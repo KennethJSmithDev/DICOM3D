@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#101820" />
+    <title>DICOM3D</title>
+    <style>
+      :root { color-scheme: dark; font: 14px system-ui, sans-serif; background: #101820; color: #e4e9ed; }
+      * { box-sizing: border-box; }
+      html, body { margin: 0; min-height: 100%; height: 100%; }
+      body { display: flex; flex-direction: column; }
+      header { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 24px; padding: 14px 20px; border-bottom: 1px solid #34414a; }
+      h1 { margin: 0; font-size: 18px; }
+      .intro { color: #aab8c3; margin: 3px 0 0; }
+      .files, .controls { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+      label { color: #c5d0d7; }
+      input, button { font: inherit; color: inherit; }
+      input[type=file] { max-width: 230px; }
+      button { border: 1px solid #617583; border-radius: 4px; background: #263945; padding: 6px 10px; cursor: pointer; }
+      button:hover { background: #344c5a; }
+      button:disabled { opacity: .5; cursor: not-allowed; }
+      canvas { display: block; flex: 1; width: 100%; min-height: 180px; touch-action: none; outline: none; }
+      #status { white-space: pre-wrap; margin: 0; padding: 10px 20px; min-height: 40px; color: #d0dae0; }
+      @media (max-width: 700px) { header { align-items: flex-start; flex-direction: column; } }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div><h1>DICOM3D</h1><p class="intro">Research development viewer · presentation only</p></div>
+      <div class="files">
+        <label for="manifestFile">Manifest</label><input id="manifestFile" type="file" accept="application/json,.json" />
+        <label for="glbFile">GLB</label><input id="glbFile" type="file" accept="model/gltf-binary,.glb" />
+      </div>
+      <div class="controls" aria-label="Structure controls">
+        <button id="visibilityButton" type="button" disabled>Hide structure</button>
+        <button id="clearButton" type="button" disabled>Clear selection</button>
+      </div>
+    </header>
+    <canvas id="renderCanvas" aria-label="3D structure presentation"></canvas>
+    <pre id="status" role="status" aria-live="polite">Choose a manifest and its matching GLB. No example medical data is bundled.</pre>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>
