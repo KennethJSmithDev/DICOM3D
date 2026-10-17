@@ -4,6 +4,8 @@
 
 H000 is **PASS / CLOSED**. Its accepted claim and evidence identity are summarized in [H000_BASELINE.md](docs/H000_BASELINE.md). H001-A establishes this product repository and a minimal viewer baseline. Exploded presentation is outside this gate.
 
+V010-B / **0.0.2** qualifies the native IRIS for Health development viewer/API shell and restart behavior. IPM package lifecycle and DICOM3D Docker clean-room qualification remain open.
+
 ## Version boundaries
 
 - **0.0.1** — public product baseline.
@@ -15,4 +17,4 @@ The order of later capabilities remains evidence-driven. Native DICOM ingress, m
 
 ## Platform direction
 
-IRIS for Health is a future host target; it does not own DICOM3D semantic representation. Reuse native platform capabilities where qualified, keep DICOM3D independently installable, and select the oldest reasonable supported platform baseline for each release. Do not make developer-preview platform features mandatory without evidence.
+IRIS for Health is a qualified development host at 0.0.2; it does not own DICOM3D semantic representation. The observed target is 2026.2 Build 221U; qualification of other supported baselines remains open. Reuse native platform capabilities where qualified, keep DICOM3D independently installable, and select the oldest reasonable supported platform baseline for each release. Do not make developer-preview platform features mandatory without evidence.

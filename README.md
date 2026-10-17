@@ -4,7 +4,7 @@ DICOM3D is an open development project for preserving the meaning and spatial co
 
 ## Status
 
-This repository begins the **0.0.1 public development baseline** after the H000 research qualification passed. DICOM3D is research software and is not intended for clinical use, diagnosis, or treatment decisions. No IRIS for Health integration or installable package exists yet.
+The **0.0.2 native development shell** hosts the qualified viewer and a bounded health endpoint in IRIS for Health. Authenticated viewer/API, semantic interaction and native restart checks passed on IRIS for Windows 2026.2 Build 221U, with post-restart rendering verified in Microsoft Edge. DICOM3D is research software and is not intended for clinical use, diagnosis, or treatment decisions. IPM packaging and the DICOM3D Docker lifecycle are not yet qualified; this is not the v0.1.0 installable release.
 
 The current viewer is a small Babylon Lite/WebGPU development shell. It can load a manifest and matching GLB selected locally; the repository does not bundle a patient-derived example. The H000 example was derived from a qualified public research study. Redistribution of derived example assets remains a separate decision.
 
@@ -27,6 +27,8 @@ npm run dev
 ```
 
 Open the local Vite URL printed by the command. Choose a manifest JSON file first, then its corresponding GLB. The viewer verifies the GLB SHA-256 against the manifest before loading it. The browser must support WebGPU. To produce the static development build, run `npm run build`.
+
+For the native development host, see [NATIVE_DEV_INSTALL.md](docs/NATIVE_DEV_INSTALL.md). The authenticated entry is `/dicom3d/DICOM3D.Entry.cls`; the read-only identity endpoint is `/dicom3d-api/health`. Imaging files remain local browser inputs. No OpsDeck installation is needed.
 
 ## Roadmap
 
