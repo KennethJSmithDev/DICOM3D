@@ -27,6 +27,10 @@ The product viewer accepts a user-selected manifest and matching GLB. It checks 
 - This product repository is not the complete research evidence store.
 - AI segmentation remains last, after deterministic providers and their contracts are established.
 
-## Scope
+## Qualified deployment versus future scope
 
-This baseline does not implement exploded presentation, multiple-structure composition, IRIS for Health, IPM, Docker, native DICOM ingress, H004 source correlation, FHIR, Unreal, or AI.
+The v0.1.0 release includes an independently installable IRIS for Health package with two ObjectScript classes, authenticated viewer/API endpoints, IPM lifecycle qualification and a tested isolated Docker development profile. These host and deployment capabilities do **not** make IRIS the owner of DICOM3D semantic geometry. Native Windows viewer/API v0.0.2 was qualified separately; native Windows IPM installation remains unverified.
+
+DEMO-001 is a browser-only GitHub Pages safe demo with a synthetic mathematical fixture and existing selection/visibility/camera controls. It does not ship a medical study. The v0.2.0 roadmap proposes independently manipulable, derived presentation slices without modifying the canonical GLB.
+
+Unimplemented features include exploded/slice manipulation, multi-structure composition, native DICOM ingress, H004 source correlation, FHIR, Unreal, AI, and clinical use. Native64 World is excluded. See ROADMAP.md for current and proposed release boundaries.
