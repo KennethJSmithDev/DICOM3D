@@ -9,4 +9,7 @@ New-Item -ItemType Directory -Path $OutputDirectory | Out-Null
 Copy-Item (Join-Path $root 'src') $OutputDirectory -Recurse
 Copy-Item (Join-Path $root 'viewer/dist') (Join-Path $OutputDirectory 'public') -Recurse
 Copy-Item (Join-Path $root 'module.xml') $OutputDirectory
+Copy-Item (Join-Path $root 'LICENSE') $OutputDirectory
+Copy-Item (Join-Path $root 'NOTICE') $OutputDirectory
+Copy-Item (Join-Path $root 'third-party') $OutputDirectory -Recurse
 Write-Output "Staged package at $OutputDirectory"

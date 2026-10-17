@@ -4,7 +4,7 @@
 
 H000 is **PASS / CLOSED**. Its accepted claim and evidence identity are summarized in [H000_BASELINE.md](docs/H000_BASELINE.md). H001-A establishes this product repository and a minimal viewer baseline. Exploded presentation is outside this gate.
 
-V010-B / **0.0.2** qualifies the native IRIS for Health development viewer/API shell and restart behavior. V010-C.2 IPM lifecycle, V010-D frozen artifact, and V010-E independent Docker clean-room qualification pass. Final v0.1.0 licensing and release remain pending.
+V010-B / **0.0.2** qualifies the native IRIS for Health development viewer/API shell and restart behavior. V010-C.2 IPM lifecycle, V010-D frozen artifact, and V010-E independent Docker clean-room qualification pass. V010-F/G qualify v0.1.0 with personal Apache-2.0 ownership and exact-artifact Docker lifecycle. Native64 World is outside this release.
 
 ## Version boundaries
 

@@ -21,3 +21,6 @@ Deterministic standard-library IPM archive generation; unchanged frontend asset 
 
 ## 0.0.5 qualification milestone
 Second independent IRIS for Health Docker target passed the unchanged frozen 0.0.4 archive lifecycle and restart persistence. Artifact version/hash retained.
+
+## 0.1.0 — 2026-10-17
+Apache-2.0 with personal copyright ownership; exact pinned third-party notices retained in source and IPM distribution. Final release archive passed two-target lifecycle, native resource enforcement and restart persistence. No geometry, semantic identity, smooth-normal behavior, voxelization or dependency changes. Native64 World excluded.

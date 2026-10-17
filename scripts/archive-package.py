@@ -19,7 +19,7 @@ with args.archive.open("wb") as raw:
         with tarfile.open(fileobj=compressed, mode="w", format=tarfile.USTAR_FORMAT) as tar:
             for path in files:
                 name = path.relative_to(args.stage).as_posix()
-                if path.is_symlink() or not (name == "module.xml" or name.startswith(("src/", "public/"))):
+                if path.is_symlink() or not (name in ("module.xml", "LICENSE", "NOTICE") or name.startswith(("src/", "public/", "third-party/"))):
                     raise ValueError(f"unexpected package file: {name}")
                 info = tarfile.TarInfo(name)
                 info.size = path.stat().st_size

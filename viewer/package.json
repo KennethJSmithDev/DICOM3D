@@ -1,7 +1,9 @@
 {
   "name": "dicom3d-viewer",
   "private": true,
-  "version": "0.0.4",
+  "license": "Apache-2.0",
+  "author": "KennethJSmithDev",
+  "version": "0.1.0",
   "type": "module",
   "scripts": {
     "dev": "vite",

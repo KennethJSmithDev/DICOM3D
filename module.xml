@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Export generator="Cache" version="25">
  <Document name="dicom3d.ZPM"><Module>
-  <Name>dicom3d</Name><Version>0.0.4</Version>
+  <Name>dicom3d</Name><Version>0.1.0</Version>
   <Description>DICOM3D research presentation viewer; not for clinical use</Description>
   <Packaging>module</Packaging><SourcesRoot>src</SourcesRoot>
   <Resource Name="DICOM3D.PKG" />
@@ -281,6 +281,13 @@
       <FileCopy Name="public/assets/vector-slerp-DasdgQ5w.js" Target="{$cspdir}dicom3d/assets/vector-slerp-DasdgQ5w.js" />
       <FileCopy Name="public/assets/wait-all-BLjh_5ka.js" Target="{$cspdir}dicom3d/assets/wait-all-BLjh_5ka.js" />
       <FileCopy Name="public/assets/while-loop-bMa-xfnV.js" Target="{$cspdir}dicom3d/assets/while-loop-bMa-xfnV.js" />
+  <FileCopy Name="LICENSE" Target="{$cspdir}dicom3d/LICENSE" />
+  <FileCopy Name="NOTICE" Target="{$cspdir}dicom3d/NOTICE" />
+  <FileCopy Name="third-party/babylon-lite-1.32.0-LICENSE.txt" Target="{$cspdir}dicom3d/third-party/babylon-lite-1.32.0-LICENSE.txt" />
+  <FileCopy Name="third-party/babylon-lite-1.32.0-NOTICE.txt" Target="{$cspdir}dicom3d/third-party/babylon-lite-1.32.0-NOTICE.txt" />
+  <FileCopy Name="third-party/rolldown-1.2.12-LICENSE.txt" Target="{$cspdir}dicom3d/third-party/rolldown-1.2.12-LICENSE.txt" />
+  <FileCopy Name="third-party/rolldown-1.2.12-THIRD-PARTY-LICENSE.txt" Target="{$cspdir}dicom3d/third-party/rolldown-1.2.12-THIRD-PARTY-LICENSE.txt" />
+  <FileCopy Name="third-party/vite-8.3.0-CORE-LICENSE.txt" Target="{$cspdir}dicom3d/third-party/vite-8.3.0-CORE-LICENSE.txt" />
   <WebApplication Name="/dicom3d" NameSpace="USER" Path="{$cspdir}dicom3d/" Recurse="1" ServeFiles="3" AutheEnabled="32" Resource="%Development" GroupById="DICOM3D" CookiePath="/" />
   <WebApplication Name="/dicom3d-api" NameSpace="USER" DispatchClass="DICOM3D.Health" Recurse="0" ServeFiles="0" AutheEnabled="32" Resource="%Development" GroupById="DICOM3D" CookiePath="/" />
  </Module></Document>

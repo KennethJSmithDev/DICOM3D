@@ -1,0 +1,15 @@
+DICOM3D
+Copyright 2026 KennethJSmithDev (personal copyright owner).
+Licensed under the Apache License, Version 2.0. See LICENSE.
+
+Third-party software retains its respective copyright and license terms.
+Redistributed Babylon Lite 1.32.0: third-party/babylon-lite-1.32.0-LICENSE.txt
+and third-party/babylon-lite-1.32.0-NOTICE.txt (upstream notice retained verbatim).
+Browser build helpers: Vite 8.3.0 and Rolldown 1.2.12; license texts in third-party/.
+The complete upstream Babylon package notice is retained for provenance;
+this does not assert every optional upstream component is present in this build.
+
+DICOM3D is independent of OpsDeck; OpsDeck's MIT license is unchanged.
+Native64 World and its unreleased smooth-voxel engine are excluded from
+DICOM3D v0.1.0 and are not licensed or distributed by this release.
+No ownership is attributed to Hell or High Water Solutions LLC.

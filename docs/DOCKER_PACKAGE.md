@@ -1,6 +1,6 @@
 # Qualified Docker package development profile
 
-0.0.3 is qualified in USER on the community-maintained image
+0.1.0 is qualified in USER on the community-maintained image
 `intersystemsdc/irishealth-community@sha256:7746ec696970a7e41fc265e9828a99c0bc1bc534a514f1690e60fb03c957cff2`
 (linux/amd64, IRIS for Health 2026.2 Build221U, USER IPM0.10.5-SNAPSHOT mapped from HSLIB).
 This is not a vendor ICR image equivalence or general native Windows IPM support claim.
@@ -24,4 +24,4 @@ No CT/SEG/GLB/manifest examples are distributed. Research presentation only; no 
 
 For deterministic archives: python scripts/archive-package.py STAGE NEW_ARCHIVE.tgz. Paths sort lexically, modes/owners/timestamps and gzip headers are normalized. Compare two independent outputs before release.
 
-The qualified artifact is module0.0.4 SHA-256 a9937761993c2fabb45d4c0b02d8bfae7a514f87b5510741489047b3442f0399. See DOCKER_QUICKSTART.md for the independent-target procedure. The0.0.5 milestone records evidence only; it does not replace these bytes.
+The qualified artifact is module0.1.0 SHA-256 b8cba446cd3873fef47518a8eed04e676bb29ea30e332c30496497718c371d3a. See DOCKER_QUICKSTART.md for the independent-target procedure. The0.0.5 milestone records evidence only; it does not replace these bytes.

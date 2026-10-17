@@ -2,9 +2,9 @@
 
 This procedure reproduces the V010-E mechanism. Use Docker Desktop with Linux/amd64 containers and PowerShell7. The tested engine is29.8.2. Do not use another application's container/volume. It is research software, not for clinical use.
 
-Frozen development package: dicom3d-0.0.4.tgz, SHA-256
-`a9937761993c2fabb45d4c0b02d8bfae7a514f87b5510741489047b3442f0399`.
-The final v0.1.0 artifact is not published yet. Build/stage with `scripts/stage-package.ps1` and `scripts/archive-package.py`; generated artifacts are ignored. Compare the archive hash before loading it. Do not substitute source-head qualification for exact-artifact verification.
+Frozen development package: dicom3d-0.1.0.tgz, SHA-256
+`b8cba446cd3873fef47518a8eed04e676bb29ea30e332c30496497718c371d3a`.
+The qualified v0.1.0 artifact is available from the GitHub v0.1.0 release. Build/stage with `scripts/stage-package.ps1` and `scripts/archive-package.py`; generated artifacts are ignored. Compare the archive hash before loading it. Do not substitute source-head qualification for exact-artifact verification.
 
 Use this Compose template in a new local directory, alongside a private `.secrets/merge.cpf` and your frozen archive. Names and ports must be available. Do not use `down -v`, reset or cleanup another project.
 
@@ -42,11 +42,11 @@ Wait for initialization to finish. Inspect `docker logs`, `iris qlist IRIS`, and
 Before package load, establish only the package directories `/usr/irissys/ipm/dicom3d` and `/usr/irissys/csp/dicom3d`, owner irisowner, mode0700, matching the tested donor pattern. Copy the verified archive into the container, hash it again, then in `iris session IRIS -U USER` run:
 
 ```objectscript
-zpm "load /tmp/dicom3d-0.0.4.tgz"
+zpm "load /tmp/dicom3d-0.1.0.tgz"
 zpm "list"
 ```
 
-Require Activate SUCCESS and dicom3d0.0.4. Open `http://127.0.0.1:52886/dicom3d/DICOM3D.Entry.cls` and sign in with the locally initialized _SYSTEM development credential. Production end-user provisioning is outside this development profile. No role is granted by DICOM3D. Verify BOTH applications' native `Resource=%Development`, Password auth32, API401/static404 unauthenticated and denial to a role-free identity.
+Require Activate SUCCESS and dicom3d0.1.0. Open `http://127.0.0.1:52886/dicom3d/DICOM3D.Entry.cls` and sign in with the locally initialized _SYSTEM development credential. Production end-user provisioning is outside this development profile. No role is granted by DICOM3D. Verify BOTH applications' native `Resource=%Development`, Password auth32, API401/static404 unauthenticated and denial to a role-free identity.
 
 The native entry links to the viewer; `/dicom3d-api/health` returns nonclinical identity. Choose your own accepted manifest/GLB locally. Check select/clear/hide/show, restart/persistence, then `zpm "uninstall dicom3d"`. Verify DICOM3D classes, both routes and static files absent; reinstall the SAME hash and recheck native reads.
 
