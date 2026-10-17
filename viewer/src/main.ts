@@ -15,12 +15,14 @@ import {
 import { createPresentation } from './presentation';
 import { FIXTURE_ID, FIXTURE_SHA } from './slices.mjs';
 import { prepareCamera } from './camera-ui';
+import { prepareExperience } from './experience';
 
 type Manifest = {
   structure: { semantic_id: string };
   asset: { relative_filename: string; sha256: string; model_space: string; units: string };
 };
 
+const experience = prepareExperience();
 const canvas = document.querySelector<HTMLCanvasElement>('#renderCanvas')!;
 const status = document.querySelector<HTMLElement>('#status')!;
 const manifestInput = document.querySelector<HTMLInputElement>('#manifestFile')!;
@@ -68,6 +70,7 @@ export async function loadFiles(manifestFile: File, glbFile: File) {
       throw new Error('GLB SHA-256 does not match the manifest.');
     }
     if (currentGeneration !== generation) return;
+    experience.describeSource(manifest);
 
     status.textContent = 'Creating WebGPU scene…';
     const engine = await createEngine(canvas);
@@ -103,6 +106,7 @@ export async function loadFiles(manifestFile: File, glbFile: File) {
     camera.beta = Math.PI / 2.35;
     camera.radius *= 1.25;
     const framing=prepareCamera({camera,canvas,sourceMeshes:meshes,sliceController});
+    experience.connectControls();
     sliceController?.setFraming(framing);
     let detachCamera = attachControl(camera, canvas, scene);
     let cameraEnabled = true;

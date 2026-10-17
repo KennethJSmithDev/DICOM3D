@@ -4,8 +4,7 @@ import {worldBounds,fitDistance} from './camera-fit.mjs';
 export function prepareCamera({camera,canvas,sourceMeshes,sliceController}:any) {
   const toolbar=document.createElement('div');toolbar.id='cameraControls';toolbar.setAttribute('aria-label','Presentation camera controls');
   toolbar.innerHTML=`<div class="camera-actions"><button id="cameraFit" type="button">Fit complete assembly</button><button id="cameraFocus" type="button" disabled>Focus selected slice</button><button id="cameraRestore" type="button">Restore original camera</button></div><p id="cameraStatus" role="status" aria-live="polite"></p><small>Camera target follows geometric bounds. Source-space origin and model transforms stay unchanged.</small><pre id="cameraState" hidden></pre>`;
-  const style=document.createElement('style');style.textContent=`#cameraControls{padding:8px 16px;border-bottom:1px solid #34414a;flex-shrink:0;font:13px system-ui}#cameraControls .camera-actions{display:flex;flex-wrap:wrap;gap:8px}#cameraControls button{min-height:44px}#cameraControls p{margin:4px 0}#cameraControls small{color:#aab8c3}#cameraControls :focus-visible{outline:2px solid #5edbff;outline-offset:2px}`;
-  document.head.append(style);canvas.before(toolbar);
+  (document.querySelector('#cameraMount')||canvas.parentElement!).append(toolbar);
   const get=(id:string)=>toolbar.querySelector(`#${id}`) as any;
   const initial={alpha:camera.alpha,beta:camera.beta,fov:camera.fov};
   const originalMeshes=sourceMeshes.filter((m:any)=>m.visible!==false);

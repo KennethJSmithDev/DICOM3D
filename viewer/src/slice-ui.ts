@@ -18,7 +18,7 @@ export async function prepareSlices(options: any) {
   }
   const state=createSliceState(slices);let active=false,originalVisible=true,dragMode=false,drag:any=null,skipClick=false,cameraControls=(enabled:boolean)=>{},framing:any=null;
   const panel=document.createElement('details');panel.id='slicePanel';panel.open=true;
-  panel.innerHTML=`<summary>Synthetic presentation slices · not CT slices</summary>
+  panel.innerHTML=`<summary>Synthetic slices</summary>
   <button id="sliceMode" type="button">Enable derived slices</button>
   <div id="sliceControls" hidden>
     <p>Five open model-Y surface bands · no caps. Display changes never alter the source. Rotate about each band's model origin.</p>
@@ -33,8 +33,8 @@ export async function prepareSlices(options: any) {
     <div class="slice-actions"><button id="sliceVisibility" type="button">Hide selected slice</button><button id="sliceIsolate" type="button" aria-pressed="false">Isolate selected</button><button id="sliceReset" type="button">Reset selected</button><button id="sliceResetAll" type="button">Reset all and reassemble</button></div>
     <p id="sliceIdentity" role="status" aria-live="polite"></p>
   </div>`;
-  const style=document.createElement('style');style.textContent=`#slicePanel{padding:10px 16px;border-bottom:1px solid #34414a;max-height:42dvh;overflow:auto;flex-shrink:0;font:14px system-ui}#slicePanel summary{cursor:pointer;padding:5px}#slicePanel p{margin:8px 0}.slice-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:8px 20px}.slice-grid label{display:flex;flex-wrap:wrap;align-items:center;gap:6px}.slice-grid input{width:140px;min-height:34px}.slice-grid select{max-width:100%;padding:8px}.slice-actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}#slicePanel button{min-height:44px;margin:3px 0}#slicePanel :focus-visible{outline:2px solid #5edbff;outline-offset:2px}#sliceIdentity{overflow-wrap:anywhere}@media(max-width:600px){#slicePanel{padding:8px 12px;max-height:36dvh}.slice-grid{grid-template-columns:1fr}}`;
-  document.head.append(style);canvas.before(panel);
+  (document.querySelector('#sliceMount')||canvas.parentElement!).append(panel);
+  for(const id of ['sliceAction','sliceOffset0','sliceOffset1','sliceOffset2','sliceRotation'])panel.querySelector(`#${id}`)!.closest('label')!.setAttribute('data-advanced','');
   const get=(id:string)=>panel.querySelector(`#${id}`) as any;
   const item=()=>state.items.find(s=>s.id===state.selected);
   function refresh() {
