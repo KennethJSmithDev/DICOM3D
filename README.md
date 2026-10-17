@@ -1,5 +1,7 @@
 # DICOM3D
 
+[**Open the live safe demo →**](https://kennethjsmithdev.github.io/DICOM3D/)
+
 <p align="center">
   <img src="assets/branding/dicom3d-logo.png" alt="DICOM3D Logo" width="480">
 </p>

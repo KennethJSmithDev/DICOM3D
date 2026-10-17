@@ -1,0 +1,38 @@
+name: Deploy DICOM3D safe demo
+on:
+  push:
+    branches: [main]
+    paths: ['demo/**', 'viewer/**', 'scripts/*demo.mjs', 'LICENSE', 'NOTICE', 'third-party/**', '.github/workflows/pages-demo.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+concurrency:
+  group: pages
+  cancel-in-progress: true
+jobs:
+  deploy:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+          cache-dependency-path: viewer/package-lock.json
+      - run: npm ci --prefix viewer
+      - run: node scripts/build-demo.mjs
+      - run: node scripts/test-demo.mjs
+      - uses: actions/configure-pages@v5
+        with:
+          enablement: true
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: .demo-dist
+      - uses: actions/deploy-pages@v4
+        id: deployment

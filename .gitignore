@@ -8,3 +8,6 @@ Thumbs.db
 .package/
 .secrets/
 artifacts/
+
+.demo-dist/
+demo/public/sample/

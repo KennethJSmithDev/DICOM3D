@@ -37,18 +37,22 @@ function showError(error: unknown) {
 }
 
 async function loadSelectedFiles() {
-  const currentGeneration = ++generation;
-  visibilityButton.disabled = true;
-  clearButton.disabled = true;
   if (!manifestInput.files?.[0] || !glbInput.files?.[0]) {
     status.textContent = 'Choose a manifest and its matching GLB. No example medical data is bundled.';
     return;
   }
+  await loadFiles(manifestInput.files[0], glbInput.files[0]);
+}
+
+// Shared input seam: the installable viewer supplies local files; the safe demo
+// supplies only its explicitly published synthetic fixture. Rendering is shared.
+export async function loadFiles(manifestFile: File, glbFile: File) {
+  const currentGeneration = ++generation;
+  visibilityButton.disabled = true;
+  clearButton.disabled = true;
 
   try {
     status.textContent = 'Reading manifest…';
-    const manifestFile = manifestInput.files[0];
-    const glbFile = glbInput.files[0];
     const manifest = JSON.parse(await manifestFile.text()) as Manifest;
     if (!manifest.structure?.semantic_id || !manifest.asset?.sha256 || !manifest.asset?.relative_filename) {
       throw new Error('Manifest is missing structure identity or asset metadata.');
