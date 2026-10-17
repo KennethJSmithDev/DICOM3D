@@ -4,7 +4,7 @@ DICOM3D is an open development project for preserving the meaning and spatial co
 
 ## Status
 
-The **0.0.2 native development shell** hosts the qualified viewer and a bounded health endpoint in IRIS for Health. Authenticated viewer/API, semantic interaction and native restart checks passed on IRIS for Windows 2026.2 Build 221U, with post-restart rendering verified in Microsoft Edge. DICOM3D is research software and is not intended for clinical use, diagnosis, or treatment decisions. IPM packaging and the DICOM3D Docker lifecycle are not yet qualified; this is not the v0.1.0 installable release.
+The **0.0.5 qualification milestone** reproduces the frozen 0.0.4 IPM package in two isolated IRIS for Health Docker targets. Install, resource enforcement, authenticated browser/API, uninstall/absence/reinstall and restart persistence passed. The exact tested profile and artifact are in [DOCKER_PACKAGE.md](docs/DOCKER_PACKAGE.md). Native Windows 0.0.2 viewer/API qualification remains separate; native Windows IPM support is unverified. The final license decision and v0.1.0 release qualification remain pending. Research presentation only, not intended for clinical use.
 
 The current viewer is a small Babylon Lite/WebGPU development shell. It can load a manifest and matching GLB selected locally; the repository does not bundle a patient-derived example. The H000 example was derived from a qualified public research study. Redistribution of derived example assets remains a separate decision.
 

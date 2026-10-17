@@ -18,3 +18,6 @@ Qualified isolated IRIS for Health Docker IPM package with resource enforcement 
 
 ## 0.0.4
 Deterministic standard-library IPM archive generation; unchanged frontend asset graph and same-artifact lifecycle verified.
+
+## 0.0.5 qualification milestone
+Second independent IRIS for Health Docker target passed the unchanged frozen 0.0.4 archive lifecycle and restart persistence. Artifact version/hash retained.
