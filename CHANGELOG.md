@@ -12,3 +12,6 @@
 - Establish the public DICOM3D product repository and its ownership boundaries.
 - Add an asset-optional Babylon Lite/WebGPU viewer shell for local manifest and GLB files.
 - Document the H000 qualification scope, limitations, and release roadmap.
+
+## 0.0.3
+Qualified isolated IRIS for Health Docker IPM package with resource enforcement and exact-artifact uninstall/absence/reinstall. No viewer geometry changes.
