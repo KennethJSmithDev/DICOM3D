@@ -21,3 +21,5 @@ existing durable volume. The original image healthcheck remains enabled; require
 Docker healthy. Do not clear genuine alerts or reset volumes to manufacture a PASS.
 Native Windows 0.0.2 viewer/API qualification is separate; native Windows IPM remains unverified.
 No CT/SEG/GLB/manifest examples are distributed. Research presentation only; no clinical claims.
+
+For deterministic archives: python scripts/archive-package.py STAGE NEW_ARCHIVE.tgz. Paths sort lexically, modes/owners/timestamps and gzip headers are normalized. Compare two independent outputs before release.

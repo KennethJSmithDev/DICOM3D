@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Export generator="Cache" version="25">
  <Document name="dicom3d.ZPM"><Module>
-  <Name>dicom3d</Name><Version>0.0.3</Version>
+  <Name>dicom3d</Name><Version>0.0.4</Version>
   <Description>DICOM3D research presentation viewer; not for clinical use</Description>
   <Packaging>module</Packaging><SourcesRoot>src</SourcesRoot>
   <Resource Name="DICOM3D.PKG" />

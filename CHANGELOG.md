@@ -15,3 +15,6 @@
 
 ## 0.0.3
 Qualified isolated IRIS for Health Docker IPM package with resource enforcement and exact-artifact uninstall/absence/reinstall. No viewer geometry changes.
+
+## 0.0.4
+Deterministic standard-library IPM archive generation; unchanged frontend asset graph and same-artifact lifecycle verified.
