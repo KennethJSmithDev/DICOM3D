@@ -10,6 +10,8 @@ DICOM3D is an open development project for preserving the meaning and spatial co
 
 ## Status
 
+The **v0.2.0 candidate** adds reversible, independently selectable synthetic presentation bands. H002 bounded qualification is recorded in [candidate status](docs/H002_CANDIDATE.md); publication is pending approval. The public demo and v0.1.0 release remain the published baseline.
+
 **v0.1.0** is the first installable IRIS for Health development release. The exact Apache-2.0 package passed install, resource enforcement, authenticated browser/API, restart persistence, uninstall/absence and same-artifact reinstall in two isolated Docker targets. See [Docker quick start](docs/DOCKER_QUICKSTART.md) and [notice audit](docs/NOTICE_AUDIT.md). Native Windows 0.0.2 viewer/API qualification remains separate; native Windows IPM support is unverified. Research presentation only; not intended for clinical use.
 
 The current viewer is a small Babylon Lite/WebGPU development shell. It can load a manifest and matching GLB selected locally; the repository does not bundle a patient-derived example. The H000 example was derived from a qualified public research study. Redistribution of derived example assets remains a separate decision.

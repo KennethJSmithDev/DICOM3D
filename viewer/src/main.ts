@@ -14,6 +14,7 @@ import {
 } from '@babylonjs/lite';
 import { createPresentation } from './presentation';
 import { FIXTURE_ID, FIXTURE_SHA } from './slices.mjs';
+import { prepareCamera } from './camera-ui';
 
 type Manifest = {
   structure: { semantic_id: string };
@@ -101,6 +102,8 @@ export async function loadFiles(manifestFile: File, glbFile: File) {
     camera.alpha = -Math.PI / 2;
     camera.beta = Math.PI / 2.35;
     camera.radius *= 1.25;
+    const framing=prepareCamera({camera,canvas,sourceMeshes:meshes,sliceController});
+    sliceController?.setFraming(framing);
     let detachCamera = attachControl(camera, canvas, scene);
     let cameraEnabled = true;
     sliceController?.setCameraControls((enabled:boolean)=>{

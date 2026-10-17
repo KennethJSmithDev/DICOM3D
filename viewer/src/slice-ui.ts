@@ -16,7 +16,7 @@ export async function prepareSlices(options: any) {
     const bind=(n:any)=>{if(getMeshTriangles(n)){meshIds.set(n,slice.id);n.material=material;}(n.children||[]).forEach(bind);};bind(node);
     setSubtreeVisible(node,false);
   }
-  const state=createSliceState(slices);let active=false,originalVisible=true,dragMode=false,drag:any=null,skipClick=false,cameraControls=(enabled:boolean)=>{};
+  const state=createSliceState(slices);let active=false,originalVisible=true,dragMode=false,drag:any=null,skipClick=false,cameraControls=(enabled:boolean)=>{},framing:any=null;
   const panel=document.createElement('details');panel.id='slicePanel';panel.open=true;
   panel.innerHTML=`<summary>Synthetic presentation slices · not CT slices</summary>
   <button id="sliceMode" type="button">Enable derived slices</button>
@@ -50,6 +50,7 @@ export async function prepareSlices(options: any) {
       markMaterialUboDirty(material);
     }
     visibilityButton.disabled=active;cameraControls(!(active&&dragMode));
+    framing?.sync();
     get('sliceControls').hidden=!active;get('sliceMode').textContent=active?'Show original fixture':'Enable derived slices';
     get('sliceSelect').value=state.selected||'';const current=item();
     for(let i=0;i<3;i++){get(`sliceOffset${i}`).disabled=!current;get(`sliceOffset${i}`).value=current?current.offset[i]*1000:0;get(`sliceOffsetValue${i}`).textContent=current?Math.round(current.offset[i]*1000):'—';}
@@ -61,17 +62,17 @@ export async function prepareSlices(options: any) {
     if(active){get('sliceIdentity').textContent=`Selected: ${state.selected||'none'} · source: ${sourceNode.name} · ${current?.visible?'visible':'hidden/unselected'} · presentation only`;
       status.textContent=`Derived presentation slices · ${state.selected||'none'}\nExpansion ${Math.round(state.gap*1000)} mm · open surface bands, not acquired CT slices. Source geometry unchanged.`;}
   }
-  get('sliceMode').onclick=()=>{if(!active)originalVisible=sourceNode.visible!==false;active=!active;refresh();if(!active)onOriginal();};
+  get('sliceMode').onclick=()=>{if(!active)originalVisible=sourceNode.visible!==false;active=!active;refresh();if(active)framing?.fitAssembly();else{onOriginal();framing?.restore();}};
   get('sliceSelect').onchange=()=>{state.selected=get('sliceSelect').value||null;refresh();};
   get('sliceAction').onchange=()=>{dragMode=get('sliceAction').value==='translate';refresh();};
-  get('sliceGap').oninput=()=>{setGap(state,Number(get('sliceGap').value)/1000);refresh();};
+  get('sliceGap').oninput=()=>{setGap(state,Number(get('sliceGap').value)/1000);refresh();framing?.fitAssembly();};
   for(let i=0;i<3;i++)get(`sliceOffset${i}`).oninput=()=>{const current=item();if(current){const offset=[...current.offset];offset[i]=Number(get(`sliceOffset${i}`).value)/1000;updateSlice(state,current.id,{offset});refresh();}};
   get('sliceRotation').oninput=()=>{if(item())updateSlice(state,state.selected,{rotation:Number(get('sliceRotation').value)*Math.PI/180});refresh();};
   get('sliceOpacity').oninput=()=>{if(item())updateSlice(state,state.selected,{opacity:Number(get('sliceOpacity').value)/100});refresh();};
   get('sliceVisibility').onclick=()=>{if(item())updateSlice(state,state.selected,{visible:!item().visible});refresh();};
   get('sliceIsolate').onclick=()=>{state.isolate=!state.isolate;refresh();};
   get('sliceReset').onclick=()=>{if(item())resetSlice(state,state.selected);refresh();};
-  get('sliceResetAll').onclick=()=>{resetAll(state);refresh();};
+  get('sliceResetAll').onclick=()=>{resetAll(state);refresh();framing?.restore();};
   canvas.addEventListener('pointerdown',(event:PointerEvent)=>{if(active&&dragMode&&item()){drag={x:event.clientX,y:event.clientY,offset:[...item().offset],id:item().id,moved:false};canvas.setPointerCapture(event.pointerId);event.preventDefault();}});
   canvas.addEventListener('pointermove',(event:PointerEvent)=>{if(drag){const dx=(event.clientX-drag.x)*.00025,dy=(drag.y-event.clientY)*.00025;drag.moved=drag.moved||Math.abs(dx)+Math.abs(dy)>.0005;updateSlice(state,drag.id,{offset:[Math.max(-.1,Math.min(.1,drag.offset[0]+dx)),Math.max(-.1,Math.min(.1,drag.offset[1]+dy)),drag.offset[2]]});refresh();}});
   canvas.addEventListener('pointerup',()=>{if(drag){skipClick=drag.moved;drag=null;}});canvas.addEventListener('pointercancel',()=>{drag=null;});
@@ -79,5 +80,7 @@ export async function prepareSlices(options: any) {
     selectMesh:(mesh:any)=>{state.selected=meshIds.get(mesh)||null;if(!state.selected)state.isolate=false;refresh();},clear:()=>{state.selected=null;state.isolate=false;refresh();},
     consumeDragClick:()=>{const value=skipClick;skipClick=false;return value;},
     setCameraControls:(callback:any)=>{cameraControls=callback;},
+    meshes:()=>[...meshIds.keys()],selectedMeshes:()=>[...meshIds].filter(([mesh,id])=>id===state.selected&&mesh.visible!==false).map(([mesh])=>mesh),
+    setFraming:(value:any)=>{framing=value;framing.sync();},
   };
 }

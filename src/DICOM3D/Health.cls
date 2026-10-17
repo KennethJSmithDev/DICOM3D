@@ -15,7 +15,7 @@ ClassMethod Health() As %Status
 {
     Set %response.ContentType = "application/json"
     Do %response.SetHeader("Cache-Control", "no-store")
-    Set body = {"product":"DICOM3D","version":"0.1.0","status":"ok","clinicalUse":false}
+    Set body = {"product":"DICOM3D","version":"0.2.0","status":"ok","clinicalUse":false}
     Do body.%Set("runtime", $ZVERSION)
     Write body.%ToJSON()
     Quit $$$OK

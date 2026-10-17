@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.2.0 candidate — publication pending
+
+Five deterministic open surface bands of the exact synthetic demo fixture, stable derived identities, independent selection/hide/isolate/opacity/translation/rotation and reversible model-Y expansion. World-bounds camera fit/focus/refit/reset is presentation-only. Original fixture and H000 geometry/transforms remain authoritative. No new dependency or rendering engine. H002 C/D/E bounded checks pass; F package/browser qualification is blocked on stale-client upgrade behavior. See docs/H002_CANDIDATE.md.
+
 ## 0.0.2 — native IRIS for Health development shell
 
 - Host the unchanged Babylon Lite/WebGPU viewer under `/dicom3d/` with protected native authentication and a bounded `/dicom3d-api/health` response.
