@@ -288,7 +288,8 @@
   <FileCopy Name="third-party/rolldown-1.2.12-LICENSE.txt" Target="{$cspdir}dicom3d/third-party/rolldown-1.2.12-LICENSE.txt" />
   <FileCopy Name="third-party/rolldown-1.2.12-THIRD-PARTY-LICENSE.txt" Target="{$cspdir}dicom3d/third-party/rolldown-1.2.12-THIRD-PARTY-LICENSE.txt" />
   <FileCopy Name="third-party/vite-8.3.0-CORE-LICENSE.txt" Target="{$cspdir}dicom3d/third-party/vite-8.3.0-CORE-LICENSE.txt" />
-  <WebApplication Name="/dicom3d" NameSpace="USER" Path="{$cspdir}dicom3d/" Recurse="1" ServeFiles="3" AutheEnabled="32" Resource="%Development" GroupById="DICOM3D" CookiePath="/" />
+  <WebApplication Name="/dicom3d" NameSpace="USER" Path="{$cspdir}dicom3d/" Recurse="1" ServeFiles="3" ServeFilesTimeout="0" AutheEnabled="32" Resource="%Development" GroupById="DICOM3D" CookiePath="/" />
+  <WebApplication Name="/dicom3d/assets" NameSpace="USER" Path="{$cspdir}dicom3d/assets/" Recurse="1" ServeFiles="3" ServeFilesTimeout="3600" AutheEnabled="32" Resource="%Development" GroupById="DICOM3D" CookiePath="/" />
   <WebApplication Name="/dicom3d-api" NameSpace="USER" DispatchClass="DICOM3D.Health" Recurse="0" ServeFiles="0" AutheEnabled="32" Resource="%Development" GroupById="DICOM3D" CookiePath="/" />
  </Module></Document>
 </Export>

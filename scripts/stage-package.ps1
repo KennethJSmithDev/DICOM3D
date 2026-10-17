@@ -9,6 +9,14 @@ New-Item -ItemType Directory -Path $OutputDirectory | Out-Null
 Copy-Item (Join-Path $root 'src') $OutputDirectory -Recurse
 Copy-Item (Join-Path $root 'viewer/dist') (Join-Path $OutputDirectory 'public') -Recurse
 Copy-Item (Join-Path $root 'module.xml') $OutputDirectory
+# A versioned native link escapes still-fresh HTML cached by older packages.
+# The shell itself must revalidate; hashed JS assets retain the server's cache policy.
+$entryPath = Join-Path $OutputDirectory 'src/DICOM3D/Entry.cls'
+$entry = [IO.File]::ReadAllText($entryPath)
+$placeholder = 'Parameter VIEWERBUILD = "source";'
+if (($entry.Split($placeholder).Count - 1) -ne 1) { throw 'Missing unique viewer build placeholder' }
+$viewerBuild = (Get-FileHash (Join-Path $OutputDirectory 'public/index.html') -Algorithm SHA256).Hash.ToLower()
+[IO.File]::WriteAllText($entryPath,$entry.Replace($placeholder,'Parameter VIEWERBUILD = "'+$viewerBuild+'";'))
 # Match current hashed build filenames without changing the frozen release.
 $manifestPath = Join-Path $OutputDirectory 'module.xml'
 $manifest = [IO.File]::ReadAllText($manifestPath)
