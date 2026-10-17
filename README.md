@@ -1,5 +1,9 @@
 # DICOM3D
 
+<p align="center">
+  <img src="assets/branding/dicom3d-logo.png" alt="DICOM3D Logo" width="480">
+</p>
+
 DICOM3D is an open development project for preserving the meaning and spatial context of anatomical structures reconstructed from medical imaging. It separates source DICOM reality, semantic and spatial metadata, portable geometry, and renderer-owned presentation.
 
 ## Status
