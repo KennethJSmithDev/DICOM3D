@@ -23,3 +23,5 @@ Native Windows 0.0.2 viewer/API qualification is separate; native Windows IPM re
 No CT/SEG/GLB/manifest examples are distributed. Research presentation only; no clinical claims.
 
 For deterministic archives: python scripts/archive-package.py STAGE NEW_ARCHIVE.tgz. Paths sort lexically, modes/owners/timestamps and gzip headers are normalized. Compare two independent outputs before release.
+
+The qualified artifact is module0.0.4 SHA-256 a9937761993c2fabb45d4c0b02d8bfae7a514f87b5510741489047b3442f0399. See DOCKER_QUICKSTART.md for the independent-target procedure. The0.0.5 milestone records evidence only; it does not replace these bytes.
