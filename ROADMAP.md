@@ -10,9 +10,9 @@ DICOM3D is an independently installable, open-source IRIS for Health research-pr
 - **0.1.0 / V010-F/G PASS:** Apache-2.0 package and exact-artifact IPM install/uninstall/absence/reinstall, security and browser checks, and second isolated Docker clean-room qualification. GitHub release published. Native Windows IPM remains unverified; see docs/DOCKER_QUICKSTART.md.
 - **DEMO-001 PASS:** public GitHub Pages Live Safe Demo with auto-loaded synthetic icosahedron, semantic selection, orbit/zoom and hide/show. No patient imaging or clinical claim. Public URL: https://kennethjsmithdev.github.io/DICOM3D/
 
-## 0.2.0 — Interactive slice expansion (qualified candidate; publication pending)
+## 0.2.0 — Interactive slice expansion (published October 17, 2026)
 
-H002-A/B and fresh C/D/E/F bounded checks passed on the candidate branch, including camera framing, cache repair and exact-artifact package qualification. Historical failures remain preserved; the earlier C screenshot's cause is not claimed resolved. See [candidate status](docs/H002_CANDIDATE.md). Final merge, release and public demo update require operator approval.
+H002-A/B and fresh C/D/E/F bounded checks passed on the candidate branch, including camera framing, cache repair and exact-artifact package qualification. Historical failures remain preserved; the earlier C screenshot's cause is not claimed resolved. See [candidate status](docs/H002_CANDIDATE.md). The v0.2.0 release is published. The live public demo subsequently moved to anatomy-first DEMO-050.
 
 **Objective:** Extend the existing Babylon Lite viewer with reversible, independently selectable and manipulable **derived presentation slices**, keeping original geometry, semantic identity and source-space transforms authoritative. Use a synthetic test fixture for public demonstrations.
 
@@ -29,7 +29,11 @@ H002-A/B and fresh C/D/E/F bounded checks passed on the candidate branch, includ
 
 **Gate behavior:** continuous bounded execution through ordinary PASS steps. On a genuine failure or material design/authority decision, stop with exact evidence. Never promote an inferred or saved-only replay to new browser observation. Preserve the original DEMO-001 fixture as a regression control.
 
-## Later proposed releases (subject to evidence)
+## v0.5.0 — Published functional foundation (October 18, 2026)
+
+Licensed generalized male/female anatomy, bounded multimodality presentation, source-linked H000 semantic evidence, deterministic contextual learning, stable selection/isolation/camera behavior and qualified Core/IPM distributions. The public DEMO-050 loads male anatomy directly and permits female switching. Live FHIR, DICOMweb, generic SEG/SR interpretation, clinical validation and AI decisions are not production-qualified.
+
+## Historical planning targets and later proposed releases (subject to evidence)
 
 - **0.3.0 — recognizable anatomical context:** qualified public/synthetic contextual study presentation, CT-volume display and legibility; preserve source versus interpolated detail.
 - **0.4.0 — source correlation:** H004 DICOM SOP/frame/source-slice navigation and derived-section distinctions.
@@ -38,7 +42,7 @@ H002-A/B and fresh C/D/E/F bounded checks passed on the candidate branch, includ
 - **0.7.x–0.9.x — hardening:** multi-structure composition, additional imaging workflows, UX/accessibility, performance, compatibility, security and evidence-driven stability.
 - **1.0.0 — stable contract:** independently installable, documented, reproducible, tested and supportable release with clearly bounded medical/research claims.
 
-These are planning targets, not claims of implemented features or fixed dates.
+The historical 0.3–0.5 planning descriptions above are superseded by the published v0.5.0 capability statement and must not be interpreted as pending releases. Targets above 0.5 remain proposals, not fixed dates.
 
 ## Core ownership and representation
 
