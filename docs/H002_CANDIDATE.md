@@ -1,6 +1,6 @@
 # H002 candidate status
 
-A/B PASS; C fresh requalification PASS; D/E including camera framing and F bounded PASS. **Stopped at the operator publication-approval boundary.**
+A/B PASS; C fresh requalification PASS; D/E including camera framing and F bounded PASS. **Published as v0.2.0 on 2026-10-17.** See the [v0.2.0 release](https://github.com/KennethJSmithDev/DICOM3D/releases/tag/v0.2.0).
 
 The historical C failure receipt remains preserved. Its visual failure was not reproduced in fresh builds, including an uninstrumented fresh Edge tab and installed-product browsers. No visibility code defect was demonstrated, so no speculative renderer/adapter patch was made. The historical cause remains unverified; fresh acceptance does not explain it.
 
@@ -16,4 +16,4 @@ The F stale-client cause is now observed: browser disk cache supplied an old mut
 
 Reproduce pure checks with `node scripts/test-slices.mjs`; build the private standalone preview with `node scripts/build-demo.mjs`, serve `.demo-dist` at `/DICOM3D/`, and run `node scripts/test-demo.mjs`. Package with the existing stage/archive scripts. Never promote the prior failed screenshot or pure-state tests to new browser evidence.
 
-Next exact boundary: [publication approval](H002_RELEASE_HANDOFF.md) to merge the qualified branch, publish the frozen v0.2.0 artifact/tag and update Pages. Public main/demo and v0.1.0 remain unchanged. Open Exchange submission remains operator-owned.
+Publication update (2026-10-17): the qualified checkpoint `38ed849349abbe2ef4ba8cc04244173777616b7a` is on main, the [v0.2.0 release](https://github.com/KennethJSmithDev/DICOM3D/releases/tag/v0.2.0) is published, and its [Pages deployment](https://github.com/KennethJSmithDev/DICOM3D/actions/runs/39054943071) completed. The published archive's GitHub-reported size and SHA-256 digest match the frozen artifact above. See the [historical publication handoff](H002_RELEASE_HANDOFF.md). v0.1.0 remains available as the earlier release. Open Exchange updates remain operator-owned.

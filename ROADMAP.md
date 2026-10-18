@@ -10,9 +10,9 @@ DICOM3D is an independently installable, open-source IRIS for Health research-pr
 - **0.1.0 / V010-F/G PASS:** Apache-2.0 package and exact-artifact IPM install/uninstall/absence/reinstall, security and browser checks, and second isolated Docker clean-room qualification. GitHub release published. Native Windows IPM remains unverified; see docs/DOCKER_QUICKSTART.md.
 - **DEMO-001 PASS:** public GitHub Pages Live Safe Demo with auto-loaded synthetic icosahedron, semantic selection, orbit/zoom and hide/show. No patient imaging or clinical claim. Public URL: https://kennethjsmithdev.github.io/DICOM3D/
 
-## 0.2.0 — Interactive slice expansion (qualified candidate; publication pending)
+## 0.2.0 — Interactive slice expansion (published 2026-10-17)
 
-H002-A/B and fresh C/D/E/F bounded checks passed on the candidate branch, including camera framing, cache repair and exact-artifact package qualification. Historical failures remain preserved; the earlier C screenshot's cause is not claimed resolved. See [candidate status](docs/H002_CANDIDATE.md). Final merge, release and public demo update require operator approval.
+H002-A/B and fresh C/D/E/F bounded checks passed on the candidate branch, including camera framing, cache repair and exact-artifact package qualification. Historical failures remain preserved; the earlier C screenshot's cause is not claimed resolved. See [candidate status](docs/H002_CANDIDATE.md). The qualified checkpoint is on main, the [v0.2.0 release](https://github.com/KennethJSmithDev/DICOM3D/releases/tag/v0.2.0) is published, and its [Pages deployment](https://github.com/KennethJSmithDev/DICOM3D/actions/runs/39054943071) completed. Open Exchange updates remain operator-owned.
 
 **Objective:** Extend the existing Babylon Lite viewer with reversible, independently selectable and manipulable **derived presentation slices**, keeping original geometry, semantic identity and source-space transforms authoritative. Use a synthetic test fixture for public demonstrations.
 

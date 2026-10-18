@@ -1,4 +1,8 @@
-# H002 publication handoff — approval required
+# H002 publication handoff — completed 2026-10-17
+
+Publication update: checkpoint `38ed849349abbe2ef4ba8cc04244173777616b7a` is on main; the [v0.2.0 release](https://github.com/KennethJSmithDev/DICOM3D/releases/tag/v0.2.0) was published on 2026-10-17, and its [Pages deployment](https://github.com/KennethJSmithDev/DICOM3D/actions/runs/39054943071) completed. The published asset's GitHub-reported size and SHA-256 digest match the frozen artifact below. The following approval-boundary instructions are retained as the pre-publication record and are no longer pending.
+
+## Historical pre-publication record
 
 H002-A through F are bounded PASS. The candidate is prepared; no v0.2.0 tag, GitHub release, public-main merge or Pages update has been performed.
 

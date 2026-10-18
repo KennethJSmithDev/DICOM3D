@@ -1,8 +1,8 @@
 # Changelog
 
-## 0.2.0 candidate — publication pending
+## 0.2.0 — 2026-10-17
 
-Five deterministic open surface bands of the exact synthetic demo fixture, stable derived identities, independent selection/hide/isolate/opacity/translation/rotation and reversible model-Y expansion. World-bounds camera fit/focus/refit/reset is presentation-only. Original fixture and H000 geometry/transforms remain authoritative. Mutable-shell freshness and a content-bound native entry prevent stale normal upgrade navigation while protected hashed assets retain caching. Narrow status text wraps. No new dependency or rendering engine. H002 bounded qualification passes; publication awaits approval. See docs/H002_CANDIDATE.md and docs/CACHE_POLICY.md.
+Five deterministic open surface bands of the exact synthetic demo fixture, stable derived identities, independent selection/hide/isolate/opacity/translation/rotation and reversible model-Y expansion. World-bounds camera fit/focus/refit/reset is presentation-only. Original fixture and H000 geometry/transforms remain authoritative. Mutable-shell freshness and a content-bound native entry prevent stale normal upgrade navigation while protected hashed assets retain caching. Narrow status text wraps. No new dependency or rendering engine. H002 bounded qualification passes; the [v0.2.0 release](https://github.com/KennethJSmithDev/DICOM3D/releases/tag/v0.2.0) is published. See docs/H002_CANDIDATE.md and docs/CACHE_POLICY.md.
 
 ## 0.0.2 — native IRIS for Health development shell
 
