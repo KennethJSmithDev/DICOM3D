@@ -10,7 +10,7 @@ H000-derived examples remain unapproved for redistribution and are NOT used.
 The adapter fetches only two same-origin static sample files, supplies them to the
 existing manifest/GLB integrity+semantic loading path and reuses the same scene,
 materials, GPU picking and camera controls. There are no public write APIs, login,
-IRIS endpoint, patient upload or Native64 dependency. The Open Exchange link points
+IRIS endpoint, patient upload or external engine dependency. The Open Exchange link points
 to the directory because no product listing URL has been supplied.
 
 Build: `npm ci --prefix viewer`, then `node scripts/build-demo.mjs`.

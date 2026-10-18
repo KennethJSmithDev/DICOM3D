@@ -1,0 +1,1 @@
+import{n as e}from"./typed-arrays-B2JZIDLp.js";function t(){return new e(16)}var n;function r(){return(n??t)()}function i(e){n=e}export{r as n,i as t};

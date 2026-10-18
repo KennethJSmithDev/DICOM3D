@@ -1,0 +1,1 @@
+import{dt as e}from"./reference-CwpuuO1N.js";function t(t,n){let r=t.nodes??[];for(let t=0;t<r.length;t++){let i=r[t]?.extensions?.KHR_node_visibility?.visible,a=n[t];i===!1&&a&&e(a,!1)}}var n={id:`KHR_node_visibility`,async applyAsset(e,n,r){return r._nodeMap&&t(r._json,r._nodeMap),{}}};export{n as default};

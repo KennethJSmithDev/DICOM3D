@@ -1,0 +1,1 @@
+import{t as e}from"./wgsl-fog-DGeH4xPp.js";var t=e,n=`if(scene.vFogInfos.x>0.0){var fogFactor=calcFogFactor((scene.view*vec4<f32>(input.worldPos,1.0)).xyz);fogFactor=pow(fogFactor,2.2);color=mix(pow(scene.vFogColor.rgb,vec3<f32>(2.2)),color,fogFactor);}`;export{n as PBR_FOG_BLOCK,t as PBR_FOG_HELPER};

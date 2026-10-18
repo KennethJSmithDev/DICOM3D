@@ -1,0 +1,4 @@
+export function evidenceLearning(id:string,parent:HTMLElement){
+ const panel=document.createElement('details');panel.id=id;panel.className='evidence-learning';panel.innerHTML='<summary>Understand this evidence</summary><div class="learning-copy"></div>';parent.append(panel);
+ return {clear(){panel.hidden=true;panel.querySelector('div')!.replaceChildren();},show(lesson:any){panel.hidden=false;panel.querySelector('summary')!.textContent=lesson.title;const body=panel.querySelector('div')!;body.replaceChildren();for(const [key,label] of [['known','KNOWN'],['presentation','PRESENTATION'],['uncertainty','UNVERIFIED / LIMIT'],['provenance','PROVENANCE']]){const p=document.createElement('p'),strong=document.createElement('strong');strong.textContent=label+' ';p.append(strong,document.createTextNode(lesson[key]));body.append(p);}}};
+}

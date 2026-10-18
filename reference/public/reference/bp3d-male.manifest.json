@@ -1,0 +1,271 @@
+{
+  "structure": {
+    "semantic_id": "reference.body.bp3d.male"
+  },
+  "asset": {
+    "relative_filename": "bp3d-male.glb",
+    "sha256": "dcef47dc21d252b93b288b649ac30795d9de73f733c27b285f8d1a43ae4fc055",
+    "model_space": "BodyParts3D reference; source mm XYZ mapped to metres (X,Z,-Y)",
+    "units": "metres"
+  },
+  "reference": {
+    "id": "BODY-DEFAULT-BP3D-01",
+    "variant": "male",
+    "representation": "licensed anatomical reference surfaces",
+    "structures": [
+      {
+        "id": "FMA7163",
+        "label": "Skin",
+        "region": "Body envelope",
+        "skin": true
+      },
+      {
+        "id": "FMA23881",
+        "label": "Skeletal System (axial subset)",
+        "region": "Skeleton",
+        "skin": false
+      },
+      {
+        "id": "FMA50801",
+        "label": "Brain",
+        "region": "Head and nervous system",
+        "skin": false
+      },
+      {
+        "id": "FMA7088",
+        "label": "Heart",
+        "region": "Thorax",
+        "skin": false
+      },
+      {
+        "id": "FMA7309",
+        "label": "Right Lung",
+        "region": "Thorax",
+        "skin": false
+      },
+      {
+        "id": "FMA7310",
+        "label": "Left Lung",
+        "region": "Thorax",
+        "skin": false
+      },
+      {
+        "id": "FMA7197",
+        "label": "Liver",
+        "region": "Abdomen",
+        "skin": false
+      },
+      {
+        "id": "FMA7148",
+        "label": "Stomach",
+        "region": "Abdomen",
+        "skin": false
+      },
+      {
+        "id": "FMA7200",
+        "label": "Small Intestine",
+        "region": "Abdomen",
+        "skin": false
+      },
+      {
+        "id": "FMA7201",
+        "label": "Large Intestine",
+        "region": "Abdomen",
+        "skin": false
+      },
+      {
+        "id": "FMA7198",
+        "label": "Pancreas",
+        "region": "Abdomen",
+        "skin": false
+      },
+      {
+        "id": "FMA7204",
+        "label": "Right Kidney",
+        "region": "Abdomen",
+        "skin": false
+      },
+      {
+        "id": "FMA7205",
+        "label": "Left Kidney",
+        "region": "Abdomen",
+        "skin": false
+      },
+      {
+        "id": "FMA15900",
+        "label": "Urinary Bladder",
+        "region": "Pelvis",
+        "skin": false
+      },
+      {
+        "id": "FMA3734",
+        "label": "Aorta",
+        "region": "Vessels",
+        "skin": false
+      },
+      {
+        "id": "FMA7394",
+        "label": "Trachea",
+        "region": "Thorax",
+        "skin": false
+      },
+      {
+        "id": "FMA7131",
+        "label": "Esophagus",
+        "region": "Thorax",
+        "skin": false
+      },
+      {
+        "id": "FMA23130",
+        "label": "Right Humerus",
+        "region": "Upper limbs",
+        "skin": false
+      },
+      {
+        "id": "FMA23464",
+        "label": "Right Radius",
+        "region": "Upper limbs",
+        "skin": false
+      },
+      {
+        "id": "FMA23467",
+        "label": "Right Ulna",
+        "region": "Upper limbs",
+        "skin": false
+      },
+      {
+        "id": "FMA9713",
+        "label": "Right Hand (bone subset)",
+        "region": "Upper limbs",
+        "skin": false
+      },
+      {
+        "id": "FMA24474",
+        "label": "Right Femur",
+        "region": "Lower limbs",
+        "skin": false
+      },
+      {
+        "id": "FMA24477",
+        "label": "Right Tibia",
+        "region": "Lower limbs",
+        "skin": false
+      },
+      {
+        "id": "FMA24480",
+        "label": "Right Fibula",
+        "region": "Lower limbs",
+        "skin": false
+      },
+      {
+        "id": "FMA11343",
+        "label": "Right Foot (bone subset)",
+        "region": "Lower limbs",
+        "skin": false
+      },
+      {
+        "id": "FMA23131",
+        "label": "Left Humerus",
+        "region": "Upper limbs",
+        "skin": false
+      },
+      {
+        "id": "FMA23465",
+        "label": "Left Radius",
+        "region": "Upper limbs",
+        "skin": false
+      },
+      {
+        "id": "FMA23468",
+        "label": "Left Ulna",
+        "region": "Upper limbs",
+        "skin": false
+      },
+      {
+        "id": "FMA9714",
+        "label": "Left Hand (bone subset)",
+        "region": "Upper limbs",
+        "skin": false
+      },
+      {
+        "id": "FMA24475",
+        "label": "Left Femur",
+        "region": "Lower limbs",
+        "skin": false
+      },
+      {
+        "id": "FMA24478",
+        "label": "Left Tibia",
+        "region": "Lower limbs",
+        "skin": false
+      },
+      {
+        "id": "FMA24481",
+        "label": "Left Fibula",
+        "region": "Lower limbs",
+        "skin": false
+      },
+      {
+        "id": "FMA11344",
+        "label": "Left Foot (bone subset)",
+        "region": "Lower limbs",
+        "skin": false
+      }
+    ]
+  },
+  "provenance": {
+    "description": "BodyParts3D 4.0 adult male reference atlas subset. Generalized educational prototype; not patient DICOM or clinical truth. Source anatomical meshes reused; display materials and clipping are derived.",
+    "copyright": "BodyParts3D, \u00a9 The Database Center for Life Science",
+    "license": "CC BY-SA 2.1 Japan (embedded OBJ grant retained); publisher current database license CC BY 4.0",
+    "source_url": "https://dbarchive.biosciencedbc.jp/en/bodyparts3d/desc.html",
+    "archive_sha256": "9fbc713fffeee924a5a657d9813d84d7eb957bded63adb854931dd5e3eb61c97",
+    "semantic_map_sha256": "3f5f6df1028eb122b30de77c711597b6bb8e5541658e5985859fd228adbf88ea",
+    "generator_sha256": "7014b7beaec9b526de93520a2e7c8e9369ea6f1bfa56de51c3b7faddae83d691",
+    "source_to_reference_m": [
+      [
+        0.001,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0.001,
+        0
+      ],
+      [
+        0,
+        -0.001,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        1
+      ]
+    ],
+    "notice": "BODYParts3D-NOTICE.txt",
+    "source_bounds_mm": [
+      [
+        -334.119,
+        -246.783,
+        -78.1112
+      ],
+      [
+        332.825,
+        45.2476,
+        1641.36
+      ]
+    ]
+  },
+  "cost": {
+    "glb_bytes": 47348364,
+    "vertices": 1057660,
+    "triangles": 1827964,
+    "geometry_buffer_bytes": 47319408,
+    "semantic_structures": 33
+  }
+}

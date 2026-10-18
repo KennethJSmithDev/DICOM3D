@@ -2,7 +2,7 @@
 
 DICOM3D copyright: 2026 KennethJSmithDev, personally, as selected by the operator.
 Apache License 2.0 applies to DICOM3D-owned work. Third-party copyrights/licenses remain intact.
-Native64 World and the unreleased smooth-voxel engine are excluded. No LLC ownership is asserted.
+No LLC ownership is asserted.
 No voxelization, mesh deformation, new smoothing algorithm or new dependency was introduced.
 
 ## Pinned redistribution

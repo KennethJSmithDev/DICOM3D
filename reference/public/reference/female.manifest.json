@@ -1,0 +1,179 @@
+{
+  "structure": {
+    "semantic_id": "reference.body.female"
+  },
+  "asset": {
+    "relative_filename": "female.glb",
+    "sha256": "d1c1757c219041d9e2c9c7edf6521dd7c8a4e8a3776ed2556fa7f951f6c85a9a",
+    "model_space": "Synthetic reference space v1, Y up; unrelated to patient space",
+    "units": "metres (illustrative dimensions)"
+  },
+  "provenance": {
+    "description": "Procedural R&D anatomy assembled from ellipsoids. No DICOM, patient, scan, segmentation or registration. Shapes and relative placement are illustrative.",
+    "license": "Apache-2.0; project-authored experimental recipe",
+    "generator_sha256": "e9a4037c675e5dffc16757296aaa9ac9529cbda22fa9781841e20e5e617324d9"
+  },
+  "reference": {
+    "id": "BODY-DEFAULT-SYNTH-01",
+    "variant": "female",
+    "representation": "smooth synthetic surfaces",
+    "structures": [
+      {
+        "id": "reference.head",
+        "label": "Head",
+        "region": "Head and neck",
+        "skin": true
+      },
+      {
+        "id": "reference.neck",
+        "label": "Neck",
+        "region": "Head and neck",
+        "skin": true
+      },
+      {
+        "id": "reference.thorax",
+        "label": "Chest",
+        "region": "Torso",
+        "skin": true
+      },
+      {
+        "id": "reference.abdomen",
+        "label": "Abdomen",
+        "region": "Torso",
+        "skin": true
+      },
+      {
+        "id": "reference.pelvis",
+        "label": "Pelvic region",
+        "region": "Torso",
+        "skin": true
+      },
+      {
+        "id": "reference.right.upper-arm",
+        "label": "Right upper arm",
+        "region": "Arms",
+        "skin": true
+      },
+      {
+        "id": "reference.right.forearm",
+        "label": "Right forearm",
+        "region": "Arms",
+        "skin": true
+      },
+      {
+        "id": "reference.right.hand",
+        "label": "Right hand",
+        "region": "Arms",
+        "skin": true
+      },
+      {
+        "id": "reference.right.thigh",
+        "label": "Right thigh",
+        "region": "Legs",
+        "skin": true
+      },
+      {
+        "id": "reference.right.calf",
+        "label": "Right lower leg",
+        "region": "Legs",
+        "skin": true
+      },
+      {
+        "id": "reference.right.foot",
+        "label": "Right foot",
+        "region": "Legs",
+        "skin": true
+      },
+      {
+        "id": "reference.left.upper-arm",
+        "label": "Left upper arm",
+        "region": "Arms",
+        "skin": true
+      },
+      {
+        "id": "reference.left.forearm",
+        "label": "Left forearm",
+        "region": "Arms",
+        "skin": true
+      },
+      {
+        "id": "reference.left.hand",
+        "label": "Left hand",
+        "region": "Arms",
+        "skin": true
+      },
+      {
+        "id": "reference.left.thigh",
+        "label": "Left thigh",
+        "region": "Legs",
+        "skin": true
+      },
+      {
+        "id": "reference.left.calf",
+        "label": "Left lower leg",
+        "region": "Legs",
+        "skin": true
+      },
+      {
+        "id": "reference.left.foot",
+        "label": "Left foot",
+        "region": "Legs",
+        "skin": true
+      },
+      {
+        "id": "reference.brain",
+        "label": "Illustrative brain",
+        "region": "Illustrative organs",
+        "skin": false
+      },
+      {
+        "id": "reference.lung.right",
+        "label": "Illustrative right lung",
+        "region": "Illustrative organs",
+        "skin": false
+      },
+      {
+        "id": "reference.lung.left",
+        "label": "Illustrative left lung",
+        "region": "Illustrative organs",
+        "skin": false
+      },
+      {
+        "id": "reference.heart",
+        "label": "Illustrative heart",
+        "region": "Illustrative organs",
+        "skin": false
+      },
+      {
+        "id": "reference.liver",
+        "label": "Illustrative liver",
+        "region": "Illustrative organs",
+        "skin": false
+      },
+      {
+        "id": "reference.stomach",
+        "label": "Illustrative stomach",
+        "region": "Illustrative organs",
+        "skin": false
+      },
+      {
+        "id": "reference.kidney.right",
+        "label": "Illustrative right kidney",
+        "region": "Illustrative organs",
+        "skin": false
+      },
+      {
+        "id": "reference.kidney.left",
+        "label": "Illustrative left kidney",
+        "region": "Illustrative organs",
+        "skin": false
+      }
+    ]
+  },
+  "cost": {
+    "glb_bytes": 300172,
+    "vertices": 7850,
+    "triangles": 15600,
+    "geometry_buffer_bytes": 282000
+  }
+}

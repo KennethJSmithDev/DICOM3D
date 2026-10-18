@@ -1,0 +1,1 @@
+import{i as e}from"./sockets-DhRah2Zy.js";import{E as t,T as n,l as r}from"./gltf-feature-interactivity-CA0zCwzq.js";var i={type:t.PI,build:()=>({dataOut:[e(`value`,n.Number)]}),updateOutputs(e,t){r(t,e,`value`,Math.PI)}};export{i as piDef};

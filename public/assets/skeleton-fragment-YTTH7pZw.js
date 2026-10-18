@@ -1,0 +1,1 @@
+import{n as e}from"./skeleton-fragment-NyhYM12-.js";var t={id:`skeleton`,phase:`vertex`,frag(t){return t._meshFeatures&2?e(!!(t._meshFeatures&4)):null},bind(e,t,n){let r=e._mesh;return!(e._meshFeatures&2)||!r?.skeleton||t.push({binding:n++,resource:r.skeleton.boneTexture.createView()}),n}};export{e as createSkeletonFragment,t as pbrExt};

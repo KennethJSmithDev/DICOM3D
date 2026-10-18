@@ -6,7 +6,7 @@ The historical C failure receipt remains preserved. Its visual failure was not r
 
 Actual mesh/renderable ownership, parent links, visibility flags and canonical reset positions were traced with temporary read-only diagnostics, removed before final builds. Fresh visual isolation, GPU hit/hidden miss, independent state, reassembly, desktop/narrow layout and authenticated package checks are recorded in CompDocs H002 C–F receipts and D:/DICOM3D/evidence/H002/.
 
-Only the exact DEMO-001 synthetic fixture enables five open model-Y presentation bands. These are not acquired CT slices, anatomy or a clinical feature. H000 remains on the original unsliced viewer path; source hashes and semantic identity are unchanged. No Native64 or new dependency.
+Only the exact DEMO-001 synthetic fixture enables five open model-Y presentation bands. These are not acquired CT slices, anatomy or a clinical feature. H000 remains on the original unsliced viewer path; source hashes and semantic identity are unchanged. No new engine or dependency.
 
 Camera controls fit the complete assembly, focus a visible selected slice, refit on expansion/canvas resize and restore original framing on reset-all. Camera targets follow world-space geometric bounds, independently of source-space origin. Model transforms are not recentered. Collapsed controls retain the camera toolbar. Original framing restores initial orientation/FOV and original visible bounds; distance adapts to the current canvas aspect.
 

@@ -1,0 +1,1 @@
+import{t as e}from"./multiply-mat4-into-buffer-DfBnM-FI.js";import{n as t}from"./_matrix-allocator-lS7uVVV-.js";function n(n,r){let i=t();return e(i,0,n,0,r,0),i}export{n as t};

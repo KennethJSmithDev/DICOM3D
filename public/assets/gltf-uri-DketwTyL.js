@@ -1,0 +1,1 @@
+function e(e,t){if(t)return new URL(e,t+`x`).href;try{return new URL(e)+``}catch{throw Error(`loadGltf: baseless input can't resolve relative URI; use self-contained GLB or URL with base.`)}}export{e as t};

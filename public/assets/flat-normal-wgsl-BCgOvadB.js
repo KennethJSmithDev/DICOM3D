@@ -1,0 +1,1 @@
+var e=`var N_geom=normalize(cross(dpdx(input.worldPos),dpdy(input.worldPos)));if(dot(N_geom,normalize(scene.vEyePosition.xyz-input.worldPos))<0.0){N_geom=-N_geom;}var N=N_geom;`;export{e as FLAT_NORMAL_WGSL};

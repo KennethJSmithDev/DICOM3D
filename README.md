@@ -1,52 +1,41 @@
 # DICOM3D
 
-[**Open the live safe demo →**](https://kennethjsmithdev.github.io/DICOM3D/)
-
 <p align="center">
-  <img src="assets/branding/dicom3d-logo.png" alt="DICOM3D Logo" width="480">
+  <a href="https://kennethjsmithdev.github.io/DICOM3D/"><strong>Live Demo</strong></a>
+  &nbsp;·&nbsp;
+  <a href="docs/INSTALL_050.md#optional-irisipm-host"><strong>Native Install QuickStart</strong></a>
+  &nbsp;·&nbsp;
+  <a href="docs/CORE_DOCKER_QUICKSTART.md"><strong>Docker Quick Start</strong></a>
 </p>
 
-DICOM3D is an open development project for preserving the meaning and spatial context of anatomical structures reconstructed from medical imaging. It separates source DICOM reality, semantic and spatial metadata, portable geometry, and renderer-owned presentation.
+<p align="center"><img src="assets/branding/dicom3d-logo.png" alt="DICOM3D Logo" width="480"></p>
 
-## Status
+**v0.5.0 — research and development release.**
 
-The **v0.2.0 candidate** adds reversible, independently selectable synthetic presentation bands. H002 bounded qualification is recorded in [candidate status](docs/H002_CANDIDATE.md); publication is pending approval. The public demo and v0.1.0 release remain the published baseline.
+DICOM3D is a desktop-first research imaging and generalized-anatomy explorer. No patient study is required to explore the licensed male BodyParts3D and female HRA reference subsets. Reference anatomy and patient-specific evidence remain separate.
 
-**v0.1.0** is the first installable IRIS for Health development release. The exact Apache-2.0 package passed install, resource enforcement, authenticated browser/API, restart persistence, uninstall/absence and same-artifact reinstall in two isolated Docker targets. See [Docker quick start](docs/DOCKER_QUICKSTART.md) and [notice audit](docs/NOTICE_AUDIT.md). Native Windows 0.0.2 viewer/API qualification remains separate; native Windows IPM support is unverified. Research presentation only; not intended for clinical use.
+Start with the [installation guide](docs/INSTALL_050.md) or [standalone Docker quick start](docs/CORE_DOCKER_QUICKSTART.md). Read the [release scope](docs/RELEASE_050.md), [compatibility and limitations](docs/COMPATIBILITY_050.md), and [changelog](CHANGELOG.md).
 
-The current viewer is a small Babylon Lite/WebGPU development shell. It can load a manifest and matching GLB selected locally; the repository does not bundle a patient-derived example. The H000 example was derived from a qualified public research study. Redistribution of derived example assets remains a separate decision.
+## v0.5.0 distribution
 
-## Representation and ownership
+- **Standalone Core**: self-contained source/assets ZIP, digest-pinned Docker build, loopback-only static host, automatic male/female reference loading. No IRIS, login, server upload or patient imaging is bundled.
+- **IPM**: the same built reference viewer and assets, plus the existing password/resource-protected IRIS hosting wrapper and read-only identity endpoint. This does not configure FHIR, clinical integrations or optional Connect.
+- **GitHub is authoritative** for the exact release files and SHA256SUMS. Open Exchange and its IPM registry may update later; verify the actual installed version rather than inferring it from a listing. See the [publication handoff](docs/OPEN_EXCHANGE_050_HANDOFF.md).
 
-- DICOM files remain the source reality.
-- A manifest carries semantic identity, provenance, units, and spatial mappings.
-- GLB carries portable derived geometry and stable semantic identity.
-- Babylon Lite and the application own rendering and other presentation state.
+The existing public Safe Demo is independently deployed and may show an older synthetic fixture. Its link is not proof of the v0.5.0 anatomy distribution. Published [v0.1.0](https://github.com/KennethJSmithDev/DICOM3D/releases/tag/v0.1.0) and [v0.2.0](https://github.com/KennethJSmithDev/DICOM3D/releases/tag/v0.2.0) remain immutable.
 
-Presentation transforms, camera, material, lighting, and transient renderer-generated normals do not become source or clinical truth. Current DICOM3D Model Space v1 qualification is limited to one BIPED study and one semantic structure. It does not establish multi-structure composition, anatomical outward-normal correctness, clinical validity, or source-slice correlation.
+## Experience and evidence
+
+Explore 33 male and 22 female semantic structures with selection, visibility, isolation, opacity, clipping, camera presets and restoration. The references have partial coverage and different sources; they are not one registered patient scan. Skin remains rendered and explicitly selectable from the list while exposed eligible anatomy can be picked in the canvas.
+
+Local acquired-CT frame/volume presentation requires separately qualified local pixels, metadata and source transforms. The browser also accepts converted local image bundles. It is not a universal native DICOM decoder or PACS. Modality recognition, pixel decoding, display and independent qualification are distinct capabilities.
+
+DICOM/source arrays remain authoritative. Derived meshes preserve provenance and spatial identity. Camera, materials, window/level, clipping and reversible presentation transforms do not become medical observations. No calibrated HU/SUV, anatomical accuracy, diagnostic validity, new segmentation, AI interpretation or physiological simulation is claimed.
 
 ## Development
 
-Requires Node.js and npm. From `viewer/`:
+Use the pinned viewer lockfile with Node.js 24 and `npm ci` in `viewer/`. Run `npm run dev` and open `/reference.html`; the default `/` development entry remains the earlier local-study shell. The Core Dockerfile builds `vite.reference.config.mjs`. Existing `scripts/stage-package.ps1`, `scripts/archive-package.py` and `scripts/archive-core.py` prepare the release distributions. No third-party renderer or additional runtime dependency is introduced.
 
-```sh
-npm ci
-npm run dev
-```
+## License
 
-Open the local Vite URL printed by the command. Choose a manifest JSON file first, then its corresponding GLB. The viewer verifies the GLB SHA-256 against the manifest before loading it. The browser must support WebGPU. To produce the static development build, run `npm run build`.
-
-For the native development host, see [NATIVE_DEV_INSTALL.md](docs/NATIVE_DEV_INSTALL.md). The authenticated entry is `/dicom3d/DICOM3D.Entry.cls`; the read-only identity endpoint is `/dicom3d-api/health`. Imaging files remain local browser inputs. No OpsDeck installation is needed.
-
-## Roadmap
-
-- `0.0.1`: public product baseline.
-- `0.0.x`: bounded public development milestones before the first installable release.
-- `0.1.0`: first directly installable IRIS for Health development release, including IPM install/uninstall/reinstall lifecycle and a Docker clean-room quick start.
-- `1.0.0`: stable, independently installable, documented, reproducible product contract.
-
-OpsDeck is an implementation donor for packaging and representation-measurement methods. It is not a DICOM3D runtime dependency. See [ROADMAP.md](ROADMAP.md) and [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md).
-
-## License and feedback
-
-DICOM3D is licensed under Apache-2.0. Copyright 2026 KennethJSmithDev, personally. See LICENSE, NOTICE and docs/NOTICE_AUDIT.md. Native64 World and its unreleased engine are excluded. Use GitHub Issues for questions, feedback, and proposed changes.
+Apache-2.0; copyright 2026 KennethJSmithDev personally. Preserve LICENSE, NOTICE and third-party notices. BodyParts3D-derived assets retain CC BY-SA 2.1 Japan attribution; HRA assets retain CC BY 4.0 attribution and source limitations. Their notices accompany the reference assets. Optional IRIS software is acquired separately under its applicable license.

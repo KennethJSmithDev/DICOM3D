@@ -10,6 +10,4 @@ The complete upstream Babylon package notice is retained for provenance;
 this does not assert every optional upstream component is present in this build.
 
 DICOM3D is independent of OpsDeck; OpsDeck's MIT license is unchanged.
-Native64 World and its unreleased smooth-voxel engine are excluded from
-DICOM3D v0.1.0 and are not licensed or distributed by this release.
 No ownership is attributed to Hell or High Water Solutions LLC.

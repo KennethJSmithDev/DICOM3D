@@ -1,0 +1,1 @@
+function e(e,t,n,r,i,a,o,s,c,l,u,d){let f=a*a,p=o*o,m=s*s,h=a*o,g=a*s,_=o*s,v=c*a,y=c*o,b=c*s;e[t]=(1-2*(p+m))*l,e[t+1]=2*(h+b)*l,e[t+2]=2*(g-y)*l,e[t+3]=0,e[t+4]=2*(h-b)*u,e[t+5]=(1-2*(f+m))*u,e[t+6]=2*(_+v)*u,e[t+7]=0,e[t+8]=2*(g+y)*d,e[t+9]=2*(_-v)*d,e[t+10]=(1-2*(f+p))*d,e[t+11]=0,e[t+12]=n,e[t+13]=r,e[t+14]=i,e[t+15]=1}export{e as t};

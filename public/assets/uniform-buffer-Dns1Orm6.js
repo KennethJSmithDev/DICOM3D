@@ -1,0 +1,1 @@
+import{t as e}from"./gpu-flags-C1xPl_f9.js";import{t}from"./buffer-alignment-C-ra1dDf.js";function n(n,r,i){return n._device.createBuffer({label:i,size:t(r,16),usage:e.UNIFORM|e.COPY_DST})}function r(e,t,r){let i=e._device,a=n(e,t.byteLength,r);try{i.queue.writeBuffer(a,0,t.buffer,t.byteOffset,t.byteLength)}catch(e){throw a.destroy(),e}return a}export{n,r as t};

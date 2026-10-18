@@ -1,0 +1,1 @@
+import{t as e}from"./set-unlit-C2Vkjyqm.js";var t={id:`KHR_materials_unlit`,async applyMaterial(t){if(!t._rawMatDef?.extensions?.KHR_materials_unlit)return null;let n=t._baseColorFactor,r=t._baseColorImage?[n[0],n[1],n[2]]:void 0,i={};return e(i,r),i}};export{t as default};

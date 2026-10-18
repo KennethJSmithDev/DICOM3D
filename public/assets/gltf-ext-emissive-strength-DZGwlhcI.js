@@ -1,0 +1,1 @@
+import{w as e}from"./reference-CwpuuO1N.js";var t={id:`KHR_materials_emissive_strength`,async applyMaterial(t){let n=t._rawMatDef?.extensions?.KHR_materials_emissive_strength;if(!n)return null;let r=n.emissiveStrength??1,i=t._emissiveFactor,a={};return e(a,[i[0]*r,i[1]*r,i[2]*r]),a}};export{t as default};

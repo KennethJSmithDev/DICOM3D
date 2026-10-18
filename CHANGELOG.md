@@ -1,3 +1,18 @@
+# v0.5.0 — research and development release
+
+Standalone Core distribution based on qualified UX-RACE-001 archive `03a8bcf6e05b127cdcc7068c0ee534b53522cde3d6737e3fa1f3cbb13e0fa77d`. The baseline bytes remain immutable. Release metadata, documentation and package source paths are reconciled separately.
+
+- Licensed generalized male/female reference subsets, semantic selection and contextual source explanations.
+- Shared Basic/DICOM presentation, persistent isolation, skin-picking exclusion and world-bounds camera controls.
+- Local acquired-CT/image-bundle presentation and accepted intensity/memory safeguards; no study bundled.
+- Superseded GPU pick results cannot overwrite newer explicit selection or reference lifecycle intent.
+- Reproducible Core Docker source ZIP and IPM package with matching versioned reference-viewer payload.
+- Correct repository FileCopy sources so registry packaging has the built shell/assets it requires.
+
+Desktop-first prototype/research scope. Optional Connect/FHIR, other-platform production support, clinical validity and public-demo deployment are not promoted by this candidate. GitHub publication is approved; Open Exchange/IPM synchronization remains a separate pending step.
+
+---
+
 # Changelog
 
 ## 0.2.0 candidate — publication pending
@@ -27,4 +42,4 @@ Deterministic standard-library IPM archive generation; unchanged frontend asset 
 Second independent IRIS for Health Docker target passed the unchanged frozen 0.0.4 archive lifecycle and restart persistence. Artifact version/hash retained.
 
 ## 0.1.0 — 2026-10-17
-Apache-2.0 with personal copyright ownership; exact pinned third-party notices retained in source and IPM distribution. Final release archive passed two-target lifecycle, native resource enforcement and restart persistence. No geometry, semantic identity, smooth-normal behavior, voxelization or dependency changes. Native64 World excluded.
+Apache-2.0 with personal copyright ownership; exact pinned third-party notices retained in source and IPM distribution. Final release archive passed two-target lifecycle, native resource enforcement and restart persistence. No geometry, semantic identity, smooth-normal behavior, voxelization or dependency changes. Unrelated engine implementations excluded.

@@ -4,6 +4,6 @@ The H000 qualification used a public research CT study and an existing segmentat
 
 The viewer requires a manifest and matching GLB selected by the user and checks the GLB SHA-256 declared by the manifest. No raw DICOM, mask, volume, frozen H000 model, manifest, screenshot, runtime report, credential, or local evidence file is bundled here.
 
-Public source availability does not by itself decide whether a derived asset may be redistributed. The H000-derived example asset remains outside this repository pending a separate publication decision. DICOM3D-owned source is Apache-2.0 with personal copyright ownership; required upstream notices are preserved. Native64 World is excluded.
+Public source availability does not by itself decide whether a derived asset may be redistributed. The H000-derived example asset remains outside this repository pending a separate publication decision. DICOM3D-owned source is Apache-2.0 with personal copyright ownership; required upstream notices are preserved. Unrelated engine implementations are excluded.
 
 This is a repository cleanliness statement, not an independent medical privacy audit.

@@ -1,0 +1,1 @@
+function e(e){return`${e._colorFormat??`-`}|${e._depthStencilFormat??`-`}|${e._depthCompare??``}|${e._sampleCount}`}export{e as t};

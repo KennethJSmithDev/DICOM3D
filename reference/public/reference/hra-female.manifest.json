@@ -1,0 +1,195 @@
+{
+  "structure": {
+    "semantic_id": "VH_F"
+  },
+  "asset": {
+    "relative_filename": "hra-female.glb",
+    "sha256": "a61a60841fd3c8308d332421385be03188c0babd58b78ae101adf2807a88473a",
+    "model_space": "HRA united-female v1.5 source glTF metres, Y up; unchanged coordinates",
+    "units": "metres"
+  },
+  "reference": {
+    "id": "BODY-HRA-F-001",
+    "variant": "female",
+    "representation": "anatomically grounded generalized reference subset",
+    "structures": [
+      {
+        "id": "VH_F_skin",
+        "label": "Skin",
+        "region": "Body envelope",
+        "skin": true,
+        "source_node_index": 2
+      },
+      {
+        "id": "VH_F_skeletal_system",
+        "label": "Skeleton (source partial coverage)",
+        "region": "Skeleton",
+        "skin": false,
+        "source_node_index": 961
+      },
+      {
+        "id": "VH_F_fat_L",
+        "label": "Left mammary region (source fat)",
+        "region": "Thorax",
+        "skin": false,
+        "source_node_index": 5
+      },
+      {
+        "id": "VH_F_fat_R",
+        "label": "Right mammary region (source fat)",
+        "region": "Thorax",
+        "skin": false,
+        "source_node_index": 14
+      },
+      {
+        "id": "VH_F_heart",
+        "label": "Heart",
+        "region": "Thorax",
+        "skin": false,
+        "source_node_index": 673
+      },
+      {
+        "id": "VH_F_left_lungs_L",
+        "label": "Left lung",
+        "region": "Thorax",
+        "skin": false,
+        "source_node_index": 850
+      },
+      {
+        "id": "VH_F_lungs_R",
+        "label": "Right lung",
+        "region": "Thorax",
+        "skin": false,
+        "source_node_index": 866
+      },
+      {
+        "id": "VH_F_tracheobronchial_tree",
+        "label": "Tracheobronchial tree",
+        "region": "Thorax",
+        "skin": false,
+        "source_node_index": 895
+      },
+      {
+        "id": "VH_F_colon",
+        "label": "Colon",
+        "region": "Abdomen",
+        "skin": false,
+        "source_node_index": 486
+      },
+      {
+        "id": "VH_F_small_intestine",
+        "label": "Small intestine",
+        "region": "Abdomen",
+        "skin": false,
+        "source_node_index": 497
+      },
+      {
+        "id": "VH_F_capsule_of_the_liver",
+        "label": "Liver capsule",
+        "region": "Abdomen",
+        "skin": false,
+        "source_node_index": 528
+      },
+      {
+        "id": "VH_F_pancreas",
+        "label": "Pancreas",
+        "region": "Abdomen",
+        "skin": false,
+        "source_node_index": 553
+      },
+      {
+        "id": "VH_F_spleen",
+        "label": "Spleen",
+        "region": "Abdomen",
+        "skin": false,
+        "source_node_index": 944
+      },
+      {
+        "id": "VH_F_kidney_capsule_L",
+        "label": "Left kidney capsule",
+        "region": "Abdomen",
+        "skin": false,
+        "source_node_index": 565
+      },
+      {
+        "id": "VH_F_kidney_capsule_R",
+        "label": "Right kidney capsule",
+        "region": "Abdomen",
+        "skin": false,
+        "source_node_index": 596
+      },
+      {
+        "id": "VH_F_urinary_bladder",
+        "label": "Urinary bladder",
+        "region": "Pelvis",
+        "skin": false,
+        "source_node_index": 664
+      },
+      {
+        "id": "VH_F_uterus",
+        "label": "Uterus",
+        "region": "Reproductive anatomy",
+        "skin": false,
+        "source_node_index": 471
+      },
+      {
+        "id": "VH_F_left_ovary",
+        "label": "Left ovary",
+        "region": "Reproductive anatomy",
+        "skin": false,
+        "source_node_index": 469
+      },
+      {
+        "id": "VH_F_right_ovary",
+        "label": "Right ovary",
+        "region": "Reproductive anatomy",
+        "skin": false,
+        "source_node_index": 470
+      },
+      {
+        "id": "VH_F_fallopian_tube_R",
+        "label": "Right uterine tube",
+        "region": "Reproductive anatomy",
+        "skin": false,
+        "source_node_index": 434
+      },
+      {
+        "id": "VH_F_fallopian_tube_L",
+        "label": "Left uterine tube",
+        "region": "Reproductive anatomy",
+        "skin": false,
+        "source_node_index": 439
+      },
+      {
+        "id": "VH_F_vagina",
+        "label": "Vagina",
+        "region": "Reproductive anatomy",
+        "skin": false,
+        "source_node_index": 431
+      }
+    ],
+    "presentation": {
+      "clip_min": -0.9,
+      "clip_max": 1
+    }
+  },
+  "provenance": {
+    "description": "HRA / NIH Visible Human female reference subset. Source skin, selected organs and partial skeleton; not exhaustive anatomy, a patient scan or a clinically validated reconstruction. Pregnancy, Allen-brain and Yao reference structures omitted. Source geometry unchanged; subset, materials and highlights are presentation choices.",
+    "copyright": "Kristen Browne; Heidi Schlehlein; Human Reference Atlas / HuBMAP. Courtesy of the U.S. National Library of Medicine.",
+    "license": "CC BY 4.0",
+    "license_url": "https://creativecommons.org/licenses/by/4.0/",
+    "source_url": "https://3d.nih.gov/entries/3DPX-020992/2",
+    "source_reference": "https://purl.humanatlas.io/ref-organ/united-female/v1.5",
+    "source_asset_url": "https://cdn.humanatlas.io/digital-objects/ref-organ/united-female/v1.5/assets/3d-vh-f-united.glb",
+    "source_sha256": "472567a56896b9b7890508da6501fbf858e56aaa30745365f7a71ade782b529c",
+    "notice": "HRA-FEMALE-NOTICE.txt",
+    "adaptation": "Selected named source subtrees, compacted accessor storage, two-sided display and translucent cyan skin. Skin vertex tint omitted for uniform presentation; all retained positions, normals, colors, indices and coordinate values copied without resampling, decimation or reordering. Group ancestry simplified only where all source transforms are identity."
+  },
+  "cost": {
+    "glb_bytes": 67539748,
+    "geometry_buffer_bytes": 67271868,
+    "vertices": 1492898,
+    "triangles": 2098191,
+    "semantic_structures": 22
+  }
+}

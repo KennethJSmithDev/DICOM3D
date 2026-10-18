@@ -1,0 +1,1 @@
+function e(e,t,n){return n===void 0?{name:e,type:t}:{name:e,type:t,defaultValue:n}}function t(e,t){return{name:e,type:t}}function n(e){return{name:e,targets:[]}}function r(e){return{name:e,targets:[]}}export{t as i,r as n,e as r,n as t};

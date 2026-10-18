@@ -1,0 +1,1 @@
+import{t as e}from"./texture-reference-store-D7itGrdQ.js";function t(t){let n=e();n.set(t,(n.get(t)??0)+1)}export{t};

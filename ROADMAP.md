@@ -16,7 +16,7 @@ H002-A/B and fresh C/D/E/F bounded checks passed on the candidate branch, includ
 
 **Objective:** Extend the existing Babylon Lite viewer with reversible, independently selectable and manipulable **derived presentation slices**, keeping original geometry, semantic identity and source-space transforms authoritative. Use a synthetic test fixture for public demonstrations.
 
-**Explicit non-goals:** no Native64 World code, voxel engine, clinical claims, native DICOM ingestion, AI, new renderer, or mutation of H000 artifacts. Acquired CT slices must not be confused with mesh-derived cross-sections.
+**Explicit non-goals:** no unrelated engine code, clinical claims, native DICOM ingestion, AI, new renderer, or mutation of H000 artifacts. Acquired CT slices must not be confused with mesh-derived cross-sections.
 
 ### Bounded gates
 
@@ -46,7 +46,7 @@ These are planning targets, not claims of implemented features or fixed dates.
 - Derived slices preserve stable identity and canonical transform while allowing temporary manipulation. Never rewrite the original GLB or accepted H000 mesh to implement visual expansion.
 - Use small semantic IDs and explicit domains; load rich per-slice payload only when needed. Measure browser requests, generated assets, memory and interaction latency as well as correctness.
 - The live safe demo must remain no-login, browser-only and safe for public access. The IRIS/IPM product remains independently installable.
-- Native64 World is independently owned, unreleased and explicitly excluded from this roadmap's implementation dependencies.
+- Unrelated private research implementations are excluded from this product.
 - No claim of clinical validity, diagnostic support or submillimetre anatomical accuracy follows from a smoother display.
 
 ## Release process

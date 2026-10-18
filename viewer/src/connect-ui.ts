@@ -1,0 +1,29 @@
+import {inspectClinicalReferences,syntheticClinicalFixture} from './connect-references.mjs';
+import {boundedTestReader,retrievePublicTestEvidence,SMART_TEST,OHIF_TEST} from './connect-read.mjs';
+export function prepareConnectPrototype(mount:HTMLElement){
+ const panel=document.createElement('details');panel.id='connectPrototype';panel.innerHTML=`<summary>DICOM3D Connect · source evidence</summary>
+ <div class="connect-body"><p>Optional, anonymous public-test reads. No local IRIS data endpoint qualified. Reference anatomy and locally loaded imaging remain independent.</p>
+ <div class="connect-actions"><button id="connectLive">Read public FHIR test evidence</button><button id="connectDicom">Discover public DICOMweb studies</button><button id="connectExample">Inspect synthetic references</button><button id="connectClear">Clear / cancel</button></div>
+ <p id="connectStatus" role="status"></p><div id="connectCards"></div><details id="connectProvenance" hidden><summary>Original source responses & provenance</summary><pre id="connectProjection"></pre></details><output id="connectState" hidden></output></div>`;
+ mount.append(panel);const get=(id:string)=>panel.querySelector('#'+id) as any;let generation=0,controller:AbortController|null=null;
+ function begin(){controller?.abort();controller=new AbortController();generation++;get('connectCards').replaceChildren();get('connectProjection').textContent='';get('connectProvenance').hidden=true;get('connectState').textContent=JSON.stringify({loaded:false,networkCalls:0});return generation;}
+ function card(title:string,lines:string[]){const section=document.createElement('section'),heading=document.createElement('h3');section.className='connect-card';heading.textContent=title;section.append(heading);for(const line of lines){const p=document.createElement('p');p.textContent=line;section.append(p);}get('connectCards').append(section);}
+ function show(value:any,state:any){get('connectProjection').textContent=JSON.stringify(value,null,2);get('connectProvenance').hidden=false;get('connectState').textContent=JSON.stringify({loaded:true,...state});}
+ function fail(e:unknown,token:number){if(token===generation){begin();get('connectStatus').textContent='Connection unavailable: '+String(e)+'. Local imaging and anatomy unchanged.';}}
+ get('connectClear').onclick=()=>{begin();get('connectStatus').textContent='No connection active. References cleared; no retained network resources.';};
+ get('connectLive').onclick=async()=>{const token=begin(),start=performance.now();get('connectStatus').textContent='Reading bounded public SMART test resources…';try{
+  const reader=boundedTestReader(SMART_TEST,controller!.signal),result=await retrievePublicTestEvidence(reader);if(token!==generation)return;const p=result.projection;
+  card('Public test report · '+p.report.title,[p.report.key+' · version '+p.report.version+' · '+p.report.status,'Effective: '+JSON.stringify(p.report.effective)+' · issued: '+p.report.issued,'Interpreter: '+(p.report.interpreters.length?JSON.stringify(p.report.interpreters):'not supplied by source'),'Report → imaging: '+p.links.reportToImagingStudy]);
+  if(p.observation)card('Source-linked result · '+p.observation.title,['Report → Observation: '+p.links.reportToObservation,JSON.stringify(p.observation.value),p.observation.key+' · source status '+p.observation.status]);
+  card('Imaging identity & limits',[p.study.key,'DICOM identifiers: '+(p.study.dicomIdentifiers.length?JSON.stringify(p.study.dicomIdentifiers):'not supplied'),'Finding → frame: '+p.links.findingToFrame+' · anatomy: '+p.links.semanticStructure,p.explanation]);
+  show(result,{mode:'PUBLIC_TEST_FHIR',protocol:result.protocol,networkCalls:result.cost.calls,...result.cost,links:p.links,loadMs:performance.now()-start,localEndpointQualified:false});get('connectStatus').textContent=result.protocol+' public test connection · source responses hashed. No patient/study registration or diagnostic claim.';
+ }catch(e){fail(e,token);}};
+ get('connectDicom').onclick=async()=>{const token=begin();get('connectStatus').textContent='Reading public DICOMweb QIDO metadata…';try{
+  const reader=boundedTestReader(OHIF_TEST,controller!.signal),response=await reader.read('studies?limit=1',256*1024);if(token!==generation)return;
+  if(!Array.isArray(response.data)||response.data.length>100)throw Error('Unexpected bounded QIDO response');const ids=response.data.map((x:any)=>x['0020000D']?.Value?.[0]);if(ids.some((x:any)=>typeof x!=='string'||!/^\d+(\.\d+)+$/.test(x)))throw Error('QIDO study identity mismatch');
+  card('Public DICOMweb discovery',[ids.length+' studies returned; this static provider may ignore limit=1.','QIDO identities only. Campaign WADO whole-instance retrieval returned ACCESS_DENIED (403). No source pixels retrieved or registered here.','First study UID: '+ids[0]]);
+  show({provider:OHIF_TEST,studyUids:ids,sources:reader.sources},{mode:'PUBLIC_TEST_QIDO',networkCalls:reader.cost().calls,...reader.cost(),studies:ids.length,retrievalQualified:false});get('connectStatus').textContent='QIDO discovery observed. Whole-instance retrieval remains blocked; local imaging is unchanged.';
+ }catch(e){fail(e,token);}};
+ get('connectExample').onclick=async()=>{const token=begin();try{const {wire,context}=await syntheticClinicalFixture(),projection=await inspectClinicalReferences(wire,context);if(token!==generation)return;show(projection,{mode:'SYNTHETIC_OFFLINE',networkCalls:0,sourceHash:projection.sourceHash,records:projection.records.length});card('Synthetic offline contract',['Three explicit study relationships in a constructed test fixture. No service called; unrelated to displayed anatomy and imaging.']);get('connectStatus').textContent='SYNTHETIC references. Finding → frame → anatomy remains UNRESOLVED.';}catch(e){fail(e,token);}};
+ get('connectClear').onclick();window.addEventListener('pagehide',()=>{controller?.abort();generation++;});
+}

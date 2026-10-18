@@ -1,0 +1,137 @@
+.anatomy-experience { --border:#355465; --raised:#173042; --surface:#101f2b; background:#061018; }
+.anatomy-experience #localImagePixels { width:100%; max-height:45dvh; object-fit:contain; background:#000; image-rendering:pixelated; }
+.anatomy-experience #semanticEvidence pre { white-space:pre-wrap; overflow-wrap:anywhere; font-size:11px; }
+.anatomy-experience #connectProjection { white-space:pre-wrap; overflow-wrap:anywhere; max-height:220px; overflow:auto; font-size:11px; }
+.anatomy-experience #connectPrototype { grid-column:1/-1; border-top:1px solid var(--border); padding-top:8px; }
+.anatomy-experience .connect-body { padding:8px 0; }
+.anatomy-experience .connect-actions { display:flex; flex-wrap:wrap; gap:8px; }
+.anatomy-experience #connectCards { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:12px; }
+.anatomy-experience .connect-card { padding:12px; border:1px solid var(--border); border-radius:10px; background:rgba(7,24,34,.72); overflow-wrap:anywhere; }
+.anatomy-experience .connect-card h3 { color:var(--text); font-size:13px; margin:0 0 8px; }
+.anatomy-experience #connectProjection { max-height:260px; overflow:auto; white-space:pre-wrap; overflow-wrap:anywhere; }
+@media(max-width:900px) { .anatomy-experience #connectCards { grid-template-columns:1fr; } }
+.anatomy-experience #semanticEvidence { margin:10px; }
+.anatomy-experience .evidence-learning { margin:10px 0; border:1px solid #35596d; border-radius:9px; background:#102430; }
+.anatomy-experience .context-control { display:flex; align-items:center; gap:8px; min-height:44px; }
+.anatomy-experience .context-control input { width:20px; height:20px; accent-color:var(--accent); }
+@media(min-width:1101px){
+ .anatomy-experience .workspace:has(#workspaceControls:not([open])) { grid-template-columns:48px minmax(0,1fr) 48px; }
+ .anatomy-experience .workspace:has(#imagingRail[open]):has(#workspaceControls:not([open])) { grid-template-columns:260px minmax(0,1fr) 48px; }
+ .anatomy-experience .workspace.has-ct:has(#workspaceControls:not([open])) { grid-template-columns:minmax(240px,.7fr) minmax(0,1.8fr) 48px; }
+ .anatomy-experience #workspaceControls:not([open]) > summary { writing-mode:vertical-rl; padding:16px 12px; }
+}
+.anatomy-experience #localImagePanel { margin:8px; border:1px solid var(--border); border-radius:10px; }
+.anatomy-experience #localImagePanel .section-body { padding:10px; }
+.anatomy-experience #localImagePanel input { max-width:100%; }
+.anatomy-experience #localImageIdentity { white-space:pre-wrap; overflow-wrap:anywhere; max-height:38dvh; overflow:auto; }
+.anatomy-experience .workspace { background:radial-gradient(ellipse at 50% 15%,#0c354355,transparent 65%),#061018; }
+.anatomy-experience .viewport { border-color:#3d7688; box-shadow:0 18px 54px #0007,inset 0 0 0 1px #70def811; }
+.anatomy-experience .viewport-heading { background:linear-gradient(115deg,#173848dd,#0b1926f5); }
+.anatomy-experience .research-badge { color:#c8f5ff; background:#18506644; }
+.anatomy-experience .inspector,.anatomy-experience #imagingRail { box-shadow:inset 0 1px #c5f5ff12,0 12px 32px #0003; }
+.anatomy-experience .selection-card { border-left:3px solid #63e7ff; background:linear-gradient(125deg,#1c4d6388,#102331); }
+.anatomy-experience #referenceAppearance { width:100%; margin-top:4px; }
+.anatomy-experience .brand-mark { box-shadow:inset 0 0 16px #5de3ff44,0 0 25px #00bde52a; }
+@media(prefers-reduced-motion:reduce){.anatomy-experience * { transition:none!important; scroll-behavior:auto!important; }}
+.anatomy-experience .app-header { padding:12px 22px; background:linear-gradient(115deg,#163348,#0b1722 65%); }
+.anatomy-experience .workspace { grid-template-columns:48px minmax(0,1fr) 306px; grid-template-rows:minmax(0,1fr) auto; gap:12px; padding:12px; }
+.anatomy-experience .workspace:has(#imagingRail[open]) { grid-template-columns:260px minmax(0,1fr) 306px; }
+.anatomy-experience #imagingRail { grid-column:1; grid-row:1; border:1px solid var(--border); border-radius:14px; overflow:auto; background:linear-gradient(155deg,#193447dd,#0b1924f5); }
+.anatomy-experience #imagingRail:not([open]) > summary { writing-mode:vertical-rl; padding:16px 12px; width:100%; letter-spacing:.03em; }
+.anatomy-experience #imagingRail[open] > summary { border-bottom:1px solid var(--border); }
+.anatomy-experience .imaging-body > h2,.anatomy-experience .imaging-body > p { margin:14px; }
+.anatomy-experience .imaging-body p { color:var(--muted); font-size:12px; }
+.anatomy-experience .viewport { grid-column:2; grid-row:1; box-shadow:0 16px 50px #0004; }
+.anatomy-experience .inspector { grid-column:3; grid-row:1; background:linear-gradient(155deg,#1b3446e8,#0c1925f5); }
+.anatomy-experience h2 { font-size:16px; margin:14px 0 8px; letter-spacing:-.3px; }
+.anatomy-experience .viewport-heading { padding:14px 18px; align-items:center; }
+.anatomy-experience .viewport-heading strong { display:block; font-size:18px; font-weight:600; }
+.anatomy-experience .eyebrow { display:block; font-size:10px; letter-spacing:.15em; color:var(--accent); margin-bottom:4px; }
+.anatomy-experience .research-badge { border:1px solid #427384; border-radius:20px; padding:5px 10px; font-size:11px; }
+.anatomy-experience .reference-library { display:flex; align-items:end; gap:8px; flex-wrap:wrap; padding:10px 16px; border-bottom:1px solid var(--border); background:#112331; }
+.anatomy-experience .reference-library label { flex:1; min-width:180px; font-size:11px; }
+.anatomy-experience .reference-library select { width:100%; margin-top:3px; }
+.anatomy-experience .reference-library > p { display:none; }
+.anatomy-experience .reference-library button { font-size:12px; padding:8px 10px; }
+.anatomy-experience .canvas-hint { padding:8px 12px; text-align:center; color:var(--muted); background:#101f2b; font-size:11px; border-top:1px solid #213b4d; }
+.anatomy-experience .workspace-mode { margin:0; padding:5px 12px; font-size:11px; color:var(--muted); border-bottom:1px solid #294756; background:#0b1b26; }
+.anatomy-experience #structureMount .controls { padding:10px 12px; }
+.anatomy-experience #structureMount button { flex:1; font-size:12px; }
+.anatomy-experience #referenceControls { padding:0 12px 12px; }
+.anatomy-experience #referenceControls > label { margin:10px 0; font-size:12px; }
+.anatomy-experience #referenceControls select,.anatomy-experience #referenceSearch { width:100%; margin-top:4px; }
+.anatomy-experience #referenceActions { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:8px; }
+.anatomy-experience #referenceSearch { padding:10px; min-height:44px; border:1px solid var(--border); border-radius:8px; background:#0a1b26; }
+.anatomy-experience #referenceSearch::placeholder { color:var(--muted); }
+.anatomy-experience button,.anatomy-experience summary { transition:background-color 120ms,border-color 120ms; }
+.anatomy-experience #referenceControls > p { font-size:12px; color:var(--muted); }
+.anatomy-experience .selection-card { border:1px solid #397184; border-radius:10px; padding:12px; background:linear-gradient(125deg,#17405688,#132630); margin:12px 0; }
+.anatomy-experience .selection-card strong { display:block; font-size:17px; }
+.anatomy-experience .selection-card small { display:block; color:var(--muted); overflow-wrap:anywhere; margin-top:5px; }
+.anatomy-experience #referenceLearning { border:1px solid #35596d; border-radius:9px; margin-bottom:12px; background:#102430; }
+.anatomy-experience #referenceLearning summary { font-size:12px; }
+.anatomy-experience .learning-copy { padding:0 12px 12px; color:var(--muted); font-size:12px; overflow-wrap:anywhere; }
+.anatomy-experience .learning-copy strong { color:var(--accent); display:block; font-size:10px; letter-spacing:.08em; }
+.anatomy-experience #evidencePanel { grid-column:1 / -1; grid-row:2; border:1px solid var(--border); border-radius:12px; background:#10212de8; max-height:30dvh; overflow:auto; }
+.anatomy-experience #evidencePanel > summary { font-size:12px; }
+.anatomy-experience #evidencePanel > summary span { margin-left:14px; color:var(--muted); font-weight:400; }
+.anatomy-experience .evidence-grid { display:grid; grid-template-columns:1fr 1fr 1fr; gap:20px; padding:0 16px 16px; color:var(--muted); font-size:12px; }
+.anatomy-experience .evidence-grid details { min-width:0; }
+.anatomy-experience .app-footer { padding:6px 20px; }
+.anatomy-experience .workspace.has-ct { grid-template-columns: minmax(240px,.85fr) minmax(0,1.65fr) 306px; }
+.anatomy-experience #ctPane { height:290px; margin:8px; flex:none; }
+.anatomy-experience #ctPixels { height:230px; flex:none; }
+.anatomy-experience .has-ct #imagingRail { grid-column:1; grid-row:1; }
+.anatomy-experience .has-ct #evidencePanel { grid-row:2; }
+.anatomy-experience .viewport-heading { padding:10px 16px; }
+.anatomy-experience .viewport-heading > div { display:flex; align-items:center; gap:12px; }
+.anatomy-experience .eyebrow { margin:0; }
+.anatomy-experience .reference-library { padding:7px 12px; }
+.anatomy-experience .reference-library label { display:flex; align-items:center; gap:10px; }
+.anatomy-experience .reference-library select { margin:0; }
+.anatomy-experience .viewport > #cameraControls { flex:none; padding:8px 10px; background:linear-gradient(110deg,#112a39,#0b1925); border-top:1px solid var(--border); border-bottom:0; }
+.anatomy-experience .viewport > #cameraControls .camera-actions { gap:5px; }
+.anatomy-experience .viewport > #cameraControls button { flex:1 1 70px; font-size:11px; padding:7px; }
+.anatomy-experience .viewport > #cameraControls small { display:none; }
+.anatomy-experience .viewport > #cameraControls #cameraStatus { font-size:10px; margin:4px 0 0; }
+@media(min-width:761px) and (max-width:1100px) {
+ .anatomy-experience .workspace,.anatomy-experience .workspace:has(#imagingRail[open]) { grid-template-columns:48px minmax(0,1fr) 270px; }
+ .anatomy-experience #imagingRail[open] { position:absolute; z-index:5; top:88px; left:12px; width:270px; max-height:75dvh; box-shadow:0 10px 40px #000; }
+}
+@media(max-width:760px) {
+ .anatomy-experience .app-header { padding:9px 12px; }
+ .anatomy-experience .app-header { flex-wrap:nowrap; }
+ .anatomy-experience .app-header .intro { display:none; }
+ .anatomy-experience .workspace,.anatomy-experience .workspace:has(#imagingRail[open]) { grid-template-columns:minmax(0,1fr); grid-template-rows:minmax(180px,1fr) auto auto auto; gap:7px; padding:7px; }
+ .anatomy-experience .viewport { grid-column:1; grid-row:1; }
+ .anatomy-experience .inspector { grid-column:1; grid-row:2; max-height:36dvh; }
+ .anatomy-experience #imagingRail,.anatomy-experience .has-ct #imagingRail { grid-column:1; grid-row:3; max-height:36dvh; }
+ .anatomy-experience #imagingRail:not([open]) > summary { writing-mode:horizontal-tb; padding:12px 14px; }
+ .anatomy-experience #evidencePanel { grid-row:4; }
+ .anatomy-experience #evidencePanel > summary span { display:none; }
+ .anatomy-experience .viewport-heading { padding:9px 12px; }
+ .anatomy-experience .viewport-heading strong { font-size:16px; }
+ .anatomy-experience .viewport-heading > div { display:block; }
+ .anatomy-experience .viewport-heading .eyebrow { margin-bottom:4px; }
+ .anatomy-experience .reference-library { padding:7px 10px; gap:5px; }
+ .anatomy-experience .reference-library label { min-width:160px; }
+ .anatomy-experience .reference-library label { display:block; }
+ .anatomy-experience .reference-library select { margin-top:3px; }
+ .anatomy-experience .viewport > #cameraControls .camera-actions { flex-wrap:nowrap; overflow-x:auto; }
+ .anatomy-experience .viewport > #cameraControls button { flex:0 0 auto; min-width:74px; }
+ .anatomy-experience .viewport > #cameraControls #cameraStatus { display:none; }
+ .anatomy-experience #referenceUnload { display:none; }
+ .anatomy-experience .reference-library > p { display:none; }
+ .anatomy-experience .canvas-hint { display:none; }
+ .anatomy-experience .evidence-grid { grid-template-columns:1fr; gap:6px; }
+ .anatomy-experience .app-footer { padding:5px 10px; }
+ .anatomy-experience #status { font-size:11px; }
+ .anatomy-experience .workspace.has-ct { grid-template-columns:minmax(0,1fr); grid-template-rows:minmax(180px,1fr) auto auto auto; }
+ .anatomy-experience .has-ct .inspector { grid-row:2; }
+ .anatomy-experience .has-ct #imagingRail { grid-row:3; }
+ .anatomy-experience .has-ct #evidencePanel { grid-row:4; }
+ .anatomy-experience { height:auto; min-height:100dvh; overflow-y:auto; }
+ .anatomy-experience .workspace,.anatomy-experience .workspace:has(#imagingRail[open]),.anatomy-experience .workspace.has-ct { flex:none; grid-template-rows:minmax(540px,calc(100dvh - 210px)) auto auto auto; }
+ .anatomy-experience:has(#imagingRail[open]) #imagingRail { max-height:none; overflow:visible; }
+ .anatomy-experience .app-header { position:sticky; top:0; z-index:8; }
+}

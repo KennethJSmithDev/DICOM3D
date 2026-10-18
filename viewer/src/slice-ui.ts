@@ -18,13 +18,13 @@ export async function prepareSlices(options: any) {
   }
   const state=createSliceState(slices);let active=false,originalVisible=true,dragMode=false,drag:any=null,skipClick=false,cameraControls=(enabled:boolean)=>{},framing:any=null;
   const panel=document.createElement('details');panel.id='slicePanel';panel.open=true;
-  panel.innerHTML=`<summary>Synthetic presentation slices · not CT slices</summary>
+  panel.innerHTML=`<summary>Synthetic slices</summary>
   <button id="sliceMode" type="button">Enable derived slices</button>
   <div id="sliceControls" hidden>
     <p>Five open model-Y surface bands · no caps. Display changes never alter the source. Rotate about each band's model origin.</p>
     <div class="slice-grid">
       <label>Selected slice <select id="sliceSelect"><option value="">No slice selected</option>${slices.map(s=>`<option value="${s.id}">Band ${s.ordinal+1}</option>`).join('')}</select></label>
-      <label>Canvas action <select id="sliceAction"><option value="orbit">Orbit camera</option><option value="translate">Drag selected in model X/Y</option></select></label>
+      <label>Canvas action <select id="sliceAction"><option value="orbit">Orbit camera</option><option value="translate">Drag selected · mouse screen plane / touch model X/Y</option></select></label>
       <label>Expansion gap (mm) <input id="sliceGap" type="range" min="0" max="50" step="1" value="0"><output id="sliceGapValue">0</output></label>
       ${['X','Y','Z'].map((axis,i)=>`<label>Selected ${axis} offset (mm) <input id="sliceOffset${i}" type="range" min="-100" max="100" step="1" value="0"><output id="sliceOffsetValue${i}">0</output></label>`).join('')}
       <label>Selected Z rotation (degrees) <input id="sliceRotation" type="range" min="-180" max="180" step="5" value="0"><output id="sliceRotationValue">0</output></label>
@@ -33,9 +33,11 @@ export async function prepareSlices(options: any) {
     <div class="slice-actions"><button id="sliceVisibility" type="button">Hide selected slice</button><button id="sliceIsolate" type="button" aria-pressed="false">Isolate selected</button><button id="sliceReset" type="button">Reset selected</button><button id="sliceResetAll" type="button">Reset all and reassemble</button></div>
     <p id="sliceIdentity" role="status" aria-live="polite"></p>
   </div>`;
-  const style=document.createElement('style');style.textContent=`#slicePanel{padding:10px 16px;border-bottom:1px solid #34414a;max-height:42dvh;overflow:auto;flex-shrink:0;font:14px system-ui}#slicePanel summary{cursor:pointer;padding:5px}#slicePanel p{margin:8px 0}.slice-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:8px 20px}.slice-grid label{display:flex;flex-wrap:wrap;align-items:center;gap:6px}.slice-grid input{width:140px;min-height:34px}.slice-grid select{max-width:100%;padding:8px}.slice-actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}#slicePanel button{min-height:44px;margin:3px 0}#slicePanel :focus-visible{outline:2px solid #5edbff;outline-offset:2px}#sliceIdentity{overflow-wrap:anywhere}@media(max-width:600px){#slicePanel{padding:8px 12px;max-height:36dvh}.slice-grid{grid-template-columns:1fr}}`;
-  document.head.append(style);canvas.before(panel);
+  (document.querySelector('#sliceMount')||canvas.parentElement!).append(panel);
+  for(const id of ['sliceAction','sliceOffset0','sliceOffset1','sliceOffset2','sliceRotation'])panel.querySelector(`#${id}`)!.closest('label')!.setAttribute('data-advanced','');
   const get=(id:string)=>panel.querySelector(`#${id}`) as any;
+  const diagnostic=new URLSearchParams(location.search).has('diagnostics')?document.createElement('output'):null;
+  if(diagnostic){diagnostic.id='sliceInteractionState';diagnostic.hidden=true;panel.append(diagnostic);}
   const item=()=>state.items.find(s=>s.id===state.selected);
   function refresh() {
     setSubtreeVisible(sourceNode,!active&&originalVisible);
@@ -61,6 +63,7 @@ export async function prepareSlices(options: any) {
     get('sliceVisibility').textContent=current?.visible?'Hide selected slice':'Show selected slice';get('sliceIsolate').setAttribute('aria-pressed',String(state.isolate));
     if(active){get('sliceIdentity').textContent=`Selected: ${state.selected||'none'} · source: ${sourceNode.name} · ${current?.visible?'visible':'hidden/unselected'} · presentation only`;
       status.textContent=`Derived presentation slices · ${state.selected||'none'}\nExpansion ${Math.round(state.gap*1000)} mm · open surface bands, not acquired CT slices. Source geometry unchanged.`;}
+    if(diagnostic)diagnostic.textContent=JSON.stringify({active,state,meshes:[...meshIds].map(([m,id])=>({id,visible:m.visible,worldMatrix:Array.from(m.worldMatrix)}))});
   }
   get('sliceMode').onclick=()=>{if(!active)originalVisible=sourceNode.visible!==false;active=!active;refresh();if(active)framing?.fitAssembly();else{onOriginal();framing?.restore();}};
   get('sliceSelect').onchange=()=>{state.selected=get('sliceSelect').value||null;refresh();};
@@ -73,9 +76,26 @@ export async function prepareSlices(options: any) {
   get('sliceIsolate').onclick=()=>{state.isolate=!state.isolate;refresh();};
   get('sliceReset').onclick=()=>{if(item())resetSlice(state,state.selected);refresh();};
   get('sliceResetAll').onclick=()=>{resetAll(state);refresh();framing?.restore();};
-  canvas.addEventListener('pointerdown',(event:PointerEvent)=>{if(active&&dragMode&&item()){drag={x:event.clientX,y:event.clientY,offset:[...item().offset],id:item().id,moved:false};canvas.setPointerCapture(event.pointerId);event.preventDefault();}});
-  canvas.addEventListener('pointermove',(event:PointerEvent)=>{if(drag){const dx=(event.clientX-drag.x)*.00025,dy=(drag.y-event.clientY)*.00025;drag.moved=drag.moved||Math.abs(dx)+Math.abs(dy)>.0005;updateSlice(state,drag.id,{offset:[Math.max(-.1,Math.min(.1,drag.offset[0]+dx)),Math.max(-.1,Math.min(.1,drag.offset[1]+dy)),drag.offset[2]]});refresh();}});
-  canvas.addEventListener('pointerup',()=>{if(drag){skipClick=drag.moved;drag=null;}});canvas.addEventListener('pointercancel',()=>{drag=null;});
+  let mouseGesture:any=null;
+  canvas.addEventListener('pointerdown',(event:PointerEvent)=>{
+    if(event.pointerType==='mouse'&&event.button===0){skipClick=false;mouseGesture={id:event.pointerId,x:event.clientX,y:event.clientY,moved:false};}
+    if(active&&dragMode&&item()){
+      const root=roots.get(item().id),wm=root.worldMatrix;
+      drag={x:event.clientX,y:event.clientY,offset:[...item().offset],id:item().id,moved:false,screen:event.pointerType==='mouse',anchor:[wm[12],wm[13],wm[14]],parent:Array.from(root.parent.worldMatrix)};
+      canvas.setPointerCapture(event.pointerId);event.preventDefault();
+    }
+  });
+  canvas.addEventListener('pointermove',(event:PointerEvent)=>{
+    if(mouseGesture?.id===event.pointerId)mouseGesture.moved ||= Math.hypot(event.clientX-mouseGesture.x,event.clientY-mouseGesture.y)>5;
+    if(drag){
+      const dx=event.clientX-drag.x,dy=event.clientY-drag.y;
+      const delta=drag.screen?framing.dragDelta(drag.anchor,drag.parent,dx,dy):[dx*.00025,-dy*.00025,0];
+      drag.moved=drag.moved||Math.abs(dx)+Math.abs(dy)>2;
+      updateSlice(state,drag.id,{offset:drag.offset.map((v:number,i:number)=>Math.max(-.1,Math.min(.1,v+delta[i])))});refresh();
+    }
+  });
+  canvas.addEventListener('pointerup',(event:PointerEvent)=>{if(drag){skipClick=drag.moved;drag=null;}if(mouseGesture?.id===event.pointerId){skipClick ||= mouseGesture.moved;mouseGesture=null;}});
+  canvas.addEventListener('pointercancel',()=>{drag=null;mouseGesture=null;skipClick=false;});
   return {get active(){return active;},canPick:(mesh:any)=>{const id=meshIds.get(mesh);return Boolean(id&&slicePose(slices.find(s=>s.id===id),state).visible);},
     selectMesh:(mesh:any)=>{state.selected=meshIds.get(mesh)||null;if(!state.selected)state.isolate=false;refresh();},clear:()=>{state.selected=null;state.isolate=false;refresh();},
     consumeDragClick:()=>{const value=skipClick;skipClick=false;return value;},
