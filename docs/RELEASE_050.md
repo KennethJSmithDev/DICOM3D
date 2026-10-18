@@ -1,6 +1,6 @@
 # v0.5.0 release scope
 
-GitHub is the authoritative release source. Open Exchange/IPM publication is a separate pending step. The independently deployed public Safe Demo remains unchanged.
+GitHub v0.5.0 is published and authoritative for frozen release downloads. Open Exchange/IPM registry status must be verified separately. DEMO-050 subsequently deployed the same reference-anatomy experience to the existing GitHub Pages URL.
 
 The immutable UX-RACE-001 Core baseline is SHA-256 `03a8bcf6e05b127cdcc7068c0ee534b53522cde3d6737e3fa1f3cbb13e0fa77d`. Final v0.5.0 archives have new identities because version, packaging and documentation metadata differ. Exact hashes are in the accompanying release-manifest.json and SHA256SUMS; do not substitute the baseline archive. The publication README and documentation changes receive new Core/source archive hashes; the IPM runtime archive remains unchanged.
 
@@ -10,4 +10,4 @@ The version is 0.5.0 in frontend/package lock, module.xml, identity API and Core
 
 Geometry, pixels, transforms, semantic identities, viewer algorithms and runtime dependencies are preserved from the accepted baseline. Reuse its behavioral evidence only where final built JS/CSS/reference bytes match; qualify changed packaging, routes and version metadata against exact final files. Historical v0.1.0/v0.2.0 releases and the public Safe Demo are independent and unchanged.
 
-See INSTALL_050.md, COMPATIBILITY_050.md and OPEN_EXCHANGE_050_HANDOFF.md. The preparation receipt and final manifests state each accepted claim and any material blocker; a source version number alone is not a qualification claim.
+See INSTALL_050.md and COMPATIBILITY_050.md. The accepted qualification receipts and published release manifests bound the tested claims; a source version number alone is not a qualification claim.
