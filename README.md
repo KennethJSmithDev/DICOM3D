@@ -20,9 +20,15 @@ Start with the [installation guide](docs/INSTALL_050.md) or [standalone Docker q
 
 - **Standalone Core**: self-contained source/assets ZIP, digest-pinned Docker build, loopback-only static host, automatic male/female reference loading. No IRIS, login, server upload or patient imaging is bundled.
 - **IPM**: the same built reference viewer and assets, plus the existing password/resource-protected IRIS hosting wrapper and read-only identity endpoint. This does not configure FHIR, clinical integrations or optional Connect.
-- **GitHub is authoritative** for the exact release files and SHA256SUMS. Open Exchange and its IPM registry may update later; verify the actual installed version rather than inferring it from a listing. See the [publication handoff](docs/OPEN_EXCHANGE_050_HANDOFF.md).
+- **GitHub is authoritative** for the exact release files and SHA256SUMS. Open Exchange and its IPM registry may update later; verify the actual installed version rather than inferring it from a listing. Read the [installation guide](docs/INSTALL_050.md) and verify the installed version.
 
-The existing public Safe Demo is independently deployed and may show an older synthetic fixture. Its link is not proof of the v0.5.0 anatomy distribution. Published [v0.1.0](https://github.com/KennethJSmithDev/DICOM3D/releases/tag/v0.1.0) and [v0.2.0](https://github.com/KennethJSmithDev/DICOM3D/releases/tag/v0.2.0) remain immutable.
+The [public anatomy demo](https://kennethjsmithdev.github.io/DICOM3D/) now opens the generalized male reference with female switching, interactive selection and reversible presentation. It is browser-only and not a clinical viewer. Published [v0.1.0](https://github.com/KennethJSmithDev/DICOM3D/releases/tag/v0.1.0) and [v0.2.0](https://github.com/KennethJSmithDev/DICOM3D/releases/tag/v0.2.0) remain immutable.
+
+## Milestone and evidence history
+
+The public Git history consolidates numerous locally qualified development gates into the v0.5.0 promotion. The documented sequence is **H000 source CT/SEG → spatial/semantic GLB**, **V010 IRIS/IPM lifecycle**, **H002 synthetic presentation slices**, **MOD/VIS multimodality and anatomy**, **CONNECTED-001/CONNECT-002 evidence exploration**, **MOD-QUAL/MOD-REPAIR imaging qualification**, **UX-INTERACTION/UX-RACE fixes**, and **RELEASE-050 / DEMO-050 packaging and public demonstration**. The named local receipts, not commit times alone, establish individual test claims; some acceptance evidence is preserved in CompDocs rather than this repository. No unqualified clinical or production Connect capability is implied.
+
+Public checkpoints: [v0.1.0](https://github.com/KennethJSmithDev/DICOM3D/releases/tag/v0.1.0) · [v0.2.0](https://github.com/KennethJSmithDev/DICOM3D/releases/tag/v0.2.0) · [v0.5.0](https://github.com/KennethJSmithDev/DICOM3D/releases/tag/v0.5.0). See the [changelog](CHANGELOG.md) and [release scope](docs/RELEASE_050.md).
 
 ## Experience and evidence
 
