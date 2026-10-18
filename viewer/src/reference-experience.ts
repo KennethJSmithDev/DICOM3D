@@ -1,6 +1,7 @@
 import './reference-experience.css';
 import {prepareLocalImageInspector} from './local-image-ui';
 import {prepareConnectPrototype} from './connect-ui';
+const publicReferenceDemo=import.meta.env.MODE==='safe-reference-demo';
 
 // Reference-entry presentation only. Existing controllers retain their DOM and state.
 export function prepareReferenceExperience(library:HTMLElement) {
@@ -12,7 +13,8 @@ export function prepareReferenceExperience(library:HTMLElement) {
   const imaging=document.createElement('details');imaging.id='imagingRail';
   imaging.innerHTML='<summary>Local imaging</summary><div class="imaging-body"><h2>Patient evidence</h2><p>Reference anatomy works without a study. Load accepted local imaging here when available. Reference anatomy is not registered to your study.</p></div>';
   imaging.querySelector('div')!.append(source);workspace.prepend(imaging);
-  prepareLocalImageInspector();
+  if(!publicReferenceDemo)prepareLocalImageInspector();
+  if(publicReferenceDemo)imaging.hidden=true;
   source.querySelectorAll<HTMLElement>('details').forEach(el=>{el.hidden=false;});
   const viewport=workspace.querySelector<HTMLElement>('main.viewport')!;
   const heading=viewport.querySelector('.viewport-heading')!;
@@ -37,7 +39,16 @@ export function prepareReferenceExperience(library:HTMLElement) {
   evidence.innerHTML='<summary>Documents & evidence <span>Source identity · limitations · local research</span></summary><div class="evidence-grid"><div><h2>Source evidence</h2><p>Generalized anatomy and patient imaging are separate sources. Display choices do not establish anatomical or clinical accuracy.</p></div><div><h2>Clinical references</h2><p>Optional public-test evidence below. Local imaging is never uploaded or implicitly linked. No clinical records are generated or inferred.</p></div></div>';
   const metadata=document.querySelector('#sourceMetadata')!.closest('details')!;metadata.removeAttribute('data-advanced');evidence.querySelector('.evidence-grid')!.append(metadata);
   workspace.append(evidence);
-  prepareConnectPrototype(evidence.querySelector('.evidence-grid')!);
+  // Public demo composes the same reference controller; no live-provider controls mount.
+  if(!publicReferenceDemo)prepareConnectPrototype(evidence.querySelector('.evidence-grid')!);
+  else {
+    evidence.querySelector('.evidence-grid > div:nth-child(2)')!.innerHTML='<h2>Reference provenance</h2><p>Licensed generalized anatomy only. No patient records, local-file import or connected clinical service is included in this public demonstration.</p>';
+    evidence.querySelector('summary span')!.textContent='Source identity · attribution · limitations';
+    document.body.classList.add('safe-reference-demo');
+    const links=document.createElement('nav');links.setAttribute('aria-label','Demo project links');
+    links.innerHTML='<a href="https://github.com/KennethJSmithDev/DICOM3D">GitHub</a> · <a href="https://github.com/KennethJSmithDev/DICOM3D/releases/tag/v0.5.0">Install v0.5.0</a> · <a href="https://openexchange.intersystems.com/">Open Exchange</a> · <a href="'+import.meta.env.BASE_URL+'NOTICE">Notices</a>';
+    document.querySelector('header')!.append(links);
+  }
   document.querySelector('.intro')!.textContent='From Pixels to Meaning · local research explorer';
   const learn=document.querySelector('#contextHelp')!;learn.textContent='Choose a structure to reveal its identity, region and presentation controls.';
   const help:Record<string,string>={referenceSelect:'Choose a source-labeled anatomical structure. Selection changes its highlight only.',referenceOpacity:'Reduce the selected structure’s display opacity. Source material transparency is preserved.',referenceClip:'Hide fragments above the chosen model-space height. This is a presentation cut with no anatomical cap.',referenceIsolate:'Show only the selected structure. Restore model returns all reference structures.',referenceSearch:'Filter source structure labels and semantic identities; no anatomy is inferred.'};

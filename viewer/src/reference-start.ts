@@ -8,7 +8,7 @@ const base=import.meta.env.BASE_URL;const mount=document.createElement('section'
 
 mount.innerHTML=`<label>Generalized adult reference <select id="referenceVariant"><option value="bp3d-male">Male · BodyParts3D anatomy</option><option value="hra-female">Female · HRA anatomical reference</option></select></label><button id="referenceReload">Reload reference</button><button id="referenceUnload">Unload reference</button><p>Independent BodyParts3D male and HRA female reference sources; partial coverage, no patient registration. No patient DICOM required.</p><output id="referenceLoadState" hidden></output>`;
 
-document.querySelector('#sourceMount')!.prepend(mount);document.title='DICOM3D · Reference Anatomy Prototype';
+document.querySelector('#sourceMount')!.prepend(mount);document.title=import.meta.env.MODE==='safe-reference-demo'?'DICOM3D v0.5.0 · Anatomy Safe Demo':'DICOM3D · Reference Anatomy Prototype';
 
 prepareReferenceExperience(mount);
 

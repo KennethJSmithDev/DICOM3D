@@ -1,25 +1,21 @@
 import assert from 'node:assert/strict';
-import { readFileSync } from 'node:fs';
-import { createHash } from 'node:crypto';
-import { fileURLToPath } from 'node:url';
-const root = fileURLToPath(new URL('../', import.meta.url));
-const bytes = readFileSync(`${root}/.demo-dist/sample/study.glb`);
-const manifest = JSON.parse(readFileSync(`${root}/.demo-dist/sample/study.manifest.json`));
-assert.equal(bytes.readUInt32LE(0),0x46546c67);
-assert.equal(bytes.readUInt32LE(8),bytes.length);
-assert.equal(createHash('sha256').update(bytes).digest('hex'),manifest.asset.sha256);
-assert.equal(manifest.provenance.patient_data,false);
-assert.equal(manifest.provenance.anatomical,false);
-assert.equal(manifest.provenance.license,'Apache-2.0');
-const gltf = JSON.parse(bytes.subarray(20,20+bytes.readUInt32LE(12)).toString());
-assert.equal(gltf.nodes[0].name,manifest.structure.semantic_id);
-assert.equal(gltf.accessors[0].count,12);
-assert.equal(gltf.accessors[1].count,60);
-const html = readFileSync(`${root}/.demo-dist/index.html`,'utf8');
-assert.match(html,/synthetic shape, not anatomy/);
-assert.match(html,/https:\/\/github.com\/KennethJSmithDev\/DICOM3D/);
-assert.match(html,/https:\/\/openexchange.intersystems.com/);
-assert(!html.includes('/dicom3d-api'));
-for(const name of ['LICENSE','NOTICE','third-party/babylon-lite-1.32.0-NOTICE.txt'])
-  assert.deepEqual(readFileSync(`${root}/${name}`),readFileSync(`${root}/.demo-dist/${name}`));
-console.log('PASS: synthetic rights/provenance, GLB/hash/semantic binding, static shell and notices');
+import {readFileSync} from 'node:fs';
+import {createHash} from 'node:crypto';
+import {fileURLToPath} from 'node:url';
+const root=fileURLToPath(new URL('../',import.meta.url)),out=root+'/.demo-dist/';
+const manifest=JSON.parse(readFileSync(out+'demo-build-manifest.json'));
+assert.equal(manifest.patientData,false);assert.equal(manifest.connectedServices,false);
+for(const [name,value] of Object.entries(manifest.files)){const b=readFileSync(out+name);assert.equal(b.length,value.bytes);assert.equal(createHash('sha256').update(b).digest('hex'),value.sha256);assert(!/\.(dcm|npy|npz)$/i.test(name));}
+for(const [variant,count,notice] of [['bp3d-male',33,'BODYParts3D-NOTICE.txt'],['hra-female',22,'HRA-FEMALE-NOTICE.txt']]){
+ const m=JSON.parse(readFileSync(out+'reference/'+variant+'.manifest.json')),b=readFileSync(out+'reference/'+m.asset.relative_filename);
+ assert.equal(createHash('sha256').update(b).digest('hex'),m.asset.sha256);assert.equal(m.reference.structures.length,count);
+ assert(m.reference.structures.some(x=>x.label==='Heart'));assert.equal(b.readUInt32LE(0),0x46546c67);
+ assert.deepEqual(readFileSync(root+'/reference/public/reference/'+notice),readFileSync(out+'reference/'+notice));
+}
+assert.deepEqual(readFileSync(out+'index.html'),readFileSync(out+'reference.html'));
+const html=readFileSync(out+'index.html','utf8');assert(html.includes('/DICOM3D/'));
+const bundles=Object.keys(manifest.files).filter(x=>x.endsWith('.js')).map(x=>readFileSync(out+x,'utf8')).join('\n');
+for(const s of ['connectLive','connectDicom','Read public FHIR test evidence','SMART_TEST','hapi.fhir.org','server.fire.ly'])assert(!bundles.includes(s),s+' must not be distributed');
+for(const name of ['LICENSE','NOTICE','third-party/babylon-lite-1.32.0-NOTICE.txt'])assert.deepEqual(readFileSync(root+'/'+name),readFileSync(out+name));
+assert(!Object.keys(manifest.files).some(x=>/reference\/(male|female)\.(glb|manifest\.json)$/.test(x)));
+console.log('PASS: 33/22 reference identities, exact assets/notices, static Pages base, no placeholder/default or Connect provider UI, all output hashes');
