@@ -1,5 +1,8 @@
 # Docker quick start — qualified development profile
 
+> **Historical v0.1.0 IRIS/IPM reproduction only.** This embedded Compose template is **not** a self-contained quick start: the new named volume must first be prepared with the nonroot IRIS owner, as directed below. Copying the YAML alone may fail with `ERROR #5001: Cannot create target: /durable/iris/`. For the current, gated, isolated recovery candidate use [IRIS Docker development host](IRIS_DOCKER_DEV_051.md) and `compose.iris-dev.yaml`. Standalone Core v0.5.0 instead uses [CORE_DOCKER_QUICKSTART.md](CORE_DOCKER_QUICKSTART.md). Do not change the historical image, recorded archive hash or another project's volume.
+
+
 This procedure reproduces the V010-E mechanism. Use Docker Desktop with Linux/amd64 containers and PowerShell7. The tested engine is29.8.2. Do not use another application's container/volume. It is research software, not for clinical use.
 
 Frozen development package: dicom3d-0.1.0.tgz, SHA-256
