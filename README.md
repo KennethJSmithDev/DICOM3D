@@ -20,6 +20,7 @@ Start with the [installation guide](docs/INSTALL_050.md) or [standalone Docker q
 
 - **Standalone Core**: self-contained source/assets ZIP, digest-pinned Docker build, loopback-only static host, automatic male/female reference loading. No IRIS, login, server upload or patient imaging is bundled.
 - **IPM**: the same built reference viewer and assets, plus the existing password/resource-protected IRIS hosting wrapper and read-only identity endpoint. This does not configure FHIR, clinical integrations or optional Connect.
+- **Optional IRIS Docker development host (recovery candidate)**: [isolated durable-volume bootstrap](docs/IRIS_DOCKER_DEV_051.md) distinguishes container startup from IPM installation. The legacy [IRIS Docker quickstart](docs/DOCKER_QUICKSTART.md) remains a historical v0.1.0 profile, not the v0.5.0 standalone Core procedure.
 - **GitHub is authoritative** for the exact release files and SHA256SUMS. Open Exchange and its IPM registry may update later; verify the actual installed version rather than inferring it from a listing. Read the [installation guide](docs/INSTALL_050.md) and verify the installed version.
 
 The [public anatomy demo](https://kennethjsmithdev.github.io/DICOM3D/) now opens the generalized male reference with female switching, interactive selection and reversible presentation. It is browser-only and not a clinical viewer. Published [v0.1.0](https://github.com/KennethJSmithDev/DICOM3D/releases/tag/v0.1.0) and [v0.2.0](https://github.com/KennethJSmithDev/DICOM3D/releases/tag/v0.2.0) remain immutable.
