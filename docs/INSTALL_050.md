@@ -15,7 +15,9 @@ Open http://127.0.0.1:53042/dicom3d/reference.html. The male reference loads aut
 
 ## Optional IRIS/IPM host
 
-Acquire a licensed/authorized IRIS for Health environment and IPM separately; DICOM3D does not redistribute either. Use the exact dicom3d-0.5.0.tgz from GitHub until the external registry actually exposes0.5.0. Copy it to an approved local/container path, verify its hash again, then in the intended development namespace:
+The standalone Docker Compose command above uses **no IRIS**. For a separate, isolated IRIS container host and durable-storage diagnostics, see the [v0.5.1 recovery-candidate procedure](IRIS_DOCKER_DEV_051.md). The historical [IRIS Docker guide](DOCKER_QUICKSTART.md) is tied to v0.1.0. An IRIS-startup success alone is not evidence that IPM installed DICOM3D.
+
+Acquire a licensed/authorized IRIS for Health environment and IPM separately; DICOM3D does not redistribute either. Use the exact dicom3d-0.5.0.tgz from GitHub until the external registry actually exposes0.5.0. Copy it to an approved local/container path, verify its hash again, then in namespace **USER** (all three web applications in v0.5.0 `module.xml` target USER):
 
 ```objectscript
 zpm "load /approved/path/dicom3d-0.5.0.tgz"
