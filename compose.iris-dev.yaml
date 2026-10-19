@@ -1,0 +1,67 @@
+# Experimental IRIS development host bootstrap. Separate from standalone Core.
+# An isolated named volume and a one-shot ownership gate precede IRIS startup.
+name: dicom3d-iris-dev051
+x-iris-image: &iris-image intersystemsdc/irishealth-community@sha256:7746ec696970a7e41fc265e9828a99c0bc1bc534a514f1690e60fb03c957cff2
+
+services:
+  prepare-durable:
+    image: *iris-image
+    user: "0:0"
+    read_only: true
+    network_mode: none
+    entrypoint: ["/bin/sh", "-eu", "-c"]
+    command:
+      - |
+        # Preserve existing instance contents: never recursively chown or reset.
+        if [ -L /durable/iris ]; then
+          echo >&2 "Refusing symlinked durable target"
+          exit 1
+        fi
+        if [ -e /durable/iris ] && [ ! -d /durable/iris ]; then
+          echo >&2 "Durable target exists but is not a directory"
+          exit 1
+        fi
+        if [ -d /durable/iris ] && [ -n "$$(ls -A /durable/iris)" ]; then
+          if [ "$$(stat -c %u /durable)" != "51773" ] || [ "$$(stat -c %u /durable/iris)" != "51773" ]; then
+            echo >&2 "Existing durable contents detected with unexpected owner; refusing modification"
+            exit 1
+          fi
+        else
+          mkdir -p /durable/iris
+          chown 51773:51773 /durable /durable/iris
+          chmod 0750 /durable/iris
+        fi
+        ls -ldn /durable /durable/iris
+    volumes:
+      - type: volume
+        source: data
+        target: /durable
+        volume:
+          nocopy: true
+    restart: "no"
+
+  iris:
+    image: *iris-image
+    entrypoint: ["/iris-main"]
+    depends_on:
+      prepare-durable:
+        condition: service_completed_successfully
+    environment:
+      ISC_DATA_DIRECTORY: /durable/iris
+      ISC_CPF_MERGE_FILE: /dicom3d-setup/merge.cpf
+    ports:
+      - "127.0.0.1:52887:52773"
+      - "127.0.0.1:51987:1972"
+    volumes:
+      - type: volume
+        source: data
+        target: /durable
+        volume:
+          nocopy: true
+      - ./.secrets/merge.cpf:/dicom3d-setup/merge.cpf:ro
+    shm_size: 64m
+    stop_grace_period: 30s
+    restart: "no"
+
+volumes:
+  data:
