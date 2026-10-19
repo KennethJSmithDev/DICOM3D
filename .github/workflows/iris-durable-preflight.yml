@@ -1,0 +1,36 @@
+name: IRIS durable-volume preflight (isolated)
+
+on:
+  pull_request:
+    paths:
+      - compose.iris-dev.yaml
+      - docs/IRIS_DOCKER_DEV_051.md
+      - .github/workflows/iris-durable-preflight.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  permissions:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate Compose model
+        run: docker compose -f compose.iris-dev.yaml config --quiet
+      - name: Create disposable merge-file placeholder
+        run: |
+          mkdir -p .secrets
+          printf '[Startup]\n' > .secrets/merge.cpf
+      - name: Bootstrap isolated named volume
+        run: docker compose -p dicom3d-iris-051-ci -f compose.iris-dev.yaml up --abort-on-container-exit --exit-code-from prepare-durable prepare-durable
+      - name: Verify actual IRIS user can write
+        run: |
+          docker compose -p dicom3d-iris-051-ci -f compose.iris-dev.yaml run --rm --no-deps --entrypoint /bin/sh iris -eu -c 'test "$(id -u)" = 51773 && test -w /durable/iris && touch /durable/iris/.preflight && rm /durable/iris/.preflight'
+      - name: Clean up only ephemeral runner-owned resources
+        if: always()
+        run: docker compose -p dicom3d-iris-051-ci -f compose.iris-dev.yaml down -v --remove-orphans
+
+# Scope: Compose parse + ownership/write permission only.
+# NOT an IRIS startup, IPM install, full runtime, or 2026.1 moderator-image proof.
