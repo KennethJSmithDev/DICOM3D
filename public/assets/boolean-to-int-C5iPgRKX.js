@@ -1,0 +1,1 @@
+import{A as e,M as t,b as n,s as r,u as i}from"./runtime-BxVH-6yn.js";import{i as a,r as o}from"./sockets-DhRah2Zy.js";var s={type:t.BooleanToInt,build:()=>({dataIn:[o(`a`,e.Boolean,!1)],dataOut:[a(`value`,e.Integer)]}),updateOutputs(e,t,a){i(t,e,`value`,n(+!!r(t,a,e,`a`)))}};export{s as booleanToIntDef};

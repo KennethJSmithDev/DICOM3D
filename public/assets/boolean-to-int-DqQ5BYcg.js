@@ -1,1 +1,0 @@
-import{i as e,r as t}from"./sockets-DhRah2Zy.js";import{E as n,T as r,l as i,s as a,v as o}from"./gltf-feature-interactivity-CA0zCwzq.js";var s={type:n.BooleanToInt,build:()=>({dataIn:[t(`a`,r.Boolean,!1)],dataOut:[e(`value`,r.Integer)]}),updateOutputs(e,t,n){i(t,e,`value`,o(+!!a(t,n,e,`a`)))}};export{s as booleanToIntDef};

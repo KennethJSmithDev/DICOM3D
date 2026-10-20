@@ -18,11 +18,13 @@ v0.6.0 is a **web/source release** of the desktop-first, reference-only Visual R
 
 The release includes licensed generalized reference assets and original notices. It excludes the five H000 CT/SEG-derived candidate files and CT screenshot. No study-download action or arbitrary patient-data loading is promoted through Safe Demo. Historical/local H000 qualification remains preserved separately and does not itself grant public-data approval.
 
-### Distribution boundary
+### Installation completion and immutable tag
 
-The viewer package and root lockfile identity are v0.6.0. Protected IRIS module/Health identity, Compose distribution identifiers and qualified installation archives remain **v0.5.1**. This distinction is intentional. GitHub source archives are source snapshots, not qualified native or IPM installers.
+The original v0.6.0 web/source tag remains at d3490dd659e19e44b8800abe87bbc626f45350a2 and contains historical v0.5.1 installation identifiers. A later, separately identified packaging completion commit reconciles module/runtime/Compose identities to 0.6.0 and routes Core and IRIS/IPM through the accepted guarded visual frontend.
 
-Use the [v0.5.1 installation guide](INSTALL_051.md) for installable distributions. No v0.6.0 Core ZIP, IPM TGZ, native installer, registry publication or Open Exchange update is part of this operation. Existing v0.5.0/v0.5.1 assets and checksums are unchanged.
+The existing release is the destination for separately qualified dicom3d-core-0.6.0.zip and dicom3d-0.6.0.tgz, the exact packaging-source snapshot, checksums and qualification receipts. Read the external release/artifact manifest for their actual source commit and publication status. The original tag and GitHub's automatic source snapshots are not relabeled as later packaging source.
+
+See [installation](INSTALL_060.md) and [reproduction/provenance](PACKAGING_060.md). No proprietary IRIS image, private configuration, new user/role, native Windows qualification, registry publication or Open Exchange update is included. Existing v0.5.0/v0.5.1 assets remain immutable. Baseline installers remain reference-only; H000 admission is independent.
 
 ## Evidence and limitations
 

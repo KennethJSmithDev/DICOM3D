@@ -1,0 +1,1 @@
+function e(e){return e[0]*(e[5]*e[10]-e[6]*e[9])+e[1]*(e[6]*e[8]-e[4]*e[10])+e[2]*(e[4]*e[9]-e[5]*e[8])}export{e as t};

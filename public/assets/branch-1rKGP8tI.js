@@ -1,1 +1,0 @@
-import{n as e,r as t,t as n}from"./sockets-DhRah2Zy.js";import{E as r,T as i,i as a,s as o}from"./gltf-feature-interactivity-CA0zCwzq.js";var s={type:r.Branch,build:()=>({dataIn:[t(`condition`,i.Boolean,!1)],signalIn:[n(`in`)],signalOut:[e(`onTrue`),e(`onFalse`)]}),execute(e,t,n){o(t,n,e,`condition`)?a(t,n,e,`onTrue`):a(t,n,e,`onFalse`)}};export{s as branchDef};

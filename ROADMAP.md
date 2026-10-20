@@ -2,6 +2,10 @@
 
 DICOM3D is an independently installable, open-source IRIS for Health research-presentation viewer. Source DICOM data, semantic/spatial provenance, portable derived geometry and renderer-owned presentation remain separate.
 
+## Current installation completion
+
+The v0.6.0 visual web/source release is published. Matching Core/Docker and IRIS/IPM packaging uses a separately identified later source commit and exact-artifact receipts; the original tag stays immutable. See [installation](docs/INSTALL_060.md) and [source reproduction](docs/PACKAGING_060.md). H000 data admission and OEX/IPM registry publication remain separate decisions.
+
 ## Accepted milestones
 
 - **H000 PASS / CLOSED:** one identified public CT/SEG study through deterministic reconstruction, reversible model/patient transforms, semantic GLB and independent Babylon Lite/WebGPU rendering; source and canonical evidence remain frozen. Not a clinical validation claim.
@@ -45,7 +49,7 @@ The GitHub main/tag/release and Pages operation uses the reference-only fallback
 
 The final release gate freezes the exact reference-only tree/output, verifies browser behavior, integrates the accepted source, observes Pages completion and reads back the actual remote experience and GitHub release. [Release notes](docs/RELEASE_060.md) define the scope; the [procedure](docs/VISUAL_PUBLICATION_PROCEDURE.md) separates each evidence step.
 
-Viewer package/lockfile versions are v0.6.0. Installation artifacts, IRIS module/Health and Compose distribution identifiers remain v0.5.1. New native/Core/IPM packages, Open Exchange/registry actions and future H000 data admission require separate authorization and qualification.
+The original web/source publication retained v0.5.1 installer identifiers. The separately authorized installation completion reconciles Core/IPM, module/Health and Compose to 0.6.0 and binds exact archives to a later packaging commit. The original tag stays immutable. Native Windows, Open Exchange/registry actions and H000 admission retain their separate boundaries.
 
 ## Historical planning targets and later proposals (subject to evidence)
 

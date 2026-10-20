@@ -10,7 +10,10 @@ import {
 import {PUBLIC_STUDY_ENABLED} from '../viewer/src/public-release.mjs';
 
 const root=fileURLToPath(new URL('../',import.meta.url));
-const out=resolve(root,'.demo-dist'),source=resolve(root,'reference/public');
+const option=name=>{const i=process.argv.indexOf(name);return i<0?undefined:process.argv[i+1];};
+const base=option('--base')??'/DICOM3D/';
+assert(['/DICOM3D/','/dicom3d/'].includes(base));
+const out=resolve(option('--out-dir')??resolve(root,'.demo-dist')),source=resolve(root,'reference/public');
 const read=(dir,name)=>readFileSync(resolve(dir,name));
 const hash=bytes=>createHash('sha256').update(bytes).digest('hex');
 const manifest=JSON.parse(read(out,'demo-build-manifest.json'));
@@ -21,7 +24,7 @@ assert.equal(JSON.parse(read(root,'viewer/package.json')).version,manifest.relea
 assert.equal(JSON.parse(read(root,'viewer/package-lock.json')).version,manifest.release);
 assert.equal(JSON.parse(read(root,'viewer/package-lock.json')).packages[''].version,manifest.release);
 assert.equal(manifest.product,'DICOM3D');
-assert.equal(manifest.entrypoint,'/DICOM3D/');
+assert.equal(manifest.entrypoint,base);
 assert.equal(manifest.entrySource,'viewer/reference.html');
 assert.equal(manifest.defaultReference,'bp3d-male');
 for(const [key,value] of Object.entries({
@@ -80,7 +83,7 @@ const entrySource=read(root,'viewer/reference.html').toString('utf8');
 const title=text=>text.match(/<title>([^<]+)<\/title>/)?.[1];
 assert.equal(title(html),title(entrySource));
 assert.equal(title(html),'DICOM3D v0.6.0 — Visual Research Workstation');
-assert(html.includes('/DICOM3D/'));
+assert(html.includes(base));
 const bundles=names.filter(x=>x.endsWith('.js')).map(x=>read(out,x).toString('utf8')).join('\n');
 for(const text of [
   'connectLive','connectDicom','Read public FHIR test evidence','SMART_TEST','hapi.fhir.org','server.fire.ly',

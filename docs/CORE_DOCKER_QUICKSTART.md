@@ -1,6 +1,6 @@
-# Standalone Core Docker quick start — v0.5.1
+# Standalone Core Docker quick start — v0.6.0
 
-Research/reference prototype, not clinical software. No IRIS, account or patient study is required. Optional Connect/FHIR is not provisioned or qualified by this distribution. Current status, October 20, 2026: obtain the complete `dicom3d-core-0.5.1.zip` and SHA256SUMS from the [published v0.5.1 release](https://github.com/KennethJSmithDev/DICOM3D/releases/tag/v0.5.1). Historical v0.5.0 remains available from its existing release. These commands describe the frozen v0.5.1 archive; no v0.6.0 Core archive has been qualified.
+Use dicom3d-core-0.6.0.zip, SHA256SUMS and its exact qualification receipt from the [v0.6.0 release](https://github.com/KennethJSmithDev/DICOM3D/releases/tag/v0.6.0). [Installation provenance](PACKAGING_060.md) identifies the later packaging commit without moving the original tag. The immutable v0.5.1 archive and [its guide](INSTALL_051.md) remain available. Research software; not for clinical use.
 
 Use Docker with Compose v2+ and Linux containers. The initial qualification target is linux/amd64; other architectures remain unverified. A WebGPU-capable desktop browser is required. The image build obtains the digest-pinned official Node base and lockfile-pinned npm dependencies; internet access is required for the first build. Node's built-in HTTP API serves the compiled viewer; no server package is installed.
 
@@ -27,7 +27,7 @@ docker compose -f compose.core.yaml -p dicom3d-core down
 
 `down` removes only this Compose project's containers/network. There are no persistent volumes, host mounts or server-side study storage. Do not run global prune or `down -v`. Leave unrelated IRIS/OpsDeck projects alone. Keep the built image unless its deletion is separately desired/authorized.
 
-Reference files persist in the immutable image across container restart/recreation. Selection, transforms and local imported study buffers are browser-session presentation state; they are not saved by Docker. Reload returns to the default reference. Choose local study files again when needed. The Core server offers GET/HEAD static reads only and rejects writes; it does not upload or store those files. Optional public-source reader controls inherited from the candidate may contact their explicitly selected public providers; no private endpoint or credentials are configured here.
+Reference files persist in the immutable image across container restart/recreation. Selection, camera and animation are browser presentation state. Reload returns to the default reference. This reference-only visual release exposes no arbitrary patient upload, Connect/FHIR provider UI or H000 study download. The Core server offers GET/HEAD static reads and rejects writes.
 
 The container runs as the unprivileged Node user with a read-only filesystem, no added capabilities, 2 CPU / 768 MiB runtime limits and an HTTP healthcheck. Host-browser/GPU memory is outside those server limits. Health means the static host is serving its shell, not that WebGPU/anatomy rendering has passed.
 
@@ -35,10 +35,10 @@ The container runs as the unprivileged Node user with a read-only filesystem, no
 
 Software remains Apache-2.0, personally copyrighted KennethJSmithDev. Preserve LICENSE, NOTICE and third-party/. BodyParts3D-derived data remains separately CC BY-SA 2.1 Japan as recorded in `reference/public/reference/BODYParts3D-NOTICE.txt`; HRA female data is CC BY 4.0, with creators/source/changes recorded in HRA-FEMALE-NOTICE.txt. Both notices and semantic manifests are served with the assets. No patient CT, SEG, H000 lesion, proprietary IRIS image, license key or credential is bundled.
 
-To reproduce this release from its approved v0.5.1 source snapshot using Python 3 (not the v0.6.0 web/source checkout):
+To reproduce from the separately identified v0.6.0 packaging-source snapshot using Python 3:
 
 ```sh
-python scripts/archive-core.py --output /absolute/path/to/new-core.zip
+python scripts/archive-core.py --output /absolute/path/to/new-core.zip --source-commit EXACT_PACKAGING_COMMIT
 ```
 
-Use a fresh output path. The archiver creates an explicit allowlisted source/asset archive and internal SHA-256 manifest without copying node_modules, caches, imaging studies or developer paths. Source Git HEAD plus the manifest digest identifies the candidate; HEAD alone is insufficient when accepted work is uncommitted. Qualify the exact extracted archive before claiming distribution PASS. The frozen release assets and recorded qualification, rather than a fresh unqualified rebuild, define this release.
+Use a fresh output path. The archiver reads the explicit content-bound source inventory and emits an internal SHA-256 manifest. It excludes ignored local payloads, caches and private configuration. The external release manifest identifies the packaging commit, source snapshot and exact qualified installer bytes. See [PACKAGING_060.md](PACKAGING_060.md); the original v0.6.0 tag remains immutable.

@@ -1,1 +1,0 @@
-import{i as e,r as t}from"./sockets-DhRah2Zy.js";import{E as n,T as r,l as i,s as a,y as o}from"./gltf-feature-interactivity-CA0zCwzq.js";var s={type:n.IntToFloat,build:()=>({dataIn:[t(`a`,r.Integer)],dataOut:[e(`value`,r.Number)]}),updateOutputs(e,t,n){let r=a(t,n,e,`a`);i(t,e,`value`,o(r)?r.value:r)}};export{s as intToFloatDef};

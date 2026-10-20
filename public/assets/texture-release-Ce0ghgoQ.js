@@ -1,0 +1,1 @@
+import{t as e}from"./texture-allocation-release-BTktSIXv.js";function t(t){return e(t.texture,t)}export{t};

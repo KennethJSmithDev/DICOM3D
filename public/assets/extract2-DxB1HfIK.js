@@ -1,0 +1,1 @@
+import{A as e,M as t,s as n,u as r}from"./runtime-BxVH-6yn.js";import{F as i}from"./fg-math-CsBC5zKx.js";import{i as a,r as o}from"./sockets-DhRah2Zy.js";var s={type:t.ExtractVector2,build:()=>({dataIn:[o(`a`,e.Vector2)],dataOut:[a(`x`,e.Number),a(`y`,e.Number)]}),updateOutputs(e,t,a){let[o,s]=i(n(t,a,e,`a`));r(t,e,`x`,o),r(t,e,`y`,s)}};export{s as extract2Def};

@@ -1,6 +1,6 @@
 # Changelog
 
-## 0.6.0 — Visual Research Workstation (web/source release)
+## 0.6.0 — Visual Research Workstation
 
 **From Pixels to Meaning.** The selected GitHub/Pages release is reference-only. Publication completion and final remote rendering are recorded separately in the release receipt; earlier local candidate evidence is not a deployment claim.
 
@@ -12,7 +12,7 @@
 
 The five H000 candidate files and CT screenshot are excluded. Safe Demo offers no acquired-study download or arbitrary patient-data load. The earlier CT-inclusive lab candidate and evidence remain separately preserved.
 
-Viewer package/lockfile identity is v0.6.0. Installable Core/IPM/native distribution scope remains v0.5.1: no replacement installation archives, registry publication or Open Exchange operation is part of this release. Existing v0.5.0/v0.5.1 artifacts stay immutable.
+Installation completion is a later packaging commit: Core/Docker and protected IRIS/IPM version ownership is reconciled to 0.6.0, using the same guarded visual source and exact admitted reference assets. The original web/source tag stays immutable. Exact archive hashes, source snapshot, supported-host qualification and upload status are bound by the external release manifest and receipts. See [installation](docs/INSTALL_060.md) and [reproduction](docs/PACKAGING_060.md). No OEX/IPM registry publication or new native Windows qualification is included. Existing v0.5.0/v0.5.1 artifacts stay immutable.
 
 See [release notes](docs/RELEASE_060.md), [visual evidence limits](docs/VISUAL_RELEASE_060.md), [data policy](docs/PUBLIC_RESEARCH_DATA_POLICY.md) and [publication/readback](docs/VISUAL_PUBLICATION_PROCEDURE.md).
 

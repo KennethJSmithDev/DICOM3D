@@ -1,1 +1,0 @@
-import{r as e}from"./fg-math-D66aWcRG.js";import{i as t,r as n}from"./sockets-DhRah2Zy.js";import{E as r,T as i,l as a,s as o}from"./gltf-feature-interactivity-CA0zCwzq.js";var s={type:r.Acosh,build:()=>({dataIn:[n(`a`,i.Any)],dataOut:[t(`value`,i.Any)]}),updateOutputs(t,n,r){let i=o(n,r,t,`a`);a(n,t,`value`,e(i))}};export{s as acoshDef};

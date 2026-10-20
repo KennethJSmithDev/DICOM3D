@@ -2,13 +2,13 @@
 
 **From Pixels to Meaning.**
 
-<p align="center"><a href="https://kennethjsmithdev.github.io/DICOM3D/"><strong>Live Demo</strong></a> · <a href="docs/RELEASE_060.md"><strong>v0.6.0 Web / Source Release</strong></a> · <a href="docs/INSTALL_051.md"><strong>v0.5.1 Install Guide</strong></a></p>
+<p align="center"><a href="https://kennethjsmithdev.github.io/DICOM3D/"><strong>Live Demo</strong></a> · <a href="docs/RELEASE_060.md"><strong>v0.6.0 Web / Source Release</strong></a> · <a href="docs/INSTALL_060.md"><strong>v0.6.0 Install Guide</strong></a></p>
 
 <p align="center"><img src="reference/public/brand/semantic-cube.svg" alt="DICOM3D semantic cube" width="96"></p>
 
 DICOM3D is a desktop-first research workstation for exploring generalized anatomy in a central 3D workspace. The v0.6.0 web/source release combines the existing male BodyParts3D and female HRA references with scientific, holographic and bounded materialization presentations. Source geometry, semantic identity and attribution stay intact.
 
-**Release scope:** v0.6.0 covers the browser experience and its source. The qualified **[v0.5.1 installation distributions](https://github.com/KennethJSmithDev/DICOM3D/releases/tag/v0.5.1)** remain available and unchanged. No v0.6.0 native, Core Docker or IPM installation package is included. Open Exchange and its registry are separate surfaces.
+**Release scope:** the published v0.6.0 tag identifies the accepted visual web/source commit. Matching Core/Docker and IRIS/IPM installation artifacts use a separately identified packaging completion commit and source snapshot. Obtain exact archives, checksums and qualification receipts from the [v0.6.0 release](https://github.com/KennethJSmithDev/DICOM3D/releases/tag/v0.6.0); see [installation provenance](docs/PACKAGING_060.md). Existing v0.5.1 assets remain immutable. Open Exchange and its registry are separate, user-owned publication surfaces.
 
 ## A 3D-first anatomy workspace
 
@@ -34,13 +34,13 @@ Male BodyParts3D lung groups contain source airway/vessel branches rather than c
 
 Camera, materials, clipping and animation are presentation state. This research software makes no clinical, diagnostic, anatomical-accuracy, new-segmentation, registration or physiological-simulation claim.
 
-## Installable v0.5.1 distributions
+## Install v0.6.0
 
-- **Standalone Core:** the frozen source/assets ZIP and [Docker quick start](docs/CORE_DOCKER_QUICKSTART.md). No IRIS or account is required.
-- **Protected IRIS/IPM host:** the exact published package and scope in the [installation guide](docs/INSTALL_051.md).
-- **Optional IRIS development host:** the [isolated durable-volume procedure](docs/IRIS_DOCKER_DEV_051.md), separating startup from package activation.
+- **Standalone Core / Docker:** dicom3d-core-0.6.0.zip, the canonical visual workstation and attributed reference assets, served read-only on loopback.
+- **Protected IRIS/IPM:** dicom3d-0.6.0.tgz with prebuilt visual frontend, generated FileCopy inventory, content-bound entry link and existing password/resource protection.
+- **Optional IRIS development host:** the existing isolated durable-volume recipe, reconciled to 0.6.0.
 
-Use exact v0.5.1 release files and SHA256SUMS. A changing checkout or listing version does not identify those archived bytes. The [qualification record](docs/RELEASE_051.md), [compatibility limits](docs/COMPATIBILITY_051.md) and earlier releases remain preserved.
+Use the exact [installation guide](docs/INSTALL_060.md), [packaging/source instructions](docs/PACKAGING_060.md) and external release qualification receipt. The original v0.6.0 tag is not the later installation source snapshot. [v0.5.1 installers](https://github.com/KennethJSmithDev/DICOM3D/releases/tag/v0.5.1) remain available for rollback with their original checksums.
 
 ## Run the web experience locally
 
@@ -56,7 +56,7 @@ node node_modules/vite/bin/vite.js preview --config vite.reference.config.mjs --
 
 Open `http://127.0.0.1:53260/DICOM3D/`. Stop with Ctrl+C, then use `Pop-Location`. The build uses the existing reference entry and Babylon Lite renderer, without an additional rendering engine or runtime dependency.
 
-Inactive source code retains public TCIA identity/hash constants and research preparation tests, but no H000 data payload or study route is emitted by the reference-only build. Earlier research adapters and installation tooling do not qualify a new installable package. Reproduce v0.5.1 packages from their exact release source. The [publication procedure](docs/VISUAL_PUBLICATION_PROCEDURE.md) separates source integration, Pages deployment and actual remote rendering checks.
+Inactive source code retains public TCIA identity/hash constants and research preparation tests, but no H000 data payload or study route is emitted by the reference-only build. Installation qualification is recorded against the exact later packaging artifacts and supported hosts; it does not qualify inactive research adapters. Reproduce each version from its identified packaging source. The [publication procedure](docs/VISUAL_PUBLICATION_PROCEDURE.md) separates source integration, Pages deployment and actual remote rendering checks.
 
 ## History and license
 

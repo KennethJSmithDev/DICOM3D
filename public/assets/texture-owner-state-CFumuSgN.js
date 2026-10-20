@@ -1,0 +1,1 @@
+import{t as e}from"./texture-reference-store-D7itGrdQ.js";function t(t){return e().get(t.texture)===0}function n(t){return e().get(t.texture)??0}export{n,t};

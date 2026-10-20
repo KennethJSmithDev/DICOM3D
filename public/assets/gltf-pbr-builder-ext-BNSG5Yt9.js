@@ -1,0 +1,1 @@
+import{n as e,r as t,t as n}from"./gltf-pbr-builder-ext-BI2ONCUr.js";export{n as applyGltfUvTransform,e as assemblePbrPropsExt,t as buildDefaultPbrTexturesExt};

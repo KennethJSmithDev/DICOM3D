@@ -1,1 +1,0 @@
-import{n as e,t}from"./sockets-DhRah2Zy.js";import{E as n,i as r}from"./gltf-feature-interactivity-CA0zCwzq.js";var i={type:n.Sequence,build:n=>{let r=Math.max(1,n?.outputSignalCount??1),i=[];for(let t=0;t<r;t++)i.push(e(`out_${t}`));return{signalIn:[t(`in`)],signalOut:i}},execute(e,t,n){for(let i of e.signalOut)r(t,n,e,i.name)}};export{i as sequenceDef};

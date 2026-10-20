@@ -1,1 +1,0 @@
-import{i as e}from"./fg-math-D66aWcRG.js";import{i as t,r as n}from"./sockets-DhRah2Zy.js";import{E as r,T as i,l as a,s as o}from"./gltf-feature-interactivity-CA0zCwzq.js";var s={type:r.Add,build:()=>({dataIn:[n(`a`,i.Any),n(`b`,i.Any)],dataOut:[t(`value`,i.Any)]}),updateOutputs(t,n,r){let i=o(n,r,t,`a`),s=o(n,r,t,`b`);a(n,t,`value`,e(i,s))}};export{s as addDef};

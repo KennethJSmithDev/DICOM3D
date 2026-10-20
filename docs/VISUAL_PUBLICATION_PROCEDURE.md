@@ -1,5 +1,7 @@
 # v0.6.0 web/source publication and readback
 
+Current installation addendum: the later, separately identified v0.6.0 packaging completion is described in [INSTALL_060.md](INSTALL_060.md) and [PACKAGING_060.md](PACKAGING_060.md). The original web/source publication boundary recorded below remains historical; its tag and previous installation archives stay immutable.
+
 Identity: **DICOM3D v0.6.0 — Visual Research Workstation. From Pixels to Meaning.**
 
 The selected operation covers GitHub main, a v0.6.0 tag/release and GitHub Pages. The payload is reference-only. Open Exchange, IPM registry actions, native installations and new Core/IPM archives are outside this operation. These are required steps; completed command and readback evidence establishes their result.

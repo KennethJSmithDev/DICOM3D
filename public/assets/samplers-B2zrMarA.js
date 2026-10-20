@@ -1,0 +1,1 @@
+import{t as e}from"./texture-sampler-pool-5zXM0qOo.js";var t={magFilter:`nearest`,minFilter:`nearest`},n={magFilter:`linear`,minFilter:`linear`};function r(n){return e(n,t)}function i(t){return e(t,n)}export{r as n,i as t};

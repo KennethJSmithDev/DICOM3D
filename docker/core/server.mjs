@@ -1,10 +1,11 @@
 // Copyright 2026 KennethJSmithDev. Apache-2.0.
 // Read-only static Core host. No upload, authentication or clinical APIs.
 import {createServer} from 'node:http';
-import {createReadStream} from 'node:fs';
+import {createReadStream, readFileSync} from 'node:fs';
 import {stat} from 'node:fs/promises';
 import {resolve, extname, sep} from 'node:path';
 const root = resolve('/app/public');
+const distribution = JSON.parse(readFileSync(resolve(root,'distribution-manifest.json'),'utf8'));
 const mime = {'.html':'text/html; charset=utf-8','.js':'text/javascript; charset=utf-8','.mjs':'text/javascript; charset=utf-8','.css':'text/css; charset=utf-8','.json':'application/json','.glb':'model/gltf-binary','.png':'image/png','.svg':'image/svg+xml','.txt':'text/plain; charset=utf-8','.wasm':'application/wasm'};
 const server = createServer(async (req,res) => {
   res.setHeader('X-Content-Type-Options','nosniff');
@@ -14,7 +15,7 @@ const server = createServer(async (req,res) => {
     if (pathname === '/healthz') {
       await stat(resolve(root,'reference.html'));
       res.writeHead(200,{'Content-Type':'application/json','Cache-Control':'no-store'});
-      res.end(req.method==='HEAD'?undefined:'{"service":"dicom3d-core","status":"ok"}');return;
+      res.end(req.method==='HEAD'?undefined:JSON.stringify({product:'DICOM3D',service:'dicom3d-core',version:distribution.version,status:'ok',clinicalUse:false}));return;
     }
     if (pathname === '/' || pathname === '/dicom3d/' || pathname === '/dicom3d') {
       res.writeHead(302,{Location:'/dicom3d/reference.html','Cache-Control':'no-store'});res.end();return;

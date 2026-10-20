@@ -1,1 +1,0 @@
-import{i as e}from"./sockets-DhRah2Zy.js";import{E as t,T as n,l as r}from"./gltf-feature-interactivity-CA0zCwzq.js";var i={type:t.Constant,build:()=>({dataOut:[e(`value`,n.Any)]}),updateOutputs(e,t){r(t,e,`value`,e.config?.value??void 0)}};export{i as constantDef};

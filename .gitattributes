@@ -1,3 +1,10 @@
 # Preserve the qualified brand bytes across Git export and CI checkout.
 reference/public/brand/favicon.svg -text
 reference/public/brand/semantic-cube.svg -text
+# Generated frontend bytes own hashed filenames, manifests and native entry identity.
+public/** -text whitespace=cr-at-eol
+module.xml text eol=lf
+src/DICOM3D/Entry.cls text eol=lf
+src/DICOM3D/Health.cls text eol=lf
+source-manifest.json text eol=lf
+distribution-manifest.json text eol=lf

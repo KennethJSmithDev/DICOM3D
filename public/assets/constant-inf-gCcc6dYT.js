@@ -1,0 +1,1 @@
+import{A as e,M as t,u as n}from"./runtime-BxVH-6yn.js";import{i as r}from"./sockets-DhRah2Zy.js";var i={type:t.Inf,build:()=>({dataOut:[r(`value`,e.Number)]}),updateOutputs(e,t){n(t,e,`value`,1/0)}};export{i as infDef};

@@ -1,5 +1,7 @@
 # DICOM3D v0.6.0 — Visual Research Workstation
 
+Current installation addendum: the later, separately identified v0.6.0 packaging completion is described in [INSTALL_060.md](INSTALL_060.md) and [PACKAGING_060.md](PACKAGING_060.md). The original web/source publication boundary recorded below remains historical; its tag and previous installation archives stay immutable.
+
 **From Pixels to Meaning.**
 
 Release scope: **desktop-first, reference-only web/source experience**. GitHub source, tag/release and Pages are the selected publication surfaces. See [release notes](RELEASE_060.md) for the installation boundary and [publication procedure](VISUAL_PUBLICATION_PROCEDURE.md) for final verification. This document does not assert a completed deployment.

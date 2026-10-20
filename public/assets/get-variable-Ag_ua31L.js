@@ -1,1 +1,0 @@
-import{i as e}from"./sockets-DhRah2Zy.js";import{E as t,T as n,l as r}from"./gltf-feature-interactivity-CA0zCwzq.js";var i={type:t.GetVariable,build:()=>({dataOut:[e(`value`,n.Any)]}),updateOutputs(e,t){let n=e.config?.variable;r(t,e,`value`,t.userVariables[n])}};export{i as getVariableDef};

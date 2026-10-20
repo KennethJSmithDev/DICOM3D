@@ -1,0 +1,1 @@
+function e(e,t){return Math.floor(Math.log2(Math.max(e,t)))+1}function t(e,t,n){return Math.max(1,Math.floor(Math.log2(Math.max(e,t))-n)+1)}export{e as n,t};

@@ -1,6 +1,6 @@
 // Copyright 2026 KennethJSmithDev. Apache-2.0.
 import { createHash } from 'node:crypto';
-import { mkdirSync, writeFileSync, copyFileSync, cpSync, readFileSync, readdirSync, rmSync } from 'node:fs';
+import { mkdirSync, writeFileSync, copyFileSync, cpSync, readFileSync, readdirSync, rmSync, existsSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { resolve } from 'node:path';
 import { execFileSync } from 'node:child_process';
@@ -41,7 +41,8 @@ function checkReferenceBytes(bytes,name){
 export async function verifyAdmittedPublicFiles(publicRoot,{source=false}={}){
   if(PUBLIC_STUDY_ENABLED)throw Error('Study publication needs a separate reviewed data-admission change');
   exactNames(inventory(resolve(publicRoot,'brand')),Object.keys(APPROVED_BRAND_ASSETS),'Brand payload');
-  exactNames(inventory(resolve(publicRoot,'reference')),[...Object.keys(APPROVED_REFERENCE_ASSETS),...(source?excludedLegacy:[])],'Reference payload');
+  const referenceNames=inventory(resolve(publicRoot,'reference'));
+  exactNames(referenceNames,[...Object.keys(APPROVED_REFERENCE_ASSETS),...(source?referenceNames.filter(name=>excludedLegacy.includes(name)):[])],'Reference payload');
   for(const name of Object.keys(APPROVED_REFERENCE_ASSETS))checkReferenceBytes(readFileSync(resolve(publicRoot,'reference',name)),name);
   for(const[name,expected]of Object.entries(APPROVED_BRAND_ASSETS)){
     const actual=identity(readFileSync(resolve(publicRoot,'brand',name)));
@@ -80,13 +81,15 @@ writeFileSync(resolve(sample,'study.manifest.json'),JSON.stringify({
 },null,2)+'\n');
 }
 
-export async function buildDemo(){
+export async function buildDemo({base='/DICOM3D/',outDir=resolve(root,'.demo-dist')}={}){
 if(process.argv.includes('--sample-only')){writeSyntheticTestFixture();return;}
+if(!['/DICOM3D/','/dicom3d/'].includes(base))throw Error('Unreviewed frontend base');
+const output=resolve(outDir);
+if(output!==resolve(root,'.demo-dist')&&existsSync(output))throw Error('Use a new empty frontend output directory');
 const publicRoot=resolve(root,'reference/public');
 await verifyAdmittedPublicFiles(publicRoot,{source:true});
 // Static Pages adapter over the qualified reference viewer; no second renderer.
-execFileSync(process.execPath,[resolve(root,'viewer/node_modules/vite/bin/vite.js'),'build','--config',resolve(root,'viewer/vite.reference.config.mjs'),'--base','/DICOM3D/','--mode','safe-reference-demo','--outDir',resolve(root,'.demo-dist'),'--emptyOutDir'],{stdio:'inherit',cwd:resolve(root,'viewer')});
-const output=resolve(root,'.demo-dist');
+execFileSync(process.execPath,[resolve(root,'viewer/node_modules/vite/bin/vite.js'),'build','--config',resolve(root,'viewer/vite.reference.config.mjs'),'--base',base,'--mode','safe-reference-demo','--outDir',output,'--emptyOutDir'],{stdio:'inherit',cwd:resolve(root,'viewer')});
 // WHY: the unapproved local study must never enter a Pages artifact.
 // BOUNDARY: Vite publicDir is disabled for this mode; copy only exact named assets.
 // INVARIANT: no recursive copy from reference/public and no runtime admission override.
@@ -109,7 +112,7 @@ await verifyAdmittedPublicFiles(output);
 for(const name of [...Object.keys(APPROVED_REFERENCE_ASSETS).map(x=>'reference/'+x),...Object.keys(APPROVED_BRAND_ASSETS).map(x=>'brand/'+x)]){
   if(!readFileSync(resolve(output,name)).equals(readFileSync(resolve(publicRoot,name))))throw Error('Built public bytes differ: '+name);
 }
-if(!readFileSync(resolve(output,'index.html'),'utf8').includes('/DICOM3D/'))throw Error('Wrong Pages base');
+if(!readFileSync(resolve(output,'index.html'),'utf8').includes(base))throw Error('Wrong frontend base');
 const files=Object.fromEntries(inventory(output).sort().map(name=>[name,identity(readFileSync(resolve(output,name)))]));
 const fixedOutput=new Set(['index.html','reference.html','LICENSE','NOTICE',
   ...inventory(resolve(root,'third-party')).map(x=>'third-party/'+x),
@@ -118,11 +121,14 @@ const fixedOutput=new Set(['index.html','reference.html','LICENSE','NOTICE',
 for(const name of Object.keys(files))if(!fixedOutput.has(name)&&!/^assets\/[^/]+\.(js|css)$/.test(name))throw Error('Unadmitted build output: '+name);
 const approvedPublicResearchFixtures={};
 writeFileSync(resolve(output,'demo-build-manifest.json'),JSON.stringify({
-  product:'DICOM3D',...RELEASE_METADATA,entrypoint:'/DICOM3D/',entrySource:'viewer/reference.html',
+  product:'DICOM3D',...RELEASE_METADATA,entrypoint:base,entrySource:'viewer/reference.html',
   defaultReference:'bp3d-male',connectedServices:false,patientDerivedResearchData:false,privatePatientData:false,
   arbitraryPatientAssets:false,rawDicomFiles:false,syntheticDemoAssets:false,patientReferenceRegistration:false,
   publicDataPolicy:'Exact admitted generalized reference and brand files only; all other public data files denied. H000 data release is pending.',
   approvedPublicResearchFixtures,files,
 },null,2)+'\n');
 }
-if(process.argv[1]&&resolve(process.argv[1])===fileURLToPath(import.meta.url))await buildDemo();
+if(process.argv[1]&&resolve(process.argv[1])===fileURLToPath(import.meta.url)){
+  const option=name=>{const i=process.argv.indexOf(name);if(i<0)return undefined;if(!process.argv[i+1])throw Error('Missing '+name);return process.argv[i+1];};
+  await buildDemo({base:option('--base'),outDir:option('--out-dir')});
+}

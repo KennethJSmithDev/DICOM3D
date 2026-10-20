@@ -1,5 +1,7 @@
 # v0.6.0 documentation scope reconciliation
 
+Current installation addendum: the later, separately identified v0.6.0 packaging completion is described in [INSTALL_060.md](INSTALL_060.md) and [PACKAGING_060.md](PACKAGING_060.md). The original web/source publication boundary recorded below remains historical; its tag and previous installation archives stay immutable.
+
 Date: October 20, 2026. Scope: **reference-only web/source release**. Documentation describes selected scope; publication and remote rendering are recorded separately after execution.
 
 | Surface | Treatment |

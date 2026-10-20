@@ -1,0 +1,1 @@
+import{A as e,M as t,u as n}from"./runtime-BxVH-6yn.js";import{i as r}from"./sockets-DhRah2Zy.js";var i={type:t.Tau,build:()=>({dataOut:[r(`value`,e.Number)]}),updateOutputs(e,t){n(t,e,`value`,2*Math.PI)}};export{i as tauDef};

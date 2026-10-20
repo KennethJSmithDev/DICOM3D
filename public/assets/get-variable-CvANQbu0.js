@@ -1,0 +1,1 @@
+import{A as e,M as t,u as n}from"./runtime-BxVH-6yn.js";import{i as r}from"./sockets-DhRah2Zy.js";var i={type:t.GetVariable,build:()=>({dataOut:[r(`value`,e.Any)]}),updateOutputs(e,t){let r=e.config?.variable;n(t,e,`value`,t.userVariables[r])}};export{i as getVariableDef};

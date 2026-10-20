@@ -1,0 +1,1 @@
+import{n as e}from"./pbr-transmission-ext-Zx2GQ18m.js";import{a as t}from"./pbr-flags-D6sBGIQF.js";function n(n,r){n._transmissive=!0,(n._subsurface??={}).refraction=r,t(e)}export{n as setPbrTransmission};

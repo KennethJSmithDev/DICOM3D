@@ -1,6 +1,6 @@
 # Experimental IRIS development host bootstrap. Separate from standalone Core.
 # An isolated named volume and a one-shot ownership gate precede IRIS startup.
-name: dicom3d-iris-dev051
+name: dicom3d-iris-dev060
 x-iris-image: &iris-image intersystemsdc/irishealth-community@sha256:7746ec696970a7e41fc265e9828a99c0bc1bc534a514f1690e60fb03c957cff2
 
 services:
@@ -69,7 +69,7 @@ services:
     restart: "no"
 
   iris:
-    image: dicom3d-iris-dev:0.5.1
+    image: dicom3d-iris-dev:0.6.0
     build:
       context: .
       dockerfile: Dockerfile.iris-dev

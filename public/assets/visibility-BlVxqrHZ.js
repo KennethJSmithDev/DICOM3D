@@ -1,0 +1,1 @@
+import{n as e}from"./engine-KxBmuJ5G.js";function t(t,r){n(t,r)&&e()}function n(e,t){let r=e.visible!==t;e.visible=t;let i=e.children;for(let e=0;e<i.length;e++)n(i[e],t)&&(r=!0);return r}export{t};

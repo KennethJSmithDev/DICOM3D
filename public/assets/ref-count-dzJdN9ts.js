@@ -1,0 +1,1 @@
+function e(e){e._refCount=(e._refCount??1)+1}function t(e){let t=e._refCount;return t===void 0||t<=1||(e._refCount=t-1,!1)}export{e as n,t};
