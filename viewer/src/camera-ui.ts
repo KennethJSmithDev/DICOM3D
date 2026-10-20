@@ -1,7 +1,7 @@
 import {getViewProjectionMatrix} from '@babylonjs/lite';
 import {worldBounds,fitDistance,presentationDistance} from './camera-fit.mjs';
 import {screenDragDelta} from './screen-drag.mjs';
-export function prepareCamera({camera,canvas,sourceMeshes,sliceController,additionalBounds=()=>[],presentation=null}:any) {
+export function prepareCamera({camera,canvas,sourceMeshes,sliceController,additionalBounds=()=>[],presentation=null,refitOnResize=true}:any) {
   const toolbar=document.createElement('div');toolbar.id='cameraControls';toolbar.setAttribute('aria-label','Presentation camera controls');
   toolbar.innerHTML=`<div class="camera-actions"><button id="cameraFit" type="button">Fit complete assembly</button><button id="cameraFocus" type="button" disabled>Focus selected slice</button><button id="cameraRestore" type="button">Restore original camera</button></div><p id="cameraStatus" role="status" aria-live="polite"></p><small>Camera target follows geometric bounds. Source-space origin and model transforms stay unchanged.</small><pre id="cameraState" hidden></pre>`;
   (document.querySelector('#cameraMount')||canvas.parentElement!).append(toolbar);
@@ -60,7 +60,7 @@ export function prepareCamera({camera,canvas,sourceMeshes,sliceController,additi
   get('cameraRestore').onclick=api.restore;
   if(presentation)for(const preset of presentation.presets){const button=document.createElement('button');button.id='camera'+preset.id;button.textContent=preset.label;button.type='button';button.onclick=()=>{cancelAnimationFrame(pending);cancelInertia();camera.alpha=preset.alpha;camera.beta=preset.beta;get('cameraStatus').textContent=`${preset.label} · camera distance and target preserved`;capture();};toolbar.querySelector('.camera-actions')!.append(button);}
   // Canvas size, not browser width, owns projection framing (panels alter it).
-  const observer=new ResizeObserver(schedule);observer.observe(canvas);
+  const observer=new ResizeObserver(()=>{if(refitOnResize)schedule();});observer.observe(canvas);
   sync();schedule();
   return api;
 }

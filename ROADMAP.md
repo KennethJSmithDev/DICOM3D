@@ -33,16 +33,30 @@ H002-A/B and fresh C/D/E/F bounded checks passed on the candidate branch, includ
 
 Licensed generalized male/female anatomy, bounded multimodality presentation, source-linked H000 semantic evidence, deterministic contextual learning, stable selection/isolation/camera behavior and qualified Core/IPM distributions. The public DEMO-050 loads male anatomy directly and permits female switching. Live FHIR, DICOMweb, generic SEG/SR interpretation, clinical validation and AI decisions are not production-qualified.
 
-## Historical planning targets and later proposed releases (subject to evidence)
+## v0.5.1 — Published installation recovery (October 20, 2026)
+
+The seven frozen recovery assets are published at `f03162c`; the static viewer/reference payload retains v0.5.0 bytes. Current installation links and release status are reconciled without rewriting historical qualification. Open Exchange listing, archive targets and registry packages remain separately verified surfaces.
+
+## v0.6.0 — Visual Research Workstation (web/source scope)
+
+**From Pixels to Meaning.** The selected release brings the existing BodyParts3D/HRA references into a 3D-first desktop workspace with scientific/holographic materials, bounded materialization, source-preserving semantic controls and contextual Learn.
+
+The GitHub main/tag/release and Pages operation uses the reference-only fallback. H000 CT/SEG/lesion files and CT screenshots are excluded; their separate local qualification is preserved. No acquired-data publication is implied.
+
+The final release gate freezes the exact reference-only tree/output, verifies browser behavior, integrates the accepted source, observes Pages completion and reads back the actual remote experience and GitHub release. [Release notes](docs/RELEASE_060.md) define the scope; the [procedure](docs/VISUAL_PUBLICATION_PROCEDURE.md) separates each evidence step.
+
+Viewer package/lockfile versions are v0.6.0. Installation artifacts, IRIS module/Health and Compose distribution identifiers remain v0.5.1. New native/Core/IPM packages, Open Exchange/registry actions and future H000 data admission require separate authorization and qualification.
+
+## Historical planning targets and later proposals (subject to evidence)
 
 - **0.3.0 — recognizable anatomical context:** qualified public/synthetic contextual study presentation, CT-volume display and legibility; preserve source versus interpolated detail.
 - **0.4.0 — source correlation:** H004 DICOM SOP/frame/source-slice navigation and derived-section distinctions.
 - **0.5.0 — contextual learning:** bring OpsDeck's deterministic field/action/result teaching patterns into DICOM3D without making OpsDeck a runtime dependency.
-- **0.6.0 — interoperability and optional AI seam:** independently qualify IRIS for Health workflows and read-only provider-neutral AI hooks; any contest-specific AI Hub implementation is a separate scope with its own requirements.
+- **Former 0.6.0 proposal — interoperability and optional AI seam:** deferred and unversioned. It is not part of the selected Visual Research Workstation release. Independently qualified IRIS workflows and optional read-only AI hooks would require their own future contract.
 - **0.7.x–0.9.x — hardening:** multi-structure composition, additional imaging workflows, UX/accessibility, performance, compatibility, security and evidence-driven stability.
 - **1.0.0 — stable contract:** independently installable, documented, reproducible, tested and supportable release with clearly bounded medical/research claims.
 
-The historical 0.3–0.5 planning descriptions above are superseded by the published v0.5.0 capability statement and must not be interpreted as pending releases. Targets above 0.5 remain proposals, not fixed dates.
+The historical 0.3–0.5 planning descriptions are superseded by the published v0.5.0 capability statement. The former 0.6.0 theme is superseded by the user's Visual Research Workstation identity above. Later targets remain proposals, not fixed dates.
 
 ## Core ownership and representation
 

@@ -1,48 +1,65 @@
-# DICOM3D
+# DICOM3D — Visual Research Workstation
 
-<p align="center">
-  <a href="https://kennethjsmithdev.github.io/DICOM3D/"><strong>Live Demo</strong></a>
-  &nbsp;·&nbsp;
-  <a href="docs/INSTALL_051.md#optional-protected-irisipm-distribution"><strong>Native Install QuickStart</strong></a>
-  &nbsp;·&nbsp;
-  <a href="docs/CORE_DOCKER_QUICKSTART.md"><strong>Docker Quick Start</strong></a>
-</p>
+**From Pixels to Meaning.**
 
-<p align="center"><img src="assets/branding/dicom3d-logo.png" alt="DICOM3D Logo" width="480"></p>
+<p align="center"><a href="https://kennethjsmithdev.github.io/DICOM3D/"><strong>Live Demo</strong></a> · <a href="docs/RELEASE_060.md"><strong>v0.6.0 Web / Source Release</strong></a> · <a href="docs/INSTALL_051.md"><strong>v0.5.1 Install Guide</strong></a></p>
 
-**v0.5.1 installation-recovery candidate.** The published v0.5.0 release remains immutable. This branch prepares the next release; it does not publish it.
+<p align="center"><img src="reference/public/brand/semantic-cube.svg" alt="DICOM3D semantic cube" width="96"></p>
 
-DICOM3D is a desktop-first research imaging and generalized-anatomy explorer. No patient study is required to explore the licensed male BodyParts3D and female HRA reference subsets. Reference anatomy and patient-specific evidence remain separate.
+DICOM3D is a desktop-first research workstation for exploring generalized anatomy in a central 3D workspace. The v0.6.0 web/source release combines the existing male BodyParts3D and female HRA references with scientific, holographic and bounded materialization presentations. Source geometry, semantic identity and attribution stay intact.
 
-Start with the [installation guide](docs/INSTALL_051.md) or [standalone Docker quick start](docs/CORE_DOCKER_QUICKSTART.md). Read the [candidate scope](docs/RELEASE_051.md), [compatibility and limitations](docs/COMPATIBILITY_051.md), and [changelog](CHANGELOG.md). The [v0.5.0 release scope](docs/RELEASE_050.md) remains the historical record.
+**Release scope:** v0.6.0 covers the browser experience and its source. The qualified **[v0.5.1 installation distributions](https://github.com/KennethJSmithDev/DICOM3D/releases/tag/v0.5.1)** remain available and unchanged. No v0.6.0 native, Core Docker or IPM installation package is included. Open Exchange and its registry are separate surfaces.
 
-## v0.5.1 candidate distributions
+## A 3D-first anatomy workspace
 
-- **Standalone Core**: self-contained source/assets ZIP, digest-pinned Docker build, loopback-only static host, automatic male/female reference loading. No IRIS, login, server upload or patient imaging is bundled.
-- **IPM**: the same built reference viewer and assets, plus the existing password/resource-protected IRIS hosting wrapper and read-only identity endpoint. This does not configure FHIR, clinical integrations or optional Connect.
-- **Optional IRIS Docker development host (recovery candidate)**: [isolated durable-volume bootstrap](docs/IRIS_DOCKER_DEV_051.md) distinguishes container startup from IPM installation. The legacy [IRIS Docker quickstart](docs/DOCKER_QUICKSTART.md) remains a historical v0.1.0 profile, not the v0.5.0 standalone Core procedure.
-- **GitHub is authoritative** for the exact release files and SHA256SUMS. Open Exchange and its IPM registry may update later; verify the actual installed version rather than inferring it from a listing. Read the [installation guide](docs/INSTALL_051.md) and verify the installed version.
+![DICOM3D reference anatomy in the desktop holographic workspace](docs/images/visual-060-reference-desktop.jpg)
 
-The [public anatomy demo](https://kennethjsmithdev.github.io/DICOM3D/) now opens the generalized male reference with female switching, interactive selection and reversible presentation. It is browser-only and not a clinical viewer. Published [v0.1.0](https://github.com/KennethJSmithDev/DICOM3D/releases/tag/v0.1.0) and [v0.2.0](https://github.com/KennethJSmithDev/DICOM3D/releases/tag/v0.2.0) remain immutable.
+Actual local release02 Edge/WebGPU rendering of generalized anatomy. These screenshots are not patient studies or generated concept art. The [original logo](assets/branding/dicom3d-logo.png) remains preserved alongside the semantic-cube icon family.
 
-## Milestone and evidence history
+- A dominant 4:3 3D viewport with collapsible anatomy and presentation tools.
+- Scientific source materials, controlled cyan holography and bounded materialization that resolves to the existing mesh.
+- Male/female reference selection, semantic picking, hide/show/isolate/restore, opacity, camera presets and focus.
+- Orbit, zoom and right-drag pan, with cancellation and reduced-motion controls.
+- **Learn**, directly below **Lab**, explains the current source, presentation choices, limitations and attribution without a permanent bottom panel.
 
-The public Git history consolidates numerous locally qualified development gates into the v0.5.0 promotion. The documented sequence is **H000 source CT/SEG → spatial/semantic GLB**, **V010 IRIS/IPM lifecycle**, **H002 synthetic presentation slices**, **MOD/VIS multimodality and anatomy**, **CONNECTED-001/CONNECT-002 evidence exploration**, **MOD-QUAL/MOD-REPAIR imaging qualification**, **UX-INTERACTION/UX-RACE fixes**, and **RELEASE-050 / DEMO-050 packaging and public demonstration**. The named local receipts, not commit times alone, establish individual test claims; some acceptance evidence is preserved in CompDocs rather than this repository. No unqualified clinical or production Connect capability is implied.
+See actual captures of [female HRA anatomy](docs/images/visual-060-female-desktop.jpg), [materialization](docs/images/visual-060-materialization.jpg) and [contextual learning](docs/images/visual-060-learning.jpg). Details and evidence limits: [Visual Research Workstation](docs/VISUAL_RELEASE_060.md).
 
-Public checkpoints: [v0.1.0](https://github.com/KennethJSmithDev/DICOM3D/releases/tag/v0.1.0) · [v0.2.0](https://github.com/KennethJSmithDev/DICOM3D/releases/tag/v0.2.0) · [v0.5.0](https://github.com/KennethJSmithDev/DICOM3D/releases/tag/v0.5.0). See the [changelog](CHANGELOG.md) and [release scope](docs/RELEASE_050.md).
+## Source identity and limits
 
-## Experience and evidence
+The catalogs contain **33 male and 22 female semantic groups**. A group can own several mesh primitives. These independently sourced references have partial coverage and are not registered to one another or to a patient scan.
 
-Explore 33 male and 22 female semantic structures with selection, visibility, isolation, opacity, clipping, camera presets and restoration. The references have partial coverage and different sources; they are not one registered patient scan. Skin remains rendered and explicitly selectable from the list while exposed eligible anatomy can be picked in the canvas.
+Male BodyParts3D lung groups contain source airway/vessel branches rather than complete lung envelopes. Female HRA has its own membership and limitations. Presentation effects preserve these distinctions and do not invent missing anatomy.
 
-Local acquired-CT frame/volume presentation requires separately qualified local pixels, metadata and source transforms. The browser also accepts converted local image bundles. It is not a universal native DICOM decoder or PACS. Modality recognition, pixel decoding, display and independent qualification are distinct capabilities.
+**The v0.6.0 Safe Demo is reference-only.** It includes no H000 CT/SEG/lesion payload, source-binding metadata file, CT screenshot, arbitrary patient upload or study-download action. Separately qualified local imaging work remains outside this release. See the [data policy](docs/PUBLIC_RESEARCH_DATA_POLICY.md) and [Safe Demo scope](docs/SAFE_DEMO.md).
 
-DICOM/source arrays remain authoritative. Derived meshes preserve provenance and spatial identity. Camera, materials, window/level, clipping and reversible presentation transforms do not become medical observations. No calibrated HU/SUV, anatomical accuracy, diagnostic validity, new segmentation, AI interpretation or physiological simulation is claimed.
+Camera, materials, clipping and animation are presentation state. This research software makes no clinical, diagnostic, anatomical-accuracy, new-segmentation, registration or physiological-simulation claim.
 
-## Development
+## Installable v0.5.1 distributions
 
-Use the pinned viewer lockfile with Node.js 24 and `npm ci` in `viewer/`. Run `npm run dev` and open `/reference.html`; the default `/` development entry remains the earlier local-study shell. The Core Dockerfile builds `vite.reference.config.mjs`. Existing `scripts/stage-package.ps1`, `scripts/archive-package.py` and `scripts/archive-core.py` prepare the release distributions. No third-party renderer or additional runtime dependency is introduced.
+- **Standalone Core:** the frozen source/assets ZIP and [Docker quick start](docs/CORE_DOCKER_QUICKSTART.md). No IRIS or account is required.
+- **Protected IRIS/IPM host:** the exact published package and scope in the [installation guide](docs/INSTALL_051.md).
+- **Optional IRIS development host:** the [isolated durable-volume procedure](docs/IRIS_DOCKER_DEV_051.md), separating startup from package activation.
 
-## License
+Use exact v0.5.1 release files and SHA256SUMS. A changing checkout or listing version does not identify those archived bytes. The [qualification record](docs/RELEASE_051.md), [compatibility limits](docs/COMPATIBILITY_051.md) and earlier releases remain preserved.
 
-Apache-2.0; copyright 2026 KennethJSmithDev personally. Preserve LICENSE, NOTICE and third-party notices. BodyParts3D-derived assets retain CC BY-SA 2.1 Japan attribution; HRA assets retain CC BY 4.0 attribution and source limitations. Their notices accompany the reference assets. Optional IRIS software is acquired separately under its applicable license.
+## Run the web experience locally
+
+Use Node.js 24 and the pinned viewer lockfile. From the repository root:
+
+```powershell
+npm ci --prefix viewer
+node scripts/build-demo.mjs
+node scripts/test-demo.mjs
+Push-Location viewer
+node node_modules/vite/bin/vite.js preview --config vite.reference.config.mjs --outDir ../.demo-dist --base /DICOM3D/ --host 127.0.0.1 --port 53260 --strictPort
+```
+
+Open `http://127.0.0.1:53260/DICOM3D/`. Stop with Ctrl+C, then use `Pop-Location`. The build uses the existing reference entry and Babylon Lite renderer, without an additional rendering engine or runtime dependency.
+
+Inactive source code retains public TCIA identity/hash constants and research preparation tests, but no H000 data payload or study route is emitted by the reference-only build. Earlier research adapters and installation tooling do not qualify a new installable package. Reproduce v0.5.1 packages from their exact release source. The [publication procedure](docs/VISUAL_PUBLICATION_PROCEDURE.md) separates source integration, Pages deployment and actual remote rendering checks.
+
+## History and license
+
+H000 established one source CT/SEG-to-semantic-mesh engineering chain. Later gates added protected IRIS hosting, synthetic presentation slices, generalized anatomy, local imaging and contextual learning. Named receipts establish each bounded claim; this repository is not the complete research evidence store. See [changelog](CHANGELOG.md), [roadmap](ROADMAP.md), [architecture](docs/ARCHITECTURE.md) and [provenance](docs/PROVENANCE.md). v0.5.0/v0.5.1 artifacts remain immutable.
+
+DICOM3D software is Apache-2.0, copyright 2026 KennethJSmithDev personally. Preserve LICENSE, NOTICE and third-party notices. BodyParts3D-derived assets retain the embedded CC BY-SA 2.1 Japan grant and the notice's distinct current publisher-license statement. HRA retains CC BY 4.0 attribution and source limitations. Read the unchanged [BodyParts3D notice](reference/public/reference/BODYParts3D-NOTICE.txt) and [HRA notice](reference/public/reference/HRA-FEMALE-NOTICE.txt). Optional IRIS software is acquired separately under its applicable license.

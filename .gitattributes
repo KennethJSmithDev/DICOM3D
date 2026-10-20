@@ -1,0 +1,3 @@
+# Preserve the qualified brand bytes across Git export and CI checkout.
+reference/public/brand/favicon.svg -text
+reference/public/brand/semantic-cube.svg -text

@@ -1,4 +1,16 @@
-# v0.5.1 recovery candidate
+# v0.5.1 publication status and historical qualification
+
+## Current status — October 20, 2026
+
+[v0.5.1 was published on GitHub](https://github.com/KennethJSmithDev/DICOM3D/releases/tag/v0.5.1) at 2026-10-20 01:56 UTC from commit `f03162cdec8b89a522dd4032e3815ea7d3ed0401`. The release promotes the seven previously qualified assets without rebuilding them. Preparation-stage fields inside those frozen archives remain part of their original byte identity; this addendum does not rewrite their qualification record.
+
+The Open Exchange listing displays v0.5.1. Listing text, its archive link and the IPM registry payload are separate publication surfaces; the displayed version does not establish which bytes a registry install resolves. GitHub's release files and SHA256SUMS remain the exact release reference.
+
+**DICOM3D v0.6.0 — Visual Research Workstation** has a separate reference-only web/source release scope. It includes no replacement Core/IPM/native installation archives and leaves these v0.5.1 assets unchanged. See [v0.6.0 release notes](RELEASE_060.md); remote publication completion is recorded by its own receipt.
+
+## Historical v0.5.1 preparation record
+
+The following record is preserved from candidate preparation. Its authorization and pending-work statements describe that earlier stage; the publication event is recorded above.
 
 Status: installation-recovery candidate. No tag, release, main integration or registry publication is authorized yet. Exact distribution identities and final acceptance are bound by the candidate's release-manifest.json, SHA256SUMS and qualification receipt, rather than a circular hash in this source document.
 

@@ -46,7 +46,7 @@ export function prepareReferenceExperience(library:HTMLElement) {
     evidence.querySelector('summary span')!.textContent='Source identity · attribution · limitations';
     document.body.classList.add('safe-reference-demo');
     const links=document.createElement('nav');links.setAttribute('aria-label','Demo project links');
-    links.innerHTML='<a href="https://github.com/KennethJSmithDev/DICOM3D">GitHub</a> · <a href="https://github.com/KennethJSmithDev/DICOM3D/releases/tag/v0.5.0">Install v0.5.0</a> · <a href="https://openexchange.intersystems.com/">Open Exchange</a> · <a href="'+import.meta.env.BASE_URL+'NOTICE">Notices</a>';
+    links.innerHTML='<a href="https://github.com/KennethJSmithDev/DICOM3D">GitHub</a> · <a href="https://github.com/KennethJSmithDev/DICOM3D/releases/tag/v0.5.1">Install v0.5.1</a> · <a href="https://openexchange.intersystems.com/">Open Exchange</a> · <a href="'+import.meta.env.BASE_URL+'NOTICE">Notices</a>';
     document.querySelector('header')!.append(links);
   }
   document.querySelector('.intro')!.textContent='From Pixels to Meaning · local research explorer';

@@ -1,4 +1,28 @@
-# v0.5.0 — research and development release
+# Changelog
+
+## 0.6.0 — Visual Research Workstation (web/source release)
+
+**From Pixels to Meaning.** The selected GitHub/Pages release is reference-only. Publication completion and final remote rendering are recorded separately in the release receipt; earlier local candidate evidence is not a deployment claim.
+
+- Dominant 4:3 desktop 3D workspace with collapsible tools and Learn below Lab.
+- Scientific, holographic and bounded materialization presentations over unchanged source geometry and semantic identities.
+- Existing male BodyParts3D and female HRA catalogs, including multi-primitive semantic groups and source-specific coverage limits.
+- Desktop camera/pan/cancellation controls, reduced motion and reversible presentation state.
+- Semantic-cube branding and actual generalized-reference screenshots.
+
+The five H000 candidate files and CT screenshot are excluded. Safe Demo offers no acquired-study download or arbitrary patient-data load. The earlier CT-inclusive lab candidate and evidence remain separately preserved.
+
+Viewer package/lockfile identity is v0.6.0. Installable Core/IPM/native distribution scope remains v0.5.1: no replacement installation archives, registry publication or Open Exchange operation is part of this release. Existing v0.5.0/v0.5.1 artifacts stay immutable.
+
+See [release notes](docs/RELEASE_060.md), [visual evidence limits](docs/VISUAL_RELEASE_060.md), [data policy](docs/PUBLIC_RESEARCH_DATA_POLICY.md) and [publication/readback](docs/VISUAL_PUBLICATION_PROCEDURE.md).
+
+## 0.5.1 — published October 20, 2026
+
+The [GitHub release](https://github.com/KennethJSmithDev/DICOM3D/releases/tag/v0.5.1) was published from commit `f03162cdec8b89a522dd4032e3815ea7d3ed0401`. Seven qualified installation-recovery assets were promoted without rebuilding. Their frozen candidate/preparation fields remain unchanged. The static viewer/reference payload is unchanged from v0.5.0; this release does not contain the planned visual-workstation redesign.
+
+Open Exchange listing, archive-link and IPM registry reconciliation remain distinct from GitHub publication. See [current publication status and preserved preparation evidence](docs/RELEASE_051.md).
+
+## v0.5.0 — research and development release
 
 Standalone Core distribution based on qualified UX-RACE-001 archive `03a8bcf6e05b127cdcc7068c0ee534b53522cde3d6737e3fa1f3cbb13e0fa77d`. The baseline bytes remain immutable. Release metadata, documentation and package source paths are reconciled separately.
 
@@ -13,16 +37,16 @@ Desktop-first prototype/research scope. Optional Connect/FHIR, other-platform pr
 
 ---
 
-# Changelog
+## Historical preparation notes
 
-## 0.5.1 candidate � installation recovery
+### 0.5.1 preparation record — installation recovery
 
 - Prepare only DICOM3D package destinations in an optional, nonroot IRIS development host; persist them on its owned durable volume.
 - Preserve the pinned IRIS base, protected web applications, licensed anatomy and standalone Core implementation.
 - Include current installation/recovery documentation in the Core source distribution.
 - Separate confirmed registry publication from the Open Exchange timeout notification; no timeout setting or package-size workaround is claimed as a fix.
 
-Qualification and exact artifact identities: docs/RELEASE_051.md. Not published.
+At this preparation stage the candidate was not published. Qualification and exact artifact identities: docs/RELEASE_051.md. The dated publication entry above records the later release.
 
 
 ## 0.2.0 — published October 17, 2026

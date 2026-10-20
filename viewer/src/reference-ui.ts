@@ -43,7 +43,7 @@ export function prepareReference({scene,root,manifest,status,selectedMaterial,vi
   for(const texture of retainedTextures)acquireTexture(texture);
 
   const clipMax=manifest.reference.presentation?.clip_max??1.9;
-  const state={appearance:'source',context:true,selected:null as string|null,isolate:false,hidden:new Set<string>(),clip:clipMax,opacity:new Map<string,number>()};let framing:any=null;
+  const state={appearance:'source',context:true,selected:null as string|null,isolate:false,hidden:new Set<string>(),clip:clipMax,opacity:new Map<string,number>()};let framing:any=null;let projection:((detail:any)=>void)|null=null;
 
   // Lite's scene clip-plane state alone does not inject discard into stock PBR.
 
@@ -111,6 +111,10 @@ export function prepareReference({scene,root,manifest,status,selectedMaterial,vi
 
     for(const [id,list] of groups)for(const m of list){m.visible=!state.hidden.has(id)&&(!state.isolate||id===state.selected);m.material=id===state.selected?selectedMaterial:originals.get(m);m.material.alpha=(initialAlpha.get(originals.get(m))??1)*(state.opacity.get(id)??1)*(state.context&&state.selected&&id!==state.selected&&!state.isolate ? .28 : 1);}
 
+    // Optional visual projection follows existing semantic/material state; absent by default.
+    // WHY: public reference effects reuse this controller, including female mesh groups.
+    // INVARIANT: projection may change display only; original source/state ownership stays here.
+    projection?.({state,groups,originals});
     const selectedPart=parts.find((p:any)=>p.id===state.selected);card.replaceChildren();const title=document.createElement('strong');title.textContent=selectedPart?.label||'Complete reference anatomy';const detail=document.createElement('small');detail.textContent=selectedPart?`${selectedPart.id}  -  ${selectedPart.region}  -  ${state.hidden.has(state.selected!)?'hidden':'visible'}`:`${parts.length} selectable structures  -  ${manifest.reference.id==='BODY-HRA-F-001'?'HRA female reference subset':manifest.reference.variant==='female'?'Synthetic fallback - not a female atlas':'BodyParts3D adult male reference'}`;card.append(title,detail);
     const lesson=referenceLesson(manifest,selectedPart,state);learning.querySelector('summary')!.textContent=lesson.title;const copy=learning.querySelector('div')!;copy.replaceChildren();for(const [name,text] of [['KNOWN',lesson.known],['PRESENTATION',lesson.presentation],['UNVERIFIED',lesson.unverified],['ATTRIBUTION',lesson.credit]]){const p=document.createElement('p');const label=document.createElement('strong');label.textContent=name+' ';p.append(label,document.createTextNode(text));copy.append(p);}if(lesson.source?.startsWith('https://')){const link=document.createElement('a');link.href=lesson.source;link.target='_blank';link.rel='noopener noreferrer';link.textContent='View original source and attribution';copy.append(link);}
 
@@ -127,6 +131,11 @@ export function prepareReference({scene,root,manifest,status,selectedMaterial,vi
 
   }
 
+  // A display clip/visibility intent also supersedes an in-flight visual-mode pick.
+  // The inherited controller path is unchanged when no projection is attached.
+  for(const [id,event] of [['referenceHide','click'],['referenceShow','click'],['referenceIsolate','click'],['referenceClip','input']])
+    get(id).addEventListener(event,()=>{if(projection)picks.invalidate();},{capture:true,signal:diagnosticAbort.signal});
+
   get('referenceSearch').oninput=options;get('referenceRegion').onchange=options;get('referenceSelect').onchange=()=>{picks.invalidate();state.selected=get('referenceSelect').value||null;if(!state.selected)state.isolate=false;refresh();};
 
   get('referenceHide').onclick=()=>{if(state.selected)state.hidden.add(state.selected);refresh();};get('referenceShow').onclick=()=>{if(state.selected)state.hidden.delete(state.selected);refresh();};
@@ -139,12 +148,12 @@ export function prepareReference({scene,root,manifest,status,selectedMaterial,vi
 
   get('referenceRestore').onclick=()=>{picks.invalidate();state.appearance='source';state.context=true;get('referenceContext').checked=true;get('referenceAppearance').value='source';applyAppearance();state.selected=null;state.hidden.clear();state.isolate=false;state.clip=clipMax;state.opacity.clear();get('referenceClip').value=String(clipMax);get('referenceRegion').value='';get('referenceSearch').value='';options();refresh();framing?.restore();visibilityButton.textContent='Hide all structures';};
 
-  visibilityButton.textContent='Hide all structures';visibilityButton.onclick=()=>{if(state.hidden.size===parts.length)state.hidden.clear();else for(const p of parts)state.hidden.add(p.id);state.isolate=false;visibilityButton.textContent=state.hidden.size?'Show all structures':'Hide all structures';refresh();};
+  visibilityButton.textContent='Hide all structures';visibilityButton.onclick=()=>{if(projection)picks.invalidate();if(state.hidden.size===parts.length)state.hidden.clear();else for(const p of parts)state.hidden.add(p.id);state.isolate=false;visibilityButton.textContent=state.hidden.size?'Show all structures':'Hide all structures';refresh();};
 
   // WHY: release-generated background misses must not exit explicit isolation.
   // BOUNDARY/INVARIANT: only reference selection; geometry stays frozen.
   // EVIDENCE: UX-INTERACTION-001 receipt. REGRESSION: Clear/dropdown/Restore still exit.
-  const api={active:true,meshes:()=>[...originals.keys()],selectedMeshes:()=>state.selected?(groups.get(state.selected)||[]).filter(m=>m.visible):[],setFraming(f:any){framing=f;refresh();},canPick:(m:any)=>originals.has(m)&&m.visible&&!skinMeshes.has(m),pick:(request:()=>Promise<any>)=>picks.run(request,(pick:any)=>api.selectMesh(pick.hit?pick.pickedMesh:null)),selectMesh(m:any){if(!m&&state.isolate&&state.selected)return;state.selected=[...groups].find(([,list])=>list.includes(m))?.[0]||null;if(!state.selected)state.isolate=false;get('referenceRegion').value='';options();refresh();},clear(){picks.invalidate();state.selected=null;state.isolate=false;refresh();},dispose(){picks.dispose();diagnosticAbort.abort();for(const texture of retainedTextures)releaseTexture(texture);panel.remove();},refresh};
+  const api={active:true,groups:()=>new Map([...groups].map(([id,list])=>[id,[...list]])),originals:()=>new Map(originals),state:()=>({...state,hidden:new Set(state.hidden),opacity:new Map(state.opacity)}),setProjection(fn:((detail:any)=>void)|null){projection=fn;refresh();},setAppearance(value:string){if(!['source','cyan'].includes(value))throw Error('Unknown source appearance');state.appearance=value;get('referenceAppearance').value=value;applyAppearance();},invalidatePick:()=>picks.invalidate(),meshes:()=>[...originals.keys()],selectedMeshes:()=>state.selected?(groups.get(state.selected)||[]).filter(m=>m.visible):[],setFraming(f:any){framing=f;refresh();},canPick:(m:any)=>originals.has(m)&&m.visible&&!skinMeshes.has(m),pick:(request:()=>Promise<any>)=>picks.run(request,(pick:any)=>api.selectMesh(pick.hit?pick.pickedMesh:null)),selectMesh(m:any){if(!m&&state.isolate&&state.selected)return;state.selected=[...groups].find(([,list])=>list.includes(m))?.[0]||null;if(!state.selected)state.isolate=false;get('referenceRegion').value='';options();refresh();},clear(){picks.invalidate();state.selected=null;state.isolate=false;refresh();},dispose(){projection=null;picks.dispose();diagnosticAbort.abort();for(const texture of retainedTextures)releaseTexture(texture);panel.remove();},refresh};
 
   if(new URLSearchParams(location.search).has('diagnostics')){const output=document.createElement('output');output.id='referenceRenderState';output.hidden=true;panel.append(output);let frames=0;const errors:string[]=[];const engine=scene.surface.engine;const capture=()=>{const c=scene.camera;output.textContent=JSON.stringify({frames,drawCalls:engine.drawCallCount,retainedTextures:retainedTextures.length,renderables:scene._renderables.length,queuedSwaps:scene._materialSwapQueue.length,errors,camera:c?{alpha:c.alpha,beta:c.beta,radius:c.radius,target:[c.target.x,c.target.y,c.target.z],near:c.nearPlane,far:c.farPlane}:null,materials:[...groups].map(([id,list])=>({id,visible:list[0].visible,alpha:list[0].material.alpha,color:list[0].material.baseColorFactor,original:list[0].material===originals.get(list[0])}))});};onBeforeRender(scene,()=>{frames++;capture();});window.addEventListener('error',e=>{errors.length<8&&errors.push(String(e.error?.stack||e.message));capture();},{signal:diagnosticAbort.signal});engine._device.addEventListener('uncapturederror',(e:any)=>{errors.length<8&&errors.push(String(e.error?.message));capture();},{signal:diagnosticAbort.signal});}
 

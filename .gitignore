@@ -11,3 +11,7 @@ artifacts/
 
 .demo-dist/
 demo/public/sample/
+
+# H000 data and CT screenshots remain local until their separate release gate.
+reference/public/demo/h000/
+docs/images/visual-060-study-docked.jpg

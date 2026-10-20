@@ -2,7 +2,7 @@ name: Deploy DICOM3D safe demo
 on:
   push:
     branches: [main]
-    paths: ['demo/**', 'viewer/**', 'scripts/*demo.mjs', 'LICENSE', 'NOTICE', 'third-party/**', '.github/workflows/pages-demo.yml']
+    paths: ['demo/**', 'reference/public/**', 'viewer/**', 'scripts/*demo.mjs', 'scripts/test-publication.mjs', 'LICENSE', 'NOTICE', 'third-party/**', '.github/workflows/pages-demo.yml']
   workflow_dispatch:
 permissions:
   contents: read
@@ -28,6 +28,7 @@ jobs:
       - run: npm ci --prefix viewer
       - run: node scripts/build-demo.mjs
       - run: node scripts/test-demo.mjs
+      - run: node scripts/test-publication.mjs
       - uses: actions/configure-pages@v5
         with:
           enablement: true

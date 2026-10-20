@@ -1,6 +1,6 @@
 # Standalone Core Docker quick start — v0.5.1
 
-Research/reference prototype, not clinical software. No IRIS, account or patient study is required. Optional Connect/FHIR is not provisioned or qualified by this distribution. This is an unpublished v0.5.1 candidate; obtain its complete Core ZIP and checksums from the qualification handoff. GitHub becomes the authoritative download source only after separately approved publication. Historical v0.5.0 remains available from its existing release.
+Research/reference prototype, not clinical software. No IRIS, account or patient study is required. Optional Connect/FHIR is not provisioned or qualified by this distribution. Current status, October 20, 2026: obtain the complete `dicom3d-core-0.5.1.zip` and SHA256SUMS from the [published v0.5.1 release](https://github.com/KennethJSmithDev/DICOM3D/releases/tag/v0.5.1). Historical v0.5.0 remains available from its existing release. These commands describe the frozen v0.5.1 archive; no v0.6.0 Core archive has been qualified.
 
 Use Docker with Compose v2+ and Linux containers. The initial qualification target is linux/amd64; other architectures remain unverified. A WebGPU-capable desktop browser is required. The image build obtains the digest-pinned official Node base and lockfile-pinned npm dependencies; internet access is required for the first build. Node's built-in HTTP API serves the compiled viewer; no server package is installed.
 
@@ -35,7 +35,7 @@ The container runs as the unprivileged Node user with a read-only filesystem, no
 
 Software remains Apache-2.0, personally copyrighted KennethJSmithDev. Preserve LICENSE, NOTICE and third-party/. BodyParts3D-derived data remains separately CC BY-SA 2.1 Japan as recorded in `reference/public/reference/BODYParts3D-NOTICE.txt`; HRA female data is CC BY 4.0, with creators/source/changes recorded in HRA-FEMALE-NOTICE.txt. Both notices and semantic manifests are served with the assets. No patient CT, SEG, H000 lesion, proprietary IRIS image, license key or credential is bundled.
 
-To rebuild a distribution from an authorized working source snapshot using Python 3:
+To reproduce this release from its approved v0.5.1 source snapshot using Python 3 (not the v0.6.0 web/source checkout):
 
 ```sh
 python scripts/archive-core.py --output /absolute/path/to/new-core.zip

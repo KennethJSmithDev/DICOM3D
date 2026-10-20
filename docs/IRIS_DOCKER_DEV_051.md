@@ -1,6 +1,6 @@
-# IRIS Docker development host — v0.5.1 recovery candidate
+# IRIS Docker development host — published v0.5.1
 
-**Status: prototype installation-recovery candidate.** Local full startup and IPM activation are now observed; exact-artifact, browser and lifecycle results are recorded separately in [RELEASE_051.md](RELEASE_051.md). This optional development host is separate from standalone Core. The previously qualified v0.1.0 profile remains recorded in [DOCKER_QUICKSTART.md](DOCKER_QUICKSTART.md).
+**Current status, October 20, 2026: v0.5.1 is published.** Local full startup, IPM activation, exact-artifact, browser and lifecycle evidence is recorded separately in [RELEASE_051.md](RELEASE_051.md). This optional development host is separate from standalone Core. The previously qualified v0.1.0 profile remains recorded in [DOCKER_QUICKSTART.md](DOCKER_QUICKSTART.md). The positive-control procedure below intentionally retains the v0.5.0 artifact; use [INSTALL_051.md](INSTALL_051.md) for the exact published v0.5.1 package. No v0.6.0 IPM or Docker qualification is implied.
 
 ## Why this exists
 
@@ -70,7 +70,7 @@ zpm "load /approved/path/dicom3d-0.5.0.tgz"
 zpm "list"
 ```
 
-Require module version 0.5.0, Activate SUCCESS and authenticated `/dicom3d/DICOM3D.Entry.cls`, `/dicom3d/reference.html`, static assets and `/dicom3d-api/health`. Independently verify unauthorized requests are denied. Do not confuse a successful IRIS boot with a successful package install, or a successful API response with visible WebGPU rendering. Once v0.5.1 is built and qualified, test its *own* SHA-pinned artifact separately.
+Require module version 0.5.0 for this positive control, Activate SUCCESS and authenticated `/dicom3d/DICOM3D.Entry.cls`, `/dicom3d/reference.html`, static assets and `/dicom3d-api/health`. Independently verify unauthorized requests are denied. Do not confuse a successful IRIS boot with a successful package install, or a successful API response with visible WebGPU rendering. The published v0.5.1 package has its own SHA-pinned identity and separate recorded qualification; the positive-control hash is not interchangeable.
 
 The public registry must also be checked independently: the Open Exchange listing version is not proof of the downloaded registry package version.
 
