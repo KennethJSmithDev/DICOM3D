@@ -1,9 +1,10 @@
-name: IRIS durable-volume preflight (isolated)
+name: IRIS isolated host and IPM control
 
 on:
   pull_request:
     paths:
       - compose.iris-dev.yaml
+      - Dockerfile.iris-dev
       - docs/IRIS_DOCKER_DEV_051.md
       - .github/workflows/iris-durable-preflight.yml
   workflow_dispatch:
@@ -19,18 +20,39 @@ jobs:
       - uses: actions/checkout@v4
       - name: Validate Compose model
         run: docker compose -f compose.iris-dev.yaml config --quiet
-      - name: Create disposable merge-file placeholder
+      - name: Create disposable private authentication configuration
         run: |
           mkdir -p .secrets
           printf '[Startup]\n' > .secrets/merge.cpf
+          password=$(openssl rand -hex 24)
+          printf '%s\n%s\n' "$password" "$password" | docker run --rm -i --network none containers.intersystems.com/intersystems/passwordhash:1.1@sha256:784ee9ad3b6daf54badc0a7f57a934de7633d27da0da38e6482c2306d3d898db -algorithm SHA512 -workfactor 10000 >> .secrets/merge.cpf
+          unset password
+      - name: Build package-specific nonroot host
+        run: docker compose -p dicom3d-iris-051-ci -f compose.iris-dev.yaml build iris
       - name: Bootstrap isolated named volume
         run: docker compose -p dicom3d-iris-051-ci -f compose.iris-dev.yaml up --abort-on-container-exit --exit-code-from prepare-durable prepare-durable
       - name: Verify actual IRIS user can write
         run: |
-          docker compose -p dicom3d-iris-051-ci -f compose.iris-dev.yaml run --rm --no-deps --entrypoint /bin/sh iris -eu -c 'test "$(id -u)" = 51773 && test -w /durable/iris && touch /durable/iris/.preflight && rm /durable/iris/.preflight'
+          docker compose -p dicom3d-iris-051-ci -f compose.iris-dev.yaml run --rm --no-deps --entrypoint /bin/sh iris -eu -c 'test "$(id -u)" = 51773 && test -w /durable/iris && touch /usr/irissys/ipm/dicom3d/.preflight /usr/irissys/csp/dicom3d/.preflight && rm /usr/irissys/ipm/dicom3d/.preflight /usr/irissys/csp/dicom3d/.preflight'
+      - name: Require full runtime health and running instance
+        run: |
+          docker compose -p dicom3d-iris-051-ci -f compose.iris-dev.yaml up -d --wait --wait-timeout 300 iris
+          docker compose -p dicom3d-iris-051-ci -f compose.iris-dev.yaml exec -T iris iris qlist IRIS | tee qlist.log
+          grep -q '\^running,' qlist.log
+      - name: Frozen v0.5.0 positive-control installation
+        run: |
+          curl --fail --location --max-time 120 -o /tmp/dicom3d-0.5.0.tgz https://github.com/KennethJSmithDev/DICOM3D/releases/download/v0.5.0/dicom3d-0.5.0.tgz
+          printf 'cfc8eeafd29c2cc98e731c7a6d7aa10fca0eaa2ca7559c5817fcbc79670bd49d  /tmp/dicom3d-0.5.0.tgz\n' | sha256sum -c -
+          docker compose -p dicom3d-iris-051-ci -f compose.iris-dev.yaml cp /tmp/dicom3d-0.5.0.tgz iris:/tmp/control.tgz
+          printf 'zpm "load /tmp/control.tgz"\nhalt\n' | docker compose -p dicom3d-iris-051-ci -f compose.iris-dev.yaml exec -T iris iris session IRIS -U USER | tee ipm.log
+          grep -q 'Activate SUCCESS' ipm.log
+      - name: Preserve bounded runtime evidence
+        if: always()
+        run: docker compose -p dicom3d-iris-051-ci -f compose.iris-dev.yaml logs --no-color --tail=120
       - name: Clean up only ephemeral runner-owned resources
         if: always()
         run: docker compose -p dicom3d-iris-051-ci -f compose.iris-dev.yaml down -v --remove-orphans
 
-# Scope: Compose parse + ownership/write permission only.
-# NOT an IRIS startup, IPM install, full runtime, or 2026.1 moderator-image proof.
+# Scope: isolated ownership, startup/health and exact historical IPM control.
+# Browser pixels, effective resource enforcement, lifecycle and the separate
+# 2026.1 build-family investigation require their own qualification evidence.

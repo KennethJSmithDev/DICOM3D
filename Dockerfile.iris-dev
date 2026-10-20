@@ -1,0 +1,15 @@
+# Optional development host only. IRIS/IPM and application data share the owned
+# durable volume; the IRIS runtime still runs as the image's nonroot user.
+FROM intersystemsdc/irishealth-community@sha256:7746ec696970a7e41fc265e9828a99c0bc1bc534a514f1690e60fb03c957cff2
+USER root
+# WHY: the stock image's /usr/irissys parents are not writable by irisowner.
+# BOUNDARY: only this package's two destinations; no global chmod/chown.
+# INVARIANT: immutable base and package payload; owned data survives recreation.
+# EVIDENCE: recovery-051/control-install-raw.log (permission denied).
+# REGRESSION: both symlinks require the prepare-durable gate in Compose.
+RUN mkdir -p /usr/irissys/ipm \
+ && test ! -e /usr/irissys/ipm/dicom3d \
+ && test ! -e /usr/irissys/csp/dicom3d \
+ && ln -s /durable/dicom3d/ipm /usr/irissys/ipm/dicom3d \
+ && ln -s /durable/dicom3d/csp /usr/irissys/csp/dicom3d
+USER irisowner

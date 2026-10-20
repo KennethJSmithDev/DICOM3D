@@ -8,9 +8,9 @@ def main():
  ap=argparse.ArgumentParser();ap.add_argument('--output',type=Path,required=True);ap.add_argument('--source-commit',help='Recorded base commit for reproducing a release archive outside Git');args=ap.parse_args()
  if args.output.exists():raise SystemExit('Refusing to overwrite an archive')
  files={}
- singles=['Dockerfile.core','compose.core.yaml','.env.core.example','.dockerignore','LICENSE','NOTICE','README.md','CHANGELOG.md','docs/INSTALL_050.md','docs/COMPATIBILITY_050.md','docs/RELEASE_050.md','docs/OPEN_EXCHANGE_050_HANDOFF.md','docs/CORE_DOCKER_QUICKSTART.md','scripts/archive-core.py','docker/core/server.mjs']
+ singles=['Dockerfile.core','compose.core.yaml','.env.core.example','.dockerignore','LICENSE','NOTICE','README.md','CHANGELOG.md','docs/INSTALL_051.md','docs/COMPATIBILITY_051.md','docs/RELEASE_051.md','docs/IRIS_DOCKER_DEV_051.md','docs/BRANCHES.md','Dockerfile.iris-dev','compose.iris-dev.yaml','docs/CORE_DOCKER_QUICKSTART.md','scripts/archive-core.py','docker/core/server.mjs']
  for rel in singles:files[rel]=(ROOT/rel).read_bytes()
- for folder in ['viewer','reference/public','assets/branding','third-party']:
+ for folder in ['viewer','reference/public','assets/branding','third-party','docs']:
   for p in (ROOT/folder).rglob('*'):
    if not p.is_file() or any(x in p.parts for x in ['node_modules','dist','.vite','.git','__pycache__']):continue
    rel=p.relative_to(ROOT).as_posix()

@@ -12,6 +12,12 @@ services:
     entrypoint: ["/bin/sh", "-eu", "-c"]
     command:
       - |
+        # Docker Desktop may materialize a missing bind as a directory.
+        # Check the actual mounted type before any durable initialization.
+        if [ ! -f /dicom3d-setup/merge.cpf ]; then
+          echo >&2 "Private merge.cpf must exist as a regular file"
+          exit 1
+        fi
         # Preserve existing instance contents: never recursively chown or reset.
         if [ -L /durable/iris ]; then
           echo >&2 "Refusing symlinked durable target"
@@ -32,7 +38,29 @@ services:
           chmod 0750 /durable/iris
         fi
         ls -ldn /durable /durable/iris
+        # Exact package targets only. Refuse pre-existing foreign content.
+        for target in /durable/dicom3d /durable/dicom3d/ipm /durable/dicom3d/csp; do
+          if [ -L "$$target" ] || { [ -e "$$target" ] && [ ! -d "$$target" ]; }; then
+            echo >&2 "Refusing invalid package target $$target"
+            exit 1
+          fi
+          if [ -d "$$target" ] && [ -n "$$(ls -A "$$target")" ] && [ "$$(stat -c %u "$$target")" != "51773" ]; then
+            echo >&2 "Refusing foreign package ownership $$target"
+            exit 1
+          fi
+          if [ ! -d "$$target" ] || [ -z "$$(ls -A "$$target")" ]; then
+            mkdir -p "$$target"
+            chown 51773:51773 "$$target"
+            chmod 0700 "$$target"
+          fi
+        done
     volumes:
+      - type: bind
+        source: ./.secrets/merge.cpf
+        target: /dicom3d-setup/merge.cpf
+        read_only: true
+        bind:
+          create_host_path: false
       - type: volume
         source: data
         target: /durable
@@ -41,7 +69,10 @@ services:
     restart: "no"
 
   iris:
-    image: *iris-image
+    image: dicom3d-iris-dev:0.5.1
+    build:
+      context: .
+      dockerfile: Dockerfile.iris-dev
     entrypoint: ["/iris-main"]
     depends_on:
       prepare-durable:
@@ -58,8 +89,15 @@ services:
         target: /durable
         volume:
           nocopy: true
-      - ./.secrets/merge.cpf:/dicom3d-setup/merge.cpf:ro
+      - type: bind
+        source: ./.secrets/merge.cpf
+        target: /dicom3d-setup/merge.cpf
+        read_only: true
+        bind:
+          create_host_path: false
     shm_size: 64m
+    cpus: 2
+    mem_limit: 2g
     stop_grace_period: 30s
     restart: "no"
 

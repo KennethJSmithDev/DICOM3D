@@ -15,6 +15,16 @@ Desktop-first prototype/research scope. Optional Connect/FHIR, other-platform pr
 
 # Changelog
 
+## 0.5.1 candidate — installation recovery
+
+- Prepare only DICOM3D package destinations in an optional, nonroot IRIS development host; persist them on its owned durable volume.
+- Preserve the pinned IRIS base, protected web applications, licensed anatomy and standalone Core implementation.
+- Include current installation/recovery documentation in the Core source distribution.
+- Separate confirmed registry publication from the Open Exchange timeout notification; no timeout setting or package-size workaround is claimed as a fix.
+
+Qualification and exact artifact identities: docs/RELEASE_051.md. Not published.
+
+
 ## 0.2.0 â€” published October 17, 2026
 
 Five deterministic open surface bands of the exact synthetic demo fixture, stable derived identities, independent selection/hide/isolate/opacity/translation/rotation and reversible model-Y expansion. World-bounds camera fit/focus/refit/reset is presentation-only. Original fixture and H000 geometry/transforms remain authoritative. Mutable-shell freshness and a content-bound native entry prevent stale normal upgrade navigation while protected hashed assets retain caching. Narrow status text wraps. No new dependency or rendering engine. H002 bounded qualification passed; the immutable v0.2.0 release was subsequently published. See docs/H002_CANDIDATE.md and docs/CACHE_POLICY.md.

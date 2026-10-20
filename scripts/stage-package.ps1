@@ -4,7 +4,7 @@ $ErrorActionPreference = 'Stop'
 $root = Split-Path $PSScriptRoot -Parent
 if (Test-Path -LiteralPath $OutputDirectory) { throw 'Use a new empty output directory' }
 New-Item -ItemType Directory -Path $OutputDirectory | Out-Null
-# v0.5.0 stages the same reference entry/assets as Core, never local research data.
+# Current release stages the same reference entry/assets as Core, never local research data.
 $publicRoot = Join-Path $OutputDirectory 'public'
 Push-Location (Join-Path $root 'viewer')
 try {

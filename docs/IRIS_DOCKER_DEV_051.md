@@ -1,18 +1,20 @@
 # IRIS Docker development host — v0.5.1 recovery candidate
 
-**Status: experimental / not yet runtime-qualified.** This is an optional IRIS/IPM development host, NOT the standalone Core Docker distribution. It provides a reproducible, isolated way to investigate the 2026-10-19 durable storage error. The previously qualified v0.1.0 profile remains recorded in [DOCKER_QUICKSTART.md](DOCKER_QUICKSTART.md).
+**Status: prototype installation-recovery candidate.** Local full startup and IPM activation are now observed; exact-artifact, browser and lifecycle results are recorded separately in [RELEASE_051.md](RELEASE_051.md). This optional development host is separate from standalone Core. The previously qualified v0.1.0 profile remains recorded in [DOCKER_QUICKSTART.md](DOCKER_QUICKSTART.md).
 
 ## Why this exists
 
 InterSystems IRIS runs as nonroot `irisowner` (UID/GID 51773 in documented Linux container profiles). A named volume mounted at `/durable` can initially be root-owned; IRIS must be able to write `/durable/iris` before the first startup. The old quickstart required a separate, manually executed root-owned preparation command, which is easy to miss when copying only its Compose template. The new `compose.iris-dev.yaml` makes that preparation an explicit dependency of IRIS startup.
 
-**Root cause of the moderator's 2026.1/235U failure remains UNVERIFIED.** This compose file retains the independently pinned community-maintained 2026.2/221U image used by the historical DICOM3D profile. It is **not** a reproduction of the moderator's exact image. Do not claim 2026.1 compatibility without a separate test.
+The reported `Cannot create target: /durable/iris/` error was independently reproduced with an unprepared root-owned volume and community IRIS Health 2026.1.0.235.2 (reported Build 235U). The prepared profile starts successfully in that build family. The moderator's exact image digest, patch and configuration remain UNVERIFIED. The default Compose base remains the pinned community 2026.2/221U image; it is not silently substituted.
+
+A separate healthy-host failure was also reproduced: stock nonroot IRIS cannot create `/usr/irissys/ipm/dicom3d/0.5.0/`. The frozen package activates after only DICOM3D's destinations are writable. `Dockerfile.iris-dev` adds two package-specific links: `/usr/irissys/ipm/dicom3d` → `/durable/dicom3d/ipm`, and `/usr/irissys/csp/dicom3d` → `/durable/dicom3d/csp`. Preparation creates those exact owned directories. No installation-wide chmod/chown, role grant, payload removal or new renderer is involved. Database and static application files survive on this project's volume.
 
 ## Boundary and safety
 
 - Use a new checkout/workspace with Docker Compose v2 and Linux/amd64 containers.
 - Only `dicom3d-iris-dev051` and its **own new named data volume** are in scope; never reuse another project volume, existing patient instance or port.
-- `prepare-durable` runs one shell as root, initializes the top-level empty volume and `/durable/iris` to UID/GID 51773, then exits. IRIS itself runs as the image's nonroot user.
+- `prepare-durable` runs one shell as root, initializes the empty volume, `/durable/iris` and the three exact `/durable/dicom3d` directories to UID/GID 51773, then exits. IRIS itself runs as the image's nonroot user. The runtime is bounded to 2 CPU / 2 GiB, 64 MiB shared memory and a 30-second graceful stop.
 - If durable contents already exist with unexpected ownership, preparation **fails closed**. It does not recursively change ownership, erase or migrate existing data.
 - The pinned image comes from the community-maintained repository, not a proven equivalent of the vendor ICR image.
 - This is an authorized development profile. Do not put credentials, clinical data or license files into Git.
@@ -25,12 +27,13 @@ The `iris` service still requires `.secrets/merge.cpf` with a vendor-compatible,
 test -f .secrets/merge.cpf
 ```
 
-Do not commit or publish that file. A missing merge file is a separate startup error from the durable-volume permissions problem.
+Do not commit or publish that file. A missing merge file is a separate configuration error. Preparation verifies the actual mounted file type before touching durable data. This is required even with `create_host_path: false`: the tested Docker Desktop permitted a missing Windows bind source to reach container creation.
 
 ## Validate and bootstrap
 
 ```sh
 docker compose -f compose.iris-dev.yaml config --quiet
+docker compose -f compose.iris-dev.yaml build iris
 docker compose -f compose.iris-dev.yaml up prepare-durable
 docker compose -f compose.iris-dev.yaml ps -a
 ```
@@ -40,18 +43,18 @@ The preparation service must exit with status 0 and report numeric ownership 517
 Once the private merge file is present, verify the directory from the nonroot IRIS image *before* attempting IRIS startup:
 
 ```sh
-docker compose -f compose.iris-dev.yaml run --rm --no-deps --entrypoint /bin/sh iris -eu -c 'test "$(id -u)" = 51773 && test -w /durable/iris'
+docker compose -f compose.iris-dev.yaml run --rm --no-deps --entrypoint /bin/sh iris -eu -c 'test "$(id -u)" = 51773 && test -w /durable/iris && test -w /usr/irissys/ipm/dicom3d && test -w /usr/irissys/csp/dicom3d'
 ```
 
 Then start only this isolated development service:
 
 ```sh
-docker compose -f compose.iris-dev.yaml up -d iris
+docker compose -f compose.iris-dev.yaml up -d --wait --wait-timeout 300 iris
 docker compose -f compose.iris-dev.yaml ps -a
 docker compose -f compose.iris-dev.yaml logs --no-color --tail=160 prepare-durable iris
 ```
 
-Do not call startup successful until IRIS reports a running instance, its health check succeeds, and `iris qlist IRIS` confirms its targets. Investigate warnings rather than suppressing them. The development web entry is bound to `127.0.0.1:52887` and the superserver to `127.0.0.1:51987`.
+Require a running instance and the real image healthcheck within five minutes. The pinned image explicitly accepts `warn` or `ok`; observed `%IPM` mapping warnings did not prevent healthy startup. Preserve warnings and test restart separately. Never reset a volume or suppress health checks to manufacture PASS. The development web entry is bound to `127.0.0.1:52887` and the superserver to `127.0.0.1:51987`.
 
 ## Distinguish startup from IPM installation
 
@@ -75,6 +78,6 @@ The public registry must also be checked independently: the Open Exchange listin
 
 If boot fails, retain `docker compose config`, `ps -a`, service logs, numeric directory ownership, image digest and IRIS version; redact authentication secrets. On the named volume, read existing diagnostics but do not reset `/durable`. Use `docker compose -f compose.iris-dev.yaml down` to stop/remove only these containers and their network while **preserving the volume**. Never use `down -v`, force uninstall, or broad permission changes to manufacture a pass.
 
-A narrow remote preflight workflow validates Compose syntax, runs the preparation service on its *own disposable GitHub runner volume*, and tests a nonroot write. That is a filesystem gate, **not** an IRIS boot, IPM install or moderator-environment reproduction claim.
+The updated CI workflow validates preparation, full runtime health/running state and frozen v0.5.0 IPM activation on its own disposable runner resources. Its execution status is evidence only after that run completes. Browser pixels, effective authorization, lifecycle and the separate 2026.1 comparison require their own receipts. No FHIR setup is performed.
 
 Official guidance: [InterSystems container durable %SYS](https://docs.intersystems.com/irislatest/csp/docbook/DocBook.UI.Page.cls?KEY=ADOCK) · [Docker Compose dependency conditions](https://docs.docker.com/reference/compose-file/services/#depends_on).
