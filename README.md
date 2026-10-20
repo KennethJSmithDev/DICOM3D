@@ -10,17 +10,17 @@
 
 <p align="center"><img src="assets/branding/dicom3d-logo.png" alt="DICOM3D Logo" width="480"></p>
 
-**v0.5.1 installation-recovery candidate.** The published v0.5.0 release remains immutable. This branch prepares the next release; it does not publish it.
+**v0.5.1 installation recovery is published.** The [GitHub release](https://github.com/KennethJSmithDev/DICOM3D/releases/tag/v0.5.1) was published October 20, 2026 from `f03162cdec8b89a522dd4032e3815ea7d3ed0401`. Its seven frozen assets were promoted without rebuilding; preparation-time candidate fields remain provenance. Open Exchange/IPM publication is a separate gate. The published v0.5.0 release remains immutable.
 
 DICOM3D is a desktop-first research imaging and generalized-anatomy explorer. No patient study is required to explore the licensed male BodyParts3D and female HRA reference subsets. Reference anatomy and patient-specific evidence remain separate.
 
-Start with the [installation guide](docs/INSTALL_051.md) or [standalone Docker quick start](docs/CORE_DOCKER_QUICKSTART.md). Read the [candidate scope](docs/RELEASE_051.md), [compatibility and limitations](docs/COMPATIBILITY_051.md), and [changelog](CHANGELOG.md). The [v0.5.0 release scope](docs/RELEASE_050.md) remains the historical record.
+Start with the [installation guide](docs/INSTALL_051.md) or [standalone Docker quick start](docs/CORE_DOCKER_QUICKSTART.md). Read the [release scope](docs/RELEASE_051.md), [compatibility and limitations](docs/COMPATIBILITY_051.md), and [changelog](CHANGELOG.md). The [v0.5.0 release scope](docs/RELEASE_050.md) remains the historical record.
 
-## v0.5.1 candidate distributions
+## v0.5.1 distributions
 
 - **Standalone Core**: self-contained source/assets ZIP, digest-pinned Docker build, loopback-only static host, automatic male/female reference loading. No IRIS, login, server upload or patient imaging is bundled.
 - **IPM**: the same built reference viewer and assets, plus the existing password/resource-protected IRIS hosting wrapper and read-only identity endpoint. This does not configure FHIR, clinical integrations or optional Connect.
-- **Optional IRIS Docker development host (recovery candidate)**: [isolated durable-volume bootstrap](docs/IRIS_DOCKER_DEV_051.md) distinguishes container startup from IPM installation. The legacy [IRIS Docker quickstart](docs/DOCKER_QUICKSTART.md) remains a historical v0.1.0 profile, not the v0.5.0 standalone Core procedure.
+- **Optional IRIS Docker development host**: [isolated durable-volume bootstrap](docs/IRIS_DOCKER_DEV_051.md) distinguishes container startup from IPM installation. The legacy [IRIS Docker quickstart](docs/DOCKER_QUICKSTART.md) remains a historical v0.1.0 profile, not the v0.5.0 standalone Core procedure.
 - **GitHub is authoritative** for the exact release files and SHA256SUMS. Open Exchange and its IPM registry may update later; verify the actual installed version rather than inferring it from a listing. Read the [installation guide](docs/INSTALL_051.md) and verify the installed version.
 
 The [public anatomy demo](https://kennethjsmithdev.github.io/DICOM3D/) now opens the generalized male reference with female switching, interactive selection and reversible presentation. It is browser-only and not a clinical viewer. Published [v0.1.0](https://github.com/KennethJSmithDev/DICOM3D/releases/tag/v0.1.0) and [v0.2.0](https://github.com/KennethJSmithDev/DICOM3D/releases/tag/v0.2.0) remain immutable.
@@ -29,7 +29,7 @@ The [public anatomy demo](https://kennethjsmithdev.github.io/DICOM3D/) now opens
 
 The public Git history consolidates numerous locally qualified development gates into the v0.5.0 promotion. The documented sequence is **H000 source CT/SEG → spatial/semantic GLB**, **V010 IRIS/IPM lifecycle**, **H002 synthetic presentation slices**, **MOD/VIS multimodality and anatomy**, **CONNECTED-001/CONNECT-002 evidence exploration**, **MOD-QUAL/MOD-REPAIR imaging qualification**, **UX-INTERACTION/UX-RACE fixes**, and **RELEASE-050 / DEMO-050 packaging and public demonstration**. The named local receipts, not commit times alone, establish individual test claims; some acceptance evidence is preserved in CompDocs rather than this repository. No unqualified clinical or production Connect capability is implied.
 
-Public checkpoints: [v0.1.0](https://github.com/KennethJSmithDev/DICOM3D/releases/tag/v0.1.0) · [v0.2.0](https://github.com/KennethJSmithDev/DICOM3D/releases/tag/v0.2.0) · [v0.5.0](https://github.com/KennethJSmithDev/DICOM3D/releases/tag/v0.5.0). See the [changelog](CHANGELOG.md) and [release scope](docs/RELEASE_050.md).
+Public checkpoints: [v0.1.0](https://github.com/KennethJSmithDev/DICOM3D/releases/tag/v0.1.0) · [v0.2.0](https://github.com/KennethJSmithDev/DICOM3D/releases/tag/v0.2.0) · [v0.5.0](https://github.com/KennethJSmithDev/DICOM3D/releases/tag/v0.5.0) · [v0.5.1](https://github.com/KennethJSmithDev/DICOM3D/releases/tag/v0.5.1). See the [changelog](CHANGELOG.md) and [release scope](docs/RELEASE_051.md).
 
 ## Experience and evidence
 

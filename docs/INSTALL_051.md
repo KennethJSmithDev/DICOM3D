@@ -1,6 +1,6 @@
-# Install v0.5.1 candidate
+# Install v0.5.1
 
-This is an unpublished installation-recovery candidate. Obtain its exact artifacts and checksums from the qualification handoff. Do not substitute the historical v0.5.0 checksum or an external registry result. GitHub remains the authoritative release source after separately approved publication.
+The installation-recovery release was [published on GitHub](https://github.com/KennethJSmithDev/DICOM3D/releases/tag/v0.5.1) on October 20, 2026. Obtain the exact artifacts and SHA256SUMS there. Preparation-time candidate/unpublished fields in the frozen assets remain provenance, not current publication status. Do not substitute the historical v0.5.0 checksum or an external registry result.
 
 ## Standalone Core
 
@@ -25,7 +25,7 @@ zpm "list"
 
 Require dicom3d 0.5.1 and Activate SUCCESS. Authenticate with an already authorized account holding `%Development`; open `/dicom3d/DICOM3D.Entry.cls`, then its content-bound viewer link. `/dicom3d-api/health` must report 0.5.1. The viewer, hashed assets and API remain password/resource protected. The package grants no roles or users. HTTP readiness is separate from actual visible WebGPU rendering.
 
-The public registry was independently observed serving 0.5.0 despite an October 18 timeout notification. OEX's listing, archive button and registry state are distinct. Do not expect `zpm "install dicom3d"` to deliver this unpublished 0.5.1 candidate. Registry publication is a separate approval gate.
+The public registry was independently observed serving 0.5.0 despite an October 18 timeout notification. OEX's listing, archive button and registry state are distinct. GitHub publication does not establish which version `zpm "install dicom3d"` will deliver. Verify the actual registry package and installed version independently; registry publication is a separate approval gate.
 
 ## Reproduce artifacts
 
