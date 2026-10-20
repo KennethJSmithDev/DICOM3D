@@ -9,20 +9,20 @@ Standalone Core distribution based on qualified UX-RACE-001 archive `03a8bcf6e05
 - Reproducible Core Docker source ZIP and IPM package with matching versioned reference-viewer payload.
 - Correct repository FileCopy sources so registry packaging has the built shell/assets it requires.
 
-Desktop-first prototype/research scope. Optional Connect/FHIR, other-platform production support, clinical validity and public-demo deployment are not promoted by this candidate. GitHub publication is approved; Open Exchange/IPM synchronization remains a separate pending step.
+Desktop-first prototype/research scope. GitHub v0.5.0 was published October 18, 2026; DEMO-050 subsequently deployed the reference-anatomy experience separately. Optional Connect/FHIR, other-platform production support and clinical validity are not promoted by those events. Open Exchange/IPM status must be verified independently.
 
 ---
 
 # Changelog
 
-## 0.5.1 candidate � installation recovery
+## 0.5.1 — published October 20, 2026
 
 - Prepare only DICOM3D package destinations in an optional, nonroot IRIS development host; persist them on its owned durable volume.
 - Preserve the pinned IRIS base, protected web applications, licensed anatomy and standalone Core implementation.
 - Include current installation/recovery documentation in the Core source distribution.
 - Separate confirmed registry publication from the Open Exchange timeout notification; no timeout setting or package-size workaround is claimed as a fix.
 
-Qualification and exact artifact identities: docs/RELEASE_051.md. Not published.
+The [GitHub v0.5.1 release](https://github.com/KennethJSmithDev/DICOM3D/releases/tag/v0.5.1) publishes the seven frozen assets from `f03162cdec8b89a522dd4032e3815ea7d3ed0401` without rebuilding. Preparation-time candidate/unpublished fields are preserved in those assets as provenance. Qualification scope: [docs/RELEASE_051.md](docs/RELEASE_051.md). Open Exchange/IPM publication remains a separate gate.
 
 
 ## 0.2.0 — published October 17, 2026

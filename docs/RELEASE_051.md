@@ -1,6 +1,8 @@
-# v0.5.1 recovery candidate
+# v0.5.1 installation recovery
 
-Status: installation-recovery candidate. No tag, release, main integration or registry publication is authorized yet. Exact distribution identities and final acceptance are bound by the candidate's release-manifest.json, SHA256SUMS and qualification receipt, rather than a circular hash in this source document.
+Status as of October 20, 2026: [GitHub v0.5.1 is published](https://github.com/KennethJSmithDev/DICOM3D/releases/tag/v0.5.1), from main commit `f03162cdec8b89a522dd4032e3815ea7d3ed0401`. The seven qualified frozen assets were promoted without rebuilding. Their preparation-time candidate/unpublished fields are retained as provenance; the GitHub release records publication. Exact identities remain bound by release-manifest.json and SHA256SUMS. Open Exchange/IPM publication remains a separate gate.
+
+The qualification narrative below records candidate preparation. Publication does not independently rerun or enlarge those tests, change historical archives, or establish clinical validity.
 
 Scope: repair the optional development host's package-owned filesystem preparation, reconcile actual public registry evidence, and align candidate versions and distributed installation documentation. Preserve the v0.5.0 release, Core viewer, reference meshes, protected resource gates and existing environments.
 
