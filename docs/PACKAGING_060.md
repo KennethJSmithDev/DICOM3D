@@ -25,6 +25,8 @@ python scripts/archive-core.py --output dicom3d-core-0.6.0.zip --source-commit E
 
 Every output path must be new. Staging recomputes DICOM3D.Entry.VIEWERBUILD from exact HTML and generates one FileCopy owner per served destination, including notices. package-manifest.json binds staged files, HTML identity and packaging commit. TGZ/ZIP archive metadata is deterministic. Reproduce twice and compare full SHA-256 values.
 
+Native staging also verifies the generated DICOM3D.InstallMigration adapter against scripts/retired-filecopy-051.json. The204-path policy comes from the immutable published051 TGZ minus current375 FileCopy targets. It introduces no frontend or medical-source change. Read [retirement ownership, maintenance and refusal boundaries](IRIS_FILECOPY_RETIREMENT_051.md). The initial native candidate's failed upgrade evidence remains historical; corrected archives have their own source commit and exact hashes.
+
 source-manifest.json inventories staged Git objects and excludes itself plus the generated Core descriptor to avoid a circular hash. The external manifest binds the final commit/source archive. distribution-manifest.json in the source checkout is a descriptor; the Core archiver generates its exact input inventory and packaging-commit binding.
 
 ## Qualification and publication

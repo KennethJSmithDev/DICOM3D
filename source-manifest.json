@@ -15,8 +15,8 @@
       "sha256": "da5ff4b8c1ca2e768ef4152c5e55bc85f2e56627367a89ec8a5baffea599ed68"
     },
     ".gitattributes": {
-      "bytes": 447,
-      "sha256": "fd3c57399ce70d9a80965a0cc1e0087dce326af805aa3c09ff1bb10803fea531"
+      "bytes": 585,
+      "sha256": "606b70aa7462e9058af3f4023591007fa5902db61b50d8d675010229650f0a58"
     },
     ".github/workflows/iris-durable-preflight.yml": {
       "bytes": 3374,
@@ -139,12 +139,16 @@
       "sha256": "71631ff33cb6d66bc941764aaa39aa3019000257c4b4d869fd6f8e00a594762e"
     },
     "docs/INSTALL_060.md": {
-      "bytes": 5862,
-      "sha256": "f0277f202d7bf15a7bfb4a31a29253475530b5a43fe18771505b70615147ea2f"
+      "bytes": 7117,
+      "sha256": "a075a6dea2d1f39b461875198e3161511e6c44139ad33029ca06b8b1df050283"
     },
     "docs/IRIS_DOCKER_DEV_051.md": {
       "bytes": 7814,
       "sha256": "d25f3bd717976941715a6b456db8872c6868fabd524743d5083accafa9ca4307"
+    },
+    "docs/IRIS_FILECOPY_RETIREMENT_051.md": {
+      "bytes": 4039,
+      "sha256": "d9e2dc7360e240cb54a0e127c5b71f7c65258028a56bb3dc9b28d8ef90f94399"
     },
     "docs/NATIVE_DEV_INSTALL.md": {
       "bytes": 3727,
@@ -159,8 +163,8 @@
       "sha256": "a790d655a4aa641e33f67264d9973a50f228112ffc347256b226297b06c3a156"
     },
     "docs/PACKAGING_060.md": {
-      "bytes": 3548,
-      "sha256": "d29673b392f10920f9a8a225dca693ebab7987462532d6ecc9afbfaf43611a6b"
+      "bytes": 4055,
+      "sha256": "b25fbf7c12039ca9c76c62f3dbdf60bad319988aa5f9446c81921a9ae016bfa6"
     },
     "docs/PROVENANCE.md": {
       "bytes": 1554,
@@ -223,8 +227,8 @@
       "sha256": "99fed23e23be4846c109fa8d3c63a2341042aa60450255788bbdedf205cbea5f"
     },
     "module.xml": {
-      "bytes": 47287,
-      "sha256": "681553d9cfa9ba60ce5778a81b3abc172575d91276becfcb1871c5162c080048"
+      "bytes": 47425,
+      "sha256": "3b6a50aa737ce1ac72f08a3d4907681f968ecfd30bdadaee211ffd2855400e21"
     },
     "public/assets/_mat4-storage-f64-DpF94Hi_.js": {
       "bytes": 143,
@@ -1719,12 +1723,16 @@
       "sha256": "48ba04f81e281800720850546a4f22a79832da827d9c865fcf4d13d5f62749d1"
     },
     "scripts/archive-package.py": {
-      "bytes": 2741,
-      "sha256": "a38c57a5a54b0fc71709d678bd6a5d3358c1b746521773a79ee485c1e94243e2"
+      "bytes": 2781,
+      "sha256": "eafd82a9b58caedac390face57f6d0852e149069fee2386f8e5a3c9d73ddfabf"
     },
     "scripts/build-demo.mjs": {
       "bytes": 10377,
       "sha256": "e6a3072e514f148c6ee90ead906ebcd4d4e2be439703365c3340df38f1591c13"
+    },
+    "scripts/generate-retirement-051.py": {
+      "bytes": 9317,
+      "sha256": "8a37245ec2a8516d19da9a719c1288d97a8d1514961e91e02afde64ad576d919"
     },
     "scripts/prepare-public-research-data.py": {
       "bytes": 6973,
@@ -1734,9 +1742,13 @@
       "bytes": 2875,
       "sha256": "7d70121075b2ab65380cec32c9c129da6289d339db410ece5226380c2f6767e9"
     },
+    "scripts/retired-filecopy-051.json": {
+      "bytes": 31297,
+      "sha256": "35207fa1d526cebe3f5e48f5898c94864e4634e45637f7b4df00d63dd85d83de"
+    },
     "scripts/stage-package.ps1": {
-      "bytes": 3891,
-      "sha256": "225af1a465ad8831327ffdf4e6cd3855e7e4866512912cb358bba59f7aea13ea"
+      "bytes": 4084,
+      "sha256": "f3c751307f68ed231f5425e09e83d336bcda84972ff1f4b228925a87573351f5"
     },
     "scripts/test-camera-fit.mjs": {
       "bytes": 1233,
@@ -1777,6 +1789,10 @@
     "src/DICOM3D/Health.cls": {
       "bytes": 555,
       "sha256": "4818e29a35d9500108b457c056693186190284b3096bc6edfe1629dc08d81f8e"
+    },
+    "src/DICOM3D/InstallMigration.cls": {
+      "bytes": 42204,
+      "sha256": "def9b2e66791b043a28e576e67107ef70093c3f42af4ac94797ab61f0874e76c"
     },
     "third-party/babylon-lite-1.32.0-LICENSE.txt": {
       "bytes": 11357,

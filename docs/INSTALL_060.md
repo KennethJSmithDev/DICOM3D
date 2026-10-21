@@ -45,7 +45,13 @@ Require **dicom3d 0.6.0** and **Activate SUCCESS**. Authenticate using an alread
 
 The TGZ contains the prebuilt canonical frontend and exact generated FileCopy inventory; installation needs no npm build. The repository's old public tree is not a release installer. Build/stage from the packaging-source snapshot or use the exact qualified TGZ.
 
-For upgrade, preserve a host backup and load the qualified TGZ over the existing v0.5.1 module. Confirm version, content-bound link, exact new files and actual rendering. Rollback is explicit package removal followed by the exact v0.5.1 TGZ under the host's normal backup/restore procedure; no data migration is introduced.
+For upgrade, first preserve a host backup and stop other writers to the package's CSP directory. Use only the exact subsequently qualified TGZ named in the native release manifest. The initial packaging candidate was withheld because IPM retained204 obsolete051 FileCopies; that failed candidate must not be substituted.
+
+The corrected package runs a bounded retirement hook after its new FileCopies activate. It checks all204 retired relative paths against the immutable051 size/SHA-256 inventory before deleting any. Already absent entries are harmless. Changed files, unexpected child links, redirected directories and unsupported filesystem primitives cause activation refusal. Unrelated paths are never enumerated for deletion. The accepted durable-root mapping is preserved. See [exact retirement policy and failure handling](IRIS_FILECOPY_RETIREMENT_051.md).
+
+Require a successful retirement report, version, content-bound entry, exact new files and actual rendering. This adapter uses Embedded Python's standard library in the supported IRIS Linux runtime; no pip packages or external Python process are used. Other platforms require their own qualification.
+
+Filesystem copies/deletions are not rolled back transactionally by IPM. If activation refuses, stop and preserve its report; restore the host backup or investigate the exact named modified file. Do not broadly remove the CSP tree or override hashes. Rollback is explicit package removal followed by the exact v0.5.1 TGZ under the host's normal backup/restore procedure; no medical-data migration is introduced.
 
 ~~~objectscript
 zpm "uninstall dicom3d"

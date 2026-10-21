@@ -2,6 +2,8 @@
 param([string]$OutputDirectory = (Join-Path $PSScriptRoot '../.package'), [string]$SourceCommit = 'UNCOMMITTED-PACKAGING-CANDIDATE')
 $ErrorActionPreference = 'Stop'
 $root = Split-Path $PSScriptRoot -Parent
+& python (Join-Path $root 'scripts/generate-retirement-051.py') --check
+if ($LASTEXITCODE) { throw 'Native retirement adapter differs from its exact policy' }
 if (Test-Path -LiteralPath $OutputDirectory) { throw 'Use a new empty output directory' }
 New-Item -ItemType Directory -Path $OutputDirectory | Out-Null
 # Current release stages the same reference entry/assets as Core, never local research data.
@@ -40,7 +42,7 @@ Copy-Item (Join-Path $root 'LICENSE') $OutputDirectory
 Copy-Item (Join-Path $root 'NOTICE') $OutputDirectory
 Copy-Item (Join-Path $root 'third-party') $OutputDirectory -Recurse
 New-Item -ItemType Directory -Path (Join-Path $OutputDirectory 'docs') | Out-Null
-foreach ($name in @('INSTALL_060.md','PACKAGING_060.md')) {
+foreach ($name in @('INSTALL_060.md','PACKAGING_060.md','IRIS_FILECOPY_RETIREMENT_051.md')) {
   Copy-Item (Join-Path $root ('docs/'+$name)) (Join-Path $OutputDirectory 'docs')
 }
 $fileInventory = [ordered]@{}

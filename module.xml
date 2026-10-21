@@ -5,6 +5,9 @@
   <Description>DICOM3D research presentation viewer; not for clinical use</Description>
   <Packaging>module</Packaging><SourcesRoot>src</SourcesRoot>
   <Resource Name="DICOM3D.PKG" />
+  <Invoke Class="DICOM3D.InstallMigration" Method="Retire051" Phase="Activate" When="After">
+    <Arg>{$cspdir}dicom3d/</Arg>
+  </Invoke>
   <FileCopy Name="LICENSE" Target="{$cspdir}dicom3d/LICENSE" />
   <FileCopy Name="NOTICE" Target="{$cspdir}dicom3d/NOTICE" />
   <FileCopy Name="public/assets/_mat4-storage-f64-DpF94Hi_.js" Target="{$cspdir}dicom3d/assets/_mat4-storage-f64-DpF94Hi_.js" />
