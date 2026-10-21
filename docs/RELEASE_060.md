@@ -2,6 +2,10 @@
 
 **From Pixels to Meaning.**
 
+## Current Safe Demo follow-on admission
+
+The optional `curated-h000` web profile admits exactly five unchanged acquired CT/SEG research files under a separate owner decision. Generalized reference anatomy still loads first; the approximately 33.3 MB study requires an explicit action. Original source-binding/notice historical flags remain unchanged. See the [exact data policy](PUBLIC_RESEARCH_DATA_POLICY.md) and [Safe Demo](SAFE_DEMO.md). Fresh artifact/browser/deployed readback is required before claiming this follow-on is public. No CT screenshots, arbitrary import, private connections or installer-data admission are included. The original v0.6.0 tag and release scope recorded below stay historical and immutable.
+
 ## Release scope
 
 v0.6.0 is a **web/source release** of the desktop-first, reference-only Visual Research Workstation. GitHub source, the version tag/release and GitHub Pages are the selected publication surfaces. Remote publication and rendering must be established by the release receipt; this document defines scope without asserting those steps have completed.

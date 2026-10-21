@@ -4,7 +4,8 @@ import { mkdirSync, writeFileSync, copyFileSync, cpSync, readFileSync, readdirSy
 import { fileURLToPath } from 'node:url';
 import { resolve } from 'node:path';
 import { execFileSync } from 'node:child_process';
-import {PUBLIC_RELEASE, PUBLIC_STUDY_ENABLED} from '../viewer/src/public-release.mjs';
+import {PUBLIC_RELEASE, publicBuildProfile} from '../viewer/src/public-release.mjs';
+import {APPROVED_H000_ASSETS, H000_PUBLIC_ADMISSION, EXCLUDED_STUDY_SCREENSHOT_SHA256} from '../viewer/src/public-h000-admission.mjs';
 const root = fileURLToPath(new URL('../', import.meta.url));
 const identity=(bytes)=>({bytes:bytes.length,sha256:createHash('sha256').update(bytes).digest('hex')});
 export const APPROVED_REFERENCE_ASSETS=Object.freeze({
@@ -38,8 +39,12 @@ function checkReferenceBytes(bytes,name){
   const actual=identity(bytes);
   if(!APPROVED_REFERENCE_ASSETS[name]?.some(x=>x.bytes===actual.bytes&&x.sha256===actual.sha256))throw Error(`Unadmitted reference bytes: ${name}`);
 }
-export async function verifyAdmittedPublicFiles(publicRoot,{source=false}={}){
-  if(PUBLIC_STUDY_ENABLED)throw Error('Study publication needs a separate reviewed data-admission change');
+export function verifyH000AssetBytes(name,bytes){
+  const expected=APPROVED_H000_ASSETS[name],actual=identity(bytes);
+  if(!Object.hasOwn(APPROVED_H000_ASSETS,name)||actual.bytes!==expected.bytes||actual.sha256!==expected.sha256)throw Error('Unadmitted H000 path or bytes: '+name);
+}
+export async function verifyAdmittedPublicFiles(publicRoot,{source=false,profile='reference-only'}={}){
+  const selected=publicBuildProfile(profile);
   exactNames(inventory(resolve(publicRoot,'brand')),Object.keys(APPROVED_BRAND_ASSETS),'Brand payload');
   const referenceNames=inventory(resolve(publicRoot,'reference'));
   exactNames(referenceNames,[...Object.keys(APPROVED_REFERENCE_ASSETS),...(source?referenceNames.filter(name=>excludedLegacy.includes(name)):[])],'Reference payload');
@@ -47,6 +52,10 @@ export async function verifyAdmittedPublicFiles(publicRoot,{source=false}={}){
   for(const[name,expected]of Object.entries(APPROVED_BRAND_ASSETS)){
     const actual=identity(readFileSync(resolve(publicRoot,'brand',name)));
     if(actual.bytes!==expected.bytes||actual.sha256!==expected.sha256)throw Error('Unadmitted brand bytes: '+name);
+  }
+  if(selected.studyEnabled){
+    exactNames(inventory(resolve(publicRoot,'demo')),Object.keys(APPROVED_H000_ASSETS).map(name=>'h000/'+name),'Curated H000 payload');
+    for(const name of Object.keys(APPROVED_H000_ASSETS))verifyH000AssetBytes(name,readFileSync(resolve(publicRoot,'demo/h000',name)));
   }
 }
 
@@ -81,21 +90,25 @@ writeFileSync(resolve(sample,'study.manifest.json'),JSON.stringify({
 },null,2)+'\n');
 }
 
-export async function buildDemo({base='/DICOM3D/',outDir=resolve(root,'.demo-dist')}={}){
+export async function buildDemo({base='/DICOM3D/',outDir=resolve(root,'.demo-dist'),profile='reference-only'}={}){
 if(process.argv.includes('--sample-only')){writeSyntheticTestFixture();return;}
 if(!['/DICOM3D/','/dicom3d/'].includes(base))throw Error('Unreviewed frontend base');
+const selected=publicBuildProfile(profile);
+if(selected.studyEnabled&&base!=='/DICOM3D/')throw Error('Curated H000 is admitted only for the Safe Demo web base; Core/native remain reference-only');
 const output=resolve(outDir);
 if(output!==resolve(root,'.demo-dist')&&existsSync(output))throw Error('Use a new empty frontend output directory');
 const publicRoot=resolve(root,'reference/public');
-await verifyAdmittedPublicFiles(publicRoot,{source:true});
+await verifyAdmittedPublicFiles(publicRoot,{source:true,profile});
 // Static Pages adapter over the qualified reference viewer; no second renderer.
-execFileSync(process.execPath,[resolve(root,'viewer/node_modules/vite/bin/vite.js'),'build','--config',resolve(root,'viewer/vite.reference.config.mjs'),'--base',base,'--mode','safe-reference-demo','--outDir',output,'--emptyOutDir'],{stdio:'inherit',cwd:resolve(root,'viewer')});
-// WHY: the unapproved local study must never enter a Pages artifact.
+execFileSync(process.execPath,[resolve(root,'viewer/node_modules/vite/bin/vite.js'),'build','--config',resolve(root,'viewer/vite.reference.config.mjs'),'--base',base,'--mode','safe-reference-demo','--outDir',output,'--emptyOutDir'],{stdio:'inherit',cwd:resolve(root,'viewer'),env:{...process.env,DICOM3D_PUBLIC_BUILD_PROFILE:profile}});
+// WHY: only the explicitly selected profile owns acquired-data admission.
 // BOUNDARY: Vite publicDir is disabled for this mode; copy only exact named assets.
 // INVARIANT: no recursive copy from reference/public and no runtime admission override.
 // EVIDENCE: scripts/test-demo.mjs verifies the complete output set and hashes.
 // REGRESSION: returning to Vite's automatic copy would ship ignored local payloads.
-for(const [folder,names]of [['reference',Object.keys(APPROVED_REFERENCE_ASSETS)],['brand',Object.keys(APPROVED_BRAND_ASSETS)]]){
+const copied=[['reference',Object.keys(APPROVED_REFERENCE_ASSETS)],['brand',Object.keys(APPROVED_BRAND_ASSETS)],
+  ...(selected.studyEnabled?[['demo/h000',Object.keys(APPROVED_H000_ASSETS)]]:[])];
+for(const [folder,names]of copied){
   mkdirSync(resolve(output,folder),{recursive:true});
   for(const name of names)copyFileSync(resolve(publicRoot,folder,name),resolve(output,folder,name));
 }
@@ -108,8 +121,8 @@ for(const name of excludedLegacy){
   if(!target.startsWith(output+'\\')&&!target.startsWith(output+'/'))throw Error('Output path escaped build directory');
   rmSync(target,{force:true});
 }
-await verifyAdmittedPublicFiles(output);
-for(const name of [...Object.keys(APPROVED_REFERENCE_ASSETS).map(x=>'reference/'+x),...Object.keys(APPROVED_BRAND_ASSETS).map(x=>'brand/'+x)]){
+await verifyAdmittedPublicFiles(output,{profile});
+for(const name of copied.flatMap(([folder,names])=>names.map(name=>folder+'/'+name))){
   if(!readFileSync(resolve(output,name)).equals(readFileSync(resolve(publicRoot,name))))throw Error('Built public bytes differ: '+name);
 }
 if(!readFileSync(resolve(output,'index.html'),'utf8').includes(base))throw Error('Wrong frontend base');
@@ -117,18 +130,21 @@ const files=Object.fromEntries(inventory(output).sort().map(name=>[name,identity
 const fixedOutput=new Set(['index.html','reference.html','LICENSE','NOTICE',
   ...inventory(resolve(root,'third-party')).map(x=>'third-party/'+x),
   ...Object.keys(APPROVED_REFERENCE_ASSETS).map(x=>'reference/'+x),
-  ...Object.keys(APPROVED_BRAND_ASSETS).map(x=>'brand/'+x)]);
+  ...Object.keys(APPROVED_BRAND_ASSETS).map(x=>'brand/'+x),
+  ...(selected.studyEnabled?Object.keys(APPROVED_H000_ASSETS).map(x=>'demo/h000/'+x):[])]);
 for(const name of Object.keys(files))if(!fixedOutput.has(name)&&!/^assets\/[^/]+\.(js|css)$/.test(name))throw Error('Unadmitted build output: '+name);
-const approvedPublicResearchFixtures={};
+for(const[name,value]of Object.entries(files))if(value.sha256===EXCLUDED_STUDY_SCREENSHOT_SHA256)throw Error('Excluded study screenshot bytes: '+name);
+const approvedPublicResearchFixtures=selected.studyEnabled?Object.fromEntries(Object.entries(APPROVED_H000_ASSETS).map(([name,value])=>['demo/h000/'+name,value])):{};
 writeFileSync(resolve(output,'demo-build-manifest.json'),JSON.stringify({
-  product:'DICOM3D',...RELEASE_METADATA,entrypoint:base,entrySource:'viewer/reference.html',
-  defaultReference:'bp3d-male',connectedServices:false,patientDerivedResearchData:false,privatePatientData:false,
+  product:'DICOM3D',...selected.release,buildProfile:profile,entrypoint:base,entrySource:'viewer/reference.html',
+  defaultReference:'bp3d-male',connectedServices:false,patientDerivedResearchData:selected.studyEnabled,privatePatientData:false,
   arbitraryPatientAssets:false,rawDicomFiles:false,syntheticDemoAssets:false,patientReferenceRegistration:false,
-  publicDataPolicy:'Exact admitted generalized reference and brand files only; all other public data files denied. H000 data release is pending.',
+  publicDataPolicy:selected.studyEnabled?'Exact reference, brand and five owner-admitted H000 files; all other public data files denied. Explicit study action required; no reference registration.':'Exact admitted generalized reference and brand files only; all other public data files denied. H000 is excluded from this reference-only build.',
+  currentResearchAdmission:selected.studyEnabled?H000_PUBLIC_ADMISSION:null,
   approvedPublicResearchFixtures,files,
 },null,2)+'\n');
 }
 if(process.argv[1]&&resolve(process.argv[1])===fileURLToPath(import.meta.url)){
   const option=name=>{const i=process.argv.indexOf(name);if(i<0)return undefined;if(!process.argv[i+1])throw Error('Missing '+name);return process.argv[i+1];};
-  await buildDemo({base:option('--base'),outDir:option('--out-dir')});
+  await buildDemo({base:option('--base'),outDir:option('--out-dir'),profile:option('--profile')});
 }

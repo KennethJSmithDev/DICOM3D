@@ -149,7 +149,10 @@ try {
     assert.equal(loaded.binding.count,32588);
     assert.equal(loaded.glbBytes.byteLength,263976);
     assert.equal(loaded.noticeUrl,'https://example.test/DICOM3D/demo/h000/NOTICE.md');
-    assert.equal(loaded.metrics.publicationApproved,false);
+    assert.equal(loaded.metrics.publicationApproved,true);
+    assert.equal(loaded.metrics.currentAdmission.profile,'curated-h000');
+    assert.equal(loaded.metrics.currentAdmission.screenshotAdmitted,false);
+    assert.equal(loaded.metrics.historicalSourceAssessment.publicationApproved,false);
     assert.equal(loaded.metrics.retainedDecodedNpyBytes,81002752);
     return {requests:requests.length,loadAndVerifyMs:loaded.metrics.loadAndVerifyMs};
   });
@@ -212,5 +215,5 @@ try {
 }
 const failures=rows.filter(row=>row.status==='FAIL');
 console.log(JSON.stringify({status:failures.length?'FAIL':'PASS',tests:rows.length,passed:rows.length-failures.length,
-  failed:failures.length,elapsedMs:performance.now()-started,publicationApproved:false,rows},null,2));
+  failed:failures.length,elapsedMs:performance.now()-started,currentOwnerAdmission:true,deployedQualification:false,historicalSourcePublicationApproved:false,rows},null,2));
 if(failures.length)process.exitCode=1;

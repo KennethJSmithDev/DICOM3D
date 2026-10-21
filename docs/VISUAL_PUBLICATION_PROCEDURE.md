@@ -1,5 +1,13 @@
 # v0.6.0 web/source publication and readback
 
+## Current addendum: curated H000 Safe Demo
+
+The owner separately admitted the exact five-file H000 subset in [the current data policy](PUBLIC_RESEARCH_DATA_POLICY.md). Build and test with `--profile curated-h000`; run `node scripts/test-public-research-data.mjs` and, after staging, `node scripts/test-publication.mjs --profile curated-h000`. Preserve historical source-binding/NOTICE bytes and the original tag. The screenshot remains excluded. Default Core/native builds remain reference-only and are reproduced from their separately frozen packaging source.
+
+The follow-on gate freezes the new web commit and output, checks actual desktop study loading/rendering/learning/lifecycle and zero automatic H000 requests, then publishes only under the applicable owner instruction. After Pages completes, independently retrieve all five exact files, manifest, references and notices and verify hashes and actual rendering. Record transport encoding separately from the retained gzip-container identity. Do not claim deployment from a build, a workflow dispatch or an HTTP status alone. This addendum does not authorize tag rewriting, release-asset replacement, OEX/IPM changes or broader data admission.
+
+## Preserved original publication procedure
+
 Current installation addendum: the later, separately identified v0.6.0 packaging completion is described in [INSTALL_060.md](INSTALL_060.md) and [PACKAGING_060.md](PACKAGING_060.md). The original web/source publication boundary recorded below remains historical; its tag and previous installation archives stay immutable.
 
 Identity: **DICOM3D v0.6.0 — Visual Research Workstation. From Pixels to Meaning.**

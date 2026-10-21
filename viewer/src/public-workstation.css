@@ -28,6 +28,7 @@ body.public-workstation{--accent:#67ddf6;--border:#234757;--bg:#050f18;--muted:#
 .public-workstation .reference-library label{flex:none;font-size:0;min-width:0}
 .public-workstation .reference-library select{font-size:11px;width:240px}
 .public-workstation .reference-library>p{display:none}
+.public-workstation #studyAdmissionNotice{display:block;flex:1 1 340px;max-width:600px;margin:0 0 0 auto;font-size:10px;line-height:1.5;text-align:left;color:#b1c7d3}
 .public-workstation #referenceUnload{display:none}
 .public-workstation .reference-scope-note{margin-left:auto;font-size:10px;color:#8bacbc;max-width:270px;text-align:right}
 .public-workstation .workspace-mode{background:none;border:0;padding:0 0 10px;font-size:10px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:#7f9dac}

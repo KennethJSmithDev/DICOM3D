@@ -2,7 +2,7 @@ name: Deploy DICOM3D safe demo
 on:
   push:
     branches: [main]
-    paths: ['demo/**', 'reference/public/**', 'viewer/**', 'scripts/*demo.mjs', 'scripts/test-publication.mjs', 'LICENSE', 'NOTICE', 'third-party/**', '.github/workflows/pages-demo.yml']
+    paths: ['demo/**', 'reference/public/**', 'viewer/**', 'scripts/*demo.mjs', 'scripts/test-publication.mjs', 'scripts/test-public-research-data.mjs', 'docs/PUBLIC_RESEARCH_DATA_POLICY.md', 'LICENSE', 'NOTICE', 'third-party/**', '.github/workflows/pages-demo.yml']
   workflow_dispatch:
 permissions:
   contents: read
@@ -26,9 +26,10 @@ jobs:
           cache: npm
           cache-dependency-path: viewer/package-lock.json
       - run: npm ci --prefix viewer
-      - run: node scripts/build-demo.mjs
-      - run: node scripts/test-demo.mjs
-      - run: node scripts/test-publication.mjs
+      - run: node scripts/build-demo.mjs --profile curated-h000
+      - run: node scripts/test-demo.mjs --profile curated-h000
+      - run: node scripts/test-public-research-data.mjs
+      - run: node scripts/test-publication.mjs --profile curated-h000
       - uses: actions/configure-pages@v5
         with:
           enablement: true

@@ -1,5 +1,12 @@
 # Changelog
 
+## v0.6.0 Safe Demo follow-on — curated H000 profile
+
+- Explicit `curated-h000` web build over the existing reference/study workstation; generalized anatomy remains the initial view.
+- Five owner-admitted unchanged CT/SEG research files with exact path/size/hash guards, lazy explicit loading, source credits and TCIA policy access.
+- Current admission is separate from preserved historical source metadata. No CT screenshot, arbitrary import, private connection or new geometry is admitted.
+- Default Core/native frontend remains reference-only. Original tags, frozen installer artifacts and the historical release notes below remain unchanged. Exact browser/deployment qualification is a separate receipt.
+
 ## 0.6.0 — Visual Research Workstation
 
 **From Pixels to Meaning.** The selected GitHub/Pages release is reference-only. Publication completion and final remote rendering are recorded separately in the release receipt; earlier local candidate evidence is not a deployment claim.

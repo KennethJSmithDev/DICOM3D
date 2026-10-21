@@ -31,13 +31,18 @@ const manifestInput = document.querySelector<HTMLInputElement>('#manifestFile')!
 const glbInput = document.querySelector<HTMLInputElement>('#glbFile')!;
 const visibilityButton = document.querySelector<HTMLButtonElement>('#visibilityButton')!;
 const clearButton = document.querySelector<HTMLButtonElement>('#clearButton')!;
+const publicFileImportsDisabled=import.meta.env.MODE==='safe-reference-demo';
 let generation = 0;
 let createdEngines=0,disposedEngines=0;
 let closeWorkspace: null | (()=>Promise<void>) = null;
 const ctOnly=document.createElement('button');ctOnly.id='openCtWorkspace';ctOnly.textContent='Open local CT workspace without GLB';glbInput.parentElement!.append(ctOnly);
-ctOnly.onclick=async()=>{if(manifestInput.files?.[0])await loadFiles(manifestInput.files[0]);else status.textContent='Choose the accepted local study manifest first.';};
+// WHY: hidden controls still accept scripted change events. BOUNDARY: only the
+// private entry binds local imports; public references/curated study use their
+// pinned loader. INVARIANT: unload never re-enables these public inputs.
+if(!publicFileImportsDisabled)ctOnly.onclick=async()=>{if(manifestInput.files?.[0])await loadFiles(manifestInput.files[0]);else status.textContent='Choose the accepted local study manifest first.';};
+else {manifestInput.disabled=glbInput.disabled=ctOnly.disabled=true;ctOnly.hidden=true;}
 const closeButton=document.createElement('button');closeButton.id='closeWorkspace';closeButton.textContent='Close local workspace';closeButton.hidden=true;ctOnly.after(closeButton);closeButton.onclick=unloadWorkspace;
-export async function unloadWorkspace(){generation++;await closeWorkspace?.();closeWorkspace=null;manifestInput.value=glbInput.value='';manifestInput.disabled=glbInput.disabled=ctOnly.disabled=false;closeButton.hidden=true;visibilityButton.disabled=clearButton.disabled=true;status.textContent='Workspace closed; local rendering resources disposed.';document.dispatchEvent(new CustomEvent('dicom3d-workspace-change',{detail:{kind:'empty'}}));return {createdEngines,disposedEngines,activeEngines:createdEngines-disposedEngines};}
+export async function unloadWorkspace(){generation++;await closeWorkspace?.();closeWorkspace=null;manifestInput.value=glbInput.value='';manifestInput.disabled=glbInput.disabled=ctOnly.disabled=publicFileImportsDisabled;closeButton.hidden=true;visibilityButton.disabled=clearButton.disabled=true;status.textContent='Workspace closed; local rendering resources disposed.';document.dispatchEvent(new CustomEvent('dicom3d-workspace-change',{detail:{kind:'empty'}}));return {createdEngines,disposedEngines,activeEngines:createdEngines-disposedEngines};}
 
 async function sha256(data: ArrayBuffer): Promise<string> {
   const digest = await crypto.subtle.digest('SHA-256', data);
@@ -236,5 +241,7 @@ export async function loadFiles(manifestFile: File, glbFile?: File, options:any 
   }
 }
 
-manifestInput.addEventListener('change', loadSelectedFiles);
-glbInput.addEventListener('change', loadSelectedFiles);
+if(!publicFileImportsDisabled){
+  manifestInput.addEventListener('change', loadSelectedFiles);
+  glbInput.addEventListener('change', loadSelectedFiles);
+}

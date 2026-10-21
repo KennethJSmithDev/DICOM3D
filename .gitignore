@@ -12,6 +12,7 @@ artifacts/
 .demo-dist/
 demo/public/sample/
 
-# H000 data and CT screenshots remain local until their separate release gate.
+# Only the five explicitly admitted H000 files are force-added by exact path.
+# Other H000 material and the separately excluded CT screenshot stay ignored.
 reference/public/demo/h000/
 docs/images/visual-060-study-docked.jpg

@@ -2,9 +2,11 @@
 
 The original v0.6.0 tag identifies accepted web/source commit d3490dd659e19e44b8800abe87bbc626f45350a2. A later packaging completion commit reconciles installation identifiers and consumes the accepted visual source. The external release/artifact manifest records that exact later commit, source snapshot, archive hashes and qualification receipts. Never move the tag or relabel an earlier snapshot.
 
+The corrected native package is bound to `bb7d34f250bd09852273924fa6f711e190c49c2c` and its separate `dicom3d-ipm-source-0.6.0.zip`. Use `INSTALLATION_ARTIFACTS_060_IPM.json`, `IPM_060_RECEIPT.md` and `SHA256SUMS-IPM` for that native completion. All five native release assets were published and their GitHub digests and independent download hashes matched the frozen packet. The earlier qualified Core packet retains its original artifacts and source identity. The follow-on curated Safe Demo branch descends from the corrected native source but does not regenerate that frozen installer or its source manifest.
+
 ## One frontend source
 
-Core and IRIS/IPM invoke scripts/build-demo.mjs in the existing guarded visual mode with base /dicom3d/. Pages retains /DICOM3D/. Both use viewer/reference.html, the existing Babylon Lite renderer, the pinned lockfile, exact admitted reference/brand assets and PUBLIC_STUDY_ENABLED=false. Hosting paths and the Core/IRIS adapters differ. No anatomical source, transform or semantic sampling change is needed.
+Core and IRIS/IPM invoke scripts/build-demo.mjs with the reference-only default and base /dicom3d/. Pages retains /DICOM3D/ and explicitly selects `--profile curated-h000` for the separately admitted optional research study. Both use viewer/reference.html, the existing Babylon Lite renderer, the pinned lockfile and exact reference/brand assets. The installer profile keeps study loading disabled; selecting the curated profile for its base is rejected. No anatomical source, transform or semantic sampling change is needed.
 
 The builder copies exact admitted assets and notices; Vite automatic public-directory copying stays disabled. The static verifier checks complete output. Source archives use the explicit Git inventory rather than recursive local discovery, so ignored H000 files, CT screenshots, credentials and caches cannot enter by being present in a developer directory.
 
@@ -35,4 +37,4 @@ Fresh extraction, Docker build/runtime/browser, exact IPM activation/upgrade/lif
 
 Attach only qualified installers, packaging-source snapshot, checksums, manifest and receipts to the existing release. Preserve the original tag and all existing assets; read back uploaded bytes. Open Exchange and IPM registry publication remain user-owned.
 
-Baseline distributions contain generalized reference anatomy only. The H000 assessment records a separate exact proposed inventory; public hosting requires the user's explicit approval of those hashes.
+Baseline distributions contain generalized reference anatomy only. The owner has separately admitted the exact five-file H000 subset for the optional Safe Demo web profile. That decision does not admit it into Core/native artifacts; see [current public data policy](PUBLIC_RESEARCH_DATA_POLICY.md).

@@ -4,6 +4,8 @@
 
 Use the exact dicom3d-core-0.6.0.zip or dicom3d-0.6.0.tgz, SHA256SUMS and installation qualification receipt attached to the [v0.6.0 release](https://github.com/KennethJSmithDev/DICOM3D/releases/tag/v0.6.0). Asset presence and the external release manifest establish publication; these instructions alone do not establish a successful qualification run.
 
+**Current native completion:** the corrected IPM source is `bb7d34f250bd09852273924fa6f711e190c49c2c`. Its exact TGZ passed the bounded clean-install and direct v0.5.1 upgrade/lifecycle matrix on the two recorded IRIS hosts, with protected browser rendering. Its published release packet is `IPM_060_RECEIPT.md`, `INSTALLATION_ARTIFACTS_060_IPM.json`, `SHA256SUMS-IPM`, `dicom3d-0.6.0.tgz` and `dicom3d-ipm-source-0.6.0.zip`. All five GitHub digests and independent download hashes matched the frozen packet. Read the [native qualification receipt](https://github.com/KennethJSmithDev/DICOM3D/releases/download/v0.6.0/IPM_060_RECEIPT.md) and [native artifact manifest](https://github.com/KennethJSmithDev/DICOM3D/releases/download/v0.6.0/INSTALLATION_ARTIFACTS_060_IPM.json). The older Core ZIP/source packet remains unchanged; do not use the earlier withheld native candidate.
+
 The original v0.6.0 tag remains the published web/source commit d3490dd659e19e44b8800abe87bbc626f45350a2. Installation completion comes from the separately identified packaging commit and reproducible packaging-source snapshot named in the release manifest. The original tag does not contain later packaging changes. See [reproduction and provenance](PACKAGING_060.md). Existing [v0.5.1 downloads](https://github.com/KennethJSmithDev/DICOM3D/releases/tag/v0.5.1) remain immutable.
 
 ## Standalone Core / Docker
@@ -73,4 +75,4 @@ Default loopback ports are 52887 (web) and 51987 (superserver). Choose independe
 
 Read the exact qualification receipt for tested image digests, runtime/IPM versions, lifecycle results and browser conditions. Native Windows IPM, other IRIS patches, authenticated low-privilege denial without an existing valid fixture, other browser/device coverage and clinical validation are not established by these instructions.
 
-Preserve software LICENSE/NOTICE, third-party licenses and source-specific BodyParts3D/HRA notices. H000 public research-data admission remains independent and closed. Open Exchange and IPM registry publication remain user-owned.
+Preserve software LICENSE/NOTICE, third-party licenses and source-specific BodyParts3D/HRA notices. The separate `curated-h000` Safe Demo admission covers five exact web files and does not add H000 to these reference-only installers. Open Exchange and IPM registry publication remain user-owned.

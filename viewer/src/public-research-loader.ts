@@ -2,10 +2,11 @@ import {
   PUBLIC_RESEARCH_ASSETS, publicAssetUrl, boundedStreamBytes, verifyPublicBytes,
   parsePublicMetadata, decodePublicGzip, projectPublicResearch,
 } from './public-source-binding.mjs';
+import {H000_PUBLIC_ADMISSION} from './public-h000-admission.mjs';
 
 // An explicit UI action calls this module. Importing it never connects or fetches.
 // WHY: source ownership and integrity must be established before the viewer sees data.
-// BOUNDARY: same-origin five-file local publication candidate, no Connect integration.
+// BOUNDARY: same-origin five-file owner-admitted Safe Demo study, no Connect integration.
 // INVARIANT: no caller-selected dataset/URL or fallback to a research directory.
 // EVIDENCE: scripts/test-public-research-data.mjs and public-admission source receipts.
 // REGRESSION: Content-Encoding auto-decode and repeated retained buffers can change costs.
@@ -76,7 +77,9 @@ export async function loadPublicResearchFixture(base: string) {
   return {
     ...projected,
     metrics: {
-      status: 'LOCAL_PUBLICATION_CANDIDATE', publicationApproved: false,
+      status: 'CURATED_PUBLIC_RESEARCH_STUDY', publicationApproved: true,
+      currentAdmission: H000_PUBLIC_ADMISSION,
+      historicalSourceAssessment: metadata.admission,
       loadAndVerifyMs: performance.now() - started,
       projectionAndSourceChecksMs: performance.now() - projectStarted,
       files,

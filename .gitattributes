@@ -1,6 +1,12 @@
 # Preserve the qualified brand bytes across Git export and CI checkout.
 reference/public/brand/favicon.svg -text
 reference/public/brand/semantic-cube.svg -text
+# Exact owner-admitted H000 bytes; historical metadata/notices must not be normalized.
+reference/public/demo/h000/ct.npy.bin -text
+reference/public/demo/h000/mask.npy.bin -text
+reference/public/demo/h000/lesion.glb -text
+reference/public/demo/h000/source-binding.json -text
+reference/public/demo/h000/NOTICE.md -text
 # Generated frontend bytes own hashed filenames, manifests and native entry identity.
 public/** -text whitespace=cr-at-eol
 module.xml text eol=lf
