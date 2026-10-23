@@ -4,9 +4,9 @@
 
 ## Current Safe Demo follow-on admission
 
-The optional `curated-h000` web profile admits exactly five unchanged acquired CT/SEG research files under a separate owner decision. Generalized reference anatomy still loads first; the approximately 33.3 MB study requires an explicit action. Original source-binding/notice historical flags remain unchanged. See the [exact data policy](PUBLIC_RESEARCH_DATA_POLICY.md) and [Safe Demo](SAFE_DEMO.md). Fresh artifact/browser/deployed readback is required before claiming this follow-on is public. No CT screenshots, arbitrary import, private connections or installer-data admission are included. The original v0.6.0 tag and release scope recorded below stay historical and immutable.
+The optional `curated-h000` web profile admits exactly five unchanged acquired CT/SEG research files under a separate owner decision. Generalized reference anatomy still loads first; the approximately 33.3 MB study requires an explicit action. Original source-binding/notice historical flags remain unchanged. See the [exact data policy](PUBLIC_RESEARCH_DATA_POLICY.md) and [Safe Demo](SAFE_DEMO.md). The [Pages deployment](https://github.com/KennethJSmithDev/DICOM3D/actions/runs/39531191232) completed successfully on October 21, 2026 at 02:07 UTC for `cc5c1d9b25776ab055b6a8ac2afa48da63f33904`. The [published release record](https://github.com/KennethJSmithDev/DICOM3D/releases/tag/v0.6.0) separately records exact deployed-payload readback and bounded desktop Edge/WebGPU checks; these are recorded qualification results, not new tests performed by this documentation update. No CT screenshots, arbitrary import, private connections or installer-data admission are included. The original v0.6.0 tag and release scope recorded below stay historical and immutable.
 
-## Release scope
+## Original web/source release scope (historical)
 
 v0.6.0 is a **web/source release** of the desktop-first, reference-only Visual Research Workstation. GitHub source, the version tag/release and GitHub Pages are the selected publication surfaces. Remote publication and rendering must be established by the release receipt; this document defines scope without asserting those steps have completed.
 

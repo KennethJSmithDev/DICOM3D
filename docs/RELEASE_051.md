@@ -6,7 +6,7 @@
 
 The Open Exchange listing displays v0.5.1. Listing text, its archive link and the IPM registry payload are separate publication surfaces; the displayed version does not establish which bytes a registry install resolves. GitHub's release files and SHA256SUMS remain the exact release reference.
 
-**DICOM3D v0.6.0 — Visual Research Workstation** has a separate reference-only web/source release scope. It includes no replacement Core/IPM/native installation archives and leaves these v0.5.1 assets unchanged. See [v0.6.0 release notes](RELEASE_060.md); remote publication completion is recorded by its own receipt.
+**DICOM3D v0.6.0 — Visual Research Workstation** subsequently published separate reference-only Core/IPM installation archives, followed by an independently admitted curated Safe Demo. The original web/source tag, later installer source commits and curated web revision are distinct. These later distributions do not replace or modify the frozen v0.5.1 assets. See [v0.6.0 release notes](RELEASE_060.md), [installation](INSTALL_060.md) and [packaging provenance](PACKAGING_060.md) for their exact identities and receipts.
 
 ## Historical v0.5.1 preparation record
 
