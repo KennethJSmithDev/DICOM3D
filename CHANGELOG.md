@@ -40,7 +40,7 @@ Standalone Core distribution based on qualified UX-RACE-001 archive `03a8bcf6e05
 - Reproducible Core Docker source ZIP and IPM package with matching versioned reference-viewer payload.
 - Correct repository FileCopy sources so registry packaging has the built shell/assets it requires.
 
-Desktop-first prototype/research scope. Optional Connect/FHIR, other-platform production support, clinical validity and public-demo deployment are not promoted by this candidate. GitHub publication is approved; Open Exchange/IPM synchronization remains a separate pending step.
+Desktop-first prototype/research scope. Optional Connect/FHIR, other-platform production support and clinical validity are not promoted by this release. [GitHub v0.5.0](https://github.com/KennethJSmithDev/DICOM3D/releases/tag/v0.5.0) was published on October 18, 2026. The separate [DEMO-050 Pages deployment](https://github.com/KennethJSmithDev/DICOM3D/actions/runs/39166437377) subsequently completed successfully; it does not establish additional installed-package or clinical qualification. Open Exchange/IPM registry status must be verified separately.
 
 ---
 
