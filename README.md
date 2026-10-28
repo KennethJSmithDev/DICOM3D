@@ -1,11 +1,3 @@
-# DICOM3D v0.6.5 — private release candidate
-
-Babylon-based integrated anatomy and verified-imaging workstation. This candidate is not published. Start with [candidate scope and local launch instructions](docs/RELEASE_CANDIDATE_065.md), [optional interoperability status](docs/INTEROPERABILITY_065.md) and [sanitized mobile handoff](docs/MOBILE_HANDOFF_065.md).
-
-The following published v0.6.0 documentation is retained as historical baseline; it does not describe0.6.5 installer, OEX or publication status.
-
----
-
 # DICOM3D — Visual Research Workstation
 
 **From Pixels to Meaning.**
