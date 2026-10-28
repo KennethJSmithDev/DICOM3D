@@ -132,9 +132,14 @@ function sourceGroups(name,expectedGroups,expectedPrimitives,expectedSha){
   const started=performance.now(),samples=budgets(groups),elapsedMs=performance.now()-started;
   assert.equal(sha(bytes),initialSha,'Source GLB bytes unchanged');
   const sampled=new Set(Array.from(samples.primitives,(primitive,i)=>`${i%groups.length}:${primitive}`));
-  assert.equal(sampled.size,expectedPrimitives,'All source primitives represented within capacity');
-  receipt.assets.push({name,sha256:initialSha,groups:groups.length,primitives:expectedPrimitives,budgets:[512,2048,8192],capacityOutputBytes:samples.outputBytes,maxTemporaryCopyBytes:samples.maxTemporaryCopyBytes,totalCopiedBytes:samples.totalCopiedBytes,allPrimitiveTargetsRepresentedAt8192:true,elapsedCpuTestMs:elapsedMs});
+  // The fixed decorative point budget is fair per semantic owner, not per mesh.
+  // Large merged baseline owners can contain more primitives than their quota.
+  // Account for those omissions explicitly; actual source meshes render separately.
+  const expectedTargets=groups.reduce((n,g,i)=>n+Math.min(g.parts.length,Math.floor(8192/groups.length)+(i<8192%groups.length?1:0)),0);
+  assert.equal(sampled.size,expectedTargets,'Every round-robin target within the fixed budget represented');
+  assert.equal(new Set(Array.from(samples.data).filter((_,i)=>i%8===3)).size,groups.length,'Every semantic owner represented');
+  receipt.assets.push({name,sha256:initialSha,groups:groups.length,primitives:expectedPrimitives,budgets:[512,2048,8192],capacityOutputBytes:samples.outputBytes,maxTemporaryCopyBytes:samples.maxTemporaryCopyBytes,totalCopiedBytes:samples.totalCopiedBytes,primitiveTargetsRepresentedAt8192:sampled.size,omittedDecorativePrimitiveTargets:expectedPrimitives-sampled.size,allPrimitiveTargetsRepresentedAt8192:sampled.size===expectedPrimitives,elapsedCpuTestMs:elapsedMs});
 }
-sourceGroups('bp3d-male',33,33,'dcef47dc21d252b93b288b649ac30795d9de73f733c27b285f8d1a43ae4fc055');
-sourceGroups('hra-female',22,231,'a61a60841fd3c8308d332421385be03188c0babd58b78ae101adf2807a88473a');
+sourceGroups('bp3d-male',386,386,'c44f884861550d92e54bae4beb8ebfd5b4927d61c37034e5f6a61f7b4b41d4d4');
+sourceGroups('hra-female',380,590,'24abc4d8bd0a00bfc93ab45e227c1e9b157ffc0d21d1e5c22408fbe3933f60cb');
 console.log(JSON.stringify({result:'PASS',...receipt},null,2));

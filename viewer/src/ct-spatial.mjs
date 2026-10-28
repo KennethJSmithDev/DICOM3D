@@ -14,9 +14,9 @@ export function validateSpatial(receipt,manifest) {
   }
   return m;
 }
-export const edgeIndices=k=>[[k,-.5,-.5],[k,-.5,511.5],[k,511.5,511.5],[k,511.5,-.5]];
-export function planeModel(m,k) {
-  if(!Number.isInteger(k)||k<0||k>102)throw Error('Invalid acquired plane k');
-  return edgeIndices(k).map(p=>point(m.patient_mm_to_model_m,point(m.index_to_patient_mm,p)));
+export const edgeIndices=(k,shape=[103,512,512])=>[[k,-.5,-.5],[k,-.5,shape[2]-.5],[k,shape[1]-.5,shape[2]-.5],[k,shape[1]-.5,-.5]];
+export function planeModel(m,k,shape=[103,512,512]) {
+  if(!Number.isInteger(k)||k<0||k>=shape[0])throw Error('Invalid acquired plane k');
+  return edgeIndices(k,shape).map(p=>point(m.patient_mm_to_model_m,point(m.index_to_patient_mm,p)));
 }
-export function uvToIndex(k,u,v){return [k,v*512-.5,u*512-.5];}
+export function uvToIndex(k,u,v,shape=[103,512,512]){return [k,v*shape[1]-.5,u*shape[2]-.5];}

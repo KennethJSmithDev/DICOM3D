@@ -32,3 +32,7 @@ viewer/.vite/
 !LICENSE
 !NOTICE
 !distribution-manifest.json
+
+!reference/public/reference/anatomy-owner-map.json
+!reference/public/reference/anatomy-admission.json
+!reference/public/reference/anatomy-source-catalog.json

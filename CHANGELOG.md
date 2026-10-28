@@ -1,3 +1,7 @@
+#0.6.5 private candidate — 2026-10-28
+
+Integrated accepted386male/380female source-backed anatomy, verified classicCT admission, generation-safe Babylon lifecycle, source-aware OpenStudy entry and bounded accumulated H000CT/SEG presentation. Separate Core/reference and curated offlineSafeDemo artifacts; no liveIRIS/PACS distribution, native renderer migration, installer/OEX publication or clinical claim. Exact qualification is bound by externalRC receipts.
+
 # Changelog
 
 ## v0.6.0 Safe Demo follow-on — curated H000 profile

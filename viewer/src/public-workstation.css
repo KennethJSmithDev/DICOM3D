@@ -111,3 +111,97 @@ body.public-workstation{--accent:#67ddf6;--border:#234757;--bg:#050f18;--muted:#
 @media(max-width:1350px){.public-workstation .release-identity{display:none}.public-workstation .reference-scope-note{display:none}.public-workstation .reference-library select{width:220px}.public-workstation .viewport-heading strong{font-size:18px}.public-workstation .public-viewport-top>span:nth-child(2){display:none}}
 @media(max-height:760px){.public-workstation .app-header{height:62px;flex-basis:62px}.public-workstation #publicStage{padding-top:10px}.public-workstation .reference-library{padding-top:8px}.public-workstation .public-rail{gap:6px;padding-top:12px}.public-workstation .public-rail button{min-height:54px}.public-workstation #labPanel,.public-workstation #learningPanel,.public-workstation #evidencePanel,.public-workstation #workspaceControls{top:108px}}
 @media(max-width:800px){body.public-workstation{overflow:hidden}.public-workstation .app-header{padding:8px 12px;gap:10px}.public-workstation .app-header nav{display:none}.public-workstation #evidenceToggle{margin-left:auto;font-size:10px}.public-workstation .brand img{width:32px;height:32px}.public-workstation h1{font-size:22px}.public-workstation .public-rail{width:58px;flex-basis:58px;padding-inline:3px}.public-workstation .public-rail button{width:48px}.public-workstation #publicStage{padding:10px}.public-workstation .public-toolbar{flex-wrap:wrap;gap:8px}.public-workstation .viewport-heading strong{font-size:16px}.public-workstation .mode-switch{width:100%}.public-workstation .mode-switch button{flex:1;padding-inline:5px;font-size:10px}.public-workstation .reference-library{flex-wrap:wrap;gap:5px}.public-workstation .reference-library label{width:100%}.public-workstation .reference-library select{width:100%}.public-workstation .reference-library button{font-size:9px}.public-workstation #viewingArea{max-width:100%;position:relative}.public-workstation .viewport-slot{flex:1}.public-workstation #imagingDock{position:absolute;inset:0;width:100%;z-index:5}.public-workstation #divider{display:none}.public-workstation #labPanel,.public-workstation #learningPanel,.public-workstation #evidencePanel,.public-workstation #workspaceControls{left:66px;right:8px;top:140px;bottom:8px;width:auto}.public-workstation .evidence-grid{grid-template-columns:1fr}.public-workstation #publicAnnotation{font-size:9px;top:45px}.public-workstation #cameraControls .camera-actions{flex-wrap:nowrap;overflow-x:auto;justify-content:flex-start}.public-workstation #cameraControls button{flex:0 0 auto;font-size:9px}.public-workstation .app-footer{padding-inline:10px}}
+
+/* BDP-VISUAL: workflow-specific space, without source/camera mutation on resize. */
+.public-workstation .app-header{height:56px;flex-basis:56px;padding:6px 20px}
+.public-workstation #publicStage{padding:10px 16px 8px}
+.public-workstation .reference-library{padding-top:6px;padding-bottom:6px;gap:8px}
+.public-workstation #viewingArea:not(:has(#imagingDock:not([hidden]))){max-width:min(1200px,calc((100cqh - 2px)*1.8))}
+.public-workstation #viewingArea:not(:has(#imagingDock:not([hidden]))) main.viewport{width:calc(100cqw - 2px);height:calc(100cqh - 2px);aspect-ratio:auto}
+.public-workstation .startup-controls{display:flex;align-items:center;gap:8px;font-size:10px;flex-wrap:wrap}
+.public-workstation .startup-controls button{min-height:30px}
+.public-workstation #verifiedVolumeImport{max-width:560px}
+.public-workstation #verifiedVolumeImport input[type=file]{width:100%;max-width:420px;min-width:0}
+@media(max-width:800px){.public-workstation .app-header{height:56px;flex-basis:56px}.public-workstation .startup-controls{font-size:9px}.public-workstation #viewingArea:not(:has(#imagingDock:not([hidden]))){max-width:100%}}
+
+.public-workstation #verifiedVolumeImport[open]{position:relative;max-height:210px;overflow:auto;flex:0 0 auto;padding:8px;border:1px solid var(--border)}
+.public-workstation #verifiedVolumeImport label{display:block;margin:5px 0}
+
+/* BDP-VISUAL-065-002: shell owns layout; source pixels, camera pose and renderer retain ownership. */
+.public-workstation .app-header{height:54px;flex-basis:54px;padding:5px 14px;gap:14px;background:#0b1d2bea;backdrop-filter:blur(16px);border-bottom:1px solid #294456}
+.public-workstation .app-header .intro{display:none}
+.public-workstation .app-header h1{font-size:24px}
+.public-workstation .app-header .brand img{width:36px;height:36px}
+.public-workstation .release-identity{font-size:9px;letter-spacing:.3px}
+.public-workstation .public-rail{width:68px;flex-basis:68px;padding:12px 4px;gap:8px;background:#0b1d29ed}
+.public-workstation .public-rail button{width:58px;min-height:58px;border-radius:10px}
+.public-workstation #publicStage{padding:0;gap:0}
+.public-workstation #publicWorkArea{order:0;justify-content:stretch}
+.public-workstation #viewingArea,.public-workstation #viewingArea:not(:has(#imagingDock:not([hidden]))),.public-workstation .maximized #viewingArea{max-width:none;gap:6px}
+.public-workstation main.viewport,.public-workstation #viewingArea:not(:has(#imagingDock:not([hidden]))) main.viewport{box-sizing:border-box;width:100cqw;height:100cqh;aspect-ratio:auto;border-radius:0;border:0}
+.public-workstation #imagingDock{border-radius:0;background:#081b28}
+.public-workstation .shell-status{order:1;flex:0 0 auto;min-height:26px;padding:5px 14px;border-top:1px solid #233c4b;background:#0a1a26;color:#a6bfcc}
+.public-workstation .shell-status .workspace-mode{padding:0;margin:0;white-space:normal;font-size:10px}
+.public-workstation #viewerDrawer,.public-workstation #workspaceControls,.public-workstation #labPanel,.public-workstation #learningPanel{position:absolute;z-index:8;left:76px;right:auto;top:8px;bottom:34px;width:min(360px,calc(100% - 88px));max-height:none;margin:0;overflow:auto;border:1px solid #4c758b88;border-radius:12px;background:#0e2333f0;backdrop-filter:blur(18px);box-shadow:0 18px 60px #0008;box-sizing:border-box}
+.public-workstation #viewerDrawer{padding:16px}
+.public-workstation #viewerDrawer>header{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:16px}
+.public-workstation #viewerDrawer h2{font-size:16px;margin:0}
+.public-workstation #viewerDrawer .public-toolbar{display:flex;flex-direction:column;align-items:stretch;gap:14px}
+.public-workstation #viewerDrawer .viewport-heading strong{font-size:16px}
+.public-workstation #viewerDrawer .mode-switch{flex-wrap:wrap;padding:4px}
+.public-workstation #viewerDrawer .mode-switch button{flex:1;padding:7px 8px}
+.public-workstation #viewerDrawer .reference-library{display:flex;flex-direction:column;align-items:stretch;gap:10px;padding:16px 0}
+.public-workstation #viewerDrawer .reference-library select{width:100%;max-width:100%}
+.public-workstation #viewerDrawer .reference-library>p,.public-workstation #viewerDrawer .reference-scope-note{display:block;flex:none;max-width:none;margin:0;text-align:left;font-size:11px;line-height:1.5}
+.public-workstation #viewerDrawer #verifiedVolumeImport{box-sizing:border-box;width:100%;max-width:100%;max-height:none;margin:0;overflow:visible}
+.public-workstation #viewerDrawer #verifiedVolumeImport input[type=file]{box-sizing:border-box;min-width:0;width:100%;font-size:11px;margin:6px 0}
+.public-workstation #viewerDrawer #verifiedVolumeImport p{font-size:11px;line-height:1.5;color:#aac2cf}
+.public-workstation #evidencePanel{top:8px;bottom:34px;background:#0a1b29;backdrop-filter:none}
+.public-workstation .startup-controls{width:auto;flex:none;gap:8px;margin:0}
+.public-workstation #startupStatus{font-size:10px;max-width:170px}
+.public-workstation button:focus-visible,.public-workstation select:focus-visible,.public-workstation input:focus-visible{outline:2px solid #a6efff;outline-offset:3px}
+.public-workstation button:hover{border-color:#71bfd6;background-color:#18394a}
+@media(max-width:1100px){.public-workstation .app-header nav a:first-child{display:none}.public-workstation .release-identity{display:none}.public-workstation #startupStatus{display:none}.public-workstation .app-header nav{gap:8px}}
+@media(max-width:800px){.public-workstation .app-header{height:54px;min-height:54px;flex-basis:54px;gap:8px}.public-workstation .app-header nav{display:none}.public-workstation .app-header h1{font-size:20px}.public-workstation .public-rail{width:58px;flex-basis:58px}.public-workstation .public-rail button{width:50px}.public-workstation #viewerDrawer,.public-workstation #workspaceControls,.public-workstation #labPanel,.public-workstation #learningPanel{left:64px;width:calc(100% - 72px);max-width:360px;top:8px}.public-workstation #publicStage{padding:0}.public-workstation #evidencePanel{right:8px;width:calc(100% - 76px)}.public-workstation .evidence-grid{grid-template-columns:1fr}.public-workstation .shell-status{font-size:9px;padding:4px 8px}}
+
+/* Focused visual correction: persistent dismissal and square-source viewing space. */
+.public-workstation #viewerDrawer>header{position:sticky;top:-16px;z-index:2;padding:12px 0;background:#0e2333;box-shadow:0 6px 12px #0e2333}
+.public-workstation .ct-image{aspect-ratio:auto;flex:1 1 0;min-height:120px;margin-block:0}
+@media(min-width:1000px){.public-workstation .workspace:has(#viewerDrawer:not([hidden]),#workspaceControls:not([hidden]),#labPanel:not([hidden]),#learningPanel:not([hidden])) #cameraControls .camera-actions{justify-content:flex-end}}
+
+/* Concept adaptation: presentation chrome only. Original source and renderer owners retained.
+   Desktop three-zone admission is pending browser/scale qualification; narrow fallback retained. */
+body.public-workstation{font-family:"Segoe UI Variable","Segoe UI",system-ui,sans-serif;--border:#264c61;--accent:#42d4f4}
+.public-workstation .app-header{background:radial-gradient(ellipse at 40% 0,#26304a80,transparent 55%),linear-gradient(110deg,#102536ee,#07131eee);border-bottom:1px solid #294a60;box-shadow:0 1px 16px #0006}
+.public-workstation .app-header .intro{display:block;font-size:10px;letter-spacing:.5px;margin-top:2px;color:#a4c5d8}
+.public-workstation .app-header .mode-switch{flex:none;margin-left:auto;background:#06121b80;border:0;gap:6px;padding:0}
+.public-workstation .app-header .mode-switch button{min-height:36px;padding:8px 15px;font-size:12px;border:1px solid #24485e;border-radius:8px;color:#d4e4ef;background:#091724c9}
+.public-workstation button[aria-pressed=true],.public-workstation .public-rail button[aria-expanded=true]{background:linear-gradient(160deg,#08799caa,#10324ce8);border-color:#26c9f2;box-shadow:inset 0 0 12px #21c6ec28,0 0 12px #14b8e31c;color:#effcff}
+.public-workstation .app-header nav{margin-left:12px}
+.public-workstation .release-identity{max-width:150px;line-height:1.5;font-size:9px}
+.public-workstation #publicWorkArea{padding:10px 10px 6px;--ct-share:.32;box-sizing:border-box}
+.public-workstation main.viewport,.public-workstation #viewingArea:not(:has(#imagingDock:not([hidden]))) main.viewport{border:1px solid #2f6077;border-radius:9px;background:#030d14;box-shadow:inset 0 0 28px #071c2966}
+.public-workstation #imagingDock{border-radius:9px;border:1px solid #295269;background:#071722}
+.public-workstation .public-rail{background:linear-gradient(180deg,#0d2433,#091925);border-right:1px solid #244557}
+.public-workstation .public-rail button{font-size:11px;min-height:68px;gap:9px}
+.public-workstation #viewerDrawer,.public-workstation #workspaceControls,.public-workstation #labPanel,.public-workstation #learningPanel{background:linear-gradient(145deg,#112939f2,#0a1624ed);border-color:#39647c;border-radius:10px;box-shadow:0 12px 32px #0007,inset 0 1px 0 #a3d8ee0b}
+.public-workstation #evidencePanel{background:#091925;left:76px;right:auto;border-color:#39647c}
+.public-workstation .selection-card{background:#071725;border:1px solid #2b526a;border-radius:8px;padding:12px;margin-bottom:12px}
+.public-workstation #referenceControls input[type=search],.public-workstation #referenceControls select{background:#071825;border:1px solid #2a5065;border-radius:7px;color:#d9e8f1;min-height:36px}
+.public-workstation .shell-status{background:#091b29;border-top-color:#29495d;color:#acc8d8}
+@media(min-width:1400px){
+ .public-workstation .app-header{height:64px;flex-basis:64px;padding:8px 18px;gap:12px}
+ .public-workstation .app-header .brand img{width:40px;height:40px}
+ .public-workstation #workspaceControls{left:auto;right:10px;top:10px;bottom:34px;width:320px}
+ .public-workstation .workspace:has(#workspaceControls:not([hidden])) #publicStage{padding-right:330px}
+ .public-workstation #viewerDrawer{left:76px;top:10px;bottom:34px;width:320px}
+ .public-workstation .workspace:has(#viewerDrawer:not([hidden])) #publicStage{padding-left:338px}
+ .public-workstation #viewerDrawer .public-toolbar{padding-bottom:10px;border-bottom:1px solid #294b60}
+ .public-workstation #viewingArea{gap:8px}
+ .public-workstation #workspaceControls .inspector-body{padding:12px}
+ .public-workstation #referenceControls .selection-card strong{font-size:15px}
+ .public-workstation .workspace:has(#viewerDrawer:not([hidden]),#workspaceControls:not([hidden]),#labPanel:not([hidden]),#learningPanel:not([hidden])) #cameraControls .camera-actions{justify-content:center}
+}
+@media(min-width:2200px){.public-workstation #workspaceControls{width:360px}.public-workstation .workspace:has(#workspaceControls:not([hidden])) #publicStage{padding-right:370px}.public-workstation #viewerDrawer{width:360px}.public-workstation .workspace:has(#viewerDrawer:not([hidden])) #publicStage{padding-left:378px}}
+@media(max-width:1399px){.public-workstation .app-header .intro{display:none}.public-workstation .app-header .mode-switch{gap:3px}.public-workstation .app-header .mode-switch button{padding:7px 8px;font-size:10px}.public-workstation .app-header nav{display:none}.public-workstation .release-identity{display:none}}
+@media(max-width:800px){.public-workstation .app-header .mode-switch{flex-wrap:wrap;gap:2px;max-width:164px}.public-workstation .app-header .mode-switch button{min-height:24px;padding:3px 6px;font-size:9px}.public-workstation .app-header .intro{display:none}}

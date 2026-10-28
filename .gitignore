@@ -16,3 +16,7 @@ demo/public/sample/
 # Other H000 material and the separately excluded CT screenshot stay ignored.
 reference/public/demo/h000/
 docs/images/visual-060-study-docked.jpg
+
+# Machine-specific qualification configuration stays private.
+viewer/vite.bdp.config.mjs
+.vite-cache/

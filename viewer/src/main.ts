@@ -1,3 +1,4 @@
+import {createDisposalOwner} from './owned-disposal.mjs';
 import {
   addToScene,
   attachControl,
@@ -18,6 +19,8 @@ import { FIXTURE_ID, FIXTURE_SHA } from './slices.mjs';
 import { prepareCamera } from './camera-ui';
 import { STUDY_WORLD } from './ct-volume-core.mjs';
 import { prepareExperience } from './experience';
+import {isVerifiedVolume,verifiedManifest} from './verified-volume.mjs';
+import {requireVolumeRenderer} from './imaging-renderer-capabilities.mjs';
 
 type Manifest = {
   structure: { semantic_id: string };
@@ -42,7 +45,7 @@ const ctOnly=document.createElement('button');ctOnly.id='openCtWorkspace';ctOnly
 if(!publicFileImportsDisabled)ctOnly.onclick=async()=>{if(manifestInput.files?.[0])await loadFiles(manifestInput.files[0]);else status.textContent='Choose the accepted local study manifest first.';};
 else {manifestInput.disabled=glbInput.disabled=ctOnly.disabled=true;ctOnly.hidden=true;}
 const closeButton=document.createElement('button');closeButton.id='closeWorkspace';closeButton.textContent='Close local workspace';closeButton.hidden=true;ctOnly.after(closeButton);closeButton.onclick=unloadWorkspace;
-export async function unloadWorkspace(){generation++;await closeWorkspace?.();closeWorkspace=null;manifestInput.value=glbInput.value='';manifestInput.disabled=glbInput.disabled=ctOnly.disabled=publicFileImportsDisabled;closeButton.hidden=true;visibilityButton.disabled=clearButton.disabled=true;status.textContent='Workspace closed; local rendering resources disposed.';document.dispatchEvent(new CustomEvent('dicom3d-workspace-change',{detail:{kind:'empty'}}));return {createdEngines,disposedEngines,activeEngines:createdEngines-disposedEngines};}
+export async function unloadWorkspace(){const closingGeneration=++generation,retiring=closeWorkspace;await retiring?.();if(closeWorkspace===retiring)closeWorkspace=null;if(closingGeneration!==generation)return {createdEngines,disposedEngines,activeEngines:createdEngines-disposedEngines};manifestInput.value=glbInput.value='';manifestInput.disabled=glbInput.disabled=ctOnly.disabled=publicFileImportsDisabled;closeButton.hidden=true;visibilityButton.disabled=clearButton.disabled=true;status.textContent='Workspace closed; local rendering resources disposed.';document.dispatchEvent(new CustomEvent('dicom3d-workspace-change',{detail:{kind:'empty'}}));return {createdEngines,disposedEngines,activeEngines:createdEngines-disposedEngines};}
 
 async function sha256(data: ArrayBuffer): Promise<string> {
   const digest = await crypto.subtle.digest('SHA-256', data);
@@ -72,12 +75,15 @@ export async function loadFiles(manifestFile: File, glbFile?: File, options:any 
   try {
     status.textContent = 'Reading manifest…';
     const manifest = JSON.parse(await manifestFile.text()) as Manifest;
-    if (!manifest.structure?.semantic_id || !manifest.asset?.sha256 || !manifest.asset?.relative_filename) {
+    const verifiedVolume=(import.meta.env.DICOM3D_VERIFIED_VOLUME_IMPORT===true||import.meta.env.DICOM3D_PRIVATE_VOLUME_DEV===true)&&isVerifiedVolume(options.verifiedVolume)?options.verifiedVolume:null;
+    if(verifiedVolume&&JSON.stringify(manifest)!==JSON.stringify(verifiedManifest(verifiedVolume)))throw Error('Verified source/manifest mismatch');
+    if(verifiedVolume)requireVolumeRenderer(verifiedVolume.descriptor,{backend:'babylon'});
+    if (!manifest.structure?.semantic_id || (!verifiedVolume&&(!manifest.asset?.sha256 || !manifest.asset?.relative_filename))) {
       throw new Error('Manifest is missing structure identity or asset metadata.');
     }
     const publicVisualEnabled=import.meta.env.MODE==='safe-reference-demo';
     const publicStudy=publicVisualEnabled&&import.meta.env.DICOM3D_PUBLIC_STUDY?options.publicStudy:null;
-    const hasCt=Boolean(publicStudy||((manifest as any).provenance?.B_evidence?.sha256 && (manifest as any).provenance?.B_volume?.sha256));
+    const hasCt=Boolean(verifiedVolume||publicStudy||((manifest as any).provenance?.B_evidence?.sha256 && (manifest as any).provenance?.B_volume?.sha256));
     if(!glbFile&&!hasCt)throw Error('CT-only workspace requires an accepted CT manifest.');
     if (glbFile && glbFile.name !== manifest.asset.relative_filename) {
       throw new Error(`Expected ${manifest.asset.relative_filename}; selected ${glbFile.name}.`);
@@ -88,18 +94,19 @@ export async function loadFiles(manifestFile: File, glbFile?: File, options:any 
       throw new Error('GLB SHA-256 does not match the manifest.');
     }
     if (currentGeneration !== generation) return;
-    experience.describeSource(manifest);
+    if(!verifiedVolume)experience.describeSource(manifest);
+    else document.querySelector('#sourceMetadata')!.textContent='Verified acquired CT · Babylon Lite. Original Study/Series/SOP/frame identities, patient millimetres and model metres retained. No SEG or atlas registration admitted.';
 
     status.textContent = 'Creating WebGPU scene…';
-    await closeWorkspace?.();
-    closeWorkspace=null;
+    const retiring=closeWorkspace;await retiring?.();
+    if(closeWorkspace===retiring)closeWorkspace=null;
+    if(currentGeneration!==generation)return false;
     const engine = await createEngine(canvas,hasCt||publicVisualEnabled?{maxDevicePixelRatio:1,msaaSamples:1}:undefined);
     createdEngines++;
     // Each acquired resource has a teardown before the next awaited boundary.
     // Failed or superseded construction disposes only this owner, never a newer scene.
     const teardown:(()=>any)[]=[()=>{disposeEngine(engine);disposedEngines++;}];
-    let released=false;
-    const cleanup=async()=>{if(released)return;released=true;stopEngine(engine);const failures=[];for(const dispose of teardown.reverse()){try{await dispose();}catch(e){failures.push(e);}}if(failures.length)console.error('Workspace disposal',failures);};
+    const cleanup=createDisposalOwner(()=>stopEngine(engine),teardown,failures=>console.error('Workspace disposal',failures));
     constructionCleanup=cleanup;
     if(currentGeneration!==generation){await cleanup();return false;}
     const scene = createSceneContext(engine,hasCt?{defaultRenderTask:false}:undefined);
@@ -146,10 +153,10 @@ export async function loadFiles(manifestFile: File, glbFile?: File, options:any 
     let resourceOutput:HTMLOutputElement|null=null;
     if(referenceController){resourceOutput=document.createElement('output');resourceOutput.id='workspaceResourceState';resourceOutput.hidden=true;canvas.after(resourceOutput);resourceOutput.textContent=JSON.stringify({createdEngines,disposedEngines,activeEngines:createdEngines-disposedEngines,geometryLogicalBytes:(manifest as any).cost.geometry_buffer_bytes});}
     teardown.push(()=>resourceOutput?.remove());
-    const visual=publicVisualEnabled?(referenceController
+    const visual=publicVisualEnabled?(verifiedVolume?await (await import('./verified-study-visual')).createVerifiedStudyVisual({engine,scene,camera,canvas,manifest,verifiedVolume}):referenceController
       ?(await import('./public-reference-visual')).createPublicReferenceVisual({engine,scene,camera,canvas,manifest,controller:referenceController})
       :import.meta.env.DICOM3D_PUBLIC_STUDY&&publicStudy?(await import('./public-study-visual')).createPublicStudyVisual({engine,scene,camera,canvas,meshes,semantic:semanticNode,manifest}):null):null;
-    teardown.push(()=>visual?.dispose());
+    teardown.push(()=>{if((window as any).__bdpVisual===visual)delete (window as any).__bdpVisual;return visual?.dispose();});
     let input:any=null,resize:ResizeObserver|null=null,pickRevision=0;
     let detachCamera = publicVisualEnabled?()=>{}:attachControl(camera, canvas, scene);
     teardown.push(()=>detachCamera());
@@ -159,11 +166,12 @@ export async function loadFiles(manifestFile: File, glbFile?: File, options:any 
       detachCamera();cameraEnabled=enabled;
       if(enabled)detachCamera=attachControl(camera,canvas,scene);
     });
-    if(hasCt&&!publicStudy)ctController=(await import('./ct-ui')).prepareLocalCt(manifest,{engine,scene,camera,canvas,sourceMeshes:meshes,framing,studyWorld:meshes[0]??{worldMatrix:STUDY_WORLD},selectStructure:()=>{if(!semanticNode)return;selected=true;for(const mesh of meshes)mesh.material=presentation.selectedMaterial;display();}});
+    if(hasCt&&!publicStudy&&!publicVisualEnabled)ctController=(await import('./ct-ui')).prepareLocalCt(manifest,{engine,scene,camera,canvas,sourceMeshes:meshes,framing,studyWorld:meshes[0]??{worldMatrix:STUDY_WORLD},selectStructure:()=>{if(!semanticNode)return;selected=true;for(const mesh of meshes)mesh.material=presentation.selectedMaterial;display();}});
     teardown.push(()=>ctController?.dispose());
     if(currentGeneration!==generation){await cleanup();return false;}
     await registerScene(scene);
     visual?.activate();
+    if(verifiedVolume)(window as any).__bdpVisual=visual;
     ctController?.start();
     await startEngine(engine);
 
@@ -177,7 +185,7 @@ export async function loadFiles(manifestFile: File, glbFile?: File, options:any 
       visual?.select?.(selected);
       options.onSelect?.(selected);
       visibilityButton.textContent = visible ? 'Hide structure' : 'Show structure';
-      if(!semanticNode){status.textContent='Local CT workspace · no lesion GLB loaded. Choose the accepted CT receipt and volume.';return;}
+      if(!semanticNode){status.textContent=verifiedVolume?`Verified acquired CT · ${verifiedVolume.descriptor.shape[0]} original source frames · Babylon Lite · no SEG admitted.`:'Local CT workspace · no lesion GLB loaded. Choose the accepted CT receipt and volume.';return;}
       status.textContent = `${selected ? 'Selected' : 'Loaded'} · ${manifest.structure.semantic_id} · ${visible ? 'visible' : 'hidden'}\n${manifest.asset.model_space} · ${manifest.asset.units} · Presentation only; no clinical meaning.`;
     };
     const pickClick=async (event:MouseEvent) => {
@@ -226,8 +234,8 @@ export async function loadFiles(manifestFile: File, glbFile?: File, options:any 
     glbInput.disabled = true;
     display();
     referenceController?.refresh();
-    document.dispatchEvent(new CustomEvent('dicom3d-workspace-change',{detail:{kind:referenceController?'reference':'study',semanticId:manifest.structure.semantic_id,referenceId:(manifest as any).reference?.id??null}}));
-    await options.onReady?.({visual,manifest,controller:referenceController,framing,study:publicStudy,
+    document.dispatchEvent(new CustomEvent('dicom3d-workspace-change',{detail:{kind:referenceController?'reference':'study',verifiedVolume:Boolean(verifiedVolume),generation:currentGeneration,semanticId:manifest.structure.semantic_id,referenceId:(manifest as any).reference?.id??null}}));
+    await options.onReady?.({visual,manifest,controller:referenceController,framing,study:publicStudy??options.workstationStudy,
       selectStudy(value:boolean){pickRevision++;selected=value;display();},
       invalidatePick(){pickRevision++;referenceController?.invalidatePick();},
       snapshot(){return {createdEngines,disposedEngines,activeEngines:createdEngines-disposedEngines,input:input?.snapshot(),visual:visual?.snapshot(),camera:{alpha:camera.alpha,beta:camera.beta,radius:camera.radius,target:[camera.target.x,camera.target.y,camera.target.z]},canvas:{width:canvas.width,height:canvas.height}};}

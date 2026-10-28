@@ -3,7 +3,7 @@ export const STUDY_WORLD=new Float32Array([-1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1]);
 export const multiplyRows=(a,b)=>a.map(row=>b[0].map((_,j)=>row.reduce((sum,v,k)=>sum+v*b[k][j],0)));
 export const columns=a=>new Float32Array(Array.from({length:16},(_,i)=>a[i%4][Math.floor(i/4)]));
 export const rows=a=>Array.from({length:4},(_,r)=>Array.from({length:4},(_,c)=>a[c*4+r]));
-export function packStored(source) {const bytes=new Uint8Array(source.length*4);for(let i=0;i<source.length;i++){bytes[4*i]=source[i]&255;bytes[4*i+1]=source[i]>>>8;bytes[4*i+3]=255;}return bytes;}
+export function packStored(source) {const bytes=new Uint8Array(source.length*4);for(let i=0;i<source.length;i++){bytes[4*i]=source[i]&255;bytes[4*i+1]=(source[i]>>>8)&255;bytes[4*i+3]=255;}return bytes;}
 const permute=[[0,0,1,0],[0,1,0,0],[1,0,0,0],[0,0,0,1]];
 export function volumeMatrices(m,world=STUDY_WORLD) {
   // Accepted Lite presentation reflection is rigid, and its inverse is itself.
@@ -18,3 +18,7 @@ fn stored(p:vec3<i32>)->f32{let d=vec3<i32>(textureDimensions(volume));let v=tex
 fn interpolate(p:vec3<f32>)->f32{let lo=vec3<i32>(floor(p));let f=fract(p);let a=mix(stored(lo),stored(lo+vec3<i32>(1,0,0)),f.x);let b=mix(stored(lo+vec3<i32>(0,1,0)),stored(lo+vec3<i32>(1,1,0)),f.x);let c=mix(stored(lo+vec3<i32>(0,0,1)),stored(lo+vec3<i32>(1,0,1)),f.x);let d=mix(stored(lo+vec3<i32>(0,1,1)),stored(lo+vec3<i32>(1,1,1)),f.x);return mix(mix(a,b,f.y),mix(c,d,f.y),f.z);}`;
 export const volumeUniformWGSL=`struct CT{inverseViewProjection:mat4x4<f32>,worldToTexture:mat4x4<f32>,textureToWorld:mat4x4<f32>,display:vec4<f32>,screen:vec4<f32>,clip:vec4<f32>,padding:vec4<f32>};@group(0) @binding(1) var<uniform> ct:CT;`;
 export const volumeTransferWGSL=`fn transfer(value:f32)->vec2<f32>{let intensity=value-1024.0;let gray=clamp((intensity-(ct.display.x-ct.display.y*.5))/ct.display.y,0.0,1.0);let knots=array<f32,15>(${opacityValues.map(v=>v.toFixed(6)).join(',')});let alpha=array<f32,15>(${opacityPerMm.map(v=>v.toFixed(6)).join(',')});var perMm=alpha[0];for(var i=1;i<15;i++){if(intensity>=knots[i]){perMm=alpha[i];}else if(intensity>knots[i-1]){perMm=mix(alpha[i-1],alpha[i],(intensity-knots[i-1])/(knots[i]-knots[i-1]));break;}}return vec2<f32>(gray,1.0-pow(1.0-clamp(perMm*ct.display.z,0.0,.95),ct.screen.z*1000.0));}`;
+
+// Same packed representation and interpolation; signedness/calibration belong to the admitted grid.
+export function volumeSamplerFor(descriptor){return descriptor?.storage.dtype==='<i2'?volumeSamplerWGSL.replace('return round(v.r*255.0)+256.0*round(v.g*255.0);','let raw=round(v.r*255.0)+256.0*round(v.g*255.0);return select(raw,raw-65536.0,raw>=32768.0);'):volumeSamplerWGSL;}
+export function volumeTransferFor(descriptor){if(!descriptor)return volumeTransferWGSL;const c=descriptor.calibration;const number=v=>Number(v).toExponential(12);const intensity=`value*${number(c.slope)}+${number(c.intercept)}`;const gray=c.voiFunction==='LINEAR'?`select(select(0.0,1.0,intensity>ct.display.x-.5),clamp((intensity-(ct.display.x-.5))/(max(ct.display.y,1.0001)-1.0)+.5,0.0,1.0),ct.display.y>1.0)`:`clamp((intensity-ct.display.x)/ct.display.y+.5,0.0,1.0)`;return volumeTransferWGSL.replace('value-1024.0',intensity).replace('clamp((intensity-(ct.display.x-ct.display.y*.5))/ct.display.y,0.0,1.0)',gray);}

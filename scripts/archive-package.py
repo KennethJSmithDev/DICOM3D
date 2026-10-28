@@ -17,8 +17,8 @@ if not (args.stage / "module.xml").is_file():
 if args.archive.exists():
     parser.error("archive already exists; choose a new output path")
 identity = json.loads((args.stage / "package-manifest.json").read_text(encoding="utf-8-sig"))
-if identity["version"] != "0.6.0" or not re.fullmatch(r"[0-9a-f]{40}", identity["sourceCommit"]):
-    parser.error("exact v0.6.0 packaging source identity required")
+if identity["version"] != "0.6.5" or not re.fullmatch(r"[0-9a-f]{40}", identity["sourceCommit"]):
+    parser.error("exact v0.6.5 packaging source identity required")
 actual = {
     path.relative_to(args.stage).as_posix(): {
         "bytes": path.stat().st_size,

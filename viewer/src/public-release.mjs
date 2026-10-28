@@ -5,13 +5,13 @@
 // REGRESSION: changing the default would silently widen Core/native data admission.
 export const PUBLIC_STUDY_ENABLED = typeof import.meta.env !== 'undefined' && import.meta.env.DICOM3D_PUBLIC_STUDY === true;
 export const PUBLIC_RELEASE = Object.freeze({
-  release: '0.6.0',
-  title: 'DICOM3D v0.6.0 — Visual Research Workstation',
+  release: '0.6.5',
+  title: 'DICOM3D v0.6.5 RC — Visual Research Workstation',
   distribution: 'REFERENCE_WEB_AND_SOURCE',
-  publicationApproved: true,
+  publicationApproved: false,
   researchDataPublicationApproved: false,
-  previousRelease: '0.5.1',
-  previousMainCommit: 'f03162cdec8b89a522dd4032e3815ea7d3ed0401',
+  previousRelease: '0.6.0',
+  previousMainCommit: 'cc5c1d9b25776ab055b6a8ac2afa48da63f33904',
 });
 
 export function publicBuildProfile(name = 'reference-only') {

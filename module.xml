@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Export generator="Cache" version="25">
  <Document name="dicom3d.ZPM"><Module>
-  <Name>dicom3d</Name><Version>0.6.0</Version>
+  <Name>dicom3d</Name><Version>0.6.5</Version>
   <Description>DICOM3D research presentation viewer; not for clinical use</Description>
   <Packaging>module</Packaging><SourcesRoot>src</SourcesRoot>
   <Resource Name="DICOM3D.PKG" />
@@ -376,7 +376,9 @@
   <FileCopy Name="reference/public/reference/bp3d-male.glb" Target="{$cspdir}dicom3d/reference/bp3d-male.glb" />
   <FileCopy Name="reference/public/reference/bp3d-male.manifest.json" Target="{$cspdir}dicom3d/reference/bp3d-male.manifest.json" />
   <FileCopy Name="reference/public/reference/bp3d-source-members.json" Target="{$cspdir}dicom3d/reference/bp3d-source-members.json" />
-  <FileCopy Name="reference/public/reference/hra-female.glb" Target="{$cspdir}dicom3d/reference/hra-female.glb" />
+  <FileCopy Name="reference/public/reference/hra-female.glb.part001" Target="{$cspdir}dicom3d/reference/hra-female.glb.part001" />
+  <FileCopy Name="reference/public/reference/hra-female.glb.part002" Target="{$cspdir}dicom3d/reference/hra-female.glb.part002" />
+  <FileCopy Name="reference/public/reference/hra-female.glb.part003" Target="{$cspdir}dicom3d/reference/hra-female.glb.part003" />
   <FileCopy Name="reference/public/reference/hra-female.manifest.json" Target="{$cspdir}dicom3d/reference/hra-female.manifest.json" />
   <FileCopy Name="third-party/babylon-lite-1.32.0-LICENSE.txt" Target="{$cspdir}dicom3d/third-party/babylon-lite-1.32.0-LICENSE.txt" />
   <FileCopy Name="third-party/babylon-lite-1.32.0-NOTICE.txt" Target="{$cspdir}dicom3d/third-party/babylon-lite-1.32.0-NOTICE.txt" />

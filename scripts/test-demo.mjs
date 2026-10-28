@@ -23,7 +23,7 @@ const manifest=JSON.parse(read(out,'demo-build-manifest.json'));
 for(const [key,value] of Object.entries(selected.release))assert.equal(manifest[key],value,key);
 assert.equal(PUBLIC_STUDY_ENABLED,false,'Node/runtime defaults do not admit a study');
 assert.equal(manifest.buildProfile,profile);
-assert.equal(manifest.release,'0.6.0');
+assert.equal(manifest.release,'0.6.5');
 assert.equal(JSON.parse(read(root,'viewer/package.json')).version,manifest.release);
 assert.equal(JSON.parse(read(root,'viewer/package-lock.json')).version,manifest.release);
 assert.equal(JSON.parse(read(root,'viewer/package-lock.json')).packages[''].version,manifest.release);
@@ -63,7 +63,7 @@ await verifyAdmittedPublicFiles(out,{profile});
 for(const name of admitted)assert.deepEqual(read(source,name),read(out,name),'Source identity changed: '+name);
 
 for(const [variant,count,notice] of [
-  ['bp3d-male',33,'BODYParts3D-NOTICE.txt'],['hra-female',22,'HRA-FEMALE-NOTICE.txt'],
+  ['bp3d-male',386,'BODYParts3D-NOTICE.txt'],['hra-female',380,'HRA-FEMALE-NOTICE.txt'],
 ]){
   const metadata=JSON.parse(read(out,'reference/'+variant+'.manifest.json'));
   const bytes=read(out,'reference/'+metadata.asset.relative_filename);
@@ -104,7 +104,7 @@ const html=read(out,'index.html').toString('utf8');
 const entrySource=read(root,'viewer/reference.html').toString('utf8');
 const title=text=>text.match(/<title>([^<]+)<\/title>/)?.[1];
 assert.equal(title(html),title(entrySource));
-assert.equal(title(html),'DICOM3D v0.6.0 — Visual Research Workstation');
+assert.equal(title(html),'DICOM3D v0.6.5 RC — Visual Research Workstation');
 assert(html.includes(base));
 const bundles=names.filter(x=>x.endsWith('.js')).map(x=>read(out,x).toString('utf8')).join('\n');
 for(const text of [
@@ -127,8 +127,8 @@ assert(!names.some(x=>/(^|\/)(sample|synthetic)(\/|[.-])/i.test(x)),'Synthetic t
 console.log(JSON.stringify({
   result:'PASS',scope:'Static build and exact asset admission; not browser or publication qualification',
   release:manifest.release,previousRelease:manifest.previousRelease,
-  publicationApproved:manifest.publicationApproved,referenceStructures:[33,22],
-  buildProfile:profile,referenceFiles:7,brandFiles:2,researchFiles:selected.studyEnabled?5:0,
+  publicationApproved:manifest.publicationApproved,referenceStructures:[386,380],
+  buildProfile:profile,referenceFiles:10,brandFiles:2,researchFiles:selected.studyEnabled?5:0,
   inventoriedFiles:names.length,totalBytes:Object.values(manifest.files).reduce((sum,file)=>sum+file.bytes,0),
   checks:['exact output set and hashes','exact source/output assets and notices','profile-bound study data and lazy loader',
     'unknown path, same-size hash, screenshot and installer-profile denial','current admission separate from historical metadata','reference semantic identities','release identity and Pages base',

@@ -1,7 +1,7 @@
 name: dicom3d-core
 services:
   core:
-    image: dicom3d-core:0.6.0
+    image: dicom3d-core:0.6.5
     build:
       context: .
       dockerfile: Dockerfile.core

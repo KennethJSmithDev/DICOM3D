@@ -12,8 +12,8 @@ export async function checkPlaneGpu(engine:any,texture:any,positions:any,world:a
     let m=mat4x4<f32>(src[0],src[1],src[2],src[3]);
     for(var i=0u;i<4u;i++){dst[i]=m*src[4u+i];}
     dst[4]=textureLoad(image,vec2<i32>(0,0),0);
-    dst[5]=textureLoad(image,vec2<i32>(287,193),0);
-    dst[6]=textureLoad(image,vec2<i32>(511,511),0);
+    dst[5]=textureLoad(image,min(vec2<i32>(287,193),vec2<i32>(textureDimensions(image))-vec2<i32>(1)),0);
+    dst[6]=textureLoad(image,vec2<i32>(textureDimensions(image))-vec2<i32>(1),0);
   }`,bindings:[computeStorageBufferBinding('src',{group:0,binding:0,access:'read'}),computeStorageBufferBinding('dst',{group:0,binding:1,access:'read-write'}),computeTextureBinding('image',{group:0,binding:2})]});
   let bindings:any,task:any;
   try{

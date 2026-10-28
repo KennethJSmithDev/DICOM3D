@@ -27,6 +27,13 @@ $placeholder = $matches[0].Value
 if (($entry.Split($placeholder).Count - 1) -ne 1) { throw 'Missing unique viewer build placeholder' }
 $viewerBuild = (Get-FileHash (Join-Path $OutputDirectory 'public/reference.html') -Algorithm SHA256).Hash.ToLower()
 [IO.File]::WriteAllText($entryPath,$entry.Replace($placeholder,'Parameter VIEWERBUILD = "'+$viewerBuild+'";'))
+# Bind the unchanged retirement policy to this exact staged frontend as well.
+# Never relax its path/hash/ownership checks to accommodate a new release.
+$migrationPath = Join-Path $OutputDirectory 'src/DICOM3D/InstallMigration.cls'
+$migration = [IO.File]::ReadAllText($migrationPath)
+$binding = [regex]::Matches($migration,'viewer_sha = "[0-9a-f]{64}"')
+if ($binding.Count -ne 1) { throw 'Missing unique retirement frontend binding' }
+[IO.File]::WriteAllText($migrationPath,$migration.Replace($binding[0].Value,'viewer_sha = "'+$viewerBuild+'"'))
 # Match current hashed build filenames without changing the frozen release.
 $manifestPath = Join-Path $OutputDirectory 'module.xml'
 $manifest = [IO.File]::ReadAllText($manifestPath)
@@ -51,7 +58,7 @@ Get-ChildItem $OutputDirectory -File -Recurse | Sort-Object FullName | ForEach-O
   $fileInventory[$name] = [ordered]@{ bytes=$_.Length; sha256=(Get-FileHash -LiteralPath $_.FullName -Algorithm SHA256).Hash.ToLower() }
 }
 $packageIdentity = [ordered]@{
-  product='DICOM3D'; version='0.6.0'; distribution='IRIS/IPM'; sourceCommit=$SourceCommit
+  product='DICOM3D'; version='0.6.5'; distribution='IRIS/IPM'; sourceCommit=$SourceCommit
   publishedWebCommit='d3490dd659e19e44b8800abe87bbc626f45350a2'
   originalTag='v0.6.0'; originalTagContainsInstallationCompletion=$false
   frontendHtmlSha256=$viewerBuild; patientDerivedResearchData=$false

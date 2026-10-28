@@ -3,6 +3,8 @@ import {getMeshTriangles,enableMaterialPlugins,markMaterialUboDirty,onBeforeRend
 import {ATLAS_CAMERA_PRESENTATION,HRA_FEMALE_CAMERA_PRESENTATION} from './reference-camera.mjs';
 import {referenceLesson} from './reference-learning.mjs';
 import {createPickGeneration} from './pick-generation.mjs';
+import {anatomyIndex} from './reference-hierarchy.mjs';
+import {createReferenceLayers} from './reference-layers.mjs';
 
 
 
@@ -43,7 +45,7 @@ export function prepareReference({scene,root,manifest,status,selectedMaterial,vi
   for(const texture of retainedTextures)acquireTexture(texture);
 
   const clipMax=manifest.reference.presentation?.clip_max??1.9;
-  const state={appearance:'source',context:true,selected:null as string|null,isolate:false,hidden:new Set<string>(),clip:clipMax,opacity:new Map<string,number>()};let framing:any=null;let projection:((detail:any)=>void)|null=null;
+  const state={appearance:'source',context:true,selected:null as string|null,isolate:false,hidden:new Set<string>(),clip:clipMax,opacity:new Map<string,number>()};let framing:any=null;const layers=createReferenceLayers(parts);let projection:((detail:any)=>void)|null=null;
 
   // Lite's scene clip-plane state alone does not inject discard into stock PBR.
 
@@ -105,17 +107,72 @@ export function prepareReference({scene,root,manifest,status,selectedMaterial,vi
 
   for(const region of [...new Set(parts.map((p:any)=>p.region))])get('referenceRegion').add(new Option(String(region),String(region)));
 
-  function options(){get('referenceSelect').replaceChildren(new Option('Choose a structure',''));for(const p of parts)if((!get('referenceRegion').value||p.region===get('referenceRegion').value)&&(!get('referenceSearch').value||`${p.label} ${p.id}`.toLowerCase().includes(get('referenceSearch').value.toLowerCase())))get('referenceSelect').add(new Option(p.label,p.id));get('referenceSelect').value=state.selected||'';}
+  // Source hierarchy is a filter/projection over the existing semantic controller.
+  // WHY: hundreds of source components need discoverable relationships.
+  // INVARIANT: filtering never changes selection, visibility or camera state.
+  const anatomy=anatomyIndex(manifest);
+  const systemLabel=document.createElement('label');systemLabel.textContent='Source system / anatomical class ';
+  const systemSelect=document.createElement('select');systemSelect.id='referenceSystem';systemSelect.add(new Option('All source systems',''));
+  for(const name of anatomy.systems)systemSelect.add(new Option(name,name));systemLabel.append(systemSelect);get('referenceRegion').parentElement.after(systemLabel);
+  const tree=document.createElement('details');tree.id='referenceHierarchy';const summary=document.createElement('summary');summary.textContent='Source anatomy hierarchy';tree.append(summary);
+  const path=document.createElement('p');path.id='referenceHierarchyPath';path.setAttribute('role','status');tree.append(path);
+  const links=document.createElement('div');links.className='camera-actions';tree.append(links);systemLabel.after(tree);let parentFilter='';
+  const matchCount=document.createElement('output');matchCount.id='referenceMatchCount';matchCount.setAttribute('aria-live','polite');systemLabel.after(matchCount);
+  function treeView(){
+    const owners=parentFilter?anatomy.owners(parentFilter):[];
+    const shared=parentFilter&&!parts.some((p:any)=>p.id===parentFilter)&&owners.length===1;
+    path.textContent=parentFilter?`${anatomy.label(parentFilter)} · ${parentFilter} · ${anatomy.count(parentFilter)} selectable source groups${shared?' · Provided through '+anatomy.label(owners[0])+'; selecting highlights the whole existing owner, not an independent subpart':''}${!owners.length?' · No admitted geometry; source record retained':''}`:'All source anatomy · source children may share existing draw owners; containers are not additional organs';links.replaceChildren();
+    const button=(label:string,id:string)=>{const b=document.createElement('button');b.type='button';b.textContent=label;b.dataset.sourceParent=id;b.onclick=()=>{parentFilter=id;treeView();options();};links.append(b);};
+    if(parentFilter){button('All anatomy','');for(const id of anatomy.parents(parentFilter))button('Up: '+anatomy.label(id),id);}
+    const candidates=parentFilter?anatomy.children(parentFilter):[...anatomy.nodes.values()].filter(n=>!(n.parents??[]).length).map(n=>n.id);
+    for(const id of candidates)button(`${anatomy.label(id)} [${id}]${anatomy.count(id)?'':' · not admitted'}`,id);
+  }
+  function options(){
+    get('referenceSelect').replaceChildren(new Option('Choose a structure',''));let count=0;
+    for(const p of parts)if(anatomy.matches(p,{query:get('referenceSearch').value,region:get('referenceRegion').value,system:systemSelect.value,parent:parentFilter})){get('referenceSelect').add(new Option(`${p.label} · ${p.id}`,p.id));count++;}
+    get('referenceSelect').value=state.selected||'';matchCount.textContent=`${count} of ${parts.length} selectable source groups · includes anatomical subcomponents`;
+  }
+  systemSelect.onchange=options;treeView();
+
+  // ANAT-LAYERS-001: source-system controls reuse the existing owning controller.
+  // IS-A labels are retained in search, never guessed into clinical systems.
+  const layerPanel=document.createElement('details');layerPanel.id='referenceLayers';
+  layerPanel.innerHTML='<summary>Systems &amp; source skin</summary><p>Source classifications only. Shared owners follow every assigned system; any lock protects against layer changes. Manual hide, isolation and clipping remain independent.</p><div class="layer-actions"><button id="referencePeel" aria-pressed="false">Peel source skin</button><button id="referenceLayersRestore">Restore layers</button></div><output id="referenceLayerSummary" role="status"></output><div class="layer-rows"></div>';
+  panel.querySelector('h2')!.after(layerPanel);
+  const layerRows=new Map<string,{visible:HTMLInputElement,locked:HTMLInputElement,opacity:HTMLInputElement}>();
+  for(const name of layers.systems){
+    const row=document.createElement('fieldset');row.dataset.system=name;
+    const legend=document.createElement('legend');legend.textContent=name;row.append(legend);
+    const controls:any={};
+    for(const [key,label,type] of [['visible','Visible','checkbox'],['locked','Lock','checkbox'],['opacity','Opacity gain','range']]){
+      const wrapper=document.createElement('label');wrapper.textContent=label;
+      const input=document.createElement('input');input.type=type;input.setAttribute('aria-label',name+' '+label);input.dataset.layerControl=key;
+      if(type==='range'){input.min='0.05';input.max='1';input.step='0.05';input.value='1';}else input.checked=key==='visible';
+      input.addEventListener(type==='range'?'input':'change',()=>{picks.invalidate();layers.set(name,{[key]:type==='range'?Number(input.value):input.checked});refresh();});
+      wrapper.append(input);row.append(wrapper);controls[key]=input;
+    }
+    layerRows.set(name,controls);layerPanel.querySelector('.layer-rows')!.append(row);
+  }
+  get('referencePeel').onclick=()=>{picks.invalidate();layers.peel(!layers.snapshot().peeled);refresh();};
+  get('referenceLayersRestore').onclick=()=>{picks.invalidate();layers.restore();refresh();};
+  function syncLayers(){
+    const snapshot=layers.snapshot();
+    get('referencePeel').setAttribute('aria-pressed',String(snapshot.peeled));
+    get('referencePeel').textContent=snapshot.peeled?'Restore source skin':'Peel source skin';
+    get('referenceLayerSummary').textContent=`${parts.length} source owners · ${snapshot.unclassified.length} without explicit system mapping · ${snapshot.overlapping.length} shared-system owners. Only ${snapshot.skin.length} source skin owner(s) support peeling; no deeper order is inferred.`;
+    for(const row of snapshot.systems){const c=layerRows.get(row.name)!;c.visible.checked=row.visible;c.locked.checked=row.locked;c.opacity.value=String(row.opacity);}
+  }
 
   function refresh(){
+    const effective=layers.effective(state);syncLayers();
 
-    for(const [id,list] of groups)for(const m of list){m.visible=!state.hidden.has(id)&&(!state.isolate||id===state.selected);m.material=id===state.selected?selectedMaterial:originals.get(m);m.material.alpha=(initialAlpha.get(originals.get(m))??1)*(state.opacity.get(id)??1)*(state.context&&state.selected&&id!==state.selected&&!state.isolate ? .28 : 1);}
+    for(const [id,list] of groups)for(const m of list){m.visible=!effective.hidden.has(id)&&(!state.isolate||id===state.selected);m.material=id===state.selected?selectedMaterial:originals.get(m);m.material.alpha=(initialAlpha.get(originals.get(m))??1)*(effective.opacity.get(id)??1)*(state.context&&state.selected&&id!==state.selected&&!state.isolate ? .28 : 1);}
 
     // Optional visual projection follows existing semantic/material state; absent by default.
     // WHY: public reference effects reuse this controller, including female mesh groups.
     // INVARIANT: projection may change display only; original source/state ownership stays here.
-    projection?.({state,groups,originals});
-    const selectedPart=parts.find((p:any)=>p.id===state.selected);card.replaceChildren();const title=document.createElement('strong');title.textContent=selectedPart?.label||'Complete reference anatomy';const detail=document.createElement('small');detail.textContent=selectedPart?`${selectedPart.id}  -  ${selectedPart.region}  -  ${state.hidden.has(state.selected!)?'hidden':'visible'}`:`${parts.length} selectable structures  -  ${manifest.reference.id==='BODY-HRA-F-001'?'HRA female reference subset':manifest.reference.variant==='female'?'Synthetic fallback - not a female atlas':'BodyParts3D adult male reference'}`;card.append(title,detail);
+    projection?.({state:effective,groups,originals});
+    const selectedPart=parts.find((p:any)=>p.id===state.selected);card.replaceChildren();const title=document.createElement('strong');title.textContent=selectedPart?.label||'Complete reference anatomy';const detail=document.createElement('small');detail.textContent=selectedPart?`${selectedPart.id}  -  ${selectedPart.region}  -  ${effective.hidden.has(state.selected!)?'hidden':'visible'}`:`${parts.length} selectable structures  -  ${manifest.reference.id==='BODY-HRA-F-001'?'HRA female reference subset':manifest.reference.variant==='female'?'Synthetic fallback - not a female atlas':'BodyParts3D adult male reference'}`;card.append(title,detail);
     const lesson=referenceLesson(manifest,selectedPart,state);learning.querySelector('summary')!.textContent=lesson.title;const copy=learning.querySelector('div')!;copy.replaceChildren();for(const [name,text] of [['KNOWN',lesson.known],['PRESENTATION',lesson.presentation],['UNVERIFIED',lesson.unverified],['ATTRIBUTION',lesson.credit]]){const p=document.createElement('p');const label=document.createElement('strong');label.textContent=name+' ';p.append(label,document.createTextNode(text));copy.append(p);}if(lesson.source?.startsWith('https://')){const link=document.createElement('a');link.href=lesson.source;link.target='_blank';link.rel='noopener noreferrer';link.textContent='View original source and attribution';copy.append(link);}
 
 
@@ -127,7 +184,7 @@ export function prepareReference({scene,root,manifest,status,selectedMaterial,vi
 
     visibilityButton.textContent=state.hidden.size===parts.length?'Show all structures':'Hide all structures';status.textContent=`Generalized adult ${manifest.reference.variant} · ${manifest.reference.id==='BODY-DEFAULT-BP3D-01'?'BodyParts3D reference anatomy':manifest.reference.id==='BODY-HRA-F-001'?'HRA female reference anatomy':'synthetic fallback'}\n${parts.find((p:any)=>p.id===state.selected)?.label||'Complete reference body'} · reference presentation, not patient anatomy`;
 
-    get('referenceState').textContent=JSON.stringify({referenceId:manifest.reference.id,variant:manifest.reference.variant,appearance:state.appearance,context:state.context,selected:state.selected,isolate:state.isolate,hidden:[...state.hidden],clip:state.clip,opacity:Object.fromEntries(state.opacity),parts:parts.map((p:any)=>({id:p.id,visible:groups.get(p.id)!.every(m=>m.visible),canvasPickable:groups.get(p.id)!.some(m=>m.visible&&!skinMeshes.has(m)),worldMatrices:groups.get(p.id)!.map(m=>Array.from(m.worldMatrix))})),cost:manifest.cost});
+    get('referenceState').textContent=JSON.stringify({referenceId:manifest.reference.id,variant:manifest.reference.variant,appearance:state.appearance,context:state.context,selected:state.selected,isolate:state.isolate,hidden:[...effective.hidden],manualHidden:[...state.hidden],layers:layers.snapshot(),clip:state.clip,opacity:Object.fromEntries(effective.opacity),parts:parts.map((p:any)=>({id:p.id,visible:groups.get(p.id)!.every(m=>m.visible),canvasPickable:groups.get(p.id)!.some(m=>m.visible&&!skinMeshes.has(m)),worldMatrices:groups.get(p.id)!.map(m=>Array.from(m.worldMatrix))})),cost:manifest.cost});
 
   }
 
@@ -146,14 +203,14 @@ export function prepareReference({scene,root,manifest,status,selectedMaterial,vi
 
   get('referenceOpacity').oninput=()=>{if(state.selected)state.opacity.set(state.selected,Number(get('referenceOpacity').value));refresh();};
 
-  get('referenceRestore').onclick=()=>{picks.invalidate();state.appearance='source';state.context=true;get('referenceContext').checked=true;get('referenceAppearance').value='source';applyAppearance();state.selected=null;state.hidden.clear();state.isolate=false;state.clip=clipMax;state.opacity.clear();get('referenceClip').value=String(clipMax);get('referenceRegion').value='';get('referenceSearch').value='';options();refresh();framing?.restore();visibilityButton.textContent='Hide all structures';};
+  get('referenceRestore').onclick=()=>{picks.invalidate();layers.restore();state.appearance='source';state.context=true;get('referenceContext').checked=true;get('referenceAppearance').value='source';applyAppearance();state.selected=null;state.hidden.clear();state.isolate=false;state.clip=clipMax;state.opacity.clear();get('referenceClip').value=String(clipMax);get('referenceRegion').value='';get('referenceSearch').value='';parentFilter='';systemSelect.value='';treeView();options();refresh();framing?.restore();visibilityButton.textContent='Hide all structures';};
 
   visibilityButton.textContent='Hide all structures';visibilityButton.onclick=()=>{if(projection)picks.invalidate();if(state.hidden.size===parts.length)state.hidden.clear();else for(const p of parts)state.hidden.add(p.id);state.isolate=false;visibilityButton.textContent=state.hidden.size?'Show all structures':'Hide all structures';refresh();};
 
   // WHY: release-generated background misses must not exit explicit isolation.
   // BOUNDARY/INVARIANT: only reference selection; geometry stays frozen.
   // EVIDENCE: UX-INTERACTION-001 receipt. REGRESSION: Clear/dropdown/Restore still exit.
-  const api={active:true,groups:()=>new Map([...groups].map(([id,list])=>[id,[...list]])),originals:()=>new Map(originals),state:()=>({...state,hidden:new Set(state.hidden),opacity:new Map(state.opacity)}),setProjection(fn:((detail:any)=>void)|null){projection=fn;refresh();},setAppearance(value:string){if(!['source','cyan'].includes(value))throw Error('Unknown source appearance');state.appearance=value;get('referenceAppearance').value=value;applyAppearance();},invalidatePick:()=>picks.invalidate(),meshes:()=>[...originals.keys()],selectedMeshes:()=>state.selected?(groups.get(state.selected)||[]).filter(m=>m.visible):[],setFraming(f:any){framing=f;refresh();},canPick:(m:any)=>originals.has(m)&&m.visible&&!skinMeshes.has(m),pick:(request:()=>Promise<any>)=>picks.run(request,(pick:any)=>api.selectMesh(pick.hit?pick.pickedMesh:null)),selectMesh(m:any){if(!m&&state.isolate&&state.selected)return;state.selected=[...groups].find(([,list])=>list.includes(m))?.[0]||null;if(!state.selected)state.isolate=false;get('referenceRegion').value='';options();refresh();},clear(){picks.invalidate();state.selected=null;state.isolate=false;refresh();},dispose(){projection=null;picks.dispose();diagnosticAbort.abort();for(const texture of retainedTextures)releaseTexture(texture);panel.remove();},refresh};
+  const api={active:true,groups:()=>new Map([...groups].map(([id,list])=>[id,[...list]])),originals:()=>new Map(originals),state:()=>layers.effective(state),setProjection(fn:((detail:any)=>void)|null){projection=fn;refresh();},setAppearance(value:string){if(!['source','cyan'].includes(value))throw Error('Unknown source appearance');state.appearance=value;get('referenceAppearance').value=value;applyAppearance();},invalidatePick:()=>picks.invalidate(),meshes:()=>[...originals.keys()],selectedMeshes:()=>state.selected?(groups.get(state.selected)||[]).filter(m=>m.visible):[],setFraming(f:any){framing=f;refresh();},canPick:(m:any)=>originals.has(m)&&m.visible&&!skinMeshes.has(m),pick:(request:()=>Promise<any>)=>picks.run(request,(pick:any)=>api.selectMesh(pick.hit?pick.pickedMesh:null)),selectMesh(m:any){if(!m&&state.isolate&&state.selected)return;state.selected=[...groups].find(([,list])=>list.includes(m))?.[0]||null;if(!state.selected)state.isolate=false;get('referenceRegion').value='';options();refresh();},clear(){picks.invalidate();state.selected=null;state.isolate=false;refresh();},dispose(){projection=null;picks.dispose();diagnosticAbort.abort();for(const texture of retainedTextures)releaseTexture(texture);panel.remove();},refresh};
 
   if(new URLSearchParams(location.search).has('diagnostics')){const output=document.createElement('output');output.id='referenceRenderState';output.hidden=true;panel.append(output);let frames=0;const errors:string[]=[];const engine=scene.surface.engine;const capture=()=>{const c=scene.camera;output.textContent=JSON.stringify({frames,drawCalls:engine.drawCallCount,retainedTextures:retainedTextures.length,renderables:scene._renderables.length,queuedSwaps:scene._materialSwapQueue.length,errors,camera:c?{alpha:c.alpha,beta:c.beta,radius:c.radius,target:[c.target.x,c.target.y,c.target.z],near:c.nearPlane,far:c.farPlane}:null,materials:[...groups].map(([id,list])=>({id,visible:list[0].visible,alpha:list[0].material.alpha,color:list[0].material.baseColorFactor,original:list[0].material===originals.get(list[0])}))});};onBeforeRender(scene,()=>{frames++;capture();});window.addEventListener('error',e=>{errors.length<8&&errors.push(String(e.error?.stack||e.message));capture();},{signal:diagnosticAbort.signal});engine._device.addEventListener('uncapturederror',(e:any)=>{errors.length<8&&errors.push(String(e.error?.message));capture();},{signal:diagnosticAbort.signal});}
 

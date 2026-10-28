@@ -8,6 +8,7 @@ import {
   startEngine, stopEngine, captureScreenshot,
 } from '@babylonjs/lite';
 import {createParticleSamples, byteFingerprint} from './particle-samples.mjs';
+import {accumulation,accumulationVector,accumulationWGSL} from './ct-accumulation.mjs';
 import {createIntegratedCt} from './integrated-ct';
 import {sourceIndexVertices} from './source-overlay.mjs';
 
@@ -21,9 +22,10 @@ const surfaceVertex = `${vertexOut}
   out.position=shaderSystem.worldViewProjection*vec4<f32>(input.position,1.0); out.worldPos=wp.xyz;
   out.normal=normalize((shaderSystem.world*vec4<f32>(input.normal,0.0)).xyz); return out;
 }`;
-const surfaceFragment = `${vertexOut}
+const surfaceFragment = accumulationWGSL+`${vertexOut}
 @fragment fn mainFragment(input:VOut)->@location(0) vec4<f32> {
   let sourceK=(shaderUniforms.worldToTexture*vec4<f32>(input.worldPos,1.0)).z;
+  if(!accumulatedK(sourceK,shaderUniforms.accumulation)){discard;}
   if(shaderUniforms.clipK>=0.0 && sourceK>shaderUniforms.clipK){discard;}
   let normalizedY=(sourceK-shaderUniforms.sourceBounds.x)/shaderUniforms.sourceBounds.y;
   if (shaderUniforms.reveal<1.0 && normalizedY>shaderUniforms.reveal) { discard; }
@@ -38,7 +40,7 @@ const surfaceFragment = `${vertexOut}
   return vec4<f32>(color,alpha);
 }`;
 const particleOut = `struct POut { @builtin(position) position:vec4<f32>, @location(0) light:f32, };`;
-const particleVertex = `${particleOut}
+const particleVertex = `${accumulationWGSL}${particleOut}
 @vertex fn mainVertex(input:VertexInput,@builtin(instance_index) id:u32)->POut {
   let surfaceSample=samples[id*2u]; let start=samples[id*2u+1u]; let p=shaderUniforms.progress;
   let stepSize=shaderUniforms.size/16.0;
@@ -49,7 +51,8 @@ const particleVertex = `${particleOut}
   var pos=mix(mix(start.xyz,lattice,activate),surfaceSample.xyz,converge);
   let layer=((shaderUniforms.worldToTexture*vec4<f32>(surfaceSample.xyz,1.0)).z-shaderUniforms.sourceBounds.x)/shaderUniforms.sourceBounds.y;
   let layerVisibility=smoothstep(layer*.72,layer*.72+.12,p);
-  let lit=emergence*select(1.0,layerVisibility,shaderUniforms.effect>.5);
+  let targetK=(shaderUniforms.worldToTexture*vec4<f32>(surfaceSample.xyz,1.0)).z;
+  let lit=emergence*select(1.0,layerVisibility,shaderUniforms.effect>.5)*select(0.0,1.0,accumulatedK(targetK,shaderUniforms.accumulation));
   let scale=shaderUniforms.radius*(.005+.005*start.w)*lit;
   var out:POut;out.position=shaderSystem.viewProjection*vec4<f32>(pos+input.position*scale,1.0);
   out.light=(.48+.52*start.w)*lit*(1.0-smoothstep(.82,1.0,p)); return out;
@@ -89,12 +92,12 @@ export function createPublicStudyVisual({engine,scene,camera,canvas,meshes,seman
   const scientific=createPbrMaterial({baseColorFactor:[.72,.32,.22,1],metallicFactor:0,roughnessFactor:.8,doubleSided:true});
   const scientificSelected=createPbrMaterial({baseColorFactor:[.12,.65,.9,1],metallicFactor:0,roughnessFactor:.8,doubleSided:true});
   const holographic=createShaderMaterial({name:'lab-holographic-source-surface',vertexSource:surfaceVertex,fragmentSource:surfaceFragment,attributes:['position','normal'],
-    uniforms:['world','worldViewProjection','cameraPosition',{name:'tint',type:'vec3<f32>',defaultValue:PALETTES.cyan},{name:'opacity',type:'f32',defaultValue:1},{name:'selected',type:'f32',defaultValue:0},{name:'reveal',type:'f32',defaultValue:1},{name:'worldToTexture',type:'mat4x4<f32>'},{name:'clipK',type:'f32',defaultValue:-1},{name:'sourceBounds',type:'vec2<f32>',defaultValue:sourceBounds}],needAlphaBlending:true,backFaceCulling:false,depthWrite:false});
+    uniforms:[{name:'accumulation',type:'vec4<f32>',defaultValue:[0,0,0,1]},'world','worldViewProjection','cameraPosition',{name:'tint',type:'vec3<f32>',defaultValue:PALETTES.cyan},{name:'opacity',type:'f32',defaultValue:1},{name:'selected',type:'f32',defaultValue:0},{name:'reveal',type:'f32',defaultValue:1},{name:'worldToTexture',type:'mat4x4<f32>'},{name:'clipK',type:'f32',defaultValue:-1},{name:'sourceBounds',type:'vec2<f32>',defaultValue:sourceBounds}],needAlphaBlending:true,backFaceCulling:false,depthWrite:false});
   const positions=new Float32Array([-1,-1,-1,1,-1,-1,1,1,-1,-1,1,-1,-1,-1,1,1,-1,1,1,1,1,-1,1,1]);
   const indices=new Uint32Array([0,2,1,0,3,2,4,5,6,4,6,7,0,1,5,0,5,4,3,7,6,3,6,2,0,4,7,0,7,3,1,2,6,1,6,5]);
   const particles=createMeshFromData(engine,'presentation-only-surface-samples',positions,positions.slice(),indices);
   const particleMaterial=createShaderMaterial({name:'lab-static-sample-assembly',vertexSource:particleVertex,fragmentSource:particleFragment,attributes:['position'],
-    uniforms:['viewProjection',{name:'tint',type:'vec3<f32>',defaultValue:PALETTES.cyan},{name:'progress',type:'f32',defaultValue:1},{name:'effect',type:'f32',defaultValue:0},{name:'center',type:'vec3<f32>',defaultValue:bounds.center},{name:'size',type:'vec3<f32>',defaultValue:bounds.size},{name:'radius',type:'f32',defaultValue:r},{name:'worldToTexture',type:'mat4x4<f32>'},{name:'sourceBounds',type:'vec2<f32>',defaultValue:sourceBounds}],
+    uniforms:[{name:'accumulation',type:'vec4<f32>',defaultValue:[0,0,0,1]},'viewProjection',{name:'tint',type:'vec3<f32>',defaultValue:PALETTES.cyan},{name:'progress',type:'f32',defaultValue:1},{name:'effect',type:'f32',defaultValue:0},{name:'center',type:'vec3<f32>',defaultValue:bounds.center},{name:'size',type:'vec3<f32>',defaultValue:bounds.size},{name:'radius',type:'f32',defaultValue:r},{name:'worldToTexture',type:'mat4x4<f32>'},{name:'sourceBounds',type:'vec2<f32>',defaultValue:sourceBounds}],
     storageBuffers:[{name:'samples',type:'array<vec4<f32>>'}],needAlphaBlending:true,blendMode:'additive',backFaceCulling:false,depthWrite:false});
   const storage=createStorageBuffer(engine,sampled.data,'lab-fixed-surface-samples');setShaderStorageBuffer(particleMaterial,'samples',storage);
   const matrices=new Float32Array(CAPACITY*16);for(let n=0;n<CAPACITY;n++){const offset=n*16;matrices[offset]=matrices[offset+5]=matrices[offset+10]=matrices[offset+15]=1;}
@@ -123,15 +126,18 @@ export function createPublicStudyVisual({engine,scene,camera,canvas,meshes,seman
   // Read only the device already owned by Lite. A new adapter request could identify a different GPU.
   const adapterInfo=engine._device?.adapterInfo;
   const selectedAdapterInfo=adapterInfo?Object.fromEntries(['vendor','architecture','device','description','subgroupMinSize','subgroupMaxSize'].map(key=>[key,adapterInfo[key]??null])):null;
+  let accumulationRange=[0,102];
+  const revealState=()=>accumulation(reduced?1:p,accumulationRange,currentMode==='materialization');
   const sync=()=>{
+    const a=revealState();ct.accumulation(a);setShaderUniform(holographic,'accumulation',accumulationVector(a));setShaderUniform(particleMaterial,'accumulation',accumulationVector(a));
     const effectiveProgress=reduced?1:p,materializing=currentMode==='materialization';
-    const surfaceVisible=visible&&(!materializing||effectiveProgress>=.06);
+    const surfaceVisible=visible&&(!materializing||!a.empty);
     setSubtreeVisible(semantic,surfaceVisible);setSubtreeVisible(particles,visible&&materializing&&effectiveProgress>0&&effectiveProgress<1);
     setSubtreeVisible(guide,currentMode!=='scientific');
     const material=currentMode==='scientific'?(selected?scientificSelected:scientific):holographic;
     if(sceneRegistered){for(const mesh of meshes)mesh.material=material;ct.overlayMaterial(material);}
-    setShaderUniform(holographic,'opacity',materializing?Math.min(1,Math.max(0,(effectiveProgress-.06)/.06)):1);
-    setShaderUniform(holographic,'reveal',materializing&&effect==='layers'&&!linked?Math.min(1,.12+.88*Math.max(0,(effectiveProgress-.06)/.94)):1);
+    setShaderUniform(holographic,'opacity',a.enabled?Number(!a.empty):1);
+    setShaderUniform(holographic,'reveal',1);
     setShaderUniform(holographic,'clipK',linked&&cutaway?sourceK:-1);
     setShaderUniform(holographic,'selected',selected?1:0);
     setShaderUniform(particleMaterial,'progress',effectiveProgress);
@@ -139,21 +145,22 @@ export function createPublicStudyVisual({engine,scene,camera,canvas,meshes,seman
   };
   sync();setThinInstanceCount(particles,count);
   onBeforeRender(scene,()=>{const now=performance.now();if(firstFrameMs===null)firstFrameMs=now-began;if(lastFrame){intervals.push(now-lastFrame);if(intervals.length>600)intervals.shift();}lastFrame=now;frames++;if(gpuTimingSupported&&engine.gpuFrameTimeMs>0){gpuTimes.push(engine.gpuFrameTimeMs);if(gpuTimes.length>600)gpuTimes.shift();}});
-  const pickDiscard={key:'lab-source-fragment-and-plane-v1',wgsl:`fn shouldDiscardPick(input:PickDiscardInput)->bool{
+  const pickDiscard={key:'lab-source-fragment-and-plane-v1',wgsl:accumulationWGSL+`fn shouldDiscardPick(input:PickDiscardInput)->bool{
     if(pickState[5].x>.5){return false;}if(pickState[5].y<=0.0){return true;}
-    let m=mat4x4<f32>(pickState[0],pickState[1],pickState[2],pickState[3]);let k=(m*vec4<f32>(input.worldPos,1)).z;let rule=pickState[4];
+    let m=mat4x4<f32>(pickState[0],pickState[1],pickState[2],pickState[3]);let k=(m*vec4<f32>(input.worldPos,1)).z;let rule=pickState[4];if(!accumulatedK(k,pickState[6])){return true;}
     if(rule.x>=0.0 && k>rule.x){return true;}return rule.y<1.0 && (k-rule.z)/rule.w>rule.y;
   }`,storage:[{name:'pickState',type:'array<vec4<f32>>',data:(mesh:any)=>{
     const effective=reduced?1:p,materializing=currentMode==='materialization',scientificMode=currentMode==='scientific';
-    const opacity=materializing?Math.min(1,Math.max(0,(effective-.06)/.06)):1,reveal=materializing&&effect==='layers'&&!linked?Math.min(1,.12+.88*Math.max(0,(effective-.06)/.94)):1;
-    return new Float32Array([...ct.worldToTexture,linked&&cutaway&&!scientificMode?sourceK:-1,scientificMode?1:reveal,...sourceBounds,Number(mesh===ct.pickOccluder()),opacity,0,0]);
+    const a=revealState(),opacity=a.enabled?Number(!a.empty):1,reveal=1;
+    return new Float32Array([...ct.worldToTexture,linked&&cutaway&&!scientificMode?sourceK:-1,scientificMode?1:reveal,...sourceBounds,Number(mesh===ct.pickOccluder()),opacity,0,0,...accumulationVector(a)]);
   }}]};
   return {
     activate(){sceneRegistered=true;sync();ct.start();initializationMs=performance.now()-began;},
-    pickAllowed(mesh:any){return mesh.visible!==false&&((visible&&meshes.includes(mesh))||mesh===ct.pickOccluder());},
+    pickAllowed(mesh:any){return mesh.visible!==false&&((visible&&meshes.includes(mesh))||(!revealState().enabled&&mesh===ct.pickOccluder()));},
     pickDiscard(){return pickDiscard;},
     mode(value:string){if(!['scientific','holographic','materialization'].includes(value))throw Error('Unknown presentation');currentMode=value;sync();},
     progress(value:number){p=Math.max(0,Math.min(1,value));sync();},
+    accumulationRange(range:number[]){accumulationRange=[...range];sync();},
     density(value:number){if(![512,2048,8192].includes(value))throw Error('Unsupported particle budget');count=value;setThinInstanceCount(particles,count);},
     preset(value:string){if(!PALETTES[value])throw Error('Unknown material preset');preset=value;setShaderUniform(holographic,'tint',PALETTES[value]);setShaderUniform(particleMaterial,'tint',PALETTES[value]);},
     effect(value:string){if(!['assembly','layers'].includes(value))throw Error('Unknown effect');effect=value;sync();},
@@ -178,12 +185,12 @@ export function createPublicStudyVisual({engine,scene,camera,canvas,meshes,seman
       const particleGeometryGpuBytes=meshBufferSizes(particles),guideGeometryGpuBytes=meshBufferSizes(guide);
       const ownedGpuBuffers={particleGeometry:particleGeometryGpuBytes,guideGeometry:guideGeometryGpuBytes,sampleStorageBytes:(storage as any)._buffer?.size??0,instanceMatricesBytes:(particles as any).thinInstances?._gpuBuffer?.size??0,indirectDrawBytes:(particles as any).thinInstances?._drawArgsBuffer?.size??0};
       const observedOwnedGpuBufferBytes=[...Object.values(particleGeometryGpuBytes),...Object.values(guideGeometryGpuBytes),ownedGpuBuffers.sampleStorageBytes,ownedGpuBuffers.instanceMatricesBytes,ownedGpuBuffers.indirectDrawBytes].reduce((a:any,b:any)=>a+b,0);
-      return {owner:'acquired-study',renderer:'Babylon Lite 1.32.0 / WebGPU',semanticId:SEMANTIC_ID,mode:currentMode,progress:p,effectiveProgress:reduced?1:p,particleCount:count,particleCapacity:CAPACITY,preset,effect,reducedMotion:reduced,visible,selected,linked,sourceK,cutaway,sourceKBounds:[sourceKMin,sourceKMax],sourceSurfaceUnclipped:(currentMode!=='materialization'||reduced||p===1)&&(!linked||!cutaway||currentMode==='scientific'),pickPolicy:'Visible source fragments with identical source-k clip/reveal; acquired opaque plane occludes; particles and grid are not selectable. Pointer intent pauses cinematic playback.',ct:ct.snapshot(),
+      return {accumulation:revealState(),owner:'acquired-study',renderer:'Babylon Lite 1.32.0 / WebGPU',semanticId:SEMANTIC_ID,mode:currentMode,progress:p,effectiveProgress:reduced?1:p,particleCount:count,particleCapacity:CAPACITY,preset,effect,reducedMotion:reduced,visible,selected,linked,sourceK,cutaway,sourceKBounds:[sourceKMin,sourceKMax],sourceSurfaceUnclipped:(currentMode!=='materialization'||reduced||p===1)&&(!linked||!cutaway||currentMode==='scientific'),pickPolicy:'Visible source fragments with identical source-k clip/reveal; acquired opaque plane occludes; particles and grid are not selectable. Pointer intent pauses cinematic playback.',ct:ct.snapshot(),
         authoritativeMeshVisible:semantic.visible!==false,particlesVisible:particles.visible!==false,guideVisible:guide.visible!==false,errors,renderDiagnostics:{drawCalls:engine.drawCallCount,particleBounds:{min:particles.boundMin,max:particles.boundMax},particleMaterial:particles.material?.name,guideMaterial:guide.material?.name,particleInstanceCount:(particles as any).thinInstances?.count,particleDrawArgs:(particles as any).thinInstances?._drawArgsData?Array.from((particles as any).thinInstances._drawArgsData):null,sceneMeshes:scene.meshes?.map((mesh:any)=>({name:mesh.name,visible:mesh.visible!==false,material:mesh.material?.name??'pbr'})),sceneRenderableCount:scene._renderables?.length},originalGeometryUnchanged:originalFingerprint===currentFingerprint,sourceGeometryFingerprint:originalFingerprint,currentGeometryFingerprint:currentFingerprint,
         sourceVertices:sampled.vertexCount,sourceTriangles:sampled.triangleCount,sourceWorldMatrices:currentParts.map(part=>Array.from(part.world)),bounds,frames,firstFrameMs,initializationMs,sampleInitMs,
         frameIntervals:quantiles(intervals),gpuTimestampSupported:gpuTimingSupported,gpuReportedEma:quantiles(gpuTimes),gpuTimestampScope:'Existing Lite frame markers; asynchronous EMA .8 previous + .2 raw; sampled EMA percentiles, not raw GPU latency',selectedAdapterInfo,adapterInfoSource:selectedAdapterInfo?'existing Lite GPUDevice.adapterInfo':'not exposed on existing Lite GPUDevice; no second adapter requested',
         representation:{particleStorageBytes:sampled.data.byteLength,instanceMatrixBytes:matrices.byteLength,particleMeshLogicalBytes:positions.byteLength*2+indices.byteLength,guideMeshLogicalBytes:linePositions.length*8+linePositions.length/3*4,activeParticleTriangles:count*12,capacityFixed:true,ownedGpuBuffers,observedOwnedGpuBufferBytes,observedAllocationScope:'Existing GPUBuffer.size for FX sample storage, matrix/indirect buffers and particle/guide geometry including unused UV buffers. Excludes uniforms, source mesh, engine, render targets, picker and timestamp resources.',totalGpuMemoryBytes:null,totalGpuMemoryReason:'WebGPU does not expose reliable total adapter/process memory; observed owned buffers are a partial allocation inventory only'},
-        canvas:{cssWidth:rect.width,cssHeight:rect.height,width:canvas.width,height:canvas.height,devicePixelRatio:devicePixelRatio},camera:{alpha:camera.alpha,beta:camera.beta,radius:camera.radius,nearPlane:camera.nearPlane,farPlane:camera.farPlane,target:[camera.target.x,camera.target.y,camera.target.z]}};
+        canvas:{cssWidth:rect.width,cssHeight:rect.height,width:canvas.width,height:canvas.height,devicePixelRatio:devicePixelRatio},camera:{fov:camera.fov,alpha:camera.alpha,beta:camera.beta,radius:camera.radius,nearPlane:camera.nearPlane,farPlane:camera.farPlane,target:[camera.target.x,camera.target.y,camera.target.z]}};
     },
     dispose(){disposed=true;engine._device.removeEventListener('uncapturederror',gpuError);ct.dispose();disposeStorageBuffer(storage);},
   };

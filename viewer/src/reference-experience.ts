@@ -26,12 +26,12 @@ export function prepareReferenceExperience(library:HTMLElement) {
   document.addEventListener('dicom3d-workspace-change',(event:Event)=>{
     const detail=(event as CustomEvent).detail;const reference=detail.kind==='reference',study=detail.kind==='study';
     workspace.setAttribute('data-workspace-kind',detail.kind);
-    mode.textContent=reference?'Generalized reference · source anatomy, partial coverage · no patient study loaded':study?(publicReferenceDemo?'Curated public research study · source-linked CT / lesion · reference anatomy is not registered':'Local study · source-linked CT / lesion · reference anatomy is not registered to this study'):publicReferenceDemo?'Workspace empty · load a generalized reference':'Workspace empty · load a reference or choose accepted local source files';
+    mode.textContent=reference?'Generalized reference · source anatomy, partial coverage · no patient study loaded':study?(detail.verifiedVolume?'Verified acquired CT · no SEG admitted · reference anatomy is not registered':publicReferenceDemo?'Curated public research study · source-linked CT / lesion · reference anatomy is not registered':'Local study · source-linked CT / lesion · reference anatomy is not registered to this study'):publicReferenceDemo?'Workspace empty · load a generalized reference':'Workspace empty · load a reference or choose accepted local source files';
     returnReference.hidden=!study;
     (document.querySelector('#referenceReload') as HTMLElement).textContent=study?'Load selected reference':'Reload reference';
     heading.querySelector('.eyebrow')!.textContent=reference?'REFERENCE WORKSPACE':study?(publicReferenceDemo?'PUBLIC RESEARCH STUDY':'LOCAL STUDY WORKSPACE'):'LOCAL WORKSPACE';
     heading.querySelector('strong')!.textContent=reference?'Explore human anatomy':study?'Explore source imaging':'Choose a source';
-    document.querySelector('#renderCanvas')!.setAttribute('aria-label',study?'Source CT and lesion workspace':'Generalized reference anatomy');
+    document.querySelector('#renderCanvas')!.setAttribute('aria-label',study?(detail.verifiedVolume?'Verified acquired CT workspace':'Source CT and lesion workspace'):'Generalized reference anatomy');
     if(reference)imaging.open=false;
   });
   const hint=document.createElement('div');hint.className='canvas-hint';hint.textContent='Drag to orbit · scroll / pinch to zoom · select a structure to explore';viewport.append(hint);

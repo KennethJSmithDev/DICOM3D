@@ -7,26 +7,35 @@ import subprocess
 
 root = Path(__file__).resolve().parents[1]
 names = subprocess.check_output(['git', 'ls-files', '-z'], cwd=root).decode().split('\0')
+# The accepted public-source branch now contains exactly five owner-admitted
+# research files. Inventory their pinned bytes without widening Core admission;
+# archive-core.py still excludes every demo/h000 path.
+approved_h000 = json.loads(subprocess.check_output(['node', '--input-type=module', '-e',
+    "import {APPROVED_H000_ASSETS} from './viewer/src/public-h000-admission.mjs'; console.log(JSON.stringify(APPROVED_H000_ASSETS));"], cwd=root))
 files = {}
 for name in sorted(filter(None, names)):
     if name in {'source-manifest.json', 'distribution-manifest.json'}:
         continue
-    if re.search(r'reference/public/demo/|study-docked|\.(dcm|npy|npz|bin)$|(^|/)\.secrets/', name, re.I):
+    admitted = name.startswith('reference/public/demo/h000/') and name.removeprefix('reference/public/demo/h000/') in approved_h000
+    if not admitted and re.search(r'reference/public/demo/|study-docked|\.(dcm|npy|npz|bin|raw16)$|(^|/)\.secrets/', name, re.I):
         raise ValueError('Unadmitted source path: ' + name)
     if (root / name).is_symlink():
         raise ValueError('Source symlink: ' + name)
     data = subprocess.check_output(['git', 'show', ':' + name], cwd=root)
     files[name] = {'bytes': len(data), 'sha256': hashlib.sha256(data).hexdigest()}
+    if admitted and files[name] != approved_h000[name.removeprefix('reference/public/demo/h000/')]:
+        raise ValueError('Owner-admitted source bytes changed: ' + name)
 manifest = {
-    'distribution': 'DICOM3D v0.6.0 installation packaging source', 'version': '0.6.0',
+    'distribution': 'DICOM3D v0.6.5 private release candidate source', 'version': '0.6.5',
     'publishedWebCommit': 'd3490dd659e19e44b8800abe87bbc626f45350a2',
     'originalTag': 'v0.6.0', 'originalTagContainsInstallationCompletion': False,
     'commitBinding': 'The external release/artifact manifest identifies the later exact packaging commit. This inventory excludes itself and distribution-manifest.json to avoid circular hashes.',
     'files': files,
+    'candidateCapability': 'BDP-001 private0.6.5RC with exact ANAT-ACCEPT-001; not published',
 }
 (root / 'source-manifest.json').write_bytes((json.dumps(manifest, indent=2) + '\n').encode('utf-8'))
 descriptor = {
-    'distribution': 'DICOM3D Core', 'version': '0.6.0',
+    'distribution': 'DICOM3D Core', 'version': '0.6.5',
     'publishedWebCommit': manifest['publishedWebCommit'],
     'originalTag': 'v0.6.0', 'originalTagContainsInstallationCompletion': False,
     'entrypoint': '/dicom3d/reference.html', 'requiresIRIS': False,
