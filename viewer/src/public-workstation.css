@@ -1,5 +1,5 @@
 /* B04 presentation shell. Source pixels, scene identity and camera pose have separate owners. */
-body.public-workstation{--accent:#67ddf6;--border:#234757;--bg:#050f18;--muted:#91adbe;--ct-share:.4;min-height:0;height:100dvh;overflow:hidden;font-size:13px}
+body.public-workstation{--accent:#67ddf6;--border:#234757;--bg:#050f18;--muted:#91adbe;--ct-share:.4;min-width:1280px;min-height:720px;height:100dvh;overflow:auto;font-size:13px}
 .public-workstation button,.public-workstation select{font-size:11px;min-height:34px;border-radius:5px;padding:7px 10px}
 .public-workstation button[aria-expanded=true],.public-workstation button[aria-pressed=true]{color:#b7f1ff;background:#123749;border-color:#51cfe9;box-shadow:none}
 .public-workstation .app-header{height:76px;flex:0 0 76px;padding:10px 24px;gap:22px;background:linear-gradient(105deg,#112d3d,#06121d 55%)}
@@ -8,7 +8,7 @@ body.public-workstation{--accent:#67ddf6;--border:#234757;--bg:#050f18;--muted:#
 .public-workstation .intro{font-size:8px;letter-spacing:2px;text-transform:uppercase;color:#8eb9ce;margin-top:5px}
 .public-workstation .release-identity{font-size:9px;letter-spacing:1px;color:#8eb6cb;margin-left:auto}
 .public-workstation .app-header nav{margin-left:auto;font-size:10px;gap:14px}
-.public-workstation .workspace,.public-workstation .workspace.has-ct,.public-workstation .workspace:has(#imagingRail[open]){position:relative;display:flex;flex:1;min-height:0;min-width:0;padding:0;gap:0;grid-template-columns:none;background:#050f18}
+.public-workstation .workspace,.public-workstation .workspace.has-ct,.public-workstation .workspace:has(#imagingRail[open]){position:relative;display:flex;flex:1;min-height:0;min-width:1280px;padding:0;gap:0;grid-template-columns:none;background:#050f18}
 .public-workstation #imagingRail{display:none}
 .public-workstation .public-rail{width:76px;flex:0 0 76px;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;gap:12px;padding:20px 6px;background:#081823;border-right:1px solid #203f50;overflow-y:auto}
 .public-workstation .public-rail button{width:62px;min-height:61px;flex-shrink:0;background:transparent;border-color:transparent;display:flex;flex-direction:column;align-items:center;gap:7px;color:#81a5ba;font-size:9px}
@@ -35,7 +35,7 @@ body.public-workstation{--accent:#67ddf6;--border:#234757;--bg:#050f18;--muted:#
 .public-workstation #publicWorkArea{container-type:size;flex:1;display:flex;justify-content:center;min-height:0;min-width:0;--ct-share:.4}
 .public-workstation #viewingArea{display:flex;gap:12px;min-width:0;min-height:0;width:100%;height:100%;max-width:calc((100cqh - 2px)*20/9 + 32px)}
 .public-workstation #viewingArea:not(:has(#imagingDock:not([hidden]))),.public-workstation .maximized #viewingArea{max-width:calc((100cqh - 2px)*4/3 + 2px)}
-.public-workstation .viewport-slot{display:grid;place-items:center;flex:calc(1 - var(--ct-share)) 1 0;min-width:0;min-height:0;container-type:size}
+.public-workstation .viewport-slot{display:grid;place-items:center;flex:calc(1 - var(--ct-share)) 1 0;min-width:360px;min-height:0;container-type:size}
 .public-workstation #viewingArea:not(:has(#imagingDock:not([hidden]))) .viewport-slot,.public-workstation .maximized .viewport-slot{flex:1}
 .public-workstation main.viewport{box-sizing:content-box;position:relative;flex:none;display:block;grid-column:auto;grid-row:auto;min-width:0;min-height:0;width:min(calc(100cqw - 2px),calc((100cqh - 2px)*4/3));height:auto;aspect-ratio:4/3;border:1px solid #31576a;border-radius:7px;background:#030e18;overflow:hidden}
 .public-workstation #renderCanvas{position:absolute;inset:0;width:100%;height:100%;touch-action:none}
@@ -80,7 +80,7 @@ body.public-workstation{--accent:#67ddf6;--border:#234757;--bg:#050f18;--muted:#
 .public-workstation #evidencePanel>summary span{display:none}
 .public-workstation .evidence-grid{grid-template-columns:1fr 1fr;padding:14px;gap:18px}
 .public-workstation #sourceMetadata{font-size:10px}
-.public-workstation #imagingDock{display:flex;flex-direction:column;position:relative;flex:var(--ct-share) 1 0;min-width:0;align-self:stretch;width:auto;border:1px solid #284f63;border-radius:7px;background:#081b28;overflow:hidden}
+.public-workstation #imagingDock{display:flex;flex-direction:column;position:relative;flex:var(--ct-share) 1 0;min-width:260px;align-self:stretch;width:auto;border:1px solid #284f63;border-radius:7px;background:#081b28;overflow:auto}
 .public-workstation #imagingDock>header{display:flex;align-items:center;justify-content:space-between;padding:10px 13px;border-bottom:1px solid #284b5d;flex:none}
 .public-workstation #imagingDock h2{margin:4px 0 0;font-size:14px}
 .public-workstation .ct-meta{padding:8px 12px;display:flex;justify-content:space-between;font-size:9px;color:#92bdcf}
@@ -108,9 +108,7 @@ body.public-workstation{--accent:#67ddf6;--border:#234757;--bg:#050f18;--muted:#
 .public-workstation .app-footer{flex:0 0 28px;max-height:28px;padding:6px 20px;border-top:1px solid #1f4052}
 .public-workstation #status{font-size:10px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .public-workstation #projectLinks{display:none}
-@media(max-width:1350px){.public-workstation .release-identity{display:none}.public-workstation .reference-scope-note{display:none}.public-workstation .reference-library select{width:220px}.public-workstation .viewport-heading strong{font-size:18px}.public-workstation .public-viewport-top>span:nth-child(2){display:none}}
 @media(max-height:760px){.public-workstation .app-header{height:62px;flex-basis:62px}.public-workstation #publicStage{padding-top:10px}.public-workstation .reference-library{padding-top:8px}.public-workstation .public-rail{gap:6px;padding-top:12px}.public-workstation .public-rail button{min-height:54px}.public-workstation #labPanel,.public-workstation #learningPanel,.public-workstation #evidencePanel,.public-workstation #workspaceControls{top:108px}}
-@media(max-width:800px){body.public-workstation{overflow:hidden}.public-workstation .app-header{padding:8px 12px;gap:10px}.public-workstation .app-header nav{display:none}.public-workstation #evidenceToggle{margin-left:auto;font-size:10px}.public-workstation .brand img{width:32px;height:32px}.public-workstation h1{font-size:22px}.public-workstation .public-rail{width:58px;flex-basis:58px;padding-inline:3px}.public-workstation .public-rail button{width:48px}.public-workstation #publicStage{padding:10px}.public-workstation .public-toolbar{flex-wrap:wrap;gap:8px}.public-workstation .viewport-heading strong{font-size:16px}.public-workstation .mode-switch{width:100%}.public-workstation .mode-switch button{flex:1;padding-inline:5px;font-size:10px}.public-workstation .reference-library{flex-wrap:wrap;gap:5px}.public-workstation .reference-library label{width:100%}.public-workstation .reference-library select{width:100%}.public-workstation .reference-library button{font-size:9px}.public-workstation #viewingArea{max-width:100%;position:relative}.public-workstation .viewport-slot{flex:1}.public-workstation #imagingDock{position:absolute;inset:0;width:100%;z-index:5}.public-workstation #divider{display:none}.public-workstation #labPanel,.public-workstation #learningPanel,.public-workstation #evidencePanel,.public-workstation #workspaceControls{left:66px;right:8px;top:140px;bottom:8px;width:auto}.public-workstation .evidence-grid{grid-template-columns:1fr}.public-workstation #publicAnnotation{font-size:9px;top:45px}.public-workstation #cameraControls .camera-actions{flex-wrap:nowrap;overflow-x:auto;justify-content:flex-start}.public-workstation #cameraControls button{flex:0 0 auto;font-size:9px}.public-workstation .app-footer{padding-inline:10px}}
 
 /* BDP-VISUAL: workflow-specific space, without source/camera mutation on resize. */
 .public-workstation .app-header{height:56px;flex-basis:56px;padding:6px 20px}
@@ -122,7 +120,6 @@ body.public-workstation{--accent:#67ddf6;--border:#234757;--bg:#050f18;--muted:#
 .public-workstation .startup-controls button{min-height:30px}
 .public-workstation #verifiedVolumeImport{max-width:560px}
 .public-workstation #verifiedVolumeImport input[type=file]{width:100%;max-width:420px;min-width:0}
-@media(max-width:800px){.public-workstation .app-header{height:56px;flex-basis:56px}.public-workstation .startup-controls{font-size:9px}.public-workstation #viewingArea:not(:has(#imagingDock:not([hidden]))){max-width:100%}}
 
 .public-workstation #verifiedVolumeImport[open]{position:relative;max-height:210px;overflow:auto;flex:0 0 auto;padding:8px;border:1px solid var(--border)}
 .public-workstation #verifiedVolumeImport label{display:block;margin:5px 0}
@@ -161,8 +158,6 @@ body.public-workstation{--accent:#67ddf6;--border:#234757;--bg:#050f18;--muted:#
 .public-workstation #startupStatus{font-size:10px;max-width:170px}
 .public-workstation button:focus-visible,.public-workstation select:focus-visible,.public-workstation input:focus-visible{outline:2px solid #a6efff;outline-offset:3px}
 .public-workstation button:hover{border-color:#71bfd6;background-color:#18394a}
-@media(max-width:1100px){.public-workstation .app-header nav a:first-child{display:none}.public-workstation .release-identity{display:none}.public-workstation #startupStatus{display:none}.public-workstation .app-header nav{gap:8px}}
-@media(max-width:800px){.public-workstation .app-header{height:54px;min-height:54px;flex-basis:54px;gap:8px}.public-workstation .app-header nav{display:none}.public-workstation .app-header h1{font-size:20px}.public-workstation .public-rail{width:58px;flex-basis:58px}.public-workstation .public-rail button{width:50px}.public-workstation #viewerDrawer,.public-workstation #workspaceControls,.public-workstation #labPanel,.public-workstation #learningPanel{left:64px;width:calc(100% - 72px);max-width:360px;top:8px}.public-workstation #publicStage{padding:0}.public-workstation #evidencePanel{right:8px;width:calc(100% - 76px)}.public-workstation .evidence-grid{grid-template-columns:1fr}.public-workstation .shell-status{font-size:9px;padding:4px 8px}}
 
 /* Focused visual correction: persistent dismissal and square-source viewing space. */
 .public-workstation #viewerDrawer>header{position:sticky;top:-16px;z-index:2;padding:12px 0;background:#0e2333;box-shadow:0 6px 12px #0e2333}
@@ -179,7 +174,7 @@ body.public-workstation{font-family:"Segoe UI Variable","Segoe UI",system-ui,san
 .public-workstation button[aria-pressed=true],.public-workstation .public-rail button[aria-expanded=true]{background:linear-gradient(160deg,#08799caa,#10324ce8);border-color:#26c9f2;box-shadow:inset 0 0 12px #21c6ec28,0 0 12px #14b8e31c;color:#effcff}
 .public-workstation .app-header nav{margin-left:12px}
 .public-workstation .release-identity{max-width:150px;line-height:1.5;font-size:9px}
-.public-workstation #publicWorkArea{padding:10px 10px 6px;--ct-share:.32;box-sizing:border-box}
+.public-workstation #publicWorkArea{padding:10px 10px 6px;--ct-share:.34;box-sizing:border-box}
 .public-workstation main.viewport,.public-workstation #viewingArea:not(:has(#imagingDock:not([hidden]))) main.viewport{border:1px solid #2f6077;border-radius:9px;background:#030d14;box-shadow:inset 0 0 28px #071c2966}
 .public-workstation #imagingDock{border-radius:9px;border:1px solid #295269;background:#071722}
 .public-workstation .public-rail{background:linear-gradient(180deg,#0d2433,#091925);border-right:1px solid #244557}
@@ -189,19 +184,16 @@ body.public-workstation{font-family:"Segoe UI Variable","Segoe UI",system-ui,san
 .public-workstation .selection-card{background:#071725;border:1px solid #2b526a;border-radius:8px;padding:12px;margin-bottom:12px}
 .public-workstation #referenceControls input[type=search],.public-workstation #referenceControls select{background:#071825;border:1px solid #2a5065;border-radius:7px;color:#d9e8f1;min-height:36px}
 .public-workstation .shell-status{background:#091b29;border-top-color:#29495d;color:#acc8d8}
-@media(min-width:1400px){
+/* Desktop shell: widths scale together; panels keep their positions. */
  .public-workstation .app-header{height:64px;flex-basis:64px;padding:8px 18px;gap:12px}
  .public-workstation .app-header .brand img{width:40px;height:40px}
- .public-workstation #workspaceControls{left:auto;right:10px;top:10px;bottom:34px;width:320px}
- .public-workstation .workspace:has(#workspaceControls:not([hidden])) #publicStage{padding-right:330px}
- .public-workstation #viewerDrawer{left:76px;top:10px;bottom:34px;width:320px}
- .public-workstation .workspace:has(#viewerDrawer:not([hidden])) #publicStage{padding-left:338px}
+ .public-workstation #workspaceControls{left:auto;right:10px;top:10px;bottom:34px;width:clamp(280px,20.93vw,400px)}
+ .public-workstation .workspace:has(#workspaceControls:not([hidden])) #publicStage{padding-right:clamp(290px,calc(20.93vw + 10px),410px)}
+ .public-workstation #viewerDrawer{left:76px;top:10px;bottom:34px;width:clamp(280px,25.3vw,423px)}
+ .public-workstation .workspace:has(#viewerDrawer:not([hidden])) #publicStage{padding-left:clamp(298px,calc(25.3vw + 18px),441px)}
  .public-workstation #viewerDrawer .public-toolbar{padding-bottom:10px;border-bottom:1px solid #294b60}
  .public-workstation #viewingArea{gap:8px}
  .public-workstation #workspaceControls .inspector-body{padding:12px}
  .public-workstation #referenceControls .selection-card strong{font-size:15px}
  .public-workstation .workspace:has(#viewerDrawer:not([hidden]),#workspaceControls:not([hidden]),#labPanel:not([hidden]),#learningPanel:not([hidden])) #cameraControls .camera-actions{justify-content:center}
-}
-@media(min-width:2200px){.public-workstation #workspaceControls{width:360px}.public-workstation .workspace:has(#workspaceControls:not([hidden])) #publicStage{padding-right:370px}.public-workstation #viewerDrawer{width:360px}.public-workstation .workspace:has(#viewerDrawer:not([hidden])) #publicStage{padding-left:378px}}
-@media(max-width:1399px){.public-workstation .app-header .intro{display:none}.public-workstation .app-header .mode-switch{gap:3px}.public-workstation .app-header .mode-switch button{padding:7px 8px;font-size:10px}.public-workstation .app-header nav{display:none}.public-workstation .release-identity{display:none}}
-@media(max-width:800px){.public-workstation .app-header .mode-switch{flex-wrap:wrap;gap:2px;max-width:164px}.public-workstation .app-header .mode-switch button{min-height:24px;padding:3px 6px;font-size:9px}.public-workstation .app-header .intro{display:none}}
+

@@ -5,9 +5,9 @@ import {PUBLIC_RELEASE} from './public-release.mjs';
 // Public and private entries retain the reference viewer and shared scene owner.
 const base=import.meta.env.BASE_URL,publicDemo=import.meta.env.MODE==='safe-reference-demo';
 const mount=document.createElement('section');mount.className='section-body control-section';
-mount.innerHTML='<label>Generalized adult reference <select id="referenceVariant"><option value="bp3d-male">Male Â· BodyParts3D anatomy</option><option value="hra-female">Female Â· HRA anatomical reference</option></select></label><button id="referenceReload">Reload reference</button><button id="referenceUnload">Unload reference</button><p>Independent BodyParts3D male and HRA female reference sources; partial coverage, no patient registration. No patient DICOM required.</p><output id="referenceLoadState" hidden></output>';
+mount.innerHTML='<label>Generalized adult reference <select id="referenceVariant"><option value="bp3d-male">Male · BodyParts3D anatomy</option><option value="hra-female">Female · HRA anatomical reference</option></select></label><button id="referenceReload">Reload reference</button><button id="referenceUnload">Unload reference</button><p>Independent BodyParts3D male and HRA female reference sources; partial coverage, no patient registration. No patient DICOM required.</p><output id="referenceLoadState" hidden></output>';
 document.querySelector('#sourceMount')!.prepend(mount);
-document.title=publicDemo?PUBLIC_RELEASE.title:'DICOM3D Â· Reference Anatomy Prototype';
+document.title=publicDemo?PUBLIC_RELEASE.title:'DICOM3D · Reference Anatomy Prototype';
 prepareReferenceExperience(mount);
 const shell=publicDemo?(await import('./public-workstation')).preparePublicWorkstation():null;
 const select=document.querySelector<HTMLSelectElement>('#referenceVariant')!,reload=document.querySelector<HTMLButtonElement>('#referenceReload')!;
@@ -18,11 +18,11 @@ function setBusy(value:boolean){busy=value;select.disabled=reload.disabled=value
 async function start(){
   if(busy)return;
   const token=++sampleGeneration,start=performance.now(),variant=select.value;setBusy(true);
-  document.querySelector('#status')!.textContent='Loading generalized reference anatomyâ€¦';
+  document.querySelector('#status')!.textContent='Loading generalized reference anatomy…';
   try{
     const mr=await fetch(`${base}reference/${variant}.manifest.json`);if(!mr.ok)throw Error('Reference manifest unavailable');
     const text=await mr.text(),manifest=JSON.parse(text);
-    // HRA is distributed in ordered byte chunks; loadFiles still verifies the original GLB SHA-256.
+    // Ordered chunks preserve the original asset; loadFiles verifies its SHA-256.
     const names=variant==='hra-female' && manifest.asset.relative_filename==='hra-female.glb'
       ? ['hra-female.glb.part001','hra-female.glb.part002','hra-female.glb.part003'] : [manifest.asset.relative_filename];
     const parts:Blob[]=[];for(const name of names){const response=await fetch(`${base}reference/${name}`);if(!response.ok)throw Error('Reference asset unavailable: '+name);parts.push(await response.blob());}
@@ -37,7 +37,7 @@ async function start(){
 }
 if(import.meta.env.DICOM3D_PUBLIC_STUDY)shell?.setLoadStudy(async()=>{
   if(busy)return;setBusy(true);sampleGeneration++;
-  document.querySelector('#status')!.textContent='Loading attributed research CT and SEG Â· approximately 33.3 MBâ€¦';
+  document.querySelector('#status')!.textContent='Loading attributed research CT and SEG · approximately 33.3 MB…';
   try{
     // No H000 import, fetch or decoded buffer exists before this explicit action.
     const {loadPublicResearchFixture}=await import('./public-research-loader');
@@ -54,7 +54,7 @@ start();
 // Private ingress uses one verified boundary; the optional loopback fixture is public H000 only.
 if((import.meta.env.DICOM3D_VERIFIED_VOLUME_IMPORT===true||import.meta.env.DICOM3D_PRIVATE_VOLUME_DEV===true)&&shell){
  const panel=document.createElement('details');panel.id='verifiedVolumeImport';panel.open=false;
- panel.innerHTML='<summary>Open verified study Â· local files Â· Babylon Lite</summary><label>Verified admission packet <input id="verifiedDescriptor" type="file" accept=".json"></label><label>Decoded stored values <input id="verifiedPixels" type="file" accept=".raw16,.bin"></label><button id="verifiedLoad" type="button">Open verified CT</button><button id="bdpPublicFixture" type="button">Open I001 retrieved H000 Â· local qualification</button><p>Choose an existing verified volume packet and its stored pixel payload. Original DICOM and live PACS/IRIS connection are not enabled here. No SEG or atlas registration is inferred.</p><output id="verifiedLoadState" hidden></output>';
+ panel.innerHTML='<summary>Open verified study · local files · Babylon Lite</summary><label>Verified admission packet <input id="verifiedDescriptor" type="file" accept=".json"></label><label>Decoded stored values <input id="verifiedPixels" type="file" accept=".raw16,.bin"></label><button id="verifiedLoad" type="button">Open verified CT</button><button id="bdpPublicFixture" type="button">Open I001 retrieved H000 · local qualification</button><p>Choose an existing verified volume packet and its stored pixel payload. Original DICOM and live PACS/IRIS connection are not enabled here. No SEG or atlas registration is inferred.</p><output id="verifiedLoadState" hidden></output>';
  const openStudy=document.createElement('button');openStudy.id='openVerifiedStudy';openStudy.textContent='Open Study';reload.after(openStudy);openStudy.onclick=()=>{panel.open=!panel.open;if(panel.open)panel.scrollIntoView({block:'nearest'});};
  (document.getElementById('viewerDrawer')??mount.parentElement)!.append(panel);if(import.meta.env.DICOM3D_PRIVATE_VOLUME_DEV!==true)panel.querySelector('#bdpPublicFixture')!.remove();let token=0,abort:AbortController|null=null,lastVerified:any=null;
  (window as any).__bdpCandidate={backend:'babylon',snapshot:()=>({backend:'babylon',loaded:Boolean(lastVerified),descriptor:lastVerified?.descriptor??null}),assertSource:()=>lastVerified?.assertSourceUnchanged()};

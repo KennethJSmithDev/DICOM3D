@@ -4,7 +4,7 @@ Class DICOM3D.InstallMigration Extends %RegisteredObject
 
 /// WHY: IPM per-file Activate leaves obsolete051 names behind on upgrade.
 /// BOUNDARY: only204 published051 paths/old hashes; privileged maintenance install.
-/// INVARIANT: preflight all before any deletion; current375 targets are disjoint.
+/// INVARIANT: preflight all before any deletion; current379 targets are disjoint.
 /// EVIDENCE: scripts/retired-filecopy-051.json and exact native release receipt.
 /// REGRESSION: filesystem deletion is not transactional; no concurrent CSP writer.
 ClassMethod Retire051(root As %String) As %Status [ Language = python ]
@@ -831,7 +831,7 @@ ClassMethod Retire051(root As %String) As %Status [ Language = python ]
         }
     }
     policy_sha = "282c8029a22bcc6ab808489fd329ba6e37b66018768e2908c66e8cc1dc3cfb43"
-    viewer_sha = "708bf20f3d8f36ab8178bced27d8b7d792b2f9998503368372dc34b47a111688"
+    viewer_sha = "f8ba303cc000dd6aacd1f0edd6baf5597b13dc01fa423581737548179e893cea"
     descriptors = []
     retired = []
     missing = 0

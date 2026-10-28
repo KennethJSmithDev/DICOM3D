@@ -136,23 +136,36 @@ export function prepareReference({scene,root,manifest,status,selectedMaterial,vi
 
   // ANAT-LAYERS-001: source-system controls reuse the existing owning controller.
   // IS-A labels are retained in search, never guessed into clinical systems.
-  const layerPanel=document.createElement('details');layerPanel.id='referenceLayers';
-  layerPanel.innerHTML='<summary>Systems &amp; source skin</summary><p>Source classifications only. Shared owners follow every assigned system; any lock protects against layer changes. Manual hide, isolation and clipping remain independent.</p><div class="layer-actions"><button id="referencePeel" aria-pressed="false">Peel source skin</button><button id="referenceLayersRestore">Restore layers</button></div><output id="referenceLayerSummary" role="status"></output><div class="layer-rows"></div>';
+  const layerPanel=document.createElement('details');layerPanel.id='referenceLayers';layerPanel.open=true;
+  layerPanel.innerHTML='<summary>Systems &amp; source skin</summary><div class="layer-actions"><button id="referencePeel" aria-pressed="false">Peel source skin</button><button id="referenceLayersRestore">Restore layers</button></div><div class="layer-rows"></div><details class="layer-policy"><summary>Source mapping &amp; behavior</summary><p>Source classifications only. Shared owners follow every assigned system; any lock protects against layer changes. Manual hide, isolation and clipping remain independent.</p><output id="referenceLayerSummary" role="status"></output></details>';
   panel.querySelector('h2')!.after(layerPanel);
   const layerRows=new Map<string,{visible:HTMLInputElement,locked:HTMLInputElement,opacity:HTMLInputElement}>();
   for(const name of layers.systems){
-    const row=document.createElement('fieldset');row.dataset.system=name;
-    const legend=document.createElement('legend');legend.textContent=name;row.append(legend);
+    const row=document.createElement('div');row.className='layer-row';row.dataset.system=name;
+    const advanced=document.createElement('details');advanced.className='layer-options';
+    const summary=document.createElement('summary');summary.textContent='More';summary.setAttribute('aria-label',name+' settings');
+    const advancedBody=document.createElement('div');advancedBody.className='layer-options-body';advanced.append(summary,advancedBody);
     const controls:any={};
     for(const [key,label,type] of [['visible','Visible','checkbox'],['locked','Lock','checkbox'],['opacity','Opacity gain','range']]){
-      const wrapper=document.createElement('label');wrapper.textContent=label;
+      const wrapper=document.createElement('label');wrapper.textContent=key==='visible'?name:label;
       const input=document.createElement('input');input.type=type;input.setAttribute('aria-label',name+' '+label);input.dataset.layerControl=key;
       if(type==='range'){input.min='0.05';input.max='1';input.step='0.05';input.value='1';}else input.checked=key==='visible';
       input.addEventListener(type==='range'?'input':'change',()=>{picks.invalidate();layers.set(name,{[key]:type==='range'?Number(input.value):input.checked});refresh();});
-      wrapper.append(input);row.append(wrapper);controls[key]=input;
+      wrapper.append(input);if(key==='visible'){wrapper.className='layer-visible';row.append(wrapper);}else advancedBody.append(wrapper);controls[key]=input;
     }
-    layerRows.set(name,controls);layerPanel.querySelector('.layer-rows')!.append(row);
+    row.append(advanced);layerRows.set(name,controls);layerPanel.querySelector('.layer-rows')!.append(row);
   }
+  // Group the existing controls without changing their handlers or source ownership.
+  const sectionTabs=document.createElement('div');sectionTabs.className='anatomy-sections';sectionTabs.setAttribute('role','group');sectionTabs.setAttribute('aria-label','Anatomy inspector sections');
+  const anatomyPane=document.createElement('div'),systemsPane=document.createElement('div'),layersPane=document.createElement('div');
+  anatomyPane.id='anatomySection';systemsPane.id='systemsSection';layersPane.id='layersSection';
+  anatomyPane.append(search,layerPanel.querySelector('.layer-rows')!);
+  systemsPane.append(get('referenceRegion').parentElement,systemLabel,matchCount,tree);
+  layersPane.append(layerPanel.querySelector('.layer-actions')!,layerPanel.querySelector('.layer-policy')!);
+  const panes=[anatomyPane,systemsPane,layersPane];
+  for(const [index,label] of ['Anatomy','Systems','Layers'].entries()) {const button=document.createElement('button');button.type='button';button.textContent=label;button.setAttribute('aria-controls',panes[index].id);button.onclick=()=>{panes.forEach((pane,i)=>{pane.hidden=i!==index;sectionTabs.children[i].setAttribute('aria-pressed',String(i===index));});};sectionTabs.append(button);}
+  panes.forEach((pane,index)=>{pane.hidden=index!==0;sectionTabs.children[index].setAttribute('aria-pressed',String(index===0));});
+  layerPanel.prepend(sectionTabs);layerPanel.append(...panes);layerPanel.open=true;
   get('referencePeel').onclick=()=>{picks.invalidate();layers.peel(!layers.snapshot().peeled);refresh();};
   get('referenceLayersRestore').onclick=()=>{picks.invalidate();layers.restore();refresh();};
   function syncLayers(){

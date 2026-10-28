@@ -50,7 +50,7 @@ export function preparePublicWorkstation(){
   }
   workspace.prepend(rail);
   // WHY: utility controls must not consume render height. Reparent existing owners only.
-  const viewerDrawer=document.createElement('aside');viewerDrawer.id='viewerDrawer';viewerDrawer.hidden=!matchMedia('(min-width:1400px)').matches;viewerDrawer.setAttribute('aria-label','Viewer controls');
+  const viewerDrawer=document.createElement('aside');viewerDrawer.id='viewerDrawer';viewerDrawer.hidden=false;viewerDrawer.setAttribute('aria-label','Viewer controls');
   viewerDrawer.innerHTML='<header><h2>Viewer</h2><button id="closeViewer">Close viewer controls</button></header>';
   viewerDrawer.append(toolbar,library);workspace.append(viewerDrawer);
   const shellStatus=document.createElement('div');shellStatus.className='shell-status';shellStatus.append($('workspaceMode'));stage.append(shellStatus);
@@ -93,7 +93,7 @@ export function preparePublicWorkstation(){
   const drawers:Record<string,string>={viewerDrawer:'workspaceButton',workspaceControls:'inspectorToggle',labPanel:'labToggle',learningPanel:'learningToggle',evidencePanel:'evidenceToggle'};
   function panel(id:string,button:string,value?:boolean){
     const open=value===undefined?$(id).hidden:value;
-    if(open)for(const [other,toggle] of Object.entries(drawers)){if(other!==id&&!(matchMedia('(min-width:1400px)').matches&&(other==='workspaceControls'||id==='workspaceControls'))){$(other).hidden=true;$(toggle).setAttribute('aria-expanded','false');}}
+    if(open)for(const [other,toggle] of Object.entries(drawers)){if(other!==id&&!(other==='workspaceControls'||id==='workspaceControls')){$(other).hidden=true;$(toggle).setAttribute('aria-expanded','false');}}
     $(id).hidden=!open;$(button).setAttribute('aria-expanded',String(open));
   }
   for(const [id,button] of Object.entries(drawers)){$(button).setAttribute('aria-controls',id);$(button).setAttribute('aria-expanded',String(!$(id).hidden));$(id).addEventListener('keydown',(e:KeyboardEvent)=>{if(e.key==='Escape'){panel(id,button,false);$(button).focus();}});}

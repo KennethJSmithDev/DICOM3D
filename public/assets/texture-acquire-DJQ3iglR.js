@@ -1,1 +1,0 @@
-import{t as e}from"./gpu-texture-acquire-DJzKWCnM.js";function t(t){e(t.texture)}export{t};

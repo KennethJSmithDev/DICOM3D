@@ -1,4 +1,4 @@
-<!doctype html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="description" content="DICOM3D — From Pixels to Meaning. Explore generalized male and female anatomy in the v0.6.0 visual research workstation. Research presentation only; no patient study included."><title>DICOM3D v0.6.0 — Visual Research Workstation</title>  <script type="module" crossorigin src="/dicom3d/assets/reference-DAmNipPn.js"></script>
+<!doctype html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="description" content="DICOM3D — From Pixels to Meaning. A desktop-first visual research workstation for anatomy and source-aware visualization. Research presentation only."><title>DICOM3D v0.6.5 RC — Visual Research Workstation</title>  <script type="module" crossorigin src="/dicom3d/assets/reference-gdWe0H5Q.js"></script>
   <link rel="modulepreload" crossorigin href="/dicom3d/assets/preload-helper-CKhbhPgO.js">
   <link rel="modulepreload" crossorigin href="/dicom3d/assets/typed-arrays-B2JZIDLp.js">
   <link rel="modulepreload" crossorigin href="/dicom3d/assets/compose-mat4-into-buffer-DVi8_Yl-.js">
@@ -12,7 +12,7 @@
   <link rel="modulepreload" crossorigin href="/dicom3d/assets/engine-KxBmuJ5G.js">
   <link rel="modulepreload" crossorigin href="/dicom3d/assets/buffer-alignment-C-ra1dDf.js">
   <link rel="modulepreload" crossorigin href="/dicom3d/assets/mapped-buffer-Dg7AhcU5.js">
-  <link rel="modulepreload" crossorigin href="/dicom3d/assets/gpu-resource-retirement-C8MDE3lY.js">
+  <link rel="modulepreload" crossorigin href="/dicom3d/assets/gpu-resource-retirement-leESN2Rr.js">
   <link rel="modulepreload" crossorigin href="/dicom3d/assets/visibility-BlVxqrHZ.js">
   <link rel="modulepreload" crossorigin href="/dicom3d/assets/uniform-buffer-Dns1Orm6.js">
   <link rel="modulepreload" crossorigin href="/dicom3d/assets/animation-tick-L0bcvMWz.js">
@@ -20,35 +20,36 @@
   <link rel="modulepreload" crossorigin href="/dicom3d/assets/types-DA4jP4yZ.js">
   <link rel="modulepreload" crossorigin href="/dicom3d/assets/scene-helpers-CipkisDJ.js">
   <link rel="modulepreload" crossorigin href="/dicom3d/assets/pack-mat4-into-f32-CXT06rqe.js">
-  <link rel="modulepreload" crossorigin href="/dicom3d/assets/render-task-base-CmE5r1lE.js">
-  <link rel="modulepreload" crossorigin href="/dicom3d/assets/thin-instance-CE0tuuPG.js">
+  <link rel="modulepreload" crossorigin href="/dicom3d/assets/render-task-base-Dad9aTea.js">
+  <link rel="modulepreload" crossorigin href="/dicom3d/assets/thin-instance-BfepUBiz.js">
   <link rel="modulepreload" crossorigin href="/dicom3d/assets/ref-count-dzJdN9ts.js">
-  <link rel="modulepreload" crossorigin href="/dicom3d/assets/get-mesh-geometry-aeglj7cf.js">
+  <link rel="modulepreload" crossorigin href="/dicom3d/assets/get-mesh-geometry-lSXRBOgb.js">
   <link rel="modulepreload" crossorigin href="/dicom3d/assets/picking-scene-bgl-DzwDBwd2.js">
   <link rel="modulepreload" crossorigin href="/dicom3d/assets/mat4-determinant3-CKMqSGD_.js">
   <link rel="modulepreload" crossorigin href="/dicom3d/assets/texture-sampler-pool-5zXM0qOo.js">
   <link rel="modulepreload" crossorigin href="/dicom3d/assets/mesh-DW6bbL_g.js">
   <link rel="modulepreload" crossorigin href="/dicom3d/assets/mip-count-C_fVOboT.js">
-  <link rel="modulepreload" crossorigin href="/dicom3d/assets/pbr-group-builder-AkVGMxfd.js">
-  <link rel="modulepreload" crossorigin href="/dicom3d/assets/gltf-pbr-builder-CjGYD5yW.js">
+  <link rel="modulepreload" crossorigin href="/dicom3d/assets/pbr-group-builder-q06MEdz1.js">
+  <link rel="modulepreload" crossorigin href="/dicom3d/assets/gltf-pbr-builder-Cwl4MsEV.js">
   <link rel="modulepreload" crossorigin href="/dicom3d/assets/gltf-parser-oG-w_Wko.js">
   <link rel="modulepreload" crossorigin href="/dicom3d/assets/gltf-material-D1kjE4mr.js">
-  <link rel="modulepreload" crossorigin href="/dicom3d/assets/slices-B9ikw2Vh.js">
+  <link rel="modulepreload" crossorigin href="/dicom3d/assets/slices-DP7gr4Sf.js">
   <link rel="modulepreload" crossorigin href="/dicom3d/assets/light-base-BZ2Ia9Hv.js">
   <link rel="modulepreload" crossorigin href="/dicom3d/assets/directional-light-DpvLOWgZ.js">
-  <link rel="modulepreload" crossorigin href="/dicom3d/assets/texture-reference-store-D7itGrdQ.js">
-  <link rel="modulepreload" crossorigin href="/dicom3d/assets/gpu-texture-acquire-DJzKWCnM.js">
-  <link rel="modulepreload" crossorigin href="/dicom3d/assets/texture-acquire-DJQ3iglR.js">
+  <link rel="modulepreload" crossorigin href="/dicom3d/assets/gpu-texture-acquire-C6oWQ6ub.js">
+  <link rel="modulepreload" crossorigin href="/dicom3d/assets/texture-acquire-F5BtQ2PA.js">
   <link rel="modulepreload" crossorigin href="/dicom3d/assets/samplers-B2zrMarA.js">
   <link rel="modulepreload" crossorigin href="/dicom3d/assets/render-target-signature-B-9UVrB_.js">
   <link rel="modulepreload" crossorigin href="/dicom3d/assets/pbr-flags-D6sBGIQF.js">
   <link rel="modulepreload" crossorigin href="/dicom3d/assets/alpha-to-coverage-hook-BqPdUk9w.js">
   <link rel="modulepreload" crossorigin href="/dicom3d/assets/pbr-pipeline-BMF9ML1T.js">
-  <link rel="modulepreload" crossorigin href="/dicom3d/assets/pbr-material-DeHX0jEa.js">
+  <link rel="modulepreload" crossorigin href="/dicom3d/assets/pbr-material-CV01cQ-H.js">
   <link rel="modulepreload" crossorigin href="/dicom3d/assets/set-emissive-g8kylsq6.js">
   <link rel="modulepreload" crossorigin href="/dicom3d/assets/camera-fit-BmuuhnCP.js">
-  <link rel="modulepreload" crossorigin href="/dicom3d/assets/ct-volume-core-DdS-i6F3.js">
-  <link rel="modulepreload" crossorigin href="/dicom3d/assets/public-release-BkHfehLJ.js">
+  <link rel="modulepreload" crossorigin href="/dicom3d/assets/ct-volume-core-CFKgkqn9.js">
+  <link rel="modulepreload" crossorigin href="/dicom3d/assets/ct-spatial-DBQBJiet.js">
+  <link rel="modulepreload" crossorigin href="/dicom3d/assets/verified-volume-9xfyQRPr.js">
+  <link rel="modulepreload" crossorigin href="/dicom3d/assets/public-release-BcTT6c7N.js">
   <link rel="stylesheet" crossorigin href="/dicom3d/assets/reference-DMBnsulO.css">
 </head><body>
 <header><div><h1>DICOM3D</h1><p class="intro">Generalized reference anatomy · prototype</p></div><div class="files"><label>Manifest <input id="manifestFile" type="file" accept=".json"></label><label>GLB <input id="glbFile" type="file" accept=".glb"></label></div><div class="controls"><button id="visibilityButton" disabled>Hide structures</button><button id="clearButton" disabled>Clear selection</button></div></header>

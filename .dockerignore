@@ -12,7 +12,7 @@ viewer/.vite/
 !reference/public/reference/bp3d-male.manifest.json
 !reference/public/reference/bp3d-source-members.json
 !reference/public/reference/BODYParts3D-NOTICE.txt
-!reference/public/reference/hra-female.glb
+!reference/public/reference/hra-female.glb.part*
 !reference/public/reference/hra-female.manifest.json
 !reference/public/reference/HRA-FEMALE-NOTICE.txt
 !reference/public/brand/

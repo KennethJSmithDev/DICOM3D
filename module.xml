@@ -56,7 +56,6 @@
   <FileCopy Name="public/assets/combine4-QTLJoOSn.js" Target="{$cspdir}dicom3d/assets/combine4-QTLJoOSn.js" />
   <FileCopy Name="public/assets/compose-mat4-AxZCUsUJ.js" Target="{$cspdir}dicom3d/assets/compose-mat4-AxZCUsUJ.js" />
   <FileCopy Name="public/assets/compose-mat4-into-buffer-DVi8_Yl-.js" Target="{$cspdir}dicom3d/assets/compose-mat4-into-buffer-DVi8_Yl-.js" />
-  <FileCopy Name="public/assets/compute-texture-binding-BciuabhW.js" Target="{$cspdir}dicom3d/assets/compute-texture-binding-BciuabhW.js" />
   <FileCopy Name="public/assets/conditional-BJ2WomYi.js" Target="{$cspdir}dicom3d/assets/conditional-BJ2WomYi.js" />
   <FileCopy Name="public/assets/console-log-Dl9Qx2-D.js" Target="{$cspdir}dicom3d/assets/console-log-Dl9Qx2-D.js" />
   <FileCopy Name="public/assets/constant-D5o68LAV.js" Target="{$cspdir}dicom3d/assets/constant-D5o68LAV.js" />
@@ -72,10 +71,10 @@
   <FileCopy Name="public/assets/create-quat-from-rotation-mat4-PcdXSPCR.js" Target="{$cspdir}dicom3d/assets/create-quat-from-rotation-mat4-PcdXSPCR.js" />
   <FileCopy Name="public/assets/create-skeleton-Dks0WSIa.js" Target="{$cspdir}dicom3d/assets/create-skeleton-Dks0WSIa.js" />
   <FileCopy Name="public/assets/cross-PXrLgZsU.js" Target="{$cspdir}dicom3d/assets/cross-PXrLgZsU.js" />
-  <FileCopy Name="public/assets/ct-plane-check-DKWbFMCo.js" Target="{$cspdir}dicom3d/assets/ct-plane-check-DKWbFMCo.js" />
-  <FileCopy Name="public/assets/ct-ui-Baody4kS.js" Target="{$cspdir}dicom3d/assets/ct-ui-Baody4kS.js" />
-  <FileCopy Name="public/assets/ct-volume-check-B7yvzPB9.js" Target="{$cspdir}dicom3d/assets/ct-volume-check-B7yvzPB9.js" />
-  <FileCopy Name="public/assets/ct-volume-core-DdS-i6F3.js" Target="{$cspdir}dicom3d/assets/ct-volume-core-DdS-i6F3.js" />
+  <FileCopy Name="public/assets/ct-accumulation-BJyF1rpm.js" Target="{$cspdir}dicom3d/assets/ct-accumulation-BJyF1rpm.js" />
+  <FileCopy Name="public/assets/ct-spatial-DBQBJiet.js" Target="{$cspdir}dicom3d/assets/ct-spatial-DBQBJiet.js" />
+  <FileCopy Name="public/assets/ct-volume-check-CWaisfXk.js" Target="{$cspdir}dicom3d/assets/ct-volume-check-CWaisfXk.js" />
+  <FileCopy Name="public/assets/ct-volume-core-CFKgkqn9.js" Target="{$cspdir}dicom3d/assets/ct-volume-core-CFKgkqn9.js" />
   <FileCopy Name="public/assets/cube-root-ex1DcSob.js" Target="{$cspdir}dicom3d/assets/cube-root-ex1DcSob.js" />
   <FileCopy Name="public/assets/data-switch-DvMlrx5k.js" Target="{$cspdir}dicom3d/assets/data-switch-DvMlrx5k.js" />
   <FileCopy Name="public/assets/decompose-mat4-CcMczqIB.js" Target="{$cspdir}dicom3d/assets/decompose-mat4-CcMczqIB.js" />
@@ -93,7 +92,6 @@
   <FileCopy Name="public/assets/enable-material-uv-transform-DYsGWWNu.js" Target="{$cspdir}dicom3d/assets/enable-material-uv-transform-DYsGWWNu.js" />
   <FileCopy Name="public/assets/engine-KxBmuJ5G.js" Target="{$cspdir}dicom3d/assets/engine-KxBmuJ5G.js" />
   <FileCopy Name="public/assets/equality-DRvfjmX3.js" Target="{$cspdir}dicom3d/assets/equality-DRvfjmX3.js" />
-  <FileCopy Name="public/assets/evidence-learning-ui-95WzHtDF.js" Target="{$cspdir}dicom3d/assets/evidence-learning-ui-95WzHtDF.js" />
   <FileCopy Name="public/assets/exponential-DqHQBoqx.js" Target="{$cspdir}dicom3d/assets/exponential-DqHQBoqx.js" />
   <FileCopy Name="public/assets/extract-matrix-BkprbXch.js" Target="{$cspdir}dicom3d/assets/extract-matrix-BkprbXch.js" />
   <FileCopy Name="public/assets/extract-matrix2d-RF1lUJEq.js" Target="{$cspdir}dicom3d/assets/extract-matrix2d-RF1lUJEq.js" />
@@ -114,16 +112,16 @@
   <FileCopy Name="public/assets/gaussian-splatting-pipeline-sh-C4f7bqYn.js" Target="{$cspdir}dicom3d/assets/gaussian-splatting-pipeline-sh-C4f7bqYn.js" />
   <FileCopy Name="public/assets/generate-mipmaps-B1I--Apk.js" Target="{$cspdir}dicom3d/assets/generate-mipmaps-B1I--Apk.js" />
   <FileCopy Name="public/assets/generate-mipmaps-D-ZNyjuP.js" Target="{$cspdir}dicom3d/assets/generate-mipmaps-D-ZNyjuP.js" />
-  <FileCopy Name="public/assets/get-mesh-geometry-aeglj7cf.js" Target="{$cspdir}dicom3d/assets/get-mesh-geometry-aeglj7cf.js" />
+  <FileCopy Name="public/assets/get-mesh-geometry-lSXRBOgb.js" Target="{$cspdir}dicom3d/assets/get-mesh-geometry-lSXRBOgb.js" />
   <FileCopy Name="public/assets/get-property-CvSrthcQ.js" Target="{$cspdir}dicom3d/assets/get-property-CvSrthcQ.js" />
   <FileCopy Name="public/assets/get-variable-CvANQbu0.js" Target="{$cspdir}dicom3d/assets/get-variable-CvANQbu0.js" />
   <FileCopy Name="public/assets/gltf-animation-DgkBPSFi.js" Target="{$cspdir}dicom3d/assets/gltf-animation-DgkBPSFi.js" />
   <FileCopy Name="public/assets/gltf-animation-Dum_9D8V.js" Target="{$cspdir}dicom3d/assets/gltf-animation-Dum_9D8V.js" />
   <FileCopy Name="public/assets/gltf-color-normalize-CjUdxCsm.js" Target="{$cspdir}dicom3d/assets/gltf-color-normalize-CjUdxCsm.js" />
   <FileCopy Name="public/assets/gltf-ext-anisotropy-B3AO9h_a.js" Target="{$cspdir}dicom3d/assets/gltf-ext-anisotropy-B3AO9h_a.js" />
-  <FileCopy Name="public/assets/gltf-ext-basisu-BVmw6Ic4.js" Target="{$cspdir}dicom3d/assets/gltf-ext-basisu-BVmw6Ic4.js" />
+  <FileCopy Name="public/assets/gltf-ext-basisu-Dm_qA3dd.js" Target="{$cspdir}dicom3d/assets/gltf-ext-basisu-Dm_qA3dd.js" />
   <FileCopy Name="public/assets/gltf-ext-clearcoat-D6tMTfrZ.js" Target="{$cspdir}dicom3d/assets/gltf-ext-clearcoat-D6tMTfrZ.js" />
-  <FileCopy Name="public/assets/gltf-ext-dielectric-C9DqsGyX.js" Target="{$cspdir}dicom3d/assets/gltf-ext-dielectric-C9DqsGyX.js" />
+  <FileCopy Name="public/assets/gltf-ext-dielectric-CPLwP0oF.js" Target="{$cspdir}dicom3d/assets/gltf-ext-dielectric-CPLwP0oF.js" />
   <FileCopy Name="public/assets/gltf-ext-diffuse-transmission-d33ZcZTP.js" Target="{$cspdir}dicom3d/assets/gltf-ext-diffuse-transmission-d33ZcZTP.js" />
   <FileCopy Name="public/assets/gltf-ext-emissive-strength-3BxAkXal.js" Target="{$cspdir}dicom3d/assets/gltf-ext-emissive-strength-3BxAkXal.js" />
   <FileCopy Name="public/assets/gltf-ext-iridescence-DWAa8ZNe.js" Target="{$cspdir}dicom3d/assets/gltf-ext-iridescence-DWAa8ZNe.js" />
@@ -140,16 +138,16 @@
   <FileCopy Name="public/assets/gltf-feature-draco-vRs4q72R.js" Target="{$cspdir}dicom3d/assets/gltf-feature-draco-vRs4q72R.js" />
   <FileCopy Name="public/assets/gltf-feature-extras-DVmtZDZe.js" Target="{$cspdir}dicom3d/assets/gltf-feature-extras-DVmtZDZe.js" />
   <FileCopy Name="public/assets/gltf-feature-gaussian-splatting-DoojDGDo.js" Target="{$cspdir}dicom3d/assets/gltf-feature-gaussian-splatting-DoojDGDo.js" />
-  <FileCopy Name="public/assets/gltf-feature-gpu-instancing-_-8CsAsr.js" Target="{$cspdir}dicom3d/assets/gltf-feature-gpu-instancing-_-8CsAsr.js" />
+  <FileCopy Name="public/assets/gltf-feature-gpu-instancing-CR5dvjF2.js" Target="{$cspdir}dicom3d/assets/gltf-feature-gpu-instancing-CR5dvjF2.js" />
   <FileCopy Name="public/assets/gltf-feature-interactivity-BNIdSyGz.js" Target="{$cspdir}dicom3d/assets/gltf-feature-interactivity-BNIdSyGz.js" />
   <FileCopy Name="public/assets/gltf-feature-lights-punctual-D2omcMNa.js" Target="{$cspdir}dicom3d/assets/gltf-feature-lights-punctual-D2omcMNa.js" />
   <FileCopy Name="public/assets/gltf-feature-meshopt-Dz03sl0G.js" Target="{$cspdir}dicom3d/assets/gltf-feature-meshopt-Dz03sl0G.js" />
   <FileCopy Name="public/assets/gltf-feature-morph-B-Jl2rgB.js" Target="{$cspdir}dicom3d/assets/gltf-feature-morph-B-Jl2rgB.js" />
   <FileCopy Name="public/assets/gltf-feature-primitive--_C8PngC.js" Target="{$cspdir}dicom3d/assets/gltf-feature-primitive--_C8PngC.js" />
-  <FileCopy Name="public/assets/gltf-feature-registry-Dw_N2ZdA.js" Target="{$cspdir}dicom3d/assets/gltf-feature-registry-Dw_N2ZdA.js" />
+  <FileCopy Name="public/assets/gltf-feature-registry-l1ueK4YE.js" Target="{$cspdir}dicom3d/assets/gltf-feature-registry-l1ueK4YE.js" />
   <FileCopy Name="public/assets/gltf-feature-skeleton-DOvqTelK.js" Target="{$cspdir}dicom3d/assets/gltf-feature-skeleton-DOvqTelK.js" />
   <FileCopy Name="public/assets/gltf-feature-sparse-BEU5Ewfn.js" Target="{$cspdir}dicom3d/assets/gltf-feature-sparse-BEU5Ewfn.js" />
-  <FileCopy Name="public/assets/gltf-feature-variants-CqEFGXY2.js" Target="{$cspdir}dicom3d/assets/gltf-feature-variants-CqEFGXY2.js" />
+  <FileCopy Name="public/assets/gltf-feature-variants-DJ6PO-GJ.js" Target="{$cspdir}dicom3d/assets/gltf-feature-variants-DJ6PO-GJ.js" />
   <FileCopy Name="public/assets/gltf-feature-xmp-D3lFvTPA.js" Target="{$cspdir}dicom3d/assets/gltf-feature-xmp-D3lFvTPA.js" />
   <FileCopy Name="public/assets/gltf-glb-parser-DNQsJHoi.js" Target="{$cspdir}dicom3d/assets/gltf-glb-parser-DNQsJHoi.js" />
   <FileCopy Name="public/assets/gltf-interleave-CwCtJ2Z-.js" Target="{$cspdir}dicom3d/assets/gltf-interleave-CwCtJ2Z-.js" />
@@ -160,28 +158,28 @@
   <FileCopy Name="public/assets/gltf-normals-BH3IspI3.js" Target="{$cspdir}dicom3d/assets/gltf-normals-BH3IspI3.js" />
   <FileCopy Name="public/assets/gltf-normals-CzT7lj04.js" Target="{$cspdir}dicom3d/assets/gltf-normals-CzT7lj04.js" />
   <FileCopy Name="public/assets/gltf-parser-oG-w_Wko.js" Target="{$cspdir}dicom3d/assets/gltf-parser-oG-w_Wko.js" />
-  <FileCopy Name="public/assets/gltf-pbr-builder-CjGYD5yW.js" Target="{$cspdir}dicom3d/assets/gltf-pbr-builder-CjGYD5yW.js" />
-  <FileCopy Name="public/assets/gltf-pbr-builder-ext-BI2ONCUr.js" Target="{$cspdir}dicom3d/assets/gltf-pbr-builder-ext-BI2ONCUr.js" />
-  <FileCopy Name="public/assets/gltf-pbr-builder-ext-BNSG5Yt9.js" Target="{$cspdir}dicom3d/assets/gltf-pbr-builder-ext-BNSG5Yt9.js" />
+  <FileCopy Name="public/assets/gltf-pbr-builder-Cwl4MsEV.js" Target="{$cspdir}dicom3d/assets/gltf-pbr-builder-Cwl4MsEV.js" />
+  <FileCopy Name="public/assets/gltf-pbr-builder-ext-C7CS3t0R.js" Target="{$cspdir}dicom3d/assets/gltf-pbr-builder-ext-C7CS3t0R.js" />
+  <FileCopy Name="public/assets/gltf-pbr-builder-ext-Dttq-9Tg.js" Target="{$cspdir}dicom3d/assets/gltf-pbr-builder-ext-Dttq-9Tg.js" />
   <FileCopy Name="public/assets/gltf-sampler-denorm-BwVJJjU7.js" Target="{$cspdir}dicom3d/assets/gltf-sampler-denorm-BwVJJjU7.js" />
   <FileCopy Name="public/assets/gltf-sampler-denorm-DdtbiocL.js" Target="{$cspdir}dicom3d/assets/gltf-sampler-denorm-DdtbiocL.js" />
-  <FileCopy Name="public/assets/gltf-sampler-desc-CUs5KOXC.js" Target="{$cspdir}dicom3d/assets/gltf-sampler-desc-CUs5KOXC.js" />
+  <FileCopy Name="public/assets/gltf-sampler-desc-D7EqL7j6.js" Target="{$cspdir}dicom3d/assets/gltf-sampler-desc-D7EqL7j6.js" />
   <FileCopy Name="public/assets/gltf-scene-cleanup-1MhA4RsM.js" Target="{$cspdir}dicom3d/assets/gltf-scene-cleanup-1MhA4RsM.js" />
   <FileCopy Name="public/assets/gltf-share-DnunQ3_W.js" Target="{$cspdir}dicom3d/assets/gltf-share-DnunQ3_W.js" />
   <FileCopy Name="public/assets/gltf-strided-attribute-CQCSVNOw.js" Target="{$cspdir}dicom3d/assets/gltf-strided-attribute-CQCSVNOw.js" />
   <FileCopy Name="public/assets/gltf-uri-DketwTyL.js" Target="{$cspdir}dicom3d/assets/gltf-uri-DketwTyL.js" />
   <FileCopy Name="public/assets/gltf-uv-denorm-DrUM3kVU.js" Target="{$cspdir}dicom3d/assets/gltf-uv-denorm-DrUM3kVU.js" />
-  <FileCopy Name="public/assets/gltf-variants-CcvFfOns.js" Target="{$cspdir}dicom3d/assets/gltf-variants-CcvFfOns.js" />
+  <FileCopy Name="public/assets/gltf-variants-BujZgHhj.js" Target="{$cspdir}dicom3d/assets/gltf-variants-BujZgHhj.js" />
   <FileCopy Name="public/assets/gpu-flags-C1xPl_f9.js" Target="{$cspdir}dicom3d/assets/gpu-flags-C1xPl_f9.js" />
-  <FileCopy Name="public/assets/gpu-resource-retirement-C8MDE3lY.js" Target="{$cspdir}dicom3d/assets/gpu-resource-retirement-C8MDE3lY.js" />
-  <FileCopy Name="public/assets/gpu-texture-acquire-DJzKWCnM.js" Target="{$cspdir}dicom3d/assets/gpu-texture-acquire-DJzKWCnM.js" />
+  <FileCopy Name="public/assets/gpu-resource-retirement-leESN2Rr.js" Target="{$cspdir}dicom3d/assets/gpu-resource-retirement-leESN2Rr.js" />
+  <FileCopy Name="public/assets/gpu-texture-acquire-C6oWQ6ub.js" Target="{$cspdir}dicom3d/assets/gpu-texture-acquire-C6oWQ6ub.js" />
   <FileCopy Name="public/assets/gpu-timer-GevwI9Nt.js" Target="{$cspdir}dicom3d/assets/gpu-timer-GevwI9Nt.js" />
   <FileCopy Name="public/assets/greater-than-or-equal-DsCGf8xz.js" Target="{$cspdir}dicom3d/assets/greater-than-or-equal-DsCGf8xz.js" />
   <FileCopy Name="public/assets/greater-than-tGpCMYce.js" Target="{$cspdir}dicom3d/assets/greater-than-tGpCMYce.js" />
   <FileCopy Name="public/assets/gs-picking-pipeline-DVGXf7lt.js" Target="{$cspdir}dicom3d/assets/gs-picking-pipeline-DVGXf7lt.js" />
   <FileCopy Name="public/assets/havok-BZX47koC.js" Target="{$cspdir}dicom3d/assets/havok-BZX47koC.js" />
   <FileCopy Name="public/assets/havok-floating-origin-B3DTHsth.js" Target="{$cspdir}dicom3d/assets/havok-floating-origin-B3DTHsth.js" />
-  <FileCopy Name="public/assets/havok-thin-instances-Bp4OPr8S.js" Target="{$cspdir}dicom3d/assets/havok-thin-instances-Bp4OPr8S.js" />
+  <FileCopy Name="public/assets/havok-thin-instances-thTfD6YR.js" Target="{$cspdir}dicom3d/assets/havok-thin-instances-thTfD6YR.js" />
   <FileCopy Name="public/assets/ibl-cubemap-upload-BG3e506-.js" Target="{$cspdir}dicom3d/assets/ibl-cubemap-upload-BG3e506-.js" />
   <FileCopy Name="public/assets/ibl-env-assembly-BrD1XpYI.js" Target="{$cspdir}dicom3d/assets/ibl-env-assembly-BrD1XpYI.js" />
   <FileCopy Name="public/assets/ibl-fragment-BQNlFQo8.js" Target="{$cspdir}dicom3d/assets/ibl-fragment-BQNlFQo8.js" />
@@ -233,13 +231,13 @@
   <FileCopy Name="public/assets/pack-mat4-with-offset-gfPe3zZb.js" Target="{$cspdir}dicom3d/assets/pack-mat4-with-offset-gfPe3zZb.js" />
   <FileCopy Name="public/assets/pbr-flags-D6sBGIQF.js" Target="{$cspdir}dicom3d/assets/pbr-flags-D6sBGIQF.js" />
   <FileCopy Name="public/assets/pbr-fog-wgsl-B1rezQu-.js" Target="{$cspdir}dicom3d/assets/pbr-fog-wgsl-B1rezQu-.js" />
-  <FileCopy Name="public/assets/pbr-group-builder-AkVGMxfd.js" Target="{$cspdir}dicom3d/assets/pbr-group-builder-AkVGMxfd.js" />
-  <FileCopy Name="public/assets/pbr-material-DeHX0jEa.js" Target="{$cspdir}dicom3d/assets/pbr-material-DeHX0jEa.js" />
+  <FileCopy Name="public/assets/pbr-group-builder-q06MEdz1.js" Target="{$cspdir}dicom3d/assets/pbr-group-builder-q06MEdz1.js" />
+  <FileCopy Name="public/assets/pbr-material-CV01cQ-H.js" Target="{$cspdir}dicom3d/assets/pbr-material-CV01cQ-H.js" />
   <FileCopy Name="public/assets/pbr-pipeline-BMF9ML1T.js" Target="{$cspdir}dicom3d/assets/pbr-pipeline-BMF9ML1T.js" />
-  <FileCopy Name="public/assets/pbr-renderable-DEwSvSWf.js" Target="{$cspdir}dicom3d/assets/pbr-renderable-DEwSvSWf.js" />
+  <FileCopy Name="public/assets/pbr-renderable-VXiUz9vz.js" Target="{$cspdir}dicom3d/assets/pbr-renderable-VXiUz9vz.js" />
   <FileCopy Name="public/assets/pbr-shadow-fragment-BTFCtOs9.js" Target="{$cspdir}dicom3d/assets/pbr-shadow-fragment-BTFCtOs9.js" />
   <FileCopy Name="public/assets/pbr-template-ext-DPa7hfbt.js" Target="{$cspdir}dicom3d/assets/pbr-template-ext-DPa7hfbt.js" />
-  <FileCopy Name="public/assets/pbr-transmission-ext-Zx2GQ18m.js" Target="{$cspdir}dicom3d/assets/pbr-transmission-ext-Zx2GQ18m.js" />
+  <FileCopy Name="public/assets/pbr-transmission-ext-Fvj9S3HR.js" Target="{$cspdir}dicom3d/assets/pbr-transmission-ext-Fvj9S3HR.js" />
   <FileCopy Name="public/assets/picking-advanced-draw-BmsGE-3p.js" Target="{$cspdir}dicom3d/assets/picking-advanced-draw-BmsGE-3p.js" />
   <FileCopy Name="public/assets/picking-debug-kovmUxk5.js" Target="{$cspdir}dicom3d/assets/picking-debug-kovmUxk5.js" />
   <FileCopy Name="public/assets/picking-detailed-pipeline-dExdYRc4.js" Target="{$cspdir}dicom3d/assets/picking-detailed-pipeline-dExdYRc4.js" />
@@ -251,10 +249,10 @@
   <FileCopy Name="public/assets/pointer-template-0D9D4E4Q.js" Target="{$cspdir}dicom3d/assets/pointer-template-0D9D4E4Q.js" />
   <FileCopy Name="public/assets/power-CRAPufBy.js" Target="{$cspdir}dicom3d/assets/power-CRAPufBy.js" />
   <FileCopy Name="public/assets/preload-helper-CKhbhPgO.js" Target="{$cspdir}dicom3d/assets/preload-helper-CKhbhPgO.js" />
-  <FileCopy Name="public/assets/public-reference-visual-Byc7JA7-.js" Target="{$cspdir}dicom3d/assets/public-reference-visual-Byc7JA7-.js" />
-  <FileCopy Name="public/assets/public-release-BkHfehLJ.js" Target="{$cspdir}dicom3d/assets/public-release-BkHfehLJ.js" />
-  <FileCopy Name="public/assets/public-workstation-B2yPTeEp.css" Target="{$cspdir}dicom3d/assets/public-workstation-B2yPTeEp.css" />
-  <FileCopy Name="public/assets/public-workstation-CGlgecw9.js" Target="{$cspdir}dicom3d/assets/public-workstation-CGlgecw9.js" />
+  <FileCopy Name="public/assets/public-reference-visual-CSZN472N.js" Target="{$cspdir}dicom3d/assets/public-reference-visual-CSZN472N.js" />
+  <FileCopy Name="public/assets/public-release-BcTT6c7N.js" Target="{$cspdir}dicom3d/assets/public-release-BcTT6c7N.js" />
+  <FileCopy Name="public/assets/public-workstation-DmR2tVMe.css" Target="{$cspdir}dicom3d/assets/public-workstation-DmR2tVMe.css" />
+  <FileCopy Name="public/assets/public-workstation-lrSrNU95.js" Target="{$cspdir}dicom3d/assets/public-workstation-lrSrNU95.js" />
   <FileCopy Name="public/assets/quat-conjugate-C09346Hg.js" Target="{$cspdir}dicom3d/assets/quat-conjugate-C09346Hg.js" />
   <FileCopy Name="public/assets/quaternion-from-angles-CEDLPJ0A.js" Target="{$cspdir}dicom3d/assets/quaternion-from-angles-CEDLPJ0A.js" />
   <FileCopy Name="public/assets/quaternion-from-axis-angle-2wkNzbm2.js" Target="{$cspdir}dicom3d/assets/quaternion-from-axis-angle-2wkNzbm2.js" />
@@ -266,24 +264,24 @@
   <FileCopy Name="public/assets/random-DhG0k4Bq.js" Target="{$cspdir}dicom3d/assets/random-DhG0k4Bq.js" />
   <FileCopy Name="public/assets/receive-custom-event-DHfejKIq.js" Target="{$cspdir}dicom3d/assets/receive-custom-event-DHfejKIq.js" />
   <FileCopy Name="public/assets/ref-count-dzJdN9ts.js" Target="{$cspdir}dicom3d/assets/ref-count-dzJdN9ts.js" />
-  <FileCopy Name="public/assets/reference-DAmNipPn.js" Target="{$cspdir}dicom3d/assets/reference-DAmNipPn.js" />
   <FileCopy Name="public/assets/reference-DMBnsulO.css" Target="{$cspdir}dicom3d/assets/reference-DMBnsulO.css" />
-  <FileCopy Name="public/assets/reference-ui-CNSLxQlH.js" Target="{$cspdir}dicom3d/assets/reference-ui-CNSLxQlH.js" />
+  <FileCopy Name="public/assets/reference-gdWe0H5Q.js" Target="{$cspdir}dicom3d/assets/reference-gdWe0H5Q.js" />
+  <FileCopy Name="public/assets/reference-ui-Dm-cE2qe.js" Target="{$cspdir}dicom3d/assets/reference-ui-Dm-cE2qe.js" />
   <FileCopy Name="public/assets/render-target-signature-B-9UVrB_.js" Target="{$cspdir}dicom3d/assets/render-target-signature-B-9UVrB_.js" />
-  <FileCopy Name="public/assets/render-task-base-CmE5r1lE.js" Target="{$cspdir}dicom3d/assets/render-task-base-CmE5r1lE.js" />
+  <FileCopy Name="public/assets/render-task-base-Dad9aTea.js" Target="{$cspdir}dicom3d/assets/render-task-base-Dad9aTea.js" />
   <FileCopy Name="public/assets/rgb-from-oklch-B0ZrHl6K.js" Target="{$cspdir}dicom3d/assets/rgb-from-oklch-B0ZrHl6K.js" />
   <FileCopy Name="public/assets/rgb-to-oklch-BP8jlj9Q.js" Target="{$cspdir}dicom3d/assets/rgb-to-oklch-BP8jlj9Q.js" />
   <FileCopy Name="public/assets/rotate2d-BI3GwbVK.js" Target="{$cspdir}dicom3d/assets/rotate2d-BI3GwbVK.js" />
   <FileCopy Name="public/assets/rotate3d-K9fU3cXg.js" Target="{$cspdir}dicom3d/assets/rotate3d-K9fU3cXg.js" />
   <FileCopy Name="public/assets/round-CfvqrVa3.js" Target="{$cspdir}dicom3d/assets/round-CfvqrVa3.js" />
-  <FileCopy Name="public/assets/rtt-n03pzOzK.js" Target="{$cspdir}dicom3d/assets/rtt-n03pzOzK.js" />
+  <FileCopy Name="public/assets/rtt-HMxmOwWv.js" Target="{$cspdir}dicom3d/assets/rtt-HMxmOwWv.js" />
   <FileCopy Name="public/assets/runtime-BxVH-6yn.js" Target="{$cspdir}dicom3d/assets/runtime-BxVH-6yn.js" />
   <FileCopy Name="public/assets/samplers-B2zrMarA.js" Target="{$cspdir}dicom3d/assets/samplers-B2zrMarA.js" />
   <FileCopy Name="public/assets/saturate-CvYhhfv5.js" Target="{$cspdir}dicom3d/assets/saturate-CvYhhfv5.js" />
   <FileCopy Name="public/assets/scene-helpers-CipkisDJ.js" Target="{$cspdir}dicom3d/assets/scene-helpers-CipkisDJ.js" />
   <FileCopy Name="public/assets/scene-node-D7imXKRU.js" Target="{$cspdir}dicom3d/assets/scene-node-D7imXKRU.js" />
-  <FileCopy Name="public/assets/scene-rebuild-CBPIwszG.js" Target="{$cspdir}dicom3d/assets/scene-rebuild-CBPIwszG.js" />
-  <FileCopy Name="public/assets/scene-runtime-mesh-build-Cuwu8VRh.js" Target="{$cspdir}dicom3d/assets/scene-runtime-mesh-build-Cuwu8VRh.js" />
+  <FileCopy Name="public/assets/scene-rebuild-Dcqx_ov3.js" Target="{$cspdir}dicom3d/assets/scene-rebuild-Dcqx_ov3.js" />
+  <FileCopy Name="public/assets/scene-runtime-mesh-build-CpWsZTb9.js" Target="{$cspdir}dicom3d/assets/scene-runtime-mesh-build-CpWsZTb9.js" />
   <FileCopy Name="public/assets/scene-start-Djnpp69K.js" Target="{$cspdir}dicom3d/assets/scene-start-Djnpp69K.js" />
   <FileCopy Name="public/assets/scene-tick-nfB3G209.js" Target="{$cspdir}dicom3d/assets/scene-tick-nfB3G209.js" />
   <FileCopy Name="public/assets/scene-uniforms-C73kE8NW-DZ06fff3.js" Target="{$cspdir}dicom3d/assets/scene-uniforms-C73kE8NW-DZ06fff3.js" />
@@ -292,18 +290,18 @@
   <FileCopy Name="public/assets/sequence-BafCT18H.js" Target="{$cspdir}dicom3d/assets/sequence-BafCT18H.js" />
   <FileCopy Name="public/assets/set-alpha-cutoff-hPUGMPVH.js" Target="{$cspdir}dicom3d/assets/set-alpha-cutoff-hPUGMPVH.js" />
   <FileCopy Name="public/assets/set-delay-DApEKb9G.js" Target="{$cspdir}dicom3d/assets/set-delay-DApEKb9G.js" />
-  <FileCopy Name="public/assets/set-dispersion-UaK6lgzY.js" Target="{$cspdir}dicom3d/assets/set-dispersion-UaK6lgzY.js" />
+  <FileCopy Name="public/assets/set-dispersion-BltDBmww.js" Target="{$cspdir}dicom3d/assets/set-dispersion-BltDBmww.js" />
   <FileCopy Name="public/assets/set-emissive-CKfG41mE.js" Target="{$cspdir}dicom3d/assets/set-emissive-CKfG41mE.js" />
   <FileCopy Name="public/assets/set-emissive-g8kylsq6.js" Target="{$cspdir}dicom3d/assets/set-emissive-g8kylsq6.js" />
   <FileCopy Name="public/assets/set-metallic-reflectance-BrUG6KIU.js" Target="{$cspdir}dicom3d/assets/set-metallic-reflectance-BrUG6KIU.js" />
   <FileCopy Name="public/assets/set-property-DJKu4xdH.js" Target="{$cspdir}dicom3d/assets/set-property-DJKu4xdH.js" />
-  <FileCopy Name="public/assets/set-transmission-BumP2iKK.js" Target="{$cspdir}dicom3d/assets/set-transmission-BumP2iKK.js" />
+  <FileCopy Name="public/assets/set-transmission-CqfUKtvF.js" Target="{$cspdir}dicom3d/assets/set-transmission-CqfUKtvF.js" />
   <FileCopy Name="public/assets/set-unlit-C2Vkjyqm.js" Target="{$cspdir}dicom3d/assets/set-unlit-C2Vkjyqm.js" />
   <FileCopy Name="public/assets/set-variable-CG_Bp6E6.js" Target="{$cspdir}dicom3d/assets/set-variable-CG_Bp6E6.js" />
-  <FileCopy Name="public/assets/shader-material-DbrKTT0n.js" Target="{$cspdir}dicom3d/assets/shader-material-DbrKTT0n.js" />
+  <FileCopy Name="public/assets/shader-material-BFlKbyuF.js" Target="{$cspdir}dicom3d/assets/shader-material-BFlKbyuF.js" />
   <FileCopy Name="public/assets/shader-pipeline-cache-iOH7GcQv.js" Target="{$cspdir}dicom3d/assets/shader-pipeline-cache-iOH7GcQv.js" />
-  <FileCopy Name="public/assets/shader-renderable-CoXdnZ8y.js" Target="{$cspdir}dicom3d/assets/shader-renderable-CoXdnZ8y.js" />
-  <FileCopy Name="public/assets/shader-thin-instance-Nf_nGI34.js" Target="{$cspdir}dicom3d/assets/shader-thin-instance-Nf_nGI34.js" />
+  <FileCopy Name="public/assets/shader-renderable-D27qS35i.js" Target="{$cspdir}dicom3d/assets/shader-renderable-D27qS35i.js" />
+  <FileCopy Name="public/assets/shader-thin-instance-D5VBvsr6.js" Target="{$cspdir}dicom3d/assets/shader-thin-instance-D5VBvsr6.js" />
   <FileCopy Name="public/assets/shader-vb-support-fMlJoTTd.js" Target="{$cspdir}dicom3d/assets/shader-vb-support-fMlJoTTd.js" />
   <FileCopy Name="public/assets/shadow-fragment-builder-DY6kbcs8.js" Target="{$cspdir}dicom3d/assets/shadow-fragment-builder-DY6kbcs8.js" />
   <FileCopy Name="public/assets/shadow-fragment-esm-AAzSKGBN.js" Target="{$cspdir}dicom3d/assets/shadow-fragment-esm-AAzSKGBN.js" />
@@ -317,14 +315,14 @@
   <FileCopy Name="public/assets/sinh-DrCXXih5.js" Target="{$cspdir}dicom3d/assets/sinh-DrCXXih5.js" />
   <FileCopy Name="public/assets/skeleton-fragment-NyhYM12-.js" Target="{$cspdir}dicom3d/assets/skeleton-fragment-NyhYM12-.js" />
   <FileCopy Name="public/assets/skeleton-fragment-YTTH7pZw.js" Target="{$cspdir}dicom3d/assets/skeleton-fragment-YTTH7pZw.js" />
-  <FileCopy Name="public/assets/slice-ui-5JER4F2A.js" Target="{$cspdir}dicom3d/assets/slice-ui-5JER4F2A.js" />
-  <FileCopy Name="public/assets/slices-B9ikw2Vh.js" Target="{$cspdir}dicom3d/assets/slices-B9ikw2Vh.js" />
+  <FileCopy Name="public/assets/slice-ui-BsPq5O0B.js" Target="{$cspdir}dicom3d/assets/slice-ui-BsPq5O0B.js" />
+  <FileCopy Name="public/assets/slices-DP7gr4Sf.js" Target="{$cspdir}dicom3d/assets/slices-DP7gr4Sf.js" />
   <FileCopy Name="public/assets/smooth-step-TpANZhO0.js" Target="{$cspdir}dicom3d/assets/smooth-step-TpANZhO0.js" />
   <FileCopy Name="public/assets/sockets-DhRah2Zy.js" Target="{$cspdir}dicom3d/assets/sockets-DhRah2Zy.js" />
   <FileCopy Name="public/assets/spot-light-DzRbKgxx.js" Target="{$cspdir}dicom3d/assets/spot-light-DzRbKgxx.js" />
   <FileCopy Name="public/assets/square-root-D8P6JkZU.js" Target="{$cspdir}dicom3d/assets/square-root-D8P6JkZU.js" />
   <FileCopy Name="public/assets/standard-material-features-LxCwHINl.js" Target="{$cspdir}dicom3d/assets/standard-material-features-LxCwHINl.js" />
-  <FileCopy Name="public/assets/standard-renderable-DCY0k9qW.js" Target="{$cspdir}dicom3d/assets/standard-renderable-DCY0k9qW.js" />
+  <FileCopy Name="public/assets/standard-renderable-BTdl8cZP.js" Target="{$cspdir}dicom3d/assets/standard-renderable-BTdl8cZP.js" />
   <FileCopy Name="public/assets/std-fog-wgsl-nbVzQ4sA.js" Target="{$cspdir}dicom3d/assets/std-fog-wgsl-nbVzQ4sA.js" />
   <FileCopy Name="public/assets/std-shadow-fragment-DenVzgWZ.js" Target="{$cspdir}dicom3d/assets/std-shadow-fragment-DenVzgWZ.js" />
   <FileCopy Name="public/assets/stop-animation-BbMFx-Q8.js" Target="{$cspdir}dicom3d/assets/stop-animation-BbMFx-Q8.js" />
@@ -336,17 +334,15 @@
   <FileCopy Name="public/assets/tan-DqY4ub1_.js" Target="{$cspdir}dicom3d/assets/tan-DqY4ub1_.js" />
   <FileCopy Name="public/assets/tanh-3gOHqJRG.js" Target="{$cspdir}dicom3d/assets/tanh-3gOHqJRG.js" />
   <FileCopy Name="public/assets/texture-2d-BUNto8j6.js" Target="{$cspdir}dicom3d/assets/texture-2d-BUNto8j6.js" />
-  <FileCopy Name="public/assets/texture-acquire-DJQ3iglR.js" Target="{$cspdir}dicom3d/assets/texture-acquire-DJQ3iglR.js" />
-  <FileCopy Name="public/assets/texture-allocation-release-BTktSIXv.js" Target="{$cspdir}dicom3d/assets/texture-allocation-release-BTktSIXv.js" />
-  <FileCopy Name="public/assets/texture-owner-state-CFumuSgN.js" Target="{$cspdir}dicom3d/assets/texture-owner-state-CFumuSgN.js" />
-  <FileCopy Name="public/assets/texture-reference-store-D7itGrdQ.js" Target="{$cspdir}dicom3d/assets/texture-reference-store-D7itGrdQ.js" />
-  <FileCopy Name="public/assets/texture-release-Ce0ghgoQ.js" Target="{$cspdir}dicom3d/assets/texture-release-Ce0ghgoQ.js" />
+  <FileCopy Name="public/assets/texture-acquire-F5BtQ2PA.js" Target="{$cspdir}dicom3d/assets/texture-acquire-F5BtQ2PA.js" />
+  <FileCopy Name="public/assets/texture-allocation-release-Db8a6oWQ.js" Target="{$cspdir}dicom3d/assets/texture-allocation-release-Db8a6oWQ.js" />
+  <FileCopy Name="public/assets/texture-release-BgwK33Hd.js" Target="{$cspdir}dicom3d/assets/texture-release-BgwK33Hd.js" />
   <FileCopy Name="public/assets/texture-sampler-pool-5zXM0qOo.js" Target="{$cspdir}dicom3d/assets/texture-sampler-pool-5zXM0qOo.js" />
-  <FileCopy Name="public/assets/thin-instance-CE0tuuPG.js" Target="{$cspdir}dicom3d/assets/thin-instance-CE0tuuPG.js" />
-  <FileCopy Name="public/assets/thin-instance-cull-binding-Dvty_GjG.js" Target="{$cspdir}dicom3d/assets/thin-instance-cull-binding-Dvty_GjG.js" />
+  <FileCopy Name="public/assets/thin-instance-BfepUBiz.js" Target="{$cspdir}dicom3d/assets/thin-instance-BfepUBiz.js" />
+  <FileCopy Name="public/assets/thin-instance-cull-binding-CQ8YDVcS.js" Target="{$cspdir}dicom3d/assets/thin-instance-cull-binding-CQ8YDVcS.js" />
   <FileCopy Name="public/assets/thin-instance-fragment-Dz9dI2V_.js" Target="{$cspdir}dicom3d/assets/thin-instance-fragment-Dz9dI2V_.js" />
-  <FileCopy Name="public/assets/thin-instance-gpu-C5XP8v7v.js" Target="{$cspdir}dicom3d/assets/thin-instance-gpu-C5XP8v7v.js" />
-  <FileCopy Name="public/assets/thin-instance-gpu-CMBUt6mU.js" Target="{$cspdir}dicom3d/assets/thin-instance-gpu-CMBUt6mU.js" />
+  <FileCopy Name="public/assets/thin-instance-gpu-CWeiVRUv.js" Target="{$cspdir}dicom3d/assets/thin-instance-gpu-CWeiVRUv.js" />
+  <FileCopy Name="public/assets/thin-instance-gpu-DamJQEmN.js" Target="{$cspdir}dicom3d/assets/thin-instance-gpu-DamJQEmN.js" />
   <FileCopy Name="public/assets/throttle-BKfmk3Qf.js" Target="{$cspdir}dicom3d/assets/throttle-BKfmk3Qf.js" />
   <FileCopy Name="public/assets/trailing-zeros-BGwTYezi.js" Target="{$cspdir}dicom3d/assets/trailing-zeros-BGwTYezi.js" />
   <FileCopy Name="public/assets/transform-vector-DJsWQ_UA.js" Target="{$cspdir}dicom3d/assets/transform-vector-DJsWQ_UA.js" />
@@ -357,10 +353,13 @@
   <FileCopy Name="public/assets/types-DA4jP4yZ.js" Target="{$cspdir}dicom3d/assets/types-DA4jP4yZ.js" />
   <FileCopy Name="public/assets/ubo-layout-C-OmE0z4.js" Target="{$cspdir}dicom3d/assets/ubo-layout-C-OmE0z4.js" />
   <FileCopy Name="public/assets/uniform-buffer-Dns1Orm6.js" Target="{$cspdir}dicom3d/assets/uniform-buffer-Dns1Orm6.js" />
-  <FileCopy Name="public/assets/uniform-copy-batch-ObiqZOi9.js" Target="{$cspdir}dicom3d/assets/uniform-copy-batch-ObiqZOi9.js" />
+  <FileCopy Name="public/assets/uniform-copy-batch-BQZpLreU.js" Target="{$cspdir}dicom3d/assets/uniform-copy-batch-BQZpLreU.js" />
   <FileCopy Name="public/assets/value-interpolation-BuNinSFc.js" Target="{$cspdir}dicom3d/assets/value-interpolation-BuNinSFc.js" />
   <FileCopy Name="public/assets/vat-picking-pipeline-uM0WRFgH.js" Target="{$cspdir}dicom3d/assets/vat-picking-pipeline-uM0WRFgH.js" />
   <FileCopy Name="public/assets/vector-slerp-B6edzDlL.js" Target="{$cspdir}dicom3d/assets/vector-slerp-B6edzDlL.js" />
+  <FileCopy Name="public/assets/verified-study-visual-dK2z283m.js" Target="{$cspdir}dicom3d/assets/verified-study-visual-dK2z283m.js" />
+  <FileCopy Name="public/assets/verified-volume-9xfyQRPr.js" Target="{$cspdir}dicom3d/assets/verified-volume-9xfyQRPr.js" />
+  <FileCopy Name="public/assets/verified-volume-DhGMw9Lq.js" Target="{$cspdir}dicom3d/assets/verified-volume-DhGMw9Lq.js" />
   <FileCopy Name="public/assets/viewport-controls-DIczX0Mf.js" Target="{$cspdir}dicom3d/assets/viewport-controls-DIczX0Mf.js" />
   <FileCopy Name="public/assets/visibility-BlVxqrHZ.js" Target="{$cspdir}dicom3d/assets/visibility-BlVxqrHZ.js" />
   <FileCopy Name="public/assets/wait-all-dBoefIUc.js" Target="{$cspdir}dicom3d/assets/wait-all-dBoefIUc.js" />
@@ -373,6 +372,9 @@
   <FileCopy Name="public/reference.html" Target="{$cspdir}dicom3d/reference.html" />
   <FileCopy Name="reference/public/reference/BODYParts3D-NOTICE.txt" Target="{$cspdir}dicom3d/reference/BODYParts3D-NOTICE.txt" />
   <FileCopy Name="reference/public/reference/HRA-FEMALE-NOTICE.txt" Target="{$cspdir}dicom3d/reference/HRA-FEMALE-NOTICE.txt" />
+  <FileCopy Name="reference/public/reference/anatomy-admission.json" Target="{$cspdir}dicom3d/reference/anatomy-admission.json" />
+  <FileCopy Name="reference/public/reference/anatomy-owner-map.json" Target="{$cspdir}dicom3d/reference/anatomy-owner-map.json" />
+  <FileCopy Name="reference/public/reference/anatomy-source-catalog.json" Target="{$cspdir}dicom3d/reference/anatomy-source-catalog.json" />
   <FileCopy Name="reference/public/reference/bp3d-male.glb" Target="{$cspdir}dicom3d/reference/bp3d-male.glb" />
   <FileCopy Name="reference/public/reference/bp3d-male.manifest.json" Target="{$cspdir}dicom3d/reference/bp3d-male.manifest.json" />
   <FileCopy Name="reference/public/reference/bp3d-source-members.json" Target="{$cspdir}dicom3d/reference/bp3d-source-members.json" />

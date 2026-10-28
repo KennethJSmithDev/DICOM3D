@@ -12,7 +12,7 @@ args = parser.parse_args()
 root = Path(__file__).resolve().parents[1]
 public = (root / 'public').resolve()
 manifest = json.loads((args.frontend / 'demo-build-manifest.json').read_text())
-assert manifest['release'] == '0.6.0' and manifest['entrypoint'] == '/dicom3d/'
+assert manifest['release'] == '0.6.5' and manifest['entrypoint'] == '/dicom3d/'
 assert not manifest['patientDerivedResearchData'] and not manifest['approvedPublicResearchFixtures']
 files = {**manifest['files'], 'demo-build-manifest.json': None}
 copies = []

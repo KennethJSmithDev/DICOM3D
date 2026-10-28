@@ -1,1 +1,0 @@
-import{i as e,n as t,r as n,t as r}from"./thin-instance-gpu-C5XP8v7v.js";export{r as syncThinInstanceBuffers,t as syncThinInstanceDrawArgs,n as syncThinInstanceForDraw,e as syncThinInstanceGpuData};

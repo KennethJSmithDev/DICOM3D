@@ -21,7 +21,7 @@ assert len(targets) == 204 and sum(r['bytes'] for r in targets.values()) == 1226
 assert all(re.fullmatch(r'assets/[A-Za-z0-9_-]+\.js|reference/(male|female)(\.glb|\.manifest\.json)', n) for n in targets)
 assert all(set(r) == {'bytes', 'sha256'} and r['bytes'] > 0 and re.fullmatch(r'[0-9a-f]{64}', r['sha256']) for r in targets.values())
 current = {e.attrib['Target'].removeprefix('{$cspdir}dicom3d/') for e in ET.parse(root / 'module.xml').findall('.//FileCopy')}
-assert len(current) == 375 and not set(targets) & current
+assert len(current) == 379 and not set(targets) & current
 entry = (root / 'src/DICOM3D/Entry.cls').read_text()
 viewer_build = re.search(r'Parameter VIEWERBUILD = "([0-9a-f]{64})";', entry)[1]
 policy_hash = hashlib.sha256(json.dumps(targets, sort_keys=True, separators=(',', ':')).encode()).hexdigest()
@@ -32,7 +32,7 @@ Class DICOM3D.InstallMigration Extends %RegisteredObject
 
 /// WHY: IPM per-file Activate leaves obsolete051 names behind on upgrade.
 /// BOUNDARY: only204 published051 paths/old hashes; privileged maintenance install.
-/// INVARIANT: preflight all before any deletion; current375 targets are disjoint.
+/// INVARIANT: preflight all before any deletion; current379 targets are disjoint.
 /// EVIDENCE: scripts/retired-filecopy-051.json and exact native release receipt.
 /// REGRESSION: filesystem deletion is not transactional; no concurrent CSP writer.
 ClassMethod Retire051(root As %String) As %Status [ Language = python ]

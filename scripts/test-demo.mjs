@@ -66,7 +66,7 @@ for(const [variant,count,notice] of [
   ['bp3d-male',386,'BODYParts3D-NOTICE.txt'],['hra-female',380,'HRA-FEMALE-NOTICE.txt'],
 ]){
   const metadata=JSON.parse(read(out,'reference/'+variant+'.manifest.json'));
-  const bytes=read(out,'reference/'+metadata.asset.relative_filename);
+  const bytes=variant==='hra-female' ? Buffer.concat([1,2,3].map(i=>read(out,'reference/hra-female.glb.part'+String(i).padStart(3,'0')))) : read(out,'reference/'+metadata.asset.relative_filename);
   assert.equal(hash(bytes),metadata.asset.sha256);
   assert.equal(metadata.reference.structures.length,count);
   assert(metadata.reference.structures.some(x=>x.label==='Heart'));

@@ -1,1 +1,0 @@
-var e=Object.freeze({release:`0.6.0`,title:`DICOM3D v0.6.0 — Visual Research Workstation`,distribution:`REFERENCE_WEB_AND_SOURCE`,publicationApproved:!0,researchDataPublicationApproved:!1,previousRelease:`0.5.1`,previousMainCommit:`f03162cdec8b89a522dd4032e3815ea7d3ed0401`});export{e as t};

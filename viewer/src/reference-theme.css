@@ -39,3 +39,20 @@ body.public-workstation{
 .public-workstation .layer-rows label:last-child{grid-column:auto;flex-direction:column;gap:0;align-items:stretch;font-size:10px}
 .public-workstation .layer-rows input[type=range]{width:100%}
 .public-workstation .layer-rows legend{font-size:11px}
+
+/* Visual-density pass: unchanged inputs/handlers, progressive disclosure only. */
+.public-workstation #referenceLayers{padding:8px;margin:8px 0}
+.public-workstation #referenceLayers>summary{min-height:26px}
+.public-workstation .layer-rows .layer-row{position:relative;border-top:1px solid var(--concept-border);padding:2px 0}
+.public-workstation .layer-rows .layer-visible{min-height:30px;margin:0;padding-right:48px;font-size:12px;text-transform:capitalize;flex-direction:row;gap:8px}
+.public-workstation .layer-visible input{flex:0 0 16px;margin:0}
+.public-workstation #referenceLayers .layer-options{border:0;background:none;padding:0;margin:0}
+.public-workstation #referenceLayers .layer-options>summary{position:absolute;right:0;top:3px;min-height:28px;box-sizing:border-box;padding:5px 2px;font-size:10px;font-weight:400;color:var(--concept-muted)}
+.public-workstation .layer-options-body{padding:6px 8px;margin:2px 0 6px;border:1px solid var(--concept-border);border-radius:5px;background:var(--concept-input)}
+.public-workstation .layer-options-body label{min-height:28px;margin:0;display:flex;flex-direction:row!important;justify-content:space-between;align-items:center!important;font-size:11px!important}
+.public-workstation .layer-options-body input[type=range]{width:58%}
+.public-workstation #referenceLayers .layer-policy{margin:6px 0 0;padding:4px 0 0;border:0;border-top:1px solid var(--concept-border);background:none}
+.public-workstation #referenceLayers .layer-policy>summary{font-size:11px;font-weight:400;min-height:24px;color:var(--concept-muted)}
+
+/* Existing anatomy controls grouped for the desktop inspector. */
+.public-workstation .anatomy-sections{display:flex;gap:4px;margin-bottom:8px}.public-workstation .anatomy-sections button{flex:1;min-width:0;padding:6px 4px}.public-workstation #referenceLayers>summary{display:none}.public-workstation #referenceLayers input[type=search]{box-sizing:border-box;width:100%}.public-workstation #referenceSelectionInfo{padding:12px;margin:10px 0}
