@@ -20,7 +20,7 @@ def main():
   if {'bytes':len(data),'sha256':sha(data)}!=record:raise ValueError('Static inventory mismatch')
   files['public/'+name]=data
  files['public/demo-build-manifest.json']=mbytes
- for name in ['scripts/preview-static.mjs','scripts/open-preview.ps1','scripts/stop-preview.ps1','docs/RELEASE_CANDIDATE_065.md','docs/INTEROPERABILITY_065.md','docs/MOBILE_HANDOFF_065.md','LICENSE','NOTICE']:
+ for name in ['scripts/preview-static.mjs','scripts/open-preview.ps1','scripts/stop-preview.ps1','docs/RELEASE_CANDIDATE_065.md','docs/RELEASE_NOTES_065.md','docs/INSTALL_065.md','docs/ANATOMY_LICENSES_065.md','docs/INTEROPERABILITY_065.md','docs/MOBILE_HANDOFF_065.md','LICENSE','NOTICE']:
   data=frozen(name)
   if source['files'][name]!={'bytes':len(data),'sha256':sha(data)}:raise ValueError('Source inventory mismatch')
   files[name]=data

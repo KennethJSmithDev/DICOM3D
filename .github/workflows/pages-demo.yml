@@ -1,8 +1,5 @@
 name: Deploy DICOM3D safe demo
 on:
-  push:
-    branches: [main]
-    paths: ['demo/**', 'reference/public/**', 'viewer/**', 'scripts/*demo.mjs', 'scripts/test-publication.mjs', 'scripts/test-public-research-data.mjs', 'docs/PUBLIC_RESEARCH_DATA_POLICY.md', 'LICENSE', 'NOTICE', 'third-party/**', '.github/workflows/pages-demo.yml']
   workflow_dispatch:
 permissions:
   contents: read

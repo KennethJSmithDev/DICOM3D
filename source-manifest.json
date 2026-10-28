@@ -27,8 +27,8 @@
       "sha256": "7fc246e73261f2d4a9b8991463fdd897ed58bda5dcaa98661e7bcfa5b4e2ab5c"
     },
     ".github/workflows/pages-demo.yml": {
-      "bytes": 1370,
-      "sha256": "7c8fcd2518b559e073a42feebedefa04480ad6c1d6a9b2afb6265dfc2cff05a7"
+      "bytes": 1074,
+      "sha256": "da32de940ffdb3f1d7da45c2fa53be9321c38bde82e7ffe3d57c1e5ca9a04fbd"
     },
     ".gitignore": {
       "bytes": 448,
@@ -37,6 +37,10 @@
     "CHANGELOG.md": {
       "bytes": 8318,
       "sha256": "5bb9913ebe4d7cd024b2e227077fb6cdb97395f0e53ff0a2f1f00cd22b17ea8f"
+    },
+    "CONTRIBUTING.md": {
+      "bytes": 542,
+      "sha256": "fe78f70fec2fb9fee3448a35a3dc3dd7585aac2ee4b6914ed52285205e47d5be"
     },
     "Dockerfile.core": {
       "bytes": 1282,
@@ -93,6 +97,10 @@
     "docker/core/server.mjs": {
       "bytes": 2562,
       "sha256": "36a521a6e5200c983513ca3820148fd96c3b63fc6d06aa1bef76f51ee0c19e41"
+    },
+    "docs/ANATOMY_LICENSES_065.md": {
+      "bytes": 1229,
+      "sha256": "1854a7904d33c19f4b7529c60f2c78f36a965ce3ea6f02c8bf940ca25b6625b7"
     },
     "docs/ANATOMY_REFERENCE_CAPABILITY.md": {
       "bytes": 6257,
@@ -153,6 +161,10 @@
     "docs/INSTALL_060.md": {
       "bytes": 8062,
       "sha256": "bba735fe559cb0ffa12d6168a557df756201a63da55e8b62998aef8c5d13a821"
+    },
+    "docs/INSTALL_065.md": {
+      "bytes": 752,
+      "sha256": "7324e12d5b440f498981b9799745f7f06b33c46f6e46948ac47870c7deeabb02"
     },
     "docs/INTEROPERABILITY_065.md": {
       "bytes": 3996,
@@ -215,8 +227,12 @@
       "sha256": "bf88c8312a0b71a741ec2cbfe369e8c94a755b319c58a351ab6a1c64f1368356"
     },
     "docs/RELEASE_CANDIDATE_065.md": {
-      "bytes": 5496,
-      "sha256": "ff5f5c52e7d9b9115cff0d527a9207bf57ad4dabb65d3b28f56b97783444ff2c"
+      "bytes": 6102,
+      "sha256": "eda5a84150b149c9c95f510de7350e9e98dccd702bef3f5a4d48de231ab415d7"
+    },
+    "docs/RELEASE_NOTES_065.md": {
+      "bytes": 757,
+      "sha256": "bec12dcdb3c6450e589160b18c5294eb49fd85ac0de4a130c6c851a26613e231"
     },
     "docs/SAFE_DEMO.md": {
       "bytes": 3416,
@@ -1815,8 +1831,8 @@
       "sha256": "8a7567445a74cee50bbdcfce419a9dc323c5456ab8cd9fb1275fb52e21df471c"
     },
     "scripts/archive-static.py": {
-      "bytes": 3381,
-      "sha256": "994342dbc5220b4f58bf758a5ee9117eef7ac9023831a29387d25deba3b11a43"
+      "bytes": 3462,
+      "sha256": "5629d05ba58e05c8d81a1c44e4a50b0db106933651b3fc091b0a86fa2c2f9536"
     },
     "scripts/build-demo.mjs": {
       "bytes": 12831,
@@ -1888,7 +1904,7 @@
     },
     "scripts/test-publication.mjs": {
       "bytes": 3391,
-      "sha256": "8b3afa4d8a92d29d5f18829b3d55ac924395fa8aa50dfd39ea949de0081245f1"
+      "sha256": "00b5a43cd4b1e342d1a3e3269a25f77bf51c4b85c9d3d412561dc59b6ccbd6d7"
     },
     "scripts/test-reference-hierarchy.mjs": {
       "bytes": 3344,

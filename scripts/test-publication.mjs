@@ -19,7 +19,7 @@ const index=process.argv.indexOf('--profile'),profile=index<0?'reference-only':p
 const selected=publicBuildProfile(profile);
 const approved=Object.fromEntries(Object.entries(APPROVED_H000_ASSETS).map(([name,value])=>['reference/public/demo/h000/'+name,value]));
 const researchHashes=new Set(Object.values(APPROVED_H000_ASSETS).map(value=>value.sha256));
-assert.equal(PUBLIC_RELEASE.release,'0.6.0');
+assert.equal(PUBLIC_RELEASE.release,'0.6.5');
 let bytes=0,researchFiles=0;
 function check(path,content){
   const hash=createHash('sha256').update(content).digest('hex');

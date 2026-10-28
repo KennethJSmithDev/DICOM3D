@@ -10,7 +10,7 @@ This candidate integrates existing qualified technology in the Babylon Lite Visu
 | Search, source hierarchy, system / region filters, source holds | QUALIFIED LOCAL; original ownership and partial HRA skeleton retained |
 | Verified CT interface and modular classic CT | QUALIFIED LOCAL; original source syntax distinct from decoded uint16 representation |
 | Original 103 IRIS-returned H000 CT volume | QUALIFIED LOCAL numerical admission, geometry, displayed frames and lifecycle; source payload excluded from all release archives |
-| Local Open Study | Versioned verified descriptor plus raw stored pixels only; not arbitrary DICOM or ISO import. Empty/invalid input fails closed. Full browser file-picker automation is not qualified |
+| Local Open Study | Versioned verified descriptor plus raw stored pixels only; not arbitrary DICOM or ISO import. Empty/invalid input fails closed. Positive file-picker qualification exists for earlier e98aba4, not independently repeated on f55623f6 |
 | Public H000 CT + SEG | QUALIFIED LOCAL in curated Safe Demo; exactly five owner-admitted files, explicit load, unchanged attribution |
 | Accumulated CT / lesion presentation | QUALIFIED LOCAL full stack and lesion-range controls and endpoints; intentional source-range prefix, separate manual clip |
 | Live IRIS / Orthanc retrieval distribution | DEFERRED; local I001 research is preserved, no production endpoint/credential/runtime ships |
@@ -37,4 +37,8 @@ BodyParts3D historical derived geometry remains CC BY-SA 2.1 Japan, HRA remains 
 
 ## Remaining publication gate
 
-Exact candidate, archive/extraction, static inventory and browser receipts must be reviewed separately. The final source correction requires another Core frontend build; the earlier Core build is withheld. Only the corrected curated offline Safe Demo is offered as a built standalone candidate in this bounded packet. Core source ZIP is a source artifact, not a newly qualified Core runtime. The user alone authorizes any push, merge, tag, Pages deployment, release or OEX update. No0.6.5 native/IPM/OEX completion follows from this candidate. Generalized anatomy and the public research fixture retain their redistribution obligations.
+Exact candidate, archive/extraction, static inventory and browser receipts must be reviewed separately. The final source correction requires another Core frontend build; the earlier Core build is withheld. Only the corrected curated offline Safe Demo is offered as a built standalone candidate in this bounded packet. Core source ZIP is a source artifact, not a newly qualified Core runtime. The user alone authorizes any push, merge, tag, Pages deployment, release or OEX update. Local Docker and IPM results are separately bound to f55623f6; the IPM browser witness used an authenticated loopback harness, and ordinary interactive login remains unverified. No installer or OEX completion follows from this candidate. Generalized anatomy and the public research fixture retain their redistribution obligations.
+
+## Publication closure update
+
+See RELEASE_NOTES_065.md, INSTALL_065.md and ANATOMY_LICENSES_065.md. The Safe Demo frontend reuses the frozen f55623f6 payload; this successor changes only publication plumbing and documentation. The Core ZIP is source, not a qualified built Core runtime. The anatomy publication flag remains false pending source-license review and owner approval.
