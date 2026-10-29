@@ -9,7 +9,7 @@ The [GitHub v0.6.5 release](https://github.com/KennethJSmithDev/DICOM3D/releases
 
 These identities are recorded by GitHub release-asset metadata, not a fresh download/re-hash in this documentation reconciliation. GitHub's automatically generated source archives are distinct. See [launch and distribution boundaries](INSTALL_065.md).
 
-The published release records operator approval for anatomy redistribution while preserving the frozen Safe Demo manifest's historical `anatomyPublicationApproved: false` field. Required source notices and separate H000 admission remain in force; the historical flag was not rewritten after approval. The public Pages demo remains a separate, earlier deployment.
+The published release records operator approval for anatomy redistribution while preserving the frozen Safe Demo manifest's historical `anatomyPublicationApproved: false` field. Required source notices and separate H000 admission remain in force; the historical flag was not rewritten after approval. GitHub reports that [Pages deployment 40733714771](https://github.com/KennethJSmithDev/DICOM3D/actions/runs/40733714771) completed successfully on October 28, 2026 at 17:14 UTC for `e8164dbde83d85f24ca997c6ae989626d46f9b2f`. Workflow completion is separate from fresh public-payload readback or browser qualification; neither was rerun here.
 
 Publication does not establish a v0.6.5 installer, IPM registry installation, built Core runtime, live IRIS/Orthanc integration, native-renderer or AI capability. Local Docker/IPM research qualification remains separately scoped, and ordinary interactive IPM sign-in remains unverified. No new runtime or browser test is asserted here.
 

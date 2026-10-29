@@ -4,7 +4,7 @@
 
 The [GitHub v0.6.5 release](https://github.com/KennethJSmithDev/DICOM3D/releases/tag/v0.6.5) provides the Safe Demo ZIP and Core source ZIP. The Core archive is source, not a built runtime. Exact download identities and the distinction between publication, historical manifest flags and qualification are recorded in [release notes](docs/RELEASE_NOTES_065.md).
 
-The public Pages demo remains on its earlier deployment. No v0.6.5 installer, built Core ZIP, live IRIS/Orthanc adapter or clinical capability is established by this publication; registry listing/link observations are recorded separately in [distribution guidance](docs/INSTALL_065.md).
+[Pages deployment 40733714771](https://github.com/KennethJSmithDev/DICOM3D/actions/runs/40733714771) subsequently completed successfully on October 28 for `e8164dbde83d85f24ca997c6ae989626d46f9b2f`; this workflow result is not fresh browser or payload-readback qualification. No v0.6.5 installer, built Core ZIP, live IRIS/Orthanc adapter or clinical capability is established by this publication; registry listing/link observations are recorded separately in [distribution guidance](docs/INSTALL_065.md).
 
 ### Historical 0.6.5 private-candidate preparation — October 28, 2026
 
