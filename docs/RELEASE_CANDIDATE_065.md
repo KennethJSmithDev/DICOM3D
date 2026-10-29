@@ -1,5 +1,7 @@
 # DICOM3D v0.6.5 private release candidate
 
+> **Historical preparation snapshot.** The [GitHub v0.6.5 release](https://github.com/KennethJSmithDev/DICOM3D/releases/tag/v0.6.5) was subsequently published on October 28, 2026. Its reviewed downloads and owner-approval record are summarized in [current release notes](RELEASE_NOTES_065.md). The unpublished/private-candidate and pending-approval statements below remain unchanged as preparation evidence; they do not override that later publication record or qualify additional distributions.
+
 This candidate integrates existing qualified technology in the Babylon Lite Visual Research Workstation. It is not published, installed into IRIS, a clinical product, or a native-renderer migration. Exact source/artifact identities and observed qualification outcomes belong to the external release-candidate manifest.
 
 | Capability | Status and scope |
