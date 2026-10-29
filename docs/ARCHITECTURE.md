@@ -14,7 +14,7 @@ Babylon Lite: renderer-owned presentation
 HTML/CSS/TypeScript: application UI
 ```
 
-The product viewer accepts a user-selected manifest and matching GLB. It checks the asset name and SHA-256 from the manifest before loading. The renderer does not become source authority. The public baseline ships no patient-derived model.
+The product viewer accepts a user-selected manifest and matching GLB. It checks the asset name and SHA-256 from the manifest before loading. The renderer does not become source authority. The original public baseline shipped no patient-derived model. The current optional `curated-h000` Safe Demo admits one exact, attributed CT/SEG research subset under its separate [public-data policy](PUBLIC_RESEARCH_DATA_POLICY.md); the frozen Core/native installers remain reference-only.
 
 ## Rules
 
@@ -39,10 +39,12 @@ Camera framing is another presentation projection. Source/model origin remains f
 
 The published Core includes bounded local imaging adapters and deterministic contextual lessons. H000 source-linked SEG/CT/lesion behavior was qualified with separately supplied research fixtures; the published v0.5.1 Core does not bundle those pixels. General medical mesh slicing, complete multi-structure composition, universal native DICOM ingress, production FHIR/PACS connections, clinical decision-making, Unreal/Niagara effects and clinical use remain unqualified or unimplemented. Public FHIR test reads and synthetic clinical references do not establish production interoperability. Unrelated engine implementations are excluded. See [the roadmap](../ROADMAP.md) for current and proposed release boundaries.
 
-## v0.6.0 reference-only web architecture
+## v0.6.0 web architecture and distribution boundaries
 
 The [Visual Research Workstation](VISUAL_RELEASE_060.md) composes onto `reference.html → reference-start.ts → main.ts/loadFiles → existing reference controller`. The controller retains semantic selection, visibility, source materials, camera and teardown ownership. Shell/effect adapters receive narrow projections; they do not introduce a second rendering engine.
 
 Reference effects use one globally bounded sample buffer carrying original semantic-group identity across source primitives. Source geometry remains unchanged. The two generalized references have no patient registration.
 
-Safe Demo excludes H000 acquired-data files, source-binding metadata and CT screenshots. Earlier local imaging adapters and their qualification remain separate from this publication scope. See [data policy](PUBLIC_RESEARCH_DATA_POLICY.md). The web/source version is v0.6.0; qualified installation distributions retain v0.5.1 identity.
+The original v0.6.0 web/source tag `d3490dd659e19e44b8800abe87bbc626f45350a2` is reference-only. The later `curated-h000` Safe Demo at `cc5c1d9b25776ab055b6a8ac2afa48da63f33904` admits exactly five unchanged research files, including source-binding metadata, only on explicit study load. CT screenshots, arbitrary imports and private connections remain excluded. See the [data policy](PUBLIC_RESEARCH_DATA_POLICY.md) and [current Safe Demo](SAFE_DEMO.md).
+
+The separately published v0.6.0 Core and corrected native distributions remain reference-only, with source identities `4b7429ec1ffb8b56928892d3e64ac8d986d1a9fd` and `bb7d34f250bd09852273924fa6f711e190c49c2c` respectively. Their frozen artifacts and receipts are separate from the original web tag and curated demo. Historical v0.5.1 artifacts remain unchanged. See [packaging provenance](PACKAGING_060.md); publication does not expand clinical or interoperability qualification.
