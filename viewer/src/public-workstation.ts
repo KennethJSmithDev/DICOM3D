@@ -25,7 +25,7 @@ export function preparePublicWorkstation(){
   document.querySelector('.intro')!.textContent='Visual Research Workstation';
   document.querySelector('.profile-control')!.setAttribute('hidden','');
   const header=document.querySelector('.app-header')!,projectLinks=header.querySelector('nav');
-  if(projectLinks){projectLinks.innerHTML=`<a href="https://github.com/KennethJSmithDev/DICOM3D">GitHub</a><a href="https://github.com/KennethJSmithDev/DICOM3D/releases/tag/v0.6.0">Published v0.6.0</a><a href="${base}NOTICE">Notices</a>`;}
+  if(projectLinks){projectLinks.innerHTML=`<a href="https://github.com/KennethJSmithDev/DICOM3D">GitHub</a><a href="https://github.com/KennethJSmithDev/DICOM3D/releases/tag/v0.6.5">Published v0.6.5</a><a href="${base}NOTICE">Notices</a>`;}
   const identity=document.createElement('span');identity.className='release-identity';identity.textContent=`VISUAL RESEARCH WORKSTATION · v${PUBLIC_RELEASE.release} RC`;header.append(identity);
   const evidenceButton=document.createElement('button');evidenceButton.id='evidenceToggle';evidenceButton.textContent='Source & evidence';header.append(evidenceButton);
   const workspace=document.querySelector<HTMLElement>('.workspace')!,view=document.querySelector<HTMLElement>('main.viewport')!,inspector=$('workspaceControls');
