@@ -1,8 +1,16 @@
-#0.6.5 private candidate — 2026-10-28
+# Changelog
+
+## 0.6.5 — published October 28, 2026
+
+The [GitHub v0.6.5 release](https://github.com/KennethJSmithDev/DICOM3D/releases/tag/v0.6.5) provides the Safe Demo ZIP and Core source ZIP. The Core archive is source, not a built runtime. Exact download identities and the distinction between publication, historical manifest flags and qualification are recorded in [release notes](docs/RELEASE_NOTES_065.md).
+
+[Pages deployment 40733714771](https://github.com/KennethJSmithDev/DICOM3D/actions/runs/40733714771) subsequently completed successfully on October 28 for `e8164dbde83d85f24ca997c6ae989626d46f9b2f`; this workflow result is not fresh browser or payload-readback qualification. No v0.6.5 installer, built Core ZIP, live IRIS/Orthanc adapter or clinical capability is established by this publication; registry listing/link observations are recorded separately in [distribution guidance](docs/INSTALL_065.md).
+
+### Historical 0.6.5 private-candidate preparation — October 28, 2026
+
+The following preparation entry is preserved; its candidate wording is not current publication status.
 
 Integrated accepted386male/380female source-backed anatomy, verified classicCT admission, generation-safe Babylon lifecycle, source-aware OpenStudy entry and bounded accumulated H000CT/SEG presentation. Separate Core/reference and curated offlineSafeDemo artifacts; no liveIRIS/PACS distribution, native renderer migration, installer/OEX publication or clinical claim. Exact qualification is bound by externalRC receipts.
-
-# Changelog
 
 ## v0.6.0 Safe Demo follow-on — curated H000 profile
 
