@@ -16,7 +16,7 @@ export function prepareCamera({camera,canvas,sourceMeshes,sliceController,additi
   }
   const originalMeshes=sourceMeshes.filter((m:any)=>m.visible!==false);
   let mode='original',pending=0;
-  // Complete assembly includes temporarily hidden bands without revealing them.
+  // Assembly framing includes temporarily hidden slice bands without changing visibility.
   const assembly=()=>sliceController?.active?sliceController.meshes():sourceMeshes;
   const selected=()=>sliceController?.active?sliceController.selectedMeshes():[];
   const meshes=()=>{const list=mode==='selected'?selected():[...(mode==='original'?originalMeshes:assembly()),...additionalBounds()];return presentation?list.filter((m:any)=>m.visible!==false):list;};

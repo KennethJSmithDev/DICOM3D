@@ -1,12 +1,12 @@
-# DICOM3D Safe Demo — v0.6.0 web scope
+# DICOM3D Safe Demo
 
 [Open the demo](https://kennethjsmithdev.github.io/DICOM3D/).
 
-The v0.6.0 Visual Research Workstation uses the existing reference viewer and Babylon Lite/WebGPU renderer. It opens generalized male BodyParts3D anatomy and supports female HRA switching, selection, visibility, isolation, restoration and camera controls. Scientific, holographic and bounded materialization modes share authoritative reference geometry. Learn sits directly below Lab.
+The Visual Research Workstation uses the reference viewer and Babylon Lite/WebGPU renderer. It opens generalized male BodyParts3D anatomy and supports female HRA switching, selection, visibility, isolation, restoration and camera controls. Scientific, holographic and bounded materialization modes share authoritative reference geometry. Learn sits directly below Lab.
 
 ## Optional curated public research profile
 
-The original v0.6.0 Safe Demo was reference-only. The follow-on `curated-h000` profile admits the five unchanged files specified in the [current data policy](PUBLIC_RESEARCH_DATA_POLICY.md): CT container, source SEG-mask container, lesion GLB, source binding and original notice. They total approximately 33.3 MB and load only after an explicit study action. Default reference browsing causes no H000 requests. The current profile's build/runtime/deployed qualification is recorded separately; this document does not assert that the live site has been updated.
+The original v0.6.0 Safe Demo was reference-only. The follow-on `curated-h000` profile admits the five unchanged files specified in the [current data policy](PUBLIC_RESEARCH_DATA_POLICY.md): CT container, source SEG-mask container, lesion GLB, source binding and original notice. They total approximately 33.3 MB and load only after an explicit study action. Default reference browsing causes no H000 requests. The curated profile first deployed on October 21, 2026. [Pages run](https://github.com/KennethJSmithDev/DICOM3D/actions/runs/39531191232)
 
 The acquired study preserves existing native-frame display, cyan source SEG contours, optional amber surface intersection, linked CT plane, acquired chest context, masked CT interior and contextual learning. The final mesh and semantic identity remain authoritative; no full lung segmentation or reference-body registration is inferred. Credits and TCIA policy are accessible before load and through Source & evidence. No CT screenshot, arbitrary import, private dataset connection, login, IRIS service or clinical write API is included.
 

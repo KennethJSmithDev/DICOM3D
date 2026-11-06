@@ -104,7 +104,7 @@ const html=read(out,'index.html').toString('utf8');
 const entrySource=read(root,'viewer/reference.html').toString('utf8');
 const title=text=>text.match(/<title>([^<]+)<\/title>/)?.[1];
 assert.equal(title(html),title(entrySource));
-assert.equal(title(html),'DICOM3D v0.6.5 RC — Visual Research Workstation');
+assert.equal(title(html),'DICOM3D v0.6.5 — Visual Research Workstation');
 assert(html.includes(base));
 const bundles=names.filter(x=>x.endsWith('.js')).map(x=>read(out,x).toString('utf8')).join('\n');
 for(const text of [
@@ -122,7 +122,9 @@ if(selected.studyEnabled){
   const styles=names.filter(x=>x.endsWith('.css')).map(x=>read(out,x).toString('utf8')).join('\n');
   assert(/#studyAdmissionNotice\{[^}]*display:block/.test(styles),'Pre-load study notice must override hidden library paragraphs');
 }
-assert(bundles.includes('Open verified CT'),'Verified local CT input must remain available');
+assert(bundles.includes('Open verified local CT'),'The local-file control must be labeled separately');
+assert(bundles.includes('Generalized reference anatomy'),'Reference anatomy copy must reflect partial coverage');
+assert(!bundles.includes('Complete reference anatomy'),'Reference anatomy copy must avoid a completeness claim');
 for(const name of ['brand/favicon.svg','brand/semantic-cube.svg'])assert(bundles.includes(name),'Brand reference missing: '+name);
 for(const name of notices)assert.deepEqual(read(root,name),read(out,name),'Notice changed: '+name);
 assert(!names.some(x=>/reference\/(male|female)\.(glb|manifest\.json)$/.test(x)));

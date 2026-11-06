@@ -14,7 +14,7 @@ Babylon Lite: renderer-owned presentation
 HTML/CSS/TypeScript: application UI
 ```
 
-The product viewer accepts a user-selected manifest and matching GLB. It checks the asset name and SHA-256 from the manifest before loading. The renderer does not become source authority. The public baseline ships no patient-derived model.
+The product viewer accepts a user-selected manifest and matching GLB. It checks the asset name and SHA-256 from the manifest before loading. The renderer does not become source authority. The original public baseline shipped reference assets. The curated Safe Demo includes one attributed CT/SEG study under the [public research data policy](PUBLIC_RESEARCH_DATA_POLICY.md).
 
 ## Rules
 
@@ -25,9 +25,8 @@ The product viewer accepts a user-selected manifest and matching GLB. It checks 
 - Current DICOM3D Model Space v1 qualification is BIPED-only for the accepted study.
 - H000 qualification does not establish clinical validity or anatomical outward-normal correctness.
 - This product repository is not the complete research evidence store.
-- AI segmentation remains last, after deterministic providers and their contracts are established.
 
-## Qualified deployment versus future scope
+## Published deployment scope
 
 The v0.1.0 release includes an independently installable IRIS for Health package with two ObjectScript classes, authenticated viewer/API endpoints, IPM lifecycle qualification and a tested isolated Docker development profile. These host and deployment capabilities do **not** make IRIS the owner of DICOM3D semantic geometry. Native Windows viewer/API v0.0.2 was qualified separately; native Windows IPM installation remains unverified.
 
@@ -37,12 +36,12 @@ The published v0.2.0 H002 path adds manipulation of five derived open bands only
 
 Camera framing is another presentation projection. Source/model origin remains fixed by the manifest. Geometric bounds center is computed from public local mesh AABBs transformed into renderer world space. The camera target copies a chosen bounds center; it is not an anatomical landmark or a rewritten source origin. Aspect-aware enclosing-sphere fit uses the actual canvas dimensions. Fit-complete includes hidden bands without changing visibility, focus uses the visible selected band, expansion/layout changes refit, and reset-all restores original orientation/FOV and original visible bounds at the current aspect.
 
-The published Core includes bounded local imaging adapters and deterministic contextual lessons. H000 source-linked SEG/CT/lesion behavior was qualified with separately supplied research fixtures; the published v0.5.1 Core does not bundle those pixels. General medical mesh slicing, complete multi-structure composition, universal native DICOM ingress, production FHIR/PACS connections, clinical decision-making, Unreal/Niagara effects and clinical use remain unqualified or unimplemented. Public FHIR test reads and synthetic clinical references do not establish production interoperability. Unrelated engine implementations are excluded. See [the roadmap](../ROADMAP.md) for current and proposed release boundaries.
+Published Core distributions include reference anatomy and contextual learning. The v0.5.1 Core was qualified with separately supplied H000 research fixtures. See the [release history](../ROADMAP.md) for the distribution scope.
 
-## v0.6.0 reference-only web architecture
+## Visual Research Workstation
 
 The [Visual Research Workstation](VISUAL_RELEASE_060.md) composes onto `reference.html → reference-start.ts → main.ts/loadFiles → existing reference controller`. The controller retains semantic selection, visibility, source materials, camera and teardown ownership. Shell/effect adapters receive narrow projections; they do not introduce a second rendering engine.
 
 Reference effects use one globally bounded sample buffer carrying original semantic-group identity across source primitives. Source geometry remains unchanged. The two generalized references have no patient registration.
 
-Safe Demo excludes H000 acquired-data files, source-binding metadata and CT screenshots. Earlier local imaging adapters and their qualification remain separate from this publication scope. See [data policy](PUBLIC_RESEARCH_DATA_POLICY.md). The web/source version is v0.6.0; qualified installation distributions retain v0.5.1 identity.
+The original v0.6.0 tag and later v0.6.0 Core/IPM distributions include reference anatomy. The curated Safe Demo serves exactly five H000 files on explicit study load. [Packaging provenance](PACKAGING_060.md) identifies the separately qualified installer sources.

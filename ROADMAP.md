@@ -1,4 +1,4 @@
-# DICOM3D Roadmap
+# DICOM3D release history
 
 DICOM3D is an independently installable, open-source IRIS for Health research-presentation viewer. Source DICOM data, semantic/spatial provenance, portable derived geometry and renderer-owned presentation remain separate.
 
@@ -45,22 +45,15 @@ The seven frozen recovery assets are published at `f03162c`; the static viewer/r
 
 **From Pixels to Meaning.** The selected release brings the existing BodyParts3D/HRA references into a 3D-first desktop workspace with scientific/holographic materials, bounded materialization, source-preserving semantic controls and contextual Learn.
 
-The GitHub main/tag/release and Pages operation uses the reference-only fallback. H000 CT/SEG/lesion files and CT screenshots are excluded; their separate local qualification is preserved. No acquired-data publication is implied.
+The original v0.6.0 tag uses the reference-only profile. A later [Safe Demo deployment](docs/SAFE_DEMO.md) added the curated H000 study on request.
 
 The final release gate freezes the exact reference-only tree/output, verifies browser behavior, integrates the accepted source, observes Pages completion and reads back the actual remote experience and GitHub release. [Release notes](docs/RELEASE_060.md) define the scope; the [procedure](docs/VISUAL_PUBLICATION_PROCEDURE.md) separates each evidence step.
 
 The original web/source publication retained v0.5.1 installer identifiers. The separately authorized installation completion reconciles Core/IPM, module/Health and Compose to 0.6.0 and binds exact archives to a later packaging commit. The original tag stays immutable. Native Windows, Open Exchange/registry actions and H000 admission retain their separate boundaries.
 
-## Historical planning targets and later proposals (subject to evidence)
+## v0.6.5 — Published Visual Research Workstation
 
-- **0.3.0 — recognizable anatomical context:** qualified public/synthetic contextual study presentation, CT-volume display and legibility; preserve source versus interpolated detail.
-- **0.4.0 — source correlation:** H004 DICOM SOP/frame/source-slice navigation and derived-section distinctions.
-- **0.5.0 — contextual learning:** explain active fields, actions, and results in the workstation.
-- **Former 0.6.0 proposal — interoperability and optional AI seam:** deferred and unversioned. It is not part of the selected Visual Research Workstation release. Independently qualified IRIS workflows and optional read-only AI hooks would require their own future contract.
-- **0.7.x–0.9.x — hardening:** multi-structure composition, additional imaging workflows, UX/accessibility, performance, compatibility, security and evidence-driven stability.
-- **1.0.0 — stable contract:** independently installable, documented, reproducible, tested and supportable release with clearly bounded medical/research claims.
-
-The historical 0.3–0.5 planning descriptions are superseded by the published v0.5.0 capability statement. The former 0.6.0 theme is superseded by the user's Visual Research Workstation identity above. Later targets remain proposals, not fixed dates.
+The published Safe Demo opens generalized reference anatomy and offers the curated H000 CT/SEG example on request. The separate Core ZIP contains source. See the [release notes](docs/RELEASE_NOTES_065.md) and [distribution guide](docs/INSTALL_065.md).
 
 ## Core ownership and representation
 
@@ -68,7 +61,6 @@ The historical 0.3–0.5 planning descriptions are superseded by the published v
 - Derived slices preserve stable identity and canonical transform while allowing temporary manipulation. Never rewrite the original GLB or accepted H000 mesh to implement visual expansion.
 - Use small semantic IDs and explicit domains; load rich per-slice payload only when needed. Measure browser requests, generated assets, memory and interaction latency as well as correctness.
 - The live safe demo must remain no-login, browser-only and safe for public access. The IRIS/IPM product remains independently installable.
-- Unrelated private research implementations are excluded from this product.
 - No claim of clinical validity, diagnostic support or submillimetre anatomical accuracy follows from a smoother display.
 
 ## Release process

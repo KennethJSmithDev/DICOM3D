@@ -6,7 +6,7 @@ const base=import.meta.env.BASE_URL,publicDemo=import.meta.env.MODE==='safe-refe
 const mount=document.createElement('section');mount.className='section-body control-section';
 mount.innerHTML='<label>Generalized adult reference <select id="referenceVariant"><option value="bp3d-male">Male · BodyParts3D anatomy</option><option value="hra-female">Female · HRA anatomical reference</option></select></label><button id="referenceReload">Reload reference</button><button id="referenceUnload">Unload reference</button><p>Independent BodyParts3D male and HRA female reference sources; partial coverage, no patient registration. No patient DICOM required.</p><output id="referenceLoadState" hidden></output>';
 document.querySelector('#sourceMount')!.prepend(mount);
-document.title=publicDemo?PUBLIC_RELEASE.title:'DICOM3D · Reference Anatomy Prototype';
+document.title=publicDemo?PUBLIC_RELEASE.title:'DICOM3D · Reference Anatomy';
 prepareReferenceExperience(mount);
 const shell=publicDemo?(await import('./public-workstation')).preparePublicWorkstation():null;
 const select=document.querySelector<HTMLSelectElement>('#referenceVariant')!,reload=document.querySelector<HTMLButtonElement>('#referenceReload')!;
@@ -38,7 +38,7 @@ if(import.meta.env.DICOM3D_PUBLIC_STUDY)shell?.setLoadStudy(async()=>{
   if(busy)return;setBusy(true);sampleGeneration++;
   document.querySelector('#status')!.textContent='Loading attributed research CT and SEG · approximately 33.3 MB…';
   try{
-    // No H000 import, fetch or decoded buffer exists before this explicit action.
+    // Load and verify the public study only after the visitor selects it.
     const {loadPublicResearchFixture}=await import('./public-research-loader');
     const fixture=await loadPublicResearchFixture(base);
     const loaded=await loadFiles(new File([JSON.stringify(fixture.manifest)],'public-source-manifest.json'),new File([fixture.glbBytes],fixture.manifest.asset.relative_filename),{...hooks(),publicStudy:fixture});
@@ -53,8 +53,8 @@ start();
 // Admit local CT only through the verified volume contract.
 if(import.meta.env.DICOM3D_VERIFIED_VOLUME_IMPORT===true&&shell){
  const panel=document.createElement('details');panel.id='verifiedVolumeImport';panel.open=false;
- panel.innerHTML='<summary>Open verified study · local files · Babylon Lite</summary><label>Verified admission packet <input id="verifiedDescriptor" type="file" accept=".json"></label><label>Decoded stored values <input id="verifiedPixels" type="file" accept=".raw16,.bin"></label><button id="verifiedLoad" type="button">Open verified CT</button><p>Choose an existing verified volume packet and its stored pixel payload. Original DICOM and live PACS/IRIS connection are not enabled here. No SEG or atlas registration is inferred.</p><output id="verifiedLoadState" hidden></output>';
- const openStudy=document.createElement('button');openStudy.id='openVerifiedStudy';openStudy.textContent='Open Study';reload.after(openStudy);openStudy.onclick=()=>{panel.open=!panel.open;if(panel.open)panel.scrollIntoView({block:'nearest'});};
+ panel.innerHTML='<summary>Verified local CT files</summary><label>Verified admission packet <input id="verifiedDescriptor" type="file" accept=".json"></label><label>Decoded stored values <input id="verifiedPixels" type="file" accept=".raw16,.bin"></label><button id="verifiedLoad" type="button">Open verified CT</button><p>Choose an existing verified volume packet and its stored pixel payload. Original DICOM and live PACS/IRIS connection are not enabled here. No SEG or atlas registration is inferred.</p><output id="verifiedLoadState" hidden></output>';
+ const openStudy=document.createElement('button');openStudy.id='openVerifiedStudy';openStudy.textContent='Open verified local CT';reload.after(openStudy);openStudy.onclick=()=>{panel.open=!panel.open;if(panel.open)panel.scrollIntoView({block:'nearest'});};
  (document.getElementById('viewerDrawer')??mount.parentElement)!.append(panel);let token=0,abort:AbortController|null=null;
  async function admit(read:()=>Promise<any>){
   if(busy)return;setBusy(true);const id=++token;abort?.abort();abort=new AbortController();const out=panel.querySelector('output')!;out.textContent='';

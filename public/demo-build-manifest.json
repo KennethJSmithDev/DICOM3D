@@ -1,7 +1,7 @@
 {
   "product": "DICOM3D",
   "release": "0.6.5",
-  "title": "DICOM3D v0.6.5 RC — Visual Research Workstation",
+  "title": "DICOM3D v0.6.5 — Visual Research Workstation",
   "distribution": "REFERENCE_WEB_AND_SOURCE",
   "publicationApproved": false,
   "researchDataPublicationApproved": false,
@@ -992,13 +992,13 @@
       "bytes": 17699,
       "sha256": "30088a744a953a7d2248383e249440e9149215c308a8605909141835d784a8e6"
     },
-    "assets/public-release-BcTT6c7N.js": {
-      "bytes": 296,
-      "sha256": "0410dc5c4928c92bc1566e70c9e7a862d2e87a9baa39fb95eae80bd702e4f298"
+    "assets/public-release-CuBq6fBm.js": {
+      "bytes": 293,
+      "sha256": "4158be64dd454f7028a6e376191d8b0b59661598064e29d8063e656067a65457"
     },
-    "assets/public-workstation-DWjZaOjj.js": {
-      "bytes": 41783,
-      "sha256": "dd9cd5be8d97e9eb91f3f05b07e6d59f5c83ed132e09d46b09ab40df95ded6bb"
+    "assets/public-workstation-BvT007Tw.js": {
+      "bytes": 41791,
+      "sha256": "b6e71a00aeeb2e7985616bec0079fe53d2df84a182f20bc16eafe29897480983"
     },
     "assets/public-workstation-DmR2tVMe.css": {
       "bytes": 27834,
@@ -1048,17 +1048,17 @@
       "bytes": 140,
       "sha256": "5b22f3f3846857325b1b923951c59c7683a65a34132842b36f1a73599f90bba1"
     },
-    "assets/reference-CmK57Qjv.js": {
-      "bytes": 54290,
-      "sha256": "d2dcefe61b692941e140e1f32c568f848eea6940ced8acbac271380558d34607"
-    },
     "assets/reference-DMBnsulO.css": {
       "bytes": 17994,
       "sha256": "82fd4c02184758280789804f72c29d509dc2dbf68ed56af191de9724295fdc80"
     },
-    "assets/reference-ui-C0Ui55uO.js": {
-      "bytes": 34267,
-      "sha256": "e6052c5197b3515aeaab9ebfdbdda1abcc9c2751edd4a31b6b41cb22cd0cd443"
+    "assets/reference-Rpe38hBM.js": {
+      "bytes": 54275,
+      "sha256": "aa29f780ca57c22ca04ae1610abd3683be35945185a8a228079865ca4e22c751"
+    },
+    "assets/reference-ui-CNia5gtF.js": {
+      "bytes": 34276,
+      "sha256": "f2aa6eeeddd7de05d97ed2af04b4d032139578c03cc33a647ef72bd5d8e30826"
     },
     "assets/render-target-signature-B-9UVrB_.js": {
       "bytes": 131,
@@ -1465,12 +1465,12 @@
       "sha256": "c96129b740649d1b4ac3a14459fcf61c5bb197bd908af52178ba3e7e88302544"
     },
     "index.html": {
-      "bytes": 5854,
-      "sha256": "cb358a82612518c4f7eeeb37337ee7b4c27de7cd94d3d615a78e27b4ec398370"
+      "bytes": 5851,
+      "sha256": "f0feb07d994874ba1ee1c577d528b4225fd014dd2b2e609be5a2ef1911efebb0"
     },
     "reference.html": {
-      "bytes": 5854,
-      "sha256": "cb358a82612518c4f7eeeb37337ee7b4c27de7cd94d3d615a78e27b4ec398370"
+      "bytes": 5851,
+      "sha256": "f0feb07d994874ba1ee1c577d528b4225fd014dd2b2e609be5a2ef1911efebb0"
     },
     "reference/BODYParts3D-NOTICE.txt": {
       "bytes": 1621,

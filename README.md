@@ -12,30 +12,16 @@
 
 **v0.6.5 — Visual Research Workstation.** *From Pixels to Meaning.*
 
-DICOM3D is an open-source, desktop-first medical imaging and anatomical research workstation. Explore generalized male and female reference anatomy, inspect source-linked acquired CT/segmentation evidence, and move between Scientific, Holographic and Materialization presentations without changing the underlying source data.
+DICOM3D is an open-source, desktop-first research workstation for exploring generalized anatomy and viewing source-linked CT and segmentation. Use Scientific, Holographic, and Materialization modes to change the presentation while retaining the source geometry.
 
-The goal is straightforward: **beautiful enough to invite exploration, informative enough to teach, and evidence-backed within its qualified research scope.** DICOM3D is designed to grow toward interoperability with existing healthcare imaging infrastructure, rather than replace a PACS. Production PACS integration and clinical use are **not** currently qualified.
+The [Live Demo](https://kennethjsmithdev.github.io/DICOM3D/) opens directly in a desktop browser with WebGPU. DICOM3D is research software for visualization and learning. Clinical use and production PACS integration are outside its qualified scope.
 
-Start with the [v0.6.5 release downloads](https://github.com/KennethJSmithDev/DICOM3D/releases/tag/v0.6.5) for the qualified Safe Demo and Core source archive. The [Live Demo](https://kennethjsmithdev.github.io/DICOM3D/) serves the October 29 v0.6.5 RC web build and links to the published release. [View the Pages deployment](https://github.com/KennethJSmithDev/DICOM3D/actions/runs/40898468972). See the [v0.6.5 release notes](https://github.com/KennethJSmithDev/DICOM3D/releases/tag/v0.6.5), [Safe Demo data policy](docs/PUBLIC_RESEARCH_DATA_POLICY.md), and [changelog](CHANGELOG.md) for evidence boundaries. The [v0.6.0 installation guide](docs/INSTALL_060.md) remains available for its historical artifacts.
+## Downloads
 
-## Distributions
+- **v0.6.5 Safe Demo and Core source.** The Safe Demo ZIP runs locally with Node.js 24 and includes the optional public CT example. The Core ZIP contains source for the reference workstation. [v0.6.5 downloads and launch instructions](https://github.com/KennethJSmithDev/DICOM3D/releases/tag/v0.6.5)
+- **v0.6.0 Core/Docker and IRIS/IPM.** The qualified installation archives contain reference anatomy. The Core build runs independently. The IPM package uses the protected IRIS for Health viewer. [v0.6.0 downloads](https://github.com/KennethJSmithDev/DICOM3D/releases/tag/v0.6.0) · [Installation guide](docs/INSTALL_060.md) · [Packaging provenance](docs/PACKAGING_060.md)
 
-- **v0.6.5 Safe Demo ZIP:** the qualified standalone Visual Research Workstation. Generalized BodyParts3D male anatomy opens first, with HRA female switching. **Explore Real CT Study** optionally loads an attributed H000 acquired CT/SEG research example. The [release notes](https://github.com/KennethJSmithDev/DICOM3D/releases/tag/v0.6.5) include local launch instructions.
-- **v0.6.0 standalone Core / Docker:** [`dicom3d-core-0.6.0.zip`](https://github.com/KennethJSmithDev/DICOM3D/releases/tag/v0.6.0) serves the reference-only workstation locally. No IRIS, account, or acquired H000 study is bundled.
-- **v0.6.0 protected IRIS/IPM:** [`dicom3d-0.6.0.tgz`](https://github.com/KennethJSmithDev/DICOM3D/releases/tag/v0.6.0) provides the versioned visual frontend behind the existing password/resource-protected IRIS for Health hosting boundary. The optional [isolated IRIS development host](docs/IRIS_DOCKER_DEV_051.md) supports installation testing; it does not configure production FHIR/PACS connectivity.
-- **Provenance and verification:** the [v0.6.5 release](https://github.com/KennethJSmithDev/DICOM3D/releases/tag/v0.6.5) identifies its reviewed Safe Demo and Core source ZIPs. Frozen v0.6.0 Core and IPM artifacts, checksums, and qualification receipts remain attached to the [v0.6.0 release](https://github.com/KennethJSmithDev/DICOM3D/releases/tag/v0.6.0). The original v0.6.0 web/source tag and later, separately qualified installer-source commits have distinct identities; read [packaging provenance](docs/PACKAGING_060.md) before reproducing an installer. Open Exchange and its IPM registry are separate publication surfaces.
-
-The **v0.6.5 Core source ZIP** is source, not a prebuilt runtime. No v0.6.5 installer, IPM distribution or live IRIS/Orthanc adapter is claimed.
-
-Historical releases, including [v0.5.1](https://github.com/KennethJSmithDev/DICOM3D/releases/tag/v0.5.1), remain preserved.
-
-## Milestone and evidence history
-
-DICOM3D began with **H000: acquired CT + DICOM SEG → verified spatial alignment → semantic 3D geometry and provenance**. Subsequent milestones established the **V010 IRIS/IPM lifecycle**, **H002 reversible presentation slices**, imaging and reference-anatomy exploration, **contextual learning**, and the v0.5.0 functional foundation. **v0.5.1** repaired and independently qualified Docker/IPM installation. **v0.6.0** introduced the Visual Research Workstation and qualified reference-only Core/IPM distributions; the optional curated H000 Safe Demo was admitted and published afterward.
-
-Public checkpoints: [v0.1.0](https://github.com/KennethJSmithDev/DICOM3D/releases/tag/v0.1.0) · [v0.2.0](https://github.com/KennethJSmithDev/DICOM3D/releases/tag/v0.2.0) · [v0.5.0](https://github.com/KennethJSmithDev/DICOM3D/releases/tag/v0.5.0) · [v0.5.1](https://github.com/KennethJSmithDev/DICOM3D/releases/tag/v0.5.1) · [v0.6.0](https://github.com/KennethJSmithDev/DICOM3D/releases/tag/v0.6.0) · [v0.6.5](https://github.com/KennethJSmithDev/DICOM3D/releases/tag/v0.6.5).
-
-Named qualification receipts, not appearances, build success or version labels alone, establish test claims. Technical evidence is preserved in the [v0.6.5 release notes](https://github.com/KennethJSmithDev/DICOM3D/releases/tag/v0.6.5), [v0.6.0 release documentation](docs/RELEASE_060.md), and [architecture](docs/ARCHITECTURE.md).
+See the [changelog](CHANGELOG.md) and [release history](ROADMAP.md) for earlier checkpoints.
 
 ## Experience and evidence
 
@@ -45,7 +31,7 @@ Named qualification receipts, not appearances, build success or version labels a
 
 **Choose the presentation.** Scientific mode displays source-oriented materials; Holographic mode provides controlled cyan translucency; Materialization offers bounded source-derived assembly effects and reduced-motion controls. These affect presentation only, not anatomy, measurements or medical evidence. See the historical v0.6.0 [female anatomy](docs/images/visual-060-female-desktop.jpg) and [materialization](docs/images/visual-060-materialization.jpg) screenshots.
 
-**Inspect real source-linked imaging.** The optional **Explore Real CT Study** action loads the curated H000 CT/SEG example into the public Safe Demo: source CT frames, segmentation contours, a distinct semantic lesion mesh, linked 3D cutaway/interior and source-aware inspection. The source study remains authoritative; generalized reference anatomy is not registered to it. The five files are admitted by an [explicit public-data policy](docs/PUBLIC_RESEARCH_DATA_POLICY.md), not as a generic patient-import feature.
+**Explore the public CT example.** Select **Explore public CT example** in the Live Demo to load the curated H000 study, including source CT frames, segmentation contours, and a linked 3D lesion view. Generalized anatomy has no registration to the study. [Public research data policy](docs/PUBLIC_RESEARCH_DATA_POLICY.md)
 
 Public H000 CT/SEG source and 3D views (v0.6.0 workstation captures):
 
@@ -57,21 +43,20 @@ Public H000 CT/SEG source and 3D views (v0.6.0 workstation captures):
 
 **Learn in context.** The **Learn** workspace explains active structures, source identity, rendering choices, limits and attribution alongside the experience. See the historical v0.6.0 [contextual learning capture](docs/images/visual-060-learning.jpg).
 
-DICOM/source arrays and spatial metadata remain authoritative. The manifest owns semantics and provenance; GLB owns portable derived geometry; Babylon Lite/WebGPU owns rendering. Windowing, clipping, camera position and visual effects do not create medical observations. DICOM3D does **not** claim diagnostic validity, clinical approval, universal native DICOM/PACS connectivity, complete anatomical coverage, or new segmentation/AI interpretation.
+**Open verified local CT** accepts a verified volume descriptor and its stored pixels. The files stay in the browser. The manifest records semantic identity, spatial transforms, and provenance. GLB carries derived geometry, and Babylon Lite renders the presentation. [Architecture](docs/ARCHITECTURE.md)
 
-## Development
+## Build from source
 
-Use Node.js 24 and the pinned `viewer/package-lock.json`:
+Use Node.js 24 and the pinned viewer dependencies.
 
 ```powershell
 npm ci --prefix viewer
 node scripts/build-demo.mjs --profile curated-h000
 node scripts/test-demo.mjs --profile curated-h000
+node scripts/preview-static.mjs --root .demo-dist --port 0
 ```
 
-Preview the built Safe Demo using the [local instructions](docs/SAFE_DEMO.md) or [publication procedure](docs/VISUAL_PUBLICATION_PROCEDURE.md). Omit `--profile curated-h000` for the reference-only build; Core/IPM installer preparation does not admit the optional H000 study. The application reuses the existing Babylon Lite renderer rather than introducing a second engine. The v0.6.5 workstation also admits a verified volume descriptor and its raw stored-pixel payload; it is not an arbitrary DICOM or ISO importer.
-
-For the historical v0.6.0 native/Core installation, use the [v0.6.0 guide](docs/INSTALL_060.md) and verified archives rather than rebuilding from GitHub's original web/source tag without the separately identified packaging source.
+Open the loopback URL printed by the preview server. The default build profile includes reference anatomy. The curated profile also includes the five approved CT/SEG research files. [Safe Demo build guide](docs/SAFE_DEMO.md)
 
 ## License
 

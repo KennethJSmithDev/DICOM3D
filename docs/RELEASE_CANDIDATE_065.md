@@ -12,11 +12,10 @@ This candidate integrates existing qualified technology in the Babylon Lite Visu
 | Search, source hierarchy, system / region filters, source holds | QUALIFIED LOCAL; original ownership and partial HRA skeleton retained |
 | Verified CT interface and modular classic CT | QUALIFIED LOCAL; original source syntax distinct from decoded uint16 representation |
 | Original 103 IRIS-returned H000 CT volume | QUALIFIED LOCAL numerical admission, geometry, displayed frames and lifecycle; source payload excluded from all release archives |
-| Local Open Study | Versioned verified descriptor plus raw stored pixels only; not arbitrary DICOM or ISO import. Empty/invalid input fails closed. Positive file-picker qualification exists for earlier e98aba4, not independently repeated on f55623f6 |
+| Verified local CT import | Versioned verified descriptor plus raw stored pixels only; not arbitrary DICOM or ISO import. Empty/invalid input fails closed. The file picker was qualified in an earlier preparation build |
 | Public H000 CT + SEG | QUALIFIED LOCAL in curated Safe Demo; exactly five owner-admitted files, explicit load, unchanged attribution |
 | Accumulated CT / lesion presentation | QUALIFIED LOCAL full stack and lesion-range controls and endpoints; intentional source-range prefix, separate manual clip |
 | Live IRIS / Orthanc retrieval distribution | DEFERRED. See the [interoperability scope](INTEROPERABILITY_065.md). |
-| Native renderer, AI, FHIR | DEFERRED and not required; Babylon default |
 | Clinical truth, diagnosis, patient-to-atlas registration | NOT CLAIMED |
 
 ## Two distinct distributions

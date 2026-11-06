@@ -6,7 +6,7 @@
 export const PUBLIC_STUDY_ENABLED = typeof import.meta.env !== 'undefined' && import.meta.env.DICOM3D_PUBLIC_STUDY === true;
 export const PUBLIC_RELEASE = Object.freeze({
   release: '0.6.5',
-  title: 'DICOM3D v0.6.5 RC — Visual Research Workstation',
+  title: 'DICOM3D v0.6.5 — Visual Research Workstation',
   distribution: 'REFERENCE_WEB_AND_SOURCE',
   publicationApproved: false,
   researchDataPublicationApproved: false,

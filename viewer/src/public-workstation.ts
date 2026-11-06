@@ -14,7 +14,7 @@ const $=(id:string)=>document.getElementById(id) as any;
 const icons:Record<string,string>={Viewer:'◇',Imaging:'▥',Anatomy:'▱',Lab:'✧',Learn:'▤'};
 const DURATION=8000;
 
-/** Reparents existing controls. Source selection, rendering and transforms retain their owners. */
+/** Arranges the viewer controls. The scene controller owns selection, rendering, and transforms. */
 export function preparePublicWorkstation(){
   document.body.classList.add('public-workstation');
   document.title=PUBLIC_RELEASE.title;
@@ -26,7 +26,7 @@ export function preparePublicWorkstation(){
   document.querySelector('.profile-control')!.setAttribute('hidden','');
   const header=document.querySelector('.app-header')!,projectLinks=header.querySelector('nav');
   if(projectLinks){projectLinks.innerHTML=`<a href="https://github.com/KennethJSmithDev/DICOM3D">GitHub</a><a href="https://github.com/KennethJSmithDev/DICOM3D/releases/tag/v0.6.5">Published v0.6.5</a><a href="${base}NOTICE">Notices</a>`;}
-  const identity=document.createElement('span');identity.className='release-identity';identity.textContent=`VISUAL RESEARCH WORKSTATION · v${PUBLIC_RELEASE.release} RC`;header.append(identity);
+  const identity=document.createElement('span');identity.className='release-identity';identity.textContent=`VISUAL RESEARCH WORKSTATION · v${PUBLIC_RELEASE.release}`;header.append(identity);
   const evidenceButton=document.createElement('button');evidenceButton.id='evidenceToggle';evidenceButton.textContent='Source & evidence';header.append(evidenceButton);
   const workspace=document.querySelector<HTMLElement>('.workspace')!,view=document.querySelector<HTMLElement>('main.viewport')!,inspector=$('workspaceControls');
   const stage=document.createElement('section');stage.id='publicStage';stage.setAttribute('aria-label','Research workspace');
@@ -34,7 +34,7 @@ export function preparePublicWorkstation(){
   const modes=document.createElement('div');modes.className='mode-switch';modes.setAttribute('role','group');modes.setAttribute('aria-label','Presentation mode');
   modes.innerHTML='<button data-mode="scientific" aria-pressed="true">Scientific</button><button data-mode="holographic">Holographic</button><button data-mode="materialization">Materialization</button>';header.insertBefore(modes,projectLinks);stage.append(toolbar);
   const library=document.querySelector('.reference-library')!;stage.append(library,$('workspaceMode'));
-  const studyButton=document.createElement('button');studyButton.id='exploreStudy';studyButton.textContent='Explore Real CT Study';studyButton.title='Optional attributed H000 research example · approximately 33.3 MB';library.append(studyButton);
+  const studyButton=document.createElement('button');studyButton.id='exploreStudy';studyButton.textContent='Explore public CT example';studyButton.title='Optional attributed H000 research example · approximately 33.3 MB';library.append(studyButton);
   studyButton.hidden=!PUBLIC_STUDY_ENABLED;
   if(PUBLIC_STUDY_ENABLED){
     const studyNotice=document.createElement('p');studyNotice.className='reference-scope-note';studyNotice.id='studyAdmissionNotice';
@@ -49,7 +49,7 @@ export function preparePublicWorkstation(){
     const button=document.createElement('button');button.id=id;button.innerHTML=`<b aria-hidden="true">${icons[label]}</b><span>${label}</span>`;button.setAttribute('aria-expanded','false');rail.append(button);
   }
   workspace.prepend(rail);
-  // WHY: utility controls must not consume render height. Reparent existing owners only.
+  // Move the existing controls into the drawer to preserve viewport height.
   const viewerDrawer=document.createElement('aside');viewerDrawer.id='viewerDrawer';viewerDrawer.hidden=false;viewerDrawer.setAttribute('aria-label','Viewer controls');
   viewerDrawer.innerHTML='<header><h2>Viewer</h2><button id="closeViewer">Close viewer controls</button></header>';
   viewerDrawer.append(toolbar,library);workspace.append(viewerDrawer);
@@ -64,7 +64,7 @@ export function preparePublicWorkstation(){
   const imageLearning=evidenceLearning('imageLearning',$('learningBody')),segLearning=evidenceLearning('segLearning',$('learningBody'));imageLearning.clear();segLearning.clear();
   const evidence=$('evidencePanel');evidence.hidden=true;evidence.open=true;
   const evidenceClose=document.createElement('button');evidenceClose.textContent='Close evidence';evidence.querySelector('summary')!.append(evidenceClose);
-  evidence.querySelector('.evidence-grid > div:nth-child(2)').innerHTML=PUBLIC_STUDY_ENABLED?`<h2>Curated public research study</h2><p>The owner admitted exactly five unchanged H000 files for this Safe Demo. Historical candidate flags in their source metadata are preserved; they describe the earlier assessment, not the current admission.</p><p><a href="https://doi.org/10.7937/K9/TCIA.2015.NPGZYZBZ">QIN LUNG CT</a> · <a href="https://doi.org/10.7937/K9/TCIA.2015.1BUVFJR7">QIN-LungCT-Seg</a> · <a href="https://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a></p><p>Generalized reference anatomy is not registered to acquired imaging. No clinical or privacy-certification claim.</p><a href="${base}demo/h000/NOTICE.md" id="studyNotice">Full source credits and transformation notes</a> · <a href="https://www.cancerimagingarchive.net/data-usage-policies-and-restrictions/">TCIA use policy: no participant identification/contact; retain source credit and policy downstream</a>`:`<h2>Reference anatomy release</h2><p>BodyParts3D male and HRA female are independent generalized sources with partial coverage. They are not patient anatomy. This reference-only build excludes acquired CT/SEG; the optional curated study belongs to the separately admitted Safe Demo profile.</p><a href="${base}reference/BODYParts3D-NOTICE.txt">BodyParts3D attribution</a> · <a href="${base}reference/HRA-FEMALE-NOTICE.txt">HRA attribution</a>`;
+  evidence.querySelector('.evidence-grid > div:nth-child(2)').innerHTML=PUBLIC_STUDY_ENABLED?`<h2>Curated public research study</h2><p>The Safe Demo includes five approved H000 files. Historical candidate flags describe the original source record.</p><p><a href="https://doi.org/10.7937/K9/TCIA.2015.NPGZYZBZ">QIN LUNG CT</a> · <a href="https://doi.org/10.7937/K9/TCIA.2015.1BUVFJR7">QIN-LungCT-Seg</a> · <a href="https://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a></p><p>Generalized reference anatomy is not registered to acquired imaging. No clinical or privacy-certification claim.</p><a href="${base}demo/h000/NOTICE.md" id="studyNotice">Full source credits and transformation notes</a> · <a href="https://www.cancerimagingarchive.net/data-usage-policies-and-restrictions/">TCIA use policy: no participant identification/contact; retain source credit and policy downstream</a>`:`<h2>Reference anatomy release</h2><p>BodyParts3D male and HRA female are independent generalized sources with partial coverage. They are not patient anatomy. This reference-only build excludes acquired CT/SEG; the optional curated study belongs to the separately admitted Safe Demo profile.</p><a href="${base}reference/BODYParts3D-NOTICE.txt">BodyParts3D attribution</a> · <a href="${base}reference/HRA-FEMALE-NOTICE.txt">HRA attribution</a>`;
   const metrics=document.createElement('output');metrics.id='publicRuntimeState';metrics.hidden=true;evidence.append(metrics);
   const overlayData=document.createElement('output');overlayData.id='overlayGeometry';overlayData.hidden=true;evidence.append(overlayData);
   const observe=document.createElement('button');observe.id='observeRuntime';observe.textContent='Capture runtime observations';evidence.querySelector('.evidence-grid')!.append(observe);

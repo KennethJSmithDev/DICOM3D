@@ -250,8 +250,8 @@
   <FileCopy Name="public/assets/power-CRAPufBy.js" Target="{$cspdir}dicom3d/assets/power-CRAPufBy.js" />
   <FileCopy Name="public/assets/preload-helper-CKhbhPgO.js" Target="{$cspdir}dicom3d/assets/preload-helper-CKhbhPgO.js" />
   <FileCopy Name="public/assets/public-reference-visual-D7ATdNe6.js" Target="{$cspdir}dicom3d/assets/public-reference-visual-D7ATdNe6.js" />
-  <FileCopy Name="public/assets/public-release-BcTT6c7N.js" Target="{$cspdir}dicom3d/assets/public-release-BcTT6c7N.js" />
-  <FileCopy Name="public/assets/public-workstation-DWjZaOjj.js" Target="{$cspdir}dicom3d/assets/public-workstation-DWjZaOjj.js" />
+  <FileCopy Name="public/assets/public-release-CuBq6fBm.js" Target="{$cspdir}dicom3d/assets/public-release-CuBq6fBm.js" />
+  <FileCopy Name="public/assets/public-workstation-BvT007Tw.js" Target="{$cspdir}dicom3d/assets/public-workstation-BvT007Tw.js" />
   <FileCopy Name="public/assets/public-workstation-DmR2tVMe.css" Target="{$cspdir}dicom3d/assets/public-workstation-DmR2tVMe.css" />
   <FileCopy Name="public/assets/quat-conjugate-C09346Hg.js" Target="{$cspdir}dicom3d/assets/quat-conjugate-C09346Hg.js" />
   <FileCopy Name="public/assets/quaternion-from-angles-CEDLPJ0A.js" Target="{$cspdir}dicom3d/assets/quaternion-from-angles-CEDLPJ0A.js" />
@@ -264,9 +264,9 @@
   <FileCopy Name="public/assets/random-DhG0k4Bq.js" Target="{$cspdir}dicom3d/assets/random-DhG0k4Bq.js" />
   <FileCopy Name="public/assets/receive-custom-event-DHfejKIq.js" Target="{$cspdir}dicom3d/assets/receive-custom-event-DHfejKIq.js" />
   <FileCopy Name="public/assets/ref-count-dzJdN9ts.js" Target="{$cspdir}dicom3d/assets/ref-count-dzJdN9ts.js" />
-  <FileCopy Name="public/assets/reference-CmK57Qjv.js" Target="{$cspdir}dicom3d/assets/reference-CmK57Qjv.js" />
   <FileCopy Name="public/assets/reference-DMBnsulO.css" Target="{$cspdir}dicom3d/assets/reference-DMBnsulO.css" />
-  <FileCopy Name="public/assets/reference-ui-C0Ui55uO.js" Target="{$cspdir}dicom3d/assets/reference-ui-C0Ui55uO.js" />
+  <FileCopy Name="public/assets/reference-Rpe38hBM.js" Target="{$cspdir}dicom3d/assets/reference-Rpe38hBM.js" />
+  <FileCopy Name="public/assets/reference-ui-CNia5gtF.js" Target="{$cspdir}dicom3d/assets/reference-ui-CNia5gtF.js" />
   <FileCopy Name="public/assets/render-target-signature-B-9UVrB_.js" Target="{$cspdir}dicom3d/assets/render-target-signature-B-9UVrB_.js" />
   <FileCopy Name="public/assets/render-task-base-Dad9aTea.js" Target="{$cspdir}dicom3d/assets/render-task-base-Dad9aTea.js" />
   <FileCopy Name="public/assets/rgb-from-oklch-B0ZrHl6K.js" Target="{$cspdir}dicom3d/assets/rgb-from-oklch-B0ZrHl6K.js" />
