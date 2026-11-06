@@ -37,3 +37,22 @@ For fixture-only tests, `DICOM3D_H000_FIXTURE` is a local H000 directory with a 
 - Broader atlas/accessibility qualification, clean distributable asset inventory, and deployment remain separate gates.
 
 The original Babylon application, public v0.6.5 release, private data and running local preview remain preserved.
+
+## Test the shared atlas on another machine
+
+This profile builds from the BodyParts3D 4.0 assets and public H000 example already in this repository. It generates ten shared anatomy chunks and uses one separately verified 2.6 MB HRA delta for the female composite. The expanded local profile continues to use its fifteen existing BodyParts3D chunks. Both profiles use the same female composition code.
+
+From the repository root, with Node 24 and npm:
+
+```sh
+cd prototypes/alpha/three-prototype
+npm ci
+node build-public-review.mjs ../review-dist
+node node_modules/vite/bin/vite.js preview --host 127.0.0.1 --outDir ../review-dist
+```
+
+Open the printed URL and select **Female · composite**. Search for the uterus, ovaries or uterine tubes, then select the male view to compare. Use a new output directory each time you build. For the expanded profile, run the ordinary Vite build, then run `node package-composite.mjs <verified-alpha-public> <vite-output> <new-output>` with the authorized local alpha runtime.
+
+Both variants use the BodyParts3D body envelope, skeleton and shared organ geometry. The female delta adds the uterus, ovaries, uterine tubes and vagina, and replaces the bladder. The composite omits identified male-specific owners, including the prostate, urethra, testes and penile vessels when present in the base. The HRA placement is a translation fitted to the shared bladder center. The female pelvis and exterior body shape still use the shared base, and the composite covers only the listed swaps. The standalone NRX ovary fixture requires the expanded local runtime.
+
+The HRA delta comes from Human Reference Atlas / HuBMAP female united reference v1.5 by Kristen Browne and Heidi Schlehlein under CC BY 4.0. The delta preserves named organ subtrees, applies a translation in metres, and normalizes exported normals. See [source notice](three-prototype/atlas-delta/HRA-FEMALE-NOTICE.txt) and [delta manifest](three-prototype/atlas-delta/female-reproductive-delta.manifest.json). Shared BodyParts3D assets retain their existing attribution and license notice.

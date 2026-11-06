@@ -1,4 +1,4 @@
-export const FEMALE_BODY_ID='VH_F_skin';
+export const FEMALE_BODY_ID='FMA7163';
 export const femalePresentationDefault=()=>({hidden:new Set([FEMALE_BODY_ID]),systems:new Set(),isolated:'',saved:null,opacity:1,appearance:'original',assemblyAmount:0});
 export function revealFemaleStructure(old,id,{isolate=false}={}){const hidden=new Set(old.hidden);hidden.delete(id);return {...old,hidden,systems:new Set(),saved:null,isolated:isolate?id:'',assemblyAmount:isolate?0:(old.assemblyAmount??0)}}
 export function toggleFemaleSystem(old,id){const systems=new Set(old.systems);systems.has(id)?systems.delete(id):systems.add(id);if(!old.systems.size&&systems.size)return {...old,systems,isolated:'',saved:{hidden:new Set(old.hidden),isolated:old.isolated}};if(!systems.size&&old.saved)return {...old,systems,hidden:new Set(old.saved.hidden),isolated:old.saved.isolated,saved:null};return {...old,systems}}
