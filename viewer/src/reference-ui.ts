@@ -1,4 +1,4 @@
-import {getMeshTriangles,enableMaterialPlugins,markMaterialUboDirty,onBeforeRender,getMaterialTextures,acquireTexture,releaseTexture} from '@babylonjs/lite';
+import {getMeshTriangles,enableMaterialPlugins,markMaterialUboDirty,getMaterialTextures,acquireTexture,releaseTexture} from '@babylonjs/lite';
 
 import {ATLAS_CAMERA_PRESENTATION,HRA_FEMALE_CAMERA_PRESENTATION} from './reference-camera.mjs';
 import {referenceLesson} from './reference-learning.mjs';
@@ -24,15 +24,15 @@ export function prepareReference({scene,root,manifest,status,selectedMaterial,vi
   // does not intercept canvas picks of the anatomy visible beneath it.
   const skinMeshes=new Set(['FMA7163','VH_F_skin'].flatMap(id=>groups.get(id)||[]));
 
-  const diagnosticAbort=new AbortController();
+  const controlListeners=new AbortController();
   // WHY: an older GPU hit/miss must not replace newer explicit user intent.
   // BOUNDARY: completion validity only; state below still owns selection.
   // INVARIANT: source geometry and valid serialized picks stay unchanged.
-  // EVIDENCE: RC-FOUNDATION-002 ordering trace; UX-RACE-001 deferred/browser tests.
+  // Ordering cases are exercised in scripts/test-pick-generation.mjs.
   // REGRESSION: invalidate at intent time, including before reference fetch/disposal.
   const picks=createPickGeneration();
   for(const [id,event] of [['referenceVariant','change'],['referenceReload','click'],['referenceUnload','click']])
-    document.querySelector('#'+id)?.addEventListener(event,()=>picks.invalidate(),{capture:true,signal:diagnosticAbort.signal});
+    document.querySelector('#'+id)?.addEventListener(event,()=>picks.invalidate(),{capture:true,signal:controlListeners.signal});
 
   const originals=new Map<any,any>();for(const list of groups.values())for(const mesh of list)originals.set(mesh,mesh.material);
 
@@ -134,7 +134,7 @@ export function prepareReference({scene,root,manifest,status,selectedMaterial,vi
   }
   systemSelect.onchange=options;treeView();
 
-  // ANAT-LAYERS-001: source-system controls reuse the existing owning controller.
+  // Source-system controls share the reference presentation controller.
   // IS-A labels are retained in search, never guessed into clinical systems.
   const layerPanel=document.createElement('details');layerPanel.id='referenceLayers';layerPanel.open=true;
   layerPanel.innerHTML='<summary>Systems &amp; source skin</summary><div class="layer-actions"><button id="referencePeel" aria-pressed="false">Peel source skin</button><button id="referenceLayersRestore">Restore layers</button></div><div class="layer-rows"></div><details class="layer-policy"><summary>Source mapping &amp; behavior</summary><p>Source classifications only. Shared owners follow every assigned system; any lock protects against layer changes. Manual hide, isolation and clipping remain independent.</p><output id="referenceLayerSummary" role="status"></output></details>';
@@ -204,7 +204,7 @@ export function prepareReference({scene,root,manifest,status,selectedMaterial,vi
   // A display clip/visibility intent also supersedes an in-flight visual-mode pick.
   // The inherited controller path is unchanged when no projection is attached.
   for(const [id,event] of [['referenceHide','click'],['referenceShow','click'],['referenceIsolate','click'],['referenceClip','input']])
-    get(id).addEventListener(event,()=>{if(projection)picks.invalidate();},{capture:true,signal:diagnosticAbort.signal});
+    get(id).addEventListener(event,()=>{if(projection)picks.invalidate();},{capture:true,signal:controlListeners.signal});
 
   get('referenceSearch').oninput=options;get('referenceRegion').onchange=options;get('referenceSelect').onchange=()=>{picks.invalidate();state.selected=get('referenceSelect').value||null;if(!state.selected)state.isolate=false;refresh();};
 
@@ -222,10 +222,8 @@ export function prepareReference({scene,root,manifest,status,selectedMaterial,vi
 
   // WHY: release-generated background misses must not exit explicit isolation.
   // BOUNDARY/INVARIANT: only reference selection; geometry stays frozen.
-  // EVIDENCE: UX-INTERACTION-001 receipt. REGRESSION: Clear/dropdown/Restore still exit.
-  const api={active:true,groups:()=>new Map([...groups].map(([id,list])=>[id,[...list]])),originals:()=>new Map(originals),state:()=>layers.effective(state),setProjection(fn:((detail:any)=>void)|null){projection=fn;refresh();},setAppearance(value:string){if(!['source','cyan'].includes(value))throw Error('Unknown source appearance');state.appearance=value;get('referenceAppearance').value=value;applyAppearance();},invalidatePick:()=>picks.invalidate(),meshes:()=>[...originals.keys()],selectedMeshes:()=>state.selected?(groups.get(state.selected)||[]).filter(m=>m.visible):[],setFraming(f:any){framing=f;refresh();},canPick:(m:any)=>originals.has(m)&&m.visible&&!skinMeshes.has(m),pick:(request:()=>Promise<any>)=>picks.run(request,(pick:any)=>api.selectMesh(pick.hit?pick.pickedMesh:null)),selectMesh(m:any){if(!m&&state.isolate&&state.selected)return;state.selected=[...groups].find(([,list])=>list.includes(m))?.[0]||null;if(!state.selected)state.isolate=false;get('referenceRegion').value='';options();refresh();},clear(){picks.invalidate();state.selected=null;state.isolate=false;refresh();},dispose(){projection=null;picks.dispose();diagnosticAbort.abort();for(const texture of retainedTextures)releaseTexture(texture);panel.remove();},refresh};
-
-  if(new URLSearchParams(location.search).has('diagnostics')){const output=document.createElement('output');output.id='referenceRenderState';output.hidden=true;panel.append(output);let frames=0;const errors:string[]=[];const engine=scene.surface.engine;const capture=()=>{const c=scene.camera;output.textContent=JSON.stringify({frames,drawCalls:engine.drawCallCount,retainedTextures:retainedTextures.length,renderables:scene._renderables.length,queuedSwaps:scene._materialSwapQueue.length,errors,camera:c?{alpha:c.alpha,beta:c.beta,radius:c.radius,target:[c.target.x,c.target.y,c.target.z],near:c.nearPlane,far:c.farPlane}:null,materials:[...groups].map(([id,list])=>({id,visible:list[0].visible,alpha:list[0].material.alpha,color:list[0].material.baseColorFactor,original:list[0].material===originals.get(list[0])}))});};onBeforeRender(scene,()=>{frames++;capture();});window.addEventListener('error',e=>{errors.length<8&&errors.push(String(e.error?.stack||e.message));capture();},{signal:diagnosticAbort.signal});engine._device.addEventListener('uncapturederror',(e:any)=>{errors.length<8&&errors.push(String(e.error?.message));capture();},{signal:diagnosticAbort.signal});}
+  // Clear, the structure selector, and Restore still exit isolation.
+  const api={active:true,groups:()=>new Map([...groups].map(([id,list])=>[id,[...list]])),originals:()=>new Map(originals),state:()=>layers.effective(state),setProjection(fn:((detail:any)=>void)|null){projection=fn;refresh();},setAppearance(value:string){if(!['source','cyan'].includes(value))throw Error('Unknown source appearance');state.appearance=value;get('referenceAppearance').value=value;applyAppearance();},invalidatePick:()=>picks.invalidate(),meshes:()=>[...originals.keys()],selectedMeshes:()=>state.selected?(groups.get(state.selected)||[]).filter(m=>m.visible):[],setFraming(f:any){framing=f;refresh();},canPick:(m:any)=>originals.has(m)&&m.visible&&!skinMeshes.has(m),pick:(request:()=>Promise<any>)=>picks.run(request,(pick:any)=>api.selectMesh(pick.hit?pick.pickedMesh:null)),selectMesh(m:any){if(!m&&state.isolate&&state.selected)return;state.selected=[...groups].find(([,list])=>list.includes(m))?.[0]||null;if(!state.selected)state.isolate=false;get('referenceRegion').value='';options();refresh();},clear(){picks.invalidate();state.selected=null;state.isolate=false;refresh();},dispose(){projection=null;picks.dispose();controlListeners.abort();for(const texture of retainedTextures)releaseTexture(texture);panel.remove();},refresh};
 
   options();refresh();return {...api,cameraPresentation:manifest.reference.id==='BODY-DEFAULT-BP3D-01'?ATLAS_CAMERA_PRESENTATION:manifest.reference.id==='BODY-HRA-F-001'?HRA_FEMALE_CAMERA_PRESENTATION:null};
 

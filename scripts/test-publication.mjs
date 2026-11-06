@@ -9,6 +9,8 @@ import {APPROVED_H000_ASSETS,EXCLUDED_STUDY_SCREENSHOT_SHA256} from '../viewer/s
 const root=fileURLToPath(new URL('../',import.meta.url));
 const git=args=>execFileSync('git',args,{cwd:root,maxBuffer:150*1024*1024});
 const paths=git(['ls-files','-z']).toString('utf8').split('\0').filter(Boolean);
+const sourceInventory=JSON.parse(git(['show',':source-manifest.json'])).files;
+const inventoryExclusions=new Set(['source-manifest.json','distribution-manifest.json']);
 const staged=Object.fromEntries(git(['ls-files','--stage','-z']).toString('utf8').split('\0').filter(Boolean).map(row=>{
   const [record,path]=row.split('\t'),[mode,,stage]=record.split(' ');
   assert.equal(stage,'0','Unmerged index entry: '+path);
@@ -21,8 +23,8 @@ const approved=Object.fromEntries(Object.entries(APPROVED_H000_ASSETS).map(([nam
 const researchHashes=new Set(Object.values(APPROVED_H000_ASSETS).map(value=>value.sha256));
 assert.equal(PUBLIC_RELEASE.release,'0.6.5');
 let bytes=0,researchFiles=0;
-function check(path,content){
-  const hash=createHash('sha256').update(content).digest('hex');
+const digest=content=>createHash('sha256').update(content).digest('hex');
+function check(path,content,hash=digest(content)){
   assert.notEqual(hash,EXCLUDED_STUDY_SCREENSHOT_SHA256,'Excluded screenshot under renamed path: '+path);
   if(selected.studyEnabled&&Object.hasOwn(approved,path)){
     assert.equal(content.length,approved[path].bytes,'Admitted path changed size: '+path);
@@ -36,9 +38,15 @@ function check(path,content){
 for(const path of paths){
   const content=git(['show',':'+path]);
   bytes+=content.length;
-  if(check(path,content))researchFiles++;
+  const sha256=digest(content);
+  if(check(path,content,sha256))researchFiles++;
+  if(!inventoryExclusions.has(path)){
+    assert.deepEqual(sourceInventory[path],{bytes:content.length,sha256},
+      'Stale source inventory: '+path+' (run scripts/update-source-manifest.py from the staged changes)');
+  }
 }
 assert.equal(Object.keys(staged).length,paths.length,'Unique regular index entries required');
+assert.equal(Object.keys(sourceInventory).length,paths.length-inventoryExclusions.size,'Source inventory contains extra paths');
 assert.equal(researchFiles,selected.studyEnabled?5:0,'Exact five indexed files required for curated publication');
 if(selected.studyEnabled){
   const sample=git(['show',':reference/public/demo/h000/NOTICE.md']);

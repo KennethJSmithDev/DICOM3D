@@ -7,7 +7,7 @@ This candidate integrates existing qualified technology in the Babylon Lite Visu
 | Capability | Status and scope |
 | --- | --- |
 | Babylon workstation, Viewer / Imaging / Anatomy / Lab / Learn | QUALIFIED LOCAL; accepted visual baseline retained |
-| Expanded source-backed anatomy | QUALIFIED LOCAL integrated capability; accepted ANAT-ACCEPT-001 donor b59b50a70c0c42eceda480dbb2331ebc18fd2bcb |
+| Expanded source-backed anatomy | QUALIFIED LOCAL integrated capability. See [source-backed anatomy](ANATOMY_REFERENCE_CAPABILITY.md). |
 | 386 male / 380 female selectable groups | QUALIFIED LOCAL; draw-owner counts, not organ counts or comprehensive coverage |
 | Search, source hierarchy, system / region filters, source holds | QUALIFIED LOCAL; original ownership and partial HRA skeleton retained |
 | Verified CT interface and modular classic CT | QUALIFIED LOCAL; original source syntax distinct from decoded uint16 representation |
@@ -15,8 +15,8 @@ This candidate integrates existing qualified technology in the Babylon Lite Visu
 | Local Open Study | Versioned verified descriptor plus raw stored pixels only; not arbitrary DICOM or ISO import. Empty/invalid input fails closed. Positive file-picker qualification exists for earlier e98aba4, not independently repeated on f55623f6 |
 | Public H000 CT + SEG | QUALIFIED LOCAL in curated Safe Demo; exactly five owner-admitted files, explicit load, unchanged attribution |
 | Accumulated CT / lesion presentation | QUALIFIED LOCAL full stack and lesion-range controls and endpoints; intentional source-range prefix, separate manual clip |
-| Live IRIS / Orthanc retrieval distribution | DEFERRED; local I001 research is preserved, no production endpoint/credential/runtime ships |
-| NRX / native renderer, AI, FHIR | DEFERRED and not required; Babylon default |
+| Live IRIS / Orthanc retrieval distribution | DEFERRED. See the [interoperability scope](INTEROPERABILITY_065.md). |
+| Native renderer, AI, FHIR | DEFERRED and not required; Babylon default |
 | Clinical truth, diagnosis, patient-to-atlas registration | NOT CLAIMED |
 
 ## Two distinct distributions
@@ -31,7 +31,7 @@ From the extracted standalone archive: `node scripts/preview-static.mjs --root p
 
 ## Source and presentation boundaries
 
-Original acquired samples, SOP/frame associations, calibration, patient millimetres and model metres remain authoritative. Original H000 uses Implicit VR Little Endian, 16 allocated / 12 stored bits / high bit 11 unsigned; decoded storage is little-endian uint16. No source is relabeled Explicit VR or given invented meaningful bits. Geometry and exact stored-value proofs are independently preserved from I001; display windowing is a derived presentation and does not establish calibrated HU truth.
+Original acquired samples, SOP/frame associations, calibration, patient millimetres and model metres remain authoritative. Original H000 uses Implicit VR Little Endian, 16 allocated / 12 stored bits / high bit 11 unsigned; decoded storage is little-endian uint16. No source is relabeled Explicit VR or given invented meaningful bits. Display windowing is a derived presentation. Geometry and stored-value checks establish the scope of the verified volume.
 
 CT-only admission has no SEG, lesion selection or materialization FX; unsupported controls remain disabled. Curated H000 has its own accepted CT/SEG identities and source-aligned lesion. Reference anatomy is generalized and never implicitly registered to acquired imaging. Scientific, holographic and materialization modes alter presentation, not source geometry. Full range completion means all selected acquired slices; lesion-range completion means selected k64–78, not the entire stack.
 

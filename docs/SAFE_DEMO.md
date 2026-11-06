@@ -14,7 +14,7 @@ The reference catalogs have different source membership and partial coverage. Th
 
 ## Build and deployment
 
-The existing `.github/workflows/pages-demo.yml` selects `--profile curated-h000` explicitly for the existing reference entry, runs exact public-output/index and research-data checks, and deploys `.demo-dist` on applicable main changes. The CLI default remains `reference-only`; Core/native staging uses that default and cannot select the curated profile at `/dicom3d/`. Build success, deployment and actual remote rendering are separate evidence steps.
+The existing `.github/workflows/pages-demo.yml` selects `--profile curated-h000` explicitly for the existing reference entry, runs exact public-output/index and research-data checks, and deploys `.demo-dist` when the workflow is manually dispatched on `main`. The CLI default remains `reference-only`; Core/native staging uses that default and cannot select the curated profile at `/dicom3d/`. Build success, deployment and actual remote rendering are separate evidence steps.
 
 The [publication procedure](VISUAL_PUBLICATION_PROCEDURE.md) requires remote version, manifest, asset, notice and UI readback before declaring deployment complete. See [release scope](RELEASE_060.md) and [visual limits](VISUAL_RELEASE_060.md). A WebGPU-capable desktop browser is required; all-device or clinical qualification is not claimed.
 

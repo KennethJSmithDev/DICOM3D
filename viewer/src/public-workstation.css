@@ -110,7 +110,7 @@ body.public-workstation{--accent:#67ddf6;--border:#234757;--bg:#050f18;--muted:#
 .public-workstation #projectLinks{display:none}
 @media(max-height:760px){.public-workstation .app-header{height:62px;flex-basis:62px}.public-workstation #publicStage{padding-top:10px}.public-workstation .reference-library{padding-top:8px}.public-workstation .public-rail{gap:6px;padding-top:12px}.public-workstation .public-rail button{min-height:54px}.public-workstation #labPanel,.public-workstation #learningPanel,.public-workstation #evidencePanel,.public-workstation #workspaceControls{top:108px}}
 
-/* BDP-VISUAL: workflow-specific space, without source/camera mutation on resize. */
+/* Resize the workflow layout while preserving source data and camera pose. */
 .public-workstation .app-header{height:56px;flex-basis:56px;padding:6px 20px}
 .public-workstation #publicStage{padding:10px 16px 8px}
 .public-workstation .reference-library{padding-top:6px;padding-bottom:6px;gap:8px}
@@ -124,7 +124,6 @@ body.public-workstation{--accent:#67ddf6;--border:#234757;--bg:#050f18;--muted:#
 .public-workstation #verifiedVolumeImport[open]{position:relative;max-height:210px;overflow:auto;flex:0 0 auto;padding:8px;border:1px solid var(--border)}
 .public-workstation #verifiedVolumeImport label{display:block;margin:5px 0}
 
-/* BDP-VISUAL-065-002: shell owns layout; source pixels, camera pose and renderer retain ownership. */
 .public-workstation .app-header{height:54px;flex-basis:54px;padding:5px 14px;gap:14px;background:#0b1d2bea;backdrop-filter:blur(16px);border-bottom:1px solid #294456}
 .public-workstation .app-header .intro{display:none}
 .public-workstation .app-header h1{font-size:24px}

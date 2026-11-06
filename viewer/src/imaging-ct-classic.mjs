@@ -1,5 +1,5 @@
 // Classic CT admission for the existing decoded descriptor, not a new DICOM parser.
-// BDP-001: qualified decoded ImplicitVRLE unsigned12 shares the uint16 carrier.
+// Decoded unsigned 12-bit samples use a uint16 carrier.
 // Original syntax and meaningful12/11 facts stay truthful; no decoder or rescale here.
 // Original transfer decoding/authorization remain adapter-owned. No GPU work in this module.
 import {requireImaging} from './imaging-contract.mjs';

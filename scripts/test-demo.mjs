@@ -111,6 +111,9 @@ for(const text of [
   'connectLive','connectDicom','Read public FHIR test evidence','SMART_TEST','hapi.fhir.org','server.fire.ly',
   'Choose the accepted local study manifest first.','Choose a manifest and its matching GLB.',
 ])assert(!bundles.includes(text),text+' must not be distributed');
+for(const devHook of [/window\.__\w+(?:Candidate|Visual|Probe)\b/,/\b\w+PublicFixture\b/,/\b[\w-]+-fixture\//,/\breferenceRenderState\b/]){
+  assert.doesNotMatch(bundles,devHook,'Development hooks must stay out of distributed bundles');
+}
 for(const text of ['demo/h000/','loadPublicResearchFixture','source-binding.json','ct.npy.bin','mask.npy.bin']){
   assert.equal(bundles.includes(text),selected.studyEnabled,text+' must follow the selected profile');
 }
@@ -119,6 +122,7 @@ if(selected.studyEnabled){
   const styles=names.filter(x=>x.endsWith('.css')).map(x=>read(out,x).toString('utf8')).join('\n');
   assert(/#studyAdmissionNotice\{[^}]*display:block/.test(styles),'Pre-load study notice must override hidden library paragraphs');
 }
+assert(bundles.includes('Open verified CT'),'Verified local CT input must remain available');
 for(const name of ['brand/favicon.svg','brand/semantic-cube.svg'])assert(bundles.includes(name),'Brand reference missing: '+name);
 for(const name of notices)assert.deepEqual(read(root,name),read(out,name),'Notice changed: '+name);
 assert(!names.some(x=>/reference\/(male|female)\.(glb|manifest\.json)$/.test(x)));

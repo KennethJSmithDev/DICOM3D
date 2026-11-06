@@ -89,7 +89,11 @@ receipt.syntheticCases+=7;
 // Parse only the existing source GLBs. No regeneration, compression or source writes.
 function sourceGroups(name,expectedGroups,expectedPrimitives,expectedSha){
   const dir=join(root,'reference/public/reference'),manifest=JSON.parse(readFileSync(join(dir,`${name}.manifest.json`),'utf8'));
-  const bytes=readFileSync(join(dir,manifest.asset.relative_filename)),initialSha=sha(bytes);
+  const filename=manifest.asset.relative_filename;
+  const bytes=filename==='hra-female.glb'
+    ? Buffer.concat(['001','002','003'].map(part=>readFileSync(join(dir,filename+'.part'+part))))
+    : readFileSync(join(dir,filename));
+  const initialSha=sha(bytes);
   assert.equal(initialSha,expectedSha);assert.equal(initialSha,manifest.asset.sha256);
   assert.equal(bytes.readUInt32LE(0),0x46546c67);assert.equal(bytes.readUInt32LE(4),2);assert.equal(bytes.readUInt32LE(8),bytes.length);
   let json,bin;

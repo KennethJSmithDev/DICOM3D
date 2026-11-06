@@ -1,6 +1,4 @@
-/* Measured from the operator's 1672x941 concept raster (ANAT-LAYERS-001).
-   These are composited raster samples, not claims of recovered source alpha.
-   Source anatomy materials and CT pixels are outside this shell boundary. */
+/* Shell colors leave anatomy materials and CT pixels under renderer control. */
 body.public-workstation{
  --concept-bg:#121629;--concept-panel-top:#07141f;--concept-panel-bottom:#0a1522;
  --concept-input:#0d1626;--concept-evidence:#04090d;--concept-border:#1f435a;
@@ -40,7 +38,7 @@ body.public-workstation{
 .public-workstation .layer-rows input[type=range]{width:100%}
 .public-workstation .layer-rows legend{font-size:11px}
 
-/* Visual-density pass: unchanged inputs/handlers, progressive disclosure only. */
+/* Collapsed sections keep their existing controls. */
 .public-workstation #referenceLayers{padding:8px;margin:8px 0}
 .public-workstation #referenceLayers>summary{min-height:26px}
 .public-workstation .layer-rows .layer-row{position:relative;border-top:1px solid var(--concept-border);padding:2px 0}

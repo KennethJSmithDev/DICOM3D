@@ -25,7 +25,7 @@ docker compose -f compose.core.yaml -p dicom3d-core start --wait --wait-timeout 
 docker compose -f compose.core.yaml -p dicom3d-core down
 ```
 
-`down` removes only this Compose project's containers/network. There are no persistent volumes, host mounts or server-side study storage. Do not run global prune or `down -v`. Leave unrelated IRIS/OpsDeck projects alone. Keep the built image unless its deletion is separately desired/authorized.
+`down` removes only this Compose project's containers/network. There are no persistent volumes, host mounts or server-side study storage. Do not run global prune or `down -v`. Keep the built image unless its deletion is separately desired/authorized.
 
 Reference files persist in the immutable image across container restart/recreation. Selection, camera and animation are browser presentation state. Reload returns to the default reference. This reference-only visual release exposes no arbitrary patient upload, Connect/FHIR provider UI or H000 study download. The Core server offers GET/HEAD static reads and rejects writes.
 

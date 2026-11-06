@@ -55,7 +55,7 @@ The original web/source publication retained v0.5.1 installer identifiers. The s
 
 - **0.3.0 — recognizable anatomical context:** qualified public/synthetic contextual study presentation, CT-volume display and legibility; preserve source versus interpolated detail.
 - **0.4.0 — source correlation:** H004 DICOM SOP/frame/source-slice navigation and derived-section distinctions.
-- **0.5.0 — contextual learning:** bring OpsDeck's deterministic field/action/result teaching patterns into DICOM3D without making OpsDeck a runtime dependency.
+- **0.5.0 — contextual learning:** explain active fields, actions, and results in the workstation.
 - **Former 0.6.0 proposal — interoperability and optional AI seam:** deferred and unversioned. It is not part of the selected Visual Research Workstation release. Independently qualified IRIS workflows and optional read-only AI hooks would require their own future contract.
 - **0.7.x–0.9.x — hardening:** multi-structure composition, additional imaging workflows, UX/accessibility, performance, compatibility, security and evidence-driven stability.
 - **1.0.0 — stable contract:** independently installable, documented, reproducible, tested and supportable release with clearly bounded medical/research claims.

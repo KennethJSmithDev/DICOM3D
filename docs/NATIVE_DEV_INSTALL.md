@@ -28,7 +28,7 @@ These settings grant no roles and do not enable unauthenticated access. `%Develo
 
 Open `/dicom3d/DICOM3D.Entry.cls` and sign in directly. The native entry page links to `index.html`; it exists because security-protected static files return 404 before authentication rather than displaying a login page. The API returns 401 to an unauthenticated request. The two DICOM3D applications share authentication with each other, independently of the Management Portal.
 
-The authenticated `GET /dicom3d-api/health` returns only product/development version, status, nonclinical flag and native IRIS version. It accepts no imaging input, writes no study data and has no OpsDeck dependency. Unknown paths and methods must not produce a successful health response.
+The authenticated `GET /dicom3d-api/health` returns only product/development version, status, nonclinical flag and native IRIS version. It accepts no imaging input, writes no study data. Unknown paths and methods must not produce a successful health response.
 
 ## Qualification
 

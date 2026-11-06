@@ -13,18 +13,25 @@ def main():
  frozen=lambda n:subprocess.check_output(['git','show',a.source_commit+':'+n],cwd=ROOT)
  source=json.loads(frozen('source-manifest.json'));mbytes=(a.build/'demo-build-manifest.json').read_bytes();m=json.loads(mbytes)
  if m['release']!='0.6.5' or m['publicationApproved'] is not False:raise ValueError('Private release candidate required')
+ build_root=a.build.resolve(strict=True)
  files={}
  for name,record in m['files'].items():
-  if name.startswith('/') or '..' in Path(name).parts or re.search(r'(^|/)(\.secrets|node_modules|bdp-fixture)(/|$)|\.(dcm|raw16|iso)$',name,re.I):raise ValueError('Unadmitted path')
-  data=(a.build/name).read_bytes()
+  if not re.fullmatch(r'[A-Za-z0-9._-]+(?:/[A-Za-z0-9._-]+)*',name) or set(name.split('/')) & {'.','..'}:
+   raise ValueError('Unadmitted archive path')
+  if re.search(r'(^|/)(\.secrets|node_modules|[^/]+-fixture)(/|$)|\.(dcm|raw16|iso)$',name,re.I):
+   raise ValueError('Unadmitted archive path')
+  path=build_root/name
+  if path.resolve(strict=True)!=path or not path.is_file():
+   raise ValueError('Archive input must be a regular file inside the build')
+  data=path.read_bytes()
   if {'bytes':len(data),'sha256':sha(data)}!=record:raise ValueError('Static inventory mismatch')
   files['public/'+name]=data
  files['public/demo-build-manifest.json']=mbytes
- for name in ['scripts/preview-static.mjs','scripts/open-preview.ps1','scripts/stop-preview.ps1','docs/RELEASE_CANDIDATE_065.md','docs/RELEASE_NOTES_065.md','docs/INSTALL_065.md','docs/ANATOMY_LICENSES_065.md','docs/INTEROPERABILITY_065.md','docs/MOBILE_HANDOFF_065.md','LICENSE','NOTICE']:
+ for name in ['scripts/preview-static.mjs','scripts/open-preview.ps1','scripts/stop-preview.ps1','docs/RELEASE_CANDIDATE_065.md','docs/RELEASE_NOTES_065.md','docs/INSTALL_065.md','docs/ANATOMY_LICENSES_065.md','docs/INTEROPERABILITY_065.md','LICENSE','NOTICE']:
   data=frozen(name)
   if source['files'][name]!={'bytes':len(data),'sha256':sha(data)}:raise ValueError('Source inventory mismatch')
   files[name]=data
- files['README.md']=b'# DICOM3D0.6.5 private standalone Safe Demo candidate\n\nRun `node scripts/preview-static.mjs --root public --port 0` with existing Node24. Open the printed loopback URL; Ctrl+C stops the host. Windows persistent open/stop launchers are in scripts/. Read docs/RELEASE_CANDIDATE_065.md for scope and remaining distribution gates. No IRIS, Orthanc, AI, package installation or frontend build is required.\n'
+ files['README.md']=b'# DICOM3D v0.6.5 standalone Safe Demo candidate\n\nRun `node scripts/preview-static.mjs --root public --port 0` with existing Node24. Open the printed loopback URL; Ctrl+C stops the host. Windows persistent open/stop launchers are in scripts/. Read docs/RELEASE_CANDIDATE_065.md for scope and remaining distribution gates. No IRIS, Orthanc, AI, package installation or frontend build is required.\n'
  identity={n:{'bytes':len(d),'sha256':sha(d)} for n,d in sorted(files.items())}
  files['release-candidate.json']=(json.dumps({'version':'0.6.5','privateReleaseCandidate':True,'sourceGitHead':a.source_commit,'profile':m['buildProfile'],'publicationApproved':False,'requiresIRIS':False,'liveInteropDistribution':False,'files':identity},indent=2)+'\n').encode()
  a.output.parent.mkdir(parents=True,exist_ok=True)

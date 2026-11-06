@@ -33,11 +33,11 @@ def main():
     source = json.loads(source_bytes)
     assert source['version'] == '0.6.5'
     singles = {
-        'Dockerfile.core', 'compose.core.yaml', '.env.core.example', '.dockerignore',
+        'Dockerfile.core', 'Dockerfile.core.offline', 'compose.core.yaml', '.env.core.example', '.dockerignore',
         'LICENSE', 'NOTICE', 'README.md', 'CHANGELOG.md', 'ROADMAP.md',
         'Dockerfile.iris-dev', 'compose.iris-dev.yaml', 'docker/core/server.mjs',
         'scripts/archive-core.py', 'scripts/archive-static.py', 'scripts/build-demo.mjs', 'scripts/test-demo.mjs',
-        'docs/RELEASE_CANDIDATE_065.md', 'docs/INTEROPERABILITY_065.md', 'docs/ANATOMY_REFERENCE_CAPABILITY.md', 'docs/MOBILE_HANDOFF_065.md', 'scripts/map-reference-owners.py', 'scripts/preview-static.mjs', 'scripts/open-preview.ps1', 'scripts/stop-preview.ps1', 'scripts/test-reference-hierarchy.mjs', 'scripts/test-public-reference-visual.mjs',
+        'docs/RELEASE_CANDIDATE_065.md', 'docs/INTEROPERABILITY_065.md', 'docs/ANATOMY_REFERENCE_CAPABILITY.md', 'scripts/map-reference-owners.py', 'scripts/preview-static.mjs', 'scripts/open-preview.ps1', 'scripts/stop-preview.ps1', 'scripts/test-reference-hierarchy.mjs', 'scripts/test-public-reference-visual.mjs',
     }
     admitted_reference = {
         'reference/public/reference/' + name for name in [
@@ -48,7 +48,7 @@ def main():
     selected = singles | admitted_reference | {
         name for name in source['files'] if name.startswith(('viewer/', 'third-party/', 'docs/', 'assets/branding/', 'reference/metadata/'))
     }
-    selected.discard('docs/H002_CANDIDATE.md')  # Historical machine-local paths stay in the source repository.
+    selected.discard('docs/H002_CANDIDATE.md')  # This qualification predates the Core distribution.
     files = {}
     for name in sorted(selected):
         if name not in source['files']:

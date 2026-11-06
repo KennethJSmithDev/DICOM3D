@@ -2,7 +2,6 @@ import {loadFiles,unloadWorkspace} from './main';
 import {prepareReferenceExperience} from './reference-experience';
 import {PUBLIC_RELEASE} from './public-release.mjs';
 
-// Public and private entries retain the reference viewer and shared scene owner.
 const base=import.meta.env.BASE_URL,publicDemo=import.meta.env.MODE==='safe-reference-demo';
 const mount=document.createElement('section');mount.className='section-body control-section';
 mount.innerHTML='<label>Generalized adult reference <select id="referenceVariant"><option value="bp3d-male">Male · BodyParts3D anatomy</option><option value="hra-female">Female · HRA anatomical reference</option></select></label><button id="referenceReload">Reload reference</button><button id="referenceUnload">Unload reference</button><p>Independent BodyParts3D male and HRA female reference sources; partial coverage, no patient registration. No patient DICOM required.</p><output id="referenceLoadState" hidden></output>';
@@ -51,14 +50,12 @@ document.querySelector<HTMLButtonElement>('#referenceUnload')!.onclick=async()=>
 start();
 
 
-// Private ingress uses one verified boundary; the optional loopback fixture is public H000 only.
-if((import.meta.env.DICOM3D_VERIFIED_VOLUME_IMPORT===true||import.meta.env.DICOM3D_PRIVATE_VOLUME_DEV===true)&&shell){
+// Admit local CT only through the verified volume contract.
+if(import.meta.env.DICOM3D_VERIFIED_VOLUME_IMPORT===true&&shell){
  const panel=document.createElement('details');panel.id='verifiedVolumeImport';panel.open=false;
- panel.innerHTML='<summary>Open verified study · local files · Babylon Lite</summary><label>Verified admission packet <input id="verifiedDescriptor" type="file" accept=".json"></label><label>Decoded stored values <input id="verifiedPixels" type="file" accept=".raw16,.bin"></label><button id="verifiedLoad" type="button">Open verified CT</button><button id="bdpPublicFixture" type="button">Open I001 retrieved H000 · local qualification</button><p>Choose an existing verified volume packet and its stored pixel payload. Original DICOM and live PACS/IRIS connection are not enabled here. No SEG or atlas registration is inferred.</p><output id="verifiedLoadState" hidden></output>';
+ panel.innerHTML='<summary>Open verified study · local files · Babylon Lite</summary><label>Verified admission packet <input id="verifiedDescriptor" type="file" accept=".json"></label><label>Decoded stored values <input id="verifiedPixels" type="file" accept=".raw16,.bin"></label><button id="verifiedLoad" type="button">Open verified CT</button><p>Choose an existing verified volume packet and its stored pixel payload. Original DICOM and live PACS/IRIS connection are not enabled here. No SEG or atlas registration is inferred.</p><output id="verifiedLoadState" hidden></output>';
  const openStudy=document.createElement('button');openStudy.id='openVerifiedStudy';openStudy.textContent='Open Study';reload.after(openStudy);openStudy.onclick=()=>{panel.open=!panel.open;if(panel.open)panel.scrollIntoView({block:'nearest'});};
- (document.getElementById('viewerDrawer')??mount.parentElement)!.append(panel);if(import.meta.env.DICOM3D_PRIVATE_VOLUME_DEV!==true)panel.querySelector('#bdpPublicFixture')!.remove();let token=0,abort:AbortController|null=null,lastVerified:any=null;
- (window as any).__bdpCandidate={backend:'babylon',snapshot:()=>({backend:'babylon',loaded:Boolean(lastVerified),descriptor:lastVerified?.descriptor??null}),assertSource:()=>lastVerified?.assertSourceUnchanged()};
- document.addEventListener('dicom3d-workspace-change',(event:any)=>{if(!event.detail?.verifiedVolume)lastVerified=null;});
+ (document.getElementById('viewerDrawer')??mount.parentElement)!.append(panel);let token=0,abort:AbortController|null=null;
  async function admit(read:()=>Promise<any>){
   if(busy)return;setBusy(true);const id=++token;abort?.abort();abort=new AbortController();const out=panel.querySelector('output')!;out.textContent='';
   try{
@@ -67,11 +64,10 @@ if((import.meta.env.DICOM3D_VERIFIED_VOLUME_IMPORT===true||import.meta.env.DICOM
    const {verifyVolume,verifiedManifest,verifiedPresentationReceipt}=await import('./verified-volume.mjs');
    const v=await verifyVolume(packet.descriptor,bytes,{signal:abort.signal,sourceEncoding:packet.sourceEncoding});if(id!==token)return;
    const study={verifiedVolume:v,pixels:v.pixels,mask:null,ctReceipt:verifiedPresentationReceipt(v),metrics:{sourceBytes:v.pixels.byteLength}};
-   const loaded=await loadFiles(new File([JSON.stringify(verifiedManifest(v))],'verified-volume.json'),undefined,{...hooks(),onDispose:()=>{if(lastVerified===v)lastVerified=null;shell.detached();},verifiedVolume:v,workstationStudy:study});
-   if(id!==token)return;if(!loaded)throw Error('Verified workstation construction failed');lastVerified=v;
+   const loaded=await loadFiles(new File([JSON.stringify(verifiedManifest(v))],'verified-volume.json'),undefined,{...hooks(),verifiedVolume:v,workstationStudy:study});
+   if(id!==token)return;if(!loaded)throw Error('Verified workstation construction failed');
    out.textContent=JSON.stringify({loaded:true,backend:'babylon',shape:v.descriptor.shape,payloadSha256:v.descriptor.payload.sha256});
   }catch(error){out.textContent=JSON.stringify({loaded:false,error:String(error)});shell.fail(error);}finally{setBusy(false);}
  }
  panel.querySelector<HTMLButtonElement>('#verifiedLoad')!.onclick=()=>admit(async()=>{const a=panel.querySelector<HTMLInputElement>('#verifiedDescriptor')!.files?.[0],b=panel.querySelector<HTMLInputElement>('#verifiedPixels')!.files?.[0];if(!a||!b||a.size>1024*1024||b.size>80*1024*1024)throw Error('Verified input bounds');return [JSON.parse(await a.text()),await b.arrayBuffer()];});
- if(import.meta.env.DICOM3D_PRIVATE_VOLUME_DEV===true)panel.querySelector<HTMLButtonElement>('#bdpPublicFixture')!.onclick=()=>admit(async()=>{const a=await fetch(base+'bdp-fixture/request.json',{cache:'no-store',signal:abort!.signal});if(!a.ok)throw Error('Pinned local public fixture unavailable');const packet=await a.json();const b=await fetch(base+'bdp-fixture/payload.raw16',{cache:'no-store',signal:abort!.signal});if(!b.ok||Number(b.headers.get('Content-Length'))!==packet.descriptor.payload.bytes)throw Error('Pinned public fixture payload unavailable');return [packet,await b.arrayBuffer()];});
 }

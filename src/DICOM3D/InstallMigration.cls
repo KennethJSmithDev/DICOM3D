@@ -4,7 +4,7 @@ Class DICOM3D.InstallMigration Extends %RegisteredObject
 
 /// WHY: IPM per-file Activate leaves obsolete051 names behind on upgrade.
 /// BOUNDARY: only204 published051 paths/old hashes; privileged maintenance install.
-/// INVARIANT: preflight all before any deletion; current379 targets are disjoint.
+/// INVARIANT: preflight all before any deletion; current frontend targets are disjoint.
 /// EVIDENCE: scripts/retired-filecopy-051.json and exact native release receipt.
 /// REGRESSION: filesystem deletion is not transactional; no concurrent CSP writer.
 ClassMethod Retire051(root As %String) As %Status [ Language = python ]
@@ -831,7 +831,7 @@ ClassMethod Retire051(root As %String) As %Status [ Language = python ]
         }
     }
     policy_sha = "282c8029a22bcc6ab808489fd329ba6e37b66018768e2908c66e8cc1dc3cfb43"
-    viewer_sha = "f8ba303cc000dd6aacd1f0edd6baf5597b13dc01fa423581737548179e893cea"
+    viewer_sha = "cb358a82612518c4f7eeeb37337ee7b4c27de7cd94d3d615a78e27b4ec398370"
     descriptors = []
     retired = []
     missing = 0
@@ -874,10 +874,10 @@ ClassMethod Retire051(root As %String) As %Status [ Language = python ]
                 total += len(block)
                 require(total <= 1048576, "retirement hash read exceeds1MiB bound")
                 h.update(block)
-        # Bind retirement to the actual accepted060 frontend entry, not version text.
+        # Bind retirement to the actual current frontend entry, not version text.
         entry_fd = os.open("reference.html", os.O_RDONLY | os.O_NOFOLLOW | os.O_NONBLOCK, dir_fd=root_fd)
         descriptors.append(entry_fd)
-        require(stat.S_ISREG(os.fstat(entry_fd).st_mode) and file_hash(entry_fd) == viewer_sha, "current060 frontend identity differs")
+        require(stat.S_ISREG(os.fstat(entry_fd).st_mode) and file_hash(entry_fd) == viewer_sha, "current frontend identity differs")
         parents = {}
         records = []
         for relative, wanted in sorted(targets.items()):

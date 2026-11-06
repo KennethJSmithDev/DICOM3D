@@ -17,6 +17,7 @@ demo/public/sample/
 reference/public/demo/h000/
 docs/images/visual-060-study-docked.jpg
 
-# Machine-specific qualification configuration stays private.
-viewer/vite.bdp.config.mjs
+# Keep machine-specific Vite configurations out of source control.
+viewer/vite.*.config.mjs
+!viewer/vite.reference.config.mjs
 .vite-cache/

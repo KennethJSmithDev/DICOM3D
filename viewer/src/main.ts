@@ -39,9 +39,8 @@ let generation = 0;
 let createdEngines=0,disposedEngines=0;
 let closeWorkspace: null | (()=>Promise<void>) = null;
 const ctOnly=document.createElement('button');ctOnly.id='openCtWorkspace';ctOnly.textContent='Open local CT workspace without GLB';glbInput.parentElement!.append(ctOnly);
-// WHY: hidden controls still accept scripted change events. BOUNDARY: only the
-// private entry binds local imports; public references/curated study use their
-// pinned loader. INVARIANT: unload never re-enables these public inputs.
+// The Safe Demo disables the generic manifest/GLB inputs, including scripted events.
+// The reference, curated study, and verified-volume paths use their own loaders.
 if(!publicFileImportsDisabled)ctOnly.onclick=async()=>{if(manifestInput.files?.[0])await loadFiles(manifestInput.files[0]);else status.textContent='Choose the accepted local study manifest first.';};
 else {manifestInput.disabled=glbInput.disabled=ctOnly.disabled=true;ctOnly.hidden=true;}
 const closeButton=document.createElement('button');closeButton.id='closeWorkspace';closeButton.textContent='Close local workspace';closeButton.hidden=true;ctOnly.after(closeButton);closeButton.onclick=unloadWorkspace;
@@ -65,7 +64,7 @@ async function loadSelectedFiles() {
 }
 
 // Shared input seam: the installable viewer supplies local files; the safe demo
-// supplies only its explicitly admitted reference assets. Rendering is shared.
+// uses the admitted reference and research loaders or a verified volume packet.
 export async function loadFiles(manifestFile: File, glbFile?: File, options:any = {}) {
   const currentGeneration = ++generation;
   let constructionCleanup:null|(()=>Promise<void>)=null;
@@ -75,7 +74,7 @@ export async function loadFiles(manifestFile: File, glbFile?: File, options:any 
   try {
     status.textContent = 'Reading manifest…';
     const manifest = JSON.parse(await manifestFile.text()) as Manifest;
-    const verifiedVolume=(import.meta.env.DICOM3D_VERIFIED_VOLUME_IMPORT===true||import.meta.env.DICOM3D_PRIVATE_VOLUME_DEV===true)&&isVerifiedVolume(options.verifiedVolume)?options.verifiedVolume:null;
+    const verifiedVolume=import.meta.env.DICOM3D_VERIFIED_VOLUME_IMPORT===true&&isVerifiedVolume(options.verifiedVolume)?options.verifiedVolume:null;
     if(verifiedVolume&&JSON.stringify(manifest)!==JSON.stringify(verifiedManifest(verifiedVolume)))throw Error('Verified source/manifest mismatch');
     if(verifiedVolume)requireVolumeRenderer(verifiedVolume.descriptor,{backend:'babylon'});
     if (!manifest.structure?.semantic_id || (!verifiedVolume&&(!manifest.asset?.sha256 || !manifest.asset?.relative_filename))) {
@@ -156,7 +155,7 @@ export async function loadFiles(manifestFile: File, glbFile?: File, options:any 
     const visual=publicVisualEnabled?(verifiedVolume?await (await import('./verified-study-visual')).createVerifiedStudyVisual({engine,scene,camera,canvas,manifest,verifiedVolume}):referenceController
       ?(await import('./public-reference-visual')).createPublicReferenceVisual({engine,scene,camera,canvas,manifest,controller:referenceController})
       :import.meta.env.DICOM3D_PUBLIC_STUDY&&publicStudy?(await import('./public-study-visual')).createPublicStudyVisual({engine,scene,camera,canvas,meshes,semantic:semanticNode,manifest}):null):null;
-    teardown.push(()=>{if((window as any).__bdpVisual===visual)delete (window as any).__bdpVisual;return visual?.dispose();});
+    teardown.push(()=>visual?.dispose());
     let input:any=null,resize:ResizeObserver|null=null,pickRevision=0;
     let detachCamera = publicVisualEnabled?()=>{}:attachControl(camera, canvas, scene);
     teardown.push(()=>detachCamera());
@@ -171,7 +170,6 @@ export async function loadFiles(manifestFile: File, glbFile?: File, options:any 
     if(currentGeneration!==generation){await cleanup();return false;}
     await registerScene(scene);
     visual?.activate();
-    if(verifiedVolume)(window as any).__bdpVisual=visual;
     ctController?.start();
     await startEngine(engine);
 

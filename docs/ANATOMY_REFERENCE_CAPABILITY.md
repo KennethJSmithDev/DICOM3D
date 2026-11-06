@@ -1,9 +1,7 @@
-# Source-backed anatomy reference capability — ANAT-ACCEPT-001
+# Source-backed anatomy reference capability
 
-This is a separately qualified desktop product candidate based on the 0.6.0
-workstation. It does not change the published 0.6.0 release or Safe Demo. The exact
-acceptance commit, artifact and measurements are bound by the external acceptance
-receipt; no publication or BDP integration follows automatically from this file.
+The v0.6.5 workstation includes expanded source-backed desktop references.
+See the [v0.6.5 release notes](RELEASE_NOTES_065.md) for distribution scope.
 
 ## Supported operation
 
@@ -48,7 +46,7 @@ IS-A classes rather than inferred organ-system assignments. Relations remain dis
 ## Source and representation ownership
 
 BodyParts3D 4.0 PART-OF source geometry and HRA female-united source geometry remain
-independent references. Their GLB hashes are unchanged from ANAT-EXPAND-002:
+independent references. The admitted GLB identities are listed below.
 
 | Reference | Bytes | SHA-256 |
 |---|---:|---|
@@ -95,7 +93,3 @@ per-owner allocation. It samples all 386 male primitives but 507/590 female
 primitives; all 380 female owners receive points. The 83 omitted decorative
 primitive targets are not missing source meshes. Full-source rendering is qualified
 separately. No accuracy, clinical completeness or diagnostic suitability is claimed.
-
-BDP-001's designated writer must review and admit this exact candidate after its
-CT gate, preserving both changesets and rerunning only affected integration checks.
-Public main promotion, versioning and deployment remain separate approval gates.

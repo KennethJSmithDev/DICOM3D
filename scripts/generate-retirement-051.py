@@ -20,8 +20,11 @@ assert inventory['sourceArchiveSha256'] == '83b7c207b9c203b29e4ba8e622f2784c8bf7
 assert len(targets) == 204 and sum(r['bytes'] for r in targets.values()) == 1226267
 assert all(re.fullmatch(r'assets/[A-Za-z0-9_-]+\.js|reference/(male|female)(\.glb|\.manifest\.json)', n) for n in targets)
 assert all(set(r) == {'bytes', 'sha256'} and r['bytes'] > 0 and re.fullmatch(r'[0-9a-f]{64}', r['sha256']) for r in targets.values())
-current = {e.attrib['Target'].removeprefix('{$cspdir}dicom3d/') for e in ET.parse(root / 'module.xml').findall('.//FileCopy')}
-assert len(current) == 379 and not set(targets) & current
+current = [e.attrib['Target'].removeprefix('{$cspdir}dicom3d/') for e in ET.parse(root / 'module.xml').findall('.//FileCopy')]
+frontend = json.loads((root / 'public/demo-build-manifest.json').read_text(encoding='utf-8'))
+expected = {*frontend['files'], 'demo-build-manifest.json'}
+assert len(current) == len(expected) and set(current) == expected
+assert not set(targets) & expected
 entry = (root / 'src/DICOM3D/Entry.cls').read_text()
 viewer_build = re.search(r'Parameter VIEWERBUILD = "([0-9a-f]{64})";', entry)[1]
 policy_hash = hashlib.sha256(json.dumps(targets, sort_keys=True, separators=(',', ':')).encode()).hexdigest()
@@ -32,7 +35,7 @@ Class DICOM3D.InstallMigration Extends %RegisteredObject
 
 /// WHY: IPM per-file Activate leaves obsolete051 names behind on upgrade.
 /// BOUNDARY: only204 published051 paths/old hashes; privileged maintenance install.
-/// INVARIANT: preflight all before any deletion; current379 targets are disjoint.
+/// INVARIANT: preflight all before any deletion; current frontend targets are disjoint.
 /// EVIDENCE: scripts/retired-filecopy-051.json and exact native release receipt.
 /// REGRESSION: filesystem deletion is not transactional; no concurrent CSP writer.
 ClassMethod Retire051(root As %String) As %Status [ Language = python ]
@@ -85,10 +88,10 @@ ClassMethod Retire051(root As %String) As %Status [ Language = python ]
                 total += len(block)
                 require(total <= 1048576, "retirement hash read exceeds1MiB bound")
                 h.update(block)
-        # Bind retirement to the actual accepted060 frontend entry, not version text.
+        # Bind retirement to the actual current frontend entry, not version text.
         entry_fd = os.open("reference.html", os.O_RDONLY | os.O_NOFOLLOW | os.O_NONBLOCK, dir_fd=root_fd)
         descriptors.append(entry_fd)
-        require(stat.S_ISREG(os.fstat(entry_fd).st_mode) and file_hash(entry_fd) == viewer_sha, "current060 frontend identity differs")
+        require(stat.S_ISREG(os.fstat(entry_fd).st_mode) and file_hash(entry_fd) == viewer_sha, "current frontend identity differs")
         parents = {}
         records = []
         for relative, wanted in sorted(targets.items()):
