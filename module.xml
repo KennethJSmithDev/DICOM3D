@@ -251,7 +251,7 @@
   <FileCopy Name="public/assets/preload-helper-CKhbhPgO.js" Target="{$cspdir}dicom3d/assets/preload-helper-CKhbhPgO.js" />
   <FileCopy Name="public/assets/public-reference-visual-D7ATdNe6.js" Target="{$cspdir}dicom3d/assets/public-reference-visual-D7ATdNe6.js" />
   <FileCopy Name="public/assets/public-release-CuBq6fBm.js" Target="{$cspdir}dicom3d/assets/public-release-CuBq6fBm.js" />
-  <FileCopy Name="public/assets/public-workstation-BvT007Tw.js" Target="{$cspdir}dicom3d/assets/public-workstation-BvT007Tw.js" />
+  <FileCopy Name="public/assets/public-workstation-BiVDGRe2.js" Target="{$cspdir}dicom3d/assets/public-workstation-BiVDGRe2.js" />
   <FileCopy Name="public/assets/public-workstation-DmR2tVMe.css" Target="{$cspdir}dicom3d/assets/public-workstation-DmR2tVMe.css" />
   <FileCopy Name="public/assets/quat-conjugate-C09346Hg.js" Target="{$cspdir}dicom3d/assets/quat-conjugate-C09346Hg.js" />
   <FileCopy Name="public/assets/quaternion-from-angles-CEDLPJ0A.js" Target="{$cspdir}dicom3d/assets/quaternion-from-angles-CEDLPJ0A.js" />
@@ -264,8 +264,8 @@
   <FileCopy Name="public/assets/random-DhG0k4Bq.js" Target="{$cspdir}dicom3d/assets/random-DhG0k4Bq.js" />
   <FileCopy Name="public/assets/receive-custom-event-DHfejKIq.js" Target="{$cspdir}dicom3d/assets/receive-custom-event-DHfejKIq.js" />
   <FileCopy Name="public/assets/ref-count-dzJdN9ts.js" Target="{$cspdir}dicom3d/assets/ref-count-dzJdN9ts.js" />
+  <FileCopy Name="public/assets/reference-BwVJVpJX.js" Target="{$cspdir}dicom3d/assets/reference-BwVJVpJX.js" />
   <FileCopy Name="public/assets/reference-DMBnsulO.css" Target="{$cspdir}dicom3d/assets/reference-DMBnsulO.css" />
-  <FileCopy Name="public/assets/reference-Rpe38hBM.js" Target="{$cspdir}dicom3d/assets/reference-Rpe38hBM.js" />
   <FileCopy Name="public/assets/reference-ui-CNia5gtF.js" Target="{$cspdir}dicom3d/assets/reference-ui-CNia5gtF.js" />
   <FileCopy Name="public/assets/render-target-signature-B-9UVrB_.js" Target="{$cspdir}dicom3d/assets/render-target-signature-B-9UVrB_.js" />
   <FileCopy Name="public/assets/render-task-base-Dad9aTea.js" Target="{$cspdir}dicom3d/assets/render-task-base-Dad9aTea.js" />
@@ -359,8 +359,8 @@
   <FileCopy Name="public/assets/vat-picking-pipeline-uM0WRFgH.js" Target="{$cspdir}dicom3d/assets/vat-picking-pipeline-uM0WRFgH.js" />
   <FileCopy Name="public/assets/vector-slerp-B6edzDlL.js" Target="{$cspdir}dicom3d/assets/vector-slerp-B6edzDlL.js" />
   <FileCopy Name="public/assets/verified-study-visual-BTIEoDs6.js" Target="{$cspdir}dicom3d/assets/verified-study-visual-BTIEoDs6.js" />
-  <FileCopy Name="public/assets/verified-volume-9xfyQRPr.js" Target="{$cspdir}dicom3d/assets/verified-volume-9xfyQRPr.js" />
-  <FileCopy Name="public/assets/verified-volume-DhGMw9Lq.js" Target="{$cspdir}dicom3d/assets/verified-volume-DhGMw9Lq.js" />
+  <FileCopy Name="public/assets/verified-volume-D3kIoqt3.js" Target="{$cspdir}dicom3d/assets/verified-volume-D3kIoqt3.js" />
+  <FileCopy Name="public/assets/verified-volume-bzgHPLF-.js" Target="{$cspdir}dicom3d/assets/verified-volume-bzgHPLF-.js" />
   <FileCopy Name="public/assets/viewport-controls-DIczX0Mf.js" Target="{$cspdir}dicom3d/assets/viewport-controls-DIczX0Mf.js" />
   <FileCopy Name="public/assets/visibility-BlVxqrHZ.js" Target="{$cspdir}dicom3d/assets/visibility-BlVxqrHZ.js" />
   <FileCopy Name="public/assets/wait-all-dBoefIUc.js" Target="{$cspdir}dicom3d/assets/wait-all-dBoefIUc.js" />

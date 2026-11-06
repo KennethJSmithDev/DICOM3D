@@ -49,8 +49,14 @@ export async function verifySpatialSource(input,buffer,pixels,{signal}={}){
     need(near(point(m.index_to_patient_mm,[k,0,0]),f.imagePositionPatient,.001),'nonuniform origins');
     need(await digest(buffer.slice(k*R*C*2,(k+1)*R*C*2))===f.pixelSha256,'frame digest');
   }
-  for(const p of [[0,0,0],[K-1,R-1,C-1],[(K-1)/2,(R-1)*.375,(C-1)*.625]]){
-    const patient=point(m.index_to_patient_mm,p);need(near(point(m.patient_mm_to_index,patient),p,1e-6)&&near(point(m.model_m_to_patient_mm,point(m.patient_mm_to_model_m,patient)),patient,1e-7),'inverse');
+  // Affine error reaches its extrema at the corners. Voxel edges span every axis, even for a singleton dimension.
+  const upper=shape.map(size=>size-.5);
+  for(let corner=0;corner<8;corner++){
+    const index=upper.map((edge,axis)=>(corner&(1<<axis))?edge:-.5);
+    const patient=point(m.index_to_patient_mm,index);
+    const model=point(m.patient_mm_to_model_m,patient);
+    need(near(point(m.patient_mm_to_index,patient),index,1e-6)&&
+      near(point(m.model_m_to_patient_mm,model),patient,1e-7),'inverse');
   }
   // Renderer-facing metadata is an allowlist: no adapter name, URL, file path or credential.
   const descriptor=freeze({schema:d.schema,shape,source,storage,calibration,geometry,frames,payload});

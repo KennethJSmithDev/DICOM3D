@@ -25,6 +25,7 @@ jobs:
       - run: npm ci --prefix viewer
       - run: node scripts/build-demo.mjs --profile curated-h000
       - run: node scripts/test-demo.mjs --profile curated-h000
+      - run: node --test scripts/test-verified-volume.mjs
       - run: node scripts/test-public-research-data.mjs
       - run: node scripts/test-publication.mjs --profile curated-h000
       - uses: actions/configure-pages@v5
