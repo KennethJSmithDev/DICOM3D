@@ -44,7 +44,7 @@ export function prepareExperience() {
     glbFile:'Choose the matching GLB. Canonical positions, indices and spatial transforms remain unchanged.',
     sliceMode:'Create reversible display bands from the authorized synthetic fixture only. These are open surfaces, not acquired CT slices.',
     sliceSelect:'Select one derived band by its stable presentation identity. Hidden bands cannot be picked on the canvas.',
-    sliceAction:'Orbit moves the camera. Drag selected changes only its derived model X/Y offset.',
+    sliceAction:'Orbit moves the camera. Mouse drag moves the selected band in the screen plane through its existing presentation offsets; touch retains model X/Y dragging. Source transforms stay unchanged.',
     sliceGap:'Separate the five synthetic bands along model Y. Individual offsets remain separate; camera refits the assembly.',
     sliceRotation:'Rotate the selected display band around its model origin. This does not register or alter source anatomy.',
     sliceOpacity:'Adjust display opacity only. Transparency is not tissue density or calibrated HU.',

@@ -1,0 +1,1 @@
+var e=16;function t(t){if(!Number.isFinite(t)||t<1)throw Error(`setMaxLights: expected positive integer, got ${t}`);e=t|0}export{t as n,e as t};

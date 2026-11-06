@@ -1,0 +1,1 @@
+import{A as e,M as t,s as n,u as r}from"./runtime-BxVH-6yn.js";import{i,r as a}from"./sockets-DhRah2Zy.js";var o={type:t.FloatToBoolean,build:()=>({dataIn:[a(`a`,e.Number,0)],dataOut:[i(`value`,e.Boolean)]}),updateOutputs(e,t,i){r(t,e,`value`,!!n(t,i,e,`a`))}};export{o as floatToBooleanDef};

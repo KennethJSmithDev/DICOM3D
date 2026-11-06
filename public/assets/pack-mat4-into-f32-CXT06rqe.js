@@ -1,0 +1,1 @@
+function e(e,t,n=0,r=0){let i=t;if(r===0&&i.length===16){e.set(i,n);return}let a=r,o=n;e[o+0]=i[a+0],e[o+1]=i[a+1],e[o+2]=i[a+2],e[o+3]=i[a+3],e[o+4]=i[a+4],e[o+5]=i[a+5],e[o+6]=i[a+6],e[o+7]=i[a+7],e[o+8]=i[a+8],e[o+9]=i[a+9],e[o+10]=i[a+10],e[o+11]=i[a+11],e[o+12]=i[a+12],e[o+13]=i[a+13],e[o+14]=i[a+14],e[o+15]=i[a+15]}export{e as t};

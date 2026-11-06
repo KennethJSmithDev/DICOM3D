@@ -1,0 +1,1 @@
+import{n as e}from"./_matrix-allocator-lS7uVVV-.js";function t(){let t=e();return t[0]=1,t[5]=1,t[10]=1,t[15]=1,t}export{t};

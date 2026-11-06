@@ -1,0 +1,30 @@
+{
+  "schema": "dicom3d-existing-reference-component-preset-1",
+  "id": "bp3d-43-lung-parenchyma-components",
+  "label": "Source-labeled lung parenchyma components",
+  "sourceIndexSha256": "8e3b71c6eb259a55532d8b3f45a58057eedbc587857ebb99c2efab4ca4c7faac",
+  "scope": "Navigation union of already admitted owners; no system classification, admission, renaming, laterality inference or complete-lung claim",
+  "bundles": [
+    "unclassified-height-upper",
+    "unclassified-height-upper-middle"
+  ],
+  "ownerIds": [
+    "FMA27390",
+    "FMA27368",
+    "FMA27393",
+    "FMA27375",
+    "FMA27386",
+    "FMA27385",
+    "FMA27389",
+    "FMA27394",
+    "FMA27369",
+    "FMA27374",
+    "FMA27373",
+    "FMA27448",
+    "FMA27391",
+    "FMA27376",
+    "FMA27371",
+    "FMA27392",
+    "FMA27452"
+  ]
+}

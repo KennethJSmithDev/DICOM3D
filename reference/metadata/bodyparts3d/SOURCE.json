@@ -1,0 +1,26 @@
+{
+  "retrievedUtc": "2026-10-28T05:14:52.3881725Z",
+  "geometryDownloads": 0,
+  "totalBytes": 1477909,
+  "files": [
+    {
+      "name": "isa_parts_list_e.txt",
+      "url": "https://dbarchive.biosciencedbc.jp/data/bodyparts3d/LATEST/isa_parts_list_e.txt",
+      "bytes": 128086,
+      "sha256": "ab7796deedd49205e77f3609a1cb8c53e2bbee14ecb5c9a6ca05227469780513"
+    },
+    {
+      "name": "isa_inclusion_relation_list.txt",
+      "url": "https://dbarchive.biosciencedbc.jp/data/bodyparts3d/LATEST/isa_inclusion_relation_list.txt",
+      "bytes": 207664,
+      "sha256": "26e7d818e03a8c909fe09c561f38d0d513423c87681f9450a803bc38f5b07564"
+    },
+    {
+      "name": "isa_element_parts.txt",
+      "url": "https://dbarchive.biosciencedbc.jp/data/bodyparts3d/LATEST/isa_element_parts.txt",
+      "bytes": 1142159,
+      "sha256": "a3de74423f943b0d724ae8f59b3a817f87c423a544f8db98113b1980817cbeaf"
+    }
+  ],
+  "license": "Publisher current metadata license CC BY 4.0 International; historical admitted derived BP3D geometry retains CC BY-SA 2.1 Japan. Preserve both source grants separately."
+}

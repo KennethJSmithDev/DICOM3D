@@ -1,12 +1,12 @@
 # H002 candidate status
 
-A/B PASS; C fresh requalification PASS; D/E including camera framing and F bounded PASS. **Stopped at the operator publication-approval boundary.**
+A/B PASS; C fresh requalification PASS; D/E including camera framing and F bounded PASS. **Historical qualification PASS; v0.2.0 was subsequently published October 17, 2026.**
 
 The historical C failure receipt remains preserved. Its visual failure was not reproduced in fresh builds, including an uninstrumented fresh Edge tab and installed-product browsers. No visibility code defect was demonstrated, so no speculative renderer/adapter patch was made. The historical cause remains unverified; fresh acceptance does not explain it.
 
-Actual mesh/renderable ownership, parent links, visibility flags and canonical reset positions were traced with temporary read-only diagnostics, removed before final builds. Fresh visual isolation, GPU hit/hidden miss, independent state, reassembly, desktop/narrow layout and authenticated package checks are recorded in CompDocs H002 C–F receipts and D:/DICOM3D/evidence/H002/.
+Actual mesh/renderable ownership, parent links, visibility flags and canonical reset positions were traced with temporary read-only diagnostics, removed before final builds. The H002 qualification covered visual isolation, GPU hits and hidden misses, independent state, reassembly, desktop and narrow layouts, and authenticated package access.
 
-Only the exact DEMO-001 synthetic fixture enables five open model-Y presentation bands. These are not acquired CT slices, anatomy or a clinical feature. H000 remains on the original unsliced viewer path; source hashes and semantic identity are unchanged. No Native64 or new dependency.
+Only the exact DEMO-001 synthetic fixture enables five open model-Y presentation bands. These are not acquired CT slices, anatomy or a clinical feature. H000 remains on the original unsliced viewer path; source hashes and semantic identity are unchanged. No new engine or dependency.
 
 Camera controls fit the complete assembly, focus a visible selected slice, refit on expansion/canvas resize and restore original framing on reset-all. Camera targets follow world-space geometric bounds, independently of source-space origin. Model transforms are not recentered. Collapsed controls retain the camera toolbar. Original framing restores initial orientation/FOV and original visible bounds; distance adapts to the current canvas aspect.
 
@@ -14,6 +14,6 @@ Frozen qualified candidate: `dicom3d-0.2.0.tgz`, 205915 bytes, SHA-256 `37159b95
 
 The F stale-client cause is now observed: browser disk cache supplied an old mutable HTML shell that selected the obsolete bundle; no service worker was registered. The supported application cache timeout now separates mutable files from protected hashed assets. The native entry binds to the exact shell hash, and ordinary reload/revisit checks pass while assets retain cache hits. See [cache policy and legacy-bookmark migration](CACHE_POLICY.md). A text-wrapping rule fixes the product status identifier's narrow-layout overflow; renderer scripts are unchanged.
 
-Reproduce pure checks with `node scripts/test-slices.mjs`; build the private standalone preview with `node scripts/build-demo.mjs`, serve `.demo-dist` at `/DICOM3D/`, and run `node scripts/test-demo.mjs`. Package with the existing stage/archive scripts. Never promote the prior failed screenshot or pure-state tests to new browser evidence.
+Generate the synthetic fixture with `node scripts/build-demo.mjs --sample-only`, then run `node scripts/test-slices.mjs`. The current [Safe Demo build instructions](SAFE_DEMO.md) cover the separate reference workstation. Package with the existing stage/archive scripts. Never promote the prior failed screenshot or pure-state tests to new browser evidence.
 
-Next exact boundary: [publication approval](H002_RELEASE_HANDOFF.md) to merge the qualified branch, publish the frozen v0.2.0 artifact/tag and update Pages. Public main/demo and v0.1.0 remain unchanged. Open Exchange submission remains operator-owned.
+Historical next boundary was publication approval; the [v0.2.0 release](https://github.com/KennethJSmithDev/DICOM3D/releases/tag/v0.2.0) is now published. The original qualification is preserved as historical evidence; the live Pages experience has since advanced to DEMO-050.

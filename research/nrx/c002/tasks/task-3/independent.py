@@ -1,0 +1,18 @@
+import json,sys,math,time,collections
+from pathlib import Path
+import numpy as np
+root=Path(__file__).resolve().parents[2];sys.path.insert(0,str(root));from ingest import read_atlas,source_mesh,topology,contact_validator
+t=Path(__file__).resolve().parent;b=t/'browser-001';r=json.loads((b/'result.json').read_text());n=64;h=4/n;start=time.monotonic();a=np.fromfile(b/'initial.samples.bin',dtype='<f4').reshape(65,65,65,2);brush=np.fromfile(b/'brush.samples.bin',dtype='<f4').reshape(a.shape);smooth=np.fromfile(b/'smooth.samples.bin',dtype='<f4').reshape(a.shape);center=np.asarray(r['editOptions']['center']);z,y,x=np.indices((65,65,65));points=np.stack([x*h-2,y*h-2,z*h-2],axis=-1);distance=np.sqrt(np.sum((points-center)**2,axis=-1));radius=.35;inside=(distance<radius)&(x>0)&(x<64)&(y>0)&(y<64)&(z>0)&(z<64);w=1-distance**2/radius**2;expected=a.copy();expected[:,:,:,0]=np.where(inside,np.clip(a[:,:,:,0].astype(float)+.04*w*w/(2*h),-1,1).astype('<f4'),a[:,:,:,0]);brushMax=float(np.max(np.abs(expected.astype(float)-brush)));assert brushMax<=np.finfo(np.float32).eps
+expected=brush.copy();v=brush[:,:,:,0].astype(float);avg=(np.roll(v,1,2)+np.roll(v,-1,2)+np.roll(v,1,1)+np.roll(v,-1,1)+np.roll(v,1,0)+np.roll(v,-1,0))/6;expected[:,:,:,0]=np.where(inside,np.clip(v+(avg-v)*.2,-1,1).astype('<f4'),v);assert np.array_equal(expected,smooth),'Independent Jacobi samples differ';assert np.array_equal(a[~inside],brush[~inside]) and np.array_equal(brush[~inside],smooth[~inside]);assert np.array_equal(a[:,:,:,1],brush[:,:,:,1]) and np.array_equal(a[:,:,:,1],smooth[:,:,:,1])
+for first,last in [('initial','undo-brush'),('brush','undo-smooth'),('brush','redo-brush'),('smooth','redo-smooth')]:
+    for suffix in ['samples.bin','mesh.bin']:assert (b/(first+'.'+suffix)).read_bytes()==(b/(last+'.'+suffix)).read_bytes()
+tetra=np.array([[0,1,3,7],[0,3,2,7],[0,2,6,7],[0,6,4,7],[0,4,5,7],[0,5,1,7]]);corners=np.array([[i&1,(i>>1)&1,(i>>2)&1] for i in range(8)])
+def residual(q,field):
+    cell=np.clip(np.floor((q+2)/h).astype(int),0,n-1);local=(q+2)/h-cell;answers=np.full(len(q),np.nan)
+    for tet in tetra:
+        p=corners[tet];inv=np.linalg.inv((p[1:]-p[0]).T);abc=(local-p[0])@inv.T;weights=np.concatenate([1-abc.sum(axis=1,keepdims=True),abc],axis=1);mask=np.all(weights>=-2e-5,axis=1)&np.isnan(answers);indices=cell[:,None,:]+p[None,:,:];values=field[indices[:,:,2],indices[:,:,1],indices[:,:,0],0];answers[mask]=np.sum(values*weights,axis=1)[mask]
+    assert np.isfinite(answers).all();return float(np.max(np.abs(answers)))
+contacts=contact_validator();reports=[]
+for name,field in [('brush',brush),('smooth',smooth)]:
+    data=np.fromfile(b/(name+'.mesh.bin'),dtype='<f4').reshape(-1,8)[:,:3].astype(float);vertices,inverse=np.unique(data,axis=0,return_inverse=True);faces=inverse.reshape(-1,3);top=topology(vertices,faces);pairs=contacts(vertices,faces);queries=np.concatenate([vertices,data.reshape(-1,3,3).mean(axis=1)]);error=residual(queries,field);assert error<=2e-5,('PWL residual',error);reports.append({'name':name,'topology':top,'contactCandidates':pairs,'forbiddenContacts':0,'pwlQueries':len(queries),'maxAffineFieldResidual':error,'scalarTolerance':2e-5})
+report={'result':'PASS','brushScalarMaxDifference':brushMax,'brushAllowedFloatRoundoff':float(np.finfo(np.float32).eps),'jacobiExact':True,'unchangedOutsideBrush':True,'unchangedConstraintB':True,'undoRedoFieldAndGeometryExact':True,'editedMeshes':reports,'seconds':time.monotonic()-start,'scope':'Declared scalar-field transformations, source unchanged. PWL output fidelity and topology; not clinical truth or exactSDF after edits.'};(t/'independent.json').write_text(json.dumps(report,indent=2));print(json.dumps(report))

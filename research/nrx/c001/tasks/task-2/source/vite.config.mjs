@@ -1,0 +1,1 @@
+export default {base:'/',publicDir:false,resolve:{alias:{'@babylonjs/lite':process.env.NRX_BABYLON_BASELINE_MODULE}},build:{outDir:'../site',emptyOutDir:false,rollupOptions:{input:{native:'index.html',baseline:'baseline.html'}}}};

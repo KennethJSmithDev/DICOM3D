@@ -1,0 +1,1 @@
+import{A as e,M as t,s as n,t as r}from"./runtime-BxVH-6yn.js";import{n as i,r as a,t as o}from"./sockets-DhRah2Zy.js";var s={type:t.Branch,build:()=>({dataIn:[a(`condition`,e.Boolean,!1)],signalIn:[o(`in`)],signalOut:[i(`onTrue`),i(`onFalse`)]}),execute(e,t,i){n(t,i,e,`condition`)?r(t,i,e,`onTrue`):r(t,i,e,`onFalse`)}};export{s as branchDef};

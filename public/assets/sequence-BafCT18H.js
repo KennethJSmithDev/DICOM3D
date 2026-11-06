@@ -1,0 +1,1 @@
+import{M as e,t}from"./runtime-BxVH-6yn.js";import{n,t as r}from"./sockets-DhRah2Zy.js";var i={type:e.Sequence,build:e=>{let t=Math.max(1,e?.outputSignalCount??1),i=[];for(let e=0;e<t;e++)i.push(n(`out_${e}`));return{signalIn:[r(`in`)],signalOut:i}},execute(e,n,r){for(let i of e.signalOut)t(n,r,e,i.name)}};export{i as sequenceDef};

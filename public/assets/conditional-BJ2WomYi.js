@@ -1,0 +1,1 @@
+import{A as e,M as t,s as n,u as r}from"./runtime-BxVH-6yn.js";import{i,r as a}from"./sockets-DhRah2Zy.js";var o={type:t.Conditional,build:()=>({dataIn:[a(`condition`,e.Boolean,!1),a(`onTrue`,e.Any),a(`onFalse`,e.Any)],dataOut:[i(`value`,e.Any)]}),updateOutputs(e,t,i){let a=n(t,i,e,`condition`)?n(t,i,e,`onTrue`):n(t,i,e,`onFalse`);r(t,e,`value`,a)}};export{o as conditionalDef};

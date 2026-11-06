@@ -1,0 +1,5 @@
+export const FEMALE_BODY_ID='VH_F_skin';
+export const femalePresentationDefault=()=>({hidden:new Set([FEMALE_BODY_ID]),systems:new Set(),isolated:'',saved:null,opacity:1,appearance:'original',assemblyAmount:0});
+export function revealFemaleStructure(old,id,{isolate=false}={}){const hidden=new Set(old.hidden);hidden.delete(id);return {...old,hidden,systems:new Set(),saved:null,isolated:isolate?id:'',assemblyAmount:isolate?0:(old.assemblyAmount??0)}}
+export function toggleFemaleSystem(old,id){const systems=new Set(old.systems);systems.has(id)?systems.delete(id):systems.add(id);if(!old.systems.size&&systems.size)return {...old,systems,isolated:'',saved:{hidden:new Set(old.hidden),isolated:old.isolated}};if(!systems.size&&old.saved)return {...old,systems,hidden:new Set(old.saved.hidden),isolated:old.saved.isolated,saved:null};return {...old,systems}}
+export function filterFemaleStructures(index,query='',system=''){const q=query.trim().toLowerCase();return index.structures.filter(p=>(!system||(p.systems??[]).includes(system))&&(!q||`${p.label} ${p.id} ${p.region??''}`.toLowerCase().includes(q)))}

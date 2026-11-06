@@ -1,0 +1,33 @@
+{
+  "build-study/result.json": {
+    "elapsed_seconds": 3.692689099989366,
+    "exit_code": 0,
+    "timed_out": false,
+    "memory_limit_bytes": 4294967296,
+    "job_peak_process_private_commit_bytes": 92942336,
+    "job_peak_total_private_commit_bytes": 111124480
+  },
+  "build-editable-field/result.json": {
+    "elapsed_seconds": 8.134742099995492,
+    "exit_code": 0,
+    "timed_out": false,
+    "memory_limit_bytes": 4294967296,
+    "job_peak_process_private_commit_bytes": 118386688,
+    "job_peak_total_private_commit_bytes": 137072640
+  },
+  "browser-resource.json": {
+    "elapsed_seconds": 11.595031699995161,
+    "exit_code": 0,
+    "timed_out": false,
+    "memory_limit_bytes": 4294967296,
+    "job_peak_process_private_commit_bytes": 876347392,
+    "job_peak_total_private_commit_bytes": 1802543104
+  },
+  "historicalIntegrity": {
+    "manifestReferences": 2222,
+    "uniqueFiles": 1826,
+    "mismatches": 0,
+    "frozenNativeIntegrationSources": 79,
+    "allMatch": true
+  }
+}

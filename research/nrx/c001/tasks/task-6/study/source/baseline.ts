@@ -1,0 +1,10 @@
+import * as B from '@babylonjs/lite';
+import {prepareCtVolume} from './vendor/ct-volume';
+import {loadPublicResearchFixture} from './vendor/public-research-loader';
+import {volumeMatrices,STUDY_WORLD} from './vendor/ct-volume-core.mjs';
+import {transform} from './camera.mjs';
+const g:any=globalThis,canvas=document.querySelector('#renderCanvas') as HTMLCanvasElement;
+g.baselineStart=async()=>{const fixture=await loadPublicResearchFixture('/');const engine=await B.createEngine(canvas,{maxDevicePixelRatio:1,msaaSamples:1}),scene=B.createSceneContext(engine,{defaultRenderTask:false});scene.clearColor={r:.035,g:.055,b:.075,a:1};const camera=B.createDefaultCamera(scene);camera.nearPlane=.001;camera.farPlane=100;const matrices=volumeMatrices(fixture.manifest.spatial.matrices,STUDY_WORLD);const center=transform(matrices.textureToWorld,[255.5,255.5,51,1]).slice(0,3);const defaults={alpha:-Math.PI/2,beta:Math.PI/2.35,radius:1,target:center};
+ const api=prepareCtVolume({engine,scene,camera,canvas,sourceMeshes:[],studyWorld:{worldMatrix:STUDY_WORLD}},fixture.manifest);await B.registerScene(scene);api.start();await B.startEngine(engine);await api.load(fixture.pixels,fixture.ctReceipt);
+ const apply=(p:any)=>{camera.alpha=p.alpha;camera.beta=p.beta;camera.radius=p.radius;camera.target.set(...p.target);const clip=document.querySelector('#ctVolumeClip') as HTMLInputElement;clip.value=String(p.clip??-.5);clip.dispatchEvent(new Event('input'));};
+ g.baseline={defaults,async capture(p:any){apply(p);for(let i=0;i<5;i++)await new Promise(requestAnimationFrame);await B.waitForGpuIdle(engine);const shot=await api.capture();const u=new Float32Array(64);u.set(B.invertMat4(B.getViewProjectionMatrix(camera,1))!,0);u.set(matrices.worldToTexture,16);u.set(matrices.textureToWorld,32);u.set([-600,1500,1,1],48);u.set([512,512,.002,0],52);u[56]=p.clip??-.5;return {shot,uniform:Array.from(u)};},async diagnostic(){return api.diagnostic();},async dispose(){B.stopEngine(engine);await api.dispose();B.disposeScene(scene);B.disposeEngine(engine);return true;}};return {defaults,source:fixture.ctReceipt.volume.npy_sha256};};

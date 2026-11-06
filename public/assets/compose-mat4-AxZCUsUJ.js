@@ -1,0 +1,1 @@
+import{t as e}from"./compose-mat4-into-buffer-DVi8_Yl-.js";import{n as t}from"./_matrix-allocator-lS7uVVV-.js";function n(n,r,i,a,o,s,c,l,u,d){let f=t();return e(f,0,n,r,i,a,o,s,c,l,u,d),f}export{n as t};

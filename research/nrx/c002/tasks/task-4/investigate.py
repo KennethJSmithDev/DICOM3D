@@ -1,0 +1,25 @@
+import json,struct,time,tracemalloc,hashlib,sys
+from pathlib import Path
+import numpy as np
+t=Path(__file__).resolve().parent;prior=t.parent/'task-3';r=json.loads((prior/'browser-002/result.json').read_text());start=time.monotonic();tracemalloc.start();reports=[]
+for name in ['initial','brush','smooth']:
+    data=(prior/'browser-002'/(name+'.samples.bin')).read_bytes();a=np.frombuffer(data,dtype='<f4').reshape(65,65,65,2);chunks=[];index=[];constants=0;retained=0;then=time.perf_counter();header=b'NRXFLD01'+struct.pack('<III',64,8,r['states'][{'initial':0,'brush':1,'smooth':2}[name]]['state']['revision'])+hashlib.sha256(data).digest();size=len(header);copies=0
+    for bz in range(8):
+        for by in range(8):
+            for bx in range(8):
+                brick=a[bz*8:bz*8+9,by*8:by*8+9,bx*8:bx*8+9];tile=brick[0,0,0];constant=tile[0] in [-1,1] and tile[1]==-1 and np.all(brick==tile);payload=tile.tobytes() if constant else brick.tobytes();record=struct.pack('<BI',int(constant),len(payload))+payload;index.append(size);size+=len(record);chunks.append(record);constants+=int(constant);retained+=len(payload);copies+=729 if not constant else 0
+    packed=header+b''.join(chunks);conversion=time.perf_counter()-then;(t/(name+'.field')).write_bytes(packed);restored=np.empty_like(a);seen=np.zeros(a.shape[:3],dtype=np.uint8);cursor=len(header);haloChecks=0
+    for bz in range(8):
+        for by in range(8):
+            for bx in range(8):
+                constant,length=struct.unpack_from('<BI',packed,cursor);cursor+=5;values=np.frombuffer(packed[cursor:cursor+length],dtype='<f4');cursor+=length;brick=np.broadcast_to(values.reshape(1,1,1,2),(9,9,9,2)) if constant else values.reshape(9,9,9,2);old=restored[bz*8:bz*8+9,by*8:by*8+9,bx*8:bx*8+9];mask=seen[bz*8:bz*8+9,by*8:by*8+9,bx*8:bx*8+9]>0;assert np.array_equal(old[mask],brick[mask]),'Neighbor/halo disagreement';haloChecks+=int(mask.sum());old[:]=brick;seen[bz*8:bz*8+9,by*8:by*8+9,bx*8:bx*8+9]+=1
+    assert cursor==len(packed) and np.all(seen>0) and restored.tobytes()==data
+    reports.append({'name':name,'densePayloadBytes':len(data),'serializedBytes':len(packed),'indexBytes':8*len(index),'retainedEncodedViewBytes':len(packed)+8*len(index),'brickSampleOrTilePayloadBytes':retained,'metadataAndHeaderBytes':len(packed)-retained,'constantBricks':constants,'sampledBricks':512-constants,'retainedSampleCopiesIncludingHalos':copies,'redundantHaloAssignmentsChecked':haloChecks,'all274625GlobalSamplesExact':True,'conversionSeconds':conversion,'sha256':hashlib.sha256(packed).hexdigest(),'sourceFieldSha256':hashlib.sha256(data).hexdigest()})
+# Independent exact dirty support calculation from actual changes, not native counters.
+a=np.fromfile(prior/'browser-002/initial.samples.bin',dtype='<f4').reshape(65,65,65,2);b=np.fromfile(prior/'browser-002/brush.samples.bin',dtype='<f4').reshape(a.shape);changed=np.argwhere(np.any(a!=b,axis=3));dirty=set()
+for z,y,x in changed:
+    for dz in [-1,0]:
+        for dy in [-1,0]:
+            for dx in [-1,0]:dirty.add(((int(z)+dz)//8,(int(y)+dy)//8,(int(x)+dx)//8))
+assert len(dirty)==r['states'][1]['edit']['dirtyRegions']==8;assert r['states'][1]['edit']['retainedRegions']==504;assert all(x['edit']['localEqualsFull'] for x in r['states'][1:])
+current,peak=tracemalloc.get_traced_memory();report={'result':'PASS','representations':reports,'changedSamples':len(changed),'independentDirtyRegions':len(dirty),'retainedRegions':504,'haloCorrectness':'All brick copies match on overlap; all global samples reconstruct exactly; incident-cell dirty support independently matched8 regions. Task3 local/full canonical geometry equality retained.','historyAccounting':'Task3 retains shared immutable views bounded8. Source/current/old/history payload aliases must be counted once. Encoded records here are independent CPU study artifacts; not native active residency or measured GPU residency. Native full requested allocator accounting remains in R002; no new compressed-runtime adoption claimed.','pythonTracedCurrentBytes':current,'pythonTracedPeakBytes':peak,'traceScope':'Tracemalloc Python/NumPy tracked allocations in this process, not universal processRSS; Windows wrapper independently measures processprivatecommit. Conversion occurs alongside dense source, restored output and prior packed buffers; peak includes those simultaneous representations.','seconds':time.monotonic()-start,'decision':'Retain native sparse immutable source views and bounded dense editable controls plus qualified local geometry regeneration. Exact brick packing demonstrates storage benefit, but a new active compressed-edit residency layer is deferred: current dense field is only2.2MB, historybounded, source/control correctness costs dominate this workload. No LOD/quantization or new codec needed for usable prototype.','stalePublication':'Existing task2/3 generation+revision guards retained; no asynchronous worker/residency publication introduced.'};(t/'result.json').write_text(json.dumps(report,indent=2));print(json.dumps(report))

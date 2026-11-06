@@ -1,0 +1,1 @@
+var e=null;function t(){return e??=new WeakMap}function n(e){let n=t();n.set(e,(n.get(e)??0)+1)}export{t as n,n as t};

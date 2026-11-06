@@ -1,0 +1,1 @@
+import{r as e}from"./gpu-flags-C1xPl_f9.js";var t=null;function n(n){let r=n._device,i=t??=new WeakMap,a=i.get(r);return a||(a=r.createBindGroupLayout({label:`scene`,entries:[{binding:0,visibility:e.VERTEX|e.FRAGMENT,buffer:{type:`uniform`}},{binding:1,visibility:e.FRAGMENT,buffer:{type:`uniform`}}]}),i.set(r,a)),a}export{n as t};

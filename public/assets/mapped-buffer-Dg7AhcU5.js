@@ -1,0 +1,1 @@
+import{l as e}from"./typed-arrays-B2JZIDLp.js";import{t}from"./gpu-flags-C1xPl_f9.js";import{t as n}from"./buffer-alignment-C-ra1dDf.js";function r(r,i,a,o){let s=r._device.createBuffer({label:o,size:n(Math.max(i.byteLength,4),4),usage:a|t.COPY_DST,mappedAtCreation:!0});return new e(s.getMappedRange()).set(new e(i.buffer,i.byteOffset,i.byteLength)),s.unmap(),s}export{r as t};

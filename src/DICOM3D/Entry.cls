@@ -3,7 +3,7 @@ Class DICOM3D.Entry Extends %CSP.Page
 {
 
 /// Staging binds the entry link to the exact generated HTML, not a release label.
-Parameter VIEWERBUILD = "source";
+Parameter VIEWERBUILD = "f0feb07d994874ba1ee1c577d528b4225fd014dd2b2e609be5a2ef1911efebb0";
 
 ClassMethod OnPreHTTP() As %Boolean
 {
@@ -16,7 +16,7 @@ ClassMethod OnPage() As %Status
 {
     Write "<!doctype html><html lang='en'><meta charset='utf-8'><title>DICOM3D</title>"
     Write "<h1>DICOM3D</h1><p>Research software. Not for clinical use.</p>"
-    Write "<p><a href='index.html?build=",..#VIEWERBUILD,"'>Open DICOM3D viewer</a></p></html>"
+    Write "<p><a href='reference.html?build=",..#VIEWERBUILD,"'>Open DICOM3D viewer</a></p></html>"
     Quit $$$OK
 }
 

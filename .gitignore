@@ -11,3 +11,13 @@ artifacts/
 
 .demo-dist/
 demo/public/sample/
+
+# Only the five explicitly admitted H000 files are force-added by exact path.
+# Other H000 material and the separately excluded CT screenshot stay ignored.
+reference/public/demo/h000/
+docs/images/visual-060-study-docked.jpg
+
+# Keep machine-specific Vite configurations out of source control.
+viewer/vite.*.config.mjs
+!viewer/vite.reference.config.mjs
+.vite-cache/

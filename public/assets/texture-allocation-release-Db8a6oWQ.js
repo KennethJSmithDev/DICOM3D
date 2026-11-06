@@ -1,0 +1,1 @@
+import{n as e}from"./gpu-texture-acquire-C6oWQ6ub.js";var t=null;function n(n,r){let i=e(),a=(i.get(n)??1)-1;return a<=0?(n.destroy(),r&&t?.(r),i.set(n,0),!0):(i.set(n,a),!1)}export{n as t};

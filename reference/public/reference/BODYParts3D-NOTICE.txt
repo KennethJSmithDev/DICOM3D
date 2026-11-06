@@ -1,0 +1,17 @@
+BodyParts3D, © The Database Center for Life Science.
+
+Source: https://dbarchive.biosciencedbc.jp/en/bodyparts3d/desc.html
+Data: BodyParts3D release 4.0, PART-OF OBJ archive, publisher-labeled polygon reduction rate 99%.
+Archive SHA-256: 9fbc713fffeee924a5a657d9813d84d7eb957bded63adb854931dd5e3eb61c97
+
+The original OBJ headers offer Creative Commons Attribution-Share Alike 2.1 Japan:
+"BodyParts3D, (c) The Database Center for Life Science licensed under CC Attribution-Share Alike 2.1 Japan".
+https://creativecommons.org/licenses/by-sa/2.1/jp/
+
+The current publisher database license page (updated 2025-02-27) separately states CC Attribution 4.0 International:
+https://dbarchive.biosciencedbc.jp/en/bodyparts3d/lic.html
+"BodyParts3D, © The Database Center for Life Science licensed under CC Attribution 4.0 International".
+
+This prototype retains the original source grant and attribution. Its derived BodyParts3D GLB and source-member mapping are provided under CC BY-SA 2.1 Japan. They are separate from DICOM3D's Apache-2.0 application code and synthetic fallback shapes. No Z-Anatomy meshes or third-party additions are included.
+
+Changes: selected source elements assembled into their published FMA structures, OBJ to glTF binary conversion, millimetres to metres with axis rotation (X,Y,Z)->(X,Z,-Y), Float32 encoding, source normals rotated, and new presentation materials. Source OBJ geometry and headers remain in the frozen private archive. No patient registration, organ generation or clinical validation is claimed. Material opacity, clipping and selection are reversible display state.

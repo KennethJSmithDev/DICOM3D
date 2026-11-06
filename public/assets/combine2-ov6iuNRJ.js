@@ -1,0 +1,1 @@
+import{A as e,M as t,s as n,u as r}from"./runtime-BxVH-6yn.js";import{v as i}from"./fg-math-CsBC5zKx.js";import{i as a,r as o}from"./sockets-DhRah2Zy.js";var s={type:t.CombineVector2,build:()=>({dataIn:[o(`a`,e.Number),o(`b`,e.Number)],dataOut:[a(`value`,e.Vector2)]}),updateOutputs(e,t,a){let o=n(t,a,e,`a`),s=n(t,a,e,`b`);r(t,e,`value`,i(o,s))}};export{s as combine2Def};

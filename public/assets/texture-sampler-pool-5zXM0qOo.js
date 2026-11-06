@@ -1,0 +1,1 @@
+var e=null,t=`nearest`,n=`clamp-to-edge`,r={minFilter:t,magFilter:t,mipmapFilter:t,addressModeU:n,addressModeV:n,addressModeW:n,maxAnisotropy:1};function i(t,n={},i=``){let a=t._device,o=e??=new WeakMap,s=o.get(a);s||o.set(a,s=new Map);let c=i;for(let e in r){let t=e;c+=`:${n[t]??r[t]}`}let l=s.get(c);return l||s.set(c,l=a.createSampler(n)),l}export{i as t};

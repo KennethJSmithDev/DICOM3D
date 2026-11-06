@@ -1,0 +1,19 @@
+# Selected reference NRX bridge — implementation / packing checks
+
+Private NRX-ORGAN-001 subtask, 2026-11-06. New files only in this directory. No frozen source/Wasm, existing ovary bridge, asset, dependency, UI main or CSS changed.
+
+Reuse: unchanged C002 Task2 native.js SHA256 c2798c8edaa60d7768c6db448de2ee3f908e5529c36c07028f36cbee6d7aeb1c and native.wasm 34c3d466ed3b8c3c4c7863ea178cd40463d2fd08cde0afcbad1750aab0aa0b19, locally rehashed. ABI inspected at Task2/source/field.h. It accepts <=1024 vertices and <=6144 indices, normalized coordinates |xyz|<=1.5, positive orientation, N32/N64. Native field validation includes topology/contact and sampled error constraints; the implementation is not a whole-atlas general-purpose extractor.
+
+prepareReferenceOwner reads existing owner-local triangles, exact-position welds without dropping triangles, checks closed oriented edges and positive signed volume, and normalizes a copied payload. Original geometry/materials remain untouched. No decimation or automatic winding reversal. Output denormalizes to the same owner-local coordinates. The component follows the source owner's world matrix, including reversible presentation offsets; this does not establish patient registration.
+
+CPU source packing observed: actual stomach FMA7148 passes with907 unique vertices/1810triangles, scale0.06723780184984207 and positive volume0.0005664554577208758 in current local coordinates. Both kidneys FMA7204/FMA7205 reject the unchanged ABI size limit. packing-result.json records the exact outcome. This is source admission preflight, not successful NRX extraction.
+
+Worker: classic dedicated CPU host imports hash-verified unchanged web glue, providing only narrow unused DOM target stubs because that glue declares document/window at top level. No NRX renderer/DOM entrypoint is invoked. New host bridge is UNWITNESSED until actual browser extraction; abort/90second watchdog terminate the worker, leaving original source intact. Worker termination ends runtime ownership; physical process/GPU peak or reclamation is not inferred.
+
+API: NrxReferenceSurface({sourceOwner, enabled, onStatus, onSurfaceReady, onSelect, selected=sourceOwner.userData.semanticId, study=null, resolution=32, opacity=1, color}). Alternatively supply bundles+selected. Acquired study guard prevents reference generation when study is truthy. Parent owns original/derived visibility. onStatus gives generating/ready/unavailable; ready contains provenance. onSurfaceReady(result) carries geometry, owner, provenance and idempotence is parent-controlled; cleanup calls onSurfaceReady(null). The component disposes its result and terminates generation on selection/change/unmount. Parent must not dispose the result early or blindly hide originals before ready. Failure retains original source.
+
+Node syntax checks PASS for bridge/worker. No Vite builds, native compilation, browser or NRX field generation performed by this subtask. CPU packing ran with parent's explicit coordination and512MiB Node heap limit.
+
+Presentation follow-up: parent reported actual headed N32 stomach generation with4928triangles. This subtask then added source-material base-color reuse and display-only averaged normals keyed by exact Float32 position bits. Native output and extracted positions are not modified. Meaningful synthetic test passed unchanged positionSHA/native normals, unchanged vertex count, unit display normals, exact coincidence averaging and nonmerge of distinct adjacent Float32 positions. Updated presentation awaits parent's build/witness.
+
+Export nrxReferenceLifecycle from load-nrx-reference.js to read created/terminated/active dedicated Worker ownership. Successful generation, error, abort and timeout share once-only termination accounting. This is API ownership evidence, not measured physical memory reclamation.

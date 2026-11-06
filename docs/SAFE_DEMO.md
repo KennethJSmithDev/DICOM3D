@@ -1,34 +1,27 @@
-# DEMO-001 — browser-only safe demo
+# DICOM3D Safe Demo
 
-Live URL: https://kennethjsmithdev.github.io/DICOM3D/
+[Open the demo](https://kennethjsmithdev.github.io/DICOM3D/).
 
-The sample is an independent mathematical fixture generated deterministically by
-`scripts/build-demo.mjs`:12vertices/20triangles, not anatomy, no imaging or H000 input.
-The new sample/generator are DICOM3D-owned Apache-2.0 work with personal attribution.
-H000-derived examples remain unapproved for redistribution and are NOT used.
+The Visual Research Workstation uses the reference viewer and Babylon Lite/WebGPU renderer. It opens generalized male BodyParts3D anatomy and supports female HRA switching, selection, visibility, isolation, restoration and camera controls. Scientific, holographic and bounded materialization modes share authoritative reference geometry. Learn sits directly below Lab.
 
-The adapter fetches only two same-origin static sample files, supplies them to the
-existing manifest/GLB integrity+semantic loading path and reuses the same scene,
-materials, GPU picking and camera controls. There are no public write APIs, login,
-IRIS endpoint, patient upload or Native64 dependency. The Open Exchange link points
-to the directory because no product listing URL has been supplied.
+## Optional curated public research profile
 
-Build: `npm ci --prefix viewer`, then `node scripts/build-demo.mjs`.
-Test: `node scripts/test-demo.mjs`. Repeat the build and compare every output hash.
-Output `.demo-dist/` is separate from the installable viewer's `viewer/dist/`.
-Apache/Babylon/Vite/Rolldown notices accompany the static site. No new dependencies.
-The product input seam still accepts local files. Package staging regenerates its
-hashed static FileCopy entries so future source builds remain consistent; no
-v0.1.0 tag or release artifact is rebuilt or replaced.
+The original v0.6.0 Safe Demo was reference-only. The follow-on `curated-h000` profile admits the five unchanged files specified in the [current data policy](PUBLIC_RESEARCH_DATA_POLICY.md): CT container, source SEG-mask container, lesion GLB, source binding and original notice. They total approximately 33.3 MB and load only after an explicit study action. Default reference browsing causes no H000 requests. The curated profile first deployed on October 21, 2026. [Pages run](https://github.com/KennethJSmithDev/DICOM3D/actions/runs/39531191232)
 
-Browser acceptance: fresh load automatically renders synthetic.demo.icosahedron.001;
-click selection/clear; hide/show and hidden misses; drag orbit and wheel zoom;
-check semantic identity/provenance/research label and links; inspect console errors.
-Check desktop,390x844 and320x568 layouts with no horizontal overflow. These are
-viewport checks, not a claim that every mobile device supports WebGPU. Unsupported
-WebGPU follows the existing bounded error path. Physical mobile touch testing is
-outside the observed desktop-browser evidence.
+The acquired study preserves existing native-frame display, cyan source SEG contours, optional amber surface intersection, linked CT plane, acquired chest context, masked CT interior and contextual learning. The final mesh and semantic identity remain authoritative; no full lung segmentation or reference-body registration is inferred. Credits and TCIA policy are accessible before load and through Source & evidence. No CT screenshot, arbitrary import, private dataset connection, login, IRIS service or clinical write API is included.
 
-Deployment: main-only GitHub Actions build/test/upload/deploy to Pages. The
-OpsDeck pin6ecf9e2 was read-only method reference for this workflow shape; its
-simulated providers and application code are not copied. No IRIS/Docker mutation.
+The reference catalogs have different source membership and partial coverage. They are not registered patient anatomy. Presentation samples are visual effects, not new tissue, acquired voxels or scientific measurements. Keep the [BodyParts3D notice](../reference/public/reference/BODYParts3D-NOTICE.txt), [HRA notice](../reference/public/reference/HRA-FEMALE-NOTICE.txt) and [data policy](PUBLIC_RESEARCH_DATA_POLICY.md) with the assets.
+
+## Build and deployment
+
+The existing `.github/workflows/pages-demo.yml` selects `--profile curated-h000` explicitly for the existing reference entry, runs exact public-output/index and research-data checks, and deploys `.demo-dist` when the workflow is manually dispatched on `main`. The CLI default remains `reference-only`; Core/native staging uses that default and cannot select the curated profile at `/dicom3d/`. Build success, deployment and actual remote rendering are separate evidence steps.
+
+The [publication procedure](VISUAL_PUBLICATION_PROCEDURE.md) requires remote version, manifest, asset, notice and UI readback before declaring deployment complete. See [release scope](RELEASE_060.md) and [visual limits](VISUAL_RELEASE_060.md). A WebGPU-capable desktop browser is required; all-device or clinical qualification is not claimed.
+
+## Preserved history
+
+DEMO-050, deployed October 18, 2026, established the anatomy-first landing experience. Its [publication commit](https://github.com/KennethJSmithDev/DICOM3D/commit/0c26e951ecc0c2074798281b6c49e162ff0dd692) remains historical evidence.
+
+DEMO-001 used a synthetic icosahedron, with 12 vertices and 20 triangles. Its accepted fixtures/tests remain regression history and are excluded from the public landing payload.
+
+Frozen v0.5.1 Core/IPM installation distributions remain separate and unchanged.

@@ -1,0 +1,224 @@
+{
+  "schema": "dicom3d-three-local-package-1",
+  "entrypoint": "/",
+  "build": "0.7.0-alpha.1",
+  "parentPackageSha256": "9c610390d055d04e23c98e92adb2fff3db118464c3deec6471a40f4ce4ac495a",
+  "files": {
+    "assets/__vite-browser-external-CmjdXIzz.js": {
+      "bytes": 113,
+      "sha256": "22e0ef5dcd9ad65be81155fc9d74aa88db06454d477591f3463f1aa7344adff8"
+    },
+    "assets/index-Bj7am_zw.css": {
+      "bytes": 20337,
+      "sha256": "7fa47ce90356358938da5038e89d454553a70a92cc5cc437d2f122d96a5ac119"
+    },
+    "assets/index-nJn4rv2x.js": {
+      "bytes": 2306729,
+      "sha256": "49e68440491f4398b3e3fb8b639b6c6cba137b10f07ce813b36f3b18a2a2e389"
+    },
+    "assets/nrx-reference-worker-BVTUSoQr.js": {
+      "bytes": 1418,
+      "sha256": "9245682fced5479b3c02b22ea69b357e4593a83ed222213473c33cdc842854f2"
+    },
+    "assets/nrx-runtime-7TkXZuTP.wasm": {
+      "bytes": 69914,
+      "sha256": "ed4e5444ec1374168fd2f9e7866b8790d0e82372acaaa1cea864419e0749227a"
+    },
+    "assets/nrx-surface-BY5zROZM.js": {
+      "bytes": 3762,
+      "sha256": "3018f6738b35b4752afc28f85fb807d399335c03006bb3c9bf5cbe82b3d58276"
+    },
+    "assets/nrx-worker-_Uj6W57p.js": {
+      "bytes": 12808,
+      "sha256": "ce33249ff0295e7cc9f5c92ab951c99fe69b7f0cd0dd043578a18cc20f8a46c5"
+    },
+    "atlas/index.json": {
+      "bytes": 1033258,
+      "sha256": "8e3b71c6eb259a55532d8b3f45a58057eedbc587857ebb99c2efab4ca4c7faac"
+    },
+    "atlas/male-classified-abdomen.glb": {
+      "bytes": 8186976,
+      "sha256": "fcf9aef7b2937d0918cf44de077d41a7341d4177804ddba4b151e66f7e1d673d"
+    },
+    "atlas/male-classified-abdomen.manifest.json": {
+      "bytes": 548145,
+      "sha256": "0fa7d6ef30e43250af684b5bb1a35851af2119fbc110a8d01deae9a434f17c63"
+    },
+    "atlas/male-classified-body-envelope.glb": {
+      "bytes": 4901056,
+      "sha256": "1f0b8058150282705b2cb126a93989d56b88e22e843ae22e9f2ee80fa89f64cc"
+    },
+    "atlas/male-classified-body-envelope.manifest.json": {
+      "bytes": 545521,
+      "sha256": "8508781d869923cb78e412e603c6e22a073e5ce1ddaf0583ff5700c0c1a49da2"
+    },
+    "atlas/male-classified-cardiovascular.glb": {
+      "bytes": 12447260,
+      "sha256": "62a5997234dc740b955acdeebc85a86f85e66ab66c7cf3b71e38398068b1c580"
+    },
+    "atlas/male-classified-cardiovascular.manifest.json": {
+      "bytes": 617798,
+      "sha256": "9f966e1e7ec6df11bba48c7220f4786a2dd526f3a66658658c1ed87fdc6b45b3"
+    },
+    "atlas/male-classified-head-and-nervous-system.glb": {
+      "bytes": 8158240,
+      "sha256": "6f8a5099ef3f473aadc66364d5039adcf86ea2210bb83bb191aa69b48a8519ab"
+    },
+    "atlas/male-classified-head-and-nervous-system.manifest.json": {
+      "bytes": 546070,
+      "sha256": "b54f1b2d6344681068d136fa71195a849ac99dd1bef5e6159f60db81947030d7"
+    },
+    "atlas/male-classified-lower-limbs.glb": {
+      "bytes": 1098056,
+      "sha256": "25bebf2119713e80c8a610649156615adecb7e53f527ed3a9571b69486ee1d94"
+    },
+    "atlas/male-classified-lower-limbs.manifest.json": {
+      "bytes": 546949,
+      "sha256": "e3fde888f7d50809cbd40d5b596b01dee9298b808030deab73639bdf75b52656"
+    },
+    "atlas/male-classified-other.glb": {
+      "bytes": 22265572,
+      "sha256": "59945640cc33819fb769f828096dd3329e94341f17d1cdb45a815d34a435be55"
+    },
+    "atlas/male-classified-other.manifest.json": {
+      "bytes": 583548,
+      "sha256": "d646281104149d0466e83d74b94e88b9ab1f1e5861321c62c39d20c4c81eedd3"
+    },
+    "atlas/male-classified-pelvis.glb": {
+      "bytes": 18524,
+      "sha256": "e93dd29c1b2de01e484bf9e6b4579997814bf8970a136c83a2d13374ed5c3859"
+    },
+    "atlas/male-classified-pelvis.manifest.json": {
+      "bytes": 545716,
+      "sha256": "2eaa31e7d6d31fc3e24348ed2d06701d2ed13ad1399bdaff76dd126e930e4c04"
+    },
+    "atlas/male-classified-skeleton.glb": {
+      "bytes": 18446956,
+      "sha256": "3cc6dee5ed12ab079bb4bdd941f336ccfd8666c249af9d26f1edcc65bae9d357"
+    },
+    "atlas/male-classified-skeleton.manifest.json": {
+      "bytes": 546784,
+      "sha256": "d9054e73c181a7a48dc7ddb63a837191e965a0be1cdfcee1cc44928e5e8ccf0c"
+    },
+    "atlas/male-classified-thorax.glb": {
+      "bytes": 5844912,
+      "sha256": "f13adaa345be6457c76972f6a1360106803ba8e7c5c545972f9220a1d1bf7d2f"
+    },
+    "atlas/male-classified-thorax.manifest.json": {
+      "bytes": 549309,
+      "sha256": "de26103dd75fd344cb8d94624e32b592e4cc91e695c2a208c7b0fc23fc90ecde"
+    },
+    "atlas/male-classified-upper-limbs.glb": {
+      "bytes": 665888,
+      "sha256": "5699b07d9501029922e6329825fc113eb1e5524321b5e3b16813d6db57c30549"
+    },
+    "atlas/male-classified-upper-limbs.manifest.json": {
+      "bytes": 546821,
+      "sha256": "eeb0f0a537433722beb84c7ed3d35b892ebf683941f023a2fff7bd37fd74005f"
+    },
+    "atlas/male-classified-vessels.glb": {
+      "bytes": 253488,
+      "sha256": "f8223fa5a508dc542adfc6e34844d66a1d7e8c39b23044bc79f7288242d76a2f"
+    },
+    "atlas/male-classified-vessels.manifest.json": {
+      "bytes": 545537,
+      "sha256": "e41cb147cbcfa4f25a19ff3d46366921405ff8593cdf5de6f01aa060b172c2d7"
+    },
+    "atlas/male-unclassified-height-lower-middle.glb": {
+      "bytes": 6320112,
+      "sha256": "06e70d5ea80a0cc8053503ad6d5c2ac500f5a198c308dda2c358a2be1bbaa170"
+    },
+    "atlas/male-unclassified-height-lower-middle.manifest.json": {
+      "bytes": 574263,
+      "sha256": "26d5d0da1dc738a34750d980509690f40bbc36526bc1985ed919365863aac92d"
+    },
+    "atlas/male-unclassified-height-lower.glb": {
+      "bytes": 9281904,
+      "sha256": "ce23cd99b8b06a11aa7ebd2ca303aa826bd664072f5ec61866f2914c421565d7"
+    },
+    "atlas/male-unclassified-height-lower.manifest.json": {
+      "bytes": 577388,
+      "sha256": "a46a05ea9128bcb1edb3bf2b31ef825961644339a8f7e52a8c1f03ec89489c5a"
+    },
+    "atlas/male-unclassified-height-upper-middle.glb": {
+      "bytes": 21899124,
+      "sha256": "f4259ae51d0b5727fff170e5ff2759ffa0d03b5bae98d97d0a1f04e9645f7d96"
+    },
+    "atlas/male-unclassified-height-upper-middle.manifest.json": {
+      "bytes": 621811,
+      "sha256": "dd6c079eb2e537ac4c988edf04efa625c4d8884cacb5d87c218e4f98aafa1c13"
+    },
+    "atlas/male-unclassified-height-upper.glb": {
+      "bytes": 31591336,
+      "sha256": "4268085fe1d0fe49d874d83224827dd3c1bebaebf56c9eb9052dae6b23b07a24"
+    },
+    "atlas/male-unclassified-height-upper.manifest.json": {
+      "bytes": 710898,
+      "sha256": "db6e0e1557cf419c6a0a7fedf64460af781a6aab0a305eec7ae7cdf156e1757a"
+    },
+    "attribution/BODYParts3D-NOTICE.txt": {
+      "bytes": 1621,
+      "sha256": "9b84c07ab570f582685decc97e8b6e16e9c5d57210d6365fa8d56c2bfb45a804"
+    },
+    "demo/h000/ct.npy.bin": {
+      "bytes": 32972849,
+      "sha256": "645c9ebaf383bb447e415e0a400973aabb2da50e147033fb710180fa0b179b88"
+    },
+    "demo/h000/lesion.glb": {
+      "bytes": 263976,
+      "sha256": "0e77bfb887791614b5fcb15c614c4948ae4d48e24ab6e9fa289aa0603c66076d"
+    },
+    "demo/h000/mask.npy.bin": {
+      "bytes": 28346,
+      "sha256": "44c55da565e520ee2d1eee25710650d23ada10bfb510c2e39e1cabb06ec0399c"
+    },
+    "demo/h000/NOTICE.md": {
+      "bytes": 3865,
+      "sha256": "0dfff975e61696fd4b570e32b38e84ef4515ebb812906196169aab0818081d2a"
+    },
+    "demo/h000/source-binding.json": {
+      "bytes": 22129,
+      "sha256": "605073678ef244b7ebd44995d01789e79f5cb31a715c66a21d4b76b12161d73e"
+    },
+    "female/hra-female.glb.part001": {
+      "bytes": 67108864,
+      "sha256": "a97a2b0602e10ebd6d6a7162627babcdfed85eec1ef482d13e40af6dd4053d19"
+    },
+    "female/hra-female.glb.part002": {
+      "bytes": 67108864,
+      "sha256": "008abd7208f1849cea0cee2427f61e06c069101db48817507c54724558cd20d2"
+    },
+    "female/hra-female.glb.part003": {
+      "bytes": 53002412,
+      "sha256": "33a7ea5afb5d934d48deed6e383ac747ba5b8ebaaba9506bf6da043ab545eca0"
+    },
+    "female/hra-female.manifest.json": {
+      "bytes": 1106683,
+      "sha256": "4f98280af464abee0f7ca78126cf2b8f7e09765077410e3409e3b047a3c2d1ce"
+    },
+    "female/parts.json": {
+      "bytes": 777,
+      "sha256": "08f661732628c3c11d88a56329347c49f5bc9ab7a257f9de4c00414317f89a43"
+    },
+    "index.html": {
+      "bytes": 396,
+      "sha256": "3efc4b3656d92d2c9765c7e696ddbe43f8d6a482a970d5e01c11de5ae857a063"
+    },
+    "nrx/HRA-FEMALE-NOTICE.txt": {
+      "bytes": 1530,
+      "sha256": "cf715c70da92f480733fc6930caf3222bef53767c7840f1e643607612b1a5070"
+    },
+    "nrx/native.js": {
+      "bytes": 114963,
+      "sha256": "c2798c8edaa60d7768c6db448de2ee3f908e5529c36c07028f36cbee6d7aeb1c"
+    },
+    "nrx/native.wasm": {
+      "bytes": 280664,
+      "sha256": "34c3d466ed3b8c3c4c7863ea178cd40463d2fd08cde0afcbad1750aab0aa0b19"
+    },
+    "nrx/VH_F_right_ovary.bin": {
+      "bytes": 7404,
+      "sha256": "6ba29bc67fb9b3aecae79c60446f8f0681efa28a3cb9773a3b4f24c127ae6e25"
+    }
+  }
+}
