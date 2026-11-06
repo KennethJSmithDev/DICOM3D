@@ -21,7 +21,7 @@ The existing `main` product snapshot is preserved as the base. Research is under
 
 ## What this branch is not
 
-No patient scans or reports, private DICOMs, raw restricted evidence, service credentials, installed runtime, or complete new atlas redistribution is included. The alpha runtime assets remain separately hash-bound and locally retained. Broader atlas completeness, arbitrary organ segmentation, whole-scan NRX tissue reconstruction, live IRIS admission, and clinical accuracy are not established.
+No patient scans or reports, private DICOMs, raw restricted evidence, service credentials, or installed runtime is included. The expanded BodyParts3D atlas and HRA delta ship on this branch under CC BY 4.0. DICOM3D code is Apache 2.0. Broader atlas completeness, arbitrary organ segmentation, whole-scan NRX tissue reconstruction, live IRIS admission, and clinical accuracy are not established.
 
 Public-safe captures below come from the identified local witnesses, not a deployed alpha.
 

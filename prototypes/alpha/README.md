@@ -31,7 +31,7 @@ For fixture-only tests, `DICOM3D_H000_FIXTURE` is a local H000 directory with a 
 ## Remaining boundaries
 
 - Male 416 held entries and female 305 held relationships remain unresolved; counts do not mean missing organs.
-- Expanded BodyParts3D mesh adaptations are distributed separately under the origin publisher’s CC BY-SA 2.1 Japan terms. The archive publisher’s CC BY 4.0 attribution is also recorded in the asset notice.
+- The expanded BodyParts3D assets and HRA delta are CC BY 4.0. DICOM3D code is Apache 2.0.
 - General anatomy is an independent reference, never an inferred patient-specific organ or segmentation.
 - No qualified live IRIS frontend admission, newly qualified Core installer/IPM/Docker release, arbitrary-study organ provider, or actual installed-update/rollback claim.
 - Broader atlas/accessibility qualification, clean distributable asset inventory, and deployment remain separate gates.
