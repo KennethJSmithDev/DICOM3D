@@ -1,0 +1,32 @@
+import assert from 'node:assert/strict';
+import vm from 'node:vm';
+import {readFile} from 'node:fs/promises';
+import {resolve,dirname} from 'node:path';
+import {fileURLToPath} from 'node:url';
+import {webcrypto,createHash} from 'node:crypto';
+import {GLTFLoader} from 'three/examples/jsm/loaders/GLTFLoader.js';
+const root=resolve(dirname(fileURLToPath(import.meta.url)),'..');
+const indexBytes=await readFile(resolve(root,'expanded-atlas/index.json'));
+const pin=createHash('sha256').update(indexBytes).digest('hex');
+const index=JSON.parse(indexBytes),delta=JSON.parse(await readFile(resolve(root,'atlas-delta/female-delta.json')));
+let fault='',requests=[];
+const context=vm.createContext({crypto:webcrypto,TextDecoder,DOMException,console,fetch:async url=>{
+ requests.push(url);const file=resolve(root,url.startsWith('atlas/')?'expanded-atlas/'+url.slice(6):url.startsWith('female-delta/')?'atlas-delta/'+url.slice(13):'INVALID');
+ if(fault==='missing'&&url.endsWith('source-native.json'))return {ok:false,status:404};
+ let bytes=await readFile(file);if(fault==='corrupt'&&url.endsWith('source-native.json')){bytes=Buffer.from(bytes);bytes[bytes.length-2]^=1;}
+ return {ok:true,status:200,headers:{get:()=>String(bytes.length)},arrayBuffer:async()=>bytes.buffer.slice(bytes.byteOffset,bytes.byteOffset+bytes.byteLength)};
+}});
+const loader=new vm.SyntheticModule(['GLTFLoader'],function(){this.setExport('GLTFLoader',GLTFLoader)},{context});
+const mod=new vm.SourceTextModule(await readFile(resolve(root,'src/atlas.js'),'utf8'),{context,initializeImportMeta(meta){meta.env={VITE_REVIEW_ATLAS_SHA:pin,BASE_URL:''}}});
+await mod.link(()=>loader);await mod.evaluate();const api=mod.namespace;
+const ac=new AbortController(),loaded=await api.loadIndex(ac.signal);
+assert.equal(loaded.structures.length,1186);assert.equal(loaded.sourceNative.atoms.length,2264);
+assert.equal(loaded.sourceNative.heldSourceEntries.length,416);
+assert.equal(requests.filter(x=>x.endsWith('.glb')).length,0,'Catalog discovery must not request geometry');
+const restored=loaded.structures.filter(p=>p.systems?.some(s=>s.startsWith('IS-A:')));assert.ok(restored.length>=477);
+for(const kind of ['missing','corrupt']){fault=kind;await assert.rejects(()=>api.loadIndex(ac.signal),kind==='missing'?/HTTP 404/:/integrity mismatch/)}fault='';
+const female=await api.loadSourceCatalog(delta.sourceNative,ac.signal,'female-delta');assert.equal(female.atoms.length,60);assert.equal(female.concepts.length,1073);
+const item=await api.loadBundle(delta,ac.signal,'female-delta');let owners=0;item.scene.traverse(n=>{if(n.userData.semanticId)owners++});assert.equal(owners,39);api.disposeScene(item.scene);
+const invalid={...delta,sha256:'0'.repeat(64)};await assert.rejects(()=>api.loadBundle(invalid,ac.signal,'female-delta'),/geometry integrity mismatch/);
+const aborted=new AbortController();aborted.abort();await assert.rejects(()=>api.loadBundle(delta,aborted.signal,'female-delta'),/Cancelled/);
+console.log(JSON.stringify({status:'PASS',indexSha256:pin,maleOwners:1186,maleAtoms:2264,held:416,femaleOwners:39,femaleAtoms:60,catalogWithoutGeometry:true,negativePaths:['missing catalog','corrupted catalog','corrupted geometry','cancelled publication'],rssBytes:process.memoryUsage().rss,maxRssKiB:process.resourceUsage().maxRSS}));

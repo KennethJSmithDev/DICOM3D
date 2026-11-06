@@ -1,3 +1,4 @@
+import {createSourceSelectionProjection} from './source-native-selection.js';
 import {assemblyOffset} from './assembly-presentation.js';
 /** Reversible presentation of admitted atlas owners. Source geometry and catalog are unchanged.
  * Call restoreScene(scene) before disposeScene(scene); call restoreAll before full teardown.
@@ -13,7 +14,7 @@ export function isVisibleOwner(node) {
 }
 
 export function createAtlasPresentation() {
-  const records = new Map();
+  const records = new Map(),sourceProjection=createSourceSelectionProjection();
   function capture(scene) {
     let r = records.get(scene);
     if (r) return r;
@@ -31,6 +32,7 @@ export function createAtlasPresentation() {
     return r;
   }
   function apply(bundles, options = {}) {
+    sourceProjection.restore();
     const hidden = options.hiddenIds instanceof Set ? options.hiddenIds : new Set(options.hiddenIds || []);
     const allowed = options.allowedIds instanceof Set ? options.allowedIds : null;
     const isolate = options.isolatedId || '';
@@ -86,8 +88,10 @@ export function createAtlasPresentation() {
         });
       }
     }
+    sourceProjection.apply(bundles,options.sourceSelection);
   }
   function restoreScene(scene) {
+    sourceProjection.restore();
     const r = records.get(scene); if (!r) return;
     for(const [node,override] of r.overrides){node.material=override.original;override.clones.forEach(m=>m.dispose());}r.overrides.clear();
     for (const {node,visible,position} of r.owners.values()) {node.visible=visible; node.position.copy(position);}
@@ -115,5 +119,5 @@ export function createAtlasPresentation() {
     }
     clone.updateMatrixWorld(true);return clone;
   }
-  return {apply, restoreScene, restoreAll,cloneSourceScene};
+  return {apply, restoreScene, restoreAll,cloneSourceScene,clearSourceSelection:sourceProjection.restore,get sourceInfo(){return sourceProjection.info;}};
 }

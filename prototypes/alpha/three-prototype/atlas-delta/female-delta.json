@@ -1,17 +1,1 @@
-{
-  "id": "female-reproductive-delta",
-  "url": "female-reproductive-delta.glb",
-  "sha256": "8902e11a7487e021ef88c73201178b00d2dfac384a4d91f9737d3ca4f8eea812",
-  "byteLength": 2596748,
-  "manifestUrl": "female-reproductive-delta.manifest.json",
-  "manifestSha256": "9a5b53500ac94ea36349d1dd6f9c9408d06709bd4ecab1f74df0840126dfd1b7",
-  "structureIds": [
-    "VH_F_urinary_bladder",
-    "VH_F_uterus",
-    "VH_F_left_ovary",
-    "VH_F_right_ovary",
-    "VH_F_fallopian_tube_L",
-    "VH_F_fallopian_tube_R",
-    "VH_F_vagina"
-  ]
-}
+{"id":"female-source-complete-delta","url":"female-source-complete-delta.glb","sha256":"cfb90ccced3bfca14073ac4f083d90b5336ca0202a9bf143b2ed2c23458fa9bd","byteLength":42118492,"manifestUrl":"female-source-complete-delta.manifest.json","manifestSha256":"f60c62156efee33873063c118ec31f59e1d61db7563d44d32c53103e2f43a54f","structureIds":["VH_F_urinary_bladder","VH_F_uterus","VH_F_left_ovary","VH_F_right_ovary","VH_F_fallopian_tube_L","VH_F_fallopian_tube_R","VH_F_vagina","VH_F_fat_L","VH_F_areolar_tubercles_L","VH_F_nipple_L","VH_F_areola_L","VH_F_mammary_lobes_L","VH_F_main_lactiferous_ducts_L","VH_F_main_lactiferous_sinuses_L","VH_F_suspensory_ligaments_L","VH_F_fat_R","VH_F_areolar_tubercles_R","VH_F_nipple_R","VH_F_areola_R","VH_F_main_lactiferous_sinuses_R","VH_F_main_lactiferous_ducts_R","VH_F_mammary_lobes_R","VH_F_suspensory_ligaments_R","VH_F_uterovesical_pouch","VH_F_right_round_ligament_of_uterus","VH_F_left_round_ligament_of_uterus","VH_F_right_uterosacral_ligament","VH_F_left_uterosacral_ligament","VH_F_right_cardinal_ligament_of_uterus","VH_F_left_cardinal_ligament_of_uterus","VH_F_suspensory_ligament_of_ovary_R","VH_F_suspensory_ligament_of_ovary_L","VH_F_ovarian_ligament_L","VH_F_ovarian_ligament_R","VH_F_broad_ligament","VH_F_mesosalpinx_L","VH_F_mesosalpinx_R","VH_F_mesovarium_R","VH_F_mesovarium_L"],"sourceNative":{"schema":"dicom3d-source-native-atlas-1","url":"female-source-native.json","sha256":"b13fdc584e8fbef5cf370a80003a28efaa9bb0ee050e30edf4955dcf38e86895","byteLength":960589}}

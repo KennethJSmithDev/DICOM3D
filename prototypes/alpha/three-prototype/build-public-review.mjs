@@ -12,8 +12,12 @@ const source=join(here,'expanded-atlas');
 const sha=bytes=>createHash('sha256').update(bytes).digest('hex');
 const catalog=await readFile(join(source,'index.json'));
 const indexSha=sha(catalog);
-if(indexSha!=='8e3b71c6eb259a55532d8b3f45a58057eedbc587857ebb99c2efab4ca4c7faac')throw Error('Expanded catalog integrity mismatch');
-const {structures,bundles}=JSON.parse(catalog);
+if(indexSha!=='d3335ceea378eedad9b3fd9c5f01572b6c048946392a32aaaff58479dc0b53a7')throw Error('Expanded catalog integrity mismatch');
+const {structures,bundles,sourceNative}=JSON.parse(catalog);
+const nativeBytes=await readFile(join(source,sourceNative.url));if(nativeBytes.length!==sourceNative.byteLength||sha(nativeBytes)!==sourceNative.sha256)throw Error('Source catalog integrity mismatch');
+const delta=JSON.parse(await readFile(join(here,'atlas-delta','female-delta.json')));
+for(const [name,hash,length] of [[delta.url,delta.sha256,delta.byteLength],[delta.manifestUrl,delta.manifestSha256],[delta.sourceNative.url,delta.sourceNative.sha256,delta.sourceNative.byteLength]]){const bytes=await readFile(join(here,'atlas-delta',name));if(sha(bytes)!==hash||(length!==undefined&&bytes.length!==length))throw Error('Female integrity mismatch: '+name);}
+
 for(const bundle of bundles){
  const [mesh,manifest]=await Promise.all([readFile(join(source,bundle.url)),readFile(join(source,bundle.manifestUrl))]);
  if(mesh.length!==bundle.byteLength||sha(mesh)!==bundle.sha256||sha(manifest)!==bundle.manifestSha256)throw Error('Bundle integrity mismatch: '+bundle.id);

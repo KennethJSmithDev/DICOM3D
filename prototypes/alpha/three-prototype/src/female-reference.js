@@ -1,5 +1,6 @@
 import {Group} from 'three';
-import {disposeScene,loadBundle} from './atlas.js';
+import {composeSourceCatalog} from './source-native-selection.js';
+import {disposeScene,loadBundle,loadSourceCatalog} from './atlas.js';
 import delta from '../atlas-delta/female-delta.json';
 
 export const FEMALE_SKIN_ID='FMA7163';
@@ -33,7 +34,7 @@ export async function loadFemaleReference(base,signal){
    ...base.structures.filter(part=>!replaced.has(part.id)).map(part=>({...part,source:'BodyParts3D'})),
    ...overlay.manifest.reference.structures.map(part=>({...part,bundleId:delta.id,source:'HRA'})),
   ];
-  const index={structures,hierarchy:[],held:[],bundles:[...base.bundles,delta]};
+  const extra=await loadSourceCatalog(delta.sourceNative,signal,'female-delta');extra.concepts=extra.concepts.map(c=>({...c,relation:'HRA_PART_OF'}));const index={structures,hierarchy:base.hierarchy??[],held:base.held??[],bundles:[...base.bundles,delta],sourceNative:composeSourceCatalog(base.sourceNative,extra,replaced)};
   return {scene,index,manifest:{reference:{id:'BodyParts3D + HRA female composite'}},bytes};
  }catch(error){
   disposeScene(scene);

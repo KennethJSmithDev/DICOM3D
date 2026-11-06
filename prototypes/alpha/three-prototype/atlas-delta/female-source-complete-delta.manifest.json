@@ -1,0 +1,713 @@
+{
+  "asset": {
+    "relative_filename": "female-source-complete-delta.glb",
+    "sha256": "cfb90ccced3bfca14073ac4f083d90b5336ca0202a9bf143b2ed2c23458fa9bd"
+  },
+  "reference": {
+    "id": "HRA-FEMALE-SOURCE-DELTA-1",
+    "structures": [
+      {
+        "id": "VH_F_urinary_bladder",
+        "label": "Urinary bladder",
+        "region": "Pelvis",
+        "skin": false,
+        "source_node_index": 664,
+        "systems": [
+          "urinary system"
+        ]
+      },
+      {
+        "id": "VH_F_uterus",
+        "label": "Uterus",
+        "region": "Reproductive anatomy",
+        "skin": false,
+        "source_node_index": 471,
+        "systems": [
+          "reproductive system"
+        ]
+      },
+      {
+        "id": "VH_F_left_ovary",
+        "label": "Left ovary",
+        "region": "Reproductive anatomy",
+        "skin": false,
+        "source_node_index": 469,
+        "systems": [
+          "reproductive system"
+        ]
+      },
+      {
+        "id": "VH_F_right_ovary",
+        "label": "Right ovary",
+        "region": "Reproductive anatomy",
+        "skin": false,
+        "source_node_index": 470,
+        "systems": [
+          "reproductive system"
+        ]
+      },
+      {
+        "id": "VH_F_fallopian_tube_L",
+        "label": "Left uterine tube",
+        "region": "Reproductive anatomy",
+        "skin": false,
+        "source_node_index": 439,
+        "systems": [
+          "reproductive system"
+        ]
+      },
+      {
+        "id": "VH_F_fallopian_tube_R",
+        "label": "Right uterine tube",
+        "region": "Reproductive anatomy",
+        "skin": false,
+        "source_node_index": 434,
+        "systems": [
+          "reproductive system"
+        ]
+      },
+      {
+        "id": "VH_F_vagina",
+        "label": "Vagina",
+        "region": "Reproductive anatomy",
+        "skin": false,
+        "source_node_index": 431,
+        "systems": [
+          "reproductive system"
+        ]
+      },
+      {
+        "id": "VH_F_fat_L",
+        "label": "Left mammary region (source fat)",
+        "region": "Thorax",
+        "skin": false,
+        "source_node_index": 5,
+        "systems": [
+          "integumentary system"
+        ]
+      },
+      {
+        "id": "VH_F_areolar_tubercles_L",
+        "label": "areolar tubercle",
+        "region": "Source atlas",
+        "skin": false,
+        "systems": [
+          "integumentary system"
+        ],
+        "source_node_index": 6,
+        "source_name": "VH_F_areolar_tubercles_L",
+        "source_annotation": {
+          "anatomical_structure_of": "#VHFLeftMammaryGland",
+          "source_spatial_entity": "#VHFemaleOrgans",
+          "label": "areolar tubercle",
+          "ontologyid": "UBERON:0011828",
+          "representation_of": "http://purl.obolibrary.org/obo/UBERON_0011828",
+          "glb_file_of_single_organs": "3d-vh-f-mammary-gland-l\n"
+        },
+        "classification": "anatomical_subcomponent"
+      },
+      {
+        "id": "VH_F_nipple_L",
+        "label": "left nipple",
+        "region": "Source atlas",
+        "skin": false,
+        "systems": [
+          "integumentary system"
+        ],
+        "source_node_index": 7,
+        "source_name": "VH_F_nipple_L",
+        "source_annotation": {
+          "anatomical_structure_of": "#VHFLeftMammaryGland",
+          "source_spatial_entity": "#VHFemaleOrgans",
+          "label": "left nipple",
+          "ontologyid": "UBERON:0013772",
+          "representation_of": "http://purl.obolibrary.org/obo/UBERON_0013772",
+          "glb_file_of_single_organs": "3d-vh-f-mammary-gland-l\n"
+        },
+        "classification": "anatomical_subcomponent"
+      },
+      {
+        "id": "VH_F_areola_L",
+        "label": "Left female areola",
+        "region": "Source atlas",
+        "skin": false,
+        "systems": [
+          "integumentary system"
+        ],
+        "source_node_index": 8,
+        "source_name": "VH_F_areola_L",
+        "source_annotation": {
+          "anatomical_structure_of": "#VHFLeftMammaryGland",
+          "source_spatial_entity": "#VHFemaleOrgans",
+          "label": "Left female areola",
+          "ontologyid": "FMA:223679",
+          "representation_of": "http://purl.org/sig/ont/fma/fma223679",
+          "glb_file_of_single_organs": "3d-vh-f-mammary-gland-l\n"
+        },
+        "classification": "anatomical_subcomponent"
+      },
+      {
+        "id": "VH_F_mammary_lobes_L",
+        "label": "mammary lobe",
+        "region": "Source atlas",
+        "skin": false,
+        "systems": [
+          "integumentary system"
+        ],
+        "source_node_index": 9,
+        "source_name": "VH_F_mammary_lobes_L",
+        "source_annotation": {
+          "anatomical_structure_of": "#VHFLeftMammaryGland",
+          "source_spatial_entity": "#VHFemaleOrgans",
+          "label": "mammary lobe",
+          "ontologyid": "UBERON:0018140",
+          "representation_of": "http://purl.obolibrary.org/obo/UBERON_0018140",
+          "glb_file_of_single_organs": "3d-vh-f-mammary-gland-l\n"
+        },
+        "classification": "anatomical_subcomponent"
+      },
+      {
+        "id": "VH_F_main_lactiferous_ducts_L",
+        "label": "main lactiferous duct",
+        "region": "Source atlas",
+        "skin": false,
+        "systems": [
+          "integumentary system"
+        ],
+        "source_node_index": 10,
+        "source_name": "VH_F_main_lactiferous_ducts_L",
+        "source_annotation": {
+          "anatomical_structure_of": "#VHFLeftMammaryGland",
+          "source_spatial_entity": "#VHFemaleOrgans",
+          "label": "main lactiferous duct",
+          "ontologyid": "UBERON:0015134",
+          "representation_of": "http://purl.org/sig/ont/fma/fma62102",
+          "glb_file_of_single_organs": "3d-vh-f-mammary-gland-l\n"
+        },
+        "classification": "anatomical_subcomponent"
+      },
+      {
+        "id": "VH_F_main_lactiferous_sinuses_L",
+        "label": "Lactiferous sinus",
+        "region": "Source atlas",
+        "skin": false,
+        "systems": [
+          "integumentary system"
+        ],
+        "source_node_index": 11,
+        "source_name": "VH_F_main_lactiferous_sinuses_L",
+        "source_annotation": {
+          "anatomical_structure_of": "#VHFLeftMammaryGland",
+          "source_spatial_entity": "#VHFemaleOrgans",
+          "label": "Lactiferous sinus",
+          "ontologyid": "FMA:58088",
+          "representation_of": "http://purl.org/sig/ont/fma/fma58088",
+          "glb_file_of_single_organs": "3d-vh-f-mammary-gland-l\n"
+        },
+        "classification": "anatomical_subcomponent"
+      },
+      {
+        "id": "VH_F_suspensory_ligaments_L",
+        "label": "Suspensory ligament of left breast",
+        "region": "Source atlas",
+        "skin": false,
+        "systems": [
+          "integumentary system"
+        ],
+        "source_node_index": 12,
+        "source_name": "VH_F_suspensory_ligaments_L",
+        "source_annotation": {
+          "anatomical_structure_of": "#VHFLeftMammaryGland",
+          "source_spatial_entity": "#VHFemaleOrgans",
+          "label": "Suspensory ligament of left breast",
+          "ontologyid": "FMA:73119",
+          "representation_of": "http://purl.org/sig/ont/fma/fma73119",
+          "glb_file_of_single_organs": "3d-vh-f-mammary-gland-l\n"
+        },
+        "classification": "anatomical_subcomponent"
+      },
+      {
+        "id": "VH_F_fat_R",
+        "label": "Right mammary region (source fat)",
+        "region": "Thorax",
+        "skin": false,
+        "source_node_index": 14,
+        "systems": [
+          "integumentary system"
+        ]
+      },
+      {
+        "id": "VH_F_areolar_tubercles_R",
+        "label": "areolar tubercle",
+        "region": "Source atlas",
+        "skin": false,
+        "systems": [
+          "integumentary system"
+        ],
+        "source_node_index": 15,
+        "source_name": "VH_F_areolar_tubercles_R",
+        "source_annotation": {
+          "anatomical_structure_of": "#VHFRightMammaryGland",
+          "source_spatial_entity": "#VHFemaleOrgans",
+          "label": "areolar tubercle",
+          "ontologyid": "UBERON:0011828",
+          "representation_of": "http://purl.obolibrary.org/obo/UBERON_0011828",
+          "glb_file_of_single_organs": "3d-vh-f-mammary-gland-r\n"
+        },
+        "classification": "anatomical_subcomponent"
+      },
+      {
+        "id": "VH_F_nipple_R",
+        "label": "right nipple",
+        "region": "Source atlas",
+        "skin": false,
+        "systems": [
+          "integumentary system"
+        ],
+        "source_node_index": 16,
+        "source_name": "VH_F_nipple_R",
+        "source_annotation": {
+          "anatomical_structure_of": "#VHFRightMammaryGland",
+          "source_spatial_entity": "#VHFemaleOrgans",
+          "label": "right nipple",
+          "ontologyid": "UBERON:0013773",
+          "representation_of": "http://purl.obolibrary.org/obo/UBERON_0013773",
+          "glb_file_of_single_organs": "3d-vh-f-mammary-gland-r\n"
+        },
+        "classification": "anatomical_subcomponent"
+      },
+      {
+        "id": "VH_F_areola_R",
+        "label": "Right female areola",
+        "region": "Source atlas",
+        "skin": false,
+        "systems": [
+          "integumentary system"
+        ],
+        "source_node_index": 17,
+        "source_name": "VH_F_areola_R",
+        "source_annotation": {
+          "anatomical_structure_of": "#VHFRightMammaryGland",
+          "source_spatial_entity": "#VHFemaleOrgans",
+          "label": "Right female areola",
+          "ontologyid": "FMA:223677",
+          "representation_of": "http://purl.org/sig/ont/fma/fma223677",
+          "glb_file_of_single_organs": "3d-vh-f-mammary-gland-r\n"
+        },
+        "classification": "anatomical_subcomponent"
+      },
+      {
+        "id": "VH_F_main_lactiferous_sinuses_R",
+        "label": "Lactiferous sinus",
+        "region": "Source atlas",
+        "skin": false,
+        "systems": [
+          "integumentary system"
+        ],
+        "source_node_index": 18,
+        "source_name": "VH_F_main_lactiferous_sinuses_R",
+        "source_annotation": {
+          "anatomical_structure_of": "#VHFRightMammaryGland",
+          "source_spatial_entity": "#VHFemaleOrgans",
+          "label": "Lactiferous sinus",
+          "ontologyid": "FMA:58088",
+          "representation_of": "http://purl.org/sig/ont/fma/fma58088",
+          "glb_file_of_single_organs": "3d-vh-f-mammary-gland-r\n"
+        },
+        "classification": "anatomical_subcomponent"
+      },
+      {
+        "id": "VH_F_main_lactiferous_ducts_R",
+        "label": "main lactiferous duct",
+        "region": "Source atlas",
+        "skin": false,
+        "systems": [
+          "integumentary system"
+        ],
+        "source_node_index": 19,
+        "source_name": "VH_F_main_lactiferous_ducts_R",
+        "source_annotation": {
+          "anatomical_structure_of": "#VHFRightMammaryGland",
+          "source_spatial_entity": "#VHFemaleOrgans",
+          "label": "main lactiferous duct",
+          "ontologyid": "UBERON:0015134",
+          "representation_of": "http://purl.org/sig/ont/fma/fma62102",
+          "glb_file_of_single_organs": "3d-vh-f-mammary-gland-r\n"
+        },
+        "classification": "anatomical_subcomponent"
+      },
+      {
+        "id": "VH_F_mammary_lobes_R",
+        "label": "mammary lobe",
+        "region": "Source atlas",
+        "skin": false,
+        "systems": [
+          "integumentary system"
+        ],
+        "source_node_index": 20,
+        "source_name": "VH_F_mammary_lobes_R",
+        "source_annotation": {
+          "anatomical_structure_of": "#VHFRightMammaryGland",
+          "source_spatial_entity": "#VHFemaleOrgans",
+          "label": "mammary lobe",
+          "ontologyid": "UBERON:0018140",
+          "representation_of": "http://purl.obolibrary.org/obo/UBERON_0018140",
+          "glb_file_of_single_organs": "3d-vh-f-mammary-gland-r\n"
+        },
+        "classification": "anatomical_subcomponent"
+      },
+      {
+        "id": "VH_F_suspensory_ligaments_R",
+        "label": "Suspensory ligament of right breast",
+        "region": "Source atlas",
+        "skin": false,
+        "systems": [
+          "integumentary system"
+        ],
+        "source_node_index": 21,
+        "source_name": "VH_F_suspensory_ligaments_R",
+        "source_annotation": {
+          "anatomical_structure_of": "#VHFRightMammaryGland",
+          "source_spatial_entity": "#VHFemaleOrgans",
+          "label": "Suspensory ligament of right breast",
+          "ontologyid": "FMA:73118",
+          "representation_of": "http://purl.org/sig/ont/fma/fma73118",
+          "glb_file_of_single_organs": "3d-vh-f-mammary-gland-r\n"
+        },
+        "classification": "anatomical_subcomponent"
+      },
+      {
+        "id": "VH_F_uterovesical_pouch",
+        "label": "Uterovesical pouch",
+        "region": "Source atlas",
+        "skin": false,
+        "systems": [
+          "reproductive system"
+        ],
+        "source_node_index": 445,
+        "source_name": "VH_F_uterovesical_pouch",
+        "source_annotation": {
+          "anatomical_structure_of": "#VHFLigamentsUterusOvaries",
+          "source_spatial_entity": "#VHFemaleOrgans",
+          "label": "Uterovesical pouch",
+          "ontologyid": "FMA:14729",
+          "representation_of": "http://purl.org/sig/ont/fma/fma14729",
+          "glb_file_of_single_organs": "VH_F_Ligaments_Uterus_Ovaries\n"
+        },
+        "classification": "anatomical_subcomponent"
+      },
+      {
+        "id": "VH_F_right_round_ligament_of_uterus",
+        "label": "Right round ligament of uterus",
+        "region": "Source atlas",
+        "skin": false,
+        "systems": [
+          "reproductive system"
+        ],
+        "source_node_index": 447,
+        "source_name": "VH_F_right_round_ligament_of_uterus",
+        "source_annotation": {
+          "anatomical_structure_of": "#VHFLigamentsUterusOvaries",
+          "source_spatial_entity": "#VHFemaleOrgans",
+          "label": "Right round ligament of uterus",
+          "ontologyid": "FMA:57789",
+          "representation_of": "http://purl.org/sig/ont/fma/fma57789",
+          "glb_file_of_single_organs": "VH_F_Ligaments_Uterus_Ovaries\n"
+        },
+        "classification": "anatomical_subcomponent"
+      },
+      {
+        "id": "VH_F_left_round_ligament_of_uterus",
+        "label": "Left round ligament of uterus",
+        "region": "Source atlas",
+        "skin": false,
+        "systems": [
+          "reproductive system"
+        ],
+        "source_node_index": 448,
+        "source_name": "VH_F_left_round_ligament_of_uterus",
+        "source_annotation": {
+          "anatomical_structure_of": "#VHFLigamentsUterusOvaries",
+          "source_spatial_entity": "#VHFemaleOrgans",
+          "label": "Left round ligament of uterus",
+          "ontologyid": "FMA:57790",
+          "representation_of": "http://purl.org/sig/ont/fma/fma57790",
+          "glb_file_of_single_organs": "VH_F_Ligaments_Uterus_Ovaries\n"
+        },
+        "classification": "anatomical_subcomponent"
+      },
+      {
+        "id": "VH_F_right_uterosacral_ligament",
+        "label": "Right uterosacral ligament",
+        "region": "Source atlas",
+        "skin": false,
+        "systems": [
+          "reproductive system"
+        ],
+        "source_node_index": 450,
+        "source_name": "VH_F_right_uterosacral_ligament",
+        "source_annotation": {
+          "anatomical_structure_of": "#VHFLigamentsUterusOvaries",
+          "source_spatial_entity": "#VHFemaleOrgans",
+          "label": "Right uterosacral ligament",
+          "ontologyid": "FMA:19119",
+          "representation_of": "http://purl.org/sig/ont/fma/fma19119",
+          "glb_file_of_single_organs": "VH_F_Ligaments_Uterus_Ovaries\n"
+        },
+        "classification": "anatomical_subcomponent"
+      },
+      {
+        "id": "VH_F_left_uterosacral_ligament",
+        "label": "Left uterosacral ligament",
+        "region": "Source atlas",
+        "skin": false,
+        "systems": [
+          "reproductive system"
+        ],
+        "source_node_index": 451,
+        "source_name": "VH_F_left_uterosacral_ligament",
+        "source_annotation": {
+          "anatomical_structure_of": "#VHFLigamentsUterusOvaries",
+          "source_spatial_entity": "#VHFemaleOrgans",
+          "label": "Left uterosacral ligament",
+          "ontologyid": "FMA:19120",
+          "representation_of": "http://purl.org/sig/ont/fma/fma19120",
+          "glb_file_of_single_organs": "VH_F_Ligaments_Uterus_Ovaries\n"
+        },
+        "classification": "anatomical_subcomponent"
+      },
+      {
+        "id": "VH_F_right_cardinal_ligament_of_uterus",
+        "label": "Cardinal ligament",
+        "region": "Source atlas",
+        "skin": false,
+        "systems": [
+          "reproductive system"
+        ],
+        "source_node_index": 453,
+        "source_name": "VH_F_right_cardinal_ligament_of_uterus",
+        "source_annotation": {
+          "anatomical_structure_of": "#VHFLigamentsUterusOvaries",
+          "source_spatial_entity": "#VHFemaleOrgans",
+          "label": "Cardinal ligament",
+          "ontologyid": "FMA:77064",
+          "representation_of": "http://purl.org/sig/ont/fma/fma77064",
+          "glb_file_of_single_organs": "VH_F_Ligaments_Uterus_Ovaries\n"
+        },
+        "classification": "anatomical_subcomponent"
+      },
+      {
+        "id": "VH_F_left_cardinal_ligament_of_uterus",
+        "label": "Cardinal ligament",
+        "region": "Source atlas",
+        "skin": false,
+        "systems": [
+          "reproductive system"
+        ],
+        "source_node_index": 454,
+        "source_name": "VH_F_left_cardinal_ligament_of_uterus",
+        "source_annotation": {
+          "anatomical_structure_of": "#VHFLigamentsUterusOvaries",
+          "source_spatial_entity": "#VHFemaleOrgans",
+          "label": "Cardinal ligament",
+          "ontologyid": "FMA:77064",
+          "representation_of": "http://purl.org/sig/ont/fma/fma77064",
+          "glb_file_of_single_organs": "VH_F_Ligaments_Uterus_Ovaries\n"
+        },
+        "classification": "anatomical_subcomponent"
+      },
+      {
+        "id": "VH_F_suspensory_ligament_of_ovary_R",
+        "label": "Suspensory ligament of right ovary",
+        "region": "Source atlas",
+        "skin": false,
+        "systems": [
+          "reproductive system"
+        ],
+        "source_node_index": 456,
+        "source_name": "VH_F_suspensory_ligament_of_ovary_R",
+        "source_annotation": {
+          "anatomical_structure_of": "#VHFLigamentsUterusOvaries",
+          "source_spatial_entity": "#VHFemaleOrgans",
+          "label": "Suspensory ligament of right ovary",
+          "ontologyid": "FMA:19823",
+          "representation_of": "http://purl.org/sig/ont/fma/fma19823",
+          "glb_file_of_single_organs": "VH_F_Ligaments_Uterus_Ovaries\n"
+        },
+        "classification": "anatomical_subcomponent"
+      },
+      {
+        "id": "VH_F_suspensory_ligament_of_ovary_L",
+        "label": "Suspensory ligament of left ovary",
+        "region": "Source atlas",
+        "skin": false,
+        "systems": [
+          "reproductive system"
+        ],
+        "source_node_index": 457,
+        "source_name": "VH_F_suspensory_ligament_of_ovary_L",
+        "source_annotation": {
+          "anatomical_structure_of": "#VHFLigamentsUterusOvaries",
+          "source_spatial_entity": "#VHFemaleOrgans",
+          "label": "Suspensory ligament of left ovary",
+          "ontologyid": "FMA:19824",
+          "representation_of": "http://purl.org/sig/ont/fma/fma19824",
+          "glb_file_of_single_organs": "VH_F_Ligaments_Uterus_Ovaries\n"
+        },
+        "classification": "anatomical_subcomponent"
+      },
+      {
+        "id": "VH_F_ovarian_ligament_L",
+        "label": "Left ovarian ligament",
+        "region": "Source atlas",
+        "skin": false,
+        "systems": [
+          "reproductive system"
+        ],
+        "source_node_index": 459,
+        "source_name": "VH_F_ovarian_ligament_L",
+        "source_annotation": {
+          "anatomical_structure_of": "#VHFLigamentsUterusOvaries",
+          "source_spatial_entity": "#VHFemaleOrgans",
+          "label": "Left ovarian ligament",
+          "ontologyid": "FMA:55424",
+          "representation_of": "http://purl.org/sig/ont/fma/fma55424",
+          "glb_file_of_single_organs": "VH_F_Ligaments_Uterus_Ovaries\n"
+        },
+        "classification": "anatomical_subcomponent"
+      },
+      {
+        "id": "VH_F_ovarian_ligament_R",
+        "label": "Right ovarian ligament",
+        "region": "Source atlas",
+        "skin": false,
+        "systems": [
+          "reproductive system"
+        ],
+        "source_node_index": 460,
+        "source_name": "VH_F_ovarian_ligament_R",
+        "source_annotation": {
+          "anatomical_structure_of": "#VHFLigamentsUterusOvaries",
+          "source_spatial_entity": "#VHFemaleOrgans",
+          "label": "Right ovarian ligament",
+          "ontologyid": "FMA:55423",
+          "representation_of": "http://purl.org/sig/ont/fma/fma55423",
+          "glb_file_of_single_organs": "VH_F_Ligaments_Uterus_Ovaries\n"
+        },
+        "classification": "anatomical_subcomponent"
+      },
+      {
+        "id": "VH_F_broad_ligament",
+        "label": "broad ligament of uterus",
+        "region": "Source atlas",
+        "skin": false,
+        "systems": [
+          "reproductive system"
+        ],
+        "source_node_index": 461,
+        "source_name": "VH_F_broad_ligament",
+        "source_annotation": {
+          "anatomical_structure_of": "#VHFLigamentsUterusOvaries",
+          "source_spatial_entity": "#VHFemaleOrgans",
+          "label": "broad ligament of uterus",
+          "ontologyid": "UBERON:0012332",
+          "representation_of": "http://purl.obolibrary.org/obo/UBERON_0012332",
+          "glb_file_of_single_organs": "VH_F_Ligaments_Uterus_Ovaries\n"
+        },
+        "classification": "anatomical_subcomponent"
+      },
+      {
+        "id": "VH_F_mesosalpinx_L",
+        "label": "Left mesosalpinx",
+        "region": "Source atlas",
+        "skin": false,
+        "systems": [
+          "reproductive system"
+        ],
+        "source_node_index": 463,
+        "source_name": "VH_F_mesosalpinx_L",
+        "source_annotation": {
+          "anatomical_structure_of": "#VHFLigamentsUterusOvaries",
+          "source_spatial_entity": "#VHFemaleOrgans",
+          "label": "Left mesosalpinx",
+          "ontologyid": "FMA:19810",
+          "representation_of": "http://purl.org/sig/ont/fma/fma19810",
+          "glb_file_of_single_organs": "VH_F_Ligaments_Uterus_Ovaries\n"
+        },
+        "classification": "anatomical_subcomponent"
+      },
+      {
+        "id": "VH_F_mesosalpinx_R",
+        "label": "Right mesosalpinx",
+        "region": "Source atlas",
+        "skin": false,
+        "systems": [
+          "reproductive system"
+        ],
+        "source_node_index": 464,
+        "source_name": "VH_F_mesosalpinx_R",
+        "source_annotation": {
+          "anatomical_structure_of": "#VHFLigamentsUterusOvaries",
+          "source_spatial_entity": "#VHFemaleOrgans",
+          "label": "Right mesosalpinx",
+          "ontologyid": "FMA:19809",
+          "representation_of": "http://purl.org/sig/ont/fma/fma19809",
+          "glb_file_of_single_organs": "VH_F_Ligaments_Uterus_Ovaries\n"
+        },
+        "classification": "anatomical_subcomponent"
+      },
+      {
+        "id": "VH_F_mesovarium_R",
+        "label": "Right mesovarium",
+        "region": "Source atlas",
+        "skin": false,
+        "systems": [
+          "reproductive system"
+        ],
+        "source_node_index": 466,
+        "source_name": "VH_F_mesovarium_R",
+        "source_annotation": {
+          "anatomical_structure_of": "#VHFLigamentsUterusOvaries",
+          "source_spatial_entity": "#VHFemaleOrgans",
+          "label": "Right mesovarium",
+          "ontologyid": "FMA:19817",
+          "representation_of": "http://purl.org/sig/ont/fma/fma19817",
+          "glb_file_of_single_organs": "VH_F_Ligaments_Uterus_Ovaries\n"
+        },
+        "classification": "anatomical_subcomponent"
+      },
+      {
+        "id": "VH_F_mesovarium_L",
+        "label": "Left mesovarium",
+        "region": "Source atlas",
+        "skin": false,
+        "systems": [
+          "reproductive system"
+        ],
+        "source_node_index": 467,
+        "source_name": "VH_F_mesovarium_L",
+        "source_annotation": {
+          "anatomical_structure_of": "#VHFLigamentsUterusOvaries",
+          "source_spatial_entity": "#VHFemaleOrgans",
+          "label": "Left mesovarium",
+          "ontologyid": "FMA:19818",
+          "representation_of": "http://purl.org/sig/ont/fma/fma19818",
+          "glb_file_of_single_organs": "VH_F_Ligaments_Uterus_Ovaries\n"
+        },
+        "classification": "anatomical_subcomponent"
+      }
+    ]
+  },
+  "provenance": {
+    "sourceSha256": "24abc4d8bd0a00bfc93ab45e227c1e9b157ffc0d21d1e5c22408fbe3933f60cb",
+    "originalSourceSha256": "472567a56896b9b7890508da6501fbf858e56aaa30745365f7a71ade782b529c",
+    "anchor": "Preserved existing bladder bounding-box center translation",
+    "translationMetres": [
+      0.013790547504413414,
+      0.805743873163089,
+      0.12081712205504619
+    ],
+    "fit": "Existing approximate translation only; no new registration",
+    "scope": "39 existing admitted source owners / 60 exact mesh atoms"
+  }
+}
