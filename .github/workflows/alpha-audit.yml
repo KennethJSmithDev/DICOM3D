@@ -1,0 +1,60 @@
+name: Audit Three R3F alpha
+on:
+  push:
+    branches:
+      - audit/release-070-alpha-20261106
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: alpha-audit-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Preserve reviewed public source
+        run: |
+          mkdir -p /tmp/dicom3d-audit
+          git archive --format=tar.gz HEAD > /tmp/dicom3d-audit/source.tar.gz
+          git rev-parse HEAD > /tmp/dicom3d-audit/source-commit.txt
+      - uses: actions/upload-artifact@v4
+        with:
+          name: alpha-audit-source
+          path: /tmp/dicom3d-audit/
+          retention-days: 7
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: npm
+          cache-dependency-path: prototypes/alpha/three-prototype/package-lock.json
+      - name: Install locked frontend dependencies
+        working-directory: prototypes/alpha/three-prototype
+        run: npm ci
+      - name: Existing alpha contract tests
+        working-directory: prototypes/alpha/three-prototype
+        run: |
+          set -euo pipefail
+          node test-asset-parts.mjs
+          node test-beginner-learning.mjs
+          node test-learn-context.mjs
+          node test-materialization.mjs
+          node test-renderer-factory.mjs
+          node test-system-visibility.mjs
+          node test-study-accumulation.mjs ../../../reference/public/demo/h000/source-binding.json
+      - name: Build exact expanded public profile
+        working-directory: prototypes/alpha/three-prototype
+        run: node build-public-review.mjs ../review-dist
+      - name: Package tested static build
+        if: success()
+        run: tar -C prototypes/alpha/review-dist -czf /tmp/alpha-review-dist.tar.gz .
+      - uses: actions/upload-artifact@v4
+        if: success()
+        with:
+          name: alpha-review-dist
+          path: /tmp/alpha-review-dist.tar.gz
+          retention-days: 7
