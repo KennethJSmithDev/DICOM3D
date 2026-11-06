@@ -31,7 +31,7 @@ For fixture-only tests, `DICOM3D_H000_FIXTURE` is a local H000 directory with a 
 ## Remaining boundaries
 
 - Male 416 held entries and female 305 held relationships remain unresolved; counts do not mean missing organs.
-- Exact expanded BodyParts3D 4.3i redistribution terms still need reconciliation: current publisher CC BY 4.0 evidence and historical version-specific BY-SA 2.1 JP notices differ. No permission is inferred by this source push. No expanded atlas GLBs or private runtime ZIP uploaded here.
+- Expanded BodyParts3D mesh adaptations are distributed separately under the origin publisher’s CC BY-SA 2.1 Japan terms. The archive publisher’s CC BY 4.0 attribution is also recorded in the asset notice.
 - General anatomy is an independent reference, never an inferred patient-specific organ or segmentation.
 - No qualified live IRIS frontend admission, newly qualified Core installer/IPM/Docker release, arbitrary-study organ provider, or actual installed-update/rollback claim.
 - Broader atlas/accessibility qualification, clean distributable asset inventory, and deployment remain separate gates.
@@ -40,7 +40,7 @@ The original Babylon application, public v0.6.5 release, private data and runnin
 
 ## Test the shared atlas on another machine
 
-This profile builds from the BodyParts3D 4.0 assets and public H000 example already in this repository. It generates ten shared anatomy chunks and uses one separately verified 2.6 MB HRA delta for the female composite. The expanded local profile continues to use its fifteen existing BodyParts3D chunks. Both profiles use the same female composition code.
+This profile ships the exact fifteen expanded BodyParts3D chunks used locally, together with the separately verified 2.6 MB HRA delta and public H000 example. The male view has 1,186 selectable owners and the female composite has 1,184. See the [expanded atlas license and attribution](three-prototype/expanded-atlas/LICENSE.md).
 
 From the repository root, with Node 24 and npm:
 
