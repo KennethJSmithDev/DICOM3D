@@ -12,7 +12,7 @@ const source=join(here,'expanded-atlas');
 const sha=bytes=>createHash('sha256').update(bytes).digest('hex');
 const catalog=await readFile(join(source,'index.json'));
 const indexSha=sha(catalog);
-if(indexSha!=='d3335ceea378eedad9b3fd9c5f01572b6c048946392a32aaaff58479dc0b53a7')throw Error('Expanded catalog integrity mismatch');
+if(indexSha!=='e90d1d5f4a06d989b3b26788ebbb0701c537cf791fb19ec580f2586886df04de')throw Error('Expanded catalog integrity mismatch');
 const {structures,bundles,sourceNative}=JSON.parse(catalog);
 const nativeBytes=await readFile(join(source,sourceNative.url));if(nativeBytes.length!==sourceNative.byteLength||sha(nativeBytes)!==sourceNative.sha256)throw Error('Source catalog integrity mismatch');
 const delta=JSON.parse(await readFile(join(here,'atlas-delta','female-delta.json')));

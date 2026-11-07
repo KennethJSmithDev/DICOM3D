@@ -15,14 +15,32 @@ def table(n):return list(csv.DictReader((M/n).open(encoding='utf-8-sig'),delimit
 assert sha(BASE/'bp3d-male.glb')=='dcbe513dbf1cef7ac12c03b6a1c53861680cb7f44f6a89c7dcb81e40ea66ee03'
 assert sha(BASE/'hra-female.glb')=='9a26e88e0223969b18874f00bfa2e30dad36c8916db5d12af9b1736ceaf91b0b'
 assert sha(M/'partof_BP3D_4.0_obj_99.zip')=='9fbc713fffeee924a5a657d9813d84d7eb957bded63adb854931dd5e3eb61c97'
+assert sha(M/'partof_parts_list_e.txt')=='9224080557053e6f1322f1e13ab27f0ecde0db19bb3b505f0631afad230eeebd'
+assert sha(M/'partof_inclusion_relation_list.txt')=='1b40738270931e3c1d955ce34e0fce0d8d10d8c5ad543463e40b4b4c0243007c'
+assert sha(M/'partof_element_parts.txt')=='3f5f6df1028eb122b30de77c711597b6bb8e5541658e5985859fd228adbf88ea'
 assert sha(F)=='472567a56896b9b7890508da6501fbf858e56aaa30745365f7a71ade782b529c'
 concepts=table('partof_parts_list_e.txt');relations=table('partof_inclusion_relation_list.txt');mapping=collections.defaultdict(set)
 for r in table('partof_element_parts.txt'):mapping[r['concept id']].add(r['element file id'])
+element_memberships=collections.defaultdict(list)
+for cid,ids in mapping.items():
+ for eid in ids:element_memberships[eid].append(cid)
 children=collections.defaultdict(list);parents=collections.defaultdict(list)
 for r in relations:children[r['parent id']].append(r['child id']);parents[r['child id']].append(r['parent id'])
 SYSTEMS=['FMA7152','FMA7157','FMA7158','FMA7159','FMA7160','FMA7161','FMA9668','FMA23881','FMA72979','FMA79063']
 labels={r['concept id']:r['en'] for r in concepts}
 def systems(elements):return [labels[k] for k in SYSTEMS if mapping[k]&set(elements)] or ['Unassigned source system']
+
+def male_source_identity(eid,head,memberships):
+ """A pinned element and published membership identify an exportable source atom.
+
+ Missing native concept metadata stays missing: table membership does not invent
+ a header Concept ID or make the element an entire anatomical concept.
+ """
+ sid=head.get('Concept ID','');name=head.get('English name','')
+ if sid and name:return sid,name,sid,None
+ if head.get('File ID')==eid and memberships:
+  return 'BP3D40_'+eid,'BodyParts3D 4.0 source element '+eid,sid or None,'PINNED_ARCHIVE_ELEMENT_AND_PARTOF_TABLE'
+ return sid,name,sid or None,None
 bm=json.loads((BASE/'bp3d-male.manifest.json').read_text());fm=json.loads((BASE/'hra-female.manifest.json').read_text());members=json.loads((BASE/'bp3d-source-members.json').read_text());owners=collections.defaultdict(list)
 for g in members:
  for m in g['members']:owners[m['element']].append(g['id'])
@@ -40,13 +58,14 @@ def obj(data):
  return positions,normals,indices
 for item in sorted(z.infolist(),key=lambda x:x.filename):
  if not item.filename.endswith('.obj'):continue
- raw=z.read(item);eid=pathlib.PurePosixPath(item.filename).stem;head={m.group(1).strip():m.group(2).strip() for line in raw.decode().splitlines()[:15] if (m:=re.match(r'# ([^:]+):\s*(.*)',line))};sid=head.get('Concept ID','');name=head.get('English name','');hold=None
+ raw=z.read(item);eid=pathlib.PurePosixPath(item.filename).stem;head={m.group(1).strip():m.group(2).strip() for line in raw.decode().splitlines()[:15] if (m:=re.match(r'# ([^:]+):\s*(.*)',line))};sid,name,native_sid,identity_basis=male_source_identity(eid,head,element_memberships[eid]);hold=None
  try:ps,ns,ix=obj(raw)
  except ValueError as err:hold='unsupported_or_unusable_geometry: '+str(err)
- if not sid or not name:hold='insufficient_source_identity: blank original concept and name'
+ if not sid or not name:hold='insufficient_source_identity: missing native identity and no exact published element membership'
  geometry_hash=hashlib.sha256(raw).hexdigest()
  kind='duplicate_or_shared_geometry_owner' if eid in owners else 'anatomical_subcomponent'
- rec={'element':eid,'member':item.filename,'source_concept':sid,'label':name,'source_sha256':geometry_hash,'existing_owners':owners.get(eid,[]),'classification':kind,'eligible_new':not hold and eid not in owners,'hold':hold,'previous_exclusion':'Already merged into accepted group; no duplicate draw' if eid in owners else 'Not selected by original hardcoded subset','systems':systems([eid])}
+ rec={'element':eid,'member':item.filename,'source_concept':native_sid,'label':name,'source_sha256':geometry_hash,'existing_owners':owners.get(eid,[]),'classification':kind,'eligible_new':not hold and eid not in owners,'hold':hold,'previous_exclusion':'Already merged into accepted group; no duplicate draw' if eid in owners else 'Not selected by original hardcoded subset','systems':systems([eid])}
+ if identity_basis:rec.update(identity_basis=identity_basis,source_membership_ids=sorted(element_memberships[eid]),native_source_label=head.get('English name') or None)
  if hold:rec['classification']='insufficient_source_identity' if hold.startswith('insufficient') else 'unsupported_or_unusable_geometry'
  if not hold:rec.update(vertices=len(ps)//3,triangles=len(ix)//3)
  elements.append(rec)
@@ -56,7 +75,9 @@ for item in sorted(z.infolist(),key=lambda x:x.filename):
 male_parts=[]
 for sid,items in sorted(new_groups.items()):
  names={x['label'] for x in items};label=labels.get(sid,next(iter(sorted(names))));ids=[x['element'] for x in items];complete=mapping.get(sid,set())==set(ids)
- male_parts.append({'id':sid,'label':label if complete else label+' (source components)','region':'Source atlas','skin':False,'systems':systems(ids),'source_concept':sid,'source_elements':ids,'representation_scope':'complete source concept membership' if complete else 'named source components; not complete parent geometry','classification':'independently_selectable_anatomical_structure' if complete and not children[sid] else 'anatomical_subcomponent'})
+ part={'id':sid,'label':label if complete else label+' (source components)','region':'Source atlas','skin':False,'systems':systems(ids),'source_concept':items[0]['source_concept'],'source_elements':ids,'representation_scope':'complete source concept membership' if complete else 'named source components; not complete parent geometry','classification':'independently_selectable_anatomical_structure' if complete and not children[sid] else 'anatomical_subcomponent'}
+ if items[0].get('identity_basis'):part.update(label=label,identity_basis=items[0]['identity_basis'],source_membership_ids=items[0]['source_membership_ids'],representation_scope='Exact source element; published PART-OF memberships; native concept and label unavailable')
+ male_parts.append(part)
 male_nodes=[{'id':x['concept id'],'label':x['en'],'parents':parents[x['concept id']],'children':children[x['concept id']],'classification':'semantic_group_container' if children[x['concept id']] else 'anatomical_subcomponent','elements':sorted(mapping[x['concept id']])} for x in concepts]
 src=GLB(F);sn=src.doc['nodes'];parent={j:i for i,n in enumerate(sn) for j in n.get('children',[])}
 def path(i):
@@ -105,7 +126,7 @@ for variant,manifest,parts in [('bp3d-male',bm,male_parts),('hra-female',fm,fema
     pp,nn,ii=obj(z.read(rec['member']));offset=len(ps)//3;ps.extend(pp);ns.extend(nn);ix.extend(v+offset for v in ii)
    count=len(ps)//3;lo=[min(ps[k::3]) for k in range(3)];hi=[max(ps[k::3]) for k in range(3)];pa=append(ps.tobytes(),{'componentType':5126,'count':count,'type':'VEC3','min':lo,'max':hi});na=append(ns.tobytes(),{'componentType':5126,'count':count,'type':'VEC3'});ia=append(ix.tobytes(),{'componentType':5125,'count':len(ix),'type':'SCALAR'});V+=count;T+=len(ix)//3
    mat=len(d['materials']);color=[.65,.22,.24,1] if any('cardiovascular' in s for s in part['systems']) else [.75,.63,.44,1]
-   d['materials'].append({'name':sid,'doubleSided':True,'alphaMode':'OPAQUE','pbrMetallicRoughness':{'baseColorFactor':color,'roughnessFactor':.48,'metallicFactor':.06}});d['meshes'].append({'name':sid,'primitives':[{'attributes':{'POSITION':pa,'NORMAL':na},'indices':ia,'material':mat}]});d['nodes'].append({'name':sid,'mesh':mesh,'extras':{'sourceConcept':sid,'sourceElements':part['source_elements']}})
+   d['materials'].append({'name':sid,'doubleSided':True,'alphaMode':'OPAQUE','pbrMetallicRoughness':{'baseColorFactor':color,'roughnessFactor':.48,'metallicFactor':.06}});d['meshes'].append({'name':sid,'primitives':[{'attributes':{'POSITION':pa,'NORMAL':na},'indices':ia,'material':mat}]});d['nodes'].append({'name':sid,'mesh':mesh,'extras':{'sourceConcept':part['source_concept'],'sourceElements':part['source_elements']}})
    member_provenance.append({'id':sid,'label':part['label'],'members':[{'element':rec['element'],'path':rec['member'],'sha256':rec['source_sha256'],'vertices':rec['vertices'],'triangles':rec['triangles'],'license_header':z.read(rec['member']).decode().splitlines()[1],'license_url':z.read(rec['member']).decode().splitlines()[2]} for rec in new_groups[sid]],'vertices':count,'triangles':len(ix)//3,'bounds_m':[lo,hi]})
   else:
    original=sn[part['source_node_index']];m=copy.deepcopy(src.doc['meshes'][original['mesh']])
