@@ -1,7 +1,6 @@
 name: Deploy DICOM3D research demo
+# Manual only: merging or pushing source does not authorize a public deployment.
 on:
-  push:
-    branches: [main]
   workflow_dispatch:
 permissions:
   contents: read

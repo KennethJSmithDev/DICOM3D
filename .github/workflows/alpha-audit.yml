@@ -1,7 +1,6 @@
 name: Audit Three R3F alpha
+# Manual only: normal development qualification runs in the configured cloud workspace.
 on:
-  push:
-    branches: [experimental]
   workflow_dispatch:
 permissions:
   contents: read

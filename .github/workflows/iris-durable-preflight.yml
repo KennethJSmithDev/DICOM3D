@@ -1,12 +1,7 @@
 name: IRIS isolated host and IPM control
 
+# Manual only: do not provision even disposable IRIS fixtures on pull requests.
 on:
-  pull_request:
-    paths:
-      - compose.iris-dev.yaml
-      - Dockerfile.iris-dev
-      - docs/IRIS_DOCKER_DEV_051.md
-      - .github/workflows/iris-durable-preflight.yml
   workflow_dispatch:
 
 permissions:
