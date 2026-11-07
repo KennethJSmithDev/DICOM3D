@@ -1,0 +1,10 @@
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+import {femalePresentationDefault,revealFemaleStructure,toggleFemaleSystem,filterFemaleStructures} from './female-presentation.js';
+const m=JSON.parse(fs.readFileSync(new URL('../public/female/hra-female.manifest.json',import.meta.url)));
+const index={structures:m.reference.structures};
+const original=femalePresentationDefault();original.hidden.add('chosen');original.systems.add('other');original.isolated='previous';original.opacity=.4;original.appearance='holographic';
+const revealed=revealFemaleStructure(original,'chosen',{isolate:true});assert(!revealed.hidden.has('chosen'));assert.equal(revealed.systems.size,0);assert.equal(revealed.isolated,'chosen');assert.equal(revealed.opacity,.4);assert.equal(revealed.appearance,'holographic');assert(original.hidden.has('chosen'));assert(original.systems.has('other'));
+const clean=femalePresentationDefault();clean.isolated='first';const filtered=toggleFemaleSystem(clean,'skeletal system');assert.equal(filtered.isolated,'');const restored=toggleFemaleSystem(filtered,'skeletal system');assert.equal(restored.isolated,'first');assert(restored.hidden.has('VH_F_skin'));
+assert.equal(filterFemaleStructures(index).length,380);assert.equal(new Set(filterFemaleStructures(index).map(x=>x.id)).size,380);for(const x of index.structures)assert(filterFemaleStructures(index,x.id).some(y=>y.id===x.id));assert(filterFemaleStructures(index,'','skeletal system').every(x=>x.systems.includes('skeletal system')));
+const result={pass:true,checks:['reveal clears hidden/filter conflicts','isolation preserves opacity and appearance','source presentation state immutable','system roundtrip restores prior isolation/hidden','all380 owners searchable','system browsing uses source memberships'],owners:index.structures.length};console.log(JSON.stringify(result));

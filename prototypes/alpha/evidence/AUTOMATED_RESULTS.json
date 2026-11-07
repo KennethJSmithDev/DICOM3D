@@ -1,0 +1,66 @@
+[
+  {
+    "command": [
+      "node",
+      "test-beginner-learning.mjs"
+    ],
+    "exit": 0,
+    "stdout": "PASS: beginner learning context adaptation, exact-ID education, female scope, loaded/unloaded guidance, presentation state, CT/SEG correspondence, local privacy, source links and self-check boundaries.\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "node",
+      "test-learn-context.mjs"
+    ],
+    "exit": 0,
+    "stdout": "PASS: 25 contextual Learn assertions; source switching, indirect ownership, capsule scope, nonintersecting SEG, local privacy and safe source links.\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "node",
+      "test-materialization.mjs"
+    ],
+    "exit": 0,
+    "stdout": "PASS live deterministic sampler, unchanged source positions, monotonic layers, eight-second endpoint and reduced-motion endpoint\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "node",
+      "test-renderer-factory.mjs"
+    ],
+    "exit": 0,
+    "stdout": "PASS renderer single-flight, failure retry, and remount\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "node",
+      "test-system-visibility.mjs"
+    ],
+    "exit": 0,
+    "stdout": "PASS source membership union, overlap, hidden skin, isolation and restoration\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "node",
+      "test-asset-parts.mjs"
+    ],
+    "exit": 0,
+    "stdout": "{\"status\":\"PASS\",\"checks\":12,\"scope\":\"ordered complete integrity, missing/corrupt/short/oversize/declared-length/path/reassembly rejection and abort before publication; no renderer created by byte loader\"}\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "node",
+      "test-study-accumulation.mjs",
+      "../package-5/public/demo/h000/source-binding.json"
+    ],
+    "exit": 0,
+    "stdout": "{\"status\":\"PASS\",\"frameCenters\":103,\"maxSourceKError\":2.842170943040401e-14,\"fullRange\":[0,102],\"lesionRange\":[64,78],\"emptyRejectsPicking\":true,\"disabledRestoresAll\":true,\"sourceTransformsUnchanged\":true,\"shaderAndBrowser\":\"pending parent witness\"}\n",
+    "stderr": ""
+  }
+]

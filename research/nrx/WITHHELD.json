@@ -1,0 +1,14 @@
+[
+  {
+    "path": "c001/tasks/task-4/source/source-mesh.h",
+    "reason": "Embedded HRA fixture geometry retained locally; no new dataset publication in review source."
+  },
+  {
+    "path": "c001/tasks/task-5/anatomy/source/source-mesh.h",
+    "reason": "Embedded HRA fixture geometry retained locally; no new dataset publication in review source."
+  },
+  {
+    "path": "c001/tasks/task-6/anatomy/source/source-mesh.h",
+    "reason": "Embedded HRA fixture geometry retained locally; no new dataset publication in review source."
+  }
+]

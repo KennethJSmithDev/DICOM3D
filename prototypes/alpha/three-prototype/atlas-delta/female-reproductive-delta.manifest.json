@@ -1,0 +1,91 @@
+{
+  "asset": {
+    "relative_filename": "female-reproductive-delta.glb",
+    "sha256": "8902e11a7487e021ef88c73201178b00d2dfac384a4d91f9737d3ca4f8eea812"
+  },
+  "reference": {
+    "id": "HRA-FEMALE-DELTA-1",
+    "structures": [
+      {
+        "id": "VH_F_urinary_bladder",
+        "label": "Urinary bladder",
+        "region": "Pelvis",
+        "skin": false,
+        "source_node_index": 664,
+        "systems": [
+          "urinary system"
+        ]
+      },
+      {
+        "id": "VH_F_uterus",
+        "label": "Uterus",
+        "region": "Reproductive anatomy",
+        "skin": false,
+        "source_node_index": 471,
+        "systems": [
+          "reproductive system"
+        ]
+      },
+      {
+        "id": "VH_F_left_ovary",
+        "label": "Left ovary",
+        "region": "Reproductive anatomy",
+        "skin": false,
+        "source_node_index": 469,
+        "systems": [
+          "reproductive system"
+        ]
+      },
+      {
+        "id": "VH_F_right_ovary",
+        "label": "Right ovary",
+        "region": "Reproductive anatomy",
+        "skin": false,
+        "source_node_index": 470,
+        "systems": [
+          "reproductive system"
+        ]
+      },
+      {
+        "id": "VH_F_fallopian_tube_L",
+        "label": "Left uterine tube",
+        "region": "Reproductive anatomy",
+        "skin": false,
+        "source_node_index": 439,
+        "systems": [
+          "reproductive system"
+        ]
+      },
+      {
+        "id": "VH_F_fallopian_tube_R",
+        "label": "Right uterine tube",
+        "region": "Reproductive anatomy",
+        "skin": false,
+        "source_node_index": 434,
+        "systems": [
+          "reproductive system"
+        ]
+      },
+      {
+        "id": "VH_F_vagina",
+        "label": "Vagina",
+        "region": "Reproductive anatomy",
+        "skin": false,
+        "source_node_index": 431,
+        "systems": [
+          "reproductive system"
+        ]
+      }
+    ]
+  },
+  "provenance": {
+    "sourceSha256": "24abc4d8bd0a00bfc93ab45e227c1e9b157ffc0d21d1e5c22408fbe3933f60cb",
+    "anchor": "Bladder bounding-box center",
+    "translationMetres": [
+      0.013790547504413414,
+      0.805743873163089,
+      0.12081712205504619
+    ],
+    "fit": "Approximate translation only"
+  }
+}

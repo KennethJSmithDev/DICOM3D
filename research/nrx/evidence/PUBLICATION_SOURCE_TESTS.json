@@ -1,0 +1,38 @@
+[
+  {
+    "test": "test-beginner-learning.mjs",
+    "exit": 0,
+    "stdout": "PASS: beginner learning context adaptation, exact-ID education, female scope, loaded/unloaded guidance, presentation state, CT/SEG correspondence, local privacy, source links and self-check boundaries.\n",
+    "status": "PASS"
+  },
+  {
+    "test": "test-learn-context.mjs",
+    "exit": 0,
+    "stdout": "PASS: 25 contextual Learn assertions; source switching, indirect ownership, capsule scope, nonintersecting SEG, local privacy and safe source links.\n",
+    "status": "PASS"
+  },
+  {
+    "test": "test-materialization.mjs",
+    "exit": 0,
+    "stdout": "PASS live deterministic sampler, unchanged source positions, monotonic layers, eight-second endpoint and reduced-motion endpoint\n",
+    "status": "PASS"
+  },
+  {
+    "test": "test-renderer-factory.mjs",
+    "exit": 0,
+    "stdout": "PASS renderer single-flight, failure retry, and remount\n",
+    "status": "PASS"
+  },
+  {
+    "test": "test-system-visibility.mjs",
+    "exit": 1,
+    "stdout": "",
+    "status": "BLOCKED: three dependency absent in isolated review checkout; historical qualified result retained"
+  },
+  {
+    "test": "test-asset-parts.mjs",
+    "exit": 0,
+    "stdout": "{\"status\":\"PASS\",\"checks\":12,\"scope\":\"ordered complete integrity, missing/corrupt/short/oversize/declared-length/path/reassembly rejection and abort before publication; no renderer created by byte loader\"}\n",
+    "status": "PASS"
+  }
+]

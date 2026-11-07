@@ -1,0 +1,41 @@
+/* Measured from the operator's 1672x941 concept raster (ANAT-LAYERS-001).
+   These are composited raster samples, not claims of recovered source alpha.
+   Source anatomy materials and CT pixels are outside this shell boundary. */
+body.public-workstation{
+ --concept-bg:#121629;--concept-panel-top:#07141f;--concept-panel-bottom:#0a1522;
+ --concept-input:#0d1626;--concept-evidence:#04090d;--concept-border:#1f435a;
+ --concept-text:#fefffe;--concept-muted:#88a7c2;--concept-accent:#128fc8;
+ --concept-light:#44d9fe;--concept-active-top:#114c7c;--concept-active-bottom:#0b4f7e;
+ --border:var(--concept-border);--accent:var(--concept-light);
+ background:var(--concept-bg);color:var(--concept-text)
+}
+.public-workstation .app-header{background:radial-gradient(ellipse at 40% 0,#20203e99,transparent 55%),linear-gradient(110deg,#0a1522,#07141f);border-color:var(--concept-border)}
+.public-workstation .workspace,.public-workstation #publicStage{background:transparent}
+.public-workstation #viewerDrawer,.public-workstation #workspaceControls,.public-workstation #labPanel,.public-workstation #learningPanel{background:linear-gradient(145deg,#07141ff5,#0a1522f2);border-color:var(--concept-border);box-shadow:0 12px 32px #0007,inset 0 1px 0 #88a7c214}
+.public-workstation #viewerDrawer>header{background:var(--concept-panel-top);box-shadow:0 6px 12px var(--concept-panel-top)}
+.public-workstation .public-rail{background:linear-gradient(#07141f,#0a1522);border-color:var(--concept-border)}
+.public-workstation .selection-card,.public-workstation .shell-status{background:var(--concept-panel-top);border-color:var(--concept-border)}
+.public-workstation .shell-status,.public-workstation .help-copy,.public-workstation .intro,.public-workstation #referenceLayerSummary{color:var(--concept-muted)}
+.public-workstation #evidencePanel,.public-workstation #imagingDock,.public-workstation .ct-image{background:var(--concept-evidence);backdrop-filter:none;border-color:var(--concept-border)}
+.public-workstation button,.public-workstation select,.public-workstation input[type=search],.public-workstation #referenceControls input[type=search],.public-workstation #referenceControls select,.public-workstation .app-header .mode-switch button{background:var(--concept-input);border-color:var(--concept-border);color:var(--concept-text)}
+.public-workstation .app-header .mode-switch button[aria-pressed=true],.public-workstation button[aria-pressed=true],.public-workstation .public-rail button[aria-expanded=true]{background:linear-gradient(160deg,var(--concept-active-top),var(--concept-active-bottom));border-color:var(--concept-accent);box-shadow:inset 0 0 12px #44d9fe28,0 0 12px #128fc81c;color:var(--concept-text)}
+.public-workstation a{color:var(--concept-light)}
+.public-workstation :is(button,input,select,summary,a):focus-visible{outline:2px solid var(--concept-light);outline-offset:3px}
+.public-workstation input{accent-color:var(--concept-light)}
+.public-workstation #referenceLayers{border:1px solid var(--concept-border);border-radius:8px;padding:10px;margin:12px 0;background:var(--concept-panel-top)}
+.public-workstation #referenceLayers summary{font-weight:600;cursor:pointer;min-height:28px}
+.public-workstation #referenceLayers p,.public-workstation #referenceLayerSummary{font-size:11px;line-height:1.5}
+.public-workstation .layer-actions{display:flex;gap:6px;margin:8px 0}
+.public-workstation .layer-actions button{flex:1;min-height:34px;font-size:11px;padding:6px}
+.public-workstation .layer-rows fieldset{border:0;border-top:1px solid var(--concept-border);padding:8px 0;margin:10px 0;display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.public-workstation .layer-rows legend{font-size:12px;text-transform:capitalize;padding-right:6px}
+.public-workstation .layer-rows label{display:flex;align-items:center;justify-content:space-between;gap:6px;font-size:11px;min-height:28px}
+.public-workstation .layer-rows label:last-child{grid-column:1/-1}
+.public-workstation .layer-rows input[type=checkbox]{width:16px;height:16px}
+.public-workstation .layer-rows input[type=range]{width:58%;min-width:0}
+
+/* Dense system rows, still native labeled controls; no decorative unsupported tabs. */
+.public-workstation .layer-rows fieldset{grid-template-columns:1fr .8fr 1.4fr;margin:6px 0;padding:4px 0;gap:4px}
+.public-workstation .layer-rows label:last-child{grid-column:auto;flex-direction:column;gap:0;align-items:stretch;font-size:10px}
+.public-workstation .layer-rows input[type=range]{width:100%}
+.public-workstation .layer-rows legend{font-size:11px}

@@ -1,0 +1,25 @@
+[
+  {
+    "id": "FMA7148",
+    "accepted": true,
+    "vertices": 907,
+    "triangles": 1810,
+    "center": [
+      0.038286201655864716,
+      1.0983850359916687,
+      0.1379249505698681
+    ],
+    "scale": 0.06723780184984207,
+    "volume": 0.0005664554577208758
+  },
+  {
+    "id": "FMA7204",
+    "accepted": false,
+    "error": "Unchanged NRX ABI limit: at most 1024 vertices / 2048 triangles; this owner requires a separate extension"
+  },
+  {
+    "id": "FMA7205",
+    "accepted": false,
+    "error": "Unchanged NRX ABI limit: at most 1024 vertices / 2048 triangles; this owner requires a separate extension"
+  }
+]

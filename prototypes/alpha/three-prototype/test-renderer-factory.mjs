@@ -1,0 +1,16 @@
+import assert from 'node:assert/strict';
+import {createSingleFlightRendererFactory} from './src/renderer-factory.js';
+let created=0,disposed=0,release;
+const canvas={};
+const make=createSingleFlightRendererFactory(async()=>{created++;await new Promise(r=>release=r);return {dispose(){disposed++}}});
+const a=make({canvas}), b=make({canvas});
+await Promise.resolve();
+assert.equal(created,1,'concurrent configurations for one canvas must share one initialization');
+release();const first=await a;assert.equal(await b,first);
+first.dispose();assert.equal(disposed,1);
+let nextRelease;const makeOther=createSingleFlightRendererFactory(async()=>({dispose(){},marker:++created}));
+const after=await makeOther({canvas});assert.notEqual(after,first);
+let attempts=0;const retry=createSingleFlightRendererFactory(async()=>{if(++attempts===1)throw Error('initialization failed');return {dispose(){}}});
+await assert.rejects(retry({canvas}),/initialization failed/);await retry({canvas});assert.equal(attempts,2,'failed initialization must be retryable');
+let immediate=0;const remount=createSingleFlightRendererFactory(async()=>({dispose(){},id:++immediate}));const one=await remount({canvas});one.dispose();const two=await remount({canvas});assert.notEqual(two,one,'disposed canvas must admit a fresh renderer');
+console.log('PASS renderer single-flight, failure retry, and remount');

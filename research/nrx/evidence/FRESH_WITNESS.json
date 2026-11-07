@@ -1,0 +1,235 @@
+{
+  "status": "PASS",
+  "viewport": {
+    "width": 2040,
+    "height": 1020,
+    "dpr": 1.25,
+    "visualScale": 1,
+    "screenWidth": 2048,
+    "screenHeight": 1152
+  },
+  "browser": {
+    "protocolVersion": "1.3",
+    "product": "Edg/156.0.4314.58",
+    "revision": "@7806b68d20d1c1273d5b07b4f4de18e8f5852581",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36 Edg/156.0.0.0",
+    "jsVersion": "15.6.12.10"
+  },
+  "studyReadyMs": 1819,
+  "bothReadyMs": 5173,
+  "pick": {
+    "acquired": {
+      "semanticId": "lesion.lung.mass.001",
+      "index": [
+        71,
+        317,
+        344
+      ],
+      "patientMm": [
+        49.892578125,
+        -101.244140625,
+        279.5
+      ],
+      "worldM": [
+        0.049892570823431015,
+        0.27950000250712037,
+        -0.1012441529892385
+      ],
+      "maskMembership": 1,
+      "ctSop": "1.3.6.1.4.1.14519.5.2.1.4320.7007.423236927069360539700983049427",
+      "segSop": "1.2.276.0.7230010.3.1.4.0.12158.1415315114.303389"
+    },
+    "reference": {
+      "triangle": 1093,
+      "point": [
+        0.0045804868089253875,
+        0.10057237296782673,
+        -0.4417781760973183
+      ],
+      "barycentric": [
+        0.49728675976536313,
+        0.12583004961973823,
+        0.37688319061489867
+      ],
+      "pixel": [
+        256,
+        256
+      ],
+      "semanticId": "VH_F_right_ovary",
+      "sourceM": [
+        -0.07052102669641902,
+        0.061807021504200726,
+        -0.04947664537696353
+      ],
+      "sourceGlb": "a61a60841fd3c8308d332421385be03188c0babd58b78ae101adf2807a88473a",
+      "fieldRevision": 2
+    }
+  },
+  "after": {
+    "study": {
+      "live": 0,
+      "bridge": 0,
+      "pending": 0,
+      "created": 8,
+      "destroyed": 8,
+      "errors": []
+    },
+    "anatomy": {
+      "live": 0,
+      "bridge": 0,
+      "pending": 0,
+      "created": 15,
+      "destroyed": 15,
+      "errors": []
+    }
+  },
+  "completedUtc": "2026-11-06T13:56:10.149Z",
+  "adapterEvidence": {
+    "study": [
+      {
+        "info": {
+          "vendor": "amd",
+          "architecture": "rdna-3",
+          "isFallbackAdapter": false
+        },
+        "features": [
+          "depth32float-stencil8",
+          "rg11b10ufloat-renderable",
+          "bgra8unorm-storage",
+          "texture-formats-tier1",
+          "texture-compression-bc",
+          "dual-source-blending",
+          "core-features-and-limits",
+          "float32-filterable",
+          "indirect-first-instance",
+          "float32-blendable",
+          "subgroup-size-control",
+          "texture-compression-unaligned",
+          "depth-clip-control",
+          "texture-compression-bc-sliced-3d",
+          "texture-formats-tier2",
+          "clip-distances",
+          "timestamp-query",
+          "shader-f16",
+          "primitive-index",
+          "texture-component-swizzle",
+          "subgroups"
+        ]
+      }
+    ],
+    "anatomy": [
+      {
+        "info": {
+          "vendor": "amd",
+          "architecture": "rdna-3",
+          "isFallbackAdapter": false
+        },
+        "features": [
+          "depth32float-stencil8",
+          "rg11b10ufloat-renderable",
+          "texture-formats-tier1",
+          "bgra8unorm-storage",
+          "texture-compression-bc",
+          "dual-source-blending",
+          "core-features-and-limits",
+          "float32-filterable",
+          "indirect-first-instance",
+          "float32-blendable",
+          "subgroup-size-control",
+          "texture-compression-unaligned",
+          "depth-clip-control",
+          "texture-compression-bc-sliced-3d",
+          "texture-formats-tier2",
+          "timestamp-query",
+          "shader-f16",
+          "clip-distances",
+          "primitive-index",
+          "texture-component-swizzle",
+          "subgroups"
+        ]
+      },
+      {
+        "info": {
+          "vendor": "amd",
+          "architecture": "rdna-3",
+          "isFallbackAdapter": false
+        },
+        "features": [
+          "depth32float-stencil8",
+          "rg11b10ufloat-renderable",
+          "texture-formats-tier1",
+          "bgra8unorm-storage",
+          "texture-compression-bc",
+          "dual-source-blending",
+          "core-features-and-limits",
+          "float32-filterable",
+          "indirect-first-instance",
+          "float32-blendable",
+          "subgroup-size-control",
+          "texture-compression-unaligned",
+          "depth-clip-control",
+          "texture-compression-bc-sliced-3d",
+          "texture-formats-tier2",
+          "timestamp-query",
+          "shader-f16",
+          "clip-distances",
+          "primitive-index",
+          "texture-component-swizzle",
+          "subgroups"
+        ]
+      },
+      {
+        "info": {
+          "vendor": "amd",
+          "architecture": "rdna-3",
+          "isFallbackAdapter": false
+        },
+        "features": [
+          "depth32float-stencil8",
+          "rg11b10ufloat-renderable",
+          "bgra8unorm-storage",
+          "texture-formats-tier1",
+          "texture-compression-bc",
+          "dual-source-blending",
+          "core-features-and-limits",
+          "float32-filterable",
+          "indirect-first-instance",
+          "float32-blendable",
+          "subgroup-size-control",
+          "texture-compression-unaligned",
+          "depth-clip-control",
+          "texture-compression-bc-sliced-3d",
+          "texture-formats-tier2",
+          "clip-distances",
+          "timestamp-query",
+          "shader-f16",
+          "primitive-index",
+          "texture-component-swizzle",
+          "subgroups"
+        ]
+      }
+    ]
+  },
+  "hardware": [
+    {
+      "vendorId": 4098,
+      "deviceId": 29772,
+      "subSysId": 2030378670,
+      "revision": 204,
+      "vendorString": "",
+      "deviceString": "AMD Radeon RX 7900 XT",
+      "driverVendor": "AMD",
+      "driverVersion": "32.0.32015.7029"
+    },
+    {
+      "vendorId": 5140,
+      "deviceId": 140,
+      "subSysId": 0,
+      "revision": 0,
+      "vendorString": "",
+      "deviceString": "Microsoft Basic Render Driver",
+      "driverVendor": "",
+      "driverVersion": "10.0.26100.9711"
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+/* Organ explorer: presentation only; CT canvases retain opaque evidence backgrounds. */
+.center{background:radial-gradient(ellipse at 50% 90%,#123145 0%,#06141f 35%,#030a10 76%)}
+.section-eyebrow{font-size:10px;letter-spacing:.15em;color:#66cee9;margin-bottom:5px}
+.organ-controls h2{font-size:18px;margin:2px 0 8px}
+.organ-controls p{font-size:12px;line-height:1.5;color:#aac4d5}
+.organ-controls label{display:block;font-size:12px;margin:12px 0 5px}
+.organ-controls output{float:right;color:#a7e7fa}
+.organ-controls input[type=range]{width:100%;accent-color:#38c8ed}
+.organ-controls small{display:block;font-size:11px;line-height:1.5;color:#a6bece}
+.restore-assembly{width:100%;margin-top:12px}
+.reference-inspector .system-list{max-height:29vh}
+.right{scrollbar-gutter:stable}
+.organ-controls{background:linear-gradient(125deg,#0b2230ed,#091421f2);box-shadow:inset 0 1px #72ddff12}
+
+.volume-controls{display:grid;gap:8px}.volume-controls label{display:block}.volume-controls input[type=checkbox]{width:auto;margin-right:8px}.volume-controls input[type=range]{display:block;width:100%}

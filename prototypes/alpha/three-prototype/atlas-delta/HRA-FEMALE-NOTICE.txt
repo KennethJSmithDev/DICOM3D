@@ -1,0 +1,14 @@
+Human Reference Atlas / HuBMAP — female united reference v1.5
+Source entry: https://3d.nih.gov/entries/3DPX-020992/2
+Source reference: https://purl.humanatlas.io/ref-organ/united-female/v1.5
+Creators: Kristen Browne; Heidi Schlehlein. Human Reference Atlas / HuBMAP.
+License: Creative Commons Attribution 4.0 International (CC BY 4.0)
+https://creativecommons.org/licenses/by/4.0/
+The NIH entry explicitly labels this model CC-BY and links the 4.0 license.
+Original GLB retrieved from the HRA CDN linked to the same female-united reference.
+Original SHA-256: 472567a56896b9b7890508da6501fbf858e56aaa30745365f7a71ade782b529c
+Courtesy of the U.S. National Library of Medicine. Visible Human Dataset source per NIH entry; no endorsement implied.
+Changes: named source-subtree subset, compacted accessor storage, two-sided display and translucent skin material. Source position/normal/color/index payload values preserved. No reconstruction, resampling, smoothing or patient registration.
+Includes source female skin, organs and partial skeleton, not exhaustive anatomy. Excludes pregnancy, Allen-brain and Yao assemblies. Native source names remain identities; no unverified ontology mappings claimed.
+This asset license is separate from DICOM3D software's Apache-2.0 license. Preserve attribution, source, license link and indication of changes on redistribution.
+Skin vertex tint is omitted in the derived presentation so a uniform translucent cyan material remains legible. Source position/normal/index payloads are unchanged.

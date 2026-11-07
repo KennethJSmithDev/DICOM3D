@@ -1,0 +1,18 @@
+import assert from 'node:assert/strict';
+import {buildLearnContext} from './src/learn-context.mjs';
+const manifest={reference:{id:'male-test'},structure:{semantic_id:'reference'},provenance:{license:'recorded terms',copyright:'Source author',source_url:'https://example.org/source'}};
+const index={structures:[{id:'FMA7309',label:'Right Lung',bundleId:'thorax',systems:['respiratory system']}],hierarchy:[{id:'related',label:'Source relation',owner_ids:['FMA7309'],ownership_scope:'INDIRECT',relation:'part_of'}]};
+const base={index,selected:'FMA7309',bundles:new Map([['thorax',{manifest}]]),heldCount:416};
+let result=buildLearnContext(base);assert.equal(result.kind,'reference');assert.match(result.title,/Right Lung/);assert.equal(result.relationships[0].scope,'Represented through existing geometry');assert.ok(result.cards.some(c=>c.body.includes('416')));assert.equal(result.sourceRows.find(r=>r.label==='Geometry').value,'Loaded');
+result=buildLearnContext({...base,bundles:new Map()});assert.equal(result.sourceRows.find(r=>r.label==='Geometry').value,'Not loaded');
+result=buildLearnContext({...base,femaleActive:true,femaleSelected:'VH_F_capsule',femaleData:{manifest,index:{structures:[{id:'VH_F_capsule',label:'Kidney capsule'}],hierarchy:[],held:[{}]}}});assert.match(result.title,/Kidney capsule/);assert.ok(result.cards.some(c=>c.body.includes('not a whole-organ segmentation')));assert.ok(!result.cards.some(c=>c.body.includes('416')));
+const binding={semanticId:'lesion.lung.mass.001',segment:1,algorithm:'source algorithm',label:'source lesion',segSop:'seg-public',maskVolumeMm3:12.25,basis:'source geometry',frames:[{ct_k:5,ct_sop_uid:'ct-public',seg_frame_number:1,nonzero_voxels:0}]};
+const study={binding,pixels:new Uint16Array(1),ctReceipt:{volume:{shape_k_row_column:[103,512,512],npy_sha256:'hash'}},manifest:{provenance:{license:'input terms'}},noticeUrl:'https://example.org/notice'};
+result=buildLearnContext({studyView:true,study,studyFrame:5,derivedMode:'nrx',derivedInfo:{status:'ready'},lesionSelected:true,studySeg:false,wipe:true});assert.equal(result.kind,'h000');assert.ok(result.cards.some(c=>c.body.includes('does not intersect')));assert.ok(result.cards.some(c=>c.body.includes('overlay is currently hidden')));assert.ok(result.cards.some(c=>c.body.includes('not a new whole-lung')));assert.ok(result.cards.some(c=>c.title==='Linked reference comparison'));assert.equal(result.sourceRows.find(r=>r.label==='Mask voxels on this frame').value,'0');
+// A local context must never reuse the previously active public SEG or expose private identity fields.
+result=buildLearnContext({localMode:true,localStudy:{descriptor:{shape:[50,256,256],PatientName:'SECRET',sop:'PRIVATE'}},study,studyView:true,showStack:true});assert.equal(result.kind,'local');assert.doesNotMatch(JSON.stringify(result),/SECRET|PRIVATE|seg-public|ct-public/);assert.ok(result.cards.some(c=>c.body.includes('No source SEG')));
+result=buildLearnContext({imagingOpen:true});assert.equal(result.kind,'empty-imaging');assert.ok(result.cards.length>0);
+result=buildLearnContext({nrx:true});assert.equal(result.kind,'nrx');assert.ok(result.cards.some(c=>c.body.includes('independent')));
+result=buildLearnContext({...base,bundles:new Map([['thorax',{manifest:{...manifest,provenance:{source_url:'javascript:alert(1)'}}}]])});assert.ok(!result.links.some(l=>l.href?.startsWith('javascript:')));
+result=buildLearnContext();assert.match(result.title,/male/);assert.ok(result.cards.length>0);
+console.log('PASS: 25 contextual Learn assertions; source switching, indirect ownership, capsule scope, nonintersecting SEG, local privacy and safe source links.');

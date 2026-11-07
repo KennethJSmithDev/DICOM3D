@@ -1,0 +1,17 @@
+{
+  "id": "female-reproductive-delta",
+  "url": "female-reproductive-delta.glb",
+  "sha256": "8902e11a7487e021ef88c73201178b00d2dfac384a4d91f9737d3ca4f8eea812",
+  "byteLength": 2596748,
+  "manifestUrl": "female-reproductive-delta.manifest.json",
+  "manifestSha256": "9a5b53500ac94ea36349d1dd6f9c9408d06709bd4ecab1f74df0840126dfd1b7",
+  "structureIds": [
+    "VH_F_urinary_bladder",
+    "VH_F_uterus",
+    "VH_F_left_ovary",
+    "VH_F_right_ovary",
+    "VH_F_fallopian_tube_L",
+    "VH_F_fallopian_tube_R",
+    "VH_F_vagina"
+  ]
+}

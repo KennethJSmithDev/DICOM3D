@@ -1,0 +1,42 @@
+[
+  {
+    "path": "adapter.cpp",
+    "bytes": 1834,
+    "sha256": "7aead6280ad01732acb8ac411a312f2101087626a95210153148139013c23b15"
+  },
+  {
+    "path": "nrx-h000.js",
+    "bytes": 2634,
+    "sha256": "001af230aa96e955d88f697c0914cac576af554f568cc51be6a6cc1ba54f64ae"
+  },
+  {
+    "path": "nrx-runtime.mjs",
+    "bytes": 14956,
+    "sha256": "e747469cff18919345a42287861a712a358c202ab6c1e2a93d68a84d7708d252"
+  },
+  {
+    "path": "nrx-runtime.wasm",
+    "bytes": 69914,
+    "sha256": "ed4e5444ec1374168fd2f9e7866b8790d0e82372acaaa1cea864419e0749227a"
+  },
+  {
+    "path": "nrx-worker.js",
+    "bytes": 2005,
+    "sha256": "c467f86f1cdbdd895be3236339cafcab582afc67dc56b8c300645306170f8e5e"
+  },
+  {
+    "path": "runtime.mjs",
+    "bytes": 1199,
+    "sha256": "ca7205653bcaeb2fb0fc187ab7ead75d4b2d91c0d4192f2d69fe2b7caaf39658"
+  },
+  {
+    "path": "scalar.mjs",
+    "bytes": 3093,
+    "sha256": "b98fb31c6050fa18852e6a7d0801b1ae9fd3ffdc82b47763e545b6b11999e814"
+  },
+  {
+    "path": "test-nrx.mjs",
+    "bytes": 2481,
+    "sha256": "be13ad1b57cce4d8491913da53aa662784a0fe137b3ca6820da3bed00ea6e023"
+  }
+]

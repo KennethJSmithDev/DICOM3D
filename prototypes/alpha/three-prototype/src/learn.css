@@ -1,0 +1,31 @@
+.learn-panel { border-color: #28718b; background: #081a27; scroll-margin-top: 8px; }
+.learn-heading { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; }
+.learn-heading h2 { margin: 6px 0; }
+.learn-heading button { flex: 0 0 auto; min-width: 34px; min-height: 34px; font-size: 20px; }
+.learn-context { color: #b7d7e5; font-size: 12px; }
+.learn-tabs { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 5px; margin: 12px 0; }
+.learn-tabs button { min-height: 36px; padding: 6px; font-size: 12px; }
+.learn-tabs button[aria-pressed="true"] { background: #10405a; border-color: #42cef1; color: #f3fbff; }
+.learn-lessons article { padding: 11px 0; border-bottom: 1px solid #1d394b; }
+.learn-lessons h3 { margin: 0 0 7px; font-size: 13px; color: #e0f2fb; }
+.learn-lessons p, .learn-sources p { font-size: 12px; line-height: 1.6; margin: 0; color: #c0d8e5; }
+.learn-sources dt { margin: 12px 0 3px; font-size: 11px; color: #83bfd6; }
+.learn-sources dd { margin: 0; overflow-wrap: anywhere; font-size: 12px; line-height: 1.5; color: #e0edf4; }
+.learn-sources details { margin: 14px 0; }
+.learn-sources details p { margin: 10px 0; }
+.learn-links { display: flex; flex-direction: column; gap: 8px; margin-top: 16px; font-size: 12px; }
+.learn-links a { color: #71dcf7; text-underline-offset: 3px; }
+.learn-panel :focus-visible { outline: 2px solid #71dcf7; outline-offset: 3px; }
+.learn-intro { font-size: 14px; line-height: 1.55; color: #edf8ff; }
+.learn-follows { font-size: 12px; line-height: 1.5; color: #b7d7e5; }
+.learn-actions { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 7px; margin: 14px 0; }
+.learn-actions button { min-height: 40px; white-space: normal; line-height: 1.35; }
+.learn-glossary { margin: 16px 0; border: 1px solid #29495c; border-radius: 5px; padding: 10px; }
+.learn-glossary summary { cursor: pointer; color: #d8f3ff; font-size: 13px; }
+.learn-glossary dt { margin-top: 12px; color: #d8f3ff; font-weight: 600; font-size: 12px; }
+.learn-glossary dd { margin: 4px 0 0; color: #c0d8e5; font-size: 12px; line-height: 1.6; }
+.learn-check { min-width: 0; margin: 18px 0 0; padding: 12px; border: 1px solid #29495c; border-radius: 5px; }
+.learn-check legend { color: #d8f3ff; font-size: 12px; padding: 0 5px; }
+.learn-check p { color: #c0d8e5; font-size: 12px; line-height: 1.6; }
+.learn-check button { display: block; width: 100%; margin: 6px 0; min-height: 38px; white-space: normal; }
+.learn-check button[aria-pressed="true"] { border-color: #71dcf7; background: #10405a; }

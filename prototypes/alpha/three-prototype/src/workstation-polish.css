@@ -1,0 +1,177 @@
+/* Private research workstation polish. Presentation only: does not restyle CT pixels,
+   alter WebGPU canvas contents, or change source/coordinate state. */
+:root {
+  --work-bg: #06111d;
+  --work-shell: #081a29;
+  --work-panel: #081923;
+  --work-panel-deep: #06131e;
+  --work-border: #1d4a61;
+  --work-border-active: #00a5d8;
+  --work-text: #e3eef6;
+  --work-muted: #a8c2d4;
+  --work-accent: #57d8fa;
+  --work-control: #0c2535;
+  --work-focus: #82e1ff;
+  font-family: 'Segoe UI', system-ui, sans-serif;
+  color: var(--work-text);
+  background: var(--work-bg);
+}
+body { background: radial-gradient(ellipse at 48% -25%, #1b1a37 0%, var(--work-bg) 53%); }
+header {
+  height: 60px;
+  padding: 0 20px;
+  background: linear-gradient(100deg, #091c2a 0%, #0b1423 48%, #071725 100%);
+  border-bottom: 1px solid #1b4055;
+  box-shadow: 0 3px 18px #0007;
+}
+.brand b { font-size: 22px; letter-spacing: -.035em; }
+.brand span { color: #38d1f5; }
+.brand small { color: #9cb9cb; letter-spacing: .12em; }
+nav { gap: 18px; }
+nav strong {
+  font-size: 11px;
+  letter-spacing: .08em;
+  color: #9fe5fa;
+  border: 1px solid #21506a;
+  border-radius: 5px;
+  background: #091e2c;
+  padding: 8px 11px;
+}
+.notice { color: #a6bfce; }
+main {
+  grid-template-columns: 68px minmax(270px, 24%) minmax(430px, 1fr) minmax(270px, 21%);
+  gap: 10px;
+  height: calc(100vh - 99px);
+  padding-top: 9px;
+  background: linear-gradient(125deg, #071723 0%, #07121f 58%, #11162a 100%);
+}
+.rail { gap: 13px; padding: 2px 5px; }
+.rail a, .rail button, .rail span {
+  width: 58px;
+  min-height: 62px;
+  display: grid;
+  place-content: center;
+  gap: 2px;
+  color: #8fc6e1;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  text-decoration: none;
+}
+.rail a:hover, .rail a:focus-visible, .rail button:hover, .rail button:focus-visible {
+  color: #d9f5ff;
+  background: linear-gradient(155deg, #10527a, #07334e);
+  border-color: #079bcc;
+  box-shadow: inset 0 1px #85e7ff33, 0 0 14px #00b5e525;
+}
+.rail a small, .rail button small, .rail span small { color: inherit; font-size: 10px; }
+.rail span { opacity: .5; }
+.left, .right { gap: 9px; padding: 0 0 8px; scrollbar-color: #315e75 #06131f; }
+.panel, .imaging-panel {
+  background: linear-gradient(145deg, #0b1d2c 0%, #081621 78%);
+  border: 1px solid var(--work-border);
+  border-radius: 8px;
+  box-shadow: inset 0 1px #b4eeff0b, 0 5px 15px #01060b40;
+  padding: 13px;
+}
+.panel h2, .imaging-panel h2 { font-size: 15px; color: #e2edf5; margin: 0 0 8px; }
+.panel p, .imaging-panel p { color: var(--work-muted); font-size: 12px; line-height: 1.45; }
+.panel small, .imaging-panel small { color: #a8c4d5; }
+.panel summary { color: #daecf6; cursor: pointer; }
+.panel button, .imaging-panel button, .canvas-actions button {
+  background: linear-gradient(#102d40, #0a1f2e);
+  border-color: #28586d;
+  color: #e0edf5;
+  border-radius: 6px;
+  min-height: 32px;
+}
+button:hover:not(:disabled), button:focus-visible {
+  color: #effbff;
+  border-color: #12bce9;
+  background: linear-gradient(#126287, #0a3b5a);
+  box-shadow: inset 0 1px #a7f1ff4d, 0 0 12px #13b8dc2e;
+}
+button:disabled { opacity: .46; }
+input:not([type=range]):not([type=checkbox]), select {
+  color: #dbeaf4;
+  background: #091a28;
+  border-color: #28566b;
+  border-radius: 5px;
+}
+input[type=range] { accent-color: #35c7e8; }
+button:focus-visible, input:focus-visible, select:focus-visible, summary:focus-visible, a:focus-visible {
+  outline: 2px solid var(--work-focus);
+  outline-offset: 2px;
+}
+.selected { border-color: #24546a; background: #091b29; }
+.bundle-list { scrollbar-color: #315e75 #06131f; }
+.bundle { border-color: #183c50; }
+.center {
+  border: 1px solid #246785;
+  border-radius: 8px;
+  background: #030b12;
+  box-shadow: inset 0 1px #85e7ff1a, 0 0 12px #00c6ff0d;
+}
+.canvas-title { top: 15px; left: 16px; text-shadow: 0 1px 3px #000; }
+.canvas-title b { color: #d6edf7; }
+.canvas-title small { color: #a9c9d8; }
+.canvas-actions { background: #071722dc; border: 1px solid #1a3d4d; }
+.imaging-panel canvas { background: #000; image-rendering: auto; }
+/* The SEG overlay must not hide the acquired image beneath it. */
+.imaging-panel canvas[aria-label="Source segmentation overlay"] { background: transparent; }
+/* Concept-inspired shell: keep the acquired-image canvas opaque and unfiltered. */
+header {
+  background: radial-gradient(ellipse at 35% -85%, #503264 0%, transparent 35%),
+    linear-gradient(105deg, #071b2a 0%, #0b1425 54%, #071726 100%);
+}
+main {
+  background: radial-gradient(ellipse at 76% 110%, #261c42 0%, transparent 35%),
+    linear-gradient(125deg, #092034 0%, #071421 60%, #10182d 100%);
+}
+.rail { background: linear-gradient(180deg, #0a2337, #0a1c30 70%, #111c32); border-right: 1px solid #183b53; }
+.rail a { transition: border-color .18s, background .18s, box-shadow .18s; }
+main.reference-only .rail a[href="#viewer"], main:not(.reference-only) .rail a[href="#imaging"] {
+  color: #dff8ff; border-color: #04aee6;
+  background: linear-gradient(160deg, #0d5785, #07314f);
+  box-shadow: inset 0 1px #9beaff55, 0 0 16px #02aeec36;
+}
+.panel, .imaging-panel {
+  background: linear-gradient(150deg, #0c2032ed, #071522f5 75%);
+  border-color: #20516c;
+  box-shadow: inset 0 1px #b6ecff12, 0 5px 18px #0008;
+}
+.center { border-color: #28728f; box-shadow: inset 0 0 26px #00668b12, 0 0 12px #00bce722; }
+main.reference-only .center::after {
+  content: ''; position: absolute; inset: 0; pointer-events: none; z-index: 0;
+  background: radial-gradient(ellipse 42% 18% at 50% 96%, #0873a326, transparent 75%);
+}
+.reference-inspector .inspector-tabs button[aria-pressed=true] {
+  background: linear-gradient(#0877a9, #08466f); border-color: #10c3f5;
+  box-shadow: inset 0 1px #bcf5ff55, 0 0 12px #00bff433;
+}
+footer {
+  height: 39px;
+  background: linear-gradient(100deg,#071a28,#0a1425 66%,#111b31);
+  border-top: 1px solid #1e455b;
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { scroll-behavior: auto !important; transition-duration: 0s !important; }
+}
+
+/* Concept composition: one desktop grid owner, internal panel scrolling. */
+main,main.reference-only { min-width:1280px; grid-template-columns:68px minmax(280px,24%) minmax(430px,1fr) minmax(290px,21%);height:calc(100vh - 99px);min-height:580px; }
+main.reference-only .left{display:flex}.panel{padding:12px}.reference-brief button{display:block;width:100%}.left a{color:#73d8f1}
+.presentation-nav{gap:8px}.presentation-nav button{min-height:38px;padding:7px 18px;background:#071521;border-color:#20465b}.presentation-nav button[aria-pressed=true]{background:linear-gradient(#105e82,#073047);border-color:#13c1ef;box-shadow:inset 0 1px #9fecff4a,0 0 14px #02a8e52a}
+.reference-inspector .system-list{max-height:36vh}.reference-inspector .system-group{position:relative}.reference-inspector .system-group>label{position:absolute;right:2px;top:9px;width:22px;overflow:hidden;white-space:nowrap;font-size:0;padding:0}.reference-inspector .system-group>label input{width:15px;height:15px}.reference-inspector .system-toggle{padding-right:26px;margin:0;min-height:36px}.reference-inspector .system-toggle small{display:none}.reference-inspector .system-group>label:focus-within{outline:2px solid var(--work-focus)}
+.right>.panel:first-child>button{width:auto}.right>.panel:first-child{flex-shrink:0}.reference-inspector,.panel{flex-shrink:0}
+.intro-status{position:absolute;z-index:5;bottom:70px;left:50%;transform:translateX(-50%);display:flex;align-items:center;gap:14px;padding:10px 14px;border:1px solid #166886;border-radius:8px;background:#061a29ed;color:#b9ecfa;font-size:12px;white-space:nowrap}
+.reference-wipe{position:absolute;inset:0;z-index:2;background:#040e18}.comparison-label{position:absolute;top:18px;right:15px;font-size:11px;color:#c6eafa;pointer-events:none}.wipe-divider{position:absolute;top:0;bottom:0;width:2px;background:#59d3f2;z-index:3;pointer-events:none;box-shadow:0 0 12px #21befa55}.comparison-tools{position:absolute;bottom:65px;left:15px;right:15px;z-index:4;display:flex;align-items:center;gap:15px;background:#061724f5;border:1px solid #245774;padding:8px;border-radius:7px;font-size:11px}.comparison-tools label{flex:1}.comparison-tools input{display:block}.reference-disclosure{position:absolute;bottom:100%;left:0;right:0;max-height:50vh;overflow:auto;padding:15px;background:#071724;border:1px solid #326e89;border-radius:6px}.reference-disclosure ul{columns:2;padding-left:18px}.reference-disclosure small{color:#86a9be}.canvas-actions{z-index:5}
+
+/* The comparison is a visual projection of the primary camera. R3F sets inline pointer-events:auto; descendants must pass navigation through to the owned primary canvas. Inspector controls are outside this surface. */
+.reference-wipe, .reference-wipe * { pointer-events: none !important; }
+/* Compact comparison workflow; keep manual alignment and diagnostics available on demand. */
+.comparison-inspector{display:grid;gap:10px}.comparison-hint{font-size:12px;line-height:1.5;color:#b9d7e5;margin:0}.comparison-actions{display:flex;gap:8px}.comparison-actions button{flex:1}.comparison-actions .reveal-lesion{background:linear-gradient(#09638b,#08364e);border-color:#20b9de;color:#e4faff}.comparison-inspector label{display:block;font-size:12px}.comparison-inspector input[type=range]{width:100%;margin:8px 0}.comparison-inspector output{float:right;color:#71d7ec}.comparison-selection{padding:10px;border:1px solid #21485d;border-radius:6px;background:#061723}.comparison-selection select{width:100%;max-width:100%;font-size:12px}.comparison-selection button{font-size:12px;padding:7px;margin-top:7px}.comparison-boundary{font-size:11px;color:#9bbfce;margin:0}.comparison-advanced{border-top:1px solid #214052;padding-top:10px}.comparison-advanced summary,.volume-controls summary{cursor:pointer;font-size:12px;color:#b4d7e5;padding:5px 0}.comparison-advanced input[type=number]{font-size:12px;min-width:0}.comparison-inspector :focus-visible{outline:2px solid #65dbf3;outline-offset:2px}.volume-controls{font-size:12px}.volume-controls h2{margin-bottom:5px}
+
+.rail button { background:transparent; padding:6px 4px; font-size:23px; }
+#organ-controls:focus, #female-controls:focus, #volume-controls:focus, #comparison-controls:focus { outline:2px solid #32caef; outline-offset:-2px; }
+
+.presentation-lab label{display:block;margin:10px 0}.presentation-lab input[type=checkbox]{width:auto}.intro-status{max-width:90%;gap:12px}.intro-status span{overflow-wrap:anywhere}
