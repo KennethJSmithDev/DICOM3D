@@ -1,1 +1,0 @@
-var e=globalThis.GPUTextureUsage,t=globalThis.GPUBufferUsage,n=globalThis.GPUShaderStage,r=globalThis.GPUColorWrite;export{e as i,r as n,n as r,t};

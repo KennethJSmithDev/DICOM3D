@@ -9,6 +9,10 @@ reference/public/demo/h000/source-binding.json -text
 reference/public/demo/h000/NOTICE.md -text
 # Generated frontend bytes own hashed filenames, manifests and native entry identity.
 public/** -text whitespace=cr-at-eol
+# Generated shader strings and publisher notices retain their exact whitespace.
+public/assets/** -text -whitespace
+third-party/alpha/** -text -whitespace
+prototypes/alpha/viewer/src/public-research-loader.ts -text whitespace=cr-at-eol
 module.xml text eol=lf
 src/DICOM3D/Entry.cls text eol=lf
 src/DICOM3D/Health.cls text eol=lf

@@ -1,1 +1,0 @@
-function e(e,t){return Math.ceil(e/t)*t}export{e as t};

@@ -1,26 +1,24 @@
-# Offline distribution qualification: --build-context npmcache=<verified npm cache>
-# Core only: no IRIS, credentials, patient studies or host bind mounts.
+# Offline: --build-context npmcache=<verified lockfile-pinned cache>
+# Three/R3F alpha Core. Fixed public H000 only; no private studies or credentials.
 FROM node:24-alpine@sha256:44fce696f38ba8c987c4db89954051000bbd05ffd8d8659ba15ed4a8602e937f AS build
-WORKDIR /build/viewer
-COPY viewer/package.json viewer/package-lock.json ./
+WORKDIR /build/prototypes/alpha/three-prototype
+COPY prototypes/alpha/three-prototype/package.json prototypes/alpha/three-prototype/package-lock.json ./
 COPY --from=npmcache / /root/.npm/
 RUN npm ci --offline --no-audit --no-fund
-COPY viewer/ ./
-COPY reference/public/ /build/reference/public/
-COPY assets/ /build/assets/
-COPY scripts/build-demo.mjs scripts/test-demo.mjs /build/scripts/
-COPY LICENSE NOTICE /build/
-COPY third-party/ /build/third-party/
-# Use the accepted visual entry and exact data admission for both installation hosts.
-RUN node /build/scripts/build-demo.mjs --base /dicom3d/ --out-dir /out \
- && node /build/scripts/test-demo.mjs --base /dicom3d/ --out-dir /out
+WORKDIR /build
+COPY prototypes/alpha/three-prototype/ ./prototypes/alpha/three-prototype/
+COPY prototypes/alpha/viewer/src/ ./prototypes/alpha/viewer/src/
+COPY reference/public/demo/h000/ ./reference/public/demo/h000/
+COPY scripts/build-alpha-distribution.mjs scripts/test-alpha-distribution.mjs ./scripts/
+COPY LICENSE NOTICE distribution-manifest.json ./
+COPY third-party/ ./third-party/
+ARG SOURCE_COMMIT=SOURCE_IDENTIFIED_BY_PACKAGE_INVENTORY
+RUN node scripts/build-alpha-distribution.mjs /out "$SOURCE_COMMIT" \
+ && node scripts/test-alpha-distribution.mjs /out
 
 FROM node:24-alpine@sha256:44fce696f38ba8c987c4db89954051000bbd05ffd8d8659ba15ed4a8602e937f
 WORKDIR /app
 COPY --from=build /out/ ./public/
-COPY LICENSE NOTICE ./public/
-COPY third-party/ ./public/third-party/
-COPY distribution-manifest.json ./public/distribution-manifest.json
 COPY docker/core/server.mjs ./server.mjs
 USER node
 EXPOSE 8080

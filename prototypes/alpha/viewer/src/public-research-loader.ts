@@ -32,7 +32,9 @@ export async function loadPublicResearchFixture(base: string, signal?: AbortSign
     const start = performance.now();
     try {
       const response = await fetch(urls[key], {
-        credentials: 'omit', redirect: 'error', cache: 'no-store', signal: controller.signal,
+        // Only the fixed, same-origin URLs above may receive the viewer's session.
+        // Native IPM serves these assets behind the same authentication as the UI.
+        credentials: 'same-origin', redirect: 'error', cache: 'no-store', signal: controller.signal,
       });
       if (!response.ok || response.url !== urls[key]) throw Error(`${asset.filename}: unexpected asset response`);
       // Fetch exposes transport-decoded bytes. Their exact file identity is authoritative,

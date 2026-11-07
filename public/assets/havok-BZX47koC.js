@@ -1,1 +1,0 @@
-var e={STATIC:0,ANIMATED:1,DYNAMIC:2},t={DISABLED:0,TELEPORT:1,ACTION:2};export{t as n,e as t};

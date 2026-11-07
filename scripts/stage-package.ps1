@@ -10,9 +10,9 @@ New-Item -ItemType Directory -Path $OutputDirectory | Out-Null
 $publicRoot = Join-Path $OutputDirectory 'public'
 Push-Location $root
 try {
-  & node scripts/build-demo.mjs --base /dicom3d/ --out-dir $publicRoot
+  & node scripts/build-alpha-distribution.mjs $publicRoot $SourceCommit
   if ($LASTEXITCODE) { throw 'Viewer build failed' }
-  & node scripts/test-demo.mjs --base /dicom3d/ --out-dir $publicRoot
+  & node scripts/test-alpha-distribution.mjs $publicRoot
   if ($LASTEXITCODE) { throw 'Frontend admission failed' }
 } finally { Pop-Location }
 Copy-Item (Join-Path $root 'src') $OutputDirectory -Recurse
@@ -49,7 +49,7 @@ Copy-Item (Join-Path $root 'LICENSE') $OutputDirectory
 Copy-Item (Join-Path $root 'NOTICE') $OutputDirectory
 Copy-Item (Join-Path $root 'third-party') $OutputDirectory -Recurse
 New-Item -ItemType Directory -Path (Join-Path $OutputDirectory 'docs') | Out-Null
-foreach ($name in @('INSTALL_060.md','PACKAGING_060.md','IRIS_FILECOPY_RETIREMENT_051.md')) {
+foreach ($name in @('INSTALL_070_ALPHA.md','PACKAGING_070_ALPHA.md','IRIS_FILECOPY_RETIREMENT_051.md')) {
   Copy-Item (Join-Path $root ('docs/'+$name)) (Join-Path $OutputDirectory 'docs')
 }
 $fileInventory = [ordered]@{}
@@ -58,10 +58,10 @@ Get-ChildItem $OutputDirectory -File -Recurse | Sort-Object FullName | ForEach-O
   $fileInventory[$name] = [ordered]@{ bytes=$_.Length; sha256=(Get-FileHash -LiteralPath $_.FullName -Algorithm SHA256).Hash.ToLower() }
 }
 $packageIdentity = [ordered]@{
-  product='DICOM3D'; version='0.6.5'; distribution='IRIS/IPM'; sourceCommit=$SourceCommit
-  publishedWebCommit='d3490dd659e19e44b8800abe87bbc626f45350a2'
-  originalTag='v0.6.0'; originalTagContainsInstallationCompletion=$false
-  frontendHtmlSha256=$viewerBuild; patientDerivedResearchData=$false
+  product='DICOM3D'; version='0.7.0-alpha.1'; profile='three-r3f-alpha'; distribution='IRIS/IPM'; sourceCommit=$SourceCommit
+  frontendProfile='three-r3f-alpha'
+  approvedPublicResearchFixtures=@('H000'); containsPrivatePatientImaging=$false
+  frontendHtmlSha256=$viewerBuild; patientDerivedResearchData=$true
   qualification='Requires the separate exact-artifact qualification receipt'; files=$fileInventory
 }
 [IO.File]::WriteAllText((Join-Path $OutputDirectory 'package-manifest.json'),($packageIdentity | ConvertTo-Json -Depth 8)+"`n")

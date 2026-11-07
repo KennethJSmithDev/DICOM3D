@@ -1,1 +1,0 @@
-function e(e,...t){let n=Error(`#${e}`);throw n.lite=t,n}export{e as t};

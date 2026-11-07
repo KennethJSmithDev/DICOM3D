@@ -1,0 +1,50 @@
+DICOM3D Three.js / React Three Fiber alpha runtime attribution
+
+DICOM3D's original code is licensed under Apache License 2.0; see the repository
+LICENSE and NOTICE. This file records separate software used by the alpha runtime.
+It does not change those components' licenses or the anatomy/data licenses.
+
+Direct runtime framework versions:
+  React 19.2.7                    MIT; Meta Platforms and contributors
+  React DOM 19.2.7                MIT; Meta Platforms and contributors
+  Three.js 0.180.0                MIT; Three.js authors
+  React Three Fiber 9.6.1         MIT; Poimandres
+
+Runtime dependency license notices retained from the locked installed packages:
+  @babel/runtime 7.29.7           MIT
+  base64-js 1.5.1                 MIT
+  buffer 6.0.3                   MIT
+  ieee754 1.2.1                  BSD-3-Clause
+  its-fine 2.0.0                 MIT
+  react-use-measure 2.1.7         MIT
+  scheduler 0.27.0               MIT
+  suspend-react 0.1.3            MIT
+  use-sync-external-store 1.6.0   MIT
+  zustand 5.0.14                 MIT
+
+Full publisher license texts are in third-party/alpha/. React and React DOM retain
+their respective original license files even where their text is identical.
+These notices describe the locked dependency set; they are not an inventory of
+separately selectable anatomical structures or an assertion that every dependency
+contributes code to every optimized build.
+
+The installed @react-three/fiber npm package declares MIT but omits its LICENSE
+file. Its retained license was obtained from the primary upstream source at:
+https://github.com/pmndrs/react-three-fiber/blob/2a528745e9aa7c9e6cca41e404b59d45cf0d0cc7/LICENSE
+That commit is both the npm 9.6.1 gitHead and upstream v9.6.1 tag.
+
+Current alpha build-tool notices are also retained byte-for-byte:
+  Vite 8.2.4                     MIT and its included third-party notices
+  Rolldown 1.2.13                MIT and its THIRD-PARTY-LICENSE
+These identify the locked assembly tools, not additional browser features. They
+do not replace historical notices for other versions elsewhere in the repository.
+
+BodyParts3D and HRA generalized anatomy have separate CC BY 4.0 attribution and
+preserved historical notices in their admitted asset directories. The public H000
+CT/SEG example has its own source notices and admission contract. None of these
+sources is relicensed by this software notice, and no patient-atlas registration
+or clinical correctness is implied.
+
+Legacy Babylon and build-tool notices elsewhere in third-party/ remain historical
+source material. They do not identify the renderer or runtime versions of this
+Three/R3F alpha.

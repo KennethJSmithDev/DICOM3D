@@ -1,1 +1,0 @@
-import{n as e,t}from"./gltf-normals-CzT7lj04.js";export{t as computeSmoothNormals,e as createSequentialIndices};

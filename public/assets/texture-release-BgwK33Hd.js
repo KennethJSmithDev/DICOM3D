@@ -1,1 +1,0 @@
-import{t as e}from"./texture-allocation-release-Db8a6oWQ.js";function t(t){return e(t.texture,t)}export{t};

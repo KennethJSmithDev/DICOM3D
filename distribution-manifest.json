@@ -1,12 +1,14 @@
 {
   "distribution": "DICOM3D Core",
-  "version": "0.6.5",
-  "publishedWebCommit": "d3490dd659e19e44b8800abe87bbc626f45350a2",
-  "originalTag": "v0.6.0",
-  "originalTagContainsInstallationCompletion": false,
+  "version": "0.7.0-alpha.1",
+  "frontendProfile": "three-r3f-alpha",
   "entrypoint": "/dicom3d/reference.html",
   "requiresIRIS": false,
-  "containsPatientImaging": false,
+  "containsPrivatePatientImaging": false,
+  "patientDerivedResearchData": true,
+  "approvedPublicResearchFixtures": [
+    "H000"
+  ],
   "baseImage": "node:24-alpine@sha256:44fce696f38ba8c987c4db89954051000bbd05ffd8d8659ba15ed4a8602e937f",
-  "commitBinding": "Source descriptor only. archive-core.py generates the exact distributed input inventory and packaging commit binding."
+  "commitBinding": "Generated frontend/package manifests bind exact inputs and the supplied source commit."
 }
