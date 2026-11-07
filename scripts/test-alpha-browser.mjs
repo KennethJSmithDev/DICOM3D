@@ -25,8 +25,11 @@ try {
   await page.screenshot({path:output+'/male-startup.png'});
  });
  await gate('full expanded male atlas',async()=>{
-  const details=page.locator('details').filter({has:page.getByRole('button',{name:'Load complete reference',exact:true})});
-  if(await details.count())await details.evaluate(e=>e.open=true);
+  // Hidden details content is absent from the accessibility tree until expanded.
+  // Locate its DOM descendants first, then use the accessible button to load.
+  const details=page.locator('details.inspector-advanced').filter({has:page.locator('button').filter({hasText:'Load complete reference'})});
+  assert.equal(await details.count(),1,'Expected one reference-loading disclosure');
+  await details.evaluate(e=>{e.open=true;});
   await page.getByRole('button',{name:'Load complete reference',exact:true}).click();
   await wait(()=>{const s=JSON.parse(document.querySelector('#runtimeState').textContent);return s.bundles.length===15&&s.owners===1186;});
   await page.screenshot({path:output+'/male-complete.png'});
