@@ -6,6 +6,10 @@
   <a href="prototypes/alpha/three-prototype/"><strong>v0.7.0-alpha Source</strong></a>
   &nbsp;·&nbsp;
   <a href="https://github.com/KennethJSmithDev/DICOM3D/releases/tag/v0.6.5"><strong>v0.6.5 Downloads</strong></a>
+  &nbsp;·&nbsp;
+  <a href="docs/CORE_DOCKER_QUICKSTART.md"><strong>Docker Quick Start</strong></a>
+  &nbsp;·&nbsp;
+  <a href="docs/INSTALL_060.md"><strong>Native / IRIS Install</strong></a>
 </p>
 
 <p align="center"><img src="assets/branding/dicom3d-logo.png" alt="DICOM3D Logo" width="480"></p>
@@ -21,7 +25,20 @@ DICOM3D is an open-source interactive anatomy and medical imaging platform for e
 - **[Live Demo](https://kennethjsmithdev.github.io/DICOM3D/):** Web frontend with the available generalized anatomy and approved public H000 CT/SEG research example. Inspect its displayed version and renderer status when evaluating a deployment.
 - **[v0.7.0-alpha source](prototypes/alpha/three-prototype/):** Three.js/R3F reference implementation and reviewed expanded atlas build. No general-purpose installer, live PACS connection or AI provider is bundled.
 - **[Published v0.6.5 downloads](https://github.com/KennethJSmithDev/DICOM3D/releases/tag/v0.6.5):** Retained Babylon Lite Safe Demo ZIP and Core **source** ZIP; this is the previous release and rollback reference.
-- **[Legacy v0.6.0 native/IPM/Docker instructions](docs/INSTALL_060.md):** Historical installation paths, not an alpha upgrade procedure.
+- **[Established v0.6.0 installations](docs/INSTALL_060.md):** Standalone Core, Docker and IRIS/IPM packaging remain available as version-specific installation paths; none is a qualified v0.7.0-alpha upgrade.
+
+## Install and integrate existing releases
+
+The Three/R3F **v0.7.0-alpha is a source-build research preview**, not an IPM, Docker or native installer update. Existing installation guides and release artifacts continue to describe their own versions and qualification evidence:
+
+- **[Standalone Core Docker Quick Start](docs/CORE_DOCKER_QUICKSTART.md):** v0.6.0 Core Docker/Compose route and its exact release-artifact requirements.
+- **[Native Core and IRIS/IPM installation](docs/INSTALL_060.md):** v0.6.0 native/Core and separately licensed IRIS for Health/IPM routes. Use the documented package versions and checksums; do not assume they install the alpha.
+- **[v0.6.0 release downloads](https://github.com/KennethJSmithDev/DICOM3D/releases/tag/v0.6.0)** and **[packaging provenance](docs/PACKAGING_060.md):** Historical distribution identities, source/packaging boundaries and qualification receipts.
+- **[v0.6.5 downloads](https://github.com/KennethJSmithDev/DICOM3D/releases/tag/v0.6.5):** Previous Babylon Lite Safe Demo ZIP and Core source ZIP, not a v0.7.0-alpha installer.
+
+For the preserved Babylon Lite workstation, see the [Safe Demo build guide](docs/SAFE_DEMO.md) and [architecture and ownership](docs/ARCHITECTURE.md). Those documents describe the earlier implementation; the alpha's active frontend and source contracts are identified below. See the [changelog](CHANGELOG.md) and [release history](ROADMAP.md) for version-specific milestones.
+
+The earlier workstation also documents a **verified local CT** input route using a volume descriptor and stored pixels kept in the browser. This is a legacy capability, not a claim that arbitrary local DICOM import is qualified in the current alpha.
 
 ## What the alpha can do
 
