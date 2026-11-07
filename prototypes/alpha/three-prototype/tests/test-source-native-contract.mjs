@@ -20,8 +20,10 @@ const loader=new vm.SyntheticModule(['GLTFLoader'],function(){this.setExport('GL
 const mod=new vm.SourceTextModule(await readFile(resolve(root,'src/atlas.js'),'utf8'),{context,initializeImportMeta(meta){meta.env={VITE_REVIEW_ATLAS_SHA:pin,BASE_URL:''}}});
 await mod.link(()=>loader);await mod.evaluate();const api=mod.namespace;
 const ac=new AbortController(),loaded=await api.loadIndex(ac.signal);
-assert.equal(loaded.structures.length,1188);assert.equal(loaded.sourceNative.atoms.length,2266);
+assert.equal(loaded.structures.length,1205);assert.equal(loaded.sourceNative.atoms.length,2299);
 assert.equal(loaded.sourceNative.heldSourceEntries.length,416);
+assert.equal(loaded.sourceNative.sourceRecoveries[0].remainingResidualHoldFiles,18);
+assert.equal(loaded.sourceNative.sourceRecoveries[0].newElementIds.length,17);
 assert.equal(requests.filter(x=>x.endsWith('.glb')).length,0,'Catalog discovery must not request geometry');
 const restored=loaded.structures.filter(p=>p.systems?.some(s=>s.startsWith('IS-A:')));assert.ok(restored.length>=477);
 for(const kind of ['missing','corrupt']){fault=kind;await assert.rejects(()=>api.loadIndex(ac.signal),kind==='missing'?/HTTP 404/:/integrity mismatch/)}fault='';
@@ -35,4 +37,4 @@ const female=await api.loadSourceCatalog(delta.sourceNative,ac.signal,'female-de
 const item=await api.loadBundle(delta,ac.signal,'female-delta');let owners=0;item.scene.traverse(n=>{if(n.userData.semanticId)owners++});assert.equal(owners,39);api.disposeScene(item.scene);
 const invalid={...delta,sha256:'0'.repeat(64)};await assert.rejects(()=>api.loadBundle(invalid,ac.signal,'female-delta'),/geometry integrity mismatch/);
 const aborted=new AbortController();aborted.abort();await assert.rejects(()=>api.loadBundle(delta,aborted.signal,'female-delta'),/Cancelled/);
-console.log(JSON.stringify({status:'PASS',indexSha256:pin,maleOwners:1188,maleAtoms:2266,held:416,femaleOwners:39,femaleAtoms:60,catalogWithoutGeometry:true,repairedCompounds:affected.length,repairOwners,repairNegativePaths:['missing repair bundle','corrupt repair bundle'],negativePaths:['missing catalog','corrupted catalog','corrupted geometry','cancelled publication'],rssBytes:process.memoryUsage().rss,maxRssKiB:process.resourceUsage().maxRSS}));
+console.log(JSON.stringify({status:'PASS',indexSha256:pin,maleOwners:1205,maleAtoms:2299,historicalHeld:416,residualUnresolved:18,femaleSupplementOwners:39,femaleSupplementAtoms:60,catalogWithoutGeometry:true,repairedCompounds:affected.length,repairOwners,repairNegativePaths:['missing repair bundle','corrupt repair bundle'],negativePaths:['missing catalog','corrupted catalog','corrupted geometry','cancelled publication'],rssBytes:process.memoryUsage().rss,maxRssKiB:process.resourceUsage().maxRSS}));

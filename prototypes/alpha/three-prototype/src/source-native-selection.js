@@ -4,8 +4,32 @@ import {Box3,Vector3,MeshBasicMaterial} from 'three';
 // BOUNDARY: reversible draw groups/materials only, never source buffers or IDs.
 // INVARIANT: selection does not allocate or duplicate positions/indices, and restore
 // precedes owner material disposal. An unavailable member rejects the whole view.
-export function nativeRecord(catalog,key){return catalog?.concepts?.find(x=>x.key===key)||catalog?.atoms?.find(x=>x.id===key);}
-export function nativeAtoms(catalog,key){const r=nativeRecord(catalog,key);if(!r)return [];const ids=new Set(r.atomIds||[r.id]);return catalog.atoms.filter(a=>ids.has(a.id));}
+// HRA concept keys can equal component IDs. Selection kind must not change
+// publisher identity or silently resolve a picked mesh to its compound.
+export const nativeComponentKey=id=>`ELEMENT:${id}`;
+// Catalog objects are immutable revisions. Do not cache mutable presentation state.
+const catalogIndexes=new WeakMap();
+function catalogIndex(catalog){
+ if(!catalog)return null;
+ let index=catalogIndexes.get(catalog);
+ if(!index){
+  const concepts=new Map(),atoms=new Map();
+  for(const record of catalog.concepts??[])if(!concepts.has(record.key))concepts.set(record.key,record);
+  (catalog.atoms??[]).forEach((record,order)=>{if(!atoms.has(record.id))atoms.set(record.id,{record,order});});
+  index={concepts,atoms};catalogIndexes.set(catalog,index);
+ }
+ return index;
+}
+export function nativeRecord(catalog,key){
+ const index=catalogIndex(catalog);if(!index)return undefined;
+ return key?.startsWith('ELEMENT:')?index.atoms.get(key.slice(8))?.record:index.concepts.get(key)||index.atoms.get(key)?.record;
+}
+export function nativeAtoms(catalog,key){
+ const record=nativeRecord(catalog,key);if(!record)return [];
+ const index=catalogIndex(catalog);
+ return [...new Set(record.atomIds||[record.id])].map(id=>index.atoms.get(id)).filter(Boolean).sort((a,b)=>a.order-b.order).map(entry=>entry.record);
+}
+
 export function nativeBundles(catalog,key){return [...new Set(nativeAtoms(catalog,key).map(x=>x.bundleId))];}
 export function mergeRanges(ranges,limit){
  const sorted=ranges.map(([start,count])=>[start,start+count]).sort((a,b)=>a[0]-b[0]);const out=[];

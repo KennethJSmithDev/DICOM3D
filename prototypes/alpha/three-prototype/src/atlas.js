@@ -1,5 +1,5 @@
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
-const INDEX_SHA=import.meta.env.VITE_REVIEW_ATLAS_SHA??'e90d1d5f4a06d989b3b26788ebbb0701c537cf791fb19ec580f2586886df04de';
+const INDEX_SHA=import.meta.env.VITE_REVIEW_ATLAS_SHA??'574feef9e1e659a644cf51a51042e8c65b6433455b95070b7ae89aa681357478';
 const name=/^[a-zA-Z0-9][a-zA-Z0-9._-]*$/;
 async function digest(bytes){return [...new Uint8Array(await crypto.subtle.digest('SHA-256',bytes))].map(x=>x.toString(16).padStart(2,'0')).join('');}
 async function get(path,maximum,signal,directory='atlas'){const r=await fetch(`${import.meta.env.BASE_URL}${directory}/${path}`,{cache:'no-store',signal});if(!r.ok)throw Error(`${path}: HTTP ${r.status}`);const n=Number(r.headers.get('content-length'));if(n>maximum)throw Error(`${path}: size limit`);const b=await r.arrayBuffer();if(b.byteLength>maximum)throw Error(`${path}: size limit`);return b;}

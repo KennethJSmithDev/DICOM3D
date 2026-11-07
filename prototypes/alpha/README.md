@@ -1,8 +1,8 @@
 # DICOM3D v0.7.0-alpha.1 source checkpoint
 
-DICOM3D is an open-source interactive anatomy and medical imaging platform. This is the existing React 19.2.7 / Three.js 0.180.0 / R3F 9.6.1 prototype, with Vite 8.2.4; no renderer migration or feature changes were made for this handoff.
+DICOM3D is an open-source interactive anatomy and medical imaging platform. This is the existing React 19.2.7 / Three.js 0.180.0 / R3F 9.6.1 prototype, with Vite 8.2.4; the current source-native integration preserves its renderer and scientific source contracts.
 
-## Exact origin
+## Preserved earlier alpha origin
 
 - Preserved dirty-worktree base: `355570e3f250c4c4644deabd39c675f466eea7ec`; that commit alone is not the candidate.
 - Final source recovery ZIP SHA-256: `d800910a3f7c52ed0d70e4b4d613ceacd253491c0a17a244bcf7fe5b39586640`.
@@ -14,7 +14,7 @@ The source manifest records portable path changes. In particular, the NRX C++ in
 
 ## Functional, at the recorded scope
 
-WebGPU is primary; forced WebGL compatibility is preserved. Male 1,186 admitted owners and female 380 owners support representative loading, source selection, focus, isolation and restoration. Skin is hidden by default. Independent bundle residency, linked comparison cameras and source-plane presentation remain implemented. Manual/bounds-based atlas placement is not patient registration.
+WebGPU is primary; forced WebGL compatibility is preserved. The current source-native candidate has 1,205 male draw owners and 1,235 female-composite draw owners, in 17 independently loadable male bundles plus the HRA supplement. Male/female catalogs contain 2,299/2,347 source-component occurrences, 2,282/2,330 distinct geometry spans and 1,368/1,361 exact PART-OF selections. These categories overlap and must not be added into a structure count. The 706 broad owner proxies are separate; exact components and compounds use geometry membership rather than proxy substitution. Skin is hidden by default. Independent bundle residency, linked comparison cameras and source-plane presentation remain implemented. Manual/bounds-based atlas placement is not patient registration.
 
 Beginner / Explore / Evidence learning adapts to selected reference structures, CT and SEG context. Eight-second introductory materialization can start while loading and settles into Scientific; Holographic remains selectable. Skip and reduced motion are explicit user choices. The Controls workspace exposes existing effects. H000 accumulation preserves source data; 11 GPU volume probes matched and source-plane CPU checks passed. Male/female, missing female chunk recovery, and zero-renderer teardown passed at documented scopes.
 
@@ -22,15 +22,15 @@ NRX H000 SEG extraction is a wasm32 R002 derivative (70,096 triangles in its sou
 
 ## How to review and reproduce
 
-The source includes the lockfile. With supported Node and approved installed dependencies, run the seven named `test-*.mjs` scripts from `three-prototype/`; `test-study-accumulation.mjs` additionally takes an authorized H000 `source-binding.json` path. Historical successful results are in `evidence/AUTOMATED_RESULTS.json`.
+The source includes the lockfile. With supported Node and approved installed dependencies, run the named `test-*.mjs` scripts from `three-prototype/` and the source-native tests under `tests/` (the loader contract and recovery tests require `--experimental-vm-modules`); `test-study-accumulation.mjs` additionally takes an authorized H000 `source-binding.json` path. Historical successful results are in `evidence/AUTOMATED_RESULTS.json`.
 
-`npm ci` is a separate dependency acquisition action; do not run it without your environment's permission. `npm run build` builds source when dependencies are present. It does **not** make a complete standalone distribution: Vite has `publicDir:false`, and required runtime assets must be supplied through a reviewed packaging step matching `EXPECTED_RUNTIME_MANIFEST.json`. This branch does not automatically fetch or redistribute them.
+`npm ci` is a separate dependency acquisition action; do not run it without your environment's permission. `npm run build` builds source when dependencies are present. It does **not** make a complete standalone distribution: Vite has `publicDir:false`, and required runtime assets must be supplied through `build-public-review.mjs`, which verifies the current catalog, bundle and supplement hashes. `EXPECTED_RUNTIME_MANIFEST.json` identifies the earlier alpha package, not a newly built successor. This build does not automatically fetch sources.
 
 For fixture-only tests, `DICOM3D_H000_FIXTURE` is a local H000 directory with a trailing separator, and `DICOM3D_ABDOMEN_FIXTURE` is the admitted male abdomen GLB. Do not substitute private studies into public evidence.
 
 ## Remaining boundaries
 
-- Male 416 held entries and female 305 held relationships remain unresolved; counts do not mean missing organs.
+- The 416 historical source-review records remain preserved. Of the most recent 35 residual files, 17 were recovered from pinned BodyParts3D 4.3i geometry, supporting 13 exact versioned source concepts; 18 remain held (3 overlap, 15 laterality cases). Sixteen versioned aliases reuse exact existing spans. No disputed geometry was mirrored or relabeled. Female whole-body membership remains intentionally partial where male-specific anatomy is excluded.
 - The expanded BodyParts3D assets and HRA delta are CC BY 4.0. DICOM3D code is Apache 2.0.
 - General anatomy is an independent reference, never an inferred patient-specific organ or segmentation.
 - No qualified live IRIS frontend admission, newly qualified Core installer/IPM/Docker release, arbitrary-study organ provider, or actual installed-update/rollback claim.
@@ -40,7 +40,7 @@ The original Babylon application, public v0.6.5 release, private data and runnin
 
 ## Test the shared atlas on another machine
 
-This profile ships the exact fifteen expanded BodyParts3D chunks used locally, together with the separately verified 2.6 MB HRA delta and public H000 example. The male view has 1,186 selectable owners and the female composite has 1,184. See the [expanded atlas license and attribution](three-prototype/expanded-atlas/LICENSE.md).
+This profile builds the current 17 semantic BodyParts3D bundles, the separately verified 42.1 MB HRA supplement and the public H000 example. The male view has 1,205 draw owners and the female composite has 1,235; source-native selection counts are described above. All individual assets remain below 100 MB. See the [expanded atlas license and attribution](three-prototype/expanded-atlas/LICENSE.md).
 
 From the repository root, with Node 24 and npm:
 
@@ -51,8 +51,8 @@ node build-public-review.mjs ../review-dist
 node node_modules/vite/bin/vite.js preview --host 127.0.0.1 --outDir ../review-dist
 ```
 
-Open the printed URL and select **Female · composite**. Search for the uterus, ovaries or uterine tubes, then select the male view to compare. Use a new output directory each time you build. For the expanded profile, run the ordinary Vite build, then run `node package-composite.mjs <verified-alpha-public> <vite-output> <new-output>` with the authorized local alpha runtime.
+Open the printed URL and select **Female · composite**. Search for the uterus, ovaries or uterine tubes, then select the male view to compare. Use a new output directory each time you build. Use `build-public-review.mjs` for this source-native candidate. The historical `package-composite.mjs` targets an older package and must not assemble this candidate.
 
-Both variants use the BodyParts3D body envelope, skeleton and shared organ geometry. The female delta adds the uterus, ovaries, uterine tubes and vagina, and replaces the bladder. The composite omits identified male-specific owners, including the prostate, urethra, testes and penile vessels when present in the base. The HRA placement is a translation fitted to the shared bladder center. The female pelvis and exterior body shape still use the shared base, and the composite covers only the listed swaps. The standalone NRX ovary fixture requires the expanded local runtime.
+Both variants use the BodyParts3D body envelope, skeleton and shared organ geometry. The 39-owner HRA supplement includes female reproductive anatomy and additional source-backed organ subtrees, and replaces the bladder. It exposes 60 original HRA components with explicit component selection keys distinct from their compound keys. The composite omits identified male-specific owners, including the prostate, urethra, testes and penile vessels when present in the base. The HRA placement is a translation fitted to the shared bladder center. The female pelvis and exterior body shape still use the shared base, and its approximate placement is not a registered female body reconstruction. The standalone NRX ovary fixture requires the expanded local runtime.
 
-The HRA delta comes from Human Reference Atlas / HuBMAP female united reference v1.5 by Kristen Browne and Heidi Schlehlein under CC BY 4.0. The delta preserves named organ subtrees, applies a translation in metres, and normalizes exported normals. See [source notice](three-prototype/atlas-delta/HRA-FEMALE-NOTICE.txt) and [delta manifest](three-prototype/atlas-delta/female-reproductive-delta.manifest.json). Shared BodyParts3D assets retain their existing attribution and license notice.
+The HRA delta comes from Human Reference Atlas / HuBMAP female united reference v1.5 by Kristen Browne and Heidi Schlehlein under CC BY 4.0. The delta preserves named organ subtrees, applies a translation in metres, and normalizes exported normals. See [source notice](three-prototype/atlas-delta/HRA-FEMALE-NOTICE.txt) and [current supplement descriptor](three-prototype/atlas-delta/female-delta.json). Shared BodyParts3D assets retain their existing attribution and license notice.
