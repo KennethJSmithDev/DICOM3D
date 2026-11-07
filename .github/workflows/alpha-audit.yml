@@ -1,7 +1,7 @@
 name: Audit Three R3F alpha
 on:
   push:
-    branches: [audit/release-070-alpha-20261106]
+    branches: [experimental]
   workflow_dispatch:
 permissions:
   contents: read
