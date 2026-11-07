@@ -1,0 +1,61 @@
+name: Audit Three R3F alpha
+# Manual only: normal development qualification runs in the configured cloud workspace.
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: alpha-audit-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: npm
+          cache-dependency-path: prototypes/alpha/three-prototype/package-lock.json
+      - name: Install locked frontend dependencies
+        working-directory: prototypes/alpha/three-prototype
+        run: npm ci
+      - name: Existing alpha contract tests
+        working-directory: prototypes/alpha/three-prototype
+        run: |
+          set -euo pipefail
+          for test in test-asset-parts.mjs test-beginner-learning.mjs test-learn-context.mjs test-materialization.mjs test-renderer-factory.mjs test-system-visibility.mjs; do node "$test"; done
+          node test-study-accumulation.mjs ../../../reference/public/demo/h000/source-binding.json
+          node test-verified-volume.mjs
+      - name: Build expanded public profile
+        working-directory: prototypes/alpha/three-prototype
+        run: node build-public-review.mjs ../review-dist
+      - name: Prepare isolated browser test tooling
+        run: |
+          npm install --prefix /tmp/dicom3d-browser --ignore-scripts --no-audit --no-fund --package-lock=false playwright@1.56.1
+          mkdir -p /tmp/dicom3d-web
+          ln -s "$GITHUB_WORKSPACE/prototypes/alpha/review-dist" /tmp/dicom3d-web/DICOM3D
+          python3 -m http.server 4173 --bind 127.0.0.1 --directory /tmp/dicom3d-web > /tmp/dicom3d-web-server.log 2>&1 &
+      - name: Headed software WebGL2 browser witness
+        env:
+          DICOM3D_PLAYWRIGHT_MODULE: /tmp/dicom3d-browser/node_modules/playwright
+        run: xvfb-run -a node scripts/test-alpha-browser.mjs
+      - name: Preserve test results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: alpha-browser-results
+          path: /tmp/dicom3d-browser-results/
+          retention-days: 7
+      - name: Preserve exact tested build
+        if: always()
+        run: tar -C prototypes/alpha/review-dist -czf /tmp/alpha-review-dist.tar.gz .
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: alpha-review-dist
+          path: /tmp/alpha-review-dist.tar.gz
+          retention-days: 7

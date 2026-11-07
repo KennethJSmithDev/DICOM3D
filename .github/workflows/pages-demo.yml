@@ -1,4 +1,5 @@
-name: Deploy DICOM3D safe demo
+name: Deploy DICOM3D research demo
+# Manual only: merging or pushing source does not authorize a public deployment.
 on:
   workflow_dispatch:
 permissions:
@@ -12,6 +13,7 @@ jobs:
   deploy:
     if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
+    timeout-minutes: 25
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
@@ -21,17 +23,23 @@ jobs:
         with:
           node-version: '24'
           cache: npm
-          cache-dependency-path: viewer/package-lock.json
-      - run: npm ci --prefix viewer
-      - run: node scripts/build-demo.mjs --profile curated-h000
-      - run: node scripts/test-demo.mjs --profile curated-h000
-      - run: node scripts/test-public-research-data.mjs
-      - run: node scripts/test-publication.mjs --profile curated-h000
+          cache-dependency-path: prototypes/alpha/three-prototype/package-lock.json
+      - name: Install locked Three/R3F dependencies
+        run: npm ci --prefix prototypes/alpha/three-prototype
+      - name: Build and verify expanded public alpha
+        working-directory: prototypes/alpha/three-prototype
+        run: node build-public-review.mjs ../review-dist
+      - name: Verify static demo identity
+        run: |
+          test -s prototypes/alpha/review-dist/index.html
+          test -s prototypes/alpha/review-dist/atlas/index.json
+          test -s prototypes/alpha/review-dist/female-delta/female-reproductive-delta.glb
+          test -s prototypes/alpha/review-dist/demo/h000/NOTICE.md
       - uses: actions/configure-pages@v5
         with:
           enablement: true
       - uses: actions/upload-pages-artifact@v3
         with:
-          path: .demo-dist
+          path: prototypes/alpha/review-dist
       - uses: actions/deploy-pages@v4
         id: deployment
