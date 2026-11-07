@@ -39,6 +39,10 @@
       "bytes": 10011,
       "sha256": "521d045a330f78886bc75a5f4d8aa0bff7d79034d5da45f397849dac6638b02b"
     },
+    "CODE_OF_CONDUCT.md": {
+      "bytes": 5229,
+      "sha256": "4141a114222660f1ab3c68e5f1e66374ac98bf8dbdcd233cb817b77e504d7dd5"
+    },
     "CONTRIBUTING.md": {
       "bytes": 908,
       "sha256": "1fe1f982537dcd8c1e808628f020919944b6f91802659a211475a2b119f41759"
