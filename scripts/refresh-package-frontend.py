@@ -62,7 +62,7 @@ for name, expected in sorted(files.items()):
         destination.write_bytes(data)
         generated.add(source)
     if not source.startswith('public/'):
-        assert (root / source).read_bytes().replace(b'\r\n', b'\n') == data.replace(b'\r\n', b'\n')
+        assert (root / source).read_bytes() == data, f'Canonical asset differs: {source}'
     copies.append(f'  <FileCopy Name="{source}" Target="{{$cspdir}}dicom3d/{name}" />')
 # Only superseded tracked generated files under the named public root are removed.
 old = subprocess.check_output(['git', 'ls-files', '-z', 'public/'], cwd=root).decode().split('\0')

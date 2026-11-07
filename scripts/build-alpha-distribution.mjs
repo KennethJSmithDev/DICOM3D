@@ -17,6 +17,8 @@ for(const asset of Object.values(PUBLIC_RESEARCH_ASSETS)){
  if(bytes.length!==asset.bytes||sha(bytes)!==asset.sha256)throw Error('Unadmitted public H000 asset: '+asset.filename);
  admitted[asset.filename]={bytes:asset.bytes,sha256:asset.sha256};
 }
+// The builder refuses an existing output; create only its possibly absent parent.
+await mkdir(dirname(output),{recursive:true});
 const built=spawnSync(process.execPath,[join(prototype,'build-public-review.mjs'),output],{stdio:'inherit',cwd:root});
 if(built.status!==0)process.exit(built.status??1);
 // Preserve existing installed bookmarks and the exact051 retirement guard.
