@@ -63,7 +63,7 @@ export default function ReferenceInspector({index, bundles, pending, matches, qu
     <details className="inspector-advanced"><summary>Source attribution and licenses</summary>
       <p>General reference and NRX research surfaces have separate source notices.</p>
       <p><a style={{color:'var(--work-focus)'}} href={`${import.meta.env.BASE_URL}attribution/BODYParts3D-NOTICE.txt`} target="_blank" rel="noopener noreferrer">BodyParts3D source notice</a></p>
-      <p><a style={{color:'var(--work-focus)'}} href={`${import.meta.env.BASE_URL}nrx/HRA-FEMALE-NOTICE.txt`} target="_blank" rel="noopener noreferrer">HRA female source notice (NRX)</a></p>
+      <p><a style={{color:'var(--work-focus)'}} href={`${import.meta.env.BASE_URL}female-delta/HRA-FEMALE-NOTICE.txt`} target="_blank" rel="noopener noreferrer">HRA female source notice</a></p>
     </details>
   </section>;
 }
