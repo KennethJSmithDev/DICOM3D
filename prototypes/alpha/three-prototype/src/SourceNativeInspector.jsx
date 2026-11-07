@@ -1,11 +1,11 @@
 import React,{useMemo,useState} from 'react';
-import {nativeRecord,nativeAtoms} from './source-native-selection.js';
+import {nativeAtoms} from './source-native-selection.js';
 
 export default function SourceNativeInspector({catalog,selection,onSelection,onChoose,onRestore,onFocus,runtime,loading=false}){
  const [query,setQuery]=useState(''),[relation,setRelation]=useState('PART_OF'),[page,setPage]=useState(0);
  const records=useMemo(()=>catalog?[...catalog.concepts,...catalog.atoms.map(a=>({...a,key:a.id,relation:'ELEMENT',scope:'EXACT_COMPONENT'}))]:[],[catalog]);
  const matches=useMemo(()=>records.filter(r=>(!relation||r.relation===relation)&&(!query.trim()||`${r.label} ${r.id} ${r.key}`.toLowerCase().includes(query.toLowerCase()))),[records,relation,query]);
- const pages=Math.max(1,Math.ceil(matches.length/30)),current=Math.min(page,pages-1),choice=nativeRecord(catalog,selection.key),atoms=nativeAtoms(catalog,selection.key);
+ const pages=Math.max(1,Math.ceil(matches.length/30)),current=Math.min(page,pages-1),choice=records.find(r=>r.key===selection.key),atoms=nativeAtoms(catalog,selection.key);
  const scope=r=>r.scope==='EXACT_COMPOUND'?'Exact source compound':r.scope==='EXACT_COMPONENT'?'Exact source component':r.scope==='PARTIAL'?'Available source members; incomplete':r.scope==='OWNER_PROXY'?'Other source version / larger-owner proxy':'Catalog relationship; no matching local geometry';
  return <section className="panel reference-inspector" aria-label="Source-native anatomy explorer"><h2>Anatomy · source concepts</h2><p>Published labels and exact source members. A compound can select parts from several existing meshes.</p>
  <label>Find anatomy<input aria-label="Search source-native anatomy" placeholder="Lung, rib, FMA identity…" value={query} onChange={e=>{setQuery(e.target.value);setPage(0)}}/></label>
