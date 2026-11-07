@@ -41,7 +41,10 @@ jobs:
           test "$GITHUB_SHA" = "$EXPECTED_COMMIT"
           case "$PROFILE" in alpha|rollback-065) ;; *) exit 1 ;; esac
           if [ "$PROFILE" = alpha ]; then
-            test "$(git rev-parse 'refs/tags/v0.7.0-alpha.1^{commit}')" = "$GITHUB_SHA"
+            RELEASE_SOURCE=$(python -c "import json; print(json.load(open('docs/releases/070-alpha1-assets.json'))['releaseSourceCommit'])")
+            [[ "$RELEASE_SOURCE" =~ ^[0-9a-f]{40}$ ]]
+            test "$(git rev-parse 'refs/tags/v0.7.0-alpha.1^{commit}')" = "$RELEASE_SOURCE"
+            git merge-base --is-ancestor "$RELEASE_SOURCE" "$GITHUB_SHA"
           else
             test "$(git rev-parse 'refs/tags/v0.6.5^{commit}')" = 4d5cac71cf1266c8eb1a272ae44ac528d238f919
           fi

@@ -1,6 +1,6 @@
 {
   "version": "0.7.0-alpha.1",
-  "title": "DICOM3D v0.7.0-alpha.1 — Anatomy & Imaging Foundation",
+  "title": "DICOM3D v0.7.0-alpha.1 \u2014 Anatomy & Imaging Foundation",
   "repository": "KennethJSmithDev/DICOM3D",
   "sourceReviewBase": "4df33582a974e398cd65a7d83f2cb0ea0c7480f3",
   "qualifiedRuntimeSource": "623d81bcab9081a0522281be36a698d16ecbda4b",
@@ -30,7 +30,14 @@
     "distribution-manifest.json",
     "third-party/alpha-runtime-NOTICE.txt",
     "third-party/alpha/its-fine-2.0.0-LICENSE.txt",
-    "third-party/alpha/react-use-measure-2.1.7-LICENSE.txt"
+    "third-party/alpha/react-use-measure-2.1.7-LICENSE.txt",
+    "LICENSE",
+    "NOTICE",
+    "third-party/babylon-lite-1.32.0-LICENSE.txt",
+    "third-party/babylon-lite-1.32.0-NOTICE.txt",
+    "third-party/rolldown-1.2.12-LICENSE.txt",
+    "third-party/rolldown-1.2.12-THIRD-PARTY-LICENSE.txt",
+    "third-party/vite-8.3.0-CORE-LICENSE.txt"
   ],
   "preview": {
     "asset": "dicom3d-0.7.0-alpha.1-preview.mjs",
@@ -38,5 +45,6 @@
     "sha256": "db085fd92811483cae68ace1c864a6520d9dbf8ddfd8a0a297ddba9cf8511313",
     "qualification": "Byte-identical to the existing alpha static host used in the extracted Safe Demo witness; Node 24 required"
   },
-  "publicationAuthority": "Separate operator approval; this hash inventory grants no publication authority"
+  "publicationAuthority": "Separate operator approval; this hash inventory grants no publication authority",
+  "releaseSourceCommit": "e74285f4c5a9f376a48afeda007e849915850895"
 }

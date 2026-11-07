@@ -28,8 +28,8 @@
       "sha256": "8cf3c497799cbddcf4925e4dca370cb24a2232c58a228d7373c6cc548232e029"
     },
     ".github/workflows/pages-demo.yml": {
-      "bytes": 3738,
-      "sha256": "cfe5b806146d1c9d13b6553de0b83553a952f8371676f2933dc53d9aadffe938"
+      "bytes": 4010,
+      "sha256": "371ecf526d4cd18c6f7fbc84d4e52dd7d77893508febb043b9596641ac6dca36"
     },
     ".gitignore": {
       "bytes": 485,
@@ -336,8 +336,8 @@
       "sha256": "b8c7819afd128855a86156118c17eebd0726d83ffcab146d54db750ba5dbecfa"
     },
     "docs/releases/070-alpha1-assets.json": {
-      "bytes": 1658,
-      "sha256": "5c046a581d09700b1c191f814f147a3f33044583d8a4aacb46f93c31d5451f5e"
+      "bytes": 2013,
+      "sha256": "1bd1103890cb1bdddf5106d8b1cfa9126ebbe5e42bc799bdbe1e9ffcac0fb485"
     },
     "module.xml": {
       "bytes": 14109,
@@ -2480,8 +2480,8 @@
       "sha256": "6b9e7141d717a247fb8dd80e1ff37f169abc965f622981fc7c9b7472de594fd0"
     },
     "scripts/prepare-release-demo.py": {
-      "bytes": 4693,
-      "sha256": "6f38c7eedca21ac22e0c7b8a51c727229a97f8ea6ef02c55812f9eb177af745c"
+      "bytes": 4699,
+      "sha256": "c037bc0e60395f8e8d81b5a8e35dddfbb53152050f61845273059f00c457ccab"
     },
     "scripts/preview-static.mjs": {
       "bytes": 3351,

@@ -60,7 +60,7 @@ def prepare(archive, output, profile, rebuilt=None):
                         raise ValueError('Rebuilt file differs from its manifest: ' + name)
                     if build['files'][name] == record:
                         continue
-                    # Only four reviewed text files may differ by checkout EOL.
+                    # Only explicitly reviewed text files may differ by checkout EOL.
                     # Geometry, imaging, JavaScript and arbitrary files remain exact.
                     if name not in pins['rebuildTextEolAllowlist']:
                         raise ValueError('Rebuilt payload changed: ' + name)
