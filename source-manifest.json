@@ -44,8 +44,8 @@
       "sha256": "4141a114222660f1ab3c68e5f1e66374ac98bf8dbdcd233cb817b77e504d7dd5"
     },
     "CONTRIBUTING.md": {
-      "bytes": 908,
-      "sha256": "1fe1f982537dcd8c1e808628f020919944b6f91802659a211475a2b119f41759"
+      "bytes": 2434,
+      "sha256": "78aa742b0f0fa76baa1e7387855acf1929ddcd1103fe37f7bd3320f62edd9929"
     },
     "Dockerfile.core": {
       "bytes": 1347,
