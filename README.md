@@ -3,36 +3,36 @@
 <p align="center">
   <a href="https://kennethjsmithdev.github.io/DICOM3D/"><strong>Live Demo</strong></a>
   &nbsp;·&nbsp;
-  <a href="prototypes/alpha/three-prototype/"><strong>v0.7.0-alpha Source</strong></a>
+  <a href="prototypes/alpha/three-prototype/"><strong>v0.7.0-alpha.1 Source</strong></a>
   &nbsp;·&nbsp;
-  <a href="https://github.com/KennethJSmithDev/DICOM3D/releases/tag/v0.6.5"><strong>v0.6.5 Downloads</strong></a>
+  <a href="docs/DOWNLOADS_070_ALPHA.md"><strong>v0.7.0-alpha.1 Downloads</strong></a>
   &nbsp;·&nbsp;
-  <a href="docs/CORE_DOCKER_QUICKSTART.md"><strong>Docker Quick Start</strong></a>
+  <a href="docs/INSTALL_070_ALPHA.md#docker-core"><strong>Docker Quick Start</strong></a>
   &nbsp;·&nbsp;
-  <a href="docs/INSTALL_060.md"><strong>Native / IRIS Install</strong></a>
+  <a href="docs/INSTALL_070_ALPHA.md#ipmzpm-in-iris"><strong>Native / IRIS Install</strong></a>
 </p>
 
 <p align="center"><img src="assets/branding/dicom3d-logo.png" alt="DICOM3D Logo" width="480"></p>
 
-**v0.7.0-alpha — Interactive Anatomy & Medical Imaging Research Preview.** *From Pixels to Meaning.*
+**v0.7.0-alpha.1 — Anatomy & Imaging Foundation.** *From Pixels to Meaning.*
 
 DICOM3D is an open-source interactive anatomy and medical imaging platform for exploring generalized reference anatomy, public acquired CT and source-linked segmentation. The new web frontend uses **Three.js, React Three Fiber and React**, with **WebGPU preferred and WebGL2 fallback**. This is a research/educational alpha for feedback and further development, **not a clinically validated diagnostic tool**.
 
-**Current public research build:** v0.7.0-alpha source under [`prototypes/alpha/three-prototype/`](prototypes/alpha/three-prototype/). The established Babylon Lite workstation, earlier documentation and install assets remain in this repository for comparison and rollback.
+**Current alpha:** v0.7.0-alpha.1 source under [`prototypes/alpha/three-prototype/`](prototypes/alpha/three-prototype/), with [versioned downloads and hashes](docs/DOWNLOADS_070_ALPHA.md), [local installation](docs/INSTALL_070_ALPHA.md) and an [acceptance record](docs/RELEASE_070_ALPHA_ACCEPTANCE.md). The published [v0.6.5 release](https://github.com/KennethJSmithDev/DICOM3D/releases/tag/v0.6.5), its Babylon Lite workstation and historical documentation remain available for comparison and rollback.
 
 ## Try it and download
 
 - **[Live Demo](https://kennethjsmithdev.github.io/DICOM3D/):** Web frontend with the available generalized anatomy and approved public H000 CT/SEG research example. Inspect its displayed version and renderer status when evaluating a deployment.
-- **[v0.7.0-alpha source](prototypes/alpha/three-prototype/):** Three.js/R3F reference implementation and reviewed expanded atlas build. No general-purpose installer, live PACS connection or AI provider is bundled.
+- **[v0.7.0-alpha.1 downloads and source](docs/DOWNLOADS_070_ALPHA.md):** Exact Safe Demo ZIP, locally qualified IPM archive and source-build routes, with hashes and publication status. The static demo needs no IRIS or AI service; the IPM host uses your existing authorized IRIS login.
 - **[Published v0.6.5 downloads](https://github.com/KennethJSmithDev/DICOM3D/releases/tag/v0.6.5):** Retained Babylon Lite Safe Demo ZIP and Core **source** ZIP; this is the previous release and rollback reference.
-- **[Established v0.6.0 installations](docs/INSTALL_060.md):** Standalone Core, Docker and IRIS/IPM packaging remain available as version-specific installation paths; none is a qualified v0.7.0-alpha upgrade.
+- **[Local alpha installation](docs/INSTALL_070_ALPHA.md):** Standalone Docker Core and authenticated IRIS/IPM setup, with fresh-install qualification separated from upgrades. Historical [v0.6.0 installations](docs/INSTALL_060.md) remain documented for their original artifacts.
 
-## Install and integrate existing releases
+## Install and integrate
 
-The Three/R3F **v0.7.0-alpha is a source-build research preview**, not an IPM, Docker or native installer update. Existing installation guides and release artifacts continue to describe their own versions and qualification evidence:
+The Three/R3F **v0.7.0-alpha.1** has separately tested static, Docker Core and fresh IRIS/IPM paths. Follow the [alpha launch guide](docs/LAUNCH_070_ALPHA.md) and exact [download identities](docs/DOWNLOADS_070_ALPHA.md); a GitHub archive does not update Docker Hub, the IPM registry or Open Exchange automatically. There is no native MSI/EXE or qualified in-place upgrade in this release:
 
-- **[Standalone Core Docker Quick Start](docs/CORE_DOCKER_QUICKSTART.md):** v0.6.0 Core Docker/Compose route and its exact release-artifact requirements.
-- **[Native Core and IRIS/IPM installation](docs/INSTALL_060.md):** v0.6.0 native/Core and separately licensed IRIS for Health/IPM routes. Use the documented package versions and checksums; do not assume they install the alpha.
+- **[Standalone Core Docker Quick Start](docs/INSTALL_070_ALPHA.md#docker-core):** The alpha frontend served locally without IRIS, Orthanc or AI. The exact offline image was built and witnessed; fresh online dependency acquisition remains a separate reproduction check.
+- **[IRIS/IPM installation](docs/INSTALL_070_ALPHA.md#ipmzpm-in-iris):** Fresh archive installation, normal authenticated Entry, restart and uninstall were exercised in an isolated IRIS for Health 2026.2 fixture. This hosts the viewer; it does not establish live PACS retrieval or a registry update. Earlier [native/Core installation artifacts](docs/INSTALL_060.md) retain their own version boundaries.
 - **[v0.6.0 release downloads](https://github.com/KennethJSmithDev/DICOM3D/releases/tag/v0.6.0)** and **[packaging provenance](docs/PACKAGING_060.md):** Historical distribution identities, source/packaging boundaries and qualification receipts.
 - **[v0.6.5 downloads](https://github.com/KennethJSmithDev/DICOM3D/releases/tag/v0.6.5):** Previous Babylon Lite Safe Demo ZIP and Core source ZIP, not a v0.7.0-alpha installer.
 
@@ -42,42 +42,41 @@ The earlier workstation also documents a **verified local CT** input route using
 
 ## What the alpha can do
 
-**Explore expanded anatomy.** The source-backed BodyParts3D male reference exposes **1,186 selectable draw owners across 15 loadable bundles**. The **1,184-owner female composite** reuses the expanded base, excludes identified male-specific structures and adds an HRA-derived seven-owner bladder/reproductive supplement. It is an approximate visual composite, not a separately modeled complete female skeleton or registered patient anatomy. These are selectable owner counts, **not counts of distinct organs**.
+**Explore expanded anatomy.** The BodyParts3D male reference provides **1,205 source-backed geometry groups across 17 independently loadable bundles**. The **1,235-group female composite** shares that base, excludes/replaces nine groups and adds 39 HRA groups containing 60 source components. These are rendered ownership groups, **not counts of distinct organs**. Published hierarchies support exact component and compound selection without copying geometry; the [coverage table](docs/RELEASE_070_ALPHA_ACCEPTANCE.md#atlas-coverage-and-limits) reports overlapping selection categories separately. The female fit is approximate and retains the shared base skeleton and body shape.
 
-**Interact with a reference.** Search, select, focus, hide, isolate and restore supported geometry. Load and unload independent bundles; choose source-oriented or stylized presentation. The body envelope starts **hidden** so interior anatomy is visible. WebGPU is requested first, and a tested WebGL2 compatibility path remains available. Some hierarchy labels share mesh owners; classifications and independent subpart availability are incomplete in this published remote checkpoint.
+**Interact with a reference.** Search, select, focus, hide, isolate and restore supported geometry. Load and unload independent bundles; choose source-oriented or stylized presentation. The body envelope starts **hidden** so interior anatomy is visible. WebGPU is requested first, and a tested WebGL2 compatibility path remains available. Exact source components and compounds remain distinct from larger-owner proxies and unavailable source relationships; 18 source files remain held rather than being mirrored or relabeled.
 
 **Connect source CT and 3D.** The approved public **H000 CT/SEG** study demonstrates 103 acquired CT frames, source segmentation overlays and related 3D visualization/accumulation. The optional NRX-derived lesion surface is a **display derivative of the supplied SEG**, not whole-scan organ segmentation. Reference anatomy is not spatially registered to that study.
 
-**Learn as you explore.** The contextual Beginner, Explore and Evidence views explain active anatomy, imaging sources, presentation effects, provenance and limitations without requiring AI. Materialization includes Skip and reduced-motion behavior.
+**Learn as you explore.** The contextual Beginner, Explore and Evidence views explain active anatomy, imaging sources, presentation effects, provenance and limitations without requiring AI. The introductory Materialization effect lasts approximately eight seconds and settles into Scientific; Holographic remains selectable. Skip and reduced-motion controls remain available as explicit choices.
 
-**Know the boundaries.** This alpha is a public research demonstration. It does not claim diagnosis, treatment guidance, anatomical completeness, arbitrary DICOM/SEG interpretation, clinical validation, general PACS interoperability, production FHIR/AI features or a qualified installed-update wizard. Its published source covers the earlier 1,186/1,184-owner atlas; newer local-only recovery work is not silently represented here.
+**Know the boundaries.** This alpha is a public research demonstration. It does not claim diagnosis, treatment guidance, anatomical completeness, arbitrary DICOM/SEG interpretation, clinical validation, general PACS interoperability, production FHIR/AI features or a qualified installed-update wizard. Whole CT display is direct volume rendering, not whole-scan organ segmentation; the native NRX research renderer is separate from the alpha's NRX/R002 lesion-surface bridge. Fresh installation does not establish an installed settings/data migration or rollback.
 
 ## Build the research alpha from source
 
 Use Node.js 24 and npm on a supported desktop. From the repository root:
 
 ```sh
-cd prototypes/alpha/three-prototype
-npm ci
-node build-public-review.mjs ../review-dist
-node node_modules/vite/bin/vite.js preview --host 127.0.0.1 --outDir ../review-dist
+npm ci --prefix prototypes/alpha/three-prototype
+node scripts/build-alpha-distribution.mjs .package/alpha-web "$(git rev-parse HEAD)"
+node scripts/preview-static.mjs --root .package/alpha-web --port 0
 ```
 
-Open the loopback URL printed by Vite. The public-review builder checks the committed atlas index and all 15 bundle hashes, builds the Three/R3F frontend, and includes approved H000 and HRA-supplement assets. It does not use developer-private scans or paths. See the [alpha source handoff and historical qualification](prototypes/alpha/README.md) for more detail.
+Open the loopback URL printed by the inventory-checked static host. Use a new build directory for each build and Ctrl+C to stop that host. The distribution builder checks the committed atlas index, all 17 bundle hashes and the current HRA supplement, and includes approved H000 assets plus software/source notices. It does not use developer-private scans or paths. See the [alpha source handoff and historical qualification](prototypes/alpha/README.md) for more detail.
 
-## Legacy screenshots (Babylon Lite, not the new Three/R3F alpha)
+## v0.7.0-alpha.1 screenshots
 
-**The screenshots below are retained from v0.6.0 and v0.6.5 until fresh, version-matched Three/R3F captures are available.** They show earlier application layouts and must not be interpreted as screenshots of this alpha.
+**Actual Three/R3F candidate captures on hardware WebGPU (RX 7900 XT).** These show the qualified `623d81bc` runtime; the [acceptance record](docs/RELEASE_070_ALPHA_ACCEPTANCE.md#candidate-captures) binds their source, viewport and limitations.
 
-![Legacy v0.6.5 Babylon Lite holographic reference anatomy](docs/images/visual-065-reference-desktop.png)
+![v0.7.0-alpha.1 male Scientific reference anatomy](docs/images/visual-070-male-scientific.png)
 
-![Legacy v0.6.0 Babylon Lite public H000 CT and source-linked holographic view](docs/images/visual-060-h000-holographic.png)
+![v0.7.0-alpha.1 female composite with exact source compound selected](docs/images/visual-070-female-composite.png)
 
-![Legacy v0.6.0 Babylon Lite public H000 CT and scientific view](docs/images/visual-060-h000-scientific.png)
+![v0.7.0-alpha.1 public H000 source CT, SEG and derived lesion presentation](docs/images/visual-070-h000.png)
 
-![Legacy v0.6.0 Babylon Lite public H000 CT and angled source-plane view](docs/images/visual-060-h000-source-plane.png)
+![v0.7.0-alpha.1 male Holographic presentation](docs/images/visual-070-male-holographic.png)
 
-The earlier [female reference](docs/images/visual-060-female-desktop.jpg), [materialization](docs/images/visual-060-materialization.jpg) and [learning](docs/images/visual-060-learning.jpg) captures are also **legacy Babylon Lite** examples.
+The v0.6.5 release and its original screenshots remain preserved; the earlier [female reference](docs/images/visual-060-female-desktop.jpg), [materialization](docs/images/visual-060-materialization.jpg) and [learning](docs/images/visual-060-learning.jpg) captures are also **legacy Babylon Lite** examples.
 
 ## Project structure and contributions
 
@@ -86,6 +85,8 @@ The earlier [female reference](docs/images/visual-060-female-desktop.jpg), [mate
 - [`viewer/`](viewer/): Preserved published Babylon Lite workstation source, not the current alpha browser entrypoint.
 - [`research/nrx/`](research/nrx/): Separately qualified native rendering/geometry research; do not assume every NRX experiment runs in the public alpha.
 - [`EXPERIMENTAL_HANDOFF.md`](EXPERIMENTAL_HANDOFF.md): Historical source-review provenance. Distinguish those earlier checkpoint figures from the current deployment.
+
+To [report a problem](https://github.com/KennethJSmithDev/DICOM3D/issues), include the version, browser/backend, reproducible steps and public-safe screenshots. See [CONTRIBUTING](CONTRIBUTING.md) for focused contributions. [Sponsor DICOM3D](https://github.com/sponsors/KennethJSmithDev) to support anatomy coverage, accessible learning, reproducible installation and imaging integration.
 
 Changes should preserve source identities, laterality, provenance, original CT values, segmentation correspondence and safe cleanup. Keep comments focused on **why a constraint exists** and on non-obvious ownership boundaries. Public issues and contributions are welcome; never add patient scans, identifying records, credentials or proprietary IRIS distributions.
 

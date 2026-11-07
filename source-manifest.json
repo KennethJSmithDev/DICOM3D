@@ -28,16 +28,16 @@
       "sha256": "8cf3c497799cbddcf4925e4dca370cb24a2232c58a228d7373c6cc548232e029"
     },
     ".github/workflows/pages-demo.yml": {
-      "bytes": 1558,
-      "sha256": "f5fe72e3dd3b0be23789fd1e6b0f9d1d7f60696c30f7db748ae5f6da5ac4e2c5"
+      "bytes": 3738,
+      "sha256": "cfe5b806146d1c9d13b6553de0b83553a952f8371676f2933dc53d9aadffe938"
     },
     ".gitignore": {
       "bytes": 485,
       "sha256": "0deb1a089a14138d172c7cc7c7985133c8e27ff776d0af62536161dddefad0f7"
     },
     "CHANGELOG.md": {
-      "bytes": 9372,
-      "sha256": "a879a6f8d3b2f6a22a005900ffd3103b65ba571bafe67a0fbc51b605e641ba2e"
+      "bytes": 10011,
+      "sha256": "521d045a330f78886bc75a5f4d8aa0bff7d79034d5da45f397849dac6638b02b"
     },
     "CONTRIBUTING.md": {
       "bytes": 908,
@@ -68,8 +68,8 @@
       "sha256": "82434fe04e921523bff967f06dc63b26d847d0b1e2c99797ee5b475e12a81623"
     },
     "README.md": {
-      "bytes": 9819,
-      "sha256": "377193f550b40dde1e79d8d516905bedaf912c3009ed07a0b641fa71f1cc2628"
+      "bytes": 11623,
+      "sha256": "ebd7ed90c3f317d143b93e077c317ec448a76a66156e45cc0ea776ad94536ca8"
     },
     "ROADMAP.md": {
       "bytes": 8221,
@@ -146,6 +146,10 @@
     "docs/DOCKER_QUICKSTART.md": {
       "bytes": 5470,
       "sha256": "13b3d6c5ffd3442e9ba8d73c67f535b78afb82ddcd91320201d2ae377d199fce"
+    },
+    "docs/DOWNLOADS_070_ALPHA.md": {
+      "bytes": 3780,
+      "sha256": "562d743e0f04fd6fe5aca755f61fcbc152e5260f80c906f2a015ccd2160addc8"
     },
     "docs/H000_BASELINE.md": {
       "bytes": 1216,
@@ -243,6 +247,10 @@
       "bytes": 11219,
       "sha256": "c026673ca336310d8a5d29889da079dc655acd0efdeb20c197f403602bab1e2c"
     },
+    "docs/RELEASE_070_ALPHA_PROCEDURE.md": {
+      "bytes": 5994,
+      "sha256": "b2234ec24fd221c3ff040f895aacd63454a8fc81a4358bb02ee3eb045b04ab2d"
+    },
     "docs/RELEASE_CANDIDATE_065.md": {
       "bytes": 6409,
       "sha256": "4bc85596d1e8612ad27cb87b7e7c123eec7cd2acae108c7cb0734c05247de40c"
@@ -250,6 +258,10 @@
     "docs/RELEASE_NOTES_065.md": {
       "bytes": 2770,
       "sha256": "c27240d26b714110714633d4c15007f0e19e977f2aee23aa1227314966da3ef8"
+    },
+    "docs/RELEASE_NOTES_070_ALPHA1.md": {
+      "bytes": 3369,
+      "sha256": "e24a5728641d3b6e4e1b814516a3476f3849f385fdaf17a334b2c30c6eae76a4"
     },
     "docs/SAFE_DEMO.md": {
       "bytes": 3391,
@@ -318,6 +330,10 @@
     "docs/images/visual-070-male-scientific.png": {
       "bytes": 1260476,
       "sha256": "b8c7819afd128855a86156118c17eebd0726d83ffcab146d54db750ba5dbecfa"
+    },
+    "docs/releases/070-alpha1-assets.json": {
+      "bytes": 1658,
+      "sha256": "5c046a581d09700b1c191f814f147a3f33044583d8a4aacb46f93c31d5451f5e"
     },
     "module.xml": {
       "bytes": 14109,
@@ -2458,6 +2474,10 @@
     "scripts/prepare-public-research-data.py": {
       "bytes": 6973,
       "sha256": "6b9e7141d717a247fb8dd80e1ff37f169abc965f622981fc7c9b7472de594fd0"
+    },
+    "scripts/prepare-release-demo.py": {
+      "bytes": 4693,
+      "sha256": "6f38c7eedca21ac22e0c7b8a51c727229a97f8ea6ef02c55812f9eb177af745c"
     },
     "scripts/preview-static.mjs": {
       "bytes": 3351,

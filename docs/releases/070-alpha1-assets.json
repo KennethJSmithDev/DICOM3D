@@ -1,0 +1,42 @@
+{
+  "version": "0.7.0-alpha.1",
+  "title": "DICOM3D v0.7.0-alpha.1 — Anatomy & Imaging Foundation",
+  "repository": "KennethJSmithDev/DICOM3D",
+  "sourceReviewBase": "4df33582a974e398cd65a7d83f2cb0ea0c7480f3",
+  "qualifiedRuntimeSource": "623d81bcab9081a0522281be36a698d16ecbda4b",
+  "alpha": {
+    "tag": "v0.7.0-alpha.1",
+    "asset": "dicom3d-0.7.0-alpha.1-safe-demo.zip",
+    "bytes": 150526764,
+    "sha256": "b36566266ad7441e63326197dc042194bcc0754681972abd75b6b954fe8d4368",
+    "payloadPrefix": "",
+    "release": "0.7.0-alpha.1"
+  },
+  "ipm": {
+    "asset": "dicom3d-0.7.0-alpha.1-002.tgz",
+    "bytes": 148241926,
+    "sha256": "6b4215b78134df6f1d9189072e7b7b1b0b639bfe59c9687ea730ca2405070d18"
+  },
+  "rollback-065": {
+    "tag": "v0.6.5",
+    "source": "4d5cac71cf1266c8eb1a272ae44ac528d238f919",
+    "asset": "dicom3d-0.6.5-safe-demo.zip",
+    "bytes": 184387189,
+    "sha256": "2d3e91c5805860a8df6266ce7b4d9d375a898823feb4e58e8a435be38cc00f9f",
+    "payloadPrefix": "public/",
+    "release": "0.6.5"
+  },
+  "rebuildTextEolAllowlist": [
+    "distribution-manifest.json",
+    "third-party/alpha-runtime-NOTICE.txt",
+    "third-party/alpha/its-fine-2.0.0-LICENSE.txt",
+    "third-party/alpha/react-use-measure-2.1.7-LICENSE.txt"
+  ],
+  "preview": {
+    "asset": "dicom3d-0.7.0-alpha.1-preview.mjs",
+    "bytes": 3390,
+    "sha256": "db085fd92811483cae68ace1c864a6520d9dbf8ddfd8a0a297ddba9cf8511313",
+    "qualification": "Byte-identical to the existing alpha static host used in the extracted Safe Demo witness; Node 24 required"
+  },
+  "publicationAuthority": "Separate operator approval; this hash inventory grants no publication authority"
+}

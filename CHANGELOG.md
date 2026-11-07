@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.7.0-alpha.1 — Anatomy & Imaging Foundation
+
+The Three.js/R3F alpha's expanded source-native anatomy, H000 CT/SEG presentation, contextual learning and materialization have separately recorded local static/Core/IPM qualification. See [release notes](docs/RELEASE_NOTES_070_ALPHA1.md), [exact downloads](docs/DOWNLOADS_070_ALPHA.md) and [acceptance boundaries](docs/RELEASE_070_ALPHA_ACCEPTANCE.md). Publication and Pages dispatch require separate operator approval; v0.6.5 remains the preserved stable rollback. No native installer, live PACS/organ-segmentation provider, registry update or installed migration/rollback is implied.
+
 ## 0.6.5 — published October 28, 2026
 
 The [GitHub v0.6.5 release](https://github.com/KennethJSmithDev/DICOM3D/releases/tag/v0.6.5) provides the Safe Demo ZIP and Core source ZIP. The Core archive is source, not a built runtime. Exact download identities and the distinction between publication, historical manifest flags and qualification are recorded in [release notes](docs/RELEASE_NOTES_065.md).

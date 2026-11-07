@@ -1,7 +1,18 @@
-name: Deploy DICOM3D research demo
-# Manual only: merging or pushing source does not authorize a public deployment.
+name: Deploy DICOM3D reviewed release demo
+# Manual only; source pushes, tags and release publication do not dispatch Pages.
 on:
   workflow_dispatch:
+    inputs:
+      expected_commit:
+        description: Exact approved main commit (40-character SHA)
+        required: true
+        type: string
+      profile:
+        description: Exact reviewed release payload
+        required: true
+        default: alpha
+        type: choice
+        options: [alpha, rollback-065]
 permissions:
   contents: read
   pages: write
@@ -19,27 +30,63 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Verify approved main identity and release tag
+        env:
+          EXPECTED_COMMIT: ${{ inputs.expected_commit }}
+          PROFILE: ${{ inputs.profile }}
+        run: |
+          [[ "$EXPECTED_COMMIT" =~ ^[0-9a-f]{40}$ ]]
+          test "$GITHUB_SHA" = "$EXPECTED_COMMIT"
+          case "$PROFILE" in alpha|rollback-065) ;; *) exit 1 ;; esac
+          if [ "$PROFILE" = alpha ]; then
+            test "$(git rev-parse 'refs/tags/v0.7.0-alpha.1^{commit}')" = "$GITHUB_SHA"
+          else
+            test "$(git rev-parse 'refs/tags/v0.6.5^{commit}')" = 4d5cac71cf1266c8eb1a272ae44ac528d238f919
+          fi
       - uses: actions/setup-node@v4
+        if: inputs.profile == 'alpha'
         with:
           node-version: '24'
           cache: npm
           cache-dependency-path: prototypes/alpha/three-prototype/package-lock.json
+      - name: Screen exact source inventory and publication boundaries
+        run: python scripts/test-alpha-publication.py --base 101c2185e5891ca63ec464e5dcac25396aba04ed
       - name: Install locked Three/R3F dependencies
+        if: inputs.profile == 'alpha'
         run: npm ci --prefix prototypes/alpha/three-prototype
-      - name: Build and verify expanded public alpha
-        working-directory: prototypes/alpha/three-prototype
-        run: node build-public-review.mjs ../review-dist
-      - name: Verify static demo identity
+      - name: Build and validate source-derived alpha
+        if: inputs.profile == 'alpha'
         run: |
-          test -s prototypes/alpha/review-dist/index.html
-          test -s prototypes/alpha/review-dist/atlas/index.json
-          test -s prototypes/alpha/review-dist/female-delta/female-reproductive-delta.glb
-          test -s prototypes/alpha/review-dist/demo/h000/NOTICE.md
+          node scripts/build-alpha-distribution.mjs .demo-rebuilt "$GITHUB_SHA"
+          node scripts/test-alpha-distribution.mjs .demo-rebuilt
+      - name: Download exact reviewed release asset
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PROFILE: ${{ inputs.profile }}
+        run: |
+          mkdir -p "$RUNNER_TEMP/dicom3d-release"
+          if [ "$PROFILE" = alpha ]; then
+            gh release download v0.7.0-alpha.1 --repo "$GITHUB_REPOSITORY" --pattern dicom3d-0.7.0-alpha.1-safe-demo.zip --dir "$RUNNER_TEMP/dicom3d-release"
+          else
+            gh release download v0.6.5 --repo "$GITHUB_REPOSITORY" --pattern dicom3d-0.6.5-safe-demo.zip --dir "$RUNNER_TEMP/dicom3d-release"
+          fi
+      - name: Validate and prepare unchanged release payload
+        env:
+          PROFILE: ${{ inputs.profile }}
+        run: |
+          if [ "$PROFILE" = alpha ]; then
+            python scripts/prepare-release-demo.py --profile alpha --archive "$RUNNER_TEMP/dicom3d-release/dicom3d-0.7.0-alpha.1-safe-demo.zip" --output .pages-payload --rebuilt .demo-rebuilt
+            node scripts/test-alpha-distribution.mjs .pages-payload
+          else
+            python scripts/prepare-release-demo.py --profile rollback-065 --archive "$RUNNER_TEMP/dicom3d-release/dicom3d-0.6.5-safe-demo.zip" --output .pages-payload
+          fi
       - uses: actions/configure-pages@v5
         with:
           enablement: true
       - uses: actions/upload-pages-artifact@v3
         with:
-          path: prototypes/alpha/review-dist
+          path: .pages-payload
       - uses: actions/deploy-pages@v4
         id: deployment
