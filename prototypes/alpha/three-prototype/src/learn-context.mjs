@@ -1,5 +1,6 @@
 import {referenceLesson} from '../../viewer/src/reference-learning.mjs';
 import {imageLesson, segmentationLesson} from '../../viewer/src/evidence-learning.mjs';
+import {referenceSourceLinks, relationshipScope, compositeCoverageText} from './female-catalog.mjs';
 
 // Adapt the existing deterministic lessons to current source context. No medical
 // finding, new anatomical classification or registration is generated here.
@@ -19,8 +20,8 @@ function referenceContext(o){
  const selected=female?o.femaleSelected:o.selected;
  const part=index?.structures?.find(p=>p.id===selected);
  const bundle=part?o.bundles?.get(part.bundleId):o.bundles?.values?.().next().value;
- const manifest=female?o.femaleData?.manifest:bundle?.manifest;
- const referenceId=manifest?.reference?.id??(female?'HRA female reference':'BodyParts3D male reference');
+ const manifest=female?(o.femaleData?.sourceManifests?.get(part?.bundleId)??o.femaleData?.manifest):bundle?.manifest;
+ const referenceId=manifest?.reference?.id??(female?'BodyParts3D + HRA female composite':'BodyParts3D male reference');
  const provenance=manifest?.provenance??{};
  const normalized={...manifest,structure:{semantic_id:manifest?.structure?.semantic_id??referenceId},reference:{id:referenceId},provenance:{...provenance,license:provenance.license??'See the source notice; no new redistribution approval is implied.'}};
  const prefs=female?o.femalePrefs:null;
@@ -33,15 +34,15 @@ function referenceContext(o){
  const cards=[
   card(part?`About this selection: ${part.label}`:'Explore the available reference',part?`${lesson.known} ${loaded?'Its source geometry is loaded.':'Its catalog identity is available; its geometry is not yet loaded.'}`:'Choose a structure in the explorer or click visible anatomy. Learn follows your current selection, reference source and imaging workspace.'),
   card('What the reference represents',female?'The female composite uses the shared BodyParts3D base and an approximately fitted HRA organ delta.':'BodyParts3D is a generalized male anatomical reference. Selectable source structures and groups may contain several components; the catalog count is not a count of independent organs.'),
-  card('Relationships and coverage',`${indirect.length?`${indirect.length} source relationships for this selection are represented through existing rendered geometry, rather than separate selectable meshes. `:''}System memberships can overlap. ${Number.isInteger(held)?`${held} source entries or relationships remain unavailable pending source review. `:''}An unloaded or unavailable structure is not evidence that anatomy is absent. Height-based navigation groups are not anatomical system classifications.`),
+  card('Relationships and coverage',`${indirect.length?`${indirect.length} source relationships for this selection are represented through existing rendered geometry, rather than separate selectable meshes. `:''}System memberships can overlap. ${female?compositeCoverageText(index)+' ':Number.isInteger(held)?`${held} source entries or relationships remain unavailable pending source review. `:''}An unloaded or unavailable structure is not evidence that anatomy is absent. Height-based navigation groups are not anatomical system classifications.`),
   ...presentationCards,
   card('Reference versus patient',lesson.unverified),
  ];
  const systems=(part?.systems??[]).join(' · ');
  return {kind:'reference',title:part?`Understand ${part.label}`:`Explore ${female?'female':'male'} anatomy`,subtitle:'Generalized reference anatomy',cards,
   sourceRows:rows([['Reference',referenceId],['Selected source ID',part?.id??'No structure selected'],['Source label',part?.label??'No structure selected'],['Source systems / classifications',systems||'Not supplied for this selection'],['Region',part?.region??'Not supplied'],['Geometry',part?(loaded?'Loaded':'Not loaded'):'Select a structure'],['Source attribution',provenance.copyright??'See source notice'],['Source terms',provenance.license??'See source notice']]),
-  relationships:related.slice(0,20).map(p=>({id:p.id,label:p.label,scope:p.ownership_scope==='DIRECT'?'Direct source relationship':'Represented through existing geometry',relation:p.relation??''})),
-  links:[{label:female?'HRA source attribution':'BodyParts3D source attribution',path:female?'female-delta/HRA-FEMALE-NOTICE.txt':'attribution/BODYParts3D-NOTICE.txt'},...(safeUrl(provenance.source_url)?[{label:'Publisher source',href:safeUrl(provenance.source_url)}]:[])],
+  relationships:related.slice(0,20).map(p=>({id:p.id,label:p.label,scope:female?relationshipScope(p):p.ownership_scope==='DIRECT'?'Direct source relationship':'Represented through existing geometry',relation:p.relation??''})),
+  links:[...referenceSourceLinks(female,part),...(safeUrl(provenance.source_url)?[{label:'Publisher source',href:safeUrl(provenance.source_url)}]:[])],
  };
 }
 
