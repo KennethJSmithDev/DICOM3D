@@ -30,6 +30,7 @@ jobs:
           set -euo pipefail
           for test in test-asset-parts.mjs test-beginner-learning.mjs test-learn-context.mjs test-materialization.mjs test-renderer-factory.mjs test-system-visibility.mjs; do node "$test"; done
           node test-study-accumulation.mjs ../../../reference/public/demo/h000/source-binding.json
+          node test-verified-volume.mjs
       - name: Build expanded public profile
         working-directory: prototypes/alpha/three-prototype
         run: node build-public-review.mjs ../review-dist

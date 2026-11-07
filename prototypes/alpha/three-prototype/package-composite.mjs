@@ -29,4 +29,4 @@ for(const name of await readdir(join(local,'atlas-delta'))){
 }
 await put('index.html',await readFile(join(build,'index.html')));
 for(const name of await readdir(join(build,'assets')))await put('assets/'+name,await readFile(join(build,'assets',name)));
-await writeFile(join(output,'demo-build-manifest.json'),JSON.stringify({schema:'dicom3d-three-local-package-1',entrypoint:'/',build:'0.7.0-alpha.1-composite',files},null,2)+'\n');
+await writeFile(join(output,'demo-build-manifest.json'),JSON.stringify({schema:'dicom3d-three-local-package-1',entrypoint:'/',build:'0.7.0-alpha-composite',files},null,2)+'\n');
