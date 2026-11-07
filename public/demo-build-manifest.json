@@ -30,7 +30,7 @@
       "sha256": "0dfff975e61696fd4b570e32b38e84ef4515ebb812906196169aab0818081d2a"
     }
   },
-  "sourceBase": "4f67a2a76222859ca533ab7f4b4061cdeea91739",
+  "sourceBase": "935021e4df68d8659b59651b9247a2cb8b8fd356",
   "sourceIdentity": "Exact application inputs below; staged package manifest binds the packaging commit.",
   "sourceInputs": {
     "prototypes/alpha/three-prototype/src/assembly-presentation.js": "2a9417b0aee3dd49269c4932be4e14a0054eddab0735c6e8728cbcbe2d82ac5d",
@@ -39,10 +39,11 @@
     "prototypes/alpha/three-prototype/src/AtlasPresentationControls.jsx": "d08813dfece36911977e3220ffd56f5b6d655ba695c701440761b4da4da54c49",
     "prototypes/alpha/three-prototype/src/beginner-learning.mjs": "c778d70f9549f34eb1f64ed0dc893ccec77f2bef8c97d294172ef31d15ae89bd",
     "prototypes/alpha/three-prototype/src/comparison-interaction.js": "b9cf5a2f6f2da065842ebc9ba042ed729f00d2b902ea889a7903ea3478870aa6",
+    "prototypes/alpha/three-prototype/src/female-catalog.mjs": "91595c2fb9b457cdaaa4e19694c211dee27e03eed847cc8a1a72118c47c295f4",
     "prototypes/alpha/three-prototype/src/female-presentation.js": "c5a0f135203c08228a41019382073bbad61a3de9c4d1646caca410634376813d",
-    "prototypes/alpha/three-prototype/src/female-reference.js": "3341e55b6e003618c55d7679e90d6fe6d1b0b2f823a8e11b45967fce2102c995",
+    "prototypes/alpha/three-prototype/src/female-reference.js": "0779ef7e2e300057cf5e63d073e26e81f8f5c4224bd2d6301a1485f44b8a9345",
     "prototypes/alpha/three-prototype/src/female-test-presentation.mjs": "2e7aa8f049f2bf141acd385b6b152f3cb55f92fdd830db86b6d9e7f33996e469",
-    "prototypes/alpha/three-prototype/src/FemaleInspector.jsx": "24becbc8cf46120798d4220d449e0d075b93c7b40f7d9a9c24163ccc2a792ee6",
+    "prototypes/alpha/three-prototype/src/FemaleInspector.jsx": "eafc6b1b5a1f1859c10166811d1c2f2b9925817e0945a7462ac14d7a5b936e52",
     "prototypes/alpha/three-prototype/src/fit-perspective-bounds.js": "e0a7f8a2ce23d52ed9753a67589d2910f46f23346b870f0820511e39d1bf8f3b",
     "prototypes/alpha/three-prototype/src/held-evidence.json": "3b5221e514e4d80a53838860d51c66ff430fb4b914d988be2063912f54a1608c",
     "prototypes/alpha/three-prototype/src/imaging/h000-display-fit.json": "15853638b741dfa3301fdc82e34143da6ceb65d9a36c1238e6754788f383a39f",
@@ -66,7 +67,7 @@
     "prototypes/alpha/three-prototype/src/imaging/study-accumulation.mjs": "5d7f7501973efc91134bdd608803a609bc5b8133e96388f29563f209568d8de6",
     "prototypes/alpha/three-prototype/src/imaging/VolumeControls.jsx": "d8bcf3c32258002ab6e1dab6a390c5f7949bbbade2a5d6df31abee5236a5a4cf",
     "prototypes/alpha/three-prototype/src/indexed-fragment-bounds.js": "cc9331625564dc9aa7266bf4bf3cabfd5191dc9a2620d153e323d36c134d53a8",
-    "prototypes/alpha/three-prototype/src/learn-context.mjs": "7f185acf691e203519579ee50c3ac0c787e5ca13164f9b4cdd95a29b2bb3866f",
+    "prototypes/alpha/three-prototype/src/learn-context.mjs": "3f796f6e2b0e19ee47acf9c8b9d5b66b2c071f8cc275fcd0d3c1e19af41efd76",
     "prototypes/alpha/three-prototype/src/learn.css": "0fdedf76e112542d9d3be4a014a5bd8c7383f9a6e9faba2388aa35fb289b9d00",
     "prototypes/alpha/three-prototype/src/LearnPanel.jsx": "ff9da2b670dc369d001006d64d6d588b9f7c0a8f610c34e02ea43675bc4a4543",
     "prototypes/alpha/three-prototype/src/linked-comparison.js": "a0748b7af1fe9aaac047f08c212cf2e2dca04eaa6bb8ba89529a187ac6bd8eb1",
@@ -136,8 +137,8 @@
     "prototypes/alpha/viewer/src/experience.ts": "5e1b529361a43102b136cecb3dd53a880a0bdc308f160ddc0f2ea92a51510aaa",
     "prototypes/alpha/viewer/src/imaging-capabilities.mjs": "0c249e1a5f65634fbf1e09855d5477eebebbbb9b968ecbf022d62e2c34e82fe4",
     "prototypes/alpha/viewer/src/imaging-contract.mjs": "54a2f46275b1b7d85d8655071ddf817e6a711fa241c496bebfe241af44bf6f98",
-    "prototypes/alpha/viewer/src/imaging-core.mjs": "c0c7698318615504ceffb622e818e1a27673aafb954871cfcec0a8a0ac66f902",
-    "prototypes/alpha/viewer/src/imaging-ct-classic.mjs": "b7fd75198a514b7a56989a7a1fe2a4344902258f32eb4ddcebe945c2333209c5",
+    "prototypes/alpha/viewer/src/imaging-core.mjs": "37a5c9d5db08ff20ffec415e06a0cca27c628fe288478c2827494255a87e05a4",
+    "prototypes/alpha/viewer/src/imaging-ct-classic.mjs": "f60d341cb23ee7700e3a6515daf70c3aa70e384e95e59b215fa85598af0a75fa",
     "prototypes/alpha/viewer/src/imaging-module-registry.mjs": "3b5a7d1cad3ad4f0e8cac6d8b849d71d3dc49e856cd17552ba5607836544ea47",
     "prototypes/alpha/viewer/src/imaging-modules-none.mjs": "86285710757f1aad71f08b4e469cafe9944fd20ef78d77207f8023f7a13281fb",
     "prototypes/alpha/viewer/src/imaging-modules.mjs": "2ecebe925f3a389d277e261ff37ac85baac60153a2834c9c21be8b0d9e90df3b",
@@ -199,9 +200,9 @@
       "bytes": 20337,
       "sha256": "7fa47ce90356358938da5038e89d454553a70a92cc5cc437d2f122d96a5ac119"
     },
-    "assets/index-CLpao5Wp.js": {
-      "bytes": 2318034,
-      "sha256": "ad161d3223f55d59ef4400df9e0b4b72a5a36a6e3d4719e40a3f7da7068583cf"
+    "assets/index-DQewmv7a.js": {
+      "bytes": 2321248,
+      "sha256": "1af9d2cf2684acb8dd31ec57aaee451d1d48914cf1ae033888ccd36d1700b037"
     },
     "assets/nrx-reference-worker-BVTUSoQr.js": {
       "bytes": 1418,
@@ -211,9 +212,9 @@
       "bytes": 69914,
       "sha256": "ed4e5444ec1374168fd2f9e7866b8790d0e82372acaaa1cea864419e0749227a"
     },
-    "assets/nrx-surface-D5Hewpt2.js": {
+    "assets/nrx-surface-FgzU_xhO.js": {
       "bytes": 3762,
-      "sha256": "56c50637acfa8f8646cc5141196aee7c5b51363a4de3e86dba867750acebeb51"
+      "sha256": "2f3802cbe9118873761ef9d0042a1a13a9a84da46d34c3a957113e2bf3bb7fb1"
     },
     "assets/nrx-worker-_Uj6W57p.js": {
       "bytes": 12808,
@@ -425,7 +426,7 @@
     },
     "index.html": {
       "bytes": 396,
-      "sha256": "0cee67b210948864103041767aa5c76a54d55204eb04a87a03bc2ed4f0d9477c"
+      "sha256": "0132cdd9f572c48f27be7627aca72d2973cfac51212dcba8607e71025f29fb95"
     },
     "LICENSE": {
       "bytes": 11560,
@@ -441,7 +442,7 @@
     },
     "reference.html": {
       "bytes": 396,
-      "sha256": "0cee67b210948864103041767aa5c76a54d55204eb04a87a03bc2ed4f0d9477c"
+      "sha256": "0132cdd9f572c48f27be7627aca72d2973cfac51212dcba8607e71025f29fb95"
     },
     "third-party/alpha/babel-runtime-7.29.7-LICENSE.txt": {
       "bytes": 1106,

@@ -12,10 +12,10 @@
   <FileCopy Name="NOTICE" Target="{$cspdir}dicom3d/NOTICE" />
   <FileCopy Name="public/assets/__vite-browser-external-CmjdXIzz.js" Target="{$cspdir}dicom3d/assets/__vite-browser-external-CmjdXIzz.js" />
   <FileCopy Name="public/assets/index-Bj7am_zw.css" Target="{$cspdir}dicom3d/assets/index-Bj7am_zw.css" />
-  <FileCopy Name="public/assets/index-CLpao5Wp.js" Target="{$cspdir}dicom3d/assets/index-CLpao5Wp.js" />
+  <FileCopy Name="public/assets/index-DQewmv7a.js" Target="{$cspdir}dicom3d/assets/index-DQewmv7a.js" />
   <FileCopy Name="public/assets/nrx-reference-worker-BVTUSoQr.js" Target="{$cspdir}dicom3d/assets/nrx-reference-worker-BVTUSoQr.js" />
   <FileCopy Name="public/assets/nrx-runtime-7TkXZuTP.wasm" Target="{$cspdir}dicom3d/assets/nrx-runtime-7TkXZuTP.wasm" />
-  <FileCopy Name="public/assets/nrx-surface-D5Hewpt2.js" Target="{$cspdir}dicom3d/assets/nrx-surface-D5Hewpt2.js" />
+  <FileCopy Name="public/assets/nrx-surface-FgzU_xhO.js" Target="{$cspdir}dicom3d/assets/nrx-surface-FgzU_xhO.js" />
   <FileCopy Name="public/assets/nrx-worker-_Uj6W57p.js" Target="{$cspdir}dicom3d/assets/nrx-worker-_Uj6W57p.js" />
   <FileCopy Name="prototypes/alpha/three-prototype/expanded-atlas/LICENSE.md" Target="{$cspdir}dicom3d/atlas/LICENSE.md" />
   <FileCopy Name="prototypes/alpha/three-prototype/expanded-atlas/index.json" Target="{$cspdir}dicom3d/atlas/index.json" />
