@@ -4,6 +4,11 @@ import hashlib
 import json
 import re
 import subprocess
+import argparse
+
+parser = argparse.ArgumentParser()
+parser.add_argument('--profile', choices=('legacy', 'alpha'), default='legacy')
+args = parser.parse_args()
 
 root = Path(__file__).resolve().parents[1]
 names = subprocess.check_output(['git', 'ls-files', '-z'], cwd=root).decode().split('\0')
@@ -32,15 +37,25 @@ manifest = {
     'commitBinding': 'The external release/artifact manifest identifies the later exact packaging commit. This inventory excludes itself and distribution-manifest.json to avoid circular hashes.',
     'files': files,
 }
+if args.profile == 'alpha':
+    manifest.update(distribution='DICOM3D v0.7.0-alpha.1 source inventory', version='0.7.0-alpha.1',
+                    profile='three-r3f-alpha')
+    # Historical release identities belong to the legacy inventory, not this candidate.
+    for key in ['publishedWebCommit', 'originalTag', 'originalTagContainsInstallationCompletion']:
+        manifest.pop(key)
 (root / 'source-manifest.json').write_bytes((json.dumps(manifest, indent=2) + '\n').encode('utf-8'))
 descriptor = {
     'distribution': 'DICOM3D Core', 'version': '0.6.5',
-    'publishedWebCommit': manifest['publishedWebCommit'],
+    'publishedWebCommit': 'd3490dd659e19e44b8800abe87bbc626f45350a2',
     'originalTag': 'v0.6.0', 'originalTagContainsInstallationCompletion': False,
     'entrypoint': '/dicom3d/reference.html', 'requiresIRIS': False,
     'containsPatientImaging': False,
     'baseImage': 'node:24-alpine@sha256:44fce696f38ba8c987c4db89954051000bbd05ffd8d8659ba15ed4a8602e937f',
     'commitBinding': 'Source descriptor only. archive-core.py generates the exact distributed input inventory and packaging commit binding.',
 }
-(root / 'distribution-manifest.json').write_bytes((json.dumps(descriptor, indent=2) + '\n').encode('utf-8'))
+if args.profile == 'legacy':
+    (root / 'distribution-manifest.json').write_bytes((json.dumps(descriptor, indent=2) + '\n').encode('utf-8'))
+else:
+    descriptor = json.loads((root / 'distribution-manifest.json').read_text())
+    assert descriptor['version'] == '0.7.0-alpha.1' and descriptor['frontendProfile'] == 'three-r3f-alpha'
 print(json.dumps({'files': len(files), 'bytes': sum(f['bytes'] for f in files.values())}))

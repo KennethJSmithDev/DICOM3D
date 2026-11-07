@@ -2,6 +2,8 @@
 
 DICOM3D is an open-source interactive anatomy and medical imaging platform. This is the existing React 19.2.7 / Three.js 0.180.0 / R3F 9.6.1 prototype, with Vite 8.2.4; the current source-native integration preserves its renderer and scientific source contracts.
 
+Current release-candidate qualification and installation: [acceptance snapshot](../../docs/RELEASE_070_ALPHA_ACCEPTANCE.md) and [launch guide](../../docs/LAUNCH_070_ALPHA.md). These distinguish local artifacts from the older public deployment.
+
 ## Preserved earlier alpha origin
 
 - Preserved dirty-worktree base: `355570e3f250c4c4644deabd39c675f466eea7ec`; that commit alone is not the candidate.
@@ -33,7 +35,7 @@ For fixture-only tests, `DICOM3D_H000_FIXTURE` is a local H000 directory with a 
 - The 416 historical source-review records remain preserved. Of the most recent 35 residual files, 17 were recovered from pinned BodyParts3D 4.3i geometry, supporting 13 exact versioned source concepts; 18 remain held (3 overlap, 15 laterality cases). Sixteen versioned aliases reuse exact existing spans. No disputed geometry was mirrored or relabeled. Female whole-body membership remains intentionally partial where male-specific anatomy is excluded.
 - The expanded BodyParts3D assets and HRA delta are CC BY 4.0. DICOM3D code is Apache 2.0.
 - General anatomy is an independent reference, never an inferred patient-specific organ or segmentation.
-- No qualified live IRIS frontend admission, newly qualified Core installer/IPM/Docker release, arbitrary-study organ provider, or actual installed-update/rollback claim.
+- No qualified live IRIS frontend admission, arbitrary-study organ provider, native MSI/EXE, or installed-update/settings/data rollback claim. Fresh alpha Docker Core and isolated IPM results are recorded separately in the acceptance snapshot; registry publication remains separate.
 - Broader atlas/accessibility qualification, clean distributable asset inventory, and deployment remain separate gates.
 
 The original Babylon application, public v0.6.5 release, private data and running local preview remain preserved.
@@ -55,4 +57,4 @@ Open the printed URL and select **Female · composite**. Search for the uterus, 
 
 Both variants use the BodyParts3D body envelope, skeleton and shared organ geometry. The 39-owner HRA supplement includes female reproductive anatomy and additional source-backed organ subtrees, and replaces the bladder. It exposes 60 original HRA components with explicit component selection keys distinct from their compound keys. The composite omits identified male-specific owners, including the prostate, urethra, testes and penile vessels when present in the base. The HRA placement is a translation fitted to the shared bladder center. The female pelvis and exterior body shape still use the shared base, and its approximate placement is not a registered female body reconstruction. The standalone NRX ovary fixture requires the expanded local runtime.
 
-The HRA delta comes from Human Reference Atlas / HuBMAP female united reference v1.5 by Kristen Browne and Heidi Schlehlein under CC BY 4.0. The delta preserves named organ subtrees, applies a translation in metres, and normalizes exported normals. See [source notice](three-prototype/atlas-delta/HRA-FEMALE-NOTICE.txt) and [current supplement descriptor](three-prototype/atlas-delta/female-delta.json). Shared BodyParts3D assets retain their existing attribution and license notice.
+The HRA delta comes from Human Reference Atlas / HuBMAP female united reference v1.5 by Kristen Browne and Heidi Schlehlein under CC BY 4.0. The delta preserves named organ subtrees, applies a translation in metres, and preserves original exported attribute/index arrays. See [source notice](three-prototype/atlas-delta/HRA-FEMALE-NOTICE.txt) and [current supplement descriptor](three-prototype/atlas-delta/female-delta.json). Shared BodyParts3D assets retain their existing attribution and license notice.
