@@ -2152,12 +2152,12 @@
       "sha256": "956c0abf9cec20f906be027c544d2b828f43bc628c8c316088c7a4db9479043a"
     },
     "research/nrx/native-workstation/viewer/package-lock.json": {
-      "bytes": 27015,
-      "sha256": "e104fe795a3c5d2f9eab94d0fe24e0f4e018c1de7a40ae0d2977bde061bfd0c8"
+      "bytes": 27016,
+      "sha256": "1297e7bf166546437dc5ac5622ac49196e90fbcfbf381055ef7a704787d400c4"
     },
     "research/nrx/native-workstation/viewer/package.json": {
       "bytes": 339,
-      "sha256": "59e36efa5b5714a27da1a6ee1ca06d37a3dbcf69560e5f3b9c89040263b50513"
+      "sha256": "cb5306a50a8a2feca55f89c10203a2480e918e1f2f3fd926c7d54a9236080c7b"
     },
     "research/nrx/native-workstation/viewer/reference.html": {
       "bytes": 1036,
@@ -2712,12 +2712,12 @@
       "sha256": "956c0abf9cec20f906be027c544d2b828f43bc628c8c316088c7a4db9479043a"
     },
     "viewer/package-lock.json": {
-      "bytes": 27015,
-      "sha256": "a827f9e8f901c5b7000523e92008996fb31ae2e22324f9bab99715fa2608c8d5"
+      "bytes": 27016,
+      "sha256": "548e301858fa267fa43a8126c855ca09f82b83a6ea43ffc6f8e7cb983f131746"
     },
     "viewer/package.json": {
       "bytes": 339,
-      "sha256": "169949ebce37dce697d1008f95fa872d0ed23511f7c381732b760ddf529e0a78"
+      "sha256": "aa52fafa8923251e33f234720565500688d6a4753fe308d432ed3b5cb873ec3a"
     },
     "viewer/reference.html": {
       "bytes": 1033,
