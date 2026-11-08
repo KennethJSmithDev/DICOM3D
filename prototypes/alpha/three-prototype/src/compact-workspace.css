@@ -11,3 +11,9 @@ body:has(main.compact) header{height:64px;padding:6px 10px;gap:8px;min-width:0}b
 main.compact .canvas-actions{padding:4px}.compact .canvas-actions span{display:none}main.compact .scene-heading{max-width:90%;font-size:11px}.compact button,.compact select{min-height:40px}.compact .comparison-tools{left:6px;right:6px;bottom:47px;padding:6px}.compact .comparison-label{max-width:48%;font-size:9px}.compact .intro-status{max-width:90%;font-size:12px}.compact .reference-inspector .system-list{max-height:45dvh}
 body:has(main.compact) header>small{display:none}body:has(main.compact) header>.quality-switch{flex-shrink:0;font-size:12px;padding:6px 8px}
 body:has(main.compact) header>.notice{display:none}main.compact .canvas-title{font-size:11px;max-width:94%;padding:8px}
+
+/* One shared header for desktop and compact layouts; effects remain in Controls. */
+header.workstation-header{height:80px;display:grid;grid-template-columns:minmax(0,1fr) auto;grid-template-rows:44px 24px;gap:0 16px;padding:6px 20px}
+.workstation-header .quality-switch{justify-self:end;min-height:36px}.presentation-status{grid-column:1/-1;display:flex;align-items:center;gap:8px;min-width:0;border-top:1px solid #25485c;padding-top:5px;font-size:11px;color:#a8c2d4}.status-indicator{flex:0 0 7px;width:7px;height:7px;border:1px solid #4fd8bf;border-radius:50%}.header-version{margin-left:auto;white-space:nowrap;font-size:10px}
+main,main.reference-only,main.compact,main.compact.reference-only{height:calc(100dvh - 119px)}
+body:has(main.compact) header.workstation-header{height:80px;padding:6px 10px;gap:0 8px}body:has(main.compact) .header-version{font-size:9px}body:has(main.compact) .presentation-status{font-size:10px;gap:6px}

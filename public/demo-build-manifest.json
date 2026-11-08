@@ -30,7 +30,7 @@
       "sha256": "0dfff975e61696fd4b570e32b38e84ef4515ebb812906196169aab0818081d2a"
     }
   },
-  "sourceBase": "18a033a-stage2-exact-source-inputs",
+  "sourceBase": "6fd38cc2573857686a07de5cece4875e19a0a92b",
   "sourceIdentity": "Exact application inputs below; staged package manifest binds the packaging commit.",
   "sourceInputs": {
     "prototypes/alpha/three-prototype/src/assembly-presentation.js": "2a9417b0aee3dd49269c4932be4e14a0054eddab0735c6e8728cbcbe2d82ac5d",
@@ -38,7 +38,7 @@
     "prototypes/alpha/three-prototype/src/atlas.js": "38b041c00c022c224ecfd77fba60bdbd9762fec2797f38bccac39a12c5afa41e",
     "prototypes/alpha/three-prototype/src/AtlasPresentationControls.jsx": "d08813dfece36911977e3220ffd56f5b6d655ba695c701440761b4da4da54c49",
     "prototypes/alpha/three-prototype/src/beginner-learning.mjs": "c778d70f9549f34eb1f64ed0dc893ccec77f2bef8c97d294172ef31d15ae89bd",
-    "prototypes/alpha/three-prototype/src/compact-workspace.css": "7333d8bbd69524a4c45825b951b8550a01850c43e3ef84449f7b9dde28c7a2b6",
+    "prototypes/alpha/three-prototype/src/compact-workspace.css": "a21f6c613d3bbc3dcb4888674f23f273c66633310b971d481a03817d486bf2db",
     "prototypes/alpha/three-prototype/src/comparison-interaction.js": "b9cf5a2f6f2da065842ebc9ba042ed729f00d2b902ea889a7903ea3478870aa6",
     "prototypes/alpha/three-prototype/src/female-catalog.mjs": "91595c2fb9b457cdaaa4e19694c211dee27e03eed847cc8a1a72118c47c295f4",
     "prototypes/alpha/three-prototype/src/female-presentation.js": "c5a0f135203c08228a41019382073bbad61a3de9c4d1646caca410634376813d",
@@ -75,7 +75,7 @@
     "prototypes/alpha/three-prototype/src/live-reference-samples.mjs": "a8a31d9785297b6664fbbc83b871bf65e9fb4a0ee55db9e946aad633b3337490",
     "prototypes/alpha/three-prototype/src/lung-preset.json": "c9b79c1e258b1272fc23787ce587da37d847c4c2cc24e71450f19a4b448a4e7d",
     "prototypes/alpha/three-prototype/src/lung-surface-fragments.js": "474581f7661d35ee26a41e5e5fa9827186db8142e2ffbd2b31384368e7d79917",
-    "prototypes/alpha/three-prototype/src/main.jsx": "47908d1f02e638376b26f91ea40526878e5a7647324479a3e6f2a32d6a859f61",
+    "prototypes/alpha/three-prototype/src/main.jsx": "243127d44119a811358c6f70f4f1c6ee83aa76d8c8aaed437a9e3e501e8e5ee9",
     "prototypes/alpha/three-prototype/src/materialization-state.mjs": "7ab8884a1e115d8d32d021ed4b124f39a7db447c6143ee77137320b87cf06458",
     "prototypes/alpha/three-prototype/src/MaterializationEffect.jsx": "e062f28d7192921c90da1e0a68cd0e712dcefbf7f6b0e68a6d2f2b2f5f49401f",
     "prototypes/alpha/three-prototype/src/nrx/nrx-surface.js": "4d9254050424fb85d0e91a58cc1e6829e1dcdbb622c92887d0abdba74d8353f9",
@@ -205,13 +205,13 @@
       "bytes": 113,
       "sha256": "22e0ef5dcd9ad65be81155fc9d74aa88db06454d477591f3463f1aa7344adff8"
     },
-    "assets/index-C2sQr-RB.css": {
-      "bytes": 23558,
-      "sha256": "3e1aa521a68def62de0f1f8e9e3041cecca2d80754013509e9dbb7c9c916a211"
+    "assets/index-BU3Q432j.css": {
+      "bytes": 24404,
+      "sha256": "48f2a0a4d308de8248488126b5d8e58d7bea61b2b4d46a25f9ee0fd62d3a5705"
     },
-    "assets/index-T38fjEJ6.js": {
-      "bytes": 2336960,
-      "sha256": "c1a47c5da9a66c3dde5a55f3def503ba28c7e4393a7e78ab18436af8bf9519de"
+    "assets/index-Cv3QpNUX.js": {
+      "bytes": 2337020,
+      "sha256": "dd32e43e794aef9ff9be47390746e115193511999be8607f2b8e9a2a4c5e1e7f"
     },
     "assets/nrx-reference-worker-BVTUSoQr.js": {
       "bytes": 1418,
@@ -221,9 +221,9 @@
       "bytes": 69914,
       "sha256": "ed4e5444ec1374168fd2f9e7866b8790d0e82372acaaa1cea864419e0749227a"
     },
-    "assets/nrx-surface-DVXq0q0e.js": {
+    "assets/nrx-surface-COjdd1b6.js": {
       "bytes": 3762,
-      "sha256": "24631636da1033ed649fc6104d743b1435fadab6b3d674bb66bded6f59a0e64e"
+      "sha256": "18fd66a108b96e4c4a1e54190e639bb6654907bad723d31566dbf23dbf9f0cb0"
     },
     "assets/nrx-worker-_Uj6W57p.js": {
       "bytes": 12808,
@@ -435,7 +435,7 @@
     },
     "index.html": {
       "bytes": 396,
-      "sha256": "8d174887452f290fe5fb40a8bb155b42def84cdbec75afdb4af250a85586932f"
+      "sha256": "9f9c775e3da9c2d5cb295adc1923cf395857afe3ee4eaececd51fc7ef1fbb1e7"
     },
     "LICENSE": {
       "bytes": 11560,
@@ -451,7 +451,7 @@
     },
     "reference.html": {
       "bytes": 396,
-      "sha256": "8d174887452f290fe5fb40a8bb155b42def84cdbec75afdb4af250a85586932f"
+      "sha256": "9f9c775e3da9c2d5cb295adc1923cf395857afe3ee4eaececd51fc7ef1fbb1e7"
     },
     "third-party/alpha/babel-runtime-7.29.7-LICENSE.txt": {
       "bytes": 1106,
