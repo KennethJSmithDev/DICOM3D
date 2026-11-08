@@ -20,6 +20,8 @@ DICOM3D is an open-source interactive anatomy and medical imaging platform for e
 
 **Current alpha:** v0.7.0-alpha.1 source under [`prototypes/alpha/three-prototype/`](prototypes/alpha/three-prototype/), with [versioned downloads and hashes](docs/DOWNLOADS_070_ALPHA.md), [local installation](docs/INSTALL_070_ALPHA.md) and an [acceptance record](docs/RELEASE_070_ALPHA_ACCEPTANCE.md). The published [v0.6.5 release](https://github.com/KennethJSmithDev/DICOM3D/releases/tag/v0.6.5), its Babylon Lite workstation and historical documentation remain available for comparison and rollback.
 
+New here? Follow the [five-minute beginner guide](docs/BEGINNER_GUIDE.md), then explore the [roadmap](ROADMAP.md). Milestones advance through [evidence and release approval](VERSIONING.md), not dates.
+
 ## Try it and download
 
 - **[Live Demo](https://kennethjsmithdev.github.io/DICOM3D/):** Web frontend with the available generalized anatomy and approved public H000 CT/SEG research example. Inspect its displayed version and renderer status when evaluating a deployment.
@@ -31,7 +33,7 @@ DICOM3D is an open-source interactive anatomy and medical imaging platform for e
 
 The Three/R3F **v0.7.0-alpha.1** has separately tested static, Docker Core and fresh IRIS/IPM paths. Follow the [alpha launch guide](docs/LAUNCH_070_ALPHA.md) and exact [download identities](docs/DOWNLOADS_070_ALPHA.md); a GitHub archive does not update Docker Hub, the IPM registry or Open Exchange automatically. There is no native MSI/EXE or qualified in-place upgrade in this release:
 
-- **[Standalone Core Docker Quick Start](docs/INSTALL_070_ALPHA.md#docker-core):** The alpha frontend served locally without IRIS, Orthanc or AI. The exact offline image was built and witnessed; fresh online dependency acquisition remains a separate reproduction check.
+- **[Standalone Core Docker Quick Start](docs/INSTALL_070_ALPHA.md#docker-core):** Run the published Linux/amd64 image by its verified digest, or build from source. Core serves the alpha without IRIS, Orthanc or AI. The published payload matches the qualified image; fresh-machine installation and source-build dependency acquisition retain their own evidence boundaries.
 - **[IRIS/IPM installation](docs/INSTALL_070_ALPHA.md#ipmzpm-in-iris):** Fresh archive installation, normal authenticated Entry, restart and uninstall were exercised in an isolated IRIS for Health 2026.2 fixture. This hosts the viewer; it does not establish live PACS retrieval or a registry update. Earlier [native/Core installation artifacts](docs/INSTALL_060.md) retain their own version boundaries.
 - **[v0.6.0 release downloads](https://github.com/KennethJSmithDev/DICOM3D/releases/tag/v0.6.0)** and **[packaging provenance](docs/PACKAGING_060.md):** Historical distribution identities, source/packaging boundaries and qualification receipts.
 - **[v0.6.5 downloads](https://github.com/KennethJSmithDev/DICOM3D/releases/tag/v0.6.5):** Previous Babylon Lite Safe Demo ZIP and Core source ZIP, not a v0.7.0-alpha installer.
@@ -49,6 +51,10 @@ The earlier workstation also documents a **verified local CT** input route using
 **Connect source CT and 3D.** The approved public **H000 CT/SEG** study demonstrates 103 acquired CT frames, source segmentation overlays and related 3D visualization/accumulation. The optional NRX-derived lesion surface is a **display derivative of the supplied SEG**, not whole-scan organ segmentation. Reference anatomy is not spatially registered to that study.
 
 **Learn as you explore.** The contextual Beginner, Explore and Evidence views explain active anatomy, imaging sources, presentation effects, provenance and limitations without requiring AI. The introductory Materialization effect lasts approximately eight seconds and settles into Scientific; Holographic remains selectable. Skip and reduced-motion controls remain available as explicit choices.
+
+![Actual alpha.1 Materialization replay settling into Scientific](docs/media/materialization-alpha1.gif)
+
+Actual frozen alpha.1 runtime on hardware WebGPU; approximately 9.5 seconds of real presentation, exported at reduced resolution. [Capture method and media boundaries](docs/DEMONSTRATION_MEDIA.md).
 
 **Know the boundaries.** This alpha is a public research demonstration. It does not claim diagnosis, treatment guidance, anatomical completeness, arbitrary DICOM/SEG interpretation, clinical validation, general PACS interoperability, production FHIR/AI features or a qualified installed-update wizard. Whole CT display is direct volume rendering, not whole-scan organ segmentation; the native NRX research renderer is separate from the alpha's NRX/R002 lesion-surface bridge. Fresh installation does not establish an installed settings/data migration or rollback.
 

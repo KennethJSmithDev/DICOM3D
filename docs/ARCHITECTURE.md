@@ -1,5 +1,40 @@
 # Architecture and ownership
 
+## Current alpha.1 display and hosting paths
+
+DICOM3D is an open-source interactive anatomy and medical imaging platform. The current alpha frontend uses React / React Three Fiber for scene lifecycle and interaction, and Three.js for presentation. Its asynchronous renderer initializes WebGPU where available and reports the actual backend; an explicitly forced WebGL2 path is separately qualified. The preserved Babylon Lite implementation belongs to the earlier product path described below.
+
+```text
+Pinned BodyParts3D / HRA sources → semantic bundles + source-native catalog
+                                            ↓
+                              Three.js / R3F atlas presentation
+
+Approved H000 CT + source SEG → existing source/spatial contracts
+                  ├─ source-image display and linked highlight
+                  ├─ Three.js WebGPU volume presentation
+                  └─ isolated NRX/R002 CPU/Wasm extraction → Three geometry
+```
+
+The NRX bridge is implemented, but the native NRX GPU renderer does not execute the alpha viewer. `prototypes/alpha/three-prototype/src/imaging/H000Scene.jsx` calls `nrx-seg/nrx-h000.js`; its dedicated worker validates the admitted mask and pinned Wasm, extracts a display surface, and returns positions for Three `BufferGeometry`. `nrx-reference/` separately bridges eligible bounded reference fields into Three geometry with recorded source transforms restored. See the [NRX handoff](../research/nrx/HANDOFF.md) for experimental scope and limitations. Whole CT display is direct volume rendering, not NRX-generated whole-scan organ segmentation.
+
+Static Pages, extracted Safe Demo, Docker Core and authenticated IRIS/IPM serve the same qualified frontend through different hosts. Core is a nonroot Node static server, independent of IRIS/Orthanc. IPM hosts protected same-origin assets through the normal IRIS Entry/login route; it does not itself establish live PACS retrieval. The [installation guide](INSTALL_070_ALPHA.md) keeps these boundaries separate.
+
+### Permanent CT/reference comparison contract
+
+- Preserve original CT pixels/stored values and authoritative SEG-to-frame correspondence.
+- Keep source-image display distinct from derived surfaces and reference anatomy.
+- Link navigation/rotation from either comparison side; permit the divider in both directions.
+- Keep selection, opacity and visibility independent and restorable.
+- Preserve the acquired plane and lesion in the appropriate comparison views.
+- Restore consistent state on mode/reference changes and dispose owned resources.
+- Label reference placement/fitting as approximate/manual; never infer patient registration.
+
+`ReferenceComparison.jsx`, `linked-comparison.js` and `comparison-interaction.js` own that presentation boundary. Existing visible-interaction acceptance is scoped evidence, not a claim of independently validated anatomical registration. Renderer changes, source admission and host authentication each require checks at their owning layer.
+
+## Preserved historical architecture
+
+The following sections describe earlier Babylon/IRIS milestones. Their source and evidence remain preserved; they do not identify the renderer of the current alpha.
+
 ## Data path
 
 ```text

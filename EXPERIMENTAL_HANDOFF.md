@@ -1,3 +1,5 @@
+> Historical source-review handoff. Public `main` and `experimental` now include the released v0.7.0-alpha.1; use the [current README](README.md), [downloads](docs/DOWNLOADS_070_ALPHA.md) and [roadmap](ROADMAP.md). Earlier checkpoint and qualification boundaries below are preserved, not silently promoted.
+
 # NRX and DICOM3D v0.7.0-alpha.1 — independent review
 
 This branch is the temporary public **source-review home** of NRX research and the Three.js / React Three Fiber alpha. The operator authorized this destination on 2026-11-06. It is not a release, Pages deployment, replacement of the installed application, or production renderer certification.

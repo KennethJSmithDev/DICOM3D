@@ -1,6 +1,6 @@
 # DICOM3D v0.7.0-alpha.1 downloads
 
-**Exact release identities.** These artifacts have the recorded local qualification; verify their availability and hashes against the versioned GitHub release. Download links become available when the reviewed prerelease is published. The public Live Demo is updated separately through a manual Pages action, so inspect its displayed version rather than assuming it matches a newly published download.
+**Published prerelease.** The [v0.7.0-alpha.1 release](https://github.com/KennethJSmithDev/DICOM3D/releases/tag/v0.7.0-alpha.1) contains the four files below. Its immutable source tag is `e74285f4c5a9f376a48afeda007e849915850895`; the qualified runtime source is `623d81bcab9081a0522281be36a698d16ecbda4b`. The [Live Demo](https://kennethjsmithdev.github.io/DICOM3D/) also serves alpha.1 following a separately approved manual Pages deployment. Check its displayed version/backend when reporting behavior.
 
 | Download | Purpose | SHA-256 |
 |---|---|---|
@@ -17,7 +17,7 @@ node dicom3d-0.7.0-alpha.1-preview.mjs --root <extracted-directory> --port 0
 
 Open the loopback URL printed by the helper. It verifies the payload before serving, accepts no uploads and requires no IRIS, Orthanc or AI service. Stop it with Ctrl+C. Opening the HTML directly with `file:` is not the qualified launch path. If replacing another host on the same origin, stale cached worker headers can require clearing that site's cache; see the [acceptance disclosures](RELEASE_070_ALPHA_ACCEPTANCE.md#hosting-transition-disclosures).
 
-For Docker source builds and the protected native Entry/login route, follow [installation](INSTALL_070_ALPHA.md) and [launch instructions](LAUNCH_070_ALPHA.md). The local qualified Docker image is identified in the [acceptance record](RELEASE_070_ALPHA_ACCEPTANCE.md); this release does not publish a Docker Hub image. A GitHub release attachment also does not update Open Exchange or the IPM registry. Do not assume `zpm "install dicom3d"` retrieves this archive.
+For the published Docker image, optional source build and protected native Entry/login route, follow [installation](INSTALL_070_ALPHA.md) and [launch instructions](LAUNCH_070_ALPHA.md). The public image is `ooopsmybaddude/dicom3d-core:0.7.0-alpha.1`, pinned by index digest `sha256:ebca2fb8be5ee11f9e6bc74c48b335b8174c17d94b9f9c36513216ef01e597a4` (Linux/amd64). Registry inspection verified the qualified layer identities and frontend payload; no new-machine installation is implied. Open Exchange and IPM registry publication remain pending. Do not assume `zpm "install dicom3d"` retrieves the alpha archive.
 
 GitHub's tag source archives are **source**, not a prebuilt Core runtime or native MSI/EXE. Fresh local Docker/IPM installation was exercised; online Docker acquisition, in-place upgrade, settings/data migration and installed rollback remain separate gates. No arbitrary-study organ segmentation or live PACS admission is claimed.
 

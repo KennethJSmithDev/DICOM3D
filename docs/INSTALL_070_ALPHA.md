@@ -2,7 +2,7 @@
 
 DICOM3D is an open-source interactive anatomy and medical imaging platform. This alpha uses React, Three.js and React Three Fiber, with WebGPU as the primary renderer and a WebGL2 compatibility path. It includes source-backed reference anatomy and the approved public H000 CT/SEG example.
 
-These instructions describe the alpha packaging candidate. The published v0.6.5 artifacts and historical installation receipts remain separate. A source version label does not mean a Docker image, IPM registry package or Open Exchange download has been updated. Use an exact artifact and its qualification receipt; do not assume `zpm "install dicom3d"` currently retrieves this alpha.
+These instructions describe the published v0.7.0-alpha.1 prerelease and its separately qualified installation routes. The published v0.6.5 artifacts and historical installation receipts remain separate. Use the exact [downloads and hashes](DOWNLOADS_070_ALPHA.md); the community IPM registry and Open Exchange have not been promoted to this alpha. Do not assume `zpm "install dicom3d"` retrieves it.
 
 ## Choose a local host
 
@@ -16,7 +16,21 @@ Core does not require IRIS, IRIS for Health, Orthanc, an AI service or patient d
 
 ## Docker Core
 
-Start Docker Desktop first. `docker info` should reach the engine. From the reviewed source checkout:
+### Published image: no source build required
+
+Start Docker Desktop or a compatible Linux-container engine first. `docker info` should reach the engine. The published image supports **Linux/amd64**; its attestation entry is not an ARM64 runtime. With an unused local port and container name:
+
+```powershell
+docker run --detach --name dicom3d-core-alpha --read-only --cap-drop ALL --security-opt no-new-privileges:true --memory 768m --cpus 2 --pids-limit 64 -p 127.0.0.1:53042:8080 ooopsmybaddude/dicom3d-core@sha256:ebca2fb8be5ee11f9e6bc74c48b335b8174c17d94b9f9c36513216ef01e597a4
+```
+
+Open [Core](http://127.0.0.1:53042/dicom3d/). Stop or restart that named container with `docker stop dicom3d-core-alpha` / `docker start dicom3d-core-alpha`. Do not replace an existing installation or delete its data to free the example name/port. No host study directory, IRIS license or credentials are mounted. The static host runs as nonroot on container port 8080; `/healthz` reports version and status.
+
+The registry index digest and all 86 frontend payload files were reconciled with qualified alpha evidence. Compressed image layers total 213,059,113 bytes; the retained local image reports 645,213,450 bytes. Browser GPU rendering occurs on your desktop, not in this static-host container. A new machine and any architecture emulation still need their own reproduction check.
+
+### Build from source instead
+
+From the reviewed source checkout:
 
 ```powershell
 docker compose -f compose.core.yaml up --build --detach core
@@ -38,12 +52,12 @@ The online build uses the checked-in alpha lockfile and a pinned Node base image
 
 Use an authorized local development instance. The retained qualification reference is IRIS for Health 2026.2; a successful test there does not establish every IRIS/IPM combination. The installer includes an Embedded Python maintenance adapter, so its supported Python runtime must be available. Do not change instance security, credentials or shared application permissions to make installation pass.
 
-1. Obtain the exact reviewed `dicom3d-0.7.0-alpha.1.tgz` and its SHA-256 from the packaging receipt. An unreleased filename is not a download location.
+1. Download the published [`dicom3d-0.7.0-alpha.1-002.tgz`](https://github.com/KennethJSmithDev/DICOM3D/releases/download/v0.7.0-alpha.1/dicom3d-0.7.0-alpha.1-002.tgz) and verify SHA-256 `6b4215b78134df6f1d9189072e7b7b1b0b639bfe59c9687ea730ca2405070d18` against [downloads](DOWNLOADS_070_ALPHA.md).
 2. Open the IRIS terminal in the `USER` namespace. Confirm that `zpm "list"` works and record the installed IPM version.
 3. Make the archive available at a local path the IRIS instance can read, then load that exact file:
 
 ```objectscript
-zpm "load /path/to/dicom3d-0.7.0-alpha.1.tgz -v"
+zpm "load /path/to/dicom3d-0.7.0-alpha.1-002.tgz -v"
 zpm "list"
 ```
 

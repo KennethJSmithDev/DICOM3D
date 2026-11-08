@@ -1,68 +1,74 @@
-# DICOM3D release history
+# DICOM3D roadmap
 
-DICOM3D is an independently installable, open-source IRIS for Health research-presentation viewer. Source DICOM data, semantic/spatial provenance, portable derived geometry and renderer-owned presentation remain separate.
+DICOM3D is an open-source interactive anatomy and medical imaging platform designed to help people see, explore and understand the human body and its underlying medical images.
 
-## Current installation completion
+This is a proposed direction, not a delivery calendar. Later milestones need scoped implementation, evidence and release approval. Documentation-only improvements do not increment the product version. See [versioning](VERSIONING.md), [beginner guidance](docs/BEGINNER_GUIDE.md) and the [interactive preview instructions](docs/ROADMAP_PREVIEW.md).
 
-The v0.6.0 visual web/source release is published. Matching Core/Docker and IRIS/IPM packaging uses a separately identified later source commit and exact-artifact receipts; the original tag stays immutable. See [installation](docs/INSTALL_060.md) and [source reproduction](docs/PACKAGING_060.md). H000 data admission and OEX/IPM registry publication remain separate decisions.
+## Milestones
 
-## Accepted milestones
+These structured milestone sections are the canonical input to the separate interactive preview.
 
-- **H000 PASS / CLOSED:** one identified public CT/SEG study through deterministic reconstruction, reversible model/patient transforms, semantic GLB and independent Babylon Lite/WebGPU rendering; source and canonical evidence remain frozen. Not a clinical validation claim.
-- **0.0.1:** initial public product baseline.
-- **0.0.2:** native IRIS for Health development viewer/API shell, qualified independently of IPM.
-- **0.1.0 / V010-F/G PASS:** Apache-2.0 package and exact-artifact IPM install/uninstall/absence/reinstall, security and browser checks, and second isolated Docker clean-room qualification. GitHub release published. Native Windows IPM remains unverified; see docs/DOCKER_QUICKSTART.md.
-- **DEMO-001 PASS:** public GitHub Pages Live Safe Demo with auto-loaded synthetic icosahedron, semantic selection, orbit/zoom and hide/show. No patient imaging or clinical claim. Public URL: https://kennethjsmithdev.github.io/DICOM3D/
+### anatomy-imaging-foundation | v0.7.0-alpha.1 — Anatomy & Imaging Foundation
+- Status: AVAILABLE
+- Outcome: Expanded male anatomy and the female composite, contextual learning, Scientific/Holographic/Materialization presentations, and the public H000 CT/SEG example.
+- Evidence: [Published alpha.1](https://github.com/KennethJSmithDev/DICOM3D/releases/tag/v0.7.0-alpha.1); [acceptance](docs/RELEASE_070_ALPHA_ACCEPTANCE.md); [downloads](docs/DOWNLOADS_070_ALPHA.md).
+- Acceptance: Source-native selection, picking, isolation, opacity, camera and lifecycle at recorded scopes; hardware WebGPU and separately forced WebGL2; independently qualified static, Core and IPM paths.
+- Limits: 1,205 male and 1,235 female-composite draw owners are not organ counts. Female placement is approximate. H000 volume display is not whole-scan organ segmentation. No patient registration or clinical validation.
+- Media: [Actual male Scientific capture](docs/images/visual-070-male-scientific.png); [actual female composite](docs/images/visual-070-female-composite.png); [actual H000](docs/images/visual-070-h000.png).
 
-## 0.2.0 — Interactive slice expansion (published October 17, 2026)
+### public-readiness | Make the current alpha easier to try and understand
+- Status: IN_DEVELOPMENT
+- Outcome: Align installation, architecture, roadmap and beginner documentation with the released alpha; prepare genuine demonstration footage and a separate interactive roadmap.
+- Evidence: [Beginner guide](docs/BEGINNER_GUIDE.md); [installation](docs/INSTALL_070_ALPHA.md); [media capture contract](docs/DEMONSTRATION_MEDIA.md).
+- Acceptance: Verified links/artifact names, preserved branding/runtime/rollback, accessible local roadmap preview, source-bound public-safe media, and operator review before commit or publication.
+- Limits: This documentation/media candidate changes no product feature, frozen runtime, public deployment or version. Publication remains separately approved.
+- Media: Released screenshots illustrate actual behavior; review-candidate recordings remain unpublished until approved.
 
-H002-A/B and fresh C/D/E/F bounded checks passed on the candidate branch, including camera framing, cache repair and exact-artifact package qualification. Historical failures remain preserved; the earlier C screenshot's cause is not claimed resolved. See [candidate status](docs/H002_CANDIDATE.md). The v0.2.0 release is published. The live public demo subsequently moved to anatomy-first DEMO-050.
+### source-native-coverage | Finish justified source-native atlas corrections
+- Status: PLANNED
+- Outcome: Resolve remaining male source-admission cases where publisher evidence permits and improve the female composite through explicit shared, replacement and exclusion mappings.
+- Evidence: [Current atlas scope](prototypes/alpha/README.md); [BodyParts3D attribution](prototypes/alpha/three-prototype/expanded-atlas/LICENSE.md); [HRA attribution](prototypes/alpha/three-prototype/atlas-delta/HRA-FEMALE-NOTICE.txt).
+- Acceptance: Exact component/compound membership, laterality and unchanged transforms; real selection/isolation; counts by category; remaining holds preserved rather than guessed away.
+- Limits: Eighteen residual files have overlap/laterality dispositions. A held file is not necessarily a missing organ. No mirroring, relabeling or new geometry solely to inflate a count.
+- Media: Record demonstrated source selections; unresolved anatomy must not be illustrated as completed functionality.
 
-**Objective:** Extend the existing Babylon Lite viewer with reversible, independently selectable and manipulable **derived presentation slices**, keeping original geometry, semantic identity and source-space transforms authoritative. Use a synthetic test fixture for public demonstrations.
+### connected-imaging | Proposed v0.8 direction — connected imaging and learning
+- Status: PLANNED
+- Outcome: Compose existing ingestion, Orthanc/IRIS retrieval and source-linked imaging into a usable supported-study path, while standalone anatomy remains independent.
+- Evidence: [Architecture](docs/ARCHITECTURE.md); [installation scope](docs/INSTALL_070_ALPHA.md); [current acceptance](docs/RELEASE_070_ALPHA_ACCEPTANCE.md).
+- Acceptance: Authorized retrieval reaches the frontend with verified source identities, values and spatial transforms; clear authentication/failure states, source-linked findings where supported, and beginner contextual learning.
+- Limits: Historical retrieval and an installed IRIS viewer are not a packaged live PACS workflow. DICOM SR/SEG, FHIR findings and generic local admission need explicit contracts and gates. AI Hub is a separate deployment path.
+- Media: Use public/synthetic studies for distributable examples; private imaging and reports stay local.
 
-**Explicit non-goals:** no unrelated engine code, clinical claims, native DICOM ingestion, AI, new renderer, or mutation of H000 artifacts. Acquired CT slices must not be confused with mesh-derived cross-sections.
+### reproducible-platform | Proposed v0.9 / beta direction — installation and recovery
+- Status: PLANNED
+- Outcome: Make Core/IRIS installation, setup guidance, compatibility and updates reproducible for people unfamiliar with the project.
+- Evidence: [Installation](docs/INSTALL_070_ALPHA.md); [versioning](VERSIONING.md); [proposed release process](docs/RELEASE_AUTOMATION_PLAN.md).
+- Acceptance: Fresh-machine reproduction, clear dependency/security requirements, supported update and settings/data-preserving rollback, accessibility checks and independently qualified distributions.
+- Limits: A Core setup wizard and installed-update flow are not delivered by alpha.1. Fresh install is not migration evidence. Registry publication and live interoperability remain independent decisions.
+- Media: Record real setup/recovery workflows only after their acceptance gates pass.
 
-### Bounded gates
+### stable-platform | Proposed v1.0 — stable anatomy and imaging platform
+- Status: PLANNED
+- Outcome: A coherent, documented and independently reproducible platform for anatomy learning and supported imaging exploration by educators, families, trainees, researchers and professionals.
+- Evidence: [Current scope](README.md); [promotion requirements](VERSIONING.md); [contributing](CONTRIBUTING.md).
+- Acceptance: Agreed feature scope, stable compatibility contracts, independent installation/use/reproduction, accessible learning/navigation, accepted limitations, maintainable tests and support/rollback instructions.
+- Limits: Version 1.0 would not establish diagnostic, therapeutic or medical-device approval. Consequential scope choices need review rather than silently removing expected capabilities.
+- Media: Released workflows use actual footage with exact build identities.
 
-1. **H002-A — inventory and contract:** read-only inspect the actual DEMO-001 viewer, its synthetic fixture and H000 interaction/spatial contracts. Determine smallest slice representation and UI/state owner. Record existing capability and missing sockets, versioned tests and cost baseline.
-2. **H002-B — synthetic slicing:** derive multiple deterministic sections from the existing synthetic shape (or an equally small explicitly synthetic fixture). Each has stable local identity and immutable canonical placement; preserve original fixture and source geometry.
-3. **H002-C — independent interaction:** trusted pick resolves slice identity; select, hide/show, isolate, opacity, drag/translation and rotation apply only to derived presentation state. Restore one or all slices to exact canonical placements.
-4. **H002-D — global expansion:** one reversible slider controls spacing along a declared axis; composition with individual offsets/rotation is deterministic. Check reassembly, ordering, bounds, camera independence and no source mutation.
-5. **H002-E — browser/UI qualification:** test fresh-page and replay in desktop and narrow mobile layouts, WebGPU rendering, selection/hidden misses, labels, keyboard/touch affordances, accessibility basics, errors and visible legibility.
-6. **H002-F — release/package qualification:** qualify the same slice UI in the standalone GitHub Pages demo and the IRIS/IPM build; deterministic artifact, resource gates, security, install/uninstall/absence/reinstall and independent clean-room Docker replay. Preserve 0.1.0 tag and accepted evidence. Publish GitHub v0.2.0 only on PASS, then prepare user-owned Open Exchange update.
+### research-directions | Longer-term research — representations, segmentation and registration
+- Status: EXPLORATORY
+- Outcome: Investigate broader scan-derived tissue/organ representations, segmentation, patient-specific registration, advanced NRX rendering, levels of detail and future device/infrastructure integrations.
+- Evidence: [Independent NRX research](research/nrx/HANDOFF.md); [current architecture](docs/ARCHITECTURE.md); [source/data boundaries](docs/PUBLIC_RESEARCH_DATA_POLICY.md).
+- Acceptance: Establish source authority and each missing capability, reuse existing mechanisms, demonstrate transforms/identity/lifecycle and representation costs, then qualify an explicit integration boundary before product admission.
+- Limits: Research directions are not released capabilities or promised dates. Reference anatomy is not patient segmentation; ontology links are not registration; smoothing can lose thin features.
+- Media: Label concept imagery conceptual and keep it distinct from actual runtime and source-derived evidence.
 
-**Gate behavior:** continuous bounded execution through ordinary PASS steps. On a genuine failure or material design/authority decision, stop with exact evidence. Never promote an inferred or saved-only replay to new browser observation. Preserve the original DEMO-001 fixture as a regression control.
+## Preserved release history
 
-## v0.5.0 — Published functional foundation (October 18, 2026)
+- [v0.7.0-alpha.1](https://github.com/KennethJSmithDev/DICOM3D/releases/tag/v0.7.0-alpha.1): Three.js/R3F Anatomy & Imaging Foundation prerelease; [distribution boundaries](docs/DOWNLOADS_070_ALPHA.md).
+- [v0.6.5](https://github.com/KennethJSmithDev/DICOM3D/releases/tag/v0.6.5): preserved Babylon Lite release and static rollback; original artifacts remain immutable.
+- [v0.6.0 installation history](docs/INSTALL_060.md): earlier distributions retain their own qualification/source identities.
+- [Original pre-alpha roadmap](https://github.com/KennethJSmithDev/DICOM3D/blob/f1d0012e99f661871563ea5baf5b543230e5ff90/ROADMAP.md): unchanged historical milestones and receipts, not the current rendering architecture.
 
-Licensed generalized male/female anatomy, bounded multimodality presentation, source-linked H000 semantic evidence, deterministic contextual learning, stable selection/isolation/camera behavior and qualified Core/IPM distributions. The public DEMO-050 loads male anatomy directly and permits female switching. Live FHIR, DICOMweb, generic SEG/SR interpretation, clinical validation and AI decisions are not production-qualified.
-
-## v0.5.1 — Published installation recovery (October 20, 2026)
-
-The seven frozen recovery assets are published at `f03162c`; the static viewer/reference payload retains v0.5.0 bytes. Current installation links and release status are reconciled without rewriting historical qualification. Open Exchange listing, archive targets and registry packages remain separately verified surfaces.
-
-## v0.6.0 — Visual Research Workstation (web/source scope)
-
-**From Pixels to Meaning.** The selected release brings the existing BodyParts3D/HRA references into a 3D-first desktop workspace with scientific/holographic materials, bounded materialization, source-preserving semantic controls and contextual Learn.
-
-The original v0.6.0 tag uses the reference-only profile. A later [Safe Demo deployment](docs/SAFE_DEMO.md) added the curated H000 study on request.
-
-The final release gate freezes the exact reference-only tree/output, verifies browser behavior, integrates the accepted source, observes Pages completion and reads back the actual remote experience and GitHub release. [Release notes](docs/RELEASE_060.md) define the scope; the [procedure](docs/VISUAL_PUBLICATION_PROCEDURE.md) separates each evidence step.
-
-The original web/source publication retained v0.5.1 installer identifiers. The separately authorized installation completion reconciles Core/IPM, module/Health and Compose to 0.6.0 and binds exact archives to a later packaging commit. The original tag stays immutable. Native Windows, Open Exchange/registry actions and H000 admission retain their separate boundaries.
-
-## v0.6.5 — Published Visual Research Workstation
-
-The published Safe Demo opens generalized reference anatomy and offers the curated H000 CT/SEG example on request. The separate Core ZIP contains source. See the [release notes](docs/RELEASE_NOTES_065.md) and [distribution guide](docs/INSTALL_065.md).
-
-## Core ownership and representation
-
-- Source imaging remains authoritative; manifest owns semantics/provenance/units/spatial transforms; GLB owns portable derived geometry; Babylon Lite owns display-only transforms/materials/normals.
-- Derived slices preserve stable identity and canonical transform while allowing temporary manipulation. Never rewrite the original GLB or accepted H000 mesh to implement visual expansion.
-- Use small semantic IDs and explicit domains; load rich per-slice payload only when needed. Measure browser requests, generated assets, memory and interaction latency as well as correctness.
-- The live safe demo must remain no-login, browser-only and safe for public access. The IRIS/IPM product remains independently installable.
-- No claim of clinical validity, diagnostic support or submillimetre anatomical accuracy follows from a smoother display.
-
-## Release process
-
-Read current contracts and receipts; use existing providers and packages; qualify each bounded gate; preserve evidence; update docs/version; freeze exact artifact; verify lifecycle in two independent qualified environments; publish tagged GitHub release only on PASS. Open Exchange submissions/updates remain operator-owned.
+[Contribute focused, source-backed changes](CONTRIBUTING.md) or [sponsor DICOM3D](https://github.com/sponsors/KennethJSmithDev). Support helps anatomy coverage, accessible learning, reproducible installation and imaging integration. No release date is promised by this roadmap.

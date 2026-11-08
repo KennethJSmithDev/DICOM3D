@@ -4,7 +4,7 @@ Use an exact reviewed source checkout or artifact. The alpha is a research and e
 
 ## Docker Core
 
-From the reviewed source checkout with Docker running:
+For the published, digest-pinned image, use the [Docker installation command](INSTALL_070_ALPHA.md#published-image-no-source-build-required). It needs no source checkout. The source-build alternative below remains available with Docker running:
 
 ```powershell
 docker compose -f compose.core.yaml up --build --detach core
@@ -37,7 +37,13 @@ IPM hosts the same frontend and protected identity API. Installation does not au
 
 The reviewed ZIP is an inventory-bound static frontend payload: extract it into a new directory and verify its SHA-256 and file inventory. It requires a compatible loopback HTTP host; opening `index.html` as a `file:` URL is not a qualified launch path. This archive does not contain a launcher or Node dependencies.
 
-From this reviewed source checkout, with Node 24 available, serve the extracted directory using the existing inventory-checked helper:
+With Node 24 available, download the separately published preview helper from [downloads](DOWNLOADS_070_ALPHA.md), then serve the extracted directory:
+
+```powershell
+node dicom3d-0.7.0-alpha.1-preview.mjs --root <extracted-directory> --port 0
+```
+
+Alternatively, from this source checkout, use its existing inventory-checked helper:
 
 ```powershell
 node scripts/preview-static.mjs --root <extracted-directory> --port 57980
