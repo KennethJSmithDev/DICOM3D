@@ -139,6 +139,10 @@
       "bytes": 2298,
       "sha256": "d824be594a929b0903b4e523bd67e81ed3aad0e10f5b5767dd09a9ca17e9beb1"
     },
+    "docs/COMPACT_EFFICIENCY.md": {
+      "bytes": 2118,
+      "sha256": "7289f9380e2f2928592bfec8c0519dcbe436ee0ddd4abbc147c7480b23068d34"
+    },
     "docs/COMPATIBILITY_050.md": {
       "bytes": 2245,
       "sha256": "778012e5987353e6350f7deabb169ede7364f743974b62ab870d3def9de721f8"
@@ -636,12 +640,20 @@
       "sha256": "741b4cafd2617bf5fc121e90c5fe9af5a2e0bc20fcf09bd1573650460e22119f"
     },
     "prototypes/alpha/three-prototype/src/ReferenceComparison.jsx": {
-      "bytes": 15688,
-      "sha256": "8d51bf6bc5b750f7b17e4f6a199360292c4ccc791cbc2457bdd985d2c7a3ed35"
+      "bytes": 15848,
+      "sha256": "d1216e47e82293ddcae5fdd9303d3a8936879b4d70793490f0c86e291b4d258e"
     },
     "prototypes/alpha/three-prototype/src/ReferenceInspector.jsx": {
       "bytes": 8985,
       "sha256": "b0fe728213339e2497dbbf4c407c38c2a75af275655b63b5596cf5f92f964f78"
+    },
+    "prototypes/alpha/three-prototype/src/RenderCadence.jsx": {
+      "bytes": 1942,
+      "sha256": "4d079b8f66ffc605000b48f2f3f6e73e30728bf1d9d7c1aa572c1c8824a8eaa1"
+    },
+    "prototypes/alpha/three-prototype/src/RenderSettings.jsx": {
+      "bytes": 2920,
+      "sha256": "d8438b3ff9b1c63c20b4625c1db9b83f862db6e301cd0c19e6bfc0fc6c90e112"
     },
     "prototypes/alpha/three-prototype/src/SkeletonParts.jsx": {
       "bytes": 3820,
@@ -670,6 +682,10 @@
     "prototypes/alpha/three-prototype/src/beginner-learning.mjs": {
       "bytes": 10519,
       "sha256": "c778d70f9549f34eb1f64ed0dc893ccec77f2bef8c97d294172ef31d15ae89bd"
+    },
+    "prototypes/alpha/three-prototype/src/compact-workspace.css": {
+      "bytes": 3234,
+      "sha256": "7333d8bbd69524a4c45825b951b8550a01850c43e3ef84449f7b9dde28c7a2b6"
     },
     "prototypes/alpha/three-prototype/src/comparison-interaction.js": {
       "bytes": 1504,
@@ -808,8 +824,8 @@
       "sha256": "474581f7661d35ee26a41e5e5fa9827186db8142e2ffbd2b31384368e7d79917"
     },
     "prototypes/alpha/three-prototype/src/main.jsx": {
-      "bytes": 52711,
-      "sha256": "aca18facb0aae2ccd2827768223dbe5013b83caac6a287502f0a8fb52a9baa37"
+      "bytes": 53951,
+      "sha256": "7b4a9cf933c410f2aca1a16995ed636d0e654fdb11417a4e069c2a7d2348a00e"
     },
     "prototypes/alpha/three-prototype/src/materialization-state.mjs": {
       "bytes": 484,
@@ -907,6 +923,10 @@
       "bytes": 3474,
       "sha256": "1b2f9631eedcab04f74b33e8c7b37675c40023158aa12b9aaac1e9b4153efd61"
     },
+    "prototypes/alpha/three-prototype/src/render-cadence.js": {
+      "bytes": 1504,
+      "sha256": "7d48da58817366a1afe00cb1c193dbc1f0bb706bd42ea28ab16c72409c9573ba"
+    },
     "prototypes/alpha/three-prototype/src/renderer-factory.js": {
       "bytes": 688,
       "sha256": "cc4e67fff64c9ed62061d986c75a9a7a55f55a3dd872d32aeee374696d39d0a1"
@@ -932,8 +952,8 @@
       "sha256": "a7c3fd2ddd25c4e7de6d20e67a4ea8816d94f367e96dc609524c81a1fda46e1a"
     },
     "prototypes/alpha/three-prototype/src/use-reference-intro.js": {
-      "bytes": 3475,
-      "sha256": "659f688b7873714f38037197d6abb30f761a234b00b18a0d8b25a1e705b4a8b8"
+      "bytes": 3517,
+      "sha256": "e2f871d7f46dd01460099b3e5a1f935e3e1019fcbab57268fb7b2b9293b4c5bc"
     },
     "prototypes/alpha/three-prototype/src/use-study-presentation.js": {
       "bytes": 2363,
@@ -970,6 +990,10 @@
     "prototypes/alpha/three-prototype/test-materialization.mjs": {
       "bytes": 1203,
       "sha256": "cf1ae3fc84f2df46b77e2f71bd52cd06329755e71340882677c1c4f54f2b1223"
+    },
+    "prototypes/alpha/three-prototype/test-render-cadence.mjs": {
+      "bytes": 1558,
+      "sha256": "5112f76a83de034f07f5b2d5f280ef7d1bcdf09852f26eb9979b365823ba5398"
     },
     "prototypes/alpha/three-prototype/test-renderer-factory.mjs": {
       "bytes": 1377,

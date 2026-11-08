@@ -23,7 +23,7 @@ export function useReferenceIntro(ready,enabled,setAppearance,setAssembly,{prefl
  },[finish,setAppearance,setAssembly,reduced,preflightReason]);
  const scrub=useCallback(value=>{const p=Math.max(0,Math.min(1,Number(value)));if(!Number.isFinite(p))return;cancelAnimationFrame(timer.current);timer.current=null;played.current=true;if(p===1){finish('manual-progress');return}setAppearance('holographic');setAssembly(0);setPhase('assembling');setProgress(p);setRun(v=>v+1);clock.current={active:true,started:performance.now()-p*INTRO_DURATION_MS,elapsedMs:p*INTRO_DURATION_MS,durationMs:INTRO_DURATION_MS,reason:'manual-progress',paused:true};},[finish,setAppearance,setAssembly]);
  const setReduced=useCallback(value=>{setReducedState(value);try{localStorage.setItem(MOTION_KEY,String(value))}catch{}if(value)finish('manual-reduced-motion')},[finish]);
- useEffect(()=>{if(enabled&&!played.current)play();if(!enabled){if(clock.current.active)finish('workspace-change');played.current=false}},[enabled,play,finish]);
+ useEffect(()=>{if(enabled&&ready&&!played.current)play();if(!enabled){if(clock.current.active)finish('workspace-change');played.current=false}},[enabled,ready,play,finish]);
  useEffect(()=>()=>cancelAnimationFrame(timer.current),[]);
  return {phase,run,clock,play,finish,scrub,progress,reduced,setReduced,ready,active:phase==='assembling'||phase==='holographic'};
 }
