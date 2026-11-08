@@ -1,0 +1,1 @@
+import{A as e,M as t,s as n,u as r,x as i}from"./runtime-DuT2Gw72.js";import{i as a,r as o}from"./sockets-DhRah2Zy.js";var s={type:t.IntToFloat,build:()=>({dataIn:[o(`a`,e.Integer)],dataOut:[a(`value`,e.Number)]}),updateOutputs(e,t,a){let o=n(t,a,e,`a`);r(t,e,`value`,i(o)?o.value:o)}};export{s as intToFloatDef};

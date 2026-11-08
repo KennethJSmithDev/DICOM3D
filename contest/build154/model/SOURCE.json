@@ -1,0 +1,34 @@
+{
+  "model": "gpt-oss:20b",
+  "selectedManifestSha256": "9ba9cc2b4e02463b933096090530aef679d534dd91ecc9afadfb2dbfdc59f3c5",
+  "weight": {
+    "digest": "sha256:8ecb5d4ad6172c63f9cbf1a07a04e525985a8a11a6e516da02b674c4010de716",
+    "bytes": 13793422816
+  },
+  "weightSource": "https://registry.ollama.ai/v2/library/gpt-oss/blobs/sha256:8ecb5d4ad6172c63f9cbf1a07a04e525985a8a11a6e516da02b674c4010de716",
+  "metadata": [
+    {
+      "path": "model/blobs/sha256-83124b166a4acad49da3433bac032aa4dd9bc63a8a5c81ada2bcca1c41f0c3da",
+      "sha256": "83124b166a4acad49da3433bac032aa4dd9bc63a8a5c81ada2bcca1c41f0c3da",
+      "bytes": 119
+    },
+    {
+      "path": "model/blobs/sha256-fa6710a93d78da62641e192361344be7a8c0a1c3737f139cf89f20ce1626b99c",
+      "sha256": "fa6710a93d78da62641e192361344be7a8c0a1c3737f139cf89f20ce1626b99c",
+      "bytes": 7240
+    },
+    {
+      "path": "model/blobs/sha256-f60356777647e927149cbd4c0ec1314a90caba9400ad205ddc4ce47ed001c2d6",
+      "sha256": "f60356777647e927149cbd4c0ec1314a90caba9400ad205ddc4ce47ed001c2d6",
+      "bytes": 11353
+    },
+    {
+      "path": "model/blobs/sha256-d8ba2f9a17b3bbdeb5690efaa409b3fcb0b56296a777c7a69c78aa33bbddf182",
+      "sha256": "d8ba2f9a17b3bbdeb5690efaa409b3fcb0b56296a777c7a69c78aa33bbddf182",
+      "bytes": 18
+    }
+  ],
+  "weightsIncluded": false,
+  "sourceLicenseBlob": "blobs/sha256-f60356777647e927149cbd4c0ec1314a90caba9400ad205ddc4ce47ed001c2d6",
+  "qualification": "Existing approved model descriptor/configuration; no inference or weight transformation"
+}

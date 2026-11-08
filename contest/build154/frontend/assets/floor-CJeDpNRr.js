@@ -1,0 +1,1 @@
+import{A as e,M as t,s as n,u as r}from"./runtime-DuT2Gw72.js";import{V as i}from"./fg-math-Cy0u3ldA.js";import{i as a,r as o}from"./sockets-DhRah2Zy.js";var s={type:t.Floor,build:()=>({dataIn:[o(`a`,e.Any)],dataOut:[a(`value`,e.Any)]}),updateOutputs(e,t,a){r(t,e,`value`,i(n(t,a,e,`a`)))}};export{s as floorDef};

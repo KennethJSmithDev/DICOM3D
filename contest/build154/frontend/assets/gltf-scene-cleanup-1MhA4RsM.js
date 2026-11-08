@@ -1,0 +1,1 @@
+function e(e,t,n){let r=e._sceneCleanups??=new WeakMap,i=r.get(t),a=i?()=>{i(),n()}:n;i?t._disposables[t._disposables.indexOf(i)]=a:t._disposables.push(a),r.set(t,a)}export{e as t};

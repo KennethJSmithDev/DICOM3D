@@ -1,0 +1,2 @@
+# Contest payload hashes bind exact bytes across Git clones and archive extraction.
+contest/build154/** -text

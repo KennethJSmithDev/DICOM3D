@@ -11,3 +11,8 @@ artifacts/
 
 .demo-dist/
 demo/public/sample/
+
+# Exact qualified asset is retained locally; source distribution uses its existing
+# published lossless parts and reconstructs only in the private runtime directory.
+contest/build154/frontend/reference/hra-female.glb
+contest/build154/scripts/__pycache__/

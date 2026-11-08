@@ -1,0 +1,1 @@
+import{r as e}from"./gpu-flags-C1xPl_f9.js";function t(e,t,n){return e._device.createBindGroupLayout({label:t,entries:[{binding:0,visibility:n,buffer:{type:`uniform`}}]})}var n=null,r=null;function i(i){return n!==i._device&&(n=i._device,r=null),r??=t(i,`picking-scene-bgl`,e.VERTEX|e.FRAGMENT)}export{t as n,i as t};

@@ -1,0 +1,1 @@
+import{t as e}from"./set-emissive-g8kylsq6.js";export{e as setPbrEmissive};

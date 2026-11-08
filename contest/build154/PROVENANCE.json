@@ -1,0 +1,37 @@
+{
+  "frontendSource": "e98aba4379ce24023ee56a2436bd57dfd79cefef",
+  "frontendArchiveSha256": "f7fc26ab4683363f63f5a198ff07c346c7893a27a462ea73226396f45a0668a6",
+  "historicalNativeSource": "C049-NATIVE-AGENT-009, 2026-10-28",
+  "recoveryOperationSha256": "33f1c5bcaa778b9d1bdad34c079058c4c95a0dfe7f89d61c2de0fa4d151a2b3e",
+  "fixtureBaselineSha256": "290f86585dbdcff45a2a829eb2f2ba5158b04835f868146ca35127b01134974b",
+  "fixtureAuthority": "Previously approved synthetic/public H000 research resources only",
+  "noPatientImport": true,
+  "restrictedImageIncluded": false,
+  "modelWeightsIncluded": false,
+  "geometryChanged": false,
+  "qualification": {
+    "maturity": "research-prototype",
+    "portablePacketSha256": "86e9e3530620cca96749987dd64c3115fb852904ca1f68208203ed2ed49e5cb3",
+    "portablePacketBytes": 186040429,
+    "demonstrated": [
+      "clean-extraction-bootstrap-with-supplied-prerequisites",
+      "genuine-native-validated-fresh-lesion-selection",
+      "native-synthetic-mismatch-review",
+      "restricted-reader-and-citation-refusal",
+      "utf8-roundtrip",
+      "supported-troubled-production-recovery-and-clean-start-stop"
+    ],
+    "limitations": [
+      "intermittent-CPU-provider-HTTP500-token-repeat",
+      "malformed-final-JSON-refused",
+      "host-crash-interrupted-five-run-gate",
+      "private-monitor-coverage-defect-in-interrupted-attempt",
+      "five-run-repeatability-not-qualified",
+      "independent-image-and-weight-acquisition-not-witnessed",
+      "not-clinical-validation"
+    ],
+    "interruptedRequestDisposition": "retained-suspended-not-replayed",
+    "frozenExecutablePacketChanged": false,
+    "sourceDocumentationUpdatedAfterFreeze": true
+  }
+}

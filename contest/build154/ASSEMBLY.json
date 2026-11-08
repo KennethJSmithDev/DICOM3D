@@ -1,0 +1,23 @@
+{
+  "urlPath": "reference/hra-female.glb",
+  "bytes": 187220140,
+  "sha256": "24abc4d8bd0a00bfc93ab45e227c1e9b157ffc0d21d1e5c22408fbe3933f60cb",
+  "parts": [
+    {
+      "path": "frontend/reference/hra-female.glb.part001",
+      "bytes": 67108864,
+      "sha256": "a97a2b0602e10ebd6d6a7162627babcdfed85eec1ef482d13e40af6dd4053d19"
+    },
+    {
+      "path": "frontend/reference/hra-female.glb.part002",
+      "bytes": 67108864,
+      "sha256": "008abd7208f1849cea0cee2427f61e06c069101db48817507c54724558cd20d2"
+    },
+    {
+      "path": "frontend/reference/hra-female.glb.part003",
+      "bytes": 53002412,
+      "sha256": "33a7ea5afb5d934d48deed6e383ac747ba5b8ebaaba9506bf6da043ab545eca0"
+    }
+  ],
+  "provenance": "Exact existing published v0.6.5 parts; concatenation equals the qualified Babylon RC1 female GLB"
+}

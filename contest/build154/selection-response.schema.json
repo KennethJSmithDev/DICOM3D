@@ -1,0 +1,11 @@
+{
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "explanation": {"type": "string", "minLength": 1},
+    "semanticId": {"type": "string", "minLength": 1},
+    "citations": {"type": "array", "items": {"type": "string"}, "minItems": 2, "maxItems": 2},
+    "limitation": {"type": "string", "minLength": 1}
+  },
+  "required": ["explanation", "semanticId", "citations", "limitation"]
+}

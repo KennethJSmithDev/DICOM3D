@@ -1,0 +1,1 @@
+import{t as e}from"./pbr-flags-D6sBGIQF.js";function t(t){let n=[];for(let e of[t.baseColorTexture,t.normalTexture,t.ormTexture,t.occlusionTexture,t.emissiveTexture,t.specGlossTexture])e&&n.push(e);for(let r of e().values())r.textures?.(t,n);return n}export{t};

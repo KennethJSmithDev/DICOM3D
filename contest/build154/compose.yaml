@@ -1,0 +1,47 @@
+services:
+  agent:
+    image: ${AI_IMAGE_ID:?Load the exact authorized Community Build154 image first}
+    pull_policy: never
+    cpus: 2
+    mem_limit: 4g
+    memswap_limit: 4g
+    pids_limit: 256
+    shm_size: 256m
+    security_opt: [no-new-privileges:true]
+    command: ["--ISCAgent", "false", "--create", "sh /run/contest/create.sh", "--password-file", "/home/irisowner/contest-private/bootstrap-password.txt"]
+    volumes:
+      - ${PACKET_ROOT}/scripts/create.sh:/run/contest/create.sh:ro
+      - ${PACKET_ROOT}/scripts/Native005Relay.py:/run/contest/Native005Relay.py:ro
+      - ${PACKET_ROOT}/src:/run/contest/src:ro
+      - ${STATE_ROOT}/private/agent-bootstrap.txt:/run/contest/bootstrap.txt:ro
+      - ${STATE_ROOT}/private/reader.json:/run/contest/reader.json:ro
+    networks: [evidence]
+    logging:
+      driver: json-file
+      options: {max-size: 10m, max-file: "2"}
+  evidence:
+    image: ${R5_IMAGE_ID:?Load the pinned R5 image first}
+    pull_policy: never
+    entrypoint: ["/tini", "--", "/iris-main"]
+    cpus: 2
+    mem_limit: 8g
+    memswap_limit: 8g
+    pids_limit: 512
+    shm_size: 256m
+    security_opt: [no-new-privileges:true]
+    command: ["--ISCAgent", "false", "--create", "sh /run/contest/create.sh", "--password-file", "/home/irisowner/contest-private/bootstrap-password.txt"]
+    ports: ["127.0.0.1:${FHIR_PORT}:52773"]
+    volumes:
+      - ${PACKET_ROOT}/scripts/create.sh:/run/contest/create.sh:ro
+      - ${STATE_ROOT}/private/r5-bootstrap.txt:/run/contest/bootstrap.txt:ro
+      - ${STATE_ROOT}/private/reader.json:/run/contest/reader.json:ro
+    networks: [evidence]
+    logging:
+      driver: json-file
+      options: {max-size: 10m, max-file: "2"}
+networks:
+  evidence:
+    internal: false
+    ipam:
+      config:
+        - subnet: ${EVIDENCE_SUBNET:?Choose an unused private subnet}
