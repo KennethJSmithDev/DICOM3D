@@ -1,0 +1,15 @@
+import assert from 'node:assert/strict';
+import {Group,Mesh,BoxGeometry,MeshStandardMaterial} from 'three';
+import {createAtlasPresentation} from './src/atlas-presentation.js';
+const mesh=id=>{const node=new Mesh(new BoxGeometry(),new MeshStandardMaterial());node.name=id;node.userData.semanticId=id;return node};
+const scene=new Group(),first=mesh('first');scene.add(first);scene.userData.atlasRevision=1;
+const presentation=createAtlasPresentation(),bundles=new Map([['composite',{scene}]]);
+presentation.apply(bundles,{isolatedId:'first',opacity:.2});
+const selected=mesh('new-selection'),other=mesh('unrelated-new-owner');scene.add(selected,other);scene.userData.atlasRevision++;
+const source=selected.geometry.attributes.position.array.slice();
+presentation.apply(bundles,{isolatedId:'new-selection',opacity:.3});
+assert.equal(first.visible,false);assert.equal(selected.visible,true);assert.equal(other.visible,false);assert.equal(selected.material.opacity,.3);assert.equal(other.material.opacity,.3);
+presentation.apply(bundles,{hiddenIds:new Set(['new-selection']),opacity:.7});assert.equal(selected.visible,false);assert.equal(other.visible,true);assert.equal(other.material.opacity,.7);
+presentation.restoreAll();assert.equal(selected.material.opacity,1);assert.equal(first.material.opacity,1);assert.equal(other.visible,true);assert.deepEqual(selected.geometry.attributes.position.array,source);
+scene.traverse(n=>{n.geometry?.dispose();n.material?.dispose()});
+console.log('PASS: newly admitted composite owners receive isolation, opacity, visibility and exact restoration without changing source buffers');

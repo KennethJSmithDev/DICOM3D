@@ -1,0 +1,13 @@
+import assert from 'node:assert/strict';import vm from 'node:vm';import {readFile} from 'node:fs/promises';import {Group} from 'three';
+import {composeSourceCatalog} from './src/source-native-selection.js';import * as catalog from './src/female-catalog.mjs';
+const delta=JSON.parse(await readFile(new URL('./atlas-delta/female-delta.json',import.meta.url)));
+let missing=true,cancel=null;const disposed=[];
+const bundle=async(descriptor,signal)=>{if(descriptor.id==='c'&&missing)throw Error('Missing fixture c');const scene=new Group();scene.name=descriptor.id;if(descriptor.id==='d')cancel.abort();return {scene,manifest:{reference:{structures:[{id:descriptor.id}]}},bytes:4}};
+const mocks={'three':{Group},'./source-native-selection.js':{composeSourceCatalog},'../atlas-delta/female-delta.json':{default:delta},'./female-catalog.mjs':catalog,'./atlas.js':{loadBundle:bundle,disposeScene:scene=>disposed.push(scene.name),loadBundleManifest:async()=>({reference:{structures:[{id:'synthetic-overlay',label:'Transaction fixture'}],hierarchy:[],held:[]}}),loadSourceCatalog:async()=>({atoms:[],concepts:[]})}};
+const context=vm.createContext({DOMException,console}),module=new vm.SourceTextModule(await readFile(new URL('./src/female-reference.js',import.meta.url),'utf8'),{context});await module.link(specifier=>{const values=mocks[specifier];assert(values,specifier);return new vm.SyntheticModule(Object.keys(values),function(){for(const key of Object.keys(values))this.setExport(key,values[key])},{context})});await module.evaluate();
+const base={structures:['a','b','c','d'].map(id=>({id,bundleId:id})),bundles:['a','b','c','d'].map(id=>({id})),sourceNative:{atoms:[],concepts:[],owners:[]},hierarchy:[],held:[]};
+const item=await module.namespace.loadFemaleReference(base,new AbortController().signal,{initialIds:['a'],includeOverlay:false});assert.deepEqual([...item.resident],['a']);
+await assert.rejects(item.ensure(['b','c'],new AbortController().signal),/Missing fixture/);assert.deepEqual([...item.resident],['a']);assert.equal(item.scene.children.length,1);assert.equal(item.bytes,4);assert.deepEqual(disposed,['b']);
+missing=false;await item.ensure(['b','c'],new AbortController().signal);assert.deepEqual([...item.resident],['a','b','c']);assert.equal(item.scene.children.length,3);assert.equal(item.bytes,12);
+cancel=new AbortController();await assert.rejects(item.ensure(['d'],cancel.signal),{name:'AbortError'});assert.deepEqual([...item.resident],['a','b','c']);assert.equal(item.scene.children.length,3);assert.deepEqual(disposed,['b','d']);
+console.log('PASS: failed/cancelled female batch publishes no partial owners, releases only staged leases and preserves prior reference; successful retry commits together');

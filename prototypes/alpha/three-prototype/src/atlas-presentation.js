@@ -1,3 +1,4 @@
+import {ownScene} from './scene-ownership.js';
 import {createSourceSelectionProjection} from './source-native-selection.js';
 import {assemblyOffset} from './assembly-presentation.js';
 /** Reversible presentation of admitted atlas owners. Source geometry and catalog are unchanged.
@@ -17,9 +18,12 @@ export function createAtlasPresentation() {
   const records = new Map(),sourceProjection=createSourceSelectionProjection();
   function capture(scene) {
     let r = records.get(scene);
-    if (r) return r;
-    r = {owners: new Map(), materials: new Map(), overrides: new Map()};
+    const revision=scene.userData.atlasRevision??0;
+    if(r?.revision===revision)return r;
+    if(!r)r={owners:new Map(),materials:new Map(),overrides:new Map(),nodes:new Set()};
+    r.revision=revision;
     scene.traverse(n => {
+      if(r.nodes.has(n))return;r.nodes.add(n);
       if (n.userData?.semanticId) r.owners.set(n.userData.semanticId, {node:n, visible:n.visible, position:n.position.clone(), offset:assemblyOffset(n,n.userData.semanticId)});
       if (!n.isMesh) return;
       for (const m of (Array.isArray(n.material) ? n.material : [n.material])) {
@@ -113,11 +117,12 @@ export function createAtlasPresentation() {
       if(owner){copy.position.copy(owner.position);copy.visible=owner.visible&&!['FMA7163','VH_F_skin'].includes(original.userData.semanticId);}
       if(original.userData.fragmentBucket!==undefined)copy.visible=false;
       if(!original.isMesh)continue;
-      const mats=r.overrides.get(original)?.original??original.material;
+      const source=sourceProjection.sourceFor(original);copy.geometry=source?.geometry??original.geometry;
+      const mats=source?.material??r.overrides.get(original)?.original??original.material;
       const cloneMaterial=m=>{const c=m.clone(),base=r.materials.get(m);if(base){c.opacity=base.opacity;c.transparent=base.transparent;c.depthWrite=base.depthWrite;if(base.color)c.color?.copy(base.color);if(base.emissive)c.emissive?.copy(base.emissive);if(base.emissiveIntensity!==undefined)c.emissiveIntensity=base.emissiveIntensity;}return c};
       copy.material=Array.isArray(mats)?mats.map(cloneMaterial):cloneMaterial(mats);
     }
-    clone.updateMatrixWorld(true);return clone;
+    clone.updateMatrixWorld(true);return ownScene(clone);
   }
   return {apply, restoreScene, restoreAll,cloneSourceScene,clearSourceSelection:sourceProjection.restore,get sourceInfo(){return sourceProjection.info;}};
 }

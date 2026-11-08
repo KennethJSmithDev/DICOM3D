@@ -1,3 +1,4 @@
+import {releaseScene} from './scene-ownership.js';
 import React,{useEffect,useMemo,useRef,useState} from 'react';
 import {createPortal} from 'react-dom';
 import {Canvas,useFrame,useThree} from '@react-three/fiber';
@@ -43,7 +44,7 @@ export default function ReferenceComparison({bundles,presentation,catalog=[],onS
  const filterIds=region==='lungs'?lungIds:region==='structure'?new Set(structure?[structure]:[]):null;
  const filterKey=filterIds?[...filterIds].sort().join('|'):'*';
  const snapshots=useMemo(()=>[...bundles.values()].map(({scene})=>{const result=presentation.cloneSourceScene(scene);result.traverse(n=>{const id=n.userData.semanticId;if(id&&((filterIds&&!filterIds.has(id))||referenceHidden.has(id)||(referenceIsolated&&referenceIsolated!==id)))n.visible=false});applyReferenceOpacity(result,allOpacity,referenceOpacity);return result}),[bundles,presentation,filterKey,allOpacity,referenceOpacity,referenceHidden,referenceIsolated]);
- useEffect(()=>()=>{for(const s of snapshots)s.traverse(n=>{if(n.isMesh)for(const m of Array.isArray(n.material)?n.material:[n.material])m?.dispose()})},[snapshots]);
+ useEffect(()=>()=>{for(const s of snapshots)releaseScene(s)},[snapshots]);
  useEffect(()=>{initialPlacement.current=false;setAlignment(identityAlignment());setError('')},[atlasKey,study]);
  const bounds=useMemo(()=>visibleSnapshotBounds(snapshots),[snapshots]),basis=useMemo(()=>referenceBasis(atlasKey),[atlasKey]);
  const matrix=useMemo(()=>alignmentMatrix(alignment).multiply(basis),[alignment,basis]);

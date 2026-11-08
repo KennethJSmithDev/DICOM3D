@@ -1,1 +1,1 @@
-import {defineConfig} from 'vite';export default defineConfig({base:'./',publicDir:false,worker:{format:'es'},cacheDir:'../vite-cache',build:{outDir:'../build',emptyOutDir:false}});
+import {defineConfig} from 'vite';import {threeTextureCompatibility} from './src/three-build-compat.mjs';export default defineConfig({plugins:[threeTextureCompatibility()],base:'./',publicDir:false,worker:{format:'es'},cacheDir:'../vite-cache',build:{outDir:'../build',emptyOutDir:false}});

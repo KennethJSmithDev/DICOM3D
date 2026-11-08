@@ -9,20 +9,30 @@ import {composeSourceCatalog,createSourceSelectionProjection,nativeAtoms,nativeC
 const root=resolve(dirname(fileURLToPath(import.meta.url)),'..'),started=performance.now();
 const hash=b=>createHash('sha256').update(b).digest('hex');
 let fault='',requests=[];
-const context=vm.createContext({crypto:webcrypto,TextDecoder,DOMException,console,fetch:async url=>{
+const context=vm.createContext({crypto:webcrypto,TextDecoder,DOMException,AbortController,URL,Response,console,fetch:async url=>{
+ url=new URL(url).pathname.slice(1);
  requests.push(url);let file=resolve(root,url.startsWith('atlas/')?'expanded-atlas/'+url.slice(6):'atlas-delta/'+url.slice(13));
  if(fault==='missing'&&url.endsWith('male-source43-recoveries.glb'))return {ok:false,status:404};
  let b=await readFile(file);if(fault==='corrupt'&&url.endsWith('male-source43-recoveries.glb')){b=Buffer.from(b);b[b.length-8]^=1;}
  return {ok:true,headers:{get:()=>String(b.length)},arrayBuffer:async()=>b.buffer.slice(b.byteOffset,b.byteOffset+b.length)};
 }});
-const module=new vm.SourceTextModule(await readFile(resolve(root,'src/atlas.js'),'utf8'),{context,initializeImportMeta(meta){meta.env={BASE_URL:''}}});
-await module.link(()=>new vm.SyntheticModule(['GLTFLoader'],function(){this.setExport('GLTFLoader',GLTFLoader)},{context}));await module.evaluate();const api=module.namespace;
+const modules=new Map();
+async function moduleFor(path){
+ if(modules.has(path))return modules.get(path);
+ const module=new vm.SourceTextModule(await readFile(path,'utf8'),{context,identifier:path,initializeImportMeta(meta){meta.env={BASE_URL:'http://localhost/'}}});modules.set(path,module);
+ await module.link(async(specifier,referencing)=>{
+  if(specifier.startsWith('.'))return moduleFor(resolve(dirname(referencing.identifier),specifier));
+  const exports=await import(specifier);const external=new vm.SyntheticModule(Object.keys(exports),function(){for(const key of Object.keys(exports))this.setExport(key,exports[key])},{context});return external;
+ });return module;
+}
+const mod=await moduleFor(resolve(root,'src/atlas.js'));await mod.evaluate();const api=mod.namespace;
+const clearCache=()=>modules.get(resolve(root,'src/public-asset-cache.js')).namespace.publicAtlasAssets.clearMemory();
 const signal=new AbortController().signal,index=await api.loadIndex(signal),cat=index.sourceNative,recovery=cat.sourceRecoveries[0];
 assert.equal(index.structures.length,1205);assert.equal(cat.atoms.length,2299);assert.equal(cat.heldSourceEntries.length,416);assert.equal(recovery.remainingResidualHoldFiles,18);
 assert.equal(requests.filter(x=>x.endsWith('.glb')).length,0);
 const descriptor=index.bundles.find(b=>b.id==='source43-recoveries');assert(descriptor);assert(descriptor.byteLength<100000000);
-for(const kind of ['missing','corrupt']){fault=kind;await assert.rejects(()=>api.loadBundle(descriptor,signal),kind==='missing'?/HTTP 404/:/geometry integrity mismatch/);}fault='';
-const abort=new AbortController();abort.abort();await assert.rejects(()=>api.loadBundle(descriptor,abort.signal),/Cancelled/);
+for(const kind of ['missing','corrupt']){fault=kind;clearCache();await assert.rejects(()=>api.loadBundle(descriptor,signal),kind==='missing'?/HTTP 404/:/integrity mismatch/);}fault='';
+const abort=new AbortController();abort.abort();await assert.rejects(()=>api.loadBundle(descriptor,abort.signal),{name:'AbortError'});
 const bundles=new Map(),owners=new Map();
 for(const b of index.bundles){const item=await api.loadBundle(b,signal);bundles.set(b.id,item);item.scene.traverse(n=>{if(n.userData.semanticId)owners.set(n.userData.semanticId,n)});}
 assert.equal(bundles.size,17);assert.equal(owners.size,1205);const atomMap=new Map(cat.atoms.map(x=>[x.id,x]));
@@ -42,7 +52,7 @@ for(const catalog of [cat,female])for(const key of [...recovery.changedConceptKe
  const result=projection.apply(bundles,{catalog,key,isolated:true,opacity:.4,style:'holographic'});assert.equal(result.status,'ready',key);assert.equal(result.drawMeshes,expected.size);
  for(const mesh of owners.values()){
   assert.equal(mesh.visible,expected.has(mesh),key+' unrelated geometry isolation');
-  if(expected.has(mesh)){assert.deepEqual(mesh.geometry.groups.map(g=>[g.start,g.count]),expected.get(mesh));assert(mesh.material.some(m=>m.opacity<=.4));}
+  if(expected.has(mesh)){const groups=mesh.geometry.groups.length?mesh.geometry.groups.map(g=>[g.start,g.count]):[[0,mesh.geometry.index.count]];assert.deepEqual(mergeRanges(groups,mesh.geometry.index.count),mergeRanges(expected.get(mesh),mesh.geometry.index.count));assert((Array.isArray(mesh.material)?mesh.material:[mesh.material]).some(m=>m.opacity<=.4));}
  }
  projection.restore();
  for(const [mesh,b]of baseline){assert.equal(mesh.visible,b.visible);assert.equal(mesh.material,b.material);assert.equal(mesh.geometry,b.geometry);assert.deepEqual(mesh.geometry.groups,b.groups);assert.deepEqual(mesh.geometry.drawRange,b.drawRange);assert.deepEqual(mesh.position.toArray(),b.position);assert.deepEqual(mesh.quaternion.toArray(),b.quaternion);assert.deepEqual(mesh.scale.toArray(),b.scale);assert.equal(mesh.geometry.attributes.position.array,b.positionArray);assert.equal(mesh.geometry.index.array,b.indexArray);}

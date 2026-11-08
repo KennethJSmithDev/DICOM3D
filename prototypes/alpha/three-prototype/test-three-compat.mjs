@@ -1,0 +1,8 @@
+import assert from 'node:assert/strict';import vm from 'node:vm';import {readFile} from 'node:fs/promises';import {dirname,resolve} from 'node:path';import {fileURLToPath} from 'node:url';
+import {threeTextureCompatibility} from './src/three-build-compat.mjs';
+const file=resolve(dirname(fileURLToPath(import.meta.resolve('three'))),'../src/renderers/common/Textures.js');const original=await readFile(file,'utf8');const plugin=threeTextureCompatibility(),patched=plugin.transform(original,file).code;
+function method(code){const start=code.indexOf('getSize( texture, target = _size )');let depth=0,opened=false,end=start;for(;end<code.length;end++){if(code[end]==='{'){depth++;opened=true}if(code[end]==='}'&&!--depth&&opened)break;}return code.slice(start,end+1)}
+function run(code){return vm.runInNewContext(`class TextureSizing {${method(code)}}; new TextureSizing().getSize({image:{width:4,height:8,depth:3}},{});`)}
+assert.throws(()=>run(original),/VideoFrame/);const value=run(patched);assert.equal(value.width,4);assert.equal(value.height,8);assert.equal(value.depth,3);assert.equal(plugin.transform(original,'/another/module.js'),null);assert.throws(()=>plugin.transform(original+'changed',file),/source changed/);
+for(const name of ['three.webgpu.js','three.core.js']){const path=resolve(dirname(fileURLToPath(import.meta.resolve('three'))),name);const code=await readFile(path,'utf8');assert(plugin.transform(code,path).code.includes("typeof VideoFrame !== 'undefined'"));}plugin.generateBundle();
+console.log('PASS: exact pinned upstream failure, missing-VideoFrame guard, unchanged image dimensions, unrelated modules untouched and source-drift rejection');

@@ -30,20 +30,21 @@
       "sha256": "0dfff975e61696fd4b570e32b38e84ef4515ebb812906196169aab0818081d2a"
     }
   },
-  "sourceBase": "935021e4df68d8659b59651b9247a2cb8b8fd356",
+  "sourceBase": "18a033a-stage2-exact-source-inputs",
   "sourceIdentity": "Exact application inputs below; staged package manifest binds the packaging commit.",
   "sourceInputs": {
     "prototypes/alpha/three-prototype/src/assembly-presentation.js": "2a9417b0aee3dd49269c4932be4e14a0054eddab0735c6e8728cbcbe2d82ac5d",
-    "prototypes/alpha/three-prototype/src/atlas-presentation.js": "1a12e54a3f71d8ae4da5b7fa7e84b8bfa4807c43100df541559e8148b7a84fa4",
-    "prototypes/alpha/three-prototype/src/atlas.js": "7bb79e3ca96e3002c67812f8380d92107967ec9d4b236f1f3fd458c3c2bf2ca4",
+    "prototypes/alpha/three-prototype/src/atlas-presentation.js": "8677fe21934da60234db2f1bf029f0e32971fe1a20786eccbd72b27189812354",
+    "prototypes/alpha/three-prototype/src/atlas.js": "38b041c00c022c224ecfd77fba60bdbd9762fec2797f38bccac39a12c5afa41e",
     "prototypes/alpha/three-prototype/src/AtlasPresentationControls.jsx": "d08813dfece36911977e3220ffd56f5b6d655ba695c701440761b4da4da54c49",
     "prototypes/alpha/three-prototype/src/beginner-learning.mjs": "c778d70f9549f34eb1f64ed0dc893ccec77f2bef8c97d294172ef31d15ae89bd",
+    "prototypes/alpha/three-prototype/src/compact-workspace.css": "7333d8bbd69524a4c45825b951b8550a01850c43e3ef84449f7b9dde28c7a2b6",
     "prototypes/alpha/three-prototype/src/comparison-interaction.js": "b9cf5a2f6f2da065842ebc9ba042ed729f00d2b902ea889a7903ea3478870aa6",
     "prototypes/alpha/three-prototype/src/female-catalog.mjs": "91595c2fb9b457cdaaa4e19694c211dee27e03eed847cc8a1a72118c47c295f4",
     "prototypes/alpha/three-prototype/src/female-presentation.js": "c5a0f135203c08228a41019382073bbad61a3de9c4d1646caca410634376813d",
-    "prototypes/alpha/three-prototype/src/female-reference.js": "0779ef7e2e300057cf5e63d073e26e81f8f5c4224bd2d6301a1485f44b8a9345",
+    "prototypes/alpha/three-prototype/src/female-reference.js": "614e674864d3a63ff20c91ddfcb572b096a099558d8ffee99c688c6d35596144",
     "prototypes/alpha/three-prototype/src/female-test-presentation.mjs": "2e7aa8f049f2bf141acd385b6b152f3cb55f92fdd830db86b6d9e7f33996e469",
-    "prototypes/alpha/three-prototype/src/FemaleInspector.jsx": "eafc6b1b5a1f1859c10166811d1c2f2b9925817e0945a7462ac14d7a5b936e52",
+    "prototypes/alpha/three-prototype/src/FemaleInspector.jsx": "9c584f7e5edfb1b974f5480bde84aaee0be5256675843ab2673d13e53242efc7",
     "prototypes/alpha/three-prototype/src/fit-perspective-bounds.js": "e0a7f8a2ce23d52ed9753a67589d2910f46f23346b870f0820511e39d1bf8f3b",
     "prototypes/alpha/three-prototype/src/held-evidence.json": "3b5221e514e4d80a53838860d51c66ff430fb4b914d988be2063912f54a1608c",
     "prototypes/alpha/three-prototype/src/imaging/h000-display-fit.json": "15853638b741dfa3301fdc82e34143da6ceb65d9a36c1238e6754788f383a39f",
@@ -74,7 +75,7 @@
     "prototypes/alpha/three-prototype/src/live-reference-samples.mjs": "a8a31d9785297b6664fbbc83b871bf65e9fb4a0ee55db9e946aad633b3337490",
     "prototypes/alpha/three-prototype/src/lung-preset.json": "c9b79c1e258b1272fc23787ce587da37d847c4c2cc24e71450f19a4b448a4e7d",
     "prototypes/alpha/three-prototype/src/lung-surface-fragments.js": "474581f7661d35ee26a41e5e5fa9827186db8142e2ffbd2b31384368e7d79917",
-    "prototypes/alpha/three-prototype/src/main.jsx": "aca18facb0aae2ccd2827768223dbe5013b83caac6a287502f0a8fb52a9baa37",
+    "prototypes/alpha/three-prototype/src/main.jsx": "47908d1f02e638376b26f91ea40526878e5a7647324479a3e6f2a32d6a859f61",
     "prototypes/alpha/three-prototype/src/materialization-state.mjs": "7ab8884a1e115d8d32d021ed4b124f39a7db447c6143ee77137320b87cf06458",
     "prototypes/alpha/three-prototype/src/MaterializationEffect.jsx": "e062f28d7192921c90da1e0a68cd0e712dcefbf7f6b0e68a6d2f2b2f5f49401f",
     "prototypes/alpha/three-prototype/src/nrx/nrx-surface.js": "4d9254050424fb85d0e91a58cc1e6829e1dcdbb622c92887d0abdba74d8353f9",
@@ -101,19 +102,27 @@
     "prototypes/alpha/three-prototype/src/organ-workspace.css": "baa3576292cc37411eb4d9e7f823f9f5f57a6a515b8745c282cb5501ad771c7d",
     "prototypes/alpha/three-prototype/src/OrganControls.jsx": "396cef409faa068650983b8894c9b55566c0bfa1d2e2be784e961276f74f3c88",
     "prototypes/alpha/three-prototype/src/PresentationPanel.jsx": "741b4cafd2617bf5fc121e90c5fe9af5a2e0bc20fcf09bd1573650460e22119f",
+    "prototypes/alpha/three-prototype/src/public-asset-cache.js": "a06b2bc9de3bd6ceb2df082e27e7d93318f928ef76ff5ebea0444702cf544582",
     "prototypes/alpha/three-prototype/src/reference-inspector.css": "1b2f9631eedcab04f74b33e8c7b37675c40023158aa12b9aaac1e9b4153efd61",
-    "prototypes/alpha/three-prototype/src/ReferenceComparison.jsx": "8d51bf6bc5b750f7b17e4f6a199360292c4ccc791cbc2457bdd985d2c7a3ed35",
+    "prototypes/alpha/three-prototype/src/ReferenceComparison.jsx": "00845ba0d3bf1d4eaa1ad798b291188fff768c33b1767f34906bb87b5e139fdf",
     "prototypes/alpha/three-prototype/src/ReferenceInspector.jsx": "b0fe728213339e2497dbbf4c407c38c2a75af275655b63b5596cf5f92f964f78",
+    "prototypes/alpha/three-prototype/src/render-cadence.js": "2c46f75c28cd26a3c1aa55af3346e02459fab05c41ac7e6573f694a305fbf333",
+    "prototypes/alpha/three-prototype/src/RenderCadence.jsx": "38edb11c18fed410f45df5162b75b96158a2c49cb27179bd2e6700851a08d1aa",
+    "prototypes/alpha/three-prototype/src/renderer-cadence.js": "7654a935ba20773f774d63f23d260c2e3905099c8a1ddd04d1918b2c9897bdef",
     "prototypes/alpha/three-prototype/src/renderer-factory.js": "cc4e67fff64c9ed62061d986c75a9a7a55f55a3dd872d32aeee374696d39d0a1",
+    "prototypes/alpha/three-prototype/src/RenderSettings.jsx": "dfbefd5a72c460c9a50e1d0ed1a89f6e1cf2b9f27e265be2fa498ba6596fe629",
+    "prototypes/alpha/three-prototype/src/resource-pool.js": "160bca208b0b667ba3ead5621bb7abb900e3a532872061d6befd6ac96378bc3c",
+    "prototypes/alpha/three-prototype/src/scene-ownership.js": "30fe810be2b9eab559b3ce27f5cfe5b5845554911f0cfd2d5e6aa889415c1807",
     "prototypes/alpha/three-prototype/src/skeleton-part-view.js": "b976f6cd8fe7b49b68fe8674b0df619b901a59f3fad8b4f91b9e2709c7a2a4cb",
     "prototypes/alpha/three-prototype/src/skeleton-parts.json": "7b0ccf87f1b3dc7c186e3815efa8535fb6d139a707ec0893ea6bb6d851edff1d",
     "prototypes/alpha/three-prototype/src/SkeletonParts.jsx": "978a16483f1dce1e5fc0601dd4e52f9f687f2b2cdc96363f14c933b529ea96b5",
-    "prototypes/alpha/three-prototype/src/source-native-selection.js": "0e2fdd2cd837af79ec5ca61dcbfad3f93a38bd87a6bc5cc23d4a9e768ca1cfca",
-    "prototypes/alpha/three-prototype/src/SourceNativeInspector.jsx": "a3bc3d73d1b5be580e1d72e92940c32d92712b5a2a160c64a7b30eed0cf98eb9",
+    "prototypes/alpha/three-prototype/src/source-native-selection.js": "c1702dee38f31e0653878239ca6b8551b65df7035f12382568eb767d4fa6985e",
+    "prototypes/alpha/three-prototype/src/SourceNativeInspector.jsx": "b61e234676acae62f59e26fd1288760e773aacf34bb1368f624e4e7beac8a757",
     "prototypes/alpha/three-prototype/src/StudyPresentationPanel.jsx": "c9deae68bcf69b23105023626c344e59f140ce9b3ea784f1e778ffb1e03dab00",
     "prototypes/alpha/three-prototype/src/style.css": "3cd35a9046e53b34d0eb80d8b39581ccea851dcf7bbedf1a97742ff5d898b7aa",
     "prototypes/alpha/three-prototype/src/system-visibility.js": "a7c3fd2ddd25c4e7de6d20e67a4ea8816d94f367e96dc609524c81a1fda46e1a",
-    "prototypes/alpha/three-prototype/src/use-reference-intro.js": "659f688b7873714f38037197d6abb30f761a234b00b18a0d8b25a1e705b4a8b8",
+    "prototypes/alpha/three-prototype/src/three-build-compat.mjs": "3f41a0f5de0dcf75cff794b9fc6aeec72c0e1f3fa97a68242faae579f247580b",
+    "prototypes/alpha/three-prototype/src/use-reference-intro.js": "e2f871d7f46dd01460099b3e5a1f935e3e1019fcbab57268fb7b2b9293b4c5bc",
     "prototypes/alpha/three-prototype/src/use-study-presentation.js": "62db146ce381e93b7414fd69f880d0c6aaac0d6dc1fdfd660abd7078d2481c6b",
     "prototypes/alpha/three-prototype/src/verified-asset-parts.js": "06a8b2d313ccafa0800423d53d3bde9af0395101a7606ee7992630a851da7a29",
     "prototypes/alpha/three-prototype/src/workstation-polish.css": "76fbf28a4eea71e60b693165760be507959acc9514cf8e432886db4863b9ae73",
@@ -187,7 +196,7 @@
     "prototypes/alpha/three-prototype/package.json": "437263f52912de94b1c9fc13d2fe64ef2804095f4a84aba18dd8b27593a7b651",
     "prototypes/alpha/three-prototype/package-lock.json": "b6857e70fd2229d33a26ef3a782a862a08f871bd1bfd83b716fc139c43271aea",
     "prototypes/alpha/three-prototype/index.html": "40ecbbb1e99c628af5b947a7c266841a565f7e9b286f11c2b9450670ee0d6cb8",
-    "prototypes/alpha/three-prototype/vite.config.js": "b03d992be7d80d54d56739247cae320699f09feedc0484b2a574fd3343be9749",
+    "prototypes/alpha/three-prototype/vite.config.js": "c73eff6b72fa385a2f6db5194601c9eab17846ce630b1a3e11cc6124e0d28c19",
     "prototypes/alpha/three-prototype/build-public-review.mjs": "b4f30814494882bfa79e73b8843b4712ab4083585321b5d810268e04eb0649ed"
   },
   "atlasIndexSha256": "574feef9e1e659a644cf51a51042e8c65b6433455b95070b7ae89aa681357478",
@@ -196,13 +205,13 @@
       "bytes": 113,
       "sha256": "22e0ef5dcd9ad65be81155fc9d74aa88db06454d477591f3463f1aa7344adff8"
     },
-    "assets/index-Bj7am_zw.css": {
-      "bytes": 20337,
-      "sha256": "7fa47ce90356358938da5038e89d454553a70a92cc5cc437d2f122d96a5ac119"
+    "assets/index-C2sQr-RB.css": {
+      "bytes": 23558,
+      "sha256": "3e1aa521a68def62de0f1f8e9e3041cecca2d80754013509e9dbb7c9c916a211"
     },
-    "assets/index-DQewmv7a.js": {
-      "bytes": 2321248,
-      "sha256": "1af9d2cf2684acb8dd31ec57aaee451d1d48914cf1ae033888ccd36d1700b037"
+    "assets/index-T38fjEJ6.js": {
+      "bytes": 2336960,
+      "sha256": "c1a47c5da9a66c3dde5a55f3def503ba28c7e4393a7e78ab18436af8bf9519de"
     },
     "assets/nrx-reference-worker-BVTUSoQr.js": {
       "bytes": 1418,
@@ -212,9 +221,9 @@
       "bytes": 69914,
       "sha256": "ed4e5444ec1374168fd2f9e7866b8790d0e82372acaaa1cea864419e0749227a"
     },
-    "assets/nrx-surface-FgzU_xhO.js": {
+    "assets/nrx-surface-DVXq0q0e.js": {
       "bytes": 3762,
-      "sha256": "2f3802cbe9118873761ef9d0042a1a13a9a84da46d34c3a957113e2bf3bb7fb1"
+      "sha256": "24631636da1033ed649fc6104d743b1435fadab6b3d674bb66bded6f59a0e64e"
     },
     "assets/nrx-worker-_Uj6W57p.js": {
       "bytes": 12808,
@@ -393,8 +402,8 @@
       "sha256": "605073678ef244b7ebd44995d01789e79f5cb31a715c66a21d4b76b12161d73e"
     },
     "distribution-manifest.json": {
-      "bytes": 536,
-      "sha256": "4c0f1abc922f570d3230b80ee94c27667b94befa8ea0483560a7cb6e98d862ba"
+      "bytes": 523,
+      "sha256": "3b2ba1e50733ed987d188211fdd4998184e3098223e7d021a3805d6f861afc41"
     },
     "female-delta/female-delta.json": {
       "bytes": 1524,
@@ -426,7 +435,7 @@
     },
     "index.html": {
       "bytes": 396,
-      "sha256": "0132cdd9f572c48f27be7627aca72d2973cfac51212dcba8607e71025f29fb95"
+      "sha256": "8d174887452f290fe5fb40a8bb155b42def84cdbec75afdb4af250a85586932f"
     },
     "LICENSE": {
       "bytes": 11560,
@@ -442,7 +451,7 @@
     },
     "reference.html": {
       "bytes": 396,
-      "sha256": "0132cdd9f572c48f27be7627aca72d2973cfac51212dcba8607e71025f29fb95"
+      "sha256": "8d174887452f290fe5fb40a8bb155b42def84cdbec75afdb4af250a85586932f"
     },
     "third-party/alpha/babel-runtime-7.29.7-LICENSE.txt": {
       "bytes": 1106,
@@ -461,8 +470,8 @@
       "sha256": "18d45466ba3253deae04667e267a91ea8de8548f18c1125264d1c9db28194cc1"
     },
     "third-party/alpha/its-fine-2.0.0-LICENSE.txt": {
-      "bytes": 1093,
-      "sha256": "506bca9e41227d2ae1fbea8342a1fcff853af8198e9e1f37693a635e86efc539"
+      "bytes": 1072,
+      "sha256": "643123eeb38f154d93cb8323e1289a648d3f343b411a9340453c010e325d0c82"
     },
     "third-party/alpha/react-dom-LICENSE.txt": {
       "bytes": 1088,
@@ -477,8 +486,8 @@
       "sha256": "9c35b5de7b7493a707fffe4eb23bd2f7f449153c1911f7c6eefb4e591fd5349a"
     },
     "third-party/alpha/react-use-measure-2.1.7-LICENSE.txt": {
-      "bytes": 1093,
-      "sha256": "1f9038eff8dbd6505a26f9d6830cc6da2b87ab1a9305d1100884986e9c11a31a"
+      "bytes": 1072,
+      "sha256": "9c35b5de7b7493a707fffe4eb23bd2f7f449153c1911f7c6eefb4e591fd5349a"
     },
     "third-party/alpha/rolldown-1.2.13-LICENSE.txt": {
       "bytes": 1302,
@@ -513,8 +522,8 @@
       "sha256": "c1e6e266563517467b1bf874817d23e426f3149252bd7d42758cd697514b8417"
     },
     "third-party/alpha-runtime-NOTICE.txt": {
-      "bytes": 2646,
-      "sha256": "42cbf935fd9cf1c4a1899e7891dd743b308a4594b4d191cde91942385cf27dd9"
+      "bytes": 2696,
+      "sha256": "36d73151f4311ab50e6d3a5d92baca26b38230538326b545c72fd88d9d8518a6"
     },
     "third-party/babylon-lite-1.32.0-LICENSE.txt": {
       "bytes": 11558,

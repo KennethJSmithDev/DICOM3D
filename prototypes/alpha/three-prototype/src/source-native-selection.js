@@ -2,8 +2,9 @@ import {Box3,Vector3,MeshBasicMaterial} from 'three';
 
 // WHY: a source concept can name exact subsets of several existing draw owners.
 // BOUNDARY: reversible draw groups/materials only, never source buffers or IDs.
-// INVARIANT: selection does not allocate or duplicate positions/indices, and restore
-// precedes owner material disposal. An unavailable member rejects the whole view.
+// INVARIANT: source buffers remain unchanged. Partial spans use a disposable copy
+// so shared views keep independent draw ranges; full-owner selections share buffers.
+// Restore precedes owner disposal. An unavailable member rejects the whole view.
 // HRA concept keys can equal component IDs. Selection kind must not change
 // publisher identity or silently resolve a picked mesh to its compound.
 export const nativeComponentKey=id=>`ELEMENT:${id}`;
@@ -54,7 +55,7 @@ export function sourceAtomAtHit(catalog,ownerId,node,faceIndex){if(!catalog||!Nu
 
 export function createSourceSelectionProjection(){
  let saved=[],clones=[],info=null;
- function restore(){for(const r of saved){r.node.visible=r.visible;if(r.material!==undefined){r.node.material=r.material;r.node.geometry.groups=r.groups;r.node.geometry.setDrawRange(r.drawRange.start,r.drawRange.count);}}saved=[];for(const m of clones)m.dispose();clones=[];info=null;}
+ function restore(){for(const r of saved){r.node.visible=r.visible;if(r.material!==undefined){r.node.material=r.material;if(r.geometry){r.node.geometry.dispose();r.node.geometry=r.geometry;}else{r.node.geometry.groups=r.groups;r.node.geometry.setDrawRange(r.drawRange.start,r.drawRange.count);}}}saved=[];for(const m of clones)m.dispose();clones=[];info=null;}
  function apply(bundles,{catalog,key,isolated=false,opacity=1,style='original'}={}){
   if(!catalog||!key){restore();return null;}
   const record=nativeRecord(catalog,key),atoms=nativeAtoms(catalog,key);
@@ -68,16 +69,19 @@ export function createSourceSelectionProjection(){
   for(const node of all){saved.push({node,visible:node.visible});if(isolated&&node.isMesh)node.visible=false;}
   for(const [mesh,entry] of meshes){
    const state=saved.find(x=>x.node===mesh);Object.assign(state,{material:mesh.material,groups:mesh.geometry.groups.map(g=>({...g})),drawRange:{...mesh.geometry.drawRange}});
+   const fullRange=entry.ranges.length===1&&entry.ranges[0][0]===0&&entry.ranges[0][1]===(mesh.geometry.index?.count??mesh.geometry.attributes.position.count);
+   // Partial draw groups are per-view state. Full owners need only private materials.
+   if(!fullRange&&!Array.isArray(mesh.material)){state.geometry=mesh.geometry;mesh.geometry=mesh.geometry.clone();}
    const materials=Array.isArray(mesh.material)?mesh.material:[mesh.material];
    const altered=materials.map(m=>{const c=m.clone();c.opacity*=Math.min(1,Math.max(.05,opacity));if(style==='holographic'){c.color?.set('#48c9f0');c.emissive?.set('#075275');c.opacity*=.7;}c.transparent=c.transparent||c.opacity<1;if(c.transparent)c.depthWrite=false;clones.push(c);return c;});
    const limit=mesh.geometry.index?.count??mesh.geometry.attributes.position.count;
-   if(Array.isArray(mesh.material)){mesh.material=altered;}
+   if(fullRange||Array.isArray(mesh.material)){mesh.material=Array.isArray(mesh.material)?altered:altered[0];}
    else{mesh.material=[materials[0],altered[0]];mesh.geometry.clearGroups();let cursor=0;for(const [start,count] of entry.ranges){if(!isolated&&start>cursor)mesh.geometry.addGroup(cursor,start-cursor,0);mesh.geometry.addGroup(start,count,1);cursor=start+count;}if(!isolated&&cursor<limit)mesh.geometry.addGroup(cursor,limit-cursor,0);mesh.geometry.setDrawRange(0,limit);}
    if(isolated){for(let node=mesh;node;node=node.parent){node.visible=true;if(!meshes.has(node)&&node.isMesh){const state=saved.find(x=>x.node===node);if(state&&state.material===undefined){Object.assign(state,{material:node.material,groups:node.geometry.groups.map(g=>({...g})),drawRange:{...node.geometry.drawRange}});const mask=new MeshBasicMaterial({visible:false});clones.push(mask);node.material=mask;}}if(!all.includes(node.parent))break;}}
   }
   info={status:'ready',key,scope:record.scope??'EXACT_COMPONENT',atoms:atoms.length,drawMeshes:meshes.size,triangles:[...meshes.values()].reduce((n,e)=>n+e.ranges.reduce((s,r)=>s+r[1]/3,0),0),isolated,opacity};return info;
  }
- return {apply,restore,get info(){return info;}};
+ return {apply,restore,sourceFor:node=>saved.find(r=>r.node===node),get info(){return info;}};
 }
 
 export function composeSourceCatalog(base,extra,removedOwners){

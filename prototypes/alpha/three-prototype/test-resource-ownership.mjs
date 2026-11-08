@@ -1,0 +1,23 @@
+import assert from 'node:assert/strict';
+import {Group,Mesh,BoxGeometry,MeshStandardMaterial,Float32BufferAttribute} from 'three';
+import {createResourcePool,createSerialAdmission} from './src/resource-pool.js';
+import {ownScene,cloneOwnedScene,releaseScene,sceneOwnership} from './src/scene-ownership.js';
+import {createSourceSelectionProjection} from './src/source-native-selection.js';
+let releaseLoad,loads=0,disposed=0;
+const pool=createResourcePool({load:()=>{loads++;return new Promise(resolve=>releaseLoad=resolve)},clone:value=>({value}),dispose:()=>disposed++,releaseClone:()=>{}});
+const first=new AbortController(),second=new AbortController();
+const a=pool.acquire('same',null,first.signal),b=pool.acquire('same',null,second.signal);await Promise.resolve();first.abort();await assert.rejects(a,{name:'AbortError'});releaseLoad(42);const result=await b;assert.equal(loads,1);assert.equal(result.value,42);assert.equal(disposed,0);pool.release(result);assert.equal(disposed,1);assert.equal(pool.stats.entries,0);assert.equal(pool.stats.leases,0);assert.equal(pool.release(result),false);
+const serial=createSerialAdmission();let active=0,peak=0;await Promise.all(Array.from({length:5},()=>serial(async()=>{peak=Math.max(peak,++active);await new Promise(resolve=>setTimeout(resolve,5));active--})));assert.equal(peak,1);
+const scene=new Group(),mesh=new Mesh(new BoxGeometry(),new MeshStandardMaterial());mesh.userData.semanticId='owner';scene.add(mesh);ownScene(scene);
+let geometryDisposals=0;mesh.geometry.addEventListener('dispose',()=>geometryDisposals++);
+const male=cloneOwnedScene(scene),female=cloneOwnedScene(scene),comparison=cloneOwnedScene(male);
+assert.equal(male.children[0].geometry,female.children[0].geometry);assert.notEqual(male.children[0].material,female.children[0].material);
+male.children[0].material.opacity=.2;male.children[0].visible=false;assert.equal(female.children[0].material.opacity,1);assert.equal(female.children[0].visible,true);
+const projection=createSourceSelectionProjection(),sourceGeometry=female.children[0].geometry;
+projection.apply(new Map([['x',{scene:female}]]),{catalog:{atoms:[{id:'element',ownerId:'owner',indexStart:0,indexCount:6}],concepts:[]},key:'ELEMENT:element',isolated:true});
+assert.notEqual(female.children[0].geometry,sourceGeometry);assert.deepEqual(comparison.children[0].geometry.groups,sourceGeometry.groups);assert.equal(sourceGeometry.drawRange.count,Infinity);
+projection.restore();assert.equal(female.children[0].geometry,sourceGeometry);
+// Derived attributes must not corrupt the admitted-byte ownership tally.
+sourceGeometry.setAttribute('derived',new Float32BufferAttribute(new Float32Array(24*3),3));
+releaseScene(male);releaseScene(scene);assert.equal(geometryDisposals,0);assert.equal(female.children[0].geometry.attributes.position.count,24);releaseScene(female);assert.equal(geometryDisposals,0);releaseScene(comparison);assert.equal(geometryDisposals,1);assert.equal(sceneOwnership.scenes,0);assert.equal(sceneOwnership.geometries,0);assert.equal(sceneOwnership.geometryBytes,0);
+console.log('PASS: shared load/cancel, serial admission, independent materials/visibility/draw ranges, last-lease disposal and zero resource ownership');
