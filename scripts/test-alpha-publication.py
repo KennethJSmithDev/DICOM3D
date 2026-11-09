@@ -1,10 +1,10 @@
 """Screen the staged alpha and outgoing Git objects; this is not a secrets audit of all history."""
 import argparse
-import hashlib
 import json
 from pathlib import Path
 import re
 import subprocess
+from staged_git import StagedBlobReader
 
 parser = argparse.ArgumentParser()
 parser.add_argument('--base', required=True, help='Verified existing destination commit or ref')
@@ -14,14 +14,14 @@ def git(*args):
     return subprocess.check_output(['git', *args], cwd=root)
 def indexed(name):
     return git('show', ':' + name)
-sha = lambda b: hashlib.sha256(b).hexdigest()
 manifest = json.loads(indexed('source-manifest.json'))
 assert manifest['version'] == '0.7.0-alpha.1' and manifest['profile'] == 'three-r3f-alpha'
 paths = list(filter(None, git('ls-files', '-z').decode().split('\0')))
+assert 'scripts/staged_git.py' in paths, 'Required staged source missing: scripts/staged_git.py'
 assert set(manifest['files']) == set(paths) - {'source-manifest.json', 'distribution-manifest.json'}
-for name, expected in manifest['files'].items():
-    data = indexed(name)
-    assert {'bytes': len(data), 'sha256': sha(data)} == expected, name
+with StagedBlobReader(root) as staged:
+    for name, expected in manifest['files'].items():
+        assert staged.digest(name) == expected, name
 descriptor = json.loads(indexed('distribution-manifest.json'))
 assert descriptor['version'] == '0.7.0-alpha.1' and descriptor['containsPrivatePatientImaging'] is False
 assert descriptor['approvedPublicResearchFixtures'] == ['H000']
@@ -49,7 +49,8 @@ for name in changed:
             private_paths.append(name)
 assert not private_paths, 'Review local path disclosure: ' + ', '.join(private_paths)
 
-# Check every newly reachable object, including superseded commits in the push.
+# The ancestry size check covers committed objects only; staged additions have
+# separate path and secret-pattern checks above.
 objects = git('rev-list', '--objects', args.base + '..HEAD')
 sizes = subprocess.check_output(['git', 'cat-file', '--batch-check=%(objectname) %(objecttype) %(objectsize) %(rest)'], input=objects, cwd=root).decode().splitlines()
 blobs = [line.split(' ', 3) for line in sizes if ' blob ' in line]

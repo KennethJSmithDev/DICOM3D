@@ -2611,6 +2611,10 @@
       "bytes": 4645,
       "sha256": "fbe36b0140045b02624ed56aff4dd539e8ed787413910f97888f9f55084659f2"
     },
+    "scripts/staged_git.py": {
+      "bytes": 4839,
+      "sha256": "0804ccb0bac764a1738c871e98b2fbde0d37a7349052953986b1a528b02a57a1"
+    },
     "scripts/stop-preview.ps1": {
       "bytes": 567,
       "sha256": "2bc3533ee06067361c569240e651ae4cc555f853fc8a22058c86431be5addec5"
@@ -2624,8 +2628,8 @@
       "sha256": "c2059b8be8ddaec92c0fbd2f1baa4cd0bf0e487836db3b70e0fc301a1ef9c6cd"
     },
     "scripts/test-alpha-publication.py": {
-      "bytes": 3723,
-      "sha256": "4743ed704e765b6650ea8f2452c5fcb1da5ed02712ca762b9dccf03bf64970b4"
+      "bytes": 3847,
+      "sha256": "e31906e50708613e733c53d6b4703949cfda9a92f75d4f33e1d53dbaef478c60"
     },
     "scripts/test-alpha-session.mjs": {
       "bytes": 2037,
@@ -2667,9 +2671,13 @@
       "bytes": 3421,
       "sha256": "88c3d91f2a40ce7f3784f739bac1e9ebda80ca77bffcc058427670431a4c9a76"
     },
+    "scripts/test-staged-git.py": {
+      "bytes": 8980,
+      "sha256": "1bf3def494ae2abc9af4964dbbe47178b765f56d2942ec63f6fc420d648f2dc2"
+    },
     "scripts/update-source-manifest.py": {
-      "bytes": 3725,
-      "sha256": "8c28aff285f924cc13e3eee21415a06d6e79addb8f5d09ab6334f5e80980a3e6"
+      "bytes": 3771,
+      "sha256": "34db325ca248b5867fa416d7fdd2900be21619f5ce8bb77bbaec4b66511b2b9d"
     },
     "src/DICOM3D/Entry.cls": {
       "bytes": 756,

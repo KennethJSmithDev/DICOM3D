@@ -1,10 +1,10 @@
 """Refresh packaging source inventory from explicit staged Git objects."""
 from pathlib import Path
-import hashlib
 import json
 import re
 import subprocess
 import argparse
+from staged_git import StagedBlobReader
 
 parser = argparse.ArgumentParser()
 parser.add_argument('--profile', choices=('legacy', 'alpha'), default='legacy')
@@ -12,24 +12,25 @@ args = parser.parse_args()
 
 root = Path(__file__).resolve().parents[1]
 names = subprocess.check_output(['git', 'ls-files', '-z'], cwd=root).decode().split('\0')
-# The accepted public-source branch now contains exactly five owner-admitted
-# research files. Inventory their pinned bytes without widening Core admission;
-# archive-core.py still excludes every demo/h000 path.
+if 'scripts/staged_git.py' not in names:
+    raise ValueError('Required staged source missing: scripts/staged_git.py')
+# Only the five H000 files named by the owner admission may enter this inventory;
+# the legacy Core archive continues to exclude all demo/h000 paths.
 approved_h000 = json.loads(subprocess.check_output(['node', '--input-type=module', '-e',
     "import {APPROVED_H000_ASSETS} from './viewer/src/public-h000-admission.mjs'; console.log(JSON.stringify(APPROVED_H000_ASSETS));"], cwd=root))
 files = {}
-for name in sorted(filter(None, names)):
-    if name in {'source-manifest.json', 'distribution-manifest.json'}:
-        continue
-    admitted = name.startswith('reference/public/demo/h000/') and name.removeprefix('reference/public/demo/h000/') in approved_h000
-    if not admitted and re.search(r'reference/public/demo/|study-docked|\.(dcm|npy|npz|bin|raw16)$|(^|/)\.secrets/', name, re.I):
-        raise ValueError('Unadmitted source path: ' + name)
-    if (root / name).is_symlink():
-        raise ValueError('Source symlink: ' + name)
-    data = subprocess.check_output(['git', 'show', ':' + name], cwd=root)
-    files[name] = {'bytes': len(data), 'sha256': hashlib.sha256(data).hexdigest()}
-    if admitted and files[name] != approved_h000[name.removeprefix('reference/public/demo/h000/')]:
-        raise ValueError('Owner-admitted source bytes changed: ' + name)
+with StagedBlobReader(root) as staged:
+    for name in sorted(filter(None, names)):
+        if name in {'source-manifest.json', 'distribution-manifest.json'}:
+            continue
+        admitted = name.startswith('reference/public/demo/h000/') and name.removeprefix('reference/public/demo/h000/') in approved_h000
+        if not admitted and re.search(r'reference/public/demo/|study-docked|\.(dcm|npy|npz|bin|raw16)$|(^|/)\.secrets/', name, re.I):
+            raise ValueError('Unadmitted source path: ' + name)
+        if (root / name).is_symlink():
+            raise ValueError('Source symlink: ' + name)
+        files[name] = staged.digest(name)
+        if admitted and files[name] != approved_h000[name.removeprefix('reference/public/demo/h000/')]:
+            raise ValueError('Owner-admitted source bytes changed: ' + name)
 manifest = {
     'distribution': 'DICOM3D v0.6.5 source inventory', 'version': '0.6.5',
     'publishedWebCommit': 'd3490dd659e19e44b8800abe87bbc626f45350a2',
