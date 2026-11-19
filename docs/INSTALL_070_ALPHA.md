@@ -2,7 +2,7 @@
 
 DICOM3D is an open-source interactive anatomy and medical imaging platform. This alpha uses React, Three.js and React Three Fiber, with WebGPU as the primary renderer and a WebGL2 compatibility path. It includes source-backed reference anatomy and the approved public H000 CT/SEG example.
 
-These instructions describe the published v0.7.0-alpha.1 prerelease and its separately qualified installation routes. The published v0.6.5 artifacts and historical installation receipts remain separate. Use the exact [downloads and hashes](DOWNLOADS_070_ALPHA.md); the community IPM registry and Open Exchange have not been promoted to this alpha. Do not assume `zpm "install dicom3d"` retrieves it.
+These instructions describe the published v0.7.0-alpha.1 prerelease and its separately qualified installation routes. The published v0.6.5 artifacts and historical installation receipts remain separate. The [Open Exchange listing](https://openexchange.intersystems.com/package/DICOM3D) describes this alpha, but listing text does not establish which archive a registry install retrieves. For the qualified fresh-install route, use the exact [GitHub downloads and hashes](DOWNLOADS_070_ALPHA.md). Do not assume `zpm "install dicom3d"` retrieves the alpha.
 
 ## Choose a local host
 
