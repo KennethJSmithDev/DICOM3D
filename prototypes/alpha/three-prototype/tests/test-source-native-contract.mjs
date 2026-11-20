@@ -5,6 +5,8 @@ import {resolve,dirname} from 'node:path';
 import {fileURLToPath} from 'node:url';
 import {webcrypto,createHash} from 'node:crypto';
 import {GLTFLoader} from 'three/examples/jsm/loaders/GLTFLoader.js';
+import {labelFemaleRecord} from '../src/female-catalog.mjs';
+import {sourceAtomAtHit,nativeComponentKey,createSourceSelectionProjection} from '../src/source-native-selection.js';
 const root=resolve(dirname(fileURLToPath(import.meta.url)),'..');
 const indexBytes=await readFile(resolve(root,'expanded-atlas/index.json'));
 const pin=createHash('sha256').update(indexBytes).digest('hex');
@@ -43,7 +45,26 @@ for(const kind of ['missing-repair','corrupt-repair']){fault=kind;clearCache();a
 const affected=loaded.sourceNative.concepts.filter(c=>c.relation==='PART_OF'&&c.atomIds.some(id=>['BP3D40:FJ1450','BP3D40:FJ1656'].includes(id)));
 assert.equal(affected.length,27);for(const c of affected){assert.equal(c.scope,'EXACT_COMPOUND');assert.equal(c.missingElements.length,0);}
 const female=await api.loadSourceCatalog(delta.sourceNative,ac.signal,'female-delta');assert.equal(female.atoms.length,60);assert.equal(female.concepts.length,1073);
-const item=await api.loadBundle(delta,ac.signal,'female-delta');let owners=0;item.scene.traverse(n=>{if(n.userData.semanticId)owners++});assert.equal(owners,39);api.disposeScene(item.scene);
+const item=await api.loadBundle(delta,ac.signal,'female-delta');let owners=0;item.scene.traverse(n=>{if(n.userData.semanticId)owners++});assert.equal(owners,39);
+const catalog={...female,atoms:female.atoms.map(labelFemaleRecord)};
+const pair=[453,454].map((sourceNodeIndex,i)=>{
+ const atom=catalog.atoms.find(record=>record.sourceNodeIndex===sourceNodeIndex);
+ assert.equal(atom.label,['Right cardinal ligament','Left cardinal ligament'][i]);
+ assert.equal(atom.sourceLabel,'Cardinal ligament');
+ let mesh;item.scene.traverse(node=>{if(node.isMesh&&node.userData.sourceNodeIndex===sourceNodeIndex)mesh=node});
+ assert.ok(mesh);
+ return {mesh,atom};
+});
+const projection=createSourceSelectionProjection(),residents=new Map([[delta.id,item]]);
+for(const member of pair){
+ const mate=pair.find(record=>record!==member);
+ const picked=sourceAtomAtHit(catalog,member.atom.ownerId,member.mesh,0);
+ assert.equal(picked.id,member.atom.id);
+ assert.equal(sourceAtomAtHit(catalog,mate.atom.ownerId,member.mesh,0),undefined);
+ assert.equal(projection.apply(residents,{catalog,key:nativeComponentKey(picked.id),isolated:true,opacity:.4}).drawMeshes,1);
+ assert.equal(member.mesh.visible,true);assert.equal(mate.mesh.visible,false);
+}
+projection.restore();assert.ok(pair.every(({mesh})=>mesh.visible));api.disposeScene(item.scene);
 const invalid={...delta,sha256:'0'.repeat(64)};await assert.rejects(()=>api.loadBundle(invalid,ac.signal,'female-delta'),/integrity mismatch/);
 const aborted=new AbortController();aborted.abort();await assert.rejects(()=>api.loadBundle(delta,aborted.signal,'female-delta'),{name:'AbortError'});
 console.log(JSON.stringify({status:'PASS',indexSha256:pin,maleOwners:1205,maleAtoms:2299,historicalHeld:416,residualUnresolved:18,femaleSupplementOwners:39,femaleSupplementAtoms:60,catalogWithoutGeometry:true,repairedCompounds:affected.length,repairOwners,repairNegativePaths:['missing repair bundle','corrupt repair bundle'],negativePaths:['missing catalog','corrupted catalog','corrupted geometry','cancelled publication'],rssBytes:process.memoryUsage().rss,maxRssKiB:process.resourceUsage().maxRSS}));

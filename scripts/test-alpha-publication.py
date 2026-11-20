@@ -26,7 +26,7 @@ with StagedBlobReader(root) as staged:
         assert staged.digest(name) == expected, name
 descriptor = json.loads(indexed('distribution-manifest.json'))
 assert descriptor['version'] == alpha_version and descriptor['containsPrivatePatientImaging'] is False
-assert descriptor['approvedPublicResearchFixtures'] == ['H000']
+assert descriptor['approvedPublicResearchFixtures'] == ['H000', 'H001']
 assert b'KennethJSmithDev' in indexed('.github/FUNDING.yml')
 for name in paths:
     if name.startswith('.github/workflows/') and name.endswith(('.yml', '.yaml')):

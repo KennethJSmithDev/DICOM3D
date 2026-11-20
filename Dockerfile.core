@@ -1,4 +1,4 @@
-# Three/R3F alpha Core. Fixed public H000 only; no private studies or credentials.
+# Three/R3F alpha Core. Public H000 CT/SEG and H001 published teaching figures; no private studies or credentials.
 FROM node:24-alpine@sha256:44fce696f38ba8c987c4db89954051000bbd05ffd8d8659ba15ed4a8602e937f AS build
 WORKDIR /build/prototypes/alpha/three-prototype
 COPY prototypes/alpha/three-prototype/package.json prototypes/alpha/three-prototype/package-lock.json ./

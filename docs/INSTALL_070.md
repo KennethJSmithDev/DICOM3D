@@ -2,6 +2,10 @@
 
 DICOM3D is an interactive anatomy and medical imaging research viewer. The same frontend runs in the standalone download and the IRIS package. Start with the reference atlas, or open **Imaging → Open H000 example** to explore the included public CT and its source segmentation. The viewer identifies generalized anatomy separately from acquired imaging.
 
+## H001 pregnancy teaching case
+
+In **Imaging**, open **H001** to compare the two published ultrasound figures from one case. The first figure shows the twin pregnancy and the second shows the anterior uterine-wall fibroid. Visit the linked adult reproductive atlas, full-term placenta and developmental references to explore their structures separately. The ultrasound figures are published stills with no source DICOM stack, spatial registration or segmentation. Open H000 for the acquired CT and linked SEG workflow. H001 runs locally with the included assets. [Ultrasound source and attribution](https://doi.org/10.7759/cureus.113224)
+
 ## Standalone viewer
 
 Verify the ZIP against the accompanying SHA-256 record, extract it into a new directory and open a terminal there. With Node.js 24 available, run:

@@ -6,7 +6,7 @@ import {stat} from 'node:fs/promises';
 import {resolve, extname, sep, relative, isAbsolute} from 'node:path';
 import {pathToFileURL} from 'node:url';
 import {loadLoopbackFhirRoute, LOOPBACK_FHIR_PREFIX} from './fhir-loopback-route.mjs';
-const mime = {'.html':'text/html; charset=utf-8','.js':'text/javascript; charset=utf-8','.mjs':'text/javascript; charset=utf-8','.css':'text/css; charset=utf-8','.json':'application/json','.glb':'model/gltf-binary','.png':'image/png','.svg':'image/svg+xml','.txt':'text/plain; charset=utf-8','.wasm':'application/wasm'};
+const mime = {'.html':'text/html; charset=utf-8','.js':'text/javascript; charset=utf-8','.mjs':'text/javascript; charset=utf-8','.css':'text/css; charset=utf-8','.json':'application/json','.glb':'model/gltf-binary','.png':'image/png','.jpg':'image/jpeg','.svg':'image/svg+xml','.txt':'text/plain; charset=utf-8','.wasm':'application/wasm'};
 
 export function createCoreServer({publicRoot='/app/public', port=8080, configPath, fetchImpl}={}) {
   const root = resolve(publicRoot);

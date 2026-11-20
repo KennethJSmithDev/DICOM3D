@@ -1,0 +1,15 @@
+.placenta-study{box-sizing:border-box;width:min(100%,72rem);height:100dvh;overflow:auto;margin:auto;padding:clamp(12px,3vw,28px);display:flex;flex-direction:column;gap:12px;color:#deedf4;background:#081624}
+.placenta-study header{display:block;height:auto;padding:0;background:none;border:0}
+.placenta-study h1{margin:.5rem 0;font-size:clamp(1.3rem,3vw,2rem)}
+.placenta-study p{margin:.4rem 0;line-height:1.45}
+.placenta-study a{color:#77dcf5}
+.placenta-stage{flex:1 0 40dvh;position:relative;min-width:0;border:1px solid #24516b;border-radius:8px;background:#030b12;overflow:hidden}
+.placenta-stage canvas{touch-action:none}
+.placenta-study section{display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+.placenta-study section label{display:flex;gap:8px;align-items:center}
+.placenta-study select,.placenta-study button,.placenta-study summary{min-height:44px}
+.placenta-study section p{width:100%}
+.placenta-study details{padding:8px 0}
+.ultrasound-examples label{display:grid;gap:.4rem;max-width:28rem}
+.ultrasound-examples figure{margin:1rem 0 0}
+.ultrasound-examples img{display:block;width:auto;max-width:100%;height:auto}

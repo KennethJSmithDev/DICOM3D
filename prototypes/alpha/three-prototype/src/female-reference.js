@@ -2,7 +2,7 @@ import {Group} from 'three';
 import {composeSourceCatalog} from './source-native-selection.js';
 import {disposeScene,loadBundle,loadBundleManifest,loadSourceCatalog} from './atlas.js';
 import delta from '../atlas-delta/female-delta.json';
-import {FEMALE_EXCLUDED_OWNER_IDS,buildFemaleCatalog,sourceAttributionManifest} from './female-catalog.mjs';
+import {FEMALE_EXCLUDED_OWNER_IDS,buildFemaleCatalog,labelFemaleRecord,sourceAttributionManifest} from './female-catalog.mjs';
 
 export const FEMALE_SKIN_ID='FMA7163';
 const replaced=new Set(FEMALE_EXCLUDED_OWNER_IDS);
@@ -12,7 +12,8 @@ export async function loadFemaleReference(base,signal,{initialIds=base.bundles.m
  const sourceManifests=new Map();
  const resident=new Set();let disposed=false;
  const overlayManifest=await loadBundleManifest(delta,signal,'female-delta');
- const extra=await loadSourceCatalog(delta.sourceNative,signal,'female-delta');extra.concepts=extra.concepts.map(c=>({...c,relation:'HRA_PART_OF'}));
+ const hra=await loadSourceCatalog(delta.sourceNative,signal,'female-delta');
+ const extra={...hra,atoms:hra.atoms.map(labelFemaleRecord),concepts:hra.concepts.map(c=>({...labelFemaleRecord(c),relation:'HRA_PART_OF'}))};
  const index={...buildFemaleCatalog(base,overlayManifest,delta),sourceNative:composeSourceCatalog(base.sourceNative,extra,replaced)};
  const item={scene,index,sourceManifests,resident,manifest:{reference:{id:'BodyParts3D + HRA female composite'}},bytes:0};
  async function ensure(ids,requestSignal){

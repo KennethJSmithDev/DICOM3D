@@ -2,7 +2,8 @@ import assert from 'node:assert/strict';
 import {test} from 'node:test';
 import {readFile} from 'node:fs/promises';
 import {composeSourceCatalog,nativeAtoms,nativeComponentKey} from './src/source-native-selection.js';
-import {buildFemaleCatalog, compositeCoverageText, referenceSourceLinks, relationshipScope} from './src/female-catalog.mjs';
+import {buildFemaleCatalog, compositeCoverageText, labelFemaleRecord, referenceSourceLinks, relationshipScope} from './src/female-catalog.mjs';
+import {filterFemaleStructures} from './src/female-presentation.js';
 
 test('current expanded female projection preserves the source-native catalog and exact HRA component keys', async () => {
   const read = async path => JSON.parse(await readFile(new URL(path,import.meta.url),'utf8'));
@@ -15,6 +16,15 @@ test('current expanded female projection preserves the source-native catalog and
   const excluded = new Set(['FMA15900','FMA9600','FMA19667','FMA7211','FMA7212','FMA21385','FMA21386','FMA20818','FMA20819']);
   const native = composeSourceCatalog(base.sourceNative,extra,excluded);
   const index = {...buildFemaleCatalog(base,supplement,delta),sourceNative:native};
+  for(const [i,side] of ['Right','Left'].entries()){
+    const [owner,...others]=filterFemaleStructures(index,`${side} cardinal ligament`);
+    assert.equal(others.length,0);
+    assert.equal(owner.id,`VH_F_${side.toLowerCase()}_cardinal_ligament_of_uterus`);
+    const source=extra.concepts.find(c=>c.sourceNodeIndex===453+i);
+    assert.equal(labelFemaleRecord(source).label,owner.label);
+    assert.equal(owner.sourceLabel,source.label);
+    assert.equal(source.label,'Cardinal ligament');
+  }
   assert.equal(base.structures.length,1205);assert.equal(index.structures.length,1235);
   assert.equal(index.bundles.length,18);assert.equal(index.hierarchy.length,1368);
   assert(index.hierarchy.every(r=>r.source_owner_ids.length===r.owner_ids.length+r.excluded_owner_ids.length+r.unresolved_owner_ids.length));

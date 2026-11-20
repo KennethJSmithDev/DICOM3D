@@ -7,8 +7,24 @@
   "containsPrivatePatientImaging": false,
   "patientDerivedResearchData": true,
   "approvedPublicResearchFixtures": [
-    "H000"
+    "H000",
+    "H001"
   ],
   "baseImage": "node:24-alpine@sha256:44fce696f38ba8c987c4db89954051000bbd05ffd8d8659ba15ed4a8602e937f",
-  "commitBinding": "Generated frontend/package manifests bind exact inputs and the supplied source commit."
+  "commitBinding": "Generated frontend/package manifests bind exact inputs and the supplied source commit.",
+  "publishedUltrasoundFigures": {
+    "study": "H001",
+    "article": "https://doi.org/10.7759/cureus.113224",
+    "license": "CC BY 4.0",
+    "figures": {
+      "1": {
+        "bytes": 633942,
+        "sha256": "8b534c82a9b49fb19d642cb873a7fbb6c8d5df7aa67c5b7439e30ba4cc776892"
+      },
+      "2": {
+        "bytes": 722530,
+        "sha256": "95b10c2e1e16c5a92721c157f54144ac0150ae2c3e8593972a60393de7bab03c"
+      }
+    }
+  }
 }

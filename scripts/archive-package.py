@@ -43,10 +43,24 @@ if actual != identity["files"]:
     parser.error("stage differs from its exact package inventory")
 frontend = json.loads((args.stage / "public/demo-build-manifest.json").read_text())
 if alpha:
-    if frontend.get("schema") != "dicom3d-alpha-distribution-1" or frontend.get("release") != identity["version"] or frontend.get("containsPrivatePatientImaging") is not False or frontend.get("approvedPublicResearchFixtures") != ["H000"]:
+    if frontend.get("schema") != "dicom3d-alpha-distribution-1" or frontend.get("release") != identity["version"] or frontend.get("containsPrivatePatientImaging") is not False:
         parser.error("unadmitted alpha distribution")
     if frontend.get('sourceBase') != identity['sourceCommit'] or not isinstance(identity.get('installedBuildDependencyTree'), dict) or identity['installedBuildDependencyTree'] != frontend.get('buildToolchain', {}).get('installedTree') or not re.fullmatch(r'[0-9a-f]{64}', identity['installedBuildDependencyTree'].get('sha256', '')):
         parser.error('package and frontend build-input identities differ')
+    fixtures = frontend.get("approvedPublicResearchFixtures")
+    policy = json.loads((args.stage / "public/distribution-manifest.json").read_bytes())
+    if fixtures not in (["H000"], ["H000", "H001"]) or fixtures != policy.get("approvedPublicResearchFixtures") or fixtures != identity.get("approvedPublicResearchFixtures"):
+        parser.error("package, frontend and source fixture identities differ")
+    if "H001" in fixtures:
+        figures = policy.get("publishedUltrasoundFigures", {}).get("figures", {})
+        approved = {"1": (633942, "8b534c82a9b49fb19d642cb873a7fbb6c8d5df7aa67c5b7439e30ba4cc776892"),
+                    "2": (722530, "95b10c2e1e16c5a92721c157f54144ac0150ae2c3e8593972a60393de7bab03c")}
+        if set(figures) != set(approved):
+            parser.error("H001 requires both published ultrasound figures")
+        for figure, (size, digest) in approved.items():
+            record = {"bytes": size, "sha256": digest}
+            if figures[figure] != record or sum(name.endswith(".jpg") and item == record for name, item in frontend["files"].items()) != 1:
+                parser.error("H001 publisher figure differs: " + figure)
     admission = frontend.get("approvedPublicResearchAssets", {})
     # Five unchanged, operator-admitted public H000 objects; not arbitrary studies.
     if hashlib.sha256(json.dumps(admission, sort_keys=True, separators=(",", ":")).encode()).hexdigest() != "b199c0f8b3d8df40a0f23a03f9bd851aebb3febc86f184b2cf7cbdeb3d8f93e8":

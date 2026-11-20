@@ -29,7 +29,7 @@ function referenceContext(o){
  const lesson=referenceLesson(normalized,part,{isolate:!!(prefs?.isolated??o.isolatedId),opacity:new Map(part?[[part.id,opacity]]:[]),context:false,clip:'unchanged'});
  const related=(index?.hierarchy??[]).filter(p=>p.owner_ids?.includes(selected));
  const indirect=related.filter(p=>p.ownership_scope!=='DIRECT');
- const loaded=female?!!o.femaleData:!!(part&&o.bundles?.has(part.bundleId));
+ const loaded=part&&(female?o.femaleData?.resident?.has(part.bundleId):o.bundles?.has(part.bundleId));
  const held=female?index?.held?.length:o.heldCount;
  const cards=[
   card(part?`About this selection: ${part.label}`:'Explore the available reference',part?`${lesson.known} ${loaded?'Its source geometry is loaded.':'Its catalog identity is available; its geometry is not yet loaded.'}`:'Choose a structure in the explorer or click visible anatomy. Learn follows your current selection, reference source and imaging workspace.'),
@@ -40,7 +40,7 @@ function referenceContext(o){
  ];
  const systems=(part?.systems??[]).join(' · ');
  return {kind:'reference',title:part?`Understand ${part.label}`:`Explore ${female?'female':'male'} anatomy`,subtitle:'Generalized reference anatomy',cards,
-  sourceRows:rows([['Reference',referenceId],['Selected source ID',part?.id??'No structure selected'],['Source label',part?.label??'No structure selected'],['Source systems / classifications',systems||'Not supplied for this selection'],['Region',part?.region??'Not supplied'],['Geometry',part?(loaded?'Loaded':'Not loaded'):'Select a structure'],['Source attribution',provenance.copyright??'See source notice'],['Source terms',provenance.license??'See source notice']]),
+  sourceRows:rows([['Reference',referenceId],['Selected source ID',part?.id??'No structure selected'],['Source label',part?.sourceLabel??part?.label??'No structure selected'],['Source systems / classifications',systems||'Not supplied for this selection'],['Region',part?.region??'Not supplied'],['Geometry',part?(loaded?'Loaded':'Not loaded'):'Select a structure'],['Source attribution',provenance.copyright??'See source notice'],['Source terms',provenance.license??'See source notice']]),
   relationships:related.slice(0,20).map(p=>({id:p.id,label:p.label,scope:female?relationshipScope(p):p.ownership_scope==='DIRECT'?'Direct source relationship':'Represented through existing geometry',relation:p.relation??''})),
   links:[...referenceSourceLinks(female,part),...(safeUrl(provenance.source_url)?[{label:'Publisher source',href:safeUrl(provenance.source_url)}]:[])],
  };

@@ -12,6 +12,18 @@ const sourceNotices = Object.freeze({
   HRA: Object.freeze({label:'HRA source attribution', path:'female-delta/HRA-FEMALE-NOTICE.txt'}),
 });
 
+// These two HRA nodes share their publisher label and ontology ID. Their
+// distinct source names supply the side for display, picking and search.
+const cardinalLigamentSides = new Map([
+  ['VH_F_right_cardinal_ligament_of_uterus', 'Right'],
+  ['VH_F_left_cardinal_ligament_of_uterus', 'Left'],
+]);
+export function labelFemaleRecord(record) {
+  const side = cardinalLigamentSides.get(record.nodeName ?? record.source_name ?? record.id);
+  if (!side || record.label !== 'Cardinal ligament') return record;
+  return {...record, sourceLabel:record.label, label:`${side} cardinal ligament`};
+}
+
 export function referenceSourceLinks(female, part) {
   if (!female) return [sourceNotices.BodyParts3D];
   const notice = Object.hasOwn(sourceNotices, part?.source ?? '') ? sourceNotices[part.source] : null;
@@ -59,7 +71,7 @@ export function buildFemaleCatalog(base, supplementManifest, supplementBundle) {
   const excluded = new Set(FEMALE_EXCLUDED_OWNER_IDS);
   const structures = [
     ...base.structures.filter(part => !excluded.has(part.id)).map(part => ({...part, source:'BodyParts3D'})),
-    ...supplement.structures.map(part => ({...part, bundleId:supplementBundle.id, source:'HRA'})),
+    ...supplement.structures.map(part => ({...labelFemaleRecord(part), bundleId:supplementBundle.id, source:'HRA'})),
   ];
   const available = new Set();
   for (const part of structures) {

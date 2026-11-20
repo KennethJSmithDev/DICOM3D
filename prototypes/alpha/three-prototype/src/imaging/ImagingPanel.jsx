@@ -5,7 +5,7 @@ import { frameRgba } from '../../../viewer/src/ct-frame.mjs';
 import { paintSourceSeg } from './seg-overlay.js';
 
 /** Public H000 research fixture only. No patient-to-atlas registration is implied. */
-export default function ImagingPanel({ onStudyChange, onFrameChange, onSegChange, controlledFrame, lesionSelected=false }) {
+export default function ImagingPanel({ onStudyChange, onFrameChange, onSegChange, controlledFrame, lesionSelected=false, onOpenH001, onShowH000, h001Active=false }) {
   const [study, setStudy] = useState(null);
   const [internalFrame, setInternalFrame] = useState(71);
   const frame=Number.isInteger(controlledFrame)?controlledFrame:internalFrame;
@@ -51,17 +51,19 @@ export default function ImagingPanel({ onStudyChange, onFrameChange, onSegChange
     const mask = over.createImageData(512, 512), offset = frame * 512 * 512;
     if (showSeg) paintSourceSeg(study.mask, offset, mask.data, lesionSelected && study.binding?.semanticId === 'lesion.lung.mass.001');
     over.putImageData(mask, 0, 0);
-  }, [study, frame, showSeg, lesionSelected]);
+  }, [study, frame, showSeg, lesionSelected, h001Active]);
   useEffect(() => { onSegChange?.(showSeg); }, [showSeg, onSegChange]);
   const counts = study?.binding?.frames?.[frame]?.nonzero_voxels;
   return <section className="imaging-panel" aria-label="Public research source imaging">
     <h2>Source imaging</h2>
     <p>Public H000 research example · CT and source segmentation</p>
-    <button type="button" onClick={load} disabled={loading}>{loading ? 'Loading…' : 'Open H000 example'}</button>{' '}
+    <button type="button" onClick={h001Active && study ? onShowH000 : load} disabled={loading}>{loading ? 'Loading…' : 'Open H000 example'}</button>{' '}
     {loading && <button type="button" onClick={cancelLoad}>Cancel loading</button>}{' '}
-    {(study || loading) && <button type="button" onClick={unload}>Close study</button>}
-    <p role="status">{status}</p>
-    {study && <>
+    {(study || loading) && !h001Active && <button type="button" onClick={unload}>Close study</button>}
+    {!h001Active && <p role="status">{status}</p>}
+    <p>Public H001 teaching case · Twin pregnancy and uterine fibroid on ultrasound</p>
+    <button type="button" aria-pressed={h001Active} onClick={()=>{if(loading)cancelLoad();onOpenH001()}}>Open H001 example</button>
+    {study && !h001Active && <>
       <div style={{ position:'relative', width:'100%', maxWidth:512, aspectRatio:'1', background:'#000' }}>
         <canvas ref={imageRef} width="512" height="512" aria-label={`Acquired CT frame ${frame}`} style={{width:'100%', height:'100%', display:'block'}} />
         <canvas ref={overlayRef} width="512" height="512" aria-label="Source segmentation overlay" style={{position:'absolute', inset:0, width:'100%', height:'100%', pointerEvents:'none'}} />

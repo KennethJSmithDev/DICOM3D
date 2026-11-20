@@ -5,7 +5,7 @@ import {femalePresentationDefault,revealFemaleStructure,toggleFemaleSystem,filte
 export {femalePresentationDefault} from './female-presentation.js';
 
 /** Source relationships navigate admitted owners; they do not create new geometry. */
-export default function FemaleInspector({index,resident,onLoadAll,selected,onSelect,presentation,onPresentation,onFit,onFocus}){
+export default function FemaleInspector({index,resident,onLoadAll,selected,onSelect,presentation,onPresentation,onFit,onFocus,onOpenLearn}){
  const [query,setQuery]=useState(''),[relation,setRelation]=useState(''),[system,setSystem]=useState(''),[page,setPage]=useState(0);
  const systems=useMemo(()=>[...new Set(index.structures.flatMap(p=>p.systems??[]).filter(s=>!s.startsWith('IS-A:')))].sort(),[index]);
  const matches=useMemo(()=>filterFemaleStructures(index,query,system),[index,query,system]);
@@ -21,6 +21,7 @@ export default function FemaleInspector({index,resident,onLoadAll,selected,onSel
   <h2>Female composite</h2><p>{index.structures.length} selectable structures · BodyParts3D base with an approximately fitted HRA organ delta.</p>
   <p>{resident?.size??index.bundles.length} of {index.bundles.length} source bundles loaded. Select a structure to load its anatomy.</p><button onClick={onLoadAll}>Load full female reference</button><details className="inspector-advanced"><summary>Systems · visibility filters</summary>{systems.map(s=><label key={s} style={{display:'block'}}><input style={{width:'auto'}} type="checkbox" checked={presentation.systems.has(s)} onChange={()=>toggleSystem(s)}/> {s} · {index.structures.filter(p=>p.systems?.includes(s)).length}</label>)}</details>
   {presentation.systems.size>0&&<button type="button" onClick={()=>onPresentation(old=>old.saved?{...old,hidden:new Set(old.saved.hidden),isolated:old.saved.isolated,systems:new Set(),saved:null}:{...old,systems:new Set()})}>Return to previous female presentation</button>}
+  <button type="button" onClick={()=>{onPresentation(old=>revealFemaleStructure(old,'VH_F_uterus'));onSelect('VH_F_uterus');onOpenLearn()}}>Explore the uterus</button>
   <label>Search structures <input aria-label="Search female structures" value={query} onChange={e=>{setQuery(e.target.value);setPage(0)}}/></label>
   <label>Browse source system<select aria-label="Browse female source system" value={system} onChange={e=>{setSystem(e.target.value);setPage(0)}}><option value="">All source systems</option>{systems.map(s=><option key={s} value={s}>{s}</option>)}</select></label><small>{matches.length} matching structures · page {currentPage+1} of {pageCount}</small>
   <div className="structure-results">{matches.slice(currentPage*40,(currentPage+1)*40).map(p=><button key={p.id} type="button" className="structure-result" aria-pressed={p.id===selected} onClick={()=>onSelect(p.id)}><span>{p.label}</span><small>{p.id}{resident&&!resident.has(p.bundleId)?" · loads on selection":" · loaded"}</small></button>)}</div>

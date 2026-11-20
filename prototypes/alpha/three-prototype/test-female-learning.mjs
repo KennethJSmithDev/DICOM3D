@@ -2,6 +2,7 @@ import assert from 'node:assert/strict';
 import {test} from 'node:test';
 import {buildFemaleCatalog,sourceAttributionManifest} from './src/female-catalog.mjs';
 import {buildLearnContext} from './src/learn-context.mjs';
+import {beginnerLesson} from './src/beginner-learning.mjs';
 const base={structures:[{id:'heart',label:'Heart',bundleId:'thorax'},{id:'FMA9600',label:'Prostate',bundleId:'pelvis'}],bundles:[{id:'thorax'},{id:'pelvis'}],hierarchy:[{id:'source-compound',label:'Source compound',ownership_scope:'INDIRECT',owner_ids:['heart','FMA9600']}],held:[{id:'base-hold',hold:'Source unresolved'}]};
 const supplement={reference:{id:'HRA supplement',structures:[{id:'uterus',label:'Uterus',systems:['reproductive system']}]},provenance:{copyright:'HRA fixture author',license:'fixture HRA terms'}};
 const index=buildFemaleCatalog(base,supplement,{id:'female-delta'});
@@ -10,6 +11,18 @@ const sourceManifests=new Map([
  ['female-delta',sourceAttributionManifest(supplement)],
 ]);
 const context=selected=>buildLearnContext({femaleActive:true,femaleSelected:selected,femaleData:{index,sourceManifests,manifest:{reference:{id:'Composite'}}}});
+
+test('pelvic walkthrough follows the HRA uterus and reports actual bundle residency',()=>{
+ const uterus={id:'VH_F_uterus',label:'Uterus',bundleId:'female-source-complete-delta'};
+ const state={femaleActive:true,femaleSelected:uterus.id,femaleData:{index:{structures:[uterus]},resident:new Set()}};
+ const lesson=()=>beginnerLesson(state,buildLearnContext(state));
+ assert.ok(lesson().ideas.some(c=>c.title==='Explore the pelvis'));
+ assert.match(lesson().ideas[0].body,/not loaded/);
+ state.femaleData.resident.add(uterus.bundleId);
+ assert.match(lesson().ideas[0].body,/Focus selection/);
+ state.femaleSelected='unmapped';
+ assert.ok(!lesson().ideas.some(c=>c.title==='Explore the pelvis'));
+});
 
 test('Learn follows the selected base structure source rather than the active female mode',()=>{
  const c=context('heart');assert.equal(c.links[0].path,'attribution/BODYParts3D-NOTICE.txt');

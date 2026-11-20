@@ -86,7 +86,7 @@ if ($frontendIdentity.sourceBase -cne $SourceCommit -or $frontendIdentity.buildT
 $packageIdentity = [ordered]@{
   product='DICOM3D'; version=$candidateVersion; profile='three-r3f-alpha'; distribution='IRIS/IPM'; sourceCommit=$SourceCommit
   frontendProfile='three-r3f-alpha'
-  approvedPublicResearchFixtures=@('H000'); containsPrivatePatientImaging=$false
+  approvedPublicResearchFixtures=@($frontendIdentity.approvedPublicResearchFixtures); containsPrivatePatientImaging=$false
   frontendHtmlSha256=$viewerBuild; patientDerivedResearchData=$true; installedBuildDependencyTree=$frontendIdentity.buildToolchain.installedTree
   qualification='Requires the separate exact-artifact qualification receipt'; files=$fileInventory
 }

@@ -48,7 +48,7 @@ else:
     assert alpha_version in {'0.7.0-alpha.1', '0.7.0-alpha.2', '0.7.0'}
     assert manifest['release'] == alpha_version and manifest['entrypoint'] == '/dicom3d/reference.html'
     assert manifest['containsPrivatePatientImaging'] is False
-    assert manifest['patientDerivedResearchData'] and manifest['approvedPublicResearchFixtures'] == ['H000']
+    assert manifest['patientDerivedResearchData'] and manifest['approvedPublicResearchFixtures'] == json.loads(checked_read(root / 'distribution-manifest.json'))['approvedPublicResearchFixtures']
 assert isinstance(manifest['files'], dict) and 'demo-build-manifest.json' not in manifest['files']
 assert len({name.casefold() for name in manifest['files']}) == len(manifest['files'])
 files = {**manifest['files'], 'demo-build-manifest.json': {'bytes': len(manifest_data), 'sha256': hashlib.sha256(manifest_data).hexdigest()}}

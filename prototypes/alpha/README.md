@@ -4,6 +4,12 @@ DICOM3D is an open-source interactive anatomy and medical imaging platform. This
 
 Current published alpha.1 qualification and installation: [acceptance snapshot](../../docs/RELEASE_070_ALPHA_ACCEPTANCE.md), [downloads](../../docs/DOWNLOADS_070_ALPHA.md) and [launch guide](../../docs/LAUNCH_070_ALPHA.md). The public Live Demo serves this alpha. Historical checkpoint sections below retain their original scope; they are not the current deployment identity.
 
+## Local development teaching case H001
+
+In the development viewer, choose **Imaging → Open H001 example** or open `reference.html?study=H001`. The case figure selector switches between the published ultrasound views of twin pregnancy and the uterine-wall fibroid. Each figure includes the authors, original report and license. H001 contains two exported images. The H000 CT/SEG example remains available under Imaging.
+
+Choose a female pelvic structure to explore its independent reference geometry in the same viewer. **Return to H001** restores the selected figure. The separate placenta and embryonic development references open in their own tabs. These specimens have no spatial registration with either published image.
+
 ## Preserved earlier alpha origin
 
 - Preserved dirty-worktree base: `355570e3f250c4c4644deabd39c675f466eea7ec`; that commit alone is not the candidate.
