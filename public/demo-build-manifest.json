@@ -41,7 +41,7 @@
     "prototypes/alpha/three-prototype/src/beginner-learning.mjs": "bb2ea9d2d7365c32dd43e774b1267ab995ac9de8fb0ba5bc3003eac0a62ba7ff",
     "prototypes/alpha/three-prototype/src/compact-workspace.css": "4e4dd191176198ac67c2aef79bc2f5e9bc05553518f1c8e54cad9be5d1b377d6",
     "prototypes/alpha/three-prototype/src/comparison-interaction.js": "b9cf5a2f6f2da065842ebc9ba042ed729f00d2b902ea889a7903ea3478870aa6",
-    "prototypes/alpha/three-prototype/src/ComparisonWipe.jsx": "a1cdceafe37c65da4e257cb107c74e49df4da9f4991fa5b178ceb4a9ab822b6a",
+    "prototypes/alpha/three-prototype/src/ComparisonWipe.jsx": "1fbc5c4f8ac854b679447b4611fe6d38e99b86f4ab40840317a700b02713e480",
     "prototypes/alpha/three-prototype/src/female-catalog.mjs": "9572373bf6735480550771747f54a6a8934d489f026b0a459d7c4a64b692f770",
     "prototypes/alpha/three-prototype/src/female-presentation.js": "c5a0f135203c08228a41019382073bbad61a3de9c4d1646caca410634376813d",
     "prototypes/alpha/three-prototype/src/female-reference.js": "b2a901fe646fdf4e2024e4a08968991a1ab81506dc092a7513fa5728c4cbffee",
@@ -54,13 +54,13 @@
     "prototypes/alpha/three-prototype/src/imaging/fetal-mri/fetal-brain.css": "28098afebb4839ba00075d4a1cac2411d403828a31ff468fbdcd09de0c87692f",
     "prototypes/alpha/three-prototype/src/imaging/fetal-mri/fetal-brain.mjs": "6ecf4b3e32061f1837c8b146ad8c9ec0a2e78b9cc0112f88c368e94aa2548633",
     "prototypes/alpha/three-prototype/src/imaging/fetal-mri/FetalBrainExplorer.jsx": "f0d99389311cd139564bb506079e70c836c58b1a21eaea6d1ab69aacd42d2dc4",
-    "prototypes/alpha/three-prototype/src/imaging/fetal-mri/FetalTissueSurface.jsx": "1933786ef186ac4d24b28e925134db8fa0cffdb1977dde2b542de18af40b396c",
+    "prototypes/alpha/three-prototype/src/imaging/fetal-mri/FetalTissueSurface.jsx": "d43e38c7a1261a40ea4cc71fc56b9db1203aad8574d7fceebabe08d36123363e",
     "prototypes/alpha/three-prototype/src/imaging/fetal-mri/source-camera.mjs": "a59e1a3c747f8579a4e761b2b63ed51af745bb3d91334ccc4c634eaa0ceaacc2",
     "prototypes/alpha/three-prototype/src/imaging/fetal-mri/source-plane.mjs": "1d035dd7cf1c25dd490d8505e6f8470384b2fa20a7f25a611d0801944fece4c6",
     "prototypes/alpha/three-prototype/src/imaging/fetal-mri/t2w_GA22_atlas.nii.gz": "506d9cd61a3d5ee816283ae87945b4d466171e4e1ee50ba0a11fd2c7a6291ad1",
     "prototypes/alpha/three-prototype/src/imaging/fetal-mri/t2w_GA22_tissue.nii.gz": "dbcf9a93669a4942f995d9e2e20ad68c4d5e995cbfa489ced7d06186cb3aecac",
     "prototypes/alpha/three-prototype/src/imaging/fetal-mri/T2WAtlas_labelkey-tissue.txt": "678f7df75ba0d594aaf17eaf49897daf063a2ac2711886feb1b012fb5df3a323",
-    "prototypes/alpha/three-prototype/src/imaging/fetal-mri/tissue-comparison.css": "e7070b60e8a95f91f733323ef4f82f9338091715955e538aeac808e985ce0a20",
+    "prototypes/alpha/three-prototype/src/imaging/fetal-mri/tissue-comparison.css": "43770854fa1209ca89579fb54f8f03c186bbf713e6765d35f761e01681acb58d",
     "prototypes/alpha/three-prototype/src/imaging/fetal-mri/tissue-surface.mjs": "c711799ef5d76ae3297783ff66e4d2eb8b21e9250cf6e6fc42e066a3d2a37e5e",
     "prototypes/alpha/three-prototype/src/imaging/fetal-mri/tissue-surface.test.mjs": "eaea2080221901b2b8fee5dfe088b2f510152adc6db2fe52bbd31f7cf01e846d",
     "prototypes/alpha/three-prototype/src/imaging/fhir-capabilities.mjs": "c3b595e8277bfeda02f5b5255d42be8b76be0fa63f3096e8c44e3ecea61e17fd",
@@ -301,9 +301,9 @@
       "bytes": 2404,
       "sha256": "90a061354400068f23b2c89b36dc86610071d5de83d30ca96fcc65de8231283a"
     },
-    "assets/EpicSandboxPanel-CnuTDVZe.js": {
+    "assets/EpicSandboxPanel-DWq0wkXo.js": {
       "bytes": 13216,
-      "sha256": "d59a860c5c6f00850b9fd4aec8f4df717f8a02c8a95b75d220a63c0254e28bda"
+      "sha256": "bd86c206200b3c04fef1c0bd92c7ddb59a4b6ce3d4b206ac1a06b07d948120a6"
     },
     "assets/fetal-brain-DKMBGb3-.js": {
       "bytes": 4352,
@@ -313,25 +313,25 @@
       "bytes": 1817,
       "sha256": "7f660f50a03b0501a957be6f449ee083b4f0930610ef1a726a587883f0cf1558"
     },
-    "assets/FetalBrainExplorer-F3sG1IDi.js": {
+    "assets/FetalBrainExplorer-DDnDusrm.js": {
       "bytes": 8116,
-      "sha256": "c20a7d90d253381381ec3969e96aadc30dbf112d965722792d4aa02ad92108e2"
+      "sha256": "c66caf775db03986a9824023fb9c2aee2f3f94e0f01fe4021b2af9bba1be9884"
     },
-    "assets/FetalTissueSurface-BPkTEP0h.css": {
-      "bytes": 607,
-      "sha256": "4240178691d502bcf94deedc5dcb400286bf77a02182e8b27728076c2f1d455e"
+    "assets/FetalTissueSurface-DXRbgbjg.css": {
+      "bytes": 476,
+      "sha256": "28736c5675b524c046e65936cca49b60aa18aef74c102718da996c75edbbbf01"
     },
-    "assets/FetalTissueSurface-XWXQC_fo.js": {
-      "bytes": 7915,
-      "sha256": "e73dbdabc76dde3a4835f1c71b9bf8697ec432d8295d85fcaef4cd5b2488c509"
+    "assets/FetalTissueSurface-lQ9TwuOr.js": {
+      "bytes": 8031,
+      "sha256": "560a6050788375494dbb000a803e8dea295cd06f8dfb3c4a9791ebab6088de67"
     },
     "assets/fetus-in-uterus-BW8kn3SM.png": {
       "bytes": 182835,
       "sha256": "a079aa76aa413be67d189fbbc9a930286742668c50d32f45be51264946c27cf3"
     },
-    "assets/fhir-readonly-openapi-GUlk9oEW.js": {
+    "assets/fhir-readonly-openapi-DwTNbwX7.js": {
       "bytes": 3859,
-      "sha256": "31c0dfe457562aebcd8fc69d5b68a0ea9d55faa4c6ff44fba293c95a3f6d89e7"
+      "sha256": "1295ea47fbef6109ef6132266ec07404028e0a8ef140f8ef4d59f9c57ec05b40"
     },
     "assets/fibroid-j8W9rm3I.jpg": {
       "bytes": 722530,
@@ -345,17 +345,17 @@
       "bytes": 26931,
       "sha256": "7567ed5149303c6f9f57c7be66a7dc0b78ef5327b32d39b8befe213c94530164"
     },
-    "assets/index-Cv5rwvtg.js": {
-      "bytes": 1995990,
-      "sha256": "f0e2d8545df1b859bb0850ef5282a069adcee0e6abfd887b3c26d55ac342f544"
+    "assets/index-D_pzShJf.js": {
+      "bytes": 1996132,
+      "sha256": "e9f45428d0e2ec08376224a59ff4966642ccaefc9375d28af570ce94d650f30a"
     },
     "assets/jsx-runtime-MZURdZre.js": {
       "bytes": 8567,
       "sha256": "66faf4691e35525cdcf6dcf7420b167664633837f787ddcde86bceca0237ace2"
     },
-    "assets/MyomaExplorer-DD5iRUBe.js": {
+    "assets/MyomaExplorer-Dw6gjTCy.js": {
       "bytes": 10846,
-      "sha256": "ca3cb36ca8fad5eca0c92feacbc7ef0ce7ec28578d86e183aa680458ecd63768"
+      "sha256": "c2d18d4b2c87a8f4fade31af457ab7a78fb4eeb2a8c4351ba2506255e3fbf90b"
     },
     "assets/MyomaExplorer-vVhwjxU3.css": {
       "bytes": 769,
@@ -381,9 +381,9 @@
       "bytes": 1117,
       "sha256": "0c15623eb4ac515b7dabca0bc83b51ae4f94bfe36beed53ec878a7d97e93a0c8"
     },
-    "assets/PlacentaReference-ZMabgVTC.js": {
+    "assets/PlacentaReference-Dq92n_sA.js": {
       "bytes": 7976,
-      "sha256": "5a67c075ab183b0d8b04e2a44da38aafe4c8245fcf90893883e5944bc77ce8dd"
+      "sha256": "761789210da489de3ea65975805cc49bd841ba9ba65c44eee71aeb1bd4818cd4"
     },
     "assets/public-asset-cache-BFw2mW6w.js": {
       "bytes": 2936,
@@ -397,9 +397,9 @@
       "bytes": 602,
       "sha256": "2bd3359d7df16db65123088a7f02a503b16625f9840676b3ae902739cf9fb665"
     },
-    "assets/SmartSyntheticPanel-CWmRRfqO.js": {
+    "assets/SmartSyntheticPanel-CFukJkhT.js": {
       "bytes": 22245,
-      "sha256": "05f0165a2320a590598c6aa0cefbe91c41807df79069763a336577f39d32c708"
+      "sha256": "6fc45988f8d27e4c78b470fd1951ce0e39e252dc8032276c318b1dd84b544f2f"
     },
     "assets/t2w_GA22_atlas.nii-DaiIkpwY.gz": {
       "bytes": 675662,
@@ -433,9 +433,9 @@
       "bytes": 843,
       "sha256": "2036bfa87736e4fbf11beae3225d144558b505ffe58723f7bfef0f39afb7ca51"
     },
-    "assets/UmdUterusReference-ChLEaB8_.js": {
-      "bytes": 2233,
-      "sha256": "9fe49e1d8645adf76d692747d6e0116648bf89fde9daf00749415527538b1062"
+    "assets/UmdUterusReference-DYk-mriy.js": {
+      "bytes": 2238,
+      "sha256": "f4de5149196e63364c56de3b507a4b3ac40a539e7b9db5de0aca349c5e15599f"
     },
     "atlas/index.json": {
       "bytes": 1046248,
@@ -643,7 +643,7 @@
     },
     "index.html": {
       "bytes": 1278,
-      "sha256": "236fe2950fa1d8ba6943f03ce7b86c7a418b33e7c9c2b891108d5146fa2a791e"
+      "sha256": "5ad75abc62c86450fc660c53601aa825ff1f5a6090c8448d0914a22399ae632a"
     },
     "LICENSE": {
       "bytes": 11560,
@@ -659,7 +659,7 @@
     },
     "reference.html": {
       "bytes": 1278,
-      "sha256": "236fe2950fa1d8ba6943f03ce7b86c7a418b33e7c9c2b891108d5146fa2a791e"
+      "sha256": "5ad75abc62c86450fc660c53601aa825ff1f5a6090c8448d0914a22399ae632a"
     },
     "third-party/alpha/babel-runtime-7.29.7-LICENSE.txt": {
       "bytes": 1106,

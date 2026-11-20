@@ -3,7 +3,7 @@ import {useFrame,useThree} from '@react-three/fiber';
 import {Box3, Vector3, DataTexture, DoubleSide, SRGBColorSpace} from 'three';
 import {OrbitControls} from 'three/addons/controls/OrbitControls.js';
 import RenderCadence, {requestSceneFrames} from '../../RenderCadence.jsx';
-import ComparisonWipe from '../../ComparisonWipe.jsx';
+import ComparisonWipe, {ComparisonToolbar} from '../../ComparisonWipe.jsx';
 import {synchronizeComparisonCamera} from '../../linked-comparison.js';
 import './tissue-comparison.css';
 import {fitPerspectiveBounds} from '../../fit-perspective-bounds.js';
@@ -94,20 +94,20 @@ class DisplayBoundary extends React.Component {
 export default function FetalTissueSurface({volume,tissueId,CanvasComponent,createRenderer,onSelect,slice,sourceSlice,comparison=false,axis,index,opacity=1,planeCorners,atlasContext=false,atlasOpacity=.28,onAtlasStatus,ariaLabel='Fetal brain tissue surface'}) {
   const data=useMemo(()=>tissueSurface(volume,tissueId),[volume,tissueId]);
   const [view,setView]=useState({direction:'oblique'});
-  const [split,setSplit]=useState(50);
+  const [split,setSplit]=useState(36);
   const cameraBridge=useRef(null);
   const selectionLabel=tissueId===3 && comparison ? 'Fibroid' : volume.byId.get(tissueId)?.name;
   return <section aria-label={ariaLabel}>
     <div className={comparison?'tissue-wipe-view':undefined} style={{position:'relative',height:comparison?'clamp(330px,58dvh,760px)':'clamp(240px,43dvh,520px)',background:'#07121c',borderRadius:8,overflow:'hidden'}}>
-      <DisplayBoundary><CanvasComponent gl={createRenderer} camera={cameraStart} dpr={1} frameloop="never">
+      <div className={comparison?'tissue-wipe-primary':'canvas-contents'}><DisplayBoundary><CanvasComponent gl={createRenderer} camera={cameraStart} dpr={1} frameloop="never">
         <RenderCadence name="fetal-tissue" policy={policy}/>
         <ambientLight intensity={1.5}/><directionalLight position={[-3,5,-4]} intensity={2}/>
         <TissueMesh data={data} volume={volume} view={view} onSelect={onSelect} opacity={opacity} cameraBridge={cameraBridge} comparison={comparison} split={split} planeCorners={planeCorners}/>
         {slice && <SourcePlane volume={volume} axis={axis} index={index} slice={slice} planeCorners={planeCorners}/>}
         {comparison && atlasContext && <Suspense fallback={null}><UmdUterusReference volume={volume} opacity={atlasOpacity} onAtlasStatus={onAtlasStatus}/></Suspense>}
-      </CanvasComponent></DisplayBoundary>
+      </CanvasComponent></DisplayBoundary></div>
       {comparison && sourceSlice && <>
-        <ComparisonWipe split={split} onSplit={setSplit} label={'Source MRI ↔ '+selectionLabel} rangeLabel="Fibroid comparison divider" side="left">
+        <ComparisonWipe split={split} side="left">
           <DisplayBoundary><CanvasComponent gl={createRenderer} camera={cameraStart} dpr={1} frameloop="never">
             <RenderCadence name="myoma-source" policy={policy}/>
             <FollowCamera cameraBridge={cameraBridge}/>
@@ -117,6 +117,7 @@ export default function FetalTissueSurface({volume,tissueId,CanvasComponent,crea
         <div className="tissue-wipe-labels" aria-hidden="true"><span>Source MRI</span><span>{selectionLabel} segmentation</span></div>
       </>}
     </div>
+    {comparison && sourceSlice && <ComparisonToolbar split={split} onSplit={setSplit} label={'Source MRI ↔ '+selectionLabel} rangeLabel="Fibroid comparison divider"/>}
     <div><button type="button" onClick={()=>setView({direction:'oblique'})}>Fit tissue</button>{' '}
       <button type="button" onClick={()=>setView({direction:'side'})}>Side view</button></div>
     <small>{comparison?'Drag either side to rotate both views. The MRI and its tissue labels share the same source coordinates.':'Drag to rotate. The surface follows the boundaries of the source tissue labels.'}</small>
