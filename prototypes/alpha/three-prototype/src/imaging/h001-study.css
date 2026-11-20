@@ -1,5 +1,5 @@
 .h001-study{height:100%;overflow:auto;box-sizing:border-box;padding:clamp(.9rem,2vw,1.75rem);color:#deedf4;scroll-padding:1rem}
-.h001-study header{display:block;background:none;height:auto;padding:0;border:0}
+.h001-heading{margin-bottom:.7rem}
 .h001-study h2{margin:0;font-size:clamp(1.2rem,2vw,1.8rem)}
 .h001-study p{margin:.6rem 0;line-height:1.5}
 .h001-study label{display:grid;gap:.35rem;max-width:28rem}

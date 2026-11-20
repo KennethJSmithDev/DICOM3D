@@ -7,8 +7,8 @@ export function H001Study({figure, onFigure, onPelvis, pelvicOwner, setPelvicOwn
   const renderer = webgl ? '&renderer=webgl' : '';
 
   return <article className="h001-study" aria-labelledby="h001-title">
-    <header><h2 id="h001-title">H001 · Twin pregnancy and uterine fibroid</h2>
-      <p>Public teaching case · Two ultrasound figures from one published pregnancy</p></header>
+    <div className="h001-heading"><h2 id="h001-title">H001 · Twin pregnancy and uterine fibroid</h2>
+      <p>Public teaching case · Two ultrasound figures from one published pregnancy</p></div>
     <CaseFigures label="Case figure" selected={figure} onSelect={onFigure}/>
     <nav aria-label="Related teaching anatomy">
       <label>Female atlas structure
