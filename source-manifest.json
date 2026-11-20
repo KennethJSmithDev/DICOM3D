@@ -2756,8 +2756,8 @@
       "sha256": "76e4f9d8f31bbe53e6f29e10c328b60280c5c65340f20368c66297d563fcc8ad"
     },
     "scripts/archive-static.py": {
-      "bytes": 4877,
-      "sha256": "883bdd3f4f88eb9a2e4262c7ea1e7a4a47f7b30fa1c580f9c4700e68b2b7c3fc"
+      "bytes": 4939,
+      "sha256": "286a3a9cb3e0517202cabc3f0749fa0a30f7adfd607e4600a5d7fb9688c761f7"
     },
     "scripts/build-alpha-distribution.mjs": {
       "bytes": 8990,

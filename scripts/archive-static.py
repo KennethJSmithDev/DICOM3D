@@ -13,8 +13,10 @@ def main():
  frozen=lambda n:subprocess.check_output(['git','show',a.source_commit+':'+n],cwd=ROOT)
  source=json.loads(frozen('source-manifest.json'));mbytes=(a.build/'demo-build-manifest.json').read_bytes();m=json.loads(mbytes)
  modern = m['release'] == '0.7.0'
+ if source['version'] != m['release']:
+  raise ValueError('Frontend and source identities differ')
  if modern:
-  if source['version'] != m['release'] or m['sourceBase'] != a.source_commit:
+  if m['sourceBase'] != a.source_commit:
    raise ValueError('Frontend and source identities differ')
   subprocess.run(['node', str(ROOT/'scripts/test-alpha-distribution.mjs'), str(a.build)], check=True)
  elif m['release'] != '0.6.5' or m['publicationApproved'] is not False:
