@@ -30,11 +30,16 @@
 !scripts/
 !scripts/build-alpha-distribution.mjs
 !scripts/test-alpha-distribution.mjs
+!scripts/admitted-public-files.mjs
+!scripts/admitted-notices.json
+!scripts/preview-verified-file.mjs
 !third-party/
 !third-party/**
 !docker/
 !docker/core/
 !docker/core/server.mjs
+!docker/core/fhir-loopback-route.mjs
+!docker/core/fhir-configured-metadata.mjs
 !LICENSE
 !NOTICE
 !distribution-manifest.json

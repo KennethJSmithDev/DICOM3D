@@ -142,6 +142,22 @@ test('marks matching local keys as unscoped when a Bundle has no server base', (
   assert.match(result.warnings.join(' '), /no server base/);
 });
 
+test('relative subject history is scoped to the source server and unknown relative forms stay unresolved', () => {
+  const bundle = fixture('4.0.1');
+  const study = bundle.entry.find(item => item.resource.resourceType === 'ImagingStudy');
+  const report = bundle.entry.find(item => item.resource.resourceType === 'DiagnosticReport');
+  study.fullUrl = 'https://a.example/fhir/ImagingStudy/synthetic-study';
+  report.fullUrl = 'https://b.example/fhir/DiagnosticReport/synthetic-report';
+  report.resource.imagingStudy = [{reference:study.fullUrl}];
+  const status = () => projectFhirEvidence(bundle, {fhirVersion:'4.0.1'}).links[0].status;
+  study.resource.subject = report.resource.subject = {reference:'Patient/synthetic/_history/1'};
+  assert.equal(status(), 'SUBJECT_REFERENCE_MISMATCH');
+  report.fullUrl = 'https://a.example/fhir/DiagnosticReport/synthetic-report';
+  assert.equal(status(), 'SAME_SUBJECT_REFERENCE');
+  study.resource.subject = report.resource.subject = {reference:'unscoped-subject'};
+  assert.equal(status(), 'SUBJECT_SCOPE_UNRESOLVED');
+});
+
 test('rejects version-conflicting resource or modality shapes, duplicate identities and unknown modifiers', () => {
   const r5 = fixture('5.0.0');
   assert.throws(() => projectFhirEvidence(r5, {fhirVersion:'4.0.1'}), /Modality shape|ImagingSelection/);

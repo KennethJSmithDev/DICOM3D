@@ -1,6 +1,6 @@
-# FHIR interoperability development candidate
+# FHIR interoperability in DICOM3D
 
-This document describes work prepared for a possible **v0.7.0-alpha.2**. It is not a published release or a claim that an installed DICOM3D service can access a FHIR server or PACS. The published alpha.1 and v0.6.5 artifacts remain separate.
+The v0.7.0 release candidate includes these research features. Availability of a live source depends on the installed services, transport configuration and the signed-in reader’s permissions.
 
 ## What the local viewer can inspect
 
@@ -14,11 +14,11 @@ The optional **Compare an R4/R4B-to-R5 conversion** control compares two local B
 
 An experimental server-side metadata reader accepts only a configured source identifier and requires an authorization callback supplied by its host. It requests only the selected source's `/metadata` (up to 8 MiB) and retains a bounded fingerprint and capability projection. A separate reader can retrieve an explicitly allowlisted `ImagingStudy` by ID, using the same bounded, read-only transport and a host authorization decision for that exact source and study. Its configured FHIR version is a label until the host independently checks the source metadata. An ImagingStudy is metadata, not retrieved DICOM pixels or proof of patient registration. Credentials supplied by the host are not returned to the caller.
 
-These readers are source-level integration sockets. The existing standalone Core server does **not** mount them; no patient-resource, FHIR-write, IRIS, Orthanc or PACS endpoint is exposed by it. An authenticated host, installation, connection policy and actual runtime must be qualified before claiming a live viewer connector.
+The local preview and standalone Core can mount these readers on loopback when configured. The installed IPM viewer also supports the native IRIS binding described below. The offline viewer can open the public example and local files without configuring a FHIR source.
 
-### Opt-in local IRIS preview
+### Local preview and standalone Core
 
-The local preview can optionally expose a narrowly scoped live ImagingStudy read to its own viewer. It requires a local configuration file supplied through `DICOM3D_LIVE_FHIR_CONFIG` before the preview starts. The file defines source IDs, FHIR versions, base URLs and allowed ImagingStudy IDs; it must not contain credentials. For example:
+The local preview and standalone Core accept a configuration file through `DICOM3D_LIVE_FHIR_CONFIG`. Set it before startup, keep the file outside the served viewer directory and use the numeric loopback address to open the viewer. The configuration contains source IDs, FHIR versions, HTTPS base URLs and allowed synthetic ImagingStudy IDs. Supply credentials only when the viewer prompts for them.
 
 ```json
 {
@@ -36,17 +36,39 @@ The viewer asks the user for their own IRIS username and password for each read;
 
 When the public H000 CT is open, the viewer can compare the returned study, series and instance IDs with the verified local CT source. An identity match does not establish patient matching, atlas registration or clinical accuracy. FHIR ImagingStudy contains metadata, not the DICOM pixel data. The pixels and SEG in that example remain the separately verified local H000 copies.
 
-This is a local research-preview path, not an installed Core/IPM connector or a public service. It does not establish OAuth, per-patient access policy, arbitrary study discovery, PACS retrieval, or remote-host security. An installed authenticated IRIS integration needs separate host-specific qualification.
+Configured Core listens exclusively on `127.0.0.1:8080` in its network namespace. On a Linux host supporting Docker host networking, mount the configuration read-only and run your locally built Core image in the host network. Use the browser on that computer. For an internal certificate authority, mount its public certificate read-only and set `NODE_EXTRA_CA_CERTS` to the certificate path inside the container.
+
+```sh
+docker run --rm --network host --read-only --cap-drop ALL --security-opt no-new-privileges --memory 768m --cpus 2 --pids-limit 64 \
+  --mount type=bind,source=/absolute/path/to/fhir.json,target=/run/dicom3d-fhir.json,readonly \
+  --env DICOM3D_LIVE_FHIR_CONFIG=/run/dicom3d-fhir.json YOUR_LOCAL_CORE_IMAGE
+```
+
+Open `http://127.0.0.1:8080/dicom3d/reference.html`. Requests arriving through ordinary Docker bridge forwarding have a different peer address and are refused for credentialed reads. The standard Compose service serves the standalone viewer with live FHIR disabled.
+
+### Installed IPM viewer on HTTPS
+
+Serve the installed `/dicom3d/` viewer and an authenticated FHIR repository from one HTTPS origin with a trusted certificate. The IPM module installs the binding reader on the existing protected `/dicom3d/DICOM3D.Entry.cls` page. A read uses the same application and browser session as the viewer. A normal visit to the entry continues to open the viewer. The application can be used offline without configuring a FHIR repository.
+
+In the installed API’s namespace (`USER` by default), an administrator may grant a synthetic test reader access to one source key and ImagingStudy ID. For example, assuming that the repository already exists and the reader can access it:
+
+```objectscript
+Set ^DICOM3DFHIR("reader","DEMOREADER","example","study-1")=$ListBuild("/synthetic/fhir/r5","5.0.0")
+```
+
+Use the exact account name returned by `$USERNAME` for that login. Only administrators should write binding records. Store the path relative to this HTTPS origin, ending in `/fhir`, `/fhir/r4`, `/fhir/r4b` or `/fhir/r5`, and pair it with the repository’s exact version. The supported values are `4.0.1`, `4.3.0` and `5.0.0`. Store neither credentials nor FHIR resource bodies in the binding. Removing that single binding revokes future viewer lookups. The repository owns its own access and revocation policies.
+
+Sign into the viewer, open **Imaging → Read a configured live IRIS study**, and enter the assigned key, study ID and the same reader’s repository credentials. The viewer first uses the installed session to resolve the exact grant. Then it sends the reader’s credentials only to that same-origin repository, verifies the version from `/metadata` and reads the specified ImagingStudy. Missing grants and denied reads leave the source closed. Repository credentials live in memory for this request. A local mock exercises all three declared versions; confirming the installed web gateway, class and repository together requires an authenticated HTTPS installation test.
 
 ## Offline read-only OpenAPI template
 
-The source checkout includes an independently authored, offline export for a single-server R4, R4B or R5 CapabilityStatement. From the repository root, run:
+In Imaging, open **FHIR capability information**, select a local R4, R4B or R5 CapabilityStatement, then choose **Generate read-only OpenAPI template** and **Download OpenAPI JSON**. The viewer processes the file locally. The source checkout provides the same generator as a command-line tool. From the repository root, run:
 
 ```text
 node scripts/export-fhir-readonly-openapi.mjs --input statement.json --output fhir-template.json
 ```
 
-The exporter reads at most 8 MiB of CapabilityStatement metadata and will not overwrite an existing file. The separate local imaging-evidence limit is unchanged. It writes read, version-read, type-search, and instance, type and system history protocol templates only where those interactions are declared, with an SHA-256 fingerprint of the input. It makes no network requests and uses a non-routable placeholder server by default; `--base-url` can specify an operator-selected HTTPS endpoint or a loopback HTTP endpoint. Credentials, queries and fragments in that URL are refused. The generated OpenAPI document omits authentication schemes, profiles, search parameters, other system interactions and write operations; omitted declared interactions are listed in its metadata. **An omitted security scheme does not mean a server is public.** Check actual server methods, permissions and security before use; even a declared search method may be rejected. The file is a limited template, not a complete or validated server contract. The source-only tool is not included in the current Core or IPM runtime.
+The exporter reads at most 8 MiB of CapabilityStatement metadata and will not overwrite an existing file. The separate local imaging-evidence limit is unchanged. It writes read, version-read, type-search, and instance, type and system history protocol templates only where those interactions are declared, with an SHA-256 fingerprint of the input. It makes no network requests and uses a non-routable placeholder server by default; `--base-url` can specify an operator-selected HTTPS endpoint or a loopback HTTP endpoint. Credentials, queries and fragments in that URL are refused. The generated OpenAPI document omits authentication schemes, profiles, search parameters, other system interactions and write operations; omitted declared interactions are listed in its metadata. **An omitted security scheme does not mean a server is public.** Check actual server methods, permissions and security before use; even a declared search method may be rejected. The file is a limited template, not a complete or validated server contract.
 
 ## Local HL7 fixture draft
 

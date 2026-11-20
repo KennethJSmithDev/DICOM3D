@@ -1,8 +1,8 @@
-import {createConfiguredFhirImagingStudyReader, createConfiguredFhirMetadataReader} from './fhir-configured-metadata.mjs';
+import {readFileSync,statSync} from 'node:fs';
+import {createConfiguredFhirImagingStudyReader, createConfiguredFhirMetadataReader, validFhirId} from './fhir-configured-metadata.mjs';
 
 const PREFIX = '/dicom3d/_interop/fhir/';
 const idPattern = /^[A-Za-z0-9_-]{1,64}$/;
-const studyPattern = /^[A-Za-z0-9.-]{1,64}$/;
 const releases = new Set(['4.0.1', '4.3.0', '5.0.0']);
 const fail = code => Object.assign(new Error(code), {code});
 const need = (condition, code) => { if (!condition) throw fail(code); };
@@ -17,7 +17,7 @@ function credentials(value) {
   return separator > 0 && separator < text.length - 1 && /^[\x20-\x7e]+$/.test(text);
 }
 
-// Optional preview-only bridge. Every request carries the user's own upstream
+// Optional loopback bridge. Every request carries the user's own upstream
 // credentials; no configured service account or browser-supplied URL is used.
 export function createLoopbackFhirRoute({sources, port, fetchImpl = globalThis.fetch, timeoutMs = 15000} = {}) {
   need(Number.isInteger(port) && port > 0 && port <= 65535, 'INVALID_CONFIGURATION');
@@ -27,7 +27,7 @@ export function createLoopbackFhirRoute({sources, port, fetchImpl = globalThis.f
     need(input && Object.keys(input).every(key => ['id','baseUrl','fhirVersion','imagingStudyIds'].includes(key)), 'INVALID_CONFIGURATION');
     need(idPattern.test(input.id ?? '') && !configured.has(input.id) && releases.has(input.fhirVersion) &&
       Array.isArray(input.imagingStudyIds) && input.imagingStudyIds.length > 0 && input.imagingStudyIds.length <= 64 &&
-      input.imagingStudyIds.every(id => studyPattern.test(id)) && new Set(input.imagingStudyIds).size === input.imagingStudyIds.length, 'INVALID_CONFIGURATION');
+      input.imagingStudyIds.every(validFhirId) && new Set(input.imagingStudyIds).size === input.imagingStudyIds.length, 'INVALID_CONFIGURATION');
     let address;
     try { address = new URL(input.baseUrl); } catch { throw fail('INVALID_CONFIGURATION'); }
     need(address.protocol === 'https:' || (address.protocol === 'http:' && ['127.0.0.1','[::1]'].includes(address.hostname)), 'INVALID_CONFIGURATION');
@@ -54,7 +54,7 @@ export function createLoopbackFhirRoute({sources, port, fetchImpl = globalThis.f
     if (!local || !sameOrigin || req.headers['transfer-encoding'] || (req.headers['content-length'] && req.headers['content-length'] !== '0'))
       return reply(403, {error:'REQUEST_NOT_ALLOWED'});
     const match = /^\/dicom3d\/_interop\/fhir\/([A-Za-z0-9_-]{1,64})\/ImagingStudy\/([A-Za-z0-9.-]{1,64})$/.exec(path);
-    if (!match || req.url !== path) return reply(404, {error:'SOURCE_UNAVAILABLE'});
+    if (!match || !validFhirId(match[2]) || req.url !== path) return reply(404, {error:'SOURCE_UNAVAILABLE'});
     const authorization = req.headers.authorization;
     if (!credentials(authorization)) return reply(401, {error:'AUTHENTICATION_REQUIRED'});
     const source = configured.get(match[1]), studyId = match[2];
@@ -92,3 +92,15 @@ export function createLoopbackFhirRoute({sources, port, fetchImpl = globalThis.f
 }
 
 export const LOOPBACK_FHIR_PREFIX = PREFIX;
+
+export function loadLoopbackFhirRoute(configPath, port, fetchImpl) {
+  if (!configPath) return null;
+  const info = statSync(configPath);
+  need(info.isFile() && info.size <= 65536, 'INVALID_CONFIGURATION');
+  const raw = readFileSync(configPath);
+  need(raw.length <= 65536, 'INVALID_CONFIGURATION');
+  const config = JSON.parse(raw.toString('utf8'));
+  need(config?.schema === 'dicom3d-loopback-fhir-1' &&
+    Object.keys(config).every(key => ['schema', 'sources'].includes(key)), 'INVALID_CONFIGURATION');
+  return createLoopbackFhirRoute({sources: config.sources, port, fetchImpl});
+}

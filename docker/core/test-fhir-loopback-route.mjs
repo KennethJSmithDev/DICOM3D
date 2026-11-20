@@ -47,7 +47,8 @@ test('rejects cross-origin, rebind, malformed, unconfigured and unauthenticated 
   for(const item of [
     {headers:{host:'attacker.invalid:57980'}},{headers:{origin:'https://attacker.invalid'}},{headers:{'sec-fetch-site':'cross-site'}},
     {headers:{'sec-fetch-site':'same-site'}},{headers:{'x-dicom3d-request':undefined}},{address:'192.0.2.2'},
-    {url:path+'?target=other'},{url:path.replace('study-1','study-2')},{url:path.replace('iris','unknown')},
+    {url:path+'?target=other'},{url:path.replace('study-1','study-2')},{url:path.replace('study-1','.')},
+    {url:path.replace('study-1','..')},{url:path.replace('iris','unknown')},
     {headers:{authorization:undefined}},{headers:{authorization:'Basic !!!'}},{method:'POST'}
   ]) {const {res,promise}=exchange(route,item);await promise;assert.ok(res.status>=400);}
   assert.equal(calls,0);
@@ -77,6 +78,7 @@ test('does not share credentials or cancellation across concurrent requests',asy
 
 test('rejects invalid configuration and refuses credentials in source definitions',()=>{
   for(const value of [{...source('5.0.0'),token:'secret'},{...source('5.0.0'),baseUrl:'http://192.0.2.1/fhir'},
-    {...source('5.0.0'),baseUrl:'https://user:pass@example.invalid/fhir'},{...source('5.0.0'),fhirVersion:'4.2.0'}])
+    {...source('5.0.0'),baseUrl:'https://user:pass@example.invalid/fhir'},{...source('5.0.0'),imagingStudyIds:['.']},
+    {...source('5.0.0'),imagingStudyIds:['..']},{...source('5.0.0'),fhirVersion:'4.2.0'}])
     assert.throws(()=>createLoopbackFhirRoute({sources:[value],port:57980}),{code:'INVALID_CONFIGURATION'});
 });

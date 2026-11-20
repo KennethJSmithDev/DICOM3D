@@ -4,6 +4,7 @@ const need = (ok, message) => { if (!ok) throw new Error(message); };
 const idPattern = /^[A-Za-z0-9.-]{1,64}$/;
 const typePattern = /^[A-Z][A-Za-z0-9]{0,63}$/;
 const relativeResourcePattern = /^[A-Z][A-Za-z0-9]{0,63}\/[A-Za-z0-9.-]{1,64}$/;
+const relativeHistoryPattern = /^[A-Z][A-Za-z0-9]{0,63}\/[A-Za-z0-9.-]{1,64}\/_history\/[A-Za-z0-9.-]{1,64}$/;
 const supportedTypes = new Set(['ImagingStudy', 'DiagnosticReport', 'Observation', 'ImagingSelection']);
 // Bound the complete projection, not only each individual FHIR reference list.
 export const MAX_PROJECTED_REFERENCES = 4096;
@@ -55,7 +56,7 @@ function rejectUninterpretedModifiers(value) {
   }
 }
 
-function modalityCodes(study, version) {
+export function modalityCodes(study, version) {
   const values = study.modality ?? [];
   need(Array.isArray(values) && values.length <= 64, 'Unsupported modality list');
   const codes = [];
@@ -153,18 +154,18 @@ export function projectFhirEvidence(bundle, {fhirVersion} = {}) {
   function scopedReference(item, value) {
     const ref = reference(value);
     if (!ref || ref.startsWith('#')) return null;
-    if (relativeResourcePattern.test(ref)) {
-      if (item.base) return new URL(ref, item.base).href;
+    if (relativeResourcePattern.test(ref) || relativeHistoryPattern.test(ref)) {
+      if (item.base) return item.base + ref;
       return item.fullUrl ? null : `bundle:${ref}`;
     }
-    return ref;
+    try { new URL(ref); return ref; } catch { return null; }
   }
   function targetFor(item, value) {
     const ref = reference(value);
     if (!ref) return {target:null, resolution:'REFERENCE_NOT_PROVIDED'};
     if (relativeResourcePattern.test(ref)) {
       if (item.base) {
-        const target = byReference.get(new URL(ref, item.base).href) ?? null;
+        const target = byReference.get(item.base + ref) ?? null;
         return {target, resolution:target ? 'SCOPED_RELATIVE' : 'TARGET_NOT_IN_BUNDLE'};
       }
       if (item.fullUrl) return {target:null, resolution:'TARGET_NOT_IN_BUNDLE'};

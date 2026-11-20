@@ -30,12 +30,14 @@ for(const version of ['4.0.1','4.3.0','5.0.0'])test(`reads an allowlisted ${vers
 test('refuses unconfigured studies and malformed source configuration',async()=>{
   let calls=0;
   const read=createConfiguredFhirImagingStudyReader(options({authorize:async()=>true,fetchImpl:async()=>{calls++;return response(study());}}));
-  for(const studyId of ['other','../other','a%2Fb','',null])await assert.rejects(read({sourceId:'fixture',studyId,principal:'allowed'}),{code:'SOURCE_UNAVAILABLE'});
+  for(const studyId of ['other','.','..','../other','a%2Fb','',null])await assert.rejects(read({sourceId:'fixture',studyId,principal:'allowed'}),{code:'SOURCE_UNAVAILABLE'});
   assert.equal(calls,0);
   for(const source of [
     {id:'x',baseUrl:'https://fhir.example.invalid',fhirVersion:'4.2.0',imagingStudyIds:['a']},
     {id:'x',baseUrl:'https://fhir.example.invalid',fhirVersion:'5.0.0',imagingStudyIds:[]},
     {id:'x',baseUrl:'https://fhir.example.invalid',fhirVersion:'5.0.0',imagingStudyIds:['a','a']},
+    {id:'x',baseUrl:'https://fhir.example.invalid',fhirVersion:'5.0.0',imagingStudyIds:['.']},
+    {id:'x',baseUrl:'https://fhir.example.invalid',fhirVersion:'5.0.0',imagingStudyIds:['..']},
     {id:'x',baseUrl:'http://remote.invalid/fhir',fhirVersion:'5.0.0',imagingStudyIds:['a']}
   ])assert.throws(()=>createConfiguredFhirImagingStudyReader(options({sources:[source]})),{code:'INVALID_CONFIGURATION'});
 });

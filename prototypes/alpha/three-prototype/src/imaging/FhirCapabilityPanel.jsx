@@ -1,5 +1,5 @@
 import React, {Suspense,useEffect, useRef, useState} from 'react';
-import {readLocalFhirCapabilities, readPublicFhirCapabilities} from './fhir-capabilities.mjs';
+import {readLocalFhirCapabilities, readLocalFhirOpenApi, readPublicFhirCapabilities} from './fhir-capabilities.mjs';
 import {SYNTHETIC_CALLBACK_PARAMS,SYNTHETIC_SESSION_KEY} from '../../../viewer/src/smart-synthetic-keys.mjs';
 import FhirEvidencePanel from './FhirEvidencePanel.jsx';
 import FhirConversionAuditPanel from './FhirConversionAuditPanel.jsx';
@@ -15,6 +15,7 @@ function syntheticState() {
 }
 
 function failureMessage(error, kind) {
+  if (kind === 'openapi') return 'Unable to generate a template. Choose a supported statement with one server declaration and no unhandled modifier rules.';
   if (kind === 'local') return 'The local capability statement is invalid, too large or unsupported.';
   const message = String(error?.message ?? '');
   if (message.includes('ACCESS_DENIED')) return 'The public test server denied access.';
@@ -27,10 +28,12 @@ export default function FhirCapabilityPanel({study,localStudy,onSyntheticReturn,
   const [result, setResult] = useState(null), [busy, setBusy] = useState(false);
   const [status, setStatus] = useState('No server information loaded.'), [query, setQuery] = useState('');
   const [file, setFile] = useState(null);
+  const [download, setDownload] = useState(null);
   const [initialSynthetic]=useState(syntheticState),[syntheticOpen,setSyntheticOpen]=useState(initialSynthetic.open),[syntheticMounted,setSyntheticMounted]=useState(initialSynthetic.open);
   const [initialEpic]=useState(()=>Boolean(epicSandboxMailbox?.current)),[epicOpen,setEpicOpen]=useState(initialEpic),[epicMounted,setEpicMounted]=useState(initialEpic);
   const sequence = useRef(0), request = useRef(null);
   useEffect(() => () => { sequence.current++; request.current?.abort(); }, []);
+  useEffect(() => () => { if (download) URL.revokeObjectURL(download.url); }, [download]);
   useEffect(() => {if(initialSynthetic.reveal||initialEpic)onSyntheticReturn?.();},[]);
 
   function cancel() {
@@ -41,6 +44,7 @@ export default function FhirCapabilityPanel({study,localStudy,onSyntheticReturn,
   function selectFile(event) {
     sequence.current++; request.current?.abort(); request.current = null; setBusy(false);
     setFile(event.target.files?.[0] ?? null);
+    setDownload(null);
     setStatus(result ? 'Input changed. The previous result remains until you inspect again.' : 'Choose a local statement to inspect.');
   }
 
@@ -48,8 +52,17 @@ export default function FhirCapabilityPanel({study,localStudy,onSyntheticReturn,
     const id = ++sequence.current;
     request.current?.abort();
     const controller = new AbortController(); request.current = controller;
-    setBusy(true); setStatus(kind === 'local' ? 'Reading the local capability statement…' : 'Reading the public test server capability statement…');
+    setBusy(true); setDownload(null);
+    setStatus(kind === 'public' ? 'Reading the public test server capability statement…' : 'Reading the local capability statement…');
     try {
+      if (kind === 'openapi') {
+        const document = await readLocalFhirOpenApi(file, {signal:controller.signal});
+        if (id !== sequence.current || controller.signal.aborted) return;
+        const blob = new Blob([JSON.stringify(document, null, 2)], {type:'application/json'});
+        setDownload({url:URL.createObjectURL(blob), name:`dicom3d-fhir-${document['x-dicom3d-projection'].fhirVersion}-openapi.json`});
+        setStatus('Read-only OpenAPI template is ready to download.');
+        return;
+      }
       const next = kind === 'local' ? await readLocalFhirCapabilities(file, {signal:controller.signal}) : await readPublicFhirCapabilities({signal: controller.signal});
       if (id !== sequence.current || controller.signal.aborted) return;
       setResult(next); setQuery('');
@@ -69,10 +82,12 @@ export default function FhirCapabilityPanel({study,localStudy,onSyntheticReturn,
       <button type="button" onClick={() => inspect('public')} disabled={busy}>Inspect public test server</button>{' '}
       <label style={{display:'block', marginTop:'0.75rem'}}>Local CapabilityStatement JSON <input type="file" accept=".json,application/json" onChange={selectFile} /></label>
       <button type="button" style={{marginTop:'0.5rem'}} onClick={() => inspect('local')} disabled={busy || !file}>Inspect local statement</button>{' '}
+      <button type="button" onClick={() => inspect('openapi')} disabled={busy || !file}>Generate read-only OpenAPI template</button>{' '}
+      {download && <a href={download.url} download={download.name}>Download OpenAPI JSON</a>}
       {busy && <button type="button" onClick={cancel}>Cancel server inspection</button>}
       <p role="status">{status}</p>
       {result && <>
-        <p>FHIR {result.capability.fhirVersion} · statement kind: {result.capability.kind}. The source describes capabilities, not your access or proof that an operation works. This view does not generate OpenAPI.</p>
+        <p>FHIR {result.capability.fhirVersion} · statement kind: {result.capability.kind}. Access depends on the server and your permissions.</p>
         <label>Filter declared resources <input type="search" value={query} onChange={event => setQuery(event.target.value)} /></label>
         <p>{resources.length} of {result.capability.resources.length} declared resource entries shown.</p>
         {resources.length > 0 ? <div style={{overflowX:'auto'}}><table style={{width:'100%', textAlign:'left', borderSpacing:'0.75rem 0.35rem'}}>

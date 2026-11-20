@@ -1,9 +1,9 @@
 // Read-only loopback host over the exact admitted frontend inventory.
-// No ingestion, credentials, original-DICOM, proxy or directory routes.
+// An explicitly configured FHIR source can serve allowlisted study metadata.
 import {createServer} from 'node:http';
 import {readFileSync,realpathSync,writeFileSync} from 'node:fs';
 import {resolve,extname,sep} from 'node:path';
-import {createLoopbackFhirRoute,LOOPBACK_FHIR_PREFIX} from '../docker/core/fhir-loopback-route.mjs';
+import {loadLoopbackFhirRoute,LOOPBACK_FHIR_PREFIX} from '../docker/core/fhir-loopback-route.mjs';
 import {readVerifiedFile,createResponseGate} from './preview-verified-file.mjs';
 const option=(n,f)=>{const i=process.argv.indexOf(n);return i<0?f:process.argv[i+1];};
 const root=realpathSync(resolve(option('--root','.'))),port=Number(option('--port','0'));
@@ -12,14 +12,7 @@ const instance=option('--instance',null);
 if(instance!==null&&!/^[a-f0-9]{32}$/.test(instance))throw Error('Invalid preview identity');
 const manifestBytes=readFileSync(resolve(root,'demo-build-manifest.json'));
 const manifest=JSON.parse(manifestBytes.toString('utf8'));
-const liveConfigPath=process.env.DICOM3D_LIVE_FHIR_CONFIG;
-let liveFhir=null;
-if(liveConfigPath){
- const raw=readFileSync(liveConfigPath);if(raw.length>65536)throw Error('Live FHIR configuration too large');
- const config=JSON.parse(raw.toString('utf8'));
- if(config?.schema!=='dicom3d-loopback-fhir-1'||Object.keys(config).some(key=>!['schema','sources'].includes(key)))throw Error('Invalid live FHIR configuration');
- liveFhir=createLoopbackFhirRoute({sources:config.sources,port});
-}
+const liveFhir=loadLoopbackFhirRoute(process.env.DICOM3D_LIVE_FHIR_CONFIG,port);
 const alpha=manifest.schema==='dicom3d-alpha-distribution-1'&&manifest.profile==='three-r3f-alpha';
 const base=alpha&&manifest.entrypoint==='/dicom3d/reference.html'?'/dicom3d/':manifest.entrypoint;
 if(!['/DICOM3D/','/dicom3d/'].includes(base))throw Error('Unadmitted base');

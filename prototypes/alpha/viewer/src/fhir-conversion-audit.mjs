@@ -1,5 +1,5 @@
 import {digest} from './ct-frame.mjs';
-import {projectFhirEvidence} from './fhir-evidence-projection.mjs';
+import {modalityCodes, projectFhirEvidence} from './fhir-evidence-projection.mjs';
 
 const need = (condition, message) => { if (!condition) throw new Error(message); };
 const MAX_BYTES = 1024 * 1024;
@@ -24,7 +24,7 @@ export function auditR4ToR5Evidence(source, converted, {sourceVersion='4.0.1'} =
     need(Array.isArray(value) && value.length <= 1024, 'Unsupported reference list');
     return value.map(ref => canonical(ref)).sort();
   };
-  const keys = entry => {
+  const keys = (entry, version) => {
     const series = entry.resource.series ?? [];
     need(Array.isArray(series) && series.length <= 1024, 'Unsupported study series');
     const result = [];
@@ -32,7 +32,8 @@ export function auditR4ToR5Evidence(source, converted, {sourceVersion='4.0.1'} =
       need(item && typeof item === 'object' && !Array.isArray(item), 'Invalid study series');
       const instances = item.instance ?? [];
       need(Array.isArray(instances) && instances.length <= 100000, 'Unsupported study instance list');
-      result.push(`series:${item.uid ?? ''}`);
+      const codes = modalityCodes({modality:item.modality === undefined ? [] : [item.modality]}, version);
+      result.push(canonical(['series', item.uid ?? null, codes.map(canonical).sort()]));
       for (const instance of instances) result.push(canonical([item.uid ?? null, instance?.uid ?? null, instance?.sopClass ?? null]));
     }
     return result.sort();
@@ -59,8 +60,8 @@ export function auditR4ToR5Evidence(source, converted, {sourceVersion='4.0.1'} =
     } else {
       if (canonical(original.resource.identifier ?? []) !== canonical(result.resource.identifier ?? []))
         add('STUDY_IDENTIFIER_CHANGED', key, 'The study identifier values changed or were omitted.');
-      if (canonical(keys(original)) !== canonical(keys(result)))
-        add('STUDY_SERIES_OR_INSTANCE_CHANGED', key, 'The source series, instance or SOP-class identity changed or was omitted.');
+      if (canonical(keys(original, from.family)) !== canonical(keys(result, to.family)))
+        add('STUDY_SERIES_OR_INSTANCE_CHANGED', key, 'A series UID, modality coding, instance UID or SOP-class identity changed or was omitted.');
       const before = from.resources.find(item => item.key === key)?.modality ?? [];
       const after = to.resources.find(item => item.key === key)?.modality ?? [];
       if (canonical(before) !== canonical(after)) add('STUDY_MODALITY_CHANGED', key, 'The source modality coding changed or was omitted.');

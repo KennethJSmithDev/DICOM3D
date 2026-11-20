@@ -81,6 +81,18 @@ test('detects removed and newly introduced imaging resources', () => {
   assert.ok(codes.includes('UNMATCHED_CONVERTED_RESOURCE'));
 });
 
+test('detects conversion changes in series modality even when study-level modality matches', () => {
+  for (const sourceVersion of ['4.0.1','4.3.0']) {
+    const {source,converted} = fixture();
+    const coding = {system:'urn:example',code:'CT'};
+    source.entry[0].resource.series[0].modality = coding;
+    converted.entry[0].resource.series[0].modality = {coding:[{...coding}]};
+    assert.equal(auditR4ToR5Evidence(source,converted,{sourceVersion}).result,'SELECTED_CHECKS_PASSED');
+    converted.entry[0].resource.series[0].modality.coding[0].code = 'MR';
+    assert.deepEqual(auditR4ToR5Evidence(source,converted,{sourceVersion}).findings.map(item=>item.code),['STUDY_SERIES_OR_INSTANCE_CHANGED']);
+  }
+});
+
 test('detects changed report result references and does not pass an empty comparison', () => {
   const {source,converted}=fixture();
   source.entry[1].resource.result=[{reference:'Observation/finding'}];

@@ -5,9 +5,10 @@ import {compareOpenCtIdentity,readLiveFhirStudy} from './fhir-live-viewer.mjs';
 const messages={
   INVALID_SOURCE:'Use the configured source key and a valid FHIR ImagingStudy ID.',
   INVALID_CREDENTIALS:'Enter an IRIS username and password using supported ASCII characters.',
-  INVALID_HOST:'Live IRIS is available only in the explicitly configured local preview.',
+  INVALID_HOST:'Open the configured Core on loopback or the installed IRIS viewer over HTTPS to read a live study.',
   ACCESS_DENIED:'IRIS denied the supplied credentials or permission for this study.',
-  SOURCE_UNAVAILABLE:'The live source or study is not configured for this preview.',
+  SOURCE_UNAVAILABLE:'This source and study are unavailable to the current reader.',
+  SOURCE_VERSION_MISMATCH:'The FHIR server reported a different version than the configured source.',
   UPSTREAM_SECURE_TRANSPORT_REQUIRED:'This IRIS source needs HTTPS with a trusted server certificate before credentials can be sent.',
   TIMEOUT:'The live IRIS request timed out.',
 };
@@ -45,8 +46,8 @@ export default function FhirLivePanel({study}) {
 
   return <details style={{marginTop:'0.75rem'}} aria-label="Live IRIS study metadata">
     <summary>Read a configured live IRIS study</summary>
-    <p>Local preview only. Enter your own authorized IRIS credentials; DICOM3D does not save them. The source and study must be configured by the local host.</p>
-    <p>This reads FHIR ImagingStudy metadata, not DICOM pixels. Credentialed IRIS reads require HTTPS and a trusted server certificate.</p>
+    <p>Use the source key and study ID supplied by your administrator. On an installed IRIS viewer, enter the same IRIS username you used to sign in.</p>
+    <p>Your credentials are used for this read only. The configured FHIR repository requires HTTPS. This view reads ImagingStudy metadata. DICOM pixels are loaded separately.</p>
     <form onSubmit={inspect} autoComplete="off">
       <label>Configured source key <input name="source" required maxLength="64" autoComplete="off"/></label>
       <label>ImagingStudy ID <input name="study" required maxLength="64" autoComplete="off"/></label>

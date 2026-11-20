@@ -4,7 +4,7 @@ import {MAX_CAPABILITY_BYTES, summarizeCapabilityStatement} from '../../prototyp
 const CAP = MAX_CAPABILITY_BYTES;
 const STUDY_CAP = 2 * 1024 * 1024;
 const RELEASES = new Set(['4.0.1','4.3.0','5.0.0']);
-const validFhirId = value => typeof value === 'string' && /^[A-Za-z0-9.-]{1,64}$/.test(value);
+export const validFhirId = value => typeof value === 'string' && value !== '.' && value !== '..' && /^[A-Za-z0-9.-]{1,64}$/.test(value);
 const failure = code => Object.assign(new Error(code), {code});
 const need = (condition, code) => { if (!condition) throw failure(code); };
 
@@ -18,9 +18,7 @@ function metadataUrl(value) {
   return url.href;
 }
 
-// This is an optional server-side socket, not an HTTP endpoint. The embedding
-// host must provide a trusted principal and authorization decision; the public
-// static Core server does not mount it. Only configured metadata is readable.
+// The embedding host owns principal and authorization decisions for each read.
 function createConfiguredFhirJsonReader({sources, authorize, fetchImpl=globalThis.fetch, timeoutMs=15000} = {}, kind) {
   need(Array.isArray(sources) && sources.length > 0 && sources.length <= 32 &&
     typeof authorize === 'function' && typeof fetchImpl === 'function' &&

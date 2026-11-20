@@ -52,7 +52,7 @@ manifest = {
 if args.profile == 'alpha':
     alpha_package = json.loads(subprocess.check_output(['git', 'show', ':prototypes/alpha/three-prototype/package.json'], cwd=root))
     alpha_version = alpha_package['version']
-    if alpha_version not in {'0.7.0-alpha.1', '0.7.0-alpha.2'}:
+    if alpha_version not in {'0.7.0-alpha.1', '0.7.0-alpha.2', '0.7.0'}:
         raise ValueError('Unreviewed alpha version')
     manifest.update(distribution=f'DICOM3D v{alpha_version} source inventory', version=alpha_version,
                     profile='three-r3f-alpha')

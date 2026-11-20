@@ -1,6 +1,6 @@
 {
   "distribution": "DICOM3D Core",
-  "version": "0.7.0-alpha.2",
+  "version": "0.7.0",
   "frontendProfile": "three-r3f-alpha",
   "entrypoint": "/dicom3d/reference.html",
   "requiresIRIS": false,

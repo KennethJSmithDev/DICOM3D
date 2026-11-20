@@ -19,7 +19,7 @@ if(/^[0-9a-f]{40}$/.test(sourceBase)){
 const packageInfo=JSON.parse(await readFile(join(prototype,'package.json')));
 const lock=JSON.parse(await readFile(join(prototype,'package-lock.json')));
 const version=packageInfo.version;
-if(!['0.7.0-alpha.1','0.7.0-alpha.2'].includes(version))throw Error('Unreviewed alpha version');
+if(!['0.7.0-alpha.1','0.7.0-alpha.2','0.7.0'].includes(version))throw Error('Unreviewed alpha version');
 const descriptor=JSON.parse(await readFile(join(root,'distribution-manifest.json'),'utf8'));
 if(descriptor.version!==version||descriptor.frontendProfile!=='three-r3f-alpha')throw Error('Source and distribution versions differ');
 const sha=b=>createHash('sha256').update(b).digest('hex');

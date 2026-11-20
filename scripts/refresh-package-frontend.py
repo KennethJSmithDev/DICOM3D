@@ -45,7 +45,7 @@ if args.profile == 'legacy':
 else:
     assert manifest['schema'] == 'dicom3d-alpha-distribution-1'
     alpha_version = json.loads((root / 'prototypes/alpha/three-prototype/package.json').read_text())['version']
-    assert alpha_version in {'0.7.0-alpha.1', '0.7.0-alpha.2'}
+    assert alpha_version in {'0.7.0-alpha.1', '0.7.0-alpha.2', '0.7.0'}
     assert manifest['release'] == alpha_version and manifest['entrypoint'] == '/dicom3d/reference.html'
     assert manifest['containsPrivatePatientImaging'] is False
     assert manifest['patientDerivedResearchData'] and manifest['approvedPublicResearchFixtures'] == ['H000']

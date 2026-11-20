@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import {test} from 'node:test';
-import {readLocalFhirCapabilities, readPublicFhirCapabilities, summarizeCapabilityStatement} from './src/imaging/fhir-capabilities.mjs';
+import {readLocalFhirCapabilities, readLocalFhirOpenApi, readPublicFhirCapabilities, summarizeCapabilityStatement} from './src/imaging/fhir-capabilities.mjs';
 import {MAX_CAPABILITY_BYTES} from '../viewer/src/fhir-capability-model.mjs';
 import {boundedTestReader, SMART_TEST} from '../viewer/src/connect-read.mjs';
 
@@ -108,6 +108,21 @@ test('rejects oversized, malformed, and changed-length local statements', async 
   await assert.rejects(readLocalFhirCapabilities(new Blob([new Uint8Array(MAX_CAPABILITY_BYTES + 1)])), /size/);
   await assert.rejects(readLocalFhirCapabilities(new Blob(['{'])));
   await assert.rejects(readLocalFhirCapabilities({size:20, arrayBuffer:async () => new ArrayBuffer(19)}), /size changed/);
+});
+
+test('viewer OpenAPI download binds the selected file and projects only declared server reads across releases', async () => {
+  for (const version of ['4.0.1', '4.3.0', '5.0.0']) {
+    const input = new Blob([JSON.stringify({...source, fhirVersion:version}) + '\n']);
+    const result = await readLocalFhirOpenApi(input);
+    assert.equal(result.openapi, '3.0.3');
+    assert.equal(result['x-dicom3d-projection'].fhirVersion, version);
+    assert.equal(result['x-dicom3d-projection'].sourceSha256, (await readLocalFhirCapabilities(input)).provenance.sha256);
+    assert.ok(result.paths['/ImagingStudy/{id}'].get);
+    assert.equal(result.paths['/Observation/{id}'], undefined);
+    assert.equal(JSON.stringify(result).includes(source.description), false);
+  }
+  await assert.rejects(readLocalFhirOpenApi(new Blob([JSON.stringify({...source, implicitRules:'urn:unsupported'})])), /rules/);
+  await assert.rejects(readLocalFhirOpenApi(new Blob(['{}']), {signal:AbortSignal.abort()}), /CANCELLED/);
 });
 
 test('allows metadata through the exact 8 MiB boundary and retains source fingerprint', async () => {

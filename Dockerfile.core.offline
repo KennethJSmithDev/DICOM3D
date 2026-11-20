@@ -4,23 +4,25 @@ FROM node:24-alpine@sha256:44fce696f38ba8c987c4db89954051000bbd05ffd8d8659ba15ed
 WORKDIR /build/prototypes/alpha/three-prototype
 COPY prototypes/alpha/three-prototype/package.json prototypes/alpha/three-prototype/package-lock.json ./
 COPY --from=npmcache / /root/.npm/
-RUN npm ci --offline --no-audit --no-fund
+# The builder uses Vite's JS API and inventories regular dependency files.
+RUN npm ci --offline --no-audit --no-fund --no-bin-links
 WORKDIR /build
 COPY prototypes/alpha/three-prototype/ ./prototypes/alpha/three-prototype/
 COPY prototypes/alpha/viewer/src/ ./prototypes/alpha/viewer/src/
 COPY reference/public/demo/h000/ ./reference/public/demo/h000/
-COPY scripts/build-alpha-distribution.mjs scripts/test-alpha-distribution.mjs ./scripts/
+COPY scripts/build-alpha-distribution.mjs scripts/test-alpha-distribution.mjs scripts/admitted-public-files.mjs scripts/admitted-notices.json scripts/preview-verified-file.mjs ./scripts/
 COPY LICENSE NOTICE distribution-manifest.json ./
 COPY third-party/ ./third-party/
-ARG SOURCE_COMMIT=SOURCE_IDENTIFIED_BY_PACKAGE_INVENTORY
-RUN node scripts/build-alpha-distribution.mjs /out "$SOURCE_COMMIT" \
+# Git metadata stays outside the context. The manifest hashes the actual inputs.
+RUN node scripts/build-alpha-distribution.mjs /out SEE-EXACT-INPUTS \
  && node scripts/test-alpha-distribution.mjs /out
 
 FROM node:24-alpine@sha256:44fce696f38ba8c987c4db89954051000bbd05ffd8d8659ba15ed4a8602e937f
 WORKDIR /app
 COPY --from=build /out/ ./public/
-COPY docker/core/server.mjs ./server.mjs
+COPY docker/core/server.mjs docker/core/fhir-loopback-route.mjs docker/core/fhir-configured-metadata.mjs ./docker/core/
+COPY prototypes/alpha/viewer/src/fhir-capability-model.mjs ./prototypes/alpha/viewer/src/
 USER node
 EXPOSE 8080
 HEALTHCHECK --interval=5s --timeout=3s --start-period=5s --retries=6 CMD node -e "fetch('http://127.0.0.1:8080/healthz').then(r=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))"
-CMD ["node", "server.mjs"]
+CMD ["node", "docker/core/server.mjs"]

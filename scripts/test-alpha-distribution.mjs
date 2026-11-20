@@ -6,7 +6,7 @@ import {PUBLIC_RESEARCH_ASSETS} from '../prototypes/alpha/viewer/src/public-sour
 const root=resolve(process.argv[2]??'UNSPECIFIED'),sha=b=>createHash('sha256').update(b).digest('hex');
 const manifest=JSON.parse(await readFile(join(root,'demo-build-manifest.json')));
 const version=JSON.parse(await readFile(new URL('../prototypes/alpha/three-prototype/package.json',import.meta.url))).version;
-assert(['0.7.0-alpha.1','0.7.0-alpha.2'].includes(version));
+assert(['0.7.0-alpha.1','0.7.0-alpha.2','0.7.0'].includes(version));
 assert.equal(manifest.schema,'dicom3d-alpha-distribution-1');assert.equal(manifest.profile,'three-r3f-alpha');assert.equal(manifest.release,version);assert.equal(manifest.entrypoint,'/dicom3d/reference.html');assert.equal(manifest.containsPrivatePatientImaging,false);assert.equal(manifest.patientDerivedResearchData,true);assert.deepEqual(manifest.approvedPublicResearchFixtures,['H000']);
 assert.equal(JSON.parse(await readFile(join(root,'distribution-manifest.json'))).version,version);
 const actual=[];async function walk(at,relative=''){for(const e of await readdir(at,{withFileTypes:true})){const name=relative+e.name;assert(!e.isSymbolicLink());if(e.isDirectory())await walk(join(at,e.name),name+'/');else actual.push(name)}}await walk(root);
