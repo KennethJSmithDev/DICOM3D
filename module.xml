@@ -10,14 +10,15 @@
   </Invoke>
   <FileCopy Name="LICENSE" Target="{$cspdir}dicom3d/LICENSE" />
   <FileCopy Name="NOTICE" Target="{$cspdir}dicom3d/NOTICE" />
-  <FileCopy Name="public/assets/EpicSandboxPanel-Y-OivXW0.js" Target="{$cspdir}dicom3d/assets/EpicSandboxPanel-Y-OivXW0.js" />
-  <FileCopy Name="public/assets/SmartSyntheticPanel-DdpsFYFq.js" Target="{$cspdir}dicom3d/assets/SmartSyntheticPanel-DdpsFYFq.js" />
+  <FileCopy Name="public/assets/EpicSandboxPanel-DSTIFjQ0.js" Target="{$cspdir}dicom3d/assets/EpicSandboxPanel-DSTIFjQ0.js" />
+  <FileCopy Name="public/assets/SmartSyntheticPanel-BDDKiHDv.js" Target="{$cspdir}dicom3d/assets/SmartSyntheticPanel-BDDKiHDv.js" />
   <FileCopy Name="public/assets/__vite-browser-external-BtIiOxWW.js" Target="{$cspdir}dicom3d/assets/__vite-browser-external-BtIiOxWW.js" />
+  <FileCopy Name="public/assets/fhir-readonly-openapi-CKN-u8V7.js" Target="{$cspdir}dicom3d/assets/fhir-readonly-openapi-CKN-u8V7.js" />
   <FileCopy Name="public/assets/index-BU3Q432j.css" Target="{$cspdir}dicom3d/assets/index-BU3Q432j.css" />
-  <FileCopy Name="public/assets/index-D1JS6LxZ.js" Target="{$cspdir}dicom3d/assets/index-D1JS6LxZ.js" />
+  <FileCopy Name="public/assets/index-CJ-LMEnQ.js" Target="{$cspdir}dicom3d/assets/index-CJ-LMEnQ.js" />
   <FileCopy Name="public/assets/nrx-reference-worker-BVTUSoQr.js" Target="{$cspdir}dicom3d/assets/nrx-reference-worker-BVTUSoQr.js" />
   <FileCopy Name="public/assets/nrx-runtime-7TkXZuTP.wasm" Target="{$cspdir}dicom3d/assets/nrx-runtime-7TkXZuTP.wasm" />
-  <FileCopy Name="public/assets/nrx-surface-jlmEhRs1.js" Target="{$cspdir}dicom3d/assets/nrx-surface-jlmEhRs1.js" />
+  <FileCopy Name="public/assets/nrx-surface-BeOtQmBm.js" Target="{$cspdir}dicom3d/assets/nrx-surface-BeOtQmBm.js" />
   <FileCopy Name="public/assets/nrx-worker-BO_EnPT5.js" Target="{$cspdir}dicom3d/assets/nrx-worker-BO_EnPT5.js" />
   <FileCopy Name="public/assets/smart-pkce-DMglXBAK.js" Target="{$cspdir}dicom3d/assets/smart-pkce-DMglXBAK.js" />
   <FileCopy Name="prototypes/alpha/three-prototype/expanded-atlas/LICENSE.md" Target="{$cspdir}dicom3d/atlas/LICENSE.md" />

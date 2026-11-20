@@ -1,7 +1,7 @@
 {
   "schema": "dicom3d-alpha-distribution-1",
   "profile": "three-r3f-alpha",
-  "release": "0.7.0-alpha.2",
+  "release": "0.7.0",
   "entrypoint": "/dicom3d/reference.html",
   "containsPrivatePatientImaging": false,
   "patientDerivedResearchData": true,
@@ -48,13 +48,13 @@
     "prototypes/alpha/three-prototype/src/fit-perspective-bounds.js": "e0a7f8a2ce23d52ed9753a67589d2910f46f23346b870f0820511e39d1bf8f3b",
     "prototypes/alpha/three-prototype/src/held-evidence.json": "3b5221e514e4d80a53838860d51c66ff430fb4b914d988be2063912f54a1608c",
     "prototypes/alpha/three-prototype/src/imaging/EpicSandboxPanel.jsx": "c1e0b9889ccf7b78a041fce19aac3f1ac18183a767bf6a78c197f82a321306d2",
-    "prototypes/alpha/three-prototype/src/imaging/fhir-capabilities.mjs": "9261f6710abecf2ba9a597dfba0bfae0b792853a0b8a85b6ba17e4d688a1e50c",
-    "prototypes/alpha/three-prototype/src/imaging/fhir-live-viewer.mjs": "55071669f1b962a2f7575f7d0e7c7ac458891b24c79d9d4d83c7efd83eddb8ee",
-    "prototypes/alpha/three-prototype/src/imaging/FhirCapabilityPanel.jsx": "4c3430da794134b3b28fecbce3d4ec3f2087b9d32154807e55c48807c793fc54",
+    "prototypes/alpha/three-prototype/src/imaging/fhir-capabilities.mjs": "c3b595e8277bfeda02f5b5255d42be8b76be0fa63f3096e8c44e3ecea61e17fd",
+    "prototypes/alpha/three-prototype/src/imaging/fhir-live-viewer.mjs": "9b313d701029a5d1a81b66d02d956d8153f3307481bfaddb1a4aa8564f19a32f",
+    "prototypes/alpha/three-prototype/src/imaging/FhirCapabilityPanel.jsx": "e72a992e23512d9e4c5e11dc64f5fff4370face0353ce57b197b802aabf472c0",
     "prototypes/alpha/three-prototype/src/imaging/FhirConversionAuditPanel.jsx": "7ee2578612a59852be1f3818c733ac4709a5c7f296e9ce1cb89446b213517f7e",
     "prototypes/alpha/three-prototype/src/imaging/FhirEvidencePanel.jsx": "283e9185eca30855ca141733d12ae9c090bb4d3b53db6efc4516295e57d21c55",
     "prototypes/alpha/three-prototype/src/imaging/FhirEvidenceView.jsx": "0e97f620187618b359200f645c08005bb6b439b1f9d89f9bd65d93cb1c427c85",
-    "prototypes/alpha/three-prototype/src/imaging/FhirLivePanel.jsx": "ee46f8f30999f5beee04637b6794b29e7c51379f0a740ba8305d6e7c5e515291",
+    "prototypes/alpha/three-prototype/src/imaging/FhirLivePanel.jsx": "dfdf2b42f77dafe0e7cb85d273a5db7db0ad0d02db1826d223ac5cad372e6bd0",
     "prototypes/alpha/three-prototype/src/imaging/h000-display-fit.json": "15853638b741dfa3301fdc82e34143da6ceb65d9a36c1238e6754788f383a39f",
     "prototypes/alpha/three-prototype/src/imaging/h000-explosion.mjs": "10549e8bc9372e712581bc9b085da50f07f70aae01ba95bc662ab8ddfebb90f6",
     "prototypes/alpha/three-prototype/src/imaging/h000-plane.js": "90a9603a486e3cbb253da5365dc299ed6311888d91814d32085772febcaef72e",
@@ -87,7 +87,7 @@
     "prototypes/alpha/three-prototype/src/live-reference-samples.mjs": "9908f8e65705b511af5aa08087ab34b1568cd7446ba381efb19da916ba6467e1",
     "prototypes/alpha/three-prototype/src/lung-preset.json": "c9b79c1e258b1272fc23787ce587da37d847c4c2cc24e71450f19a4b448a4e7d",
     "prototypes/alpha/three-prototype/src/lung-surface-fragments.js": "474581f7661d35ee26a41e5e5fa9827186db8142e2ffbd2b31384368e7d79917",
-    "prototypes/alpha/three-prototype/src/main.jsx": "435696389aea9521d9b1a2954fb7e6c825f095923dd76a6dbeb4e9fd3901751e",
+    "prototypes/alpha/three-prototype/src/main.jsx": "dc2c6b52c4cd831b23aea128ce7950ab5e444909f45f0b9fec47678603be9377",
     "prototypes/alpha/three-prototype/src/materialization-state.mjs": "7ab8884a1e115d8d32d021ed4b124f39a7db447c6143ee77137320b87cf06458",
     "prototypes/alpha/three-prototype/src/MaterializationEffect.jsx": "ad6c57bd6f4741300576d833e7eb41654f28a82e422857c314049cec2b800a4d",
     "prototypes/alpha/three-prototype/src/nrx/nrx-surface.js": "4d9254050424fb85d0e91a58cc1e6829e1dcdbb622c92887d0abdba74d8353f9",
@@ -159,8 +159,9 @@
     "prototypes/alpha/viewer/src/experience.css": "93e02040da0e939047cfa5cb6052070bd2c7d5e80fb2cd7ed557d0e368ecae58",
     "prototypes/alpha/viewer/src/experience.ts": "5e1b529361a43102b136cecb3dd53a880a0bdc308f160ddc0f2ea92a51510aaa",
     "prototypes/alpha/viewer/src/fhir-capability-model.mjs": "e970472f0fa49610991de2f333c18e2084b82a6bded57639e85e5000a86c423e",
-    "prototypes/alpha/viewer/src/fhir-conversion-audit.mjs": "77f76b33e89c359f08d982640bd493a830a498143d10e00c47becc16f0889dfe",
-    "prototypes/alpha/viewer/src/fhir-evidence-projection.mjs": "dc06c7baa9f44331782352cadc0a1c09763cc4bb7d2ce136a53e6627397a466d",
+    "prototypes/alpha/viewer/src/fhir-conversion-audit.mjs": "4688c855acb90acc794a962e3626135fd4e7112c536e7fdc2b7ba8df0e604bd1",
+    "prototypes/alpha/viewer/src/fhir-evidence-projection.mjs": "0ede8e6eb2eddda85bb144d7b016c3f8a8be852d251e39b710f77ad98ea211bb",
+    "prototypes/alpha/viewer/src/fhir-readonly-openapi.mjs": "6053c57b0b44bd01e2d96d15b7a87e7836be562aae9c3478edfcdfb928f5db19",
     "prototypes/alpha/viewer/src/hl7v2-fhir-draft.mjs": "7de1d8c0a239068eb433f0f85e2b775f835a2406576541ff71e68970fac5f64e",
     "prototypes/alpha/viewer/src/imaging-capabilities.mjs": "0c249e1a5f65634fbf1e09855d5477eebebbbb9b968ecbf022d62e2c34e82fe4",
     "prototypes/alpha/viewer/src/imaging-contract.mjs": "54a2f46275b1b7d85d8655071ddf817e6a711fa241c496bebfe241af44bf6f98",
@@ -217,16 +218,16 @@
     "prototypes/alpha/viewer/src/viewport-controls.mjs": "7f391b71d88ebb34d3172672ed983db70ded8c216edc8b6f8cf4b00003ed3d65",
     "prototypes/alpha/viewer/src/volume-probe.ts": "1fef74334d1c8ab9399eee7315507c1309c098b2efcead85b780c75bea7946b0",
     "prototypes/alpha/viewer/src/workspace-layout.mjs": "f79b1cc781f13b2da9e468be62d875386a215b84b9f66065c0be167d15e10f1c",
-    "prototypes/alpha/three-prototype/package.json": "f41c3cf6c546b1ca8cf1c8062b36d0eb053fcf1310da1acdb7efc1dbc7ee3ecc",
-    "prototypes/alpha/three-prototype/package-lock.json": "f96d62ba2c3abf654c793f1ac1d4527367cc5c9eb41e6ab4b31777fd467bdf79",
+    "prototypes/alpha/three-prototype/package.json": "2eeba048005ff1082d92df2885d5b7c066ef17dc5d6d7346cf6595d2d0008942",
+    "prototypes/alpha/three-prototype/package-lock.json": "3b390f8b588f279f0ed827f9201c1a63cf2aef70c9d477891551e4c39b684704",
     "prototypes/alpha/three-prototype/index.html": "b3f27b7230b6df89d49951102e6131bfd0c95a7ceefd6c6450b86ebff07211ee",
     "prototypes/alpha/three-prototype/vite.config.js": "c73eff6b72fa385a2f6db5194601c9eab17846ce630b1a3e11cc6124e0d28c19",
     "prototypes/alpha/three-prototype/build-public-review.mjs": "2c24668e4c0425216c8130c9495694f46be7ce9ad3ebadb16bda0d58fbf5bc8b",
-    "scripts/build-alpha-distribution.mjs": "df837ebd7c21dbe8b2fcb575d66fab0cd93b3e34bc6f635395d3f1b39d39ead6",
+    "scripts/build-alpha-distribution.mjs": "3083b16d6afa505aebed46b77481daeddb0bd9f02d26350c6176d746dcef1feb",
     "scripts/admitted-public-files.mjs": "5b8c91307b7232452b3c4d2cf1f224f9ae9a84aca4c9faaf36f26834aca5c178",
     "scripts/admitted-notices.json": "8876059ae1504db68c5b9ebbccceb95023d950c13212873ce977d3675ca1a635",
     "scripts/preview-verified-file.mjs": "0284848a4a704017f82ffc7f88c213027aa1d3b9c1e4fad88c90385790276737",
-    "distribution-manifest.json": "36c30974e157ae25c024c3ecfdf1d02aff9edb728ddaf9ba4d08799bcb4479b5",
+    "distribution-manifest.json": "ff38134d48d6c12c70615d82e900c62094e2ec3645b3e714d5d0f9578aa219a8",
     "LICENSE": "3ddf9be5c28fe27dad143a5dc76eea25222ad1dd68934a047064e56ed2fa40c5",
     "NOTICE": "284e3151e46ae17b1dbd10fbeec2c947a6b93b088650f2929d859be21b717c7d"
   },
@@ -243,7 +244,7 @@
       "sha256": "4634ceab5aaf3f012550694e7aaa2cd4f4e85f7dd9b5818964b505188855e1a5",
       "files": 1900,
       "bytes": 79971907,
-      "node": "v24.21.0",
+      "node": "v24.22.3",
       "platform": "win32",
       "arch": "x64"
     }
@@ -254,17 +255,21 @@
       "bytes": 113,
       "sha256": "2679ef840ec23659b0fa4c5d5cefe4878d00fa69bd73faa41b66c788cb98bfcb"
     },
-    "assets/EpicSandboxPanel-Y-OivXW0.js": {
+    "assets/EpicSandboxPanel-DSTIFjQ0.js": {
       "bytes": 13177,
-      "sha256": "e4798b37e8ccd244c95b65b1070c1a447c6654737c5283b08163633529f4bf1b"
+      "sha256": "e4cd9fbbbf5594f609e32d131ac45a6cb908834054e8a156415c61021ef52319"
+    },
+    "assets/fhir-readonly-openapi-CKN-u8V7.js": {
+      "bytes": 3859,
+      "sha256": "c5943033d68b77cf3229766c587fb47b8a041f9de36b0a7fddc7d884b5dadadc"
     },
     "assets/index-BU3Q432j.css": {
       "bytes": 24404,
       "sha256": "48f2a0a4d308de8248488126b5d8e58d7bea61b2b4d46a25f9ee0fd62d3a5705"
     },
-    "assets/index-D1JS6LxZ.js": {
-      "bytes": 2398543,
-      "sha256": "4b71cd9cdc1dc248ed9a5532192ba8f78478c899724ac27a1cefcfb4b2052546"
+    "assets/index-CJ-LMEnQ.js": {
+      "bytes": 2401579,
+      "sha256": "3b8e50f4fdc591374123e3708e6a6702a0edcfe78cebdd479f5c0f32968b90b0"
     },
     "assets/nrx-reference-worker-BVTUSoQr.js": {
       "bytes": 1418,
@@ -274,9 +279,9 @@
       "bytes": 69914,
       "sha256": "ed4e5444ec1374168fd2f9e7866b8790d0e82372acaaa1cea864419e0749227a"
     },
-    "assets/nrx-surface-jlmEhRs1.js": {
+    "assets/nrx-surface-BeOtQmBm.js": {
       "bytes": 3767,
-      "sha256": "24c1bc3fa600446caab5a8b0061087ad830563b590cc04a42c1bcf1dbf8093e8"
+      "sha256": "af5dd527dbf1a471bbcb53cefce63621f0a042c88f8b7d05fd71e86e7bdf947e"
     },
     "assets/nrx-worker-BO_EnPT5.js": {
       "bytes": 12811,
@@ -286,9 +291,9 @@
       "bytes": 602,
       "sha256": "2bd3359d7df16db65123088a7f02a503b16625f9840676b3ae902739cf9fb665"
     },
-    "assets/SmartSyntheticPanel-DdpsFYFq.js": {
+    "assets/SmartSyntheticPanel-BDDKiHDv.js": {
       "bytes": 22201,
-      "sha256": "eed078ab15e539d7848de99fdb14639683a14975102e7a58e7c743fe0e067e3a"
+      "sha256": "914cb79a2460d91ecda8f6a9d4b72703c2da67098b691698d052040e63769038"
     },
     "atlas/index.json": {
       "bytes": 1046248,
@@ -463,8 +468,8 @@
       "sha256": "605073678ef244b7ebd44995d01789e79f5cb31a715c66a21d4b76b12161d73e"
     },
     "distribution-manifest.json": {
-      "bytes": 523,
-      "sha256": "36c30974e157ae25c024c3ecfdf1d02aff9edb728ddaf9ba4d08799bcb4479b5"
+      "bytes": 515,
+      "sha256": "ff38134d48d6c12c70615d82e900c62094e2ec3645b3e714d5d0f9578aa219a8"
     },
     "female-delta/female-delta.json": {
       "bytes": 1524,
@@ -496,7 +501,7 @@
     },
     "index.html": {
       "bytes": 944,
-      "sha256": "ed820250aad4c3f9b902f83b02ed582aac61ccb239b03a52f14b28a388370ee7"
+      "sha256": "979f754e1f3cb44934e4383c636876d3bc866915a65263f08171a0d0c5a03ace"
     },
     "LICENSE": {
       "bytes": 11560,
@@ -512,7 +517,7 @@
     },
     "reference.html": {
       "bytes": 944,
-      "sha256": "ed820250aad4c3f9b902f83b02ed582aac61ccb239b03a52f14b28a388370ee7"
+      "sha256": "979f754e1f3cb44934e4383c636876d3bc866915a65263f08171a0d0c5a03ace"
     },
     "third-party/alpha/babel-runtime-7.29.7-LICENSE.txt": {
       "bytes": 1106,

@@ -1,11 +1,11 @@
 {
-  "distribution": "DICOM3D v0.7.0-alpha.2 source inventory",
-  "version": "0.7.0-alpha.2",
+  "distribution": "DICOM3D v0.7.0 source inventory",
+  "version": "0.7.0",
   "commitBinding": "The external release/artifact manifest identifies the later exact packaging commit. This inventory excludes itself and distribution-manifest.json to avoid circular hashes.",
   "files": {
     ".dockerignore": {
-      "bytes": 1306,
-      "sha256": "d3b8588b9bbf0eb7f69c742d4462afa99b19f84fbcb288d7aa06c5cf601cd9fa"
+      "bytes": 1486,
+      "sha256": "cde84c6e9e949897599ef832f9ad4a6a95effa677581d20934c2913aafaf3c72"
     },
     ".env.core.example": {
       "bytes": 150,
@@ -48,12 +48,12 @@
       "sha256": "78aa742b0f0fa76baa1e7387855acf1929ddcd1103fe37f7bd3320f62edd9929"
     },
     "Dockerfile.core": {
-      "bytes": 1347,
-      "sha256": "67e1e89e91e22d8535a8c27cc7ec4d7140c9b5385696892b80ce12c9413bfe90"
+      "bytes": 1740,
+      "sha256": "3acf25c567bb3dd61a4dae42ba7abcb316b90a9b957f92012067c87ce1690396"
     },
     "Dockerfile.core.offline": {
-      "bytes": 1461,
-      "sha256": "5c139632ec7c48732ec42615e7fa3346683ae4e8777d99e014df0ddb5f718f7b"
+      "bytes": 1854,
+      "sha256": "1580e7c5af34aa8376f12b3369a01668c4dc26ac11847d75cef2bb01fbbb8f19"
     },
     "Dockerfile.iris-dev": {
       "bytes": 895,
@@ -72,8 +72,8 @@
       "sha256": "82434fe04e921523bff967f06dc63b26d847d0b1e2c99797ee5b475e12a81623"
     },
     "README.md": {
-      "bytes": 12232,
-      "sha256": "ee705ad1c74c5d2c24211afa29683332bd16d57475be61a4c6908618e7027f02"
+      "bytes": 12928,
+      "sha256": "0061598d2e6c3753e166a24b0cc8283af224f5c1297c2e65dcede8ce0c35b59f"
     },
     "ROADMAP.md": {
       "bytes": 8520,
@@ -88,8 +88,8 @@
       "sha256": "48edfad29c764d2f459c2638cdce64896e64c39f733cdda6dc23624a5fd258c2"
     },
     "compose.core.yaml": {
-      "bytes": 380,
-      "sha256": "d11b705c0b4fbf2f8b9dee13364fd59a86103bddb748e2d5c97d6d3cff1ed143"
+      "bytes": 372,
+      "sha256": "610546f524e2a631acb0222fa1ad11505f34913c575f715546dba7cde9be1ab6"
     },
     "compose.iris-dev.yaml": {
       "bytes": 3526,
@@ -108,28 +108,32 @@
       "sha256": "2f39f4ee7b9b04383a6dcee51763aed13325a5af5cce73b6b75e3acf230ad307"
     },
     "docker/core/fhir-configured-metadata.mjs": {
-      "bytes": 8723,
-      "sha256": "535077fc765cc4087f589dc8debe0d54173753add8484a212c5ed6c373453ad5"
+      "bytes": 8607,
+      "sha256": "34334cc63b000a6be35a52abc804c5fcd5b7bd1d4a24e2f865edf242b27d8070"
     },
     "docker/core/fhir-loopback-route.mjs": {
-      "bytes": 6640,
-      "sha256": "d0a0c247483652821d2f97390231862018421c0dfcd237d7b257a639067ffb3f"
+      "bytes": 7250,
+      "sha256": "ea7afa0c5eda97711ae4818ccac3ac45a2ebc427f0af8d98fe245b25b14fcdf7"
     },
     "docker/core/server.mjs": {
-      "bytes": 2562,
-      "sha256": "36a521a6e5200c983513ca3820148fd96c3b63fc6d06aa1bef76f51ee0c19e41"
+      "bytes": 3869,
+      "sha256": "138e0dce88dc042952bebe599a6cd8c98f35a63ca6fd84da5cdbf51906337c2f"
+    },
+    "docker/core/test-core-distribution.mjs": {
+      "bytes": 5282,
+      "sha256": "9821199991e92b5b1b5755fb79e8a40d375a8da155403b0c44b392ca6d1bc676"
     },
     "docker/core/test-fhir-configured-imaging.mjs": {
-      "bytes": 5156,
-      "sha256": "1d4fb5a215ed63e53f79a5c2a0fb8f8cef6f148687982584941e2108ee885338"
+      "bytes": 5356,
+      "sha256": "9f9581aaf45b871155645ac0ef0c13eb87e08570fd106e2473b25c2f77b282ed"
     },
     "docker/core/test-fhir-configured-metadata.mjs": {
       "bytes": 8122,
       "sha256": "b3f0e21db1dbdc298fbeb08f88ad7e6f7b5b71f14350b6cf785304fb98a4c087"
     },
     "docker/core/test-fhir-loopback-route.mjs": {
-      "bytes": 6481,
-      "sha256": "98f784ca921d7c79cbb94f1ed323b2a12ee1cb883d81c8426a8e8044a65edcb7"
+      "bytes": 6647,
+      "sha256": "b0ac8a130c6432317532296f4f246de221a754c31e2422e1265384d28e60b4b9"
     },
     "docs/ANATOMY_LICENSES_065.md": {
       "bytes": 1229,
@@ -192,8 +196,8 @@
       "sha256": "a1f8b6d0857bc4e327131554d6942a33e30640a923e03cd867d7972b56b00ea2"
     },
     "docs/FHIR_INTEROP_ALPHA2.md": {
-      "bytes": 9364,
-      "sha256": "1ac4038bd75449d89d5055818e05fc493750b55d1422348636a1a07dcd872997"
+      "bytes": 12218,
+      "sha256": "a4571286bb1db91f80e99c990dbf47ad3e6669818cfee2bc2d774b8b3373217b"
     },
     "docs/H000_BASELINE.md": {
       "bytes": 1216,
@@ -218,6 +222,10 @@
     "docs/INSTALL_065.md": {
       "bytes": 1686,
       "sha256": "1406edeffc44715c8df54bef32845e0fe493fe14a8b746ef4669e8855e9e12e1"
+    },
+    "docs/INSTALL_070.md": {
+      "bytes": 3037,
+      "sha256": "4bb6aab980122f14afd71fa086c0f061dc34cd472076ecf720cd1f46a26fbda6"
     },
     "docs/INSTALL_070_ALPHA.md": {
       "bytes": 8830,
@@ -404,8 +412,8 @@
       "sha256": "311fc357b1dc5ed0ffab12a1eff504e605928dc7cfc4837f62f7e98d11d30d98"
     },
     "module.xml": {
-      "bytes": 14918,
-      "sha256": "2640a70f9c236027c41c151a22a17bd4623a4c2eafb422d94fecd8597db25af6"
+      "bytes": 15057,
+      "sha256": "a88ccff449dd9861e3f8589bcbd80a8072ff1427a2ae591f2c59236ff6e1b231"
     },
     "prototypes/alpha/.gitattributes": {
       "bytes": 9,
@@ -640,12 +648,12 @@
       "sha256": "282b2b52d924cfdbfb7c922b8abdea39d42322d7c9c07270bcbd9c8b869ae1f6"
     },
     "prototypes/alpha/three-prototype/package-lock.json": {
-      "bytes": 35801,
-      "sha256": "f96d62ba2c3abf654c793f1ac1d4527367cc5c9eb41e6ab4b31777fd467bdf79"
+      "bytes": 35785,
+      "sha256": "3b390f8b588f279f0ed827f9201c1a63cf2aef70c9d477891551e4c39b684704"
     },
     "prototypes/alpha/three-prototype/package.json": {
-      "bytes": 444,
-      "sha256": "f41c3cf6c546b1ca8cf1c8062b36d0eb053fcf1310da1acdb7efc1dbc7ee3ecc"
+      "bytes": 436,
+      "sha256": "2eeba048005ff1082d92df2885d5b7c066ef17dc5d6d7346cf6595d2d0008942"
     },
     "prototypes/alpha/three-prototype/src/AtlasPresentationControls.jsx": {
       "bytes": 2456,
@@ -752,8 +760,8 @@
       "sha256": "c1e0b9889ccf7b78a041fce19aac3f1ac18183a767bf6a78c197f82a321306d2"
     },
     "prototypes/alpha/three-prototype/src/imaging/FhirCapabilityPanel.jsx": {
-      "bytes": 7856,
-      "sha256": "4c3430da794134b3b28fecbce3d4ec3f2087b9d32154807e55c48807c793fc54"
+      "bytes": 8903,
+      "sha256": "e72a992e23512d9e4c5e11dc64f5fff4370face0353ce57b197b802aabf472c0"
     },
     "prototypes/alpha/three-prototype/src/imaging/FhirConversionAuditPanel.jsx": {
       "bytes": 4022,
@@ -768,8 +776,8 @@
       "sha256": "0e97f620187618b359200f645c08005bb6b439b1f9d89f9bd65d93cb1c427c85"
     },
     "prototypes/alpha/three-prototype/src/imaging/FhirLivePanel.jsx": {
-      "bytes": 4736,
-      "sha256": "ee46f8f30999f5beee04637b6794b29e7c51379f0a740ba8305d6e7c5e515291"
+      "bytes": 4896,
+      "sha256": "dfdf2b42f77dafe0e7cb85d273a5db7db0ad0d02db1826d223ac5cad372e6bd0"
     },
     "prototypes/alpha/three-prototype/src/imaging/H000ExplodedSamples.jsx": {
       "bytes": 2917,
@@ -820,12 +828,12 @@
       "sha256": "d8bcf3c32258002ab6e1dab6a390c5f7949bbbade2a5d6df31abee5236a5a4cf"
     },
     "prototypes/alpha/three-prototype/src/imaging/fhir-capabilities.mjs": {
-      "bytes": 2128,
-      "sha256": "9261f6710abecf2ba9a597dfba0bfae0b792853a0b8a85b6ba17e4d688a1e50c"
+      "bytes": 2670,
+      "sha256": "c3b595e8277bfeda02f5b5255d42be8b76be0fa63f3096e8c44e3ecea61e17fd"
     },
     "prototypes/alpha/three-prototype/src/imaging/fhir-live-viewer.mjs": {
-      "bytes": 5789,
-      "sha256": "55071669f1b962a2f7575f7d0e7c7ac458891b24c79d9d4d83c7efd83eddb8ee"
+      "bytes": 8694,
+      "sha256": "9b313d701029a5d1a81b66d02d956d8153f3307481bfaddb1a4aa8564f19a32f"
     },
     "prototypes/alpha/three-prototype/src/imaging/h000-display-fit.json": {
       "bytes": 7237,
@@ -904,8 +912,8 @@
       "sha256": "474581f7661d35ee26a41e5e5fa9827186db8142e2ffbd2b31384368e7d79917"
     },
     "prototypes/alpha/three-prototype/src/main.jsx": {
-      "bytes": 58297,
-      "sha256": "435696389aea9521d9b1a2954fb7e6c825f095923dd76a6dbeb4e9fd3901751e"
+      "bytes": 58334,
+      "sha256": "dc2c6b52c4cd831b23aea128ce7950ab5e444909f45f0b9fec47678603be9377"
     },
     "prototypes/alpha/three-prototype/src/materialization-state.mjs": {
       "bytes": 484,
@@ -1092,20 +1100,20 @@
       "sha256": "914473b1566ae66d8229a56916f6658f2c9e6bf8ce30de59780ac64741c615cd"
     },
     "prototypes/alpha/three-prototype/test-fhir-capabilities.mjs": {
-      "bytes": 7452,
-      "sha256": "3d522073b0668927db01e5a136684011dc196112230d4ced3d0f073a2a607b88"
+      "bytes": 8475,
+      "sha256": "49bf76088e3b70aee348e873e74c7b11db979048764e7e6733ee4d98a4fb7562"
     },
     "prototypes/alpha/three-prototype/test-fhir-conversion-audit.mjs": {
-      "bytes": 6758,
-      "sha256": "0288892f95626db54912774a8bf779e4f4d934200e3da5951ae8aaeeafcf11b6"
+      "bytes": 7472,
+      "sha256": "449b04a9284c50e3beaffce19db7140b32354735bd28e12c026317acdeb72c2e"
     },
     "prototypes/alpha/three-prototype/test-fhir-evidence-projection.mjs": {
-      "bytes": 15849,
-      "sha256": "2f1679ab59732ddb06591677fcd2b014aea224d8aa7557a983ff533000bd0979"
+      "bytes": 16917,
+      "sha256": "3b0ed1d3e9b585272e3a6dd9a2ce09069a4851ec5ae71f8b6a527f84aa1ff5b5"
     },
     "prototypes/alpha/three-prototype/test-fhir-live-viewer.mjs": {
-      "bytes": 4781,
-      "sha256": "475a6f507e76ffa475362db54a422f4ec7f46bb8907c5833e51f15c915b0ee3f"
+      "bytes": 9594,
+      "sha256": "c2a69fbd08032a623f309f60faf9d1b7baa7069813d608ee1400f7353badcbb7"
     },
     "prototypes/alpha/three-prototype/test-hl7v2-fhir-draft.mjs": {
       "bytes": 6365,
@@ -1284,12 +1292,16 @@
       "sha256": "e970472f0fa49610991de2f333c18e2084b82a6bded57639e85e5000a86c423e"
     },
     "prototypes/alpha/viewer/src/fhir-conversion-audit.mjs": {
-      "bytes": 6524,
-      "sha256": "77f76b33e89c359f08d982640bd493a830a498143d10e00c47becc16f0889dfe"
+      "bytes": 6739,
+      "sha256": "4688c855acb90acc794a962e3626135fd4e7112c536e7fdc2b7ba8df0e604bd1"
     },
     "prototypes/alpha/viewer/src/fhir-evidence-projection.mjs": {
-      "bytes": 13642,
-      "sha256": "dc06c7baa9f44331782352cadc0a1c09763cc4bb7d2ce136a53e6627397a466d"
+      "bytes": 13815,
+      "sha256": "0ede8e6eb2eddda85bb144d7b016c3f8a8be852d251e39b710f77ad98ea211bb"
+    },
+    "prototypes/alpha/viewer/src/fhir-readonly-openapi.mjs": {
+      "bytes": 5774,
+      "sha256": "6053c57b0b44bd01e2d96d15b7a87e7836be562aae9c3478edfcdfb928f5db19"
     },
     "prototypes/alpha/viewer/src/hl7v2-fhir-draft.mjs": {
       "bytes": 5984,
@@ -1515,25 +1527,29 @@
       "bytes": 2239,
       "sha256": "f79b1cc781f13b2da9e468be62d875386a215b84b9f66065c0be167d15e10f1c"
     },
-    "public/assets/EpicSandboxPanel-Y-OivXW0.js": {
+    "public/assets/EpicSandboxPanel-DSTIFjQ0.js": {
       "bytes": 13177,
-      "sha256": "e4798b37e8ccd244c95b65b1070c1a447c6654737c5283b08163633529f4bf1b"
+      "sha256": "e4cd9fbbbf5594f609e32d131ac45a6cb908834054e8a156415c61021ef52319"
     },
-    "public/assets/SmartSyntheticPanel-DdpsFYFq.js": {
+    "public/assets/SmartSyntheticPanel-BDDKiHDv.js": {
       "bytes": 22201,
-      "sha256": "eed078ab15e539d7848de99fdb14639683a14975102e7a58e7c743fe0e067e3a"
+      "sha256": "914cb79a2460d91ecda8f6a9d4b72703c2da67098b691698d052040e63769038"
     },
     "public/assets/__vite-browser-external-BtIiOxWW.js": {
       "bytes": 113,
       "sha256": "2679ef840ec23659b0fa4c5d5cefe4878d00fa69bd73faa41b66c788cb98bfcb"
     },
+    "public/assets/fhir-readonly-openapi-CKN-u8V7.js": {
+      "bytes": 3859,
+      "sha256": "c5943033d68b77cf3229766c587fb47b8a041f9de36b0a7fddc7d884b5dadadc"
+    },
     "public/assets/index-BU3Q432j.css": {
       "bytes": 24404,
       "sha256": "48f2a0a4d308de8248488126b5d8e58d7bea61b2b4d46a25f9ee0fd62d3a5705"
     },
-    "public/assets/index-D1JS6LxZ.js": {
-      "bytes": 2398543,
-      "sha256": "4b71cd9cdc1dc248ed9a5532192ba8f78478c899724ac27a1cefcfb4b2052546"
+    "public/assets/index-CJ-LMEnQ.js": {
+      "bytes": 2401579,
+      "sha256": "3b8e50f4fdc591374123e3708e6a6702a0edcfe78cebdd479f5c0f32968b90b0"
     },
     "public/assets/nrx-reference-worker-BVTUSoQr.js": {
       "bytes": 1418,
@@ -1543,9 +1559,9 @@
       "bytes": 69914,
       "sha256": "ed4e5444ec1374168fd2f9e7866b8790d0e82372acaaa1cea864419e0749227a"
     },
-    "public/assets/nrx-surface-jlmEhRs1.js": {
+    "public/assets/nrx-surface-BeOtQmBm.js": {
       "bytes": 3767,
-      "sha256": "24c1bc3fa600446caab5a8b0061087ad830563b590cc04a42c1bcf1dbf8093e8"
+      "sha256": "af5dd527dbf1a471bbcb53cefce63621f0a042c88f8b7d05fd71e86e7bdf947e"
     },
     "public/assets/nrx-worker-BO_EnPT5.js": {
       "bytes": 12811,
@@ -1556,16 +1572,16 @@
       "sha256": "2bd3359d7df16db65123088a7f02a503b16625f9840676b3ae902739cf9fb665"
     },
     "public/demo-build-manifest.json": {
-      "bytes": 42177,
-      "sha256": "dc99e8a4c717a700545b13386840cecda209dbae3a1c952813f758709a9f3ddf"
+      "bytes": 42459,
+      "sha256": "56a84a7f9442f5415bb0190e60a5df4d40533375df3300f3a12aa990bbab9945"
     },
     "public/index.html": {
       "bytes": 944,
-      "sha256": "ed820250aad4c3f9b902f83b02ed582aac61ccb239b03a52f14b28a388370ee7"
+      "sha256": "979f754e1f3cb44934e4383c636876d3bc866915a65263f08171a0d0c5a03ace"
     },
     "public/reference.html": {
       "bytes": 944,
-      "sha256": "ed820250aad4c3f9b902f83b02ed582aac61ccb239b03a52f14b28a388370ee7"
+      "sha256": "979f754e1f3cb44934e4383c636876d3bc866915a65263f08171a0d0c5a03ace"
     },
     "reference/metadata/anatomy-source-records.json": {
       "bytes": 855652,
@@ -2736,16 +2752,16 @@
       "sha256": "aefa82c463d9a3c2c16f73a869123824b8c1f56f148bd010796120a865243ca3"
     },
     "scripts/archive-package.py": {
-      "bytes": 4459,
-      "sha256": "9470dab06a4bc5179b1c584adf7e28cfcf9cafa9b021878ab0ef054e310cc813"
+      "bytes": 5210,
+      "sha256": "76e4f9d8f31bbe53e6f29e10c328b60280c5c65340f20368c66297d563fcc8ad"
     },
     "scripts/archive-static.py": {
-      "bytes": 3733,
-      "sha256": "bbe9c4ce1f208002fa2fe05e114dff50944b4dfa73dcf7a3868f2a1cd25b092b"
+      "bytes": 4877,
+      "sha256": "883bdd3f4f88eb9a2e4262c7ea1e7a4a47f7b30fa1c580f9c4700e68b2b7c3fc"
     },
     "scripts/build-alpha-distribution.mjs": {
-      "bytes": 8982,
-      "sha256": "df837ebd7c21dbe8b2fcb575d66fab0cd93b3e34bc6f635395d3f1b39d39ead6"
+      "bytes": 8990,
+      "sha256": "3083b16d6afa505aebed46b77481daeddb0bd9f02d26350c6176d746dcef1feb"
     },
     "scripts/build-demo.mjs": {
       "bytes": 12831,
@@ -2764,8 +2780,8 @@
       "sha256": "8ab2f59386f8a1ba17965ee4470507e1cea88365b325bac0c24b0e4c076a952f"
     },
     "scripts/fhir-readonly-openapi.mjs": {
-      "bytes": 5206,
-      "sha256": "fd706d39f3de5d3c3bfa2e0d777c4b97d12771e441a96969d45da791160065f2"
+      "bytes": 96,
+      "sha256": "fe39765994baa6638a57885864edb1a0bb1c3e396be03ac0abb6f30051dcd5bb"
     },
     "scripts/generate-retirement-051.py": {
       "bytes": 9513,
@@ -2792,8 +2808,8 @@
       "sha256": "cdf43fad36dbeba367887dbafd016a0df00b52eba074b4d1bd70ddf018ed77bc"
     },
     "scripts/preview-static.mjs": {
-      "bytes": 4825,
-      "sha256": "160528908ea8021c35d8574a033d2ab295e09d6ab4e07ff895c80272d901712d"
+      "bytes": 4422,
+      "sha256": "0d6cfe1fd9db3ed0111b4fc09e3ec0559785344c063254a09a8e706340ac4889"
     },
     "scripts/preview-verified-file.mjs": {
       "bytes": 1980,
@@ -2808,8 +2824,8 @@
       "sha256": "c6705c003e0b8ba04b8db244de00b8672166aa94b6494820b86f97f7dda11e04"
     },
     "scripts/refresh-package-frontend.py": {
-      "bytes": 10793,
-      "sha256": "d852013dab1d5ebf197edf4bd29bc44be8c0b9fe2a6cd746ecf12253c3cc37d4"
+      "bytes": 10802,
+      "sha256": "0a3e919a904c6670074a8561a3a571a633c68367cfd1584437382f23f6b6b7a7"
     },
     "scripts/repair-bp3d-export.py": {
       "bytes": 18471,
@@ -2820,8 +2836,8 @@
       "sha256": "35207fa1d526cebe3f5e48f5898c94864e4634e45637f7b4df00d63dd85d83de"
     },
     "scripts/stage-package.ps1": {
-      "bytes": 6735,
-      "sha256": "9f876b85f4b0685e2a7c14061daa49b5ff7fdfaddbccebd393adefedd324bc57"
+      "bytes": 6939,
+      "sha256": "e6037b19f87d18e6fde92b7fe2d10aeae546aec837665c0dd2769b0f942712d3"
     },
     "scripts/staged_git.py": {
       "bytes": 4839,
@@ -2840,12 +2856,12 @@
       "sha256": "5c79acab620ac8c2834add48d31ee09edf733fb6c9b97796bdf51f43482f805f"
     },
     "scripts/test-alpha-distribution.mjs": {
-      "bytes": 2662,
-      "sha256": "12a0c14d68fb0a78d879d79f0542c5219b365756170c52f3e8edfccc80b36d9f"
+      "bytes": 2670,
+      "sha256": "58045495f554eae193d381a77f6bbdf6909bb99e349aa4b623fc9fd295ff3266"
     },
     "scripts/test-alpha-publication.py": {
-      "bytes": 3998,
-      "sha256": "f49b2ffc7ca041569cddc53553b2546f36ef84d6a9d6e91966fea1f21765604e"
+      "bytes": 4007,
+      "sha256": "128e594f5ddb64e9e034385a6e630931ba81c95e203f2d8df7474b615239b870"
     },
     "scripts/test-alpha-session.mjs": {
       "bytes": 2037,
@@ -2860,8 +2876,8 @@
       "sha256": "ebc8da2a329f2fd708f45b34fe8ba4fb80e5c7d521c63f44e0a6b5f81d347970"
     },
     "scripts/test-fhir-readonly-openapi.mjs": {
-      "bytes": 5806,
-      "sha256": "1575665be4cfdeec8ab616b8a5c99d9add78e83f0491cfd0a56bbbb1f047f173"
+      "bytes": 7002,
+      "sha256": "4518cde30e3e7ba9a9d321875ee742e299c641a911b3083f3776c055c4126bbf"
     },
     "scripts/test-pick-generation.mjs": {
       "bytes": 3114,
@@ -2908,20 +2924,20 @@
       "sha256": "ef84342cf5c1d6a989b2876d312968065c85c42fdabfdf6d1ea82f03938d3da6"
     },
     "scripts/update-source-manifest.py": {
-      "bytes": 4676,
-      "sha256": "d33b8f0b26f94c9b85a071fb3ef6b0d486400f0bb1ff1de2217faf10114b1e76"
+      "bytes": 4685,
+      "sha256": "ec85afa58f803f6610ed5513e5616359b8761bc2a2c073f87152e11b9dc5fa37"
     },
     "src/DICOM3D/Entry.cls": {
-      "bytes": 756,
-      "sha256": "98d4c7d4ee22aadf15e1163c70c3eb2d0be134e33a7fec0322fc03e624154c26"
+      "bytes": 2781,
+      "sha256": "07bf04b4e58236f7f02875350ca9ae9988a8f9ae6210e52a8b4043772191794c"
     },
     "src/DICOM3D/Health.cls": {
-      "bytes": 563,
-      "sha256": "14f5aa84119f5babce5a4a129670ff3b54c19cf1c1286c981940b406f7e64d89"
+      "bytes": 555,
+      "sha256": "e3327c8cb4899e7b40d8b83a98863d03b790360718a306c884777c8de724e932"
     },
     "src/DICOM3D/InstallMigration.cls": {
       "bytes": 42203,
-      "sha256": "04979b0a964435a818b113cfc8bb598a47f27c345309c15a6e94e66d6de7be91"
+      "sha256": "fade20e3cbf9ef73c144d3791a12c80dc2bf827bb64a50205e0d02ed77441eb3"
     },
     "third-party/alpha-runtime-NOTICE.txt": {
       "bytes": 2728,
