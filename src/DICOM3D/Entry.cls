@@ -3,7 +3,7 @@ Class DICOM3D.Entry Extends %CSP.Page
 {
 
 /// Staging binds the entry link to the exact generated HTML, not a release label.
-Parameter VIEWERBUILD = "42cba22d68bd3201af61e174e240f175b1b44e2afbaa40a763b256cf01c08cbb";
+Parameter VIEWERBUILD = "236fe2950fa1d8ba6943f03ce7b86c7a418b33e7c9c2b891108d5146fa2a791e";
 
 ClassMethod OnPreHTTP() As %Boolean
 {

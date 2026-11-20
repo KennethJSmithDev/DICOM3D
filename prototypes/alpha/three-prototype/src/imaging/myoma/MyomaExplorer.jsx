@@ -10,6 +10,9 @@ function MyomaWorkspace({volume, rendererProps, compact}) {
   const [overlay,setOverlay] = useState(true);
   const [plane,setPlane] = useState(true);
   const [opacity,setOpacity] = useState(70);
+  const [atlasContext,setAtlasContext] = useState(false);
+  const [atlasOpacity,setAtlasOpacity] = useState(22);
+  const [atlasStatus,setAtlasStatus] = useState('loading');
   const [panes,setPanes] = useState({});
   const canvas = useRef(null);
   const [first,last] = volume.bounds[2];
@@ -63,10 +66,28 @@ function MyomaWorkspace({volume, rendererProps, compact}) {
     <label><input type="checkbox" checked={plane} onChange={event=>setPlane(event.target.checked)}/>Show MRI plane in 3D</label>
     <label>{name} surface opacity<input type="range" min="0" max="100" value={opacity} aria-valuetext={opacity+' percent'}
       onChange={event=>setOpacity(Number(event.target.value))}/></label>
+    <fieldset className="myoma-atlas-control"><legend>General anatomy comparison</legend>
+      <label><input type="checkbox" checked={atlasContext} onChange={event=>{
+        setAtlasStatus('loading');
+        setAtlasContext(event.target.checked);
+      }}/>Show female atlas uterus</label>
+      {atlasContext && <>
+        <p role="status">{atlasStatus==='ready'?'HRA female uterus · approximate placement':atlasStatus==='unavailable'?'The reference uterus could not be loaded. Toggle it off and on to retry.':'Loading reference uterus…'}</p>
+        <label>Reference uterus opacity<input type="range" min="0" max="100" value={atlasOpacity} disabled={atlasStatus!=='ready'}
+          onChange={event=>setAtlasOpacity(Number(event.target.value))}/></label>
+        <small>The atlas illustrates general anatomy. The fibroid comes from the MRI segmentation.</small>
+      </>}
+    </fieldset>
   </section>;
   return <>
     {panes.source ? createPortal(source,panes.source) : source}
     <TissueSurface {...rendererProps} comparison volume={volume} tissueId={tissueId}
+      atlasContext={atlasContext} atlasOpacity={atlasOpacity/100} onAtlasStatus={setAtlasStatus}
+      onSelect={(id,sourceK)=>{
+        if(!volume.byId.has(id) || id===0) return;
+        setTissueId(id);
+        if(Number.isInteger(sourceK) && sourceK>=first && sourceK<=last) setIndex(sourceK);
+      }}
       ariaLabel={name+' segmentation surface'} axis="sagittal" index={index}
       sourceSlice={grayscale} planeCorners={corners} slice={plane ? slice : null} opacity={opacity/100}/>
     {panes.controls ? createPortal(controls,panes.controls) : controls}
@@ -87,7 +108,7 @@ export default function MyomaExplorer({rendererProps, compact}) {
 
   return <section className="myoma-explorer" aria-labelledby="myoma-title">
     <h2 id="myoma-title">Uterine fibroid MRI</h2>
-    <p>Explore a fibroid, also called a myoma, in a published MRI. UMD_221129_001 is a separate case from the H001 twin-pregnancy ultrasound.</p>
+    <p>UMD_221129_001 · Separate teaching case from the twin ultrasound.</p>
     {volume ? <MyomaWorkspace compact={compact} volume={volume} rendererProps={rendererProps}/> : failed ? <div>
       <p role="alert">The uterine MRI or its tissue labels could not be loaded.</p>
       <button type="button" onClick={() => {setFailed(false);setAttempt(a=>a+1);}}>Retry uterine MRI</button>

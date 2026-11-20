@@ -1,4 +1,6 @@
-.tissue-wipe-view .comparison-tools{bottom:.45rem;left:.45rem;right:.45rem}
+.tissue-wipe-view{display:grid;grid-template-rows:minmax(0,1fr) auto;grid-template-columns:minmax(0,1fr)}
+.tissue-wipe-view>.reference-wipe,.tissue-wipe-view>.wipe-divider,.tissue-wipe-view>.tissue-wipe-labels{grid-area:1/1}
+.tissue-wipe-view>.comparison-tools{position:static;grid-area:2/1;margin:0}
 .tissue-wipe-view .reference-wipe{background:#07121c}
 .tissue-wipe-labels{position:absolute;top:.4rem;left:.45rem;right:.45rem;z-index:3;display:flex;justify-content:space-between;gap:.5rem;pointer-events:none}
 .tissue-wipe-labels span{background:#061724dc;padding:.12rem .35rem;font-size:.78rem;color:#dbf6ff}

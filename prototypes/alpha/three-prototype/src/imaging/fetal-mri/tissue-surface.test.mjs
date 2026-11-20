@@ -1,6 +1,21 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import {tissueSurface} from './tissue-surface.mjs';
+import {sourceVoxelForFace,tissueSurface} from './tissue-surface.mjs';
+
+test('each triangle picks its original voxel through a reflected oblique source grid',()=>{
+  const volume={dims:[1,1,3],affineRasMm:[[0,-2,-.3,17],[1,0,0,23],[0,.1,-6,31]],
+    labels:new Uint16Array([3,3,4]),byId:new Map([[3,{rgb:[255,128,64]}],[4,{rgb:[70,80,90]}]])};
+  const data=tissueSurface(volume);
+  const trianglesByK=[0,0,0];
+  for(let triangle=0;triangle<data.indices.length/3;triangle++){
+    const pick=sourceVoxelForFace(volume,data,triangle);
+    assert.deepEqual(pick.ijk.slice(0,2),[0,0]);
+    assert.equal(pick.id,volume.labels[pick.ijk[2]]);
+    trianglesByK[pick.ijk[2]]++;
+  }
+  assert.deepEqual(trianglesByK,[10,8,10]);
+  assert.equal(sourceVoxelForFace(volume,data,data.indices.length/3),null);
+});
 
 test('touching labels share the outer boundary; isolation restores the hidden interface',()=>{
   const volume={dims:[2,1,1],spacingMm:[2,2,2],originRasMm:[8,12,20],

@@ -1,4 +1,4 @@
-import {BufferAttribute, Matrix3, Matrix4} from 'three';
+import {BufferAttribute, Matrix3, Matrix4, Vector3} from 'three';
 
 // Each outward quad is a boundary between two source voxel cells. Keep its source
 // ID for picking even when all touching tissues share a single outer surface.
@@ -47,6 +47,20 @@ export function tissueSurface(volume, tissueId = 0) {
   if(world.determinant()<0) {
     for(let i=0;i<indices.length;i+=3) [indices[i+1],indices[i+2]]=[indices[i+2],indices[i+1]];
   }
-  return {positions:points.array,colors:new Float32Array(colors),normals:directions.array,
+  return {positions:points.array,colors:new Float32Array(colors),normals:directions.array,worldToVoxel:world.clone().invert(),
     indices:points.count>65535?new Uint32Array(indices):new Uint16Array(indices),owners:new Uint16Array(owners)};
+}
+
+export function sourceVoxelForFace(volume,surface,faceIndex) {
+  if(!Number.isInteger(faceIndex) || faceIndex<0 || faceIndex>=surface.indices.length/3)return null;
+  const quad=Math.floor(faceIndex/2), offset=quad*12;
+  const center=new Vector3().fromArray(surface.positions,offset)
+    .lerp(new Vector3().fromArray(surface.positions,offset+6),.5).applyMatrix4(surface.worldToVoxel);
+  const outward=new Vector3().fromArray(surface.normals,offset).transformDirection(surface.worldToVoxel);
+  // The face center lies on a shared voxel boundary. Sample just inside its owner in voxel units.
+  center.addScaledVector(outward,-.25).round();
+  const [i,j,k]=center.toArray(), [nx,ny,nz]=volume.dims;
+  if(i<0 || j<0 || k<0 || i>=nx || j>=ny || k>=nz)return null;
+  const id=surface.owners[quad];
+  return volume.labels[i+nx*(j+ny*k)]===id ? {id,ijk:[i+0,j+0,k+0]} : null;
 }
