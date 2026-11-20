@@ -2808,8 +2808,8 @@
       "sha256": "cdf43fad36dbeba367887dbafd016a0df00b52eba074b4d1bd70ddf018ed77bc"
     },
     "scripts/preview-static.mjs": {
-      "bytes": 4422,
-      "sha256": "0d6cfe1fd9db3ed0111b4fc09e3ec0559785344c063254a09a8e706340ac4889"
+      "bytes": 4728,
+      "sha256": "acc7afe10564093ec60ebfc3ced8e7ebb8a8a221da3b41746d13911e187563bb"
     },
     "scripts/preview-verified-file.mjs": {
       "bytes": 1980,
@@ -2888,8 +2888,8 @@
       "sha256": "17d66bf2b2c755660c4b9dfed3e68d2b5991a3c58eeff01bd8e1fedc4839c907"
     },
     "scripts/test-preview-verified-file.mjs": {
-      "bytes": 1556,
-      "sha256": "21e6717b10e589bbdb2da0a82adc0866c372997a4b48976c0d7ad74f6a9277f5"
+      "bytes": 4319,
+      "sha256": "3a62e330eac5699cc534a9b2873505c44e45d3a0a100c7c609c37a253dedb80f"
     },
     "scripts/test-public-reference-visual.mjs": {
       "bytes": 10248,

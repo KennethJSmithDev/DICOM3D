@@ -12,7 +12,6 @@ const instance=option('--instance',null);
 if(instance!==null&&!/^[a-f0-9]{32}$/.test(instance))throw Error('Invalid preview identity');
 const manifestBytes=readFileSync(resolve(root,'demo-build-manifest.json'));
 const manifest=JSON.parse(manifestBytes.toString('utf8'));
-const liveFhir=loadLoopbackFhirRoute(process.env.DICOM3D_LIVE_FHIR_CONFIG,port);
 const alpha=manifest.schema==='dicom3d-alpha-distribution-1'&&manifest.profile==='three-r3f-alpha';
 const base=alpha&&manifest.entrypoint==='/dicom3d/reference.html'?'/dicom3d/':manifest.entrypoint;
 if(!['/DICOM3D/','/dicom3d/'].includes(base))throw Error('Unadmitted base');
@@ -25,7 +24,8 @@ for(const [name,record]of Object.entries(manifest.files)){
 files.set(base+'demo-build-manifest.json',{path:resolve(root,'demo-build-manifest.json'),bytes:manifestBytes});
 const mime={'.html':'text/html; charset=utf-8','.js':'text/javascript; charset=utf-8','.mjs':'text/javascript; charset=utf-8','.css':'text/css; charset=utf-8','.json':'application/json','.svg':'image/svg+xml','.glb':'model/gltf-binary','.png':'image/png','.txt':'text/plain; charset=utf-8'};
 const admitResponse=createResponseGate();
-const server=createServer(async(req,res)=>{
+const server=createServer();
+async function servePreview(liveFhir,req,res){
  for(const [k,v]of Object.entries({'X-Content-Type-Options':'nosniff','Cross-Origin-Opener-Policy':'same-origin','Cross-Origin-Embedder-Policy':'require-corp','Cross-Origin-Resource-Policy':'same-origin','Cache-Control':'no-store'}))res.setHeader(k,v);
  if(!['GET','HEAD'].includes(req.method)){res.writeHead(405);res.end();return;}
  let path;try{path=decodeURIComponent(new URL(req.url,'http://127.0.0.1').pathname)}catch{res.writeHead(400);res.end();return;}
@@ -41,9 +41,15 @@ const server=createServer(async(req,res)=>{
  let bytes;try{bytes=file.bytes??readVerifiedFile(file.path,file.record)}catch{res.writeHead(409);res.end('Preview file no longer matches its admitted inventory');return;}
  res.writeHead(200,{'Content-Type':mime[extname(file.path)]??'application/octet-stream','Content-Length':bytes.length});
  res.end(req.method==='HEAD'?undefined:bytes);
-});
+}
 server.listen(port,'127.0.0.1',()=>{
- const url=`http://127.0.0.1:${server.address().port}${base}`;
+ // The OS chooses the exact origin when --port 0 is requested.
+ const boundPort=server.address().port;
+ let liveFhir;
+ try{liveFhir=loadLoopbackFhirRoute(process.env.DICOM3D_LIVE_FHIR_CONFIG,boundPort);}
+ catch{console.error('Invalid live FHIR configuration');process.exitCode=1;server.close();return;}
+ server.on('request',(req,res)=>servePreview(liveFhir,req,res));
+ const url=`http://127.0.0.1:${boundPort}${base}`;
  const stateFile=option('--state',null);
  const state={owner:'DICOM3D operator preview',pid:process.pid,url,root,script:realpathSync(process.argv[1]),base,startedUtc:new Date().toISOString(),node:process.execPath,requestedPort:port,instance,stateFile:stateFile?resolve(stateFile):null};
  if(stateFile)writeFileSync(stateFile,JSON.stringify(state,null,2));
