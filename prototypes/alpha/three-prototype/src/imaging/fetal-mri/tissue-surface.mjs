@@ -1,3 +1,5 @@
+import {BufferAttribute, Matrix3, Matrix4} from 'three';
+
 // Each outward quad is a boundary between two source voxel cells. Keep its source
 // ID for picking even when all touching tissues share a single outer surface.
 const faces = [
@@ -27,18 +29,24 @@ export function tissueSurface(volume, tissueId = 0) {
       }
       const start=positions.length/3;
       for (const c of corners) {
-        // Source axes advance toward left, posterior, superior. World uses R, S, -A.
-        positions.push(originRasMm[0]-(x+(c&1)-.5)*spacingMm[0],
-          originRasMm[2]+(z+((c>>2)&1)-.5)*spacingMm[2],
-          -originRasMm[1]+(y+((c>>1)&1)-.5)*spacingMm[1]);
-        normals.push(-dx,dz,dy);
+        positions.push(x+(c&1)-.5,y+((c>>1)&1)-.5,z+((c>>2)&1)-.5);
+        normals.push(dx,dy,dz);
         colors.push(...palette.get(id));
       }
       indices.push(start,start+1,start+2,start,start+2,start+3);
       owners.push(id);
     }
   }
-  return {positions:new Float32Array(positions),colors:new Float32Array(colors),
-    normals:new Float32Array(normals),indices:positions.length/3>65535?new Uint32Array(indices):new Uint16Array(indices),
-    owners:new Uint16Array(owners)};
+  const ras = volume.affineRasMm ?? [
+    [-spacingMm[0],0,0,originRasMm[0]],[0,-spacingMm[1],0,originRasMm[1]],[0,0,spacingMm[2],originRasMm[2]],
+  ];
+  // Patient RAS millimetres map to Three's right, up, back axes as R, S, -A.
+  const world=new Matrix4().set(...ras[0],...ras[2],...ras[1].map(v=>-v),0,0,0,1);
+  const points=new BufferAttribute(new Float32Array(positions),3).applyMatrix4(world);
+  const directions=new BufferAttribute(new Float32Array(normals),3).applyNormalMatrix(new Matrix3().getNormalMatrix(world));
+  if(world.determinant()<0) {
+    for(let i=0;i<indices.length;i+=3) [indices[i+1],indices[i+2]]=[indices[i+2],indices[i+1]];
+  }
+  return {positions:points.array,colors:new Float32Array(colors),normals:directions.array,
+    indices:points.count>65535?new Uint32Array(indices):new Uint16Array(indices),owners:new Uint16Array(owners)};
 }

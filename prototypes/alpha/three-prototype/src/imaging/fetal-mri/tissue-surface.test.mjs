@@ -20,3 +20,12 @@ test('touching labels share the outer boundary; isolation restores the hidden in
     assert.ok(cross.reduce((s,v,k)=>s+v*n[k],0)>0);
   }
 });
+
+test('oblique source basis places a segmented voxel in the same world coordinates as its MRI',()=>{
+  const volume={dims:[1,1,1],spacingMm:[1,2,6],affineRasMm:[[0,-2,0,17],[1,0,0,23],[0,0,6,31]],
+    labels:new Uint16Array([3]),byId:new Map([[3,{rgb:[255,128,64]}]])};
+  const mesh=tissueSurface(volume,3);
+  const axes=[[],[],[]];
+  mesh.positions.forEach((v,i)=>axes[i%3].push(v));
+  assert.deepEqual(axes.map(a=>[Math.min(...a),Math.max(...a)]),[[16,18],[28,34],[-23.5,-22.5]]);
+});

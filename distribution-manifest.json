@@ -50,5 +50,20 @@
         "sha256": "678f7df75ba0d594aaf17eaf49897daf063a2ac2711886feb1b012fb5df3a323"
       }
     }
+  },
+  "independentFibroidStudy": {
+    "source": "10.6084/m9.figshare.23541312.v3",
+    "case": "UMD_221129_001",
+    "license": "CC BY 4.0",
+    "assets": {
+      "sagittalT2": {
+        "bytes": 7117826,
+        "sha256": "1b120daa7e86e8bffda8017007aa2363005cd9ba5d5462bf63e772b2a0e4bae1"
+      },
+      "labels": {
+        "bytes": 22332,
+        "sha256": "779f34c85bd1cf3e32e5e700db559cb13f5427cfe8623a3c24a115551da5b573"
+      }
+    }
   }
 }

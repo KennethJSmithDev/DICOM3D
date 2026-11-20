@@ -1,0 +1,14 @@
+.myoma-explorer{container-type:inline-size;margin:1rem 0;line-height:1.5}
+.myoma-views,.myoma-controls{display:grid;gap:.75rem}
+.myoma-views>figure{min-width:0;margin:.4rem 0}
+.myoma-views h3{font-size:1rem;margin:0 0 .35rem}
+.myoma-views figcaption{margin:.4rem 0}
+.myoma-image{display:grid;place-items:center;background:#070e16;border-radius:.4rem}
+.myoma-image canvas{position:static;height:clamp(240px,43dvh,520px);width:auto;max-width:100%;object-fit:contain}
+.myoma-controls{padding:.5rem 0}
+.myoma-controls label{margin:.4rem 0}
+.myoma-controls input[type=range]{width:100%;min-height:30px}
+.myoma-controls .myoma-check{display:flex;align-items:center;gap:.5rem}
+.myoma-controls .myoma-check input{width:auto}
+.myoma-steps{display:flex;gap:.4rem}
+@container (min-width:35rem){.myoma-views,.myoma-controls{grid-template-columns:repeat(2,minmax(0,1fr))}}

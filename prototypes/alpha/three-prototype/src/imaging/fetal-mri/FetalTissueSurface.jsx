@@ -14,9 +14,9 @@ const directions={oblique:new Vector3(-.8,.45,-1),side:new Vector3(-1,0,0)};
 const uvs=new Float32Array([0,0,1,0,0,1,1,1]);
 const triangles=new Uint16Array([0,1,2,2,1,3]);
 
-function SourcePlane({volume,axis,index,slice}) {
+function SourcePlane({volume,axis,index,slice,planeCorners}) {
   const {width,height,rgba}=slice;
-  const corners=useMemo(()=>sourcePlaneCorners(volume,axis,index,width,height),[volume,axis,index,width,height]);
+  const corners=useMemo(()=>planeCorners ?? sourcePlaneCorners(volume,axis,index,width,height),[volume,axis,index,width,height,planeCorners]);
   const texture=useMemo(()=>{
     const map=new DataTexture(rgba,width,height);
     map.colorSpace=SRGBColorSpace;
@@ -61,16 +61,16 @@ class DisplayBoundary extends React.Component {
   render(){return this.state.failed?<p role="alert">3D display unavailable. Choose MRI slices to continue exploring.</p>:this.props.children;}
 }
 
-export default function FetalTissueSurface({volume,tissueId,CanvasComponent,createRenderer,onSelect,slice,axis,index,opacity=1}) {
+export default function FetalTissueSurface({volume,tissueId,CanvasComponent,createRenderer,onSelect,slice,axis,index,opacity=1,planeCorners,ariaLabel='Fetal brain tissue surface'}) {
   const data=useMemo(()=>tissueSurface(volume,tissueId),[volume,tissueId]);
   const [view,setView]=useState({direction:'oblique'});
-  return <section aria-label="Fetal brain tissue surface">
+  return <section aria-label={ariaLabel}>
     <div style={{height:'clamp(240px,43dvh,520px)',background:'#07121c',borderRadius:8,overflow:'hidden'}}>
       <DisplayBoundary><CanvasComponent gl={createRenderer} camera={cameraStart} dpr={1} frameloop="never">
         <RenderCadence name="fetal-tissue" policy={policy}/>
         <ambientLight intensity={1.5}/><directionalLight position={[-3,5,-4]} intensity={2}/>
         <TissueMesh data={data} view={view} onSelect={onSelect} opacity={opacity}/>
-        {slice && <SourcePlane volume={volume} axis={axis} index={index} slice={slice}/>}
+        {slice && <SourcePlane volume={volume} axis={axis} index={index} slice={slice} planeCorners={planeCorners}/>}
       </CanvasComponent></DisplayBoundary>
     </div>
     <div><button type="button" onClick={()=>setView({direction:'oblique'})}>Fit tissue</button>{' '}

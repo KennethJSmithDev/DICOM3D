@@ -46,3 +46,4 @@ scripts/build-alpha-distribution.mjs text eol=lf
 # Preserve publisher fingerprints for the 22-week MRI, tissue map and notices.
 prototypes/alpha/three-prototype/src/imaging/fetal-mri/*.nii.gz -text
 prototypes/alpha/three-prototype/src/imaging/fetal-mri/*.txt -text -whitespace
+prototypes/alpha/three-prototype/src/imaging/myoma/*.nii.gz -text

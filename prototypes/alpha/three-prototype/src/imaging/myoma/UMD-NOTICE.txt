@@ -1,0 +1,16 @@
+Uterine Myoma MRI Dataset (UMD), version 3, example UMD_221129_001
+https://doi.org/10.6084/m9.figshare.23541312.v3
+
+Haixia Pan, Minghuang Chen, Wenpei Bai, Bin Li, Xiaoran Zhao, Meng Zhang,
+Dongdong Zhang, Yanan Li and Hongqiang Wang. CC BY 4.0.
+https://creativecommons.org/licenses/by/4.0/
+Dataset paper: https://doi.org/10.1038/s41597-024-03170-x
+
+DICOM3D includes two unmodified source files from UMD.zip (Figshare file
+44111183). UMD_221129_001_t2.nii.gz is the acquired sagittal T2-weighted
+MRI and UMD_221129_001_seg.nii.gz is its published annotation.
+
+DICOM3D assigns display colours, a grayscale window and a cropped viewing
+area around the published labels. Reformatting and voxel-face surfaces
+use the spatial transform supplied by the source. This example was
+acquired independently of the H001 pregnancy case and the fetal atlas.

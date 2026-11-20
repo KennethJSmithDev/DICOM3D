@@ -11,25 +11,31 @@
   <FileCopy Name="LICENSE" Target="{$cspdir}dicom3d/LICENSE" />
   <FileCopy Name="NOTICE" Target="{$cspdir}dicom3d/NOTICE" />
   <FileCopy Name="public/assets/CRL-SOURCE-NOTICE-CZLTcZw-.txt" Target="{$cspdir}dicom3d/assets/CRL-SOURCE-NOTICE-CZLTcZw-.txt" />
-  <FileCopy Name="public/assets/EpicSandboxPanel-BfMyEdxS.js" Target="{$cspdir}dicom3d/assets/EpicSandboxPanel-BfMyEdxS.js" />
+  <FileCopy Name="public/assets/EpicSandboxPanel-CUQwNAO7.js" Target="{$cspdir}dicom3d/assets/EpicSandboxPanel-CUQwNAO7.js" />
   <FileCopy Name="public/assets/FetalBrainExplorer-Bu4wnhMR.css" Target="{$cspdir}dicom3d/assets/FetalBrainExplorer-Bu4wnhMR.css" />
-  <FileCopy Name="public/assets/FetalBrainExplorer-C2_OLH2X.js" Target="{$cspdir}dicom3d/assets/FetalBrainExplorer-C2_OLH2X.js" />
-  <FileCopy Name="public/assets/FetalTissueSurface-B3JGlDI9.js" Target="{$cspdir}dicom3d/assets/FetalTissueSurface-B3JGlDI9.js" />
+  <FileCopy Name="public/assets/FetalBrainExplorer-CwuR6C37.js" Target="{$cspdir}dicom3d/assets/FetalBrainExplorer-CwuR6C37.js" />
+  <FileCopy Name="public/assets/FetalTissueSurface-DQYZf6wM.js" Target="{$cspdir}dicom3d/assets/FetalTissueSurface-DQYZf6wM.js" />
+  <FileCopy Name="public/assets/MyomaExplorer-DWqfc3Gn.css" Target="{$cspdir}dicom3d/assets/MyomaExplorer-DWqfc3Gn.css" />
+  <FileCopy Name="public/assets/MyomaExplorer-e6C_ms9A.js" Target="{$cspdir}dicom3d/assets/MyomaExplorer-e6C_ms9A.js" />
+  <FileCopy Name="public/assets/PlacentaReference-CIQ8lBxQ.js" Target="{$cspdir}dicom3d/assets/PlacentaReference-CIQ8lBxQ.js" />
   <FileCopy Name="public/assets/PlacentaReference-Ciq5Jvss.css" Target="{$cspdir}dicom3d/assets/PlacentaReference-Ciq5Jvss.css" />
-  <FileCopy Name="public/assets/PlacentaReference-Ke_cR9EI.js" Target="{$cspdir}dicom3d/assets/PlacentaReference-Ke_cR9EI.js" />
-  <FileCopy Name="public/assets/SmartSyntheticPanel-BB1PJmTq.js" Target="{$cspdir}dicom3d/assets/SmartSyntheticPanel-BB1PJmTq.js" />
+  <FileCopy Name="public/assets/SmartSyntheticPanel-lFZul2aa.js" Target="{$cspdir}dicom3d/assets/SmartSyntheticPanel-lFZul2aa.js" />
   <FileCopy Name="public/assets/T2WAtlas_labelkey-tissue-CRUwLVvO.txt" Target="{$cspdir}dicom3d/assets/T2WAtlas_labelkey-tissue-CRUwLVvO.txt" />
+  <FileCopy Name="public/assets/UMD-NOTICE-Cx_-idnK.txt" Target="{$cspdir}dicom3d/assets/UMD-NOTICE-Cx_-idnK.txt" />
+  <FileCopy Name="public/assets/UMD_221129_001_seg.nii-dpi5Qs1q.gz" Target="{$cspdir}dicom3d/assets/UMD_221129_001_seg.nii-dpi5Qs1q.gz" />
+  <FileCopy Name="public/assets/UMD_221129_001_t2.nii-CytkCKDv.gz" Target="{$cspdir}dicom3d/assets/UMD_221129_001_t2.nii-CytkCKDv.gz" />
   <FileCopy Name="public/assets/__vite-browser-external-BtIiOxWW.js" Target="{$cspdir}dicom3d/assets/__vite-browser-external-BtIiOxWW.js" />
   <FileCopy Name="public/assets/carnegie-stage20-LH1Cwx0s.glb" Target="{$cspdir}dicom3d/assets/carnegie-stage20-LH1Cwx0s.glb" />
+  <FileCopy Name="public/assets/fetal-brain-CCONu9wP.js" Target="{$cspdir}dicom3d/assets/fetal-brain-CCONu9wP.js" />
   <FileCopy Name="public/assets/fetus-in-uterus-BW8kn3SM.png" Target="{$cspdir}dicom3d/assets/fetus-in-uterus-BW8kn3SM.png" />
-  <FileCopy Name="public/assets/fhir-readonly-openapi-XRLQdZg3.js" Target="{$cspdir}dicom3d/assets/fhir-readonly-openapi-XRLQdZg3.js" />
+  <FileCopy Name="public/assets/fhir-readonly-openapi-4ldi9GEr.js" Target="{$cspdir}dicom3d/assets/fhir-readonly-openapi-4ldi9GEr.js" />
   <FileCopy Name="public/assets/fibroid-j8W9rm3I.jpg" Target="{$cspdir}dicom3d/assets/fibroid-j8W9rm3I.jpg" />
   <FileCopy Name="public/assets/hra-full-term-DYO0M0Bj.glb" Target="{$cspdir}dicom3d/assets/hra-full-term-DYO0M0Bj.glb" />
   <FileCopy Name="public/assets/index-BYLITBvv.css" Target="{$cspdir}dicom3d/assets/index-BYLITBvv.css" />
-  <FileCopy Name="public/assets/index-CaqRJoZw.js" Target="{$cspdir}dicom3d/assets/index-CaqRJoZw.js" />
+  <FileCopy Name="public/assets/index-C-SEfB3Q.js" Target="{$cspdir}dicom3d/assets/index-C-SEfB3Q.js" />
   <FileCopy Name="public/assets/nrx-reference-worker-BVTUSoQr.js" Target="{$cspdir}dicom3d/assets/nrx-reference-worker-BVTUSoQr.js" />
   <FileCopy Name="public/assets/nrx-runtime-7TkXZuTP.wasm" Target="{$cspdir}dicom3d/assets/nrx-runtime-7TkXZuTP.wasm" />
-  <FileCopy Name="public/assets/nrx-surface-DCYD-MMf.js" Target="{$cspdir}dicom3d/assets/nrx-surface-DCYD-MMf.js" />
+  <FileCopy Name="public/assets/nrx-surface-D-S0lIcc.js" Target="{$cspdir}dicom3d/assets/nrx-surface-D-S0lIcc.js" />
   <FileCopy Name="public/assets/nrx-worker-BO_EnPT5.js" Target="{$cspdir}dicom3d/assets/nrx-worker-BO_EnPT5.js" />
   <FileCopy Name="public/assets/smart-pkce-DMglXBAK.js" Target="{$cspdir}dicom3d/assets/smart-pkce-DMglXBAK.js" />
   <FileCopy Name="public/assets/t2w_GA22_atlas.nii-DaiIkpwY.gz" Target="{$cspdir}dicom3d/assets/t2w_GA22_atlas.nii-DaiIkpwY.gz" />

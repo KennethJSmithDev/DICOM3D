@@ -30,5 +30,12 @@ for (const [source, asset] of Object.entries(brain.assets)) {
   const matches=Object.values(manifest.files).filter(record => record.bytes===asset.bytes && record.sha256===asset.sha256);
   assert.equal(matches.length,1,'Missing or duplicated fetal reference asset: '+source);
 }
+const fibroid=JSON.parse(await readFile(join(root,'distribution-manifest.json'))).independentFibroidStudy;
+assert.equal(fibroid.case,'UMD_221129_001');
+for(const [key, hash] of Object.entries({sagittalT2:'1b120daa7e86e8bffda8017007aa2363005cd9ba5d5462bf63e772b2a0e4bae1', labels:'779f34c85bd1cf3e32e5e700db559cb13f5427cfe8623a3c24a115551da5b573'})){
+  const asset=fibroid.assets[key];
+  assert.equal(asset.sha256,hash);
+  assert.equal(Object.values(manifest.files).filter(r=>r.sha256===hash && r.bytes===asset.bytes).length,1,key);
+}
 assert.equal(manifest.atlasIndexSha256,manifest.files['atlas/index.json'].sha256);
 console.log(JSON.stringify({status:'PASS',profile:manifest.profile,release:manifest.release,files:actual.length,exactPublicH000:true,legacyEntryIsSameAlpha:true,privatePatientData:false}));
