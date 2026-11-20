@@ -1,13 +1,12 @@
-import React, {lazy, Suspense, useEffect, useRef, useState} from 'react';
+import React, {lazy, Suspense, useEffect, useRef} from 'react';
 import {CaseFigures} from '../placenta/PregnancyUltrasoundExamples.jsx';
 import {h001PelvicOwners} from './h001-pelvic-owners.mjs';
 import './h001-study.css';
 
 const FetalBrainExplorer = lazy(() => import('./fetal-mri/FetalBrainExplorer.jsx'));
 
-export function H001Study({figure, onFigure, onPelvis, pelvicOwner, setPelvicOwner, pelvisAvailable, webgl, rendererProps}) {
+export function H001Study({figure, onFigure, onPelvis, pelvicOwner, setPelvicOwner, pelvisAvailable, webgl, rendererProps, showMRI, setShowMRI}) {
   const renderer = webgl ? '&renderer=webgl' : '';
-  const [showMRI, setShowMRI] = useState(false);
   const entry = useRef(null);
   const returnButton = useRef(null);
   const visited = useRef(false);
@@ -30,9 +29,9 @@ export function H001Study({figure, onFigure, onPelvis, pelvicOwner, setPelvicOwn
   return <article className="h001-study" aria-labelledby="h001-title">
     <div className="h001-heading"><h2 id="h001-title">H001 · Twin pregnancy and uterine fibroid</h2>
       <p>Public teaching case · Two ultrasound figures from one published pregnancy</p></div>
+    <button className="h001-mri-entry" type="button" ref={entry} onClick={() => setShowMRI(true)}>Explore fetal brain MRI</button>
     <CaseFigures label="Case figure" selected={figure} onSelect={onFigure}/>
     <nav aria-label="Related teaching anatomy">
-      <button type="button" ref={entry} onClick={() => setShowMRI(true)}>Explore fetal brain MRI</button>
       <label>Female atlas structure
         <select value={pelvicOwner} onChange={event=>setPelvicOwner(event.target.value)}>
           {h001PelvicOwners.map(([id,label])=><option key={id} value={id}>{label}</option>)}
@@ -46,7 +45,13 @@ export function H001Study({figure, onFigure, onPelvis, pelvicOwner, setPelvicOwn
   </article>;
 }
 
-export function H001Evidence() {
+export function H001Evidence({showMRI}) {
+  if (showMRI) return <section className="panel" aria-labelledby="h001-evidence" tabIndex={-1}>
+    <h2 id="h001-evidence">Fetal brain MRI evidence</h2>
+    <p>The 22-week template comes from the CRL fetal brain atlas. Its T2-weighted MRI and matching tissue labels share a source grid. The 3D view follows those labeled voxels.</p>
+    <p>This population reference is independent of the two H001 ultrasound figures.</p>
+    <a href="https://doi.org/10.7910/DVN/QOO75G" target="_blank" rel="noreferrer">Read the MRI dataset record</a>
+  </section>;
   return <section className="panel" aria-labelledby="h001-evidence" tabIndex={-1}>
     <h2 id="h001-evidence">H001 case evidence</h2>
     <p>Fariha Altaf and Biza Akbar published both figures in <i>Cureus</i> in 2026. Figure 1 shows the twin pregnancy; Figure 2 shows the anterior uterine-wall fibroid described in their report.</p>

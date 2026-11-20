@@ -11,14 +11,16 @@ const cameraStart={fov:34, near:.05, far:1000};
 const directions={oblique:new Vector3(-.8,.45,-1),side:new Vector3(-1,0,0)};
 
 function TissueMesh({data,view,onSelect}) {
-  const camera=useThree(s=>s.camera), gl=useThree(s=>s.gl), mesh=useRef();
+  const camera=useThree(s=>s.camera), gl=useThree(s=>s.gl), size=useThree(s=>s.size), mesh=useRef();
   useLayoutEffect(()=>{
     const controls=new OrbitControls(camera,gl.domElement);
     controls.addEventListener('change',requestSceneFrames);
-    fitPerspectiveBounds(camera,controls,new Box3().setFromObject(mesh.current),directions[view.direction]);
+    mesh.current.geometry.computeBoundingBox();
+    mesh.current.geometry.computeBoundingSphere();
+    fitPerspectiveBounds(camera,controls,new Box3().setFromObject(mesh.current),directions[view.direction],1.35);
     requestSceneFrames();
     return ()=>{controls.removeEventListener('change',requestSceneFrames);controls.dispose();};
-  },[camera,gl,data,view]);
+  },[camera,gl,data,view,size.width,size.height]);
   return <mesh ref={mesh} onClick={event=>{
     if(event.delta<=4 && Number.isInteger(event.faceIndex)) onSelect?.(data.owners[Math.floor(event.faceIndex/2)]);
   }}>

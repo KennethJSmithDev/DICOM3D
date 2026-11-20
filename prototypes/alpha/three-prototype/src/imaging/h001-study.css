@@ -8,3 +8,7 @@
 .h001-study img{display:block;max-width:100%;max-height:52dvh;width:auto;height:auto}
 .h001-study nav{display:flex;gap:.6rem 1rem;align-items:center;flex-wrap:wrap;margin:1rem 0}
 .h001-study a{color:#77dcf5}
+.h001-study .h001-mri-entry{margin:0 0 .8rem;background:#0c354a;border-color:#367891}
+.imaging-tools-inline{display:contents}
+.h001-tools{order:1}
+.h001-tools>button{min-height:44px}
