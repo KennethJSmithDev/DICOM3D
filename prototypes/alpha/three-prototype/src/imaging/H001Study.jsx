@@ -27,7 +27,7 @@ function UltrasoundComparison() {
   </section>;
 }
 
-export function H001Study({figure, onFigure, onPelvis, pelvicOwner, setPelvicOwner, pelvisAvailable, webgl, rendererProps, showMRI, setShowMRI}) {
+export function H001Study({compact, figure, onFigure, onPelvis, pelvicOwner, setPelvicOwner, pelvisAvailable, webgl, rendererProps, showMRI, setShowMRI}) {
   const renderer = webgl ? '&renderer=webgl' : '';
   const [compare, setCompare] = useState(false);
   const entry = useRef(null);
@@ -46,7 +46,7 @@ export function H001Study({figure, onFigure, onPelvis, pelvicOwner, setPelvicOwn
   if (showMRI) return <article className="h001-study" aria-label={showMRI === 'myoma' ? 'Uterine fibroid MRI reference' : 'Fetal brain MRI reference'}>
     <button ref={returnButton} type="button" onClick={() => setShowMRI(false)}>Return to H001 ultrasound</button>
     <Suspense fallback={<p role="status">Opening MRI explorer…</p>}>
-      {showMRI === 'myoma' ? <MyomaExplorer rendererProps={rendererProps}/> : <FetalBrainExplorer rendererProps={rendererProps}/>}
+      {showMRI === 'myoma' ? <MyomaExplorer compact={compact} rendererProps={rendererProps}/> : <FetalBrainExplorer rendererProps={rendererProps}/>}
     </Suspense>
   </article>;
 
@@ -88,7 +88,7 @@ export function H001PelvicCompanion({figure, onFigure, onReturn}) {
 export function H001Evidence({showMRI}) {
   if (showMRI === 'myoma') return <section className="panel" aria-labelledby="h001-evidence" tabIndex={-1}>
     <h2 id="h001-evidence">Uterine MRI evidence</h2>
-    <p>Haixia Pan and colleagues published a sagittal MRI series with expert tissue labels. In case UMD_221129_001, label 3 identifies the myoma. Both the colored overlay and 3D surface follow that same label.</p>
+    <p>Haixia Pan and colleagues published a sagittal MRI series with expert tissue labels. In case UMD_221129_001, label 3 identifies the myoma. The MRI overlay and 3D surface use the selected tissue from the same segmentation.</p>
     <a href="https://doi.org/10.6084/m9.figshare.23541312.v3" target="_blank" rel="noreferrer">Read the UMD dataset record</a>
   </section>;
   if (showMRI) return <section className="panel" aria-labelledby="h001-evidence" tabIndex={-1}>

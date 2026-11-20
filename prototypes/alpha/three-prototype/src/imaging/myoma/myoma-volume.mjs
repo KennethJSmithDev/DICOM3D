@@ -47,20 +47,33 @@ export async function loadMyoma({signal,getAsset=(...args)=>publicAtlasAssets.ge
   signal?.throwIfAborted();
   if(!mri.affine.every((r,i)=>r.every((v,j)=>Number.isFinite(v)&&v===mask.affine[i][j])))
     throw Error('UMD MRI and tissue spatial transforms differ');
-  const counts=new Uint32Array(5),myomaCountsByK=new Uint32Array(dims[2]);
+  const counts=new Uint32Array(names.length);
+  const bySlice=names.map(()=>new Uint32Array(dims[2]));
+  const allTissueCountsByK=new Uint32Array(dims[2]);
+  const planeSize=dims[0]*dims[1];
   for(let i=0;i<mask.voxels.length;i++){
     const id=mask.voxels[i];
     if(id>4)throw Error('Unrecognized UMD annotation');
     counts[id]++;
-    if(id===3)myomaCountsByK[Math.floor(i/(dims[0]*dims[1]))]++;
+    if(id){
+      const k=Math.floor(i/planeSize);
+      bySlice[id][k]++;
+      allTissueCountsByK[k]++;
+    }
   }
   if(expectedCounts.some((expected,id)=>counts[id]!==expected)) throw Error('UMD tissue occupancy differs from source');
-  const all=names.map((name,id)=>({id,name,rgb:colors[id],count:counts[id]}));
+  // Background has a retained source code, while the "all tissues" view combines IDs 1–4.
+  for(let k=0;k<dims[2];k++)bySlice[0][k]=planeSize-allTissueCountsByK[k];
+  const firstPeak=counts=>counts.indexOf(Math.max(...counts));
+  const all=names.map((name,id)=>({id,name,rgb:colors[id],count:counts[id],
+    countsByK:bySlice[id],peakK:firstPeak(bySlice[id])}));
   // Ten millimetres of context around the union of labels, clamped to the
   // original grid. These are source indices. No resampled volume is retained.
   return {dims:[...dims],spacingMm:[...spacing],affineRasMm:mri.affine,originRasMm:mri.affine.map(r=>r[3]),
     bounds:[[294,469],[186,413],[1,14]],centers:[356,287,4],
-    values:mri.voxels,labels:mask.voxels,myomaCountsByK,tissues:all.slice(1),byId:new Map(all.map(t=>[t.id,t]))};
+    values:mri.voxels,labels:mask.voxels,myomaCountsByK:bySlice[3],allTissueCountsByK,
+    allTissueCount:voxelCount-counts[0],allTissuePeakK:firstPeak(allTissueCountsByK),
+    tissues:all.slice(1),byId:new Map(all.map(t=>[t.id,t]))};
 }
 
 function plane(volume,axis,index){

@@ -16,6 +16,29 @@ test('UMD original grid, source values, labels and display planes agree',async()
   const v=await loadMyoma({getAsset});
   assert.deepEqual(v.dims,[672,672,20]);
   assert.deepEqual(v.tissues.map(t=>t.count),[69765,4628,1296,90]);
+  assert.deepEqual(v.tissues.map(t=>[t.id,t.name,t.peakK,t.countsByK[t.peakK]]),[
+    [1,'Uterine wall',7,11767],[2,'Uterine cavity',8,2286],[3,'Myoma',4,1125],[4,'Nabothian cyst',9,90],
+  ]);
+  assert.equal(v.allTissueCount,75779);
+  assert.equal(v.allTissuePeakK,7);
+  assert.equal(v.allTissueCountsByK[7],12958);
+  for(const t of v.tissues)assert.equal(t.countsByK.reduce((a,b)=>a+b,0),t.count);
+  assert.equal(v.myomaCountsByK,v.byId.get(3).countsByK);
+  for(let k=0;k<20;k++)assert.equal(v.allTissueCountsByK[k],v.tissues.reduce((n,t)=>n+t.countsByK[k],0));
+  // These source coordinates were independently read from the original compressed label file.
+  for(const [id,[i,j,k]] of [[1,[340,245,3]],[2,[364,246,5]],[3,[351,269,4]],[4,[402,327,9]]]){
+    const x=i-v.bounds[0][0],y=j-v.bounds[1][0],args={axis:'sagittal',index:k};
+    const picked=readMyomaPixel(v,{...args,x,y});
+    assert.equal(picked.id,id);
+    for(const [chosen,paint] of [[id,true],[0,true],[id===1?2:1,false]]){
+      const {width,rgba}=renderMyomaSlice(v,{...args,highlightId:chosen,opacity:1});
+      const offset=(x+y*width)*4;
+      const rgb=[...rgba.slice(offset,offset+3)];
+      if(paint)assert.deepEqual(rgb,v.byId.get(id).rgb);
+      else assert.equal(new Set(rgb).size,1);
+    }
+    assert.deepEqual(readMyomaPixel(v,{...args,x,y}),picked);
+  }
   assert.equal(v.myomaCountsByK[4],1125);
   assert.equal(Math.max(...v.myomaCountsByK),1125);
   const center=v.centers;
