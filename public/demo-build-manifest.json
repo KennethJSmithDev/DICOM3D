@@ -31,7 +31,7 @@
       "sha256": "0dfff975e61696fd4b570e32b38e84ef4515ebb812906196169aab0818081d2a"
     }
   },
-  "sourceBase": "UNCOMMITTED-PACKAGING-CANDIDATE",
+  "sourceBase": "SEE-EXACT-INPUTS",
   "sourceIdentity": "Source commit is separate from the recorded actual installed build dependency tree; tree hash is not proof of upstream package integrity.",
   "sourceInputs": {
     "prototypes/alpha/three-prototype/src/assembly-presentation.js": "2a9417b0aee3dd49269c4932be4e14a0054eddab0735c6e8728cbcbe2d82ac5d",
@@ -84,7 +84,7 @@
     "prototypes/alpha/three-prototype/src/imaging/H000Volume.jsx": "2f6ab3f78259758fc9450ae97ba45d3797f27bd93c967247de3a9a24b53ac844",
     "prototypes/alpha/three-prototype/src/imaging/h001-learning.mjs": "8f05fffd1a1e1b4b3cac091fb646986cfc92fced499bfab0dd55b25ed5eefe62",
     "prototypes/alpha/three-prototype/src/imaging/h001-pelvic-owners.mjs": "71a3a5164c5c7c20851934ad260c60626913948f9b9b15e858d0ce917d25237c",
-    "prototypes/alpha/three-prototype/src/imaging/h001-study.css": "4e65f59618280b8100e80dd9d9c1dfe714ef637f1aa79ade7cc7d417ca85adc2",
+    "prototypes/alpha/three-prototype/src/imaging/h001-study.css": "9fdc462de4dcd2a189a36cff97c05a0818f344e3ed50d7960f58c9897c82e070",
     "prototypes/alpha/three-prototype/src/imaging/H001Study.jsx": "ce2814b5cba72abcbdd60b44efbe9c149f245e2c138f9557475f086e2955abf4",
     "prototypes/alpha/three-prototype/src/imaging/Hl7FhirDraftPanel.jsx": "db9f68381c6df3e7f441a90113761f05d0bfabb1f15e4a839bbdaa5d226de7b2",
     "prototypes/alpha/three-prototype/src/imaging/ImagingPanel.jsx": "66a50d0c49b00834aebbae9ff7109afd369ede11b6b4612e928192f2b83b238c",
@@ -93,7 +93,7 @@
     "prototypes/alpha/three-prototype/src/imaging/LocalStudyScene.jsx": "884abd87959a87fa97963aea0a61519e5f848afb02ec9673ee38a0926481a121",
     "prototypes/alpha/three-prototype/src/imaging/LocalStudyStack.jsx": "86cdf84e4ccbedab1ce00024b224b72f1cd9f6590d6bd3d453a20325c37ebb96",
     "prototypes/alpha/three-prototype/src/imaging/myoma/myoma-volume.mjs": "e9bf94e0fcc922c5d69700c190733dea6dec06e27ab993387dde95c56b48c443",
-    "prototypes/alpha/three-prototype/src/imaging/myoma/myoma.css": "7b3d34e12344bd6b5c37a9c5419d34af720287ec63909948e7c40e6047bb8926",
+    "prototypes/alpha/three-prototype/src/imaging/myoma/myoma.css": "cf32e45fb735582c3e5bd3eca60e8026311d9c40271b33d3b13cc5c073e10040",
     "prototypes/alpha/three-prototype/src/imaging/myoma/MyomaExplorer.jsx": "a0e64d1644d49835f31c929da528613a1e267df658dbe2eb0fca80bd86b5abf8",
     "prototypes/alpha/three-prototype/src/imaging/myoma/UMD_221129_001_seg.nii.gz": "779f34c85bd1cf3e32e5e700db559cb13f5427cfe8623a3c24a115551da5b573",
     "prototypes/alpha/three-prototype/src/imaging/myoma/UMD_221129_001_t2.nii.gz": "1b120daa7e86e8bffda8017007aa2363005cd9ba5d5462bf63e772b2a0e4bae1",
@@ -302,25 +302,25 @@
       "bytes": 2404,
       "sha256": "90a061354400068f23b2c89b36dc86610071d5de83d30ca96fcc65de8231283a"
     },
-    "assets/EpicSandboxPanel-D6YTqFKy.js": {
+    "assets/EpicSandboxPanel-xgba0M08.js": {
       "bytes": 13216,
-      "sha256": "03889ba979222523f8c83da3e6b4d0965f6d65fae30198d45871521903e9024e"
+      "sha256": "ca09f32cfa521fc132f4363c1393df7138943085f9939823c9cfc9e08bab2601"
     },
     "assets/fetal-brain-DKMBGb3-.js": {
       "bytes": 4352,
       "sha256": "1f286da22ea9b7b83a23272daed0ef6f7db6ece169a504c50f654101b96bed83"
     },
+    "assets/FetalBrainExplorer-Bne8C0eF.js": {
+      "bytes": 8116,
+      "sha256": "32412185c29148c8aafe1f82d854eceaf69246107f61d978671c9a8432e060e2"
+    },
     "assets/FetalBrainExplorer-Bu4wnhMR.css": {
       "bytes": 1817,
       "sha256": "7f660f50a03b0501a957be6f449ee083b4f0930610ef1a726a587883f0cf1558"
     },
-    "assets/FetalBrainExplorer-D5TkBaWr.js": {
-      "bytes": 8116,
-      "sha256": "69e967f1c977718c63ab8af2af5a880178ba276a0d8106d3b11ebdce04eafb6e"
-    },
-    "assets/FetalTissueSurface-BxDpDgrt.js": {
+    "assets/FetalTissueSurface-DTYE30Zb.js": {
       "bytes": 9017,
-      "sha256": "188efee58a4d64a466ad3df62a3f97b63824862e8c507d9905284b7269dd888c"
+      "sha256": "75ab52c702954ab300e965c9647a1de86a7c28957c3d64a69ba9b06a5e78ba67"
     },
     "assets/FetalTissueSurface-DXRbgbjg.css": {
       "bytes": 476,
@@ -330,9 +330,9 @@
       "bytes": 182835,
       "sha256": "a079aa76aa413be67d189fbbc9a930286742668c50d32f45be51264946c27cf3"
     },
-    "assets/fhir-readonly-openapi-BzA8hGjJ.js": {
+    "assets/fhir-readonly-openapi-DX7QHWXF.js": {
       "bytes": 3859,
-      "sha256": "4d2952dbab9cefaabf76515ebaa8133046ed048774e4e4923ed3a39f23fc5639"
+      "sha256": "17a20f660bf88ba770b6772922185aabe12bd5166c6b050080d9386f44070573"
     },
     "assets/fibroid-j8W9rm3I.jpg": {
       "bytes": 722530,
@@ -342,25 +342,25 @@
       "bytes": 4918168,
       "sha256": "972ced14fda2e34dbba62af285345c72d56ae28885be6b38398db2bff775587f"
     },
-    "assets/index--K4Pb-Qo.css": {
-      "bytes": 27345,
-      "sha256": "594e662ec9c736c289c629edc1064509065b11b6a36bf7ce50fbe2921e41837b"
+    "assets/index-DPVtUf6h.css": {
+      "bytes": 27532,
+      "sha256": "c11ea60a52a43a2374b71162610d11874f20baca854d0ec939795dd0016b7544"
     },
-    "assets/index-C1y23P3o.js": {
+    "assets/index-it65I9Uh.js": {
       "bytes": 2001362,
-      "sha256": "d1cfb8c744b0c89343c3db4db7ab263d206b5521b3664de73174bacf97a05b5d"
+      "sha256": "2e3ebd00b0342a09579c6a4e458c8edd459b56cbfc140dcd68ef000eab682e49"
     },
     "assets/jsx-runtime-MZURdZre.js": {
       "bytes": 8567,
       "sha256": "66faf4691e35525cdcf6dcf7420b167664633837f787ddcde86bceca0237ace2"
     },
-    "assets/MyomaExplorer-BN_Vs8pm.js": {
-      "bytes": 12055,
-      "sha256": "bc7f524e68fd737527046600e3a7fb07abd162d6a0a1c2b718e83a859695bb70"
+    "assets/MyomaExplorer-7AVCLQl1.css": {
+      "bytes": 1115,
+      "sha256": "8eb34f6ef857f618d31ba178fc75c61d9b2a74064ce1e9ccd1edef5d2e7d2585"
     },
-    "assets/MyomaExplorer-h1OkIEqo.css": {
-      "bytes": 876,
-      "sha256": "8dabb6f504526e4dee9ba54d6db4dd801e7da1dd2133e3c579bae14ff5146fbf"
+    "assets/MyomaExplorer-CgS2vrg9.js": {
+      "bytes": 12055,
+      "sha256": "d3d809c7de25f98220ac021a5643fd3f7649b8c35d2e6c11c63ab462ef7f519c"
     },
     "assets/nrx-reference-worker-BVTUSoQr.js": {
       "bytes": 1418,
@@ -378,9 +378,9 @@
       "bytes": 12811,
       "sha256": "beb1b17c110d115f6ae31b34a699efe5bbe99fcd53b879e09b2578d8c868e908"
     },
-    "assets/PlacentaReference-CCICFc4K.js": {
+    "assets/PlacentaReference-BMvJc6s2.js": {
       "bytes": 7998,
-      "sha256": "c570bfca1a96af692123110c739e1706fe1cacfcb78897aef22ae626369f4ed7"
+      "sha256": "bb0c9eeeca02af44ead021be0c0332f7ee6a317c93e940b09578f8afc400b12a"
     },
     "assets/PlacentaReference-Ciq5Jvss.css": {
       "bytes": 1117,
@@ -398,9 +398,9 @@
       "bytes": 602,
       "sha256": "2bd3359d7df16db65123088a7f02a503b16625f9840676b3ae902739cf9fb665"
     },
-    "assets/SmartSyntheticPanel-C5kOVe9V.js": {
+    "assets/SmartSyntheticPanel-CHm6-Z1H.js": {
       "bytes": 22245,
-      "sha256": "90bd803f7370fc2e8f92f648eb3d6d209686ffa3984a965d8b45b73c3d542e07"
+      "sha256": "d2776c75940480b6b3c0117e8c78944ef9c1fea768277e408aeee2f6988ca18d"
     },
     "assets/t2w_GA22_atlas.nii-DaiIkpwY.gz": {
       "bytes": 675662,
@@ -434,9 +434,9 @@
       "bytes": 843,
       "sha256": "2036bfa87736e4fbf11beae3225d144558b505ffe58723f7bfef0f39afb7ca51"
     },
-    "assets/UmdUterusReference-D0dU7tQS.js": {
+    "assets/UmdUterusReference-DTFkeURv.js": {
       "bytes": 2238,
-      "sha256": "0ccdfa3ef007d5397a8ef5a4bef715afa64b3ddea26642299035f3c32ecfb39b"
+      "sha256": "891615d746bb73d5f2126abc17ad55a309763abbed996c0d872144f47523a0ac"
     },
     "atlas/index.json": {
       "bytes": 1046248,
@@ -644,7 +644,7 @@
     },
     "index.html": {
       "bytes": 1278,
-      "sha256": "b5092f6c0fbfcd19ff76dc7e2c67e52bead9de5c6dfa6429a1c6bd05ec6199bb"
+      "sha256": "136f37f669dcfe2f42a34fb4e5906a7b21767075427cd5f3c546bdebf486dcf3"
     },
     "LICENSE": {
       "bytes": 11560,
@@ -660,7 +660,7 @@
     },
     "reference.html": {
       "bytes": 1278,
-      "sha256": "b5092f6c0fbfcd19ff76dc7e2c67e52bead9de5c6dfa6429a1c6bd05ec6199bb"
+      "sha256": "136f37f669dcfe2f42a34fb4e5906a7b21767075427cd5f3c546bdebf486dcf3"
     },
     "third-party/alpha/babel-runtime-7.29.7-LICENSE.txt": {
       "bytes": 1106,

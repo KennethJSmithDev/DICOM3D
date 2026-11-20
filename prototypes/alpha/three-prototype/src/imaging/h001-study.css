@@ -14,6 +14,19 @@
 .h001-study a{color:#77dcf5}
 .h001-study .h001-mri-entry{background:#0c354a;border-color:#367891}
 .h001-case-actions{display:flex;flex-wrap:wrap;gap:.45rem;margin:0 0 .8rem}
+.h001-study > button + button {
+  margin-inline-start: .45rem;
+}
+
+main.compact .h001-study > button {
+  margin: 0 .45rem .35rem 0;
+  padding-inline: .6rem;
+  font-size: .8rem;
+}
+
+main.compact .h001-study {
+  padding: .75rem;
+}
 .h001-comparison{container-type:inline-size}
 .h001-comparison .h001-split{display:none}
 .h001-pair{display:grid;gap:1rem;margin:.7rem 0}
