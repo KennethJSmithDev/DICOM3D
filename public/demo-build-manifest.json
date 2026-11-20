@@ -1,7 +1,7 @@
 {
   "schema": "dicom3d-alpha-distribution-1",
   "profile": "three-r3f-alpha",
-  "release": "0.7.0",
+  "release": "0.8.0",
   "entrypoint": "/dicom3d/reference.html",
   "containsPrivatePatientImaging": false,
   "patientDerivedResearchData": true,
@@ -42,11 +42,11 @@
     "prototypes/alpha/three-prototype/src/compact-workspace.css": "4e4dd191176198ac67c2aef79bc2f5e9bc05553518f1c8e54cad9be5d1b377d6",
     "prototypes/alpha/three-prototype/src/comparison-interaction.js": "b9cf5a2f6f2da065842ebc9ba042ed729f00d2b902ea889a7903ea3478870aa6",
     "prototypes/alpha/three-prototype/src/ComparisonWipe.jsx": "1fbc5c4f8ac854b679447b4611fe6d38e99b86f4ab40840317a700b02713e480",
-    "prototypes/alpha/three-prototype/src/female-catalog.mjs": "9572373bf6735480550771747f54a6a8934d489f026b0a459d7c4a64b692f770",
+    "prototypes/alpha/three-prototype/src/female-catalog.mjs": "2e00cb8729d286ddbcc12481ec7500d90bed09b0a437f78e364b9010d7efe6b0",
     "prototypes/alpha/three-prototype/src/female-presentation.js": "c5a0f135203c08228a41019382073bbad61a3de9c4d1646caca410634376813d",
     "prototypes/alpha/three-prototype/src/female-reference.js": "b2a901fe646fdf4e2024e4a08968991a1ab81506dc092a7513fa5728c4cbffee",
     "prototypes/alpha/three-prototype/src/female-test-presentation.mjs": "2e7aa8f049f2bf141acd385b6b152f3cb55f92fdd830db86b6d9e7f33996e469",
-    "prototypes/alpha/three-prototype/src/FemaleInspector.jsx": "00984aa722736da8e8598a244d80d60d7b1b9f322acfc47ce1a1f047db637e22",
+    "prototypes/alpha/three-prototype/src/FemaleInspector.jsx": "503f3a983768663d051dc625c19172ee110bb712880ae4ffd9d45dea26dfcaf8",
     "prototypes/alpha/three-prototype/src/fit-perspective-bounds.js": "e0a7f8a2ce23d52ed9753a67589d2910f46f23346b870f0820511e39d1bf8f3b",
     "prototypes/alpha/three-prototype/src/held-evidence.json": "3b5221e514e4d80a53838860d51c66ff430fb4b914d988be2063912f54a1608c",
     "prototypes/alpha/three-prototype/src/imaging/EpicSandboxPanel.jsx": "c1e0b9889ccf7b78a041fce19aac3f1ac18183a767bf6a78c197f82a321306d2",
@@ -88,8 +88,16 @@
     "prototypes/alpha/three-prototype/src/imaging/H001Study.jsx": "ce2814b5cba72abcbdd60b44efbe9c149f245e2c138f9557475f086e2955abf4",
     "prototypes/alpha/three-prototype/src/imaging/Hl7FhirDraftPanel.jsx": "db9f68381c6df3e7f441a90113761f05d0bfabb1f15e4a839bbdaa5d226de7b2",
     "prototypes/alpha/three-prototype/src/imaging/ImagingPanel.jsx": "66a50d0c49b00834aebbae9ff7109afd369ede11b6b4612e928192f2b83b238c",
+    "prototypes/alpha/three-prototype/src/imaging/LiveNativeImagePanel.jsx": "375bac00747bf73dc273dc46368edf983faf7a9f310adf39a6be356d87690cf1",
+    "prototypes/alpha/three-prototype/src/imaging/local-dicom-object.mjs": "fbee6b7ea62bd5377b900122e71490576995ca954db4123c6d54b648b5108bb4",
+    "prototypes/alpha/three-prototype/src/imaging/local-ecg.mjs": "d119aa96cc1774c2768fcea5ac531104d2894522f0bb24eb2878781e143e658f",
+    "prototypes/alpha/three-prototype/src/imaging/local-seg.mjs": "1573b971cb40d31f921cc83380d0c0c2183b5d2004197c488f6ceed1c22b634d",
     "prototypes/alpha/three-prototype/src/imaging/local-stack-indices.mjs": "7932aedb7de67e020905ffa34ffc970efdf88a993f86ffa72ead18e6c0aef52b",
-    "prototypes/alpha/three-prototype/src/imaging/LocalStudyPanel.jsx": "898ea918a33352002a4364eae83f7e9bae7afe47760129a2515a20cb348f2878",
+    "prototypes/alpha/three-prototype/src/imaging/LocalDicomObjectPanel.jsx": "b531cd6feed58acd948d8cf06bc4608be1d55497d66032e7a47831a9104073fc",
+    "prototypes/alpha/three-prototype/src/imaging/LocalEcgPanel.jsx": "ea11289beb70d6dcc30ed9cc3986b225bbdb02c99b6d5783faf6041434b8ddbc",
+    "prototypes/alpha/three-prototype/src/imaging/LocalFrameFilePanel.jsx": "20928322cd0dad0f575e2fa53d765f93dd96ed6f62385f6faa70db248957beba",
+    "prototypes/alpha/three-prototype/src/imaging/LocalSegPanel.jsx": "f156daaa3cb05d379d69faca65528e2da5e17ec9bcfcab0ccc4454ee4fa8f215",
+    "prototypes/alpha/three-prototype/src/imaging/LocalStudyPanel.jsx": "18799abd48cfac6bd617a0d1bf54cfc81eb71d0949b636b7844df87cfab72cd7",
     "prototypes/alpha/three-prototype/src/imaging/LocalStudyScene.jsx": "884abd87959a87fa97963aea0a61519e5f848afb02ec9673ee38a0926481a121",
     "prototypes/alpha/three-prototype/src/imaging/LocalStudyStack.jsx": "86cdf84e4ccbedab1ce00024b224b72f1cd9f6590d6bd3d453a20325c37ebb96",
     "prototypes/alpha/three-prototype/src/imaging/myoma/myoma-volume.mjs": "e9bf94e0fcc922c5d69700c190733dea6dec06e27ab993387dde95c56b48c443",
@@ -100,6 +108,8 @@
     "prototypes/alpha/three-prototype/src/imaging/myoma/UMD-NOTICE.txt": "2036bfa87736e4fbf11beae3225d144558b505ffe58723f7bfef0f39afb7ca51",
     "prototypes/alpha/three-prototype/src/imaging/myoma/umd-uterus-placement.mjs": "b20a5a1f34798540fc522f0160d38d2c3a1357125049623bb9f0fea4a4810614",
     "prototypes/alpha/three-prototype/src/imaging/myoma/UmdUterusReference.jsx": "bb492b55940ea0f654efa2bdb33a8c325cc0736d38e9061b66356d7053d3adc4",
+    "prototypes/alpha/three-prototype/src/imaging/native-cine-timing.mjs": "1e0ad95dbc4f18b945d213f7446634919a8606b41d08796514c4e2d49a3980a8",
+    "prototypes/alpha/three-prototype/src/imaging/NativeImageFrames.jsx": "0655241da6c7cdc0602ba6944b605097062eaab3e504d22f2d6ade81c2786df0",
     "prototypes/alpha/three-prototype/src/imaging/research-r5-loader.mjs": "2bdefe35b8fed242d82f58ab60956b4d75097939c753be24e39bf278c9e6d0b2",
     "prototypes/alpha/three-prototype/src/imaging/ResearchEvidencePanel.jsx": "1334441bdb0217751ef9998e32b0bf25fb14a7d58d5e01cd5d6fe529ba8db7be",
     "prototypes/alpha/three-prototype/src/imaging/seg-overlay.js": "d447f46f7e5b54379805d1af7b6146acc6c8e868932ce89088addf37f0ed10b0",
@@ -154,7 +164,7 @@
     "prototypes/alpha/three-prototype/src/placenta/ultrasound-examples.mjs": "71598f8b7552d12710b4020765a764b2bfd543f39cd19726cbc19accfe4b2cb1",
     "prototypes/alpha/three-prototype/src/PresentationPanel.jsx": "741b4cafd2617bf5fc121e90c5fe9af5a2e0bc20fcf09bd1573650460e22119f",
     "prototypes/alpha/three-prototype/src/public-asset-cache.js": "a06b2bc9de3bd6ceb2df082e27e7d93318f928ef76ff5ebea0444702cf544582",
-    "prototypes/alpha/three-prototype/src/reference-inspector.css": "1b2f9631eedcab04f74b33e8c7b37675c40023158aa12b9aaac1e9b4153efd61",
+    "prototypes/alpha/three-prototype/src/reference-inspector.css": "cbeb6430ecc07f5f2760aba97a691571e20d528c90de4fe0549180e688a64cb4",
     "prototypes/alpha/three-prototype/src/ReferenceComparison.jsx": "ef00f0df2e1e41e1550f323bc7db2c2d95037a13f2e605cca50b231c61f87d9b",
     "prototypes/alpha/three-prototype/src/ReferenceInspector.jsx": "b0fe728213339e2497dbbf4c407c38c2a75af275655b63b5596cf5f92f964f78",
     "prototypes/alpha/three-prototype/src/render-cadence.js": "2c46f75c28cd26a3c1aa55af3346e02459fab05c41ac7e6573f694a305fbf333",
@@ -168,7 +178,7 @@
     "prototypes/alpha/three-prototype/src/skeleton-parts.json": "7b0ccf87f1b3dc7c186e3815efa8535fb6d139a707ec0893ea6bb6d851edff1d",
     "prototypes/alpha/three-prototype/src/SkeletonParts.jsx": "978a16483f1dce1e5fc0601dd4e52f9f687f2b2cdc96363f14c933b529ea96b5",
     "prototypes/alpha/three-prototype/src/source-native-selection.js": "c1702dee38f31e0653878239ca6b8551b65df7035f12382568eb767d4fa6985e",
-    "prototypes/alpha/three-prototype/src/SourceNativeInspector.jsx": "5170fa2e0da01e3c2da111e733726462f56a4ea80b8dbd0a69089bd9cbbc49a0",
+    "prototypes/alpha/three-prototype/src/SourceNativeInspector.jsx": "6d6434b52f4d1abb477aa24c6349ddb0e0d856bc64f68a899948403810ecd77a",
     "prototypes/alpha/three-prototype/src/StudyPresentationPanel.jsx": "c9deae68bcf69b23105023626c344e59f140ce9b3ea784f1e778ffb1e03dab00",
     "prototypes/alpha/three-prototype/src/style.css": "3cd35a9046e53b34d0eb80d8b39581ccea851dcf7bbedf1a97742ff5d898b7aa",
     "prototypes/alpha/three-prototype/src/system-visibility.js": "a7c3fd2ddd25c4e7de6d20e67a4ea8816d94f367e96dc609524c81a1fda46e1a",
@@ -257,18 +267,21 @@
     "prototypes/alpha/viewer/src/viewport-controls.mjs": "7f391b71d88ebb34d3172672ed983db70ded8c216edc8b6f8cf4b00003ed3d65",
     "prototypes/alpha/viewer/src/volume-probe.ts": "1fef74334d1c8ab9399eee7315507c1309c098b2efcead85b780c75bea7946b0",
     "prototypes/alpha/viewer/src/workspace-layout.mjs": "f79b1cc781f13b2da9e468be62d875386a215b84b9f66065c0be167d15e10f1c",
-    "prototypes/alpha/three-prototype/package.json": "2eeba048005ff1082d92df2885d5b7c066ef17dc5d6d7346cf6595d2d0008942",
-    "prototypes/alpha/three-prototype/package-lock.json": "3b390f8b588f279f0ed827f9201c1a63cf2aef70c9d477891551e4c39b684704",
+    "prototypes/alpha/three-prototype/package.json": "de444448db847df798038d547a5a93c6261dcfe795bfa1071ea7286214439107",
+    "prototypes/alpha/three-prototype/package-lock.json": "3d2462673d3d637efa73d4c0a5062e01bd638eb5688043928b785d04cad91d87",
     "prototypes/alpha/three-prototype/index.html": "b3f27b7230b6df89d49951102e6131bfd0c95a7ceefd6c6450b86ebff07211ee",
     "prototypes/alpha/three-prototype/vite.config.js": "c73eff6b72fa385a2f6db5194601c9eab17846ce630b1a3e11cc6124e0d28c19",
     "prototypes/alpha/three-prototype/build-public-review.mjs": "2c24668e4c0425216c8130c9495694f46be7ce9ad3ebadb16bda0d58fbf5bc8b",
-    "scripts/build-alpha-distribution.mjs": "29178637fedfc750ee533c2481923bd5ae0323bc087624619cfa0be7b472343b",
+    "scripts/build-alpha-distribution.mjs": "01b98e0ddd0c6ee07ae7c85790d2b8df03595bdd804716ecd0dd9f5d28741ee7",
     "scripts/admitted-public-files.mjs": "5b8c91307b7232452b3c4d2cf1f224f9ae9a84aca4c9faaf36f26834aca5c178",
     "scripts/admitted-notices.json": "8876059ae1504db68c5b9ebbccceb95023d950c13212873ce977d3675ca1a635",
     "scripts/preview-verified-file.mjs": "0284848a4a704017f82ffc7f88c213027aa1d3b9c1e4fad88c90385790276737",
-    "distribution-manifest.json": "c8990c18ca1177126726246ae8d9e2f9329d5d811c07c8b0b032d85b180d5ad6",
+    "distribution-manifest.json": "cfbdab4d8c07bdffce88a7987e9d4750f6030fb62c9b3be50bd4a9ad03c8a796",
     "LICENSE": "3ddf9be5c28fe27dad143a5dc76eea25222ad1dd68934a047064e56ed2fa40c5",
-    "NOTICE": "284e3151e46ae17b1dbd10fbeec2c947a6b93b088650f2929d859be21b717c7d"
+    "NOTICE": "284e3151e46ae17b1dbd10fbeec2c947a6b93b088650f2929d859be21b717c7d",
+    "scripts/preview-static.mjs": "7846f5a251039d399ac08cc2fe6eef89a4e03e1350b2d609ddefcb329cd232f7",
+    "scripts/live-h000-ct.mjs": "de0e7af7450d191e2852c10c181394f301379b7cfd2bc175ff4737f56ebea5d7",
+    "scripts/live-native-images.mjs": "6e46af7becbbcbb6cf2aaa665117c5438b71d6503bac6a9dfc5ec0dd3b5032ac"
   },
   "buildToolchain": {
     "vite": {
@@ -302,25 +315,25 @@
       "bytes": 2404,
       "sha256": "90a061354400068f23b2c89b36dc86610071d5de83d30ca96fcc65de8231283a"
     },
-    "assets/EpicSandboxPanel-xgba0M08.js": {
+    "assets/EpicSandboxPanel-CqLJeIPg.js": {
       "bytes": 13216,
-      "sha256": "ca09f32cfa521fc132f4363c1393df7138943085f9939823c9cfc9e08bab2601"
+      "sha256": "4e6efc9c593b6f1982e7b6ac32f33e0946afbbb96018260da4a2e3b05d09fa36"
     },
     "assets/fetal-brain-DKMBGb3-.js": {
       "bytes": 4352,
       "sha256": "1f286da22ea9b7b83a23272daed0ef6f7db6ece169a504c50f654101b96bed83"
     },
-    "assets/FetalBrainExplorer-Bne8C0eF.js": {
-      "bytes": 8116,
-      "sha256": "32412185c29148c8aafe1f82d854eceaf69246107f61d978671c9a8432e060e2"
-    },
     "assets/FetalBrainExplorer-Bu4wnhMR.css": {
       "bytes": 1817,
       "sha256": "7f660f50a03b0501a957be6f449ee083b4f0930610ef1a726a587883f0cf1558"
     },
-    "assets/FetalTissueSurface-DTYE30Zb.js": {
+    "assets/FetalBrainExplorer-DBOC0V7p.js": {
+      "bytes": 8116,
+      "sha256": "1db14f1356d29c44d23d3530328948284687e5995178742467a5f88a811136e9"
+    },
+    "assets/FetalTissueSurface-B4Zbs8wl.js": {
       "bytes": 9017,
-      "sha256": "75ab52c702954ab300e965c9647a1de86a7c28957c3d64a69ba9b06a5e78ba67"
+      "sha256": "989c4dee4a28030c2407f96494b1a0956ec303d7e885ed11394b5803aa9c1e06"
     },
     "assets/FetalTissueSurface-DXRbgbjg.css": {
       "bytes": 476,
@@ -330,9 +343,9 @@
       "bytes": 182835,
       "sha256": "a079aa76aa413be67d189fbbc9a930286742668c50d32f45be51264946c27cf3"
     },
-    "assets/fhir-readonly-openapi-DX7QHWXF.js": {
+    "assets/fhir-readonly-openapi-BvfWIO7L.js": {
       "bytes": 3859,
-      "sha256": "17a20f660bf88ba770b6772922185aabe12bd5166c6b050080d9386f44070573"
+      "sha256": "e92c361a37f9ebee8f685cb5d4bac004a6b319ed2dde1e263ade3928a9077cd5"
     },
     "assets/fibroid-j8W9rm3I.jpg": {
       "bytes": 722530,
@@ -342,13 +355,13 @@
       "bytes": 4918168,
       "sha256": "972ced14fda2e34dbba62af285345c72d56ae28885be6b38398db2bff775587f"
     },
-    "assets/index-DPVtUf6h.css": {
-      "bytes": 27532,
-      "sha256": "c11ea60a52a43a2374b71162610d11874f20baca854d0ec939795dd0016b7544"
+    "assets/index-D6-JUVuN.js": {
+      "bytes": 2035736,
+      "sha256": "26fa3d44fe47ed4c955a0729d5b083100e291b8e99b2859dac6a58dce865d6e9"
     },
-    "assets/index-it65I9Uh.js": {
-      "bytes": 2001362,
-      "sha256": "2e3ebd00b0342a09579c6a4e458c8edd459b56cbfc140dcd68ef000eab682e49"
+    "assets/index-DTFNjcHd.css": {
+      "bytes": 27839,
+      "sha256": "ee381c0b34ad7977b3c11ab14c987d19923cdd95a8fa47ecb238aa0c8097749a"
     },
     "assets/jsx-runtime-MZURdZre.js": {
       "bytes": 8567,
@@ -358,9 +371,9 @@
       "bytes": 1115,
       "sha256": "8eb34f6ef857f618d31ba178fc75c61d9b2a74064ce1e9ccd1edef5d2e7d2585"
     },
-    "assets/MyomaExplorer-CgS2vrg9.js": {
+    "assets/MyomaExplorer-C4NzVppR.js": {
       "bytes": 12055,
-      "sha256": "d3d809c7de25f98220ac021a5643fd3f7649b8c35d2e6c11c63ab462ef7f519c"
+      "sha256": "d302b829e2687802d1df22a7515f14c8c40c25c60dc226bede9b14b1868a503f"
     },
     "assets/nrx-reference-worker-BVTUSoQr.js": {
       "bytes": 1418,
@@ -378,13 +391,13 @@
       "bytes": 12811,
       "sha256": "beb1b17c110d115f6ae31b34a699efe5bbe99fcd53b879e09b2578d8c868e908"
     },
-    "assets/PlacentaReference-BMvJc6s2.js": {
-      "bytes": 7998,
-      "sha256": "bb0c9eeeca02af44ead021be0c0332f7ee6a317c93e940b09578f8afc400b12a"
-    },
     "assets/PlacentaReference-Ciq5Jvss.css": {
       "bytes": 1117,
       "sha256": "0c15623eb4ac515b7dabca0bc83b51ae4f94bfe36beed53ec878a7d97e93a0c8"
+    },
+    "assets/PlacentaReference-DaeeyOft.js": {
+      "bytes": 7998,
+      "sha256": "14a944d5689e83339fae0ce29e8babcb789e9478ffaa91012876cf87cb469757"
     },
     "assets/public-asset-cache-BFw2mW6w.js": {
       "bytes": 2936,
@@ -398,9 +411,9 @@
       "bytes": 602,
       "sha256": "2bd3359d7df16db65123088a7f02a503b16625f9840676b3ae902739cf9fb665"
     },
-    "assets/SmartSyntheticPanel-CHm6-Z1H.js": {
+    "assets/SmartSyntheticPanel-swhOZcll.js": {
       "bytes": 22245,
-      "sha256": "d2776c75940480b6b3c0117e8c78944ef9c1fea768277e408aeee2f6988ca18d"
+      "sha256": "a1691b3b0c4c05f19f11881fc040462d8b83686149459037315ac90eb65022e5"
     },
     "assets/t2w_GA22_atlas.nii-DaiIkpwY.gz": {
       "bytes": 675662,
@@ -434,9 +447,9 @@
       "bytes": 843,
       "sha256": "2036bfa87736e4fbf11beae3225d144558b505ffe58723f7bfef0f39afb7ca51"
     },
-    "assets/UmdUterusReference-DTFkeURv.js": {
+    "assets/UmdUterusReference-EHuIHCIZ.js": {
       "bytes": 2238,
-      "sha256": "891615d746bb73d5f2126abc17ad55a309763abbed996c0d872144f47523a0ac"
+      "sha256": "2b5a693664595bc0200ff58b21c97b63fb79be0af00c7ba5dbe9fa3e8a087412"
     },
     "atlas/index.json": {
       "bytes": 1046248,
@@ -612,7 +625,7 @@
     },
     "distribution-manifest.json": {
       "bytes": 2174,
-      "sha256": "c8990c18ca1177126726246ae8d9e2f9329d5d811c07c8b0b032d85b180d5ad6"
+      "sha256": "cfbdab4d8c07bdffce88a7987e9d4750f6030fb62c9b3be50bd4a9ad03c8a796"
     },
     "female-delta/female-delta.json": {
       "bytes": 1524,
@@ -644,7 +657,7 @@
     },
     "index.html": {
       "bytes": 1278,
-      "sha256": "136f37f669dcfe2f42a34fb4e5906a7b21767075427cd5f3c546bdebf486dcf3"
+      "sha256": "fcad82e400d68af82145d89b720160a8abae0153edb91f9d06b5562206264165"
     },
     "LICENSE": {
       "bytes": 11560,
@@ -660,7 +673,7 @@
     },
     "reference.html": {
       "bytes": 1278,
-      "sha256": "136f37f669dcfe2f42a34fb4e5906a7b21767075427cd5f3c546bdebf486dcf3"
+      "sha256": "fcad82e400d68af82145d89b720160a8abae0153edb91f9d06b5562206264165"
     },
     "third-party/alpha/babel-runtime-7.29.7-LICENSE.txt": {
       "bytes": 1106,

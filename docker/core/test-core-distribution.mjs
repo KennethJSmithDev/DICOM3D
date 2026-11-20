@@ -42,6 +42,19 @@ test('default Core serves the viewer with FHIR disabled', async t => {
   assert.equal(response.headers['Cache-Control'], 'no-store');
 });
 
+test('portable Core listens on loopback and reports optional live imaging as unavailable', async t => {
+  const host = createCoreServer({publicRoot:fixture(t), port:0, loopback:true});
+  assert.equal(host.hostname, '127.0.0.1');
+  assert.equal(host.port, 0);
+  assert.equal((await request(host, '/dicom3d/reference.html', {method:'HEAD'})).status, 200);
+  for (const route of ['/dicom3d/api/ct/h000/descriptor','/dicom3d/api/images/catalog']) {
+    const res = await request(host, route);
+    assert.equal(res.status, 503);
+    assert.equal(JSON.parse(res.body).error, 'LIVE_IMAGING_PREVIEW_ONLY');
+    assert.equal(res.headers['Cache-Control'], 'no-store');
+  }
+});
+
 test('configured Core binds to loopback and authenticates the allowlisted study', async t => {
   const publicRoot = fixture(t);
   const configPath = join(publicRoot, '..', 'inputs.json');
@@ -77,7 +90,8 @@ test('both Core build recipes admit the required build and runtime sources', () 
   const admitted = read('.dockerignore').split(/\r?\n/);
   const exact = [
     'scripts/build-alpha-distribution.mjs','scripts/test-alpha-distribution.mjs','scripts/admitted-public-files.mjs',
-    'scripts/admitted-notices.json','scripts/preview-verified-file.mjs','docker/core/server.mjs',
+    'scripts/admitted-notices.json','scripts/preview-verified-file.mjs','scripts/preview-static.mjs',
+    'scripts/live-h000-ct.mjs','scripts/live-native-images.mjs','docker/core/server.mjs',
     'docker/core/fhir-loopback-route.mjs','docker/core/fhir-configured-metadata.mjs'
   ];
   for (const name of ['Dockerfile.core', 'Dockerfile.core.offline']) {
@@ -89,5 +103,9 @@ test('both Core build recipes admit the required build and runtime sources', () 
     }
     assert.ok(recipe.includes('COPY prototypes/alpha/viewer/src/fhir-capability-model.mjs ./prototypes/alpha/viewer/src/'));
     assert.ok(recipe.includes('CMD ["node", "docker/core/server.mjs"]'));
+    const runtime = recipe.slice(recipe.lastIndexOf('\nFROM '));
+    for (const file of ['scripts/preview-static.mjs','scripts/live-h000-ct.mjs','scripts/live-native-images.mjs']) {
+      assert.ok(!runtime.includes(file), name+' includes preview source in the final image');
+    }
   }
 });

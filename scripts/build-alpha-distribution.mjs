@@ -19,7 +19,7 @@ if(/^[0-9a-f]{40}$/.test(sourceBase)){
 const packageInfo=JSON.parse(await readFile(join(prototype,'package.json')));
 const lock=JSON.parse(await readFile(join(prototype,'package-lock.json')));
 const version=packageInfo.version;
-if(!['0.7.0-alpha.1','0.7.0-alpha.2','0.7.0'].includes(version))throw Error('Unreviewed alpha version');
+if(!['0.7.0-alpha.1','0.7.0-alpha.2','0.7.0','0.8.0'].includes(version))throw Error('Unreviewed frontend version');
 const descriptor=JSON.parse(await readFile(join(root,'distribution-manifest.json'),'utf8'));
 if(descriptor.version!==version||descriptor.frontendProfile!=='three-r3f-alpha')throw Error('Source and distribution versions differ');
 const sha=b=>createHash('sha256').update(b).digest('hex');
@@ -33,6 +33,7 @@ async function captureSourceInputs(){
  await walk(join(root,'prototypes/alpha/viewer/src'),'prototypes/alpha/viewer/src');
  for(const name of ['package.json','package-lock.json','index.html','vite.config.js','build-public-review.mjs'])inputs['prototypes/alpha/three-prototype/'+name]=sha(await readFile(join(prototype,name)));
  for(const name of ['scripts/build-alpha-distribution.mjs','scripts/admitted-public-files.mjs','scripts/admitted-notices.json','scripts/preview-verified-file.mjs','distribution-manifest.json','LICENSE','NOTICE'])inputs[name]=sha(await readFile(join(root,name)));
+ if(version==='0.8.0')for(const name of ['scripts/preview-static.mjs','scripts/live-h000-ct.mjs','scripts/live-native-images.mjs'])inputs[name]=sha(await readFile(join(root,name)));
  return inputs;
 }
 const sourceBefore=await captureSourceInputs();

@@ -30,7 +30,7 @@ if args.archive.exists():
 manifest_bytes = (args.stage / "package-manifest.json").read_bytes()
 identity = json.loads(manifest_bytes.decode("utf-8-sig"))
 alpha = identity.get("profile") == "three-r3f-alpha"
-allowed_versions = {"0.7.0-alpha.1", "0.7.0-alpha.2", "0.7.0"} if alpha else {"0.6.5"}
+allowed_versions = {"0.7.0-alpha.1", "0.7.0-alpha.2", "0.7.0", "0.8.0"} if alpha else {"0.6.5"}
 if identity["version"] not in allowed_versions or not re.fullmatch(r"[0-9a-f]{40}", identity["sourceCommit"]):
     parser.error("exact reviewed packaging version and source identity required")
 actual = {

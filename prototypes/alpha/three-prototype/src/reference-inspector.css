@@ -29,6 +29,21 @@
 .reference-inspector .structure-result{display:flex;align-items:center;justify-content:space-between;gap:8px;width:100%;text-align:left;min-height:32px;padding:5px 7px;background:#081925;border-color:transparent;border-radius:4px}
 .reference-inspector .structure-result small{margin:0;white-space:nowrap;color:#90bbce;font-size:10px}
 .reference-inspector .structure-result[aria-pressed=true]{background:#0a4764;border-color:#14b9e3}
+.source-native-inspector .structure-results {
+  padding-inline-start: 0;
+}
+.source-native-inspector .structure-result {
+  display: grid;
+  gap: 2px;
+  min-height: 44px;
+}
+.source-native-inspector .structure-result small {
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+.source-native-inspector .inspector-selection {
+  overflow-wrap: anywhere;
+}
 .reference-inspector .structure-hint{font-size:11px;margin:5px 0;color:#9bb8ca}
 .reference-inspector .inspector-advanced{margin-top:10px;border-top:1px solid #1c4559;padding-top:9px}
 .reference-inspector .inspector-advanced summary{font-size:11px;color:#9fc7d8}

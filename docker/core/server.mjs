@@ -4,11 +4,11 @@ import {createServer} from 'node:http';
 import {createReadStream, readFileSync, realpathSync} from 'node:fs';
 import {stat} from 'node:fs/promises';
 import {resolve, extname, sep, relative, isAbsolute} from 'node:path';
-import {pathToFileURL} from 'node:url';
+import {fileURLToPath,pathToFileURL} from 'node:url';
 import {loadLoopbackFhirRoute, LOOPBACK_FHIR_PREFIX} from './fhir-loopback-route.mjs';
 const mime = {'.html':'text/html; charset=utf-8','.js':'text/javascript; charset=utf-8','.mjs':'text/javascript; charset=utf-8','.css':'text/css; charset=utf-8','.json':'application/json','.glb':'model/gltf-binary','.png':'image/png','.jpg':'image/jpeg','.svg':'image/svg+xml','.txt':'text/plain; charset=utf-8','.wasm':'application/wasm'};
 
-export function createCoreServer({publicRoot='/app/public', port=8080, configPath, fetchImpl}={}) {
+export function createCoreServer({publicRoot='/app/public', port=8080, configPath, fetchImpl, loopback=false}={}) {
   const root = resolve(publicRoot);
   if (configPath) {
     const fromRoot = relative(realpathSync(root), realpathSync(configPath));
@@ -18,7 +18,7 @@ export function createCoreServer({publicRoot='/app/public', port=8080, configPat
   }
   const distribution = JSON.parse(readFileSync(resolve(root,'distribution-manifest.json'),'utf8'));
   const liveFhir = loadLoopbackFhirRoute(configPath, port, fetchImpl);
-  const hostname = liveFhir ? '127.0.0.1' : '0.0.0.0';
+  const hostname = loopback || liveFhir ? '127.0.0.1' : '0.0.0.0';
   const server = createServer(async (req,res) => {
     res.setHeader('X-Content-Type-Options','nosniff');
     if (!['GET','HEAD'].includes(req.method)) {res.writeHead(405,{Allow:'GET, HEAD'});res.end();return;}
@@ -28,6 +28,10 @@ export function createCoreServer({publicRoot='/app/public', port=8080, configPat
         if (liveFhir) { await liveFhir(req,res,pathname); return; }
         res.writeHead(503,{'Content-Type':'application/json','Cache-Control':'no-store'});
         res.end(req.method==='HEAD'?undefined:JSON.stringify({error:'LIVE_FHIR_NOT_CONFIGURED'}));return;
+      }
+      if (pathname.startsWith('/dicom3d/api/ct/') || pathname.startsWith('/dicom3d/api/images/')) {
+        res.writeHead(503,{'Content-Type':'application/json','Cache-Control':'no-store'});
+        res.end(req.method==='HEAD'?undefined:JSON.stringify({error:'LIVE_IMAGING_PREVIEW_ONLY'}));return;
       }
       if (pathname === '/healthz') {
         await stat(resolve(root,'reference.html'));
@@ -51,8 +55,15 @@ export function createCoreServer({publicRoot='/app/public', port=8080, configPat
 }
 
 if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {
-  const {server, port, hostname} = createCoreServer({configPath:process.env.DICOM3D_LIVE_FHIR_CONFIG});
-  server.listen(port, hostname, ()=>console.log('DICOM3D Core: /dicom3d/reference.html'));
+  const args = process.argv.slice(2);
+  const local = args.length === 1 && args[0] === '--local';
+  if (args.length && !local) throw new Error('Usage: node docker/core/server.mjs [--local]');
+  const options = local ? {publicRoot:fileURLToPath(new URL('../../public/',import.meta.url)),port:0,loopback:true} : {};
+  const {server, port, hostname} = createCoreServer({...options,configPath:local ? undefined : process.env.DICOM3D_LIVE_FHIR_CONFIG});
+  server.listen(port, hostname, ()=>{
+    const link=local?'http://127.0.0.1:'+server.address().port+'/dicom3d/reference.html':'/dicom3d/reference.html';
+    console.log('DICOM3D Core: '+link);
+  });
   process.on('SIGTERM',()=>server.close(()=>process.exit(0)));
   process.on('SIGINT',()=>server.close(()=>process.exit(0)));
 }

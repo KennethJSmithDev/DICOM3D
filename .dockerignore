@@ -33,6 +33,9 @@
 !scripts/admitted-public-files.mjs
 !scripts/admitted-notices.json
 !scripts/preview-verified-file.mjs
+!scripts/preview-static.mjs
+!scripts/live-h000-ct.mjs
+!scripts/live-native-images.mjs
 !third-party/
 !third-party/**
 !docker/

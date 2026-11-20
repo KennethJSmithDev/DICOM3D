@@ -38,6 +38,23 @@ test('current expanded female projection preserves the source-native catalog and
   for(const atom of extra.atoms) assert.deepEqual(nativeAtoms(index.sourceNative,nativeComponentKey(atom.id)),[atom]);
 });
 
+test('readable HRA compound labels preserve the source label, key and exact members', async () => {
+  const source = JSON.parse(await readFile(new URL('./atlas-delta/female-source-native.json', import.meta.url), 'utf8'));
+  const compounds = source.concepts.filter(record =>
+    record.scope === 'EXACT_COMPOUND' && record.labelOrigin === 'source_node_name' && record.label.startsWith('VH_F'));
+  assert.equal(compounds.length, 20);
+  for (const record of compounds) {
+    const display = labelFemaleRecord(record);
+    assert.notEqual(display.label, record.label, record.key);
+    assert.deepEqual(display, {...record, label:display.label, sourceLabel:record.label});
+  }
+  const cardinal = source.concepts.find(record => record.key === 'HRA:452');
+  assert.equal(labelFemaleRecord(cardinal).label, 'Cardinal ligaments');
+  assert.deepEqual(cardinal.atomIds, ['HRA:453', 'HRA:454']);
+  const partial = source.concepts.find(record => record.key === 'HRA:420');
+  assert.equal(labelFemaleRecord(partial), partial);
+});
+
 function fixture() {
   return {
     base: {

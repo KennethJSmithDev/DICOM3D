@@ -18,10 +18,42 @@ const cardinalLigamentSides = new Map([
   ['VH_F_right_cardinal_ligament_of_uterus', 'Right'],
   ['VH_F_left_cardinal_ligament_of_uterus', 'Left'],
 ]);
+
+// Display names for exact HRA compounds whose publisher labels are node names.
+// Keep their raw labels, IDs and geometry membership as source evidence.
+const femaleCompoundLabels = new Map([
+  ['VH_F_mammary_gland', 'Mammary glands'],
+  ['VH_F_mammary_gland_L', 'Left mammary gland'],
+  ['VH_F_mammary_gland_R', 'Right mammary gland'],
+  ['VH_F_cervicovaginal_junction', 'Cervicovaginal junction'],
+  ['VH_F_fallopian_tube', 'Fallopian tubes'],
+  ['VH_F_fallopian_tube_R', 'Right fallopian tube'],
+  ['VH_F_fallopian_tube_L', 'Left fallopian tube'],
+  ['VH_F_ligaments_of_uterus_and_ovaries', 'Ligaments of the uterus and ovaries'],
+  ['VH_F_round_ligament_of_uterus', 'Round ligaments of the uterus'],
+  ['VH_F_uterosacral_ligament', 'Uterosacral ligaments'],
+  ['VH_F_cardinal_ligament_of_uterus', 'Cardinal ligaments'],
+  ['VH_F_suspensory_ligament_of_ovary', 'Suspensory ligaments of the ovaries'],
+  ['VH_F_ovarian_ligament', 'Ovarian ligaments'],
+  ['VH_F_mesosalpinx', 'Mesosalpinx'],
+  ['VH_F_mesovarium', 'Mesovarium'],
+  ['VH_F_ovary', 'Ovaries'],
+  ['VH_F_uterus', 'Uterus'],
+  ['VH_F_cornua', 'Uterine cornua'],
+  ['VH_F_urinary_bladder', 'Urinary bladder'],
+  ['VH_F_ureteral_orifice', 'Ureteral orifices'],
+]);
+
 export function labelFemaleRecord(record) {
   const side = cardinalLigamentSides.get(record.nodeName ?? record.source_name ?? record.id);
-  if (!side || record.label !== 'Cardinal ligament') return record;
-  return {...record, sourceLabel:record.label, label:`${side} cardinal ligament`};
+  if (side && record.label === 'Cardinal ligament') {
+    return {...record, sourceLabel:record.label, label:`${side} cardinal ligament`};
+  }
+  if (record.scope === 'EXACT_COMPOUND' && record.labelOrigin === 'source_node_name' && record.label === record.id) {
+    const label = femaleCompoundLabels.get(record.id);
+    if (label) return {...record, sourceLabel:record.label, label};
+  }
+  return record;
 }
 
 export function referenceSourceLinks(female, part) {

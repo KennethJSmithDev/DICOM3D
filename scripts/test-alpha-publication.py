@@ -16,7 +16,7 @@ def indexed(name):
     return git('show', ':' + name)
 manifest = json.loads(indexed('source-manifest.json'))
 alpha_version = json.loads(indexed('prototypes/alpha/three-prototype/package.json'))['version']
-assert alpha_version in {'0.7.0-alpha.1', '0.7.0-alpha.2', '0.7.0'}
+assert alpha_version in {'0.7.0-alpha.1', '0.7.0-alpha.2', '0.7.0', '0.8.0'}
 assert manifest['version'] == alpha_version and manifest['profile'] == 'three-r3f-alpha'
 paths = list(filter(None, git('ls-files', '-z').decode().split('\0')))
 assert 'scripts/staged_git.py' in paths, 'Required staged source missing: scripts/staged_git.py'

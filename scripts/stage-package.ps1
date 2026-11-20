@@ -12,7 +12,7 @@ if ($SourceCommit -ne 'UNCOMMITTED-PACKAGING-CANDIDATE') {
   if ($LASTEXITCODE -ne 0 -or @($flags | Where-Object { $_ -cnotmatch '^H ' }).Count -ne 0) { throw 'Cannot bind a package while tracked files are hidden from normal Git checks' }
 }
 $candidateVersion = (Get-Content -Raw (Join-Path $root 'prototypes/alpha/three-prototype/package.json') | ConvertFrom-Json).version
-if ($candidateVersion -notin @('0.7.0-alpha.1','0.7.0-alpha.2','0.7.0')) { throw 'Unreviewed alpha version' }
+if ($candidateVersion -notin @('0.7.0-alpha.1','0.7.0-alpha.2','0.7.0','0.8.0')) { throw 'Unreviewed frontend version' }
 $moduleVersion = ([xml](Get-Content -Raw (Join-Path $root 'module.xml'))).SelectSingleNode('/Export/Document/Module/Version').InnerText
 if ($moduleVersion -ne $candidateVersion) { throw 'Module and frontend versions differ' }
 & python (Join-Path $root 'scripts/generate-retirement-051.py') --check
@@ -68,7 +68,7 @@ Copy-Item (Join-Path $root 'LICENSE') $OutputDirectory
 Copy-Item (Join-Path $root 'NOTICE') $OutputDirectory
 Copy-Item (Join-Path $publicRoot 'third-party') $OutputDirectory -Recurse
 New-Item -ItemType Directory -Path (Join-Path $OutputDirectory 'docs') | Out-Null
-$packageDocs = if ($candidateVersion -eq '0.7.0') {
+$packageDocs = if ($candidateVersion -in @('0.7.0','0.8.0')) {
   @('INSTALL_070.md','FHIR_INTEROP_ALPHA2.md','SMART_SYNTHETIC_FOUNDATION.md','IRIS_FILECOPY_RETIREMENT_051.md')
 } else {
   @('INSTALL_070_ALPHA.md','PACKAGING_070_ALPHA.md','IRIS_FILECOPY_RETIREMENT_051.md')
