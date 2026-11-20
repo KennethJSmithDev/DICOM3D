@@ -1,4 +1,4 @@
-import React, {lazy, Suspense, useEffect, useRef, useState} from 'react';
+import React, {lazy, Suspense, useEffect, useMemo, useRef, useState} from 'react';
 import {fetalSourceNotice, loadFetalBrain, readBrainPixel, renderBrainSlice} from './fetal-brain.mjs';
 import './fetal-brain.css';
 
@@ -14,15 +14,15 @@ function tissueName(name) {
     .replaceAll('_', ' ').replace(/([a-z])([A-Z])/g, '$1 $2');
 }
 
-function SliceImage({volume, axis, index, opacity, tissueId, onPick}) {
+function SliceImage({volume, axis, index, slice, onPick}) {
   const canvas = useRef(null);
   useEffect(() => {
-    const {width, height, rgba} = renderBrainSlice(volume, {axis, index, opacity, highlightId: tissueId});
+    const {width, height, rgba} = slice;
     const target = canvas.current;
     target.width = width;
     target.height = height;
     target.getContext('2d').putImageData(new ImageData(rgba, width, height), 0, 0);
-  }, [volume, axis, index, opacity, tissueId]);
+  }, [slice]);
 
   function pick(event) {
     const target = event.currentTarget;
@@ -45,10 +45,16 @@ function BrainWorkspace({volume, rendererProps}) {
   const [tissueId, setTissueId] = useState(0);
   const [overlay, setOverlay] = useState(true);
   const [opacity, setOpacity] = useState(45);
-  const [surface, setSurface] = useState(false);
+  const [mode, setMode] = useState(()=>new URLSearchParams(location.search).get('mode')==='compare'?'compare':'slice');
+  const [split,setSplit] = useState(50);
+  const [showPlane,setShowPlane] = useState(true);
+  const [surfaceOpacity,setSurfaceOpacity] = useState(55);
+  const compare=mode==='compare', surface=mode==='surface';
   const [sample, setSample] = useState(null);
   const plane = planes[axis];
   const index = slices[plane.axis];
+  const slice = useMemo(()=>surface ? null : renderBrainSlice(volume,{axis,index,opacity:overlay?opacity/100:0,highlightId:tissueId}),
+    [volume,axis,index,overlay,opacity,tissueId,surface]);
   const [min, max] = volume.bounds[plane.axis];
   const selectedTissue = volume.tissues.find(tissue => tissue.id === tissueId);
   const activeName = selectedTissue ? tissueName(selectedTissue.name) : 'All labeled tissues';
@@ -68,19 +74,30 @@ function BrainWorkspace({volume, rendererProps}) {
 
   return <>
     <div className="brain-tabs" role="group" aria-label="MRI presentation">
-      <button type="button" aria-pressed={!surface} onClick={() => setSurface(false)}>2D slices</button>
-      <button type="button" aria-pressed={surface} onClick={() => setSurface(true)}>3D tissue</button>
+      <button type="button" aria-pressed={mode==='slice'} onClick={() => setMode('slice')}>2D slices</button>
+      <button type="button" aria-pressed={surface} onClick={() => setMode('surface')}>3D tissue</button>
+      <button type="button" aria-pressed={compare} onClick={()=>setMode('compare')}>Compare views</button>
     </div>
-    <div className="brain-workspace">
-      <figure className="brain-figure">
-        {surface ? <Suspense fallback={<p role="status">Preparing tissue surface…</p>}>
-          <TissueSurface {...rendererProps} volume={volume} tissueId={tissueId} onSelect={selectTissue}/>
-        </Suspense> : <div className="brain-image"><SliceImage volume={volume} axis={axis} index={index} opacity={overlay ? opacity/100 : 0} tissueId={tissueId} onPick={pick}/></div>}
-        <figcaption>{surface ? '3D tissue surface · ' + activeName : <>
-          <strong>{plane.label} · {sliceText}</strong><br/>{plane.description}. {plane.edges} across and down the image.
-        </>}</figcaption>
-      </figure>
+    <div className={'brain-workspace'+(compare?' brain-comparing':'')} style={{'--mri-split':split+'fr','--surface-split':(100-split)+'fr'}}>
+      {!surface && <figure className="brain-figure">
+        {compare && <strong>MRI slice</strong>}
+        <div className="brain-image"><SliceImage volume={volume} axis={axis} index={index} slice={slice} onPick={pick}/></div>
+        <figcaption><strong>{plane.label} · {sliceText}</strong><br/>{plane.description}. {plane.edges} across and down the image.</figcaption>
+      </figure>}
+      {(surface || compare) && <figure className="brain-figure">
+        {compare && <strong>3D tissue and slice position</strong>}
+        <Suspense fallback={<p role="status">Preparing tissue surface…</p>}>
+          <TissueSurface {...rendererProps} volume={volume} tissueId={tissueId} onSelect={selectTissue}
+            slice={compare && showPlane ? slice : null} axis={axis} index={index} opacity={compare ? surfaceOpacity/100 : 1}/>
+        </Suspense>
+        <figcaption>3D tissue surface · {activeName}</figcaption>
+      </figure>}
       <div className="brain-options">
+        {compare && <>
+          <label className="brain-split">Comparison divider<input type="range" min="25" max="75" value={split} onChange={e=>setSplit(Number(e.target.value))}/></label>
+          <label className="brain-check"><input type="checkbox" checked={showPlane} onChange={e=>setShowPlane(e.target.checked)}/>Show MRI plane in 3D</label>
+          <label>3D tissue opacity<input type="range" min="0" max="100" value={surfaceOpacity} onChange={e=>setSurfaceOpacity(Number(e.target.value))}/></label>
+        </>}
         {!surface && <>
           <label>MRI viewing plane<select value={axis} onChange={event => {setAxis(event.target.value); setSample(null);}}>
             {Object.entries(planes).map(([key, item]) => <option value={key} key={key}>{item.label}</option>)}

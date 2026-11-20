@@ -14,3 +14,12 @@
 .brain-credit{font-size:.9rem;padding:.5rem 0;line-height:1.6}
 .brain-credit summary{cursor:pointer}
 @container (min-width: 39rem){.brain-workspace{grid-template-columns:minmax(0,1.7fr) minmax(12rem,1fr);align-items:start}}
+.brain-workspace.brain-comparing{grid-template-columns:minmax(0,1fr)}
+.brain-comparing .brain-figure>strong{display:block;margin-bottom:.35rem}
+.brain-comparing .brain-options{grid-column:1/-1;grid-template-columns:repeat(auto-fit,minmax(min(100%,12rem),1fr));align-items:start}
+.brain-comparing .brain-image canvas{max-height:100%;width:100%;object-fit:contain}
+.brain-comparing .brain-split{display:none}
+@container (min-width:32rem){
+ .brain-workspace.brain-comparing{grid-template-columns:minmax(0,var(--mri-split)) minmax(0,var(--surface-split))}
+ .brain-comparing .brain-split{display:grid}
+}

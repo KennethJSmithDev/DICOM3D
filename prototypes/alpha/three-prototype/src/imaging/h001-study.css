@@ -8,7 +8,39 @@
 .h001-study img{display:block;max-width:100%;max-height:52dvh;width:auto;height:auto}
 .h001-study nav{display:flex;gap:.6rem 1rem;align-items:center;flex-wrap:wrap;margin:1rem 0}
 .h001-study a{color:#77dcf5}
-.h001-study .h001-mri-entry{margin:0 0 .8rem;background:#0c354a;border-color:#367891}
+.h001-study .h001-mri-entry{background:#0c354a;border-color:#367891}
+.h001-case-actions{display:flex;flex-wrap:wrap;gap:.45rem;margin:0 0 .8rem}
+.h001-comparison{container-type:inline-size}
+.h001-comparison .h001-split{display:none}
+.h001-pair{display:grid;gap:1rem;margin:.7rem 0}
+.h001-pair figure{min-width:0;margin:0}
+.h001-pair img{width:100%;max-height:none;margin:.4rem 0}
+.h001-pair figcaption{line-height:1.5}
+@container(min-width:35rem){
+  .h001-comparison .h001-split{display:grid}
+  .h001-pair{grid-template-columns:minmax(0,var(--first-width)) minmax(0,var(--second-width))}
+}
 .imaging-tools-inline{display:contents}
 .h001-tools{order:1}
 .h001-tools>button{min-height:44px}
+.canvas-contents{display:contents}
+.h001-pelvic-split{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);container-type:inline-size}
+.h001-companion,.h001-atlas-pane{min-width:0;min-height:0}
+.h001-companion{overflow:auto;padding:.8rem;background:#081724;border-right:1px solid #285067}
+.h001-companion h2{font-size:1.1rem}
+.h001-companion select,.h001-companion button{min-height:44px;max-width:100%}
+.h001-companion label{display:grid;gap:.3rem}
+.h001-companion figure{margin:.7rem 0}
+.h001-companion img{display:block;width:100%;height:auto}
+.h001-companion p{line-height:1.45}
+.h001-companion a{color:#77dcf5}
+.h001-atlas-pane{position:relative;overflow:hidden}
+.h001-atlas-pane .canvas-title{display:none}
+.h001-atlas-pane[data-reference-ready=false] canvas{visibility:hidden}
+.h001-atlas-caption{position:absolute;top:.6rem;left:.6rem;right:.6rem;z-index:2;pointer-events:none;color:#e5f7ff}
+.h001-atlas-caption small{display:block}
+@container(max-width:34rem){
+  .h001-pelvic-split>.h001-companion,.h001-pelvic-split>.h001-atlas-pane{grid-column:1/-1}
+  .h001-pelvic-split>.h001-companion{border-right:0;border-bottom:1px solid #285067}
+}
+.h001-pelvic-split:has(.h001-companion){grid-auto-rows:minmax(0,1fr)}

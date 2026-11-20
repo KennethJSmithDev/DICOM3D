@@ -6,7 +6,7 @@ DICOM3D is an interactive anatomy and medical imaging research viewer. The same 
 
 In **Imaging**, open **H001** to compare the two published ultrasound figures from one case. The first figure shows the twin pregnancy and the second shows the anterior uterine-wall fibroid. Visit the linked adult reproductive atlas, full-term placenta and developmental references to explore their structures separately. The ultrasound figures are published stills with no source DICOM stack, spatial registration or segmentation. Open H000 for the acquired CT and linked SEG workflow. H001 runs locally with the included assets. [Ultrasound source and attribution](https://doi.org/10.7759/cureus.113224)
 
-From H001, open the **22-week fetal brain MRI**. Step through the three viewing planes, adjust the tissue overlay, or switch to **3D tissue** to rotate and isolate a structure. The MRI is a population-average teaching atlas. Returning to H001 restores the ultrasound figure you were viewing. [Fetal brain atlas and source labels](https://doi.org/10.7910/DVN/QOO75G)
+From H001, open the **22-week fetal brain MRI**. Step through the three viewing planes, adjust the tissue overlay, or switch to **3D tissue** to rotate and isolate a structure. The MRI is a population-average teaching atlas. Choose **Compare views** to keep the slice and 3D tissue visible together. The current MRI plane appears at its source position in the 3D view. Returning to H001 restores the ultrasound figure you were viewing. [Fetal brain atlas and source labels](https://doi.org/10.7910/DVN/QOO75G)
 
 ## Standalone viewer
 

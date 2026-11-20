@@ -5,6 +5,8 @@ import {createHash} from 'node:crypto';
 import {gzipSync,gunzipSync} from 'node:zlib';
 import {loadFetalBrain,renderBrainSlice,readBrainPixel} from './src/imaging/fetal-mri/fetal-brain.mjs';
 
+import {sourcePlaneCorners} from './src/imaging/fetal-mri/source-plane.mjs';
+
 async function source(url,size,hash) {
   const bytes=await readFile(new URL(url));
   assert.equal(bytes.length,size);
@@ -34,6 +36,16 @@ test('GA22 source grid, tissue key, three plane readback and presentation indepe
     assert.equal(pixel.value,brain.values[center]);
     const gray=renderBrainSlice(brain,{axis,index,opacity:0});
     assert.deepEqual([gray.width,gray.height],[width,height]);
+    const corners=sourcePlaneCorners(brain,axis,index,width,height);
+    for (const [px,py] of [[0,0],[width-1,height-1],[x,y]]) {
+      const ijk=readBrainPixel(brain,{axis,index,x:px,y:py}).ijk;
+      const ras=ijk.map((v,i)=>brain.originRasMm[i]+brain.signedSpacingRasMm[i]*v);
+      const expected=[ras[0],ras[2],-ras[1]];
+      for(let i=0;i<3;i++){
+        const world=corners[i]+(px+.5)/width*(corners[3+i]-corners[i])+(py+.5)/height*(corners[6+i]-corners[i]);
+        assert.ok(Math.abs(world-expected[i])<.00001,axis+' source pixel center');
+      }
+    }
     const offset=(x+y*width)*4;
     const level=Math.min(255,Math.max(0,Math.round(pixel.value*255/100)));
     assert.deepEqual([...gray.rgba.slice(offset,offset+4)],[level,level,level,255]);
