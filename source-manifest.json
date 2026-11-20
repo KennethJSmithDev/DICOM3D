@@ -12,8 +12,8 @@
       "sha256": "da5ff4b8c1ca2e768ef4152c5e55bc85f2e56627367a89ec8a5baffea599ed68"
     },
     ".gitattributes": {
-      "bytes": 2035,
-      "sha256": "0b0a17735d7ddb917eea07544c5292107151b3c3ab00e4ae04e382148ea6a1df"
+      "bytes": 2264,
+      "sha256": "ecfe1516d81feb79b0ace8abb6ffefd3212e4121c1f08b64406dd21e0fe4f651"
     },
     ".github/FUNDING.yml": {
       "bytes": 25,
@@ -224,8 +224,8 @@
       "sha256": "1406edeffc44715c8df54bef32845e0fe493fe14a8b746ef4669e8855e9e12e1"
     },
     "docs/INSTALL_070.md": {
-      "bytes": 3677,
-      "sha256": "516244747624ce3fb14d95c0b062925916589c8bbae78c04f82238b057cac9a3"
+      "bytes": 4044,
+      "sha256": "e6e14262a66b66c2b06f7b2b1421d038838ba4bbe3392421d354aa588b251c8c"
     },
     "docs/INSTALL_070_ALPHA.md": {
       "bytes": 8830,
@@ -412,8 +412,8 @@
       "sha256": "311fc357b1dc5ed0ffab12a1eff504e605928dc7cfc4837f62f7e98d11d30d98"
     },
     "module.xml": {
-      "bytes": 15914,
-      "sha256": "06343953528c0a4d637161d48cd2b8ead6d456a24280c6820c0cd322c808234c"
+      "bytes": 16849,
+      "sha256": "ec37aa4e95f9100beada357ecbd3a48b849443672cc2f776c743bd1aefc584bc"
     },
     "prototypes/alpha/.gitattributes": {
       "bytes": 9,
@@ -800,8 +800,8 @@
       "sha256": "2f6ab3f78259758fc9450ae97ba45d3797f27bd93c967247de3a9a24b53ac844"
     },
     "prototypes/alpha/three-prototype/src/imaging/H001Study.jsx": {
-      "bytes": 2229,
-      "sha256": "a50bfb9280f60995cc2892d5a0ef41fc2858aa6bd89f08946edc0c07735d0a86"
+      "bytes": 3199,
+      "sha256": "7635e01e1e14b7677ad2fe9127b6b68665f05bf1858568acb9240cf044b07bcb"
     },
     "prototypes/alpha/three-prototype/src/imaging/Hl7FhirDraftPanel.jsx": {
       "bytes": 4268,
@@ -834,6 +834,46 @@
     "prototypes/alpha/three-prototype/src/imaging/VolumeControls.jsx": {
       "bytes": 1691,
       "sha256": "d8bcf3c32258002ab6e1dab6a390c5f7949bbbade2a5d6df31abee5236a5a4cf"
+    },
+    "prototypes/alpha/three-prototype/src/imaging/fetal-mri/CRL-SOURCE-NOTICE.txt": {
+      "bytes": 2404,
+      "sha256": "90a061354400068f23b2c89b36dc86610071d5de83d30ca96fcc65de8231283a"
+    },
+    "prototypes/alpha/three-prototype/src/imaging/fetal-mri/FetalBrainExplorer.jsx": {
+      "bytes": 8102,
+      "sha256": "78597ad185adf9009830421de296ec3df3ae779faca79e8367a34f8b4d3192bd"
+    },
+    "prototypes/alpha/three-prototype/src/imaging/fetal-mri/FetalTissueSurface.jsx": {
+      "bytes": 3047,
+      "sha256": "8bfe5325fe71c57b7bfb448a1278c85295f78ccd00d10b7fe0c3ca0515d48a6c"
+    },
+    "prototypes/alpha/three-prototype/src/imaging/fetal-mri/T2WAtlas_labelkey-tissue.txt": {
+      "bytes": 2591,
+      "sha256": "678f7df75ba0d594aaf17eaf49897daf063a2ac2711886feb1b012fb5df3a323"
+    },
+    "prototypes/alpha/three-prototype/src/imaging/fetal-mri/fetal-brain.css": {
+      "bytes": 1251,
+      "sha256": "49db0104f1da792bc2aebcc1e47fdcc8c92db711dd2f9714358461e6d93a9167"
+    },
+    "prototypes/alpha/three-prototype/src/imaging/fetal-mri/fetal-brain.mjs": {
+      "bytes": 6327,
+      "sha256": "6ecf4b3e32061f1837c8b146ad8c9ec0a2e78b9cc0112f88c368e94aa2548633"
+    },
+    "prototypes/alpha/three-prototype/src/imaging/fetal-mri/t2w_GA22_atlas.nii.gz": {
+      "bytes": 675662,
+      "sha256": "506d9cd61a3d5ee816283ae87945b4d466171e4e1ee50ba0a11fd2c7a6291ad1"
+    },
+    "prototypes/alpha/three-prototype/src/imaging/fetal-mri/t2w_GA22_tissue.nii.gz": {
+      "bytes": 43301,
+      "sha256": "dbcf9a93669a4942f995d9e2e20ad68c4d5e995cbfa489ced7d06186cb3aecac"
+    },
+    "prototypes/alpha/three-prototype/src/imaging/fetal-mri/tissue-surface.mjs": {
+      "bytes": 2006,
+      "sha256": "2ca8f278c8a3e3dbabbf93d93b997146002e685dc7a8e949aed519309f321af1"
+    },
+    "prototypes/alpha/three-prototype/src/imaging/fetal-mri/tissue-surface.test.mjs": {
+      "bytes": 1175,
+      "sha256": "91e12eb286fc6699d4e9dc2ab2a24dbc7655779b679c8e0904a24b5ace84eeea"
     },
     "prototypes/alpha/three-prototype/src/imaging/fhir-capabilities.mjs": {
       "bytes": 2670,
@@ -928,8 +968,8 @@
       "sha256": "474581f7661d35ee26a41e5e5fa9827186db8142e2ffbd2b31384368e7d79917"
     },
     "prototypes/alpha/three-prototype/src/main.jsx": {
-      "bytes": 61546,
-      "sha256": "fec9c03cf6d0a662ae9a3aff768776839f8ec04fb3fe111c88200e3d6be739fd"
+      "bytes": 61609,
+      "sha256": "04c643355233cbb4d4a6280cb2ac04f8260be332de50e3f9417d452a017cdbbd"
     },
     "prototypes/alpha/three-prototype/src/materialization-state.mjs": {
       "bytes": 484,
@@ -1166,6 +1206,10 @@
     "prototypes/alpha/three-prototype/test-female-learning.mjs": {
       "bytes": 3472,
       "sha256": "0fd12d9219b78d5d451fcef42cf08b1ffc42bb42ad26e0e33da72ca2dfe14d15"
+    },
+    "prototypes/alpha/three-prototype/test-fetal-brain.mjs": {
+      "bytes": 2853,
+      "sha256": "a78403ab8fadc5ef02e2101f3ccc17e805f96e9767e8182a9fd1f67e027a98ae"
     },
     "prototypes/alpha/three-prototype/test-fhir-capabilities.mjs": {
       "bytes": 8475,
@@ -1599,21 +1643,41 @@
       "bytes": 2239,
       "sha256": "f79b1cc781f13b2da9e468be62d875386a215b84b9f66065c0be167d15e10f1c"
     },
-    "public/assets/EpicSandboxPanel-Ctaw3fGv.js": {
+    "public/assets/CRL-SOURCE-NOTICE-CZLTcZw-.txt": {
+      "bytes": 2404,
+      "sha256": "90a061354400068f23b2c89b36dc86610071d5de83d30ca96fcc65de8231283a"
+    },
+    "public/assets/EpicSandboxPanel-DugQM-_q.js": {
       "bytes": 13177,
-      "sha256": "e7282b8716150769ce628ed31a4d62a7b5a9d95f2c4b6ac98141639230c4f212"
+      "sha256": "80f863d3332a0e6d3adacc775241e999e4394b7b076999e4dac92196d72ef25a"
+    },
+    "public/assets/FetalBrainExplorer-BDhorTxZ.js": {
+      "bytes": 10921,
+      "sha256": "6b6b94c4dbddde486f959ffcc4db8d45a6bd02ccc9083dbb0ae2b151e4d8ebf3"
+    },
+    "public/assets/FetalBrainExplorer-D7uCOQGw.css": {
+      "bytes": 1232,
+      "sha256": "ee412c125f8e9360372cab4e5baf77085f4b082884aef335224c334365477932"
+    },
+    "public/assets/FetalTissueSurface-DlyMXIve.js": {
+      "bytes": 3350,
+      "sha256": "fc19fc0529ae4c65674025b955287a8d301f24cbb22895e8d6cff9b7930b745d"
     },
     "public/assets/PlacentaReference-Ciq5Jvss.css": {
       "bytes": 1117,
       "sha256": "0c15623eb4ac515b7dabca0bc83b51ae4f94bfe36beed53ec878a7d97e93a0c8"
     },
-    "public/assets/PlacentaReference-GUN0KhJI.js": {
-      "bytes": 7809,
-      "sha256": "91ee67895a8f333dd4f4c655fc183bb5e3968889c1022236a789060f43f9a96d"
+    "public/assets/PlacentaReference-DjColoOL.js": {
+      "bytes": 7804,
+      "sha256": "75a379d74133f9b3898402bb9c4814899713b1c5963d4b9be9d9caefe09ef410"
     },
-    "public/assets/SmartSyntheticPanel-D6Fx8rUC.js": {
-      "bytes": 22201,
-      "sha256": "32bddc879b88cce4307261f8b9ea5ee6670cb590d8235a479cf136e918c19469"
+    "public/assets/SmartSyntheticPanel-DSQeJ-sG.js": {
+      "bytes": 22206,
+      "sha256": "9c4667e4b32b8d2d864a87a18d38a9f1fefc59d940ffaf2683df2e346680ad1c"
+    },
+    "public/assets/T2WAtlas_labelkey-tissue-CRUwLVvO.txt": {
+      "bytes": 2591,
+      "sha256": "678f7df75ba0d594aaf17eaf49897daf063a2ac2711886feb1b012fb5df3a323"
     },
     "public/assets/__vite-browser-external-BtIiOxWW.js": {
       "bytes": 113,
@@ -1627,9 +1691,9 @@
       "bytes": 182835,
       "sha256": "a079aa76aa413be67d189fbbc9a930286742668c50d32f45be51264946c27cf3"
     },
-    "public/assets/fhir-readonly-openapi-BJ-drcwf.js": {
+    "public/assets/fhir-readonly-openapi-PQuLoAal.js": {
       "bytes": 3859,
-      "sha256": "a0a719b7985ced98fe047e84d62da59affe16eca8f7d0e522f9a75fd3edc58e9"
+      "sha256": "513946404f553d3bd5e3ebb2f03607168d37e913b129cf7d9903e2f75bb340e3"
     },
     "public/assets/fibroid-j8W9rm3I.jpg": {
       "bytes": 722530,
@@ -1639,13 +1703,13 @@
       "bytes": 4918168,
       "sha256": "972ced14fda2e34dbba62af285345c72d56ae28885be6b38398db2bff775587f"
     },
-    "public/assets/index-BPz_I_DO.js": {
-      "bytes": 2410002,
-      "sha256": "42d648ba0e93d4ab34b23decd79221b0d2029ed64e590564c9d46743c1602d47"
-    },
     "public/assets/index-BbSVkrwK.css": {
       "bytes": 25064,
       "sha256": "838d8d974d84478ddcfe339311a761400d525201f4f01affa22a8323d56c4e48"
+    },
+    "public/assets/index-Fe2MM4pI.js": {
+      "bytes": 2410877,
+      "sha256": "fc2f6c730c6778a0318b9696f7c0fd9b19e5632db5e77a85028b2efe9834c474"
     },
     "public/assets/nrx-reference-worker-BVTUSoQr.js": {
       "bytes": 1418,
@@ -1655,9 +1719,9 @@
       "bytes": 69914,
       "sha256": "ed4e5444ec1374168fd2f9e7866b8790d0e82372acaaa1cea864419e0749227a"
     },
-    "public/assets/nrx-surface-Crlw5TC0.js": {
+    "public/assets/nrx-surface-BusnoEmq.js": {
       "bytes": 3767,
-      "sha256": "0704bbb4590590b05c98f7b9ad04540a74f96927d1c7ddc4f0207f5d68e471b5"
+      "sha256": "af663b64fcc04dcba820ea21069b1bff0527b09d656be51ae059be0f5aa4c5cb"
     },
     "public/assets/nrx-worker-BO_EnPT5.js": {
       "bytes": 12811,
@@ -1667,21 +1731,29 @@
       "bytes": 602,
       "sha256": "2bd3359d7df16db65123088a7f02a503b16625f9840676b3ae902739cf9fb665"
     },
+    "public/assets/t2w_GA22_atlas.nii-DaiIkpwY.gz": {
+      "bytes": 675662,
+      "sha256": "506d9cd61a3d5ee816283ae87945b4d466171e4e1ee50ba0a11fd2c7a6291ad1"
+    },
+    "public/assets/t2w_GA22_tissue.nii-xLUyaiAu.gz": {
+      "bytes": 43301,
+      "sha256": "dbcf9a93669a4942f995d9e2e20ad68c4d5e995cbfa489ced7d06186cb3aecac"
+    },
     "public/assets/twins-CeG7HLgi.jpg": {
       "bytes": 633942,
       "sha256": "8b534c82a9b49fb19d642cb873a7fbb6c8d5df7aa67c5b7439e30ba4cc776892"
     },
     "public/demo-build-manifest.json": {
-      "bytes": 45697,
-      "sha256": "47504465fe79ee6efbce274e2b7061b9b413e81e96676c81a217bac0f6b373e2"
+      "bytes": 48334,
+      "sha256": "8573c55531d2b0f4b3238d514e2ccad4a5d63e9dfc5fc57929c3d1ef0b8ddf33"
     },
     "public/index.html": {
       "bytes": 944,
-      "sha256": "76d5c0d8a98e987b48734c73ce811c1a8f9307c8122d9b21c795fe7e833d57af"
+      "sha256": "0fcfa7818a5ce1b1b910131607b7cdccd6055a2205424a74ed99a290fc8ff977"
     },
     "public/reference.html": {
       "bytes": 944,
-      "sha256": "76d5c0d8a98e987b48734c73ce811c1a8f9307c8122d9b21c795fe7e833d57af"
+      "sha256": "0fcfa7818a5ce1b1b910131607b7cdccd6055a2205424a74ed99a290fc8ff977"
     },
     "reference/metadata/anatomy-source-records.json": {
       "bytes": 855652,
@@ -2956,8 +3028,8 @@
       "sha256": "5c79acab620ac8c2834add48d31ee09edf733fb6c9b97796bdf51f43482f805f"
     },
     "scripts/test-alpha-distribution.mjs": {
-      "bytes": 3182,
-      "sha256": "60ed160a9d4dc1ee9cf498e55e6dea8199955332425798a587edfb503b1d3bae"
+      "bytes": 3643,
+      "sha256": "03c84f6fb2003b1a8368cc08aaed36135009a66e7ec0dec40f1703d7e5f0567f"
     },
     "scripts/test-alpha-publication.py": {
       "bytes": 4015,
@@ -3029,7 +3101,7 @@
     },
     "src/DICOM3D/Entry.cls": {
       "bytes": 2781,
-      "sha256": "349f40d5c0688abead5b89426eca1700012f3ff687a04b7b88a9e616c7076843"
+      "sha256": "9f6e81f606075e0310b285778c782a128603dd7d17cb5e374f43fd33a9d732c0"
     },
     "src/DICOM3D/Health.cls": {
       "bytes": 555,
@@ -3037,7 +3109,7 @@
     },
     "src/DICOM3D/InstallMigration.cls": {
       "bytes": 42203,
-      "sha256": "5a3fd0935d0a0f3cdccfb20289aa12075cc74466825efe39e725504cdd8145b9"
+      "sha256": "f9112cbe345512c8f8433a678c50f9858227845ddc36c630176631b78f45a993"
     },
     "third-party/alpha-runtime-NOTICE.txt": {
       "bytes": 2728,

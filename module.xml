@@ -10,23 +10,30 @@
   </Invoke>
   <FileCopy Name="LICENSE" Target="{$cspdir}dicom3d/LICENSE" />
   <FileCopy Name="NOTICE" Target="{$cspdir}dicom3d/NOTICE" />
-  <FileCopy Name="public/assets/EpicSandboxPanel-Ctaw3fGv.js" Target="{$cspdir}dicom3d/assets/EpicSandboxPanel-Ctaw3fGv.js" />
+  <FileCopy Name="public/assets/CRL-SOURCE-NOTICE-CZLTcZw-.txt" Target="{$cspdir}dicom3d/assets/CRL-SOURCE-NOTICE-CZLTcZw-.txt" />
+  <FileCopy Name="public/assets/EpicSandboxPanel-DugQM-_q.js" Target="{$cspdir}dicom3d/assets/EpicSandboxPanel-DugQM-_q.js" />
+  <FileCopy Name="public/assets/FetalBrainExplorer-BDhorTxZ.js" Target="{$cspdir}dicom3d/assets/FetalBrainExplorer-BDhorTxZ.js" />
+  <FileCopy Name="public/assets/FetalBrainExplorer-D7uCOQGw.css" Target="{$cspdir}dicom3d/assets/FetalBrainExplorer-D7uCOQGw.css" />
+  <FileCopy Name="public/assets/FetalTissueSurface-DlyMXIve.js" Target="{$cspdir}dicom3d/assets/FetalTissueSurface-DlyMXIve.js" />
   <FileCopy Name="public/assets/PlacentaReference-Ciq5Jvss.css" Target="{$cspdir}dicom3d/assets/PlacentaReference-Ciq5Jvss.css" />
-  <FileCopy Name="public/assets/PlacentaReference-GUN0KhJI.js" Target="{$cspdir}dicom3d/assets/PlacentaReference-GUN0KhJI.js" />
-  <FileCopy Name="public/assets/SmartSyntheticPanel-D6Fx8rUC.js" Target="{$cspdir}dicom3d/assets/SmartSyntheticPanel-D6Fx8rUC.js" />
+  <FileCopy Name="public/assets/PlacentaReference-DjColoOL.js" Target="{$cspdir}dicom3d/assets/PlacentaReference-DjColoOL.js" />
+  <FileCopy Name="public/assets/SmartSyntheticPanel-DSQeJ-sG.js" Target="{$cspdir}dicom3d/assets/SmartSyntheticPanel-DSQeJ-sG.js" />
+  <FileCopy Name="public/assets/T2WAtlas_labelkey-tissue-CRUwLVvO.txt" Target="{$cspdir}dicom3d/assets/T2WAtlas_labelkey-tissue-CRUwLVvO.txt" />
   <FileCopy Name="public/assets/__vite-browser-external-BtIiOxWW.js" Target="{$cspdir}dicom3d/assets/__vite-browser-external-BtIiOxWW.js" />
   <FileCopy Name="public/assets/carnegie-stage20-LH1Cwx0s.glb" Target="{$cspdir}dicom3d/assets/carnegie-stage20-LH1Cwx0s.glb" />
   <FileCopy Name="public/assets/fetus-in-uterus-BW8kn3SM.png" Target="{$cspdir}dicom3d/assets/fetus-in-uterus-BW8kn3SM.png" />
-  <FileCopy Name="public/assets/fhir-readonly-openapi-BJ-drcwf.js" Target="{$cspdir}dicom3d/assets/fhir-readonly-openapi-BJ-drcwf.js" />
+  <FileCopy Name="public/assets/fhir-readonly-openapi-PQuLoAal.js" Target="{$cspdir}dicom3d/assets/fhir-readonly-openapi-PQuLoAal.js" />
   <FileCopy Name="public/assets/fibroid-j8W9rm3I.jpg" Target="{$cspdir}dicom3d/assets/fibroid-j8W9rm3I.jpg" />
   <FileCopy Name="public/assets/hra-full-term-DYO0M0Bj.glb" Target="{$cspdir}dicom3d/assets/hra-full-term-DYO0M0Bj.glb" />
-  <FileCopy Name="public/assets/index-BPz_I_DO.js" Target="{$cspdir}dicom3d/assets/index-BPz_I_DO.js" />
   <FileCopy Name="public/assets/index-BbSVkrwK.css" Target="{$cspdir}dicom3d/assets/index-BbSVkrwK.css" />
+  <FileCopy Name="public/assets/index-Fe2MM4pI.js" Target="{$cspdir}dicom3d/assets/index-Fe2MM4pI.js" />
   <FileCopy Name="public/assets/nrx-reference-worker-BVTUSoQr.js" Target="{$cspdir}dicom3d/assets/nrx-reference-worker-BVTUSoQr.js" />
   <FileCopy Name="public/assets/nrx-runtime-7TkXZuTP.wasm" Target="{$cspdir}dicom3d/assets/nrx-runtime-7TkXZuTP.wasm" />
-  <FileCopy Name="public/assets/nrx-surface-Crlw5TC0.js" Target="{$cspdir}dicom3d/assets/nrx-surface-Crlw5TC0.js" />
+  <FileCopy Name="public/assets/nrx-surface-BusnoEmq.js" Target="{$cspdir}dicom3d/assets/nrx-surface-BusnoEmq.js" />
   <FileCopy Name="public/assets/nrx-worker-BO_EnPT5.js" Target="{$cspdir}dicom3d/assets/nrx-worker-BO_EnPT5.js" />
   <FileCopy Name="public/assets/smart-pkce-DMglXBAK.js" Target="{$cspdir}dicom3d/assets/smart-pkce-DMglXBAK.js" />
+  <FileCopy Name="public/assets/t2w_GA22_atlas.nii-DaiIkpwY.gz" Target="{$cspdir}dicom3d/assets/t2w_GA22_atlas.nii-DaiIkpwY.gz" />
+  <FileCopy Name="public/assets/t2w_GA22_tissue.nii-xLUyaiAu.gz" Target="{$cspdir}dicom3d/assets/t2w_GA22_tissue.nii-xLUyaiAu.gz" />
   <FileCopy Name="public/assets/twins-CeG7HLgi.jpg" Target="{$cspdir}dicom3d/assets/twins-CeG7HLgi.jpg" />
   <FileCopy Name="prototypes/alpha/three-prototype/expanded-atlas/LICENSE.md" Target="{$cspdir}dicom3d/atlas/LICENSE.md" />
   <FileCopy Name="prototypes/alpha/three-prototype/expanded-atlas/index.json" Target="{$cspdir}dicom3d/atlas/index.json" />

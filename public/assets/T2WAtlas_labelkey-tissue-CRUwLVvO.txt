@@ -1,0 +1,51 @@
+################################################
+# ITK-SnAP Label Description File
+# File format: 
+# IDX   -R-  -G-  -B-  -A--  VIS MSH  LABEL
+# Fields: 
+#    IDX:   Zero-based index 
+#    -R-:   Red color component (0..255)
+#    -G-:   Green color component (0..255)
+#    -B-:   Blue color component (0..255)
+#    -A-:   Label transparency (0.00 .. 1.00)
+#    VIS:   Label visibility (0 or 1)
+#    IDX:   Label mesh visibility (0 or 1)
+#  LABEL:   Label description 
+################################################
+    0     0    0    0        0  0  0    "Clear Label"
+   37   255  147  230        1  1  1    "Hippocampus_L"
+   38     0   29  255        1  1  1    "Hippocampus_R"
+   41   104  255   34        1  1  1    "Amygdala_L"
+   42    74  199  203        1  1  1    "Amygdala_R"
+   71   255    0   51        1  1  1    "Caudate_L"
+   72     0  206  209        1  1  1    "Caudate_R"
+   73     0  255  127        1  1  1    "Lentiform_L"
+   74   128    0  128        1  1  1    "Lentiform_R"
+   77   148    0  211        1  1  1    "Thalamus_L"
+   78   178   34   34        1  1  1    "Thalamus_R"
+   91   115  255    0        1  1  1    "CorpusCallosum"
+   92     0  191  255        1  1  1    "Lateral_Ventricle_L"
+   93    98    0  255        1  1  1    "Lateral_Ventricle_R"
+   94   183  106  255        1  1  1    "Brainstem"
+  100   165  180    0        1  1  1    "Cerebellum_L"
+  101   255  248  147        1  1  1    "Cerebellum_R"
+  111   255  102    0        1  1  1    "Fornix"
+  112   167   70   22        1  1  1    "Cortical_Plate_L"
+  113   255   92   95        1  1  1    "Cortical_Plate_R"
+  114    37  185    0        1  1  1    "Subplate_L"
+  115     0  115  255        1  1  1    "Subplate_R"
+  116   212  109   88        1  1  1    "Inter_Zone_L"
+  117   176  148   46        1  1  1    "Inter_Zone_R"
+  118    42    0  255        1  1  1    "Prolif_Zone_L"
+  119     0  108    5        1  1  1    "Prolif_Zone_R"
+  120   250  210  170     0.61  1  1    "White_Matter_L"
+  121   250  250  130     0.61  1  1    "White_Matter_R"
+  122    23  122   48        1  1  1    "Internal_Capsule_L"
+  123   255   97  248        1  1  1    "Internal_Capsule_R"
+  124   136  161  230     0.61  1  0    "CSF"
+  126   183  255    0        1  1  1    "Gang_Em_L"
+  127     0   25  255        1  1  1    "Gang_Em_R"
+  128   240  128  128        1  1  1    "Cavum"
+  129   152  251  152        1  1  1    "3rd_Ventricle"
+  130    10  203    0        1  1  1    "4th_Ventricle"
+  131   255    0    0        1  1  1    "Vermis"

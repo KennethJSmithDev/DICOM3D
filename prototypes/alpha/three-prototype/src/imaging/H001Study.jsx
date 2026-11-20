@@ -1,16 +1,38 @@
-import React from 'react';
+import React, {lazy, Suspense, useEffect, useRef, useState} from 'react';
 import {CaseFigures} from '../placenta/PregnancyUltrasoundExamples.jsx';
 import {h001PelvicOwners} from './h001-pelvic-owners.mjs';
 import './h001-study.css';
 
-export function H001Study({figure, onFigure, onPelvis, pelvicOwner, setPelvicOwner, pelvisAvailable, webgl}) {
+const FetalBrainExplorer = lazy(() => import('./fetal-mri/FetalBrainExplorer.jsx'));
+
+export function H001Study({figure, onFigure, onPelvis, pelvicOwner, setPelvicOwner, pelvisAvailable, webgl, rendererProps}) {
   const renderer = webgl ? '&renderer=webgl' : '';
+  const [showMRI, setShowMRI] = useState(false);
+  const entry = useRef(null);
+  const returnButton = useRef(null);
+  const visited = useRef(false);
+  useEffect(() => {
+    if (showMRI) {
+      visited.current = true;
+      returnButton.current?.focus();
+    } else if (visited.current) {
+      entry.current?.focus();
+    }
+  }, [showMRI]);
+
+  if (showMRI) return <article className="h001-study" aria-label="Fetal brain MRI reference">
+    <button ref={returnButton} type="button" onClick={() => setShowMRI(false)}>Return to H001 ultrasound</button>
+    <Suspense fallback={<p role="status">Opening fetal MRI explorer…</p>}>
+      <FetalBrainExplorer rendererProps={rendererProps}/>
+    </Suspense>
+  </article>;
 
   return <article className="h001-study" aria-labelledby="h001-title">
     <div className="h001-heading"><h2 id="h001-title">H001 · Twin pregnancy and uterine fibroid</h2>
       <p>Public teaching case · Two ultrasound figures from one published pregnancy</p></div>
     <CaseFigures label="Case figure" selected={figure} onSelect={onFigure}/>
     <nav aria-label="Related teaching anatomy">
+      <button type="button" ref={entry} onClick={() => setShowMRI(true)}>Explore fetal brain MRI</button>
       <label>Female atlas structure
         <select value={pelvicOwner} onChange={event=>setPelvicOwner(event.target.value)}>
           {h001PelvicOwners.map(([id,label])=><option key={id} value={id}>{label}</option>)}

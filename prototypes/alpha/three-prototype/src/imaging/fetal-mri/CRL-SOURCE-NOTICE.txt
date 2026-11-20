@@ -1,0 +1,28 @@
+# CRL2025 T2W Atlas and Segmentations
+
+This is a spatio-temporal map of the developing fetal brain, from gestational age (GA) weeks 21 to 37, made from 194 reconstructed fetal T2-weighted brain images. Included are two sets of image segmentations: tissue segmentations with delineated borders between white and cortical gray matter (cortical plate), and regional parcellations which overlap the white-gray matter border. The tissue segmentation is further divided into two versions, one which splits white matter into subplate and intermediate zone (white matter zones; WMZ), and one that does not. WMZ segmentations are only supplied up to 32 weeks gestational age.
+
+File suffixes:
+_atlas		- T2w Atlas Image
+_region		- Regional segmentation
+_tissue		- Tissue segmentation
+_tissueWMZ 	- Variant of tissue segmentation with subplate and intermediate zone boundary delineated
+
+T2WAtlas_labelkey-region.txt	- Label key for regional segmentation
+T2WAtlas_labelkey-tissue.txt	- Label key for tissue segmentations
+Label keys can be loaded in ITK-SNAP
+
+
+
+## License/Data Use Agreement
+These files are published under CC BY 4.0: https://creativecommons.org/licenses/by/4.0/
+
+Files in this data release were developed for research purposes and are not intended for medical or diagnostic use and have no warranty. The authors and distributors do not make any guarantees regarding the accuracy or usefulness of results generated from these tools or their derivatives, and are not liable for any damages resulting from their use.
+
+Through this data use agreement, you agree to cite the DOI referring to this resource as well as the following work:
+
+Bagheri, M., Velasco-Annis, C., Wang, J., Faghihpirayesh, R., Khan, S., Calixto, C., Jaimes, C., Vasung, L., Ouaalam, A., Afacan, O. and Warfield, S.K., 2025. An MRI Atlas of the Human Fetal Brain: Reference and Segmentation Tools for Fetal Brain MRI Analysis. arXiv preprint arXiv:2508.15034.
+Gholipour, A., Rollins, C.K., Velasco-Annis, C. et al. A normative spatiotemporal MRI atlas of the fetal brain for automatic segmentation and analysis of early brain growth. Sci Rep 7, 476 (2017). https://doi.org/10.1038/s41598-017-00525-w
+
+T2-weighted image reconstructions were performed using MIRTK construct-atlas:
+Schuh et al., “Unbiased construction of a temporally consistent morphological atlas of neonatal brain development”, bioRxiv, 2018. doi:10.1101/251512

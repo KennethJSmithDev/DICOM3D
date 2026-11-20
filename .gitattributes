@@ -42,3 +42,7 @@ reference/public/reference/hra-female.glb.part* -text
 
 # Build input hashes must match across Windows and Linux checkouts.
 scripts/build-alpha-distribution.mjs text eol=lf
+
+# Preserve publisher fingerprints for the 22-week MRI, tissue map and notices.
+prototypes/alpha/three-prototype/src/imaging/fetal-mri/*.nii.gz -text
+prototypes/alpha/three-prototype/src/imaging/fetal-mri/*.txt -text -whitespace

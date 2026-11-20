@@ -26,5 +26,29 @@
         "sha256": "95b10c2e1e16c5a92721c157f54144ac0150ae2c3e8593972a60393de7bab03c"
       }
     }
+  },
+  "fetalBrainReference": {
+    "doi": "10.7910/DVN/QOO75G",
+    "version": "4.1",
+    "gestationalWeeks": 22,
+    "license": "CC BY 4.0",
+    "assets": {
+      "CRL-SOURCE-NOTICE.txt": {
+        "bytes": 2404,
+        "sha256": "90a061354400068f23b2c89b36dc86610071d5de83d30ca96fcc65de8231283a"
+      },
+      "t2w_GA22_atlas.nii.gz": {
+        "bytes": 675662,
+        "sha256": "506d9cd61a3d5ee816283ae87945b4d466171e4e1ee50ba0a11fd2c7a6291ad1"
+      },
+      "t2w_GA22_tissue.nii.gz": {
+        "bytes": 43301,
+        "sha256": "dbcf9a93669a4942f995d9e2e20ad68c4d5e995cbfa489ced7d06186cb3aecac"
+      },
+      "T2WAtlas_labelkey-tissue.txt": {
+        "bytes": 2591,
+        "sha256": "678f7df75ba0d594aaf17eaf49897daf063a2ac2711886feb1b012fb5df3a323"
+      }
+    }
   }
 }

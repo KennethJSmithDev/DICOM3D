@@ -23,5 +23,12 @@ for (const expected of Object.values(teaching.figures)) {
  const matching=Object.entries(manifest.files).filter(([name,r]) => name.endsWith('.jpg') && r.sha256===expected.sha256 && r.bytes===expected.bytes);
  assert.equal(matching.length,1,'Expected one packaged JPEG per H001 figure');
 }
+const brain = JSON.parse(await readFile(join(root,'distribution-manifest.json'))).fetalBrainReference;
+assert.equal(brain.doi,'10.7910/DVN/QOO75G');
+assert.equal(brain.version,'4.1');
+for (const [source, asset] of Object.entries(brain.assets)) {
+  const matches=Object.values(manifest.files).filter(record => record.bytes===asset.bytes && record.sha256===asset.sha256);
+  assert.equal(matches.length,1,'Missing or duplicated fetal reference asset: '+source);
+}
 assert.equal(manifest.atlasIndexSha256,manifest.files['atlas/index.json'].sha256);
 console.log(JSON.stringify({status:'PASS',profile:manifest.profile,release:manifest.release,files:actual.length,exactPublicH000:true,legacyEntryIsSameAlpha:true,privatePatientData:false}));
