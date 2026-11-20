@@ -59,7 +59,7 @@ class SceneBoundary extends React.Component {
   }
 }
 
-export default function PlacentaReference({variant = 'placenta', CanvasComponent, createRenderer}) {
+export default function PlacentaReference({variant = 'placenta', CanvasComponent, createRenderer, embedded = false}) {
   const embryo = variant === 'embryo';
   const title = embryo ? 'Human embryo · Carnegie stage 20' : 'Placenta and umbilical cord';
   const specimen = embryo ? 'Embryo' : 'Placenta';
@@ -92,7 +92,7 @@ export default function PlacentaReference({variant = 'placenta', CanvasComponent
   const part = model?.parts.find(item => item.id === selected);
   const visible = isolated ? part?.members.length : 8;
   return <article className="placenta-study">
-    <header><a href={location.pathname}>◇ DICOM3D atlas</a><h1>{title}</h1>
+    <header>{!embedded && <a href={location.pathname}>◇ DICOM3D atlas</a>}<h1>{title}</h1>
       <p>{embryo ? 'Early human development · Carnegie Collection' : 'Full-term educational reference · Human Reference Atlas'}</p></header>
     <div className="placenta-stage" aria-label={specimen + ' 3D viewport'}>
       {model ? <SceneBoundary><CanvasComponent gl={createRenderer} camera={initialCamera} dpr={1} frameloop="never">
@@ -121,7 +121,7 @@ export default function PlacentaReference({variant = 'placenta', CanvasComponent
         <p>The Carnegie Collection specimen shows an individual human embryo at stage 20. NIH distributes one segmented exterior surface repaired for 3D printing. This example has no alignment to the adult atlas or the H001 ultrasound figures.</p>
         <p>NIH 3D contributor kbrowne. Carnegie Collection, Archives of the Human Developmental Anatomy Center, National Museum of Health and Medicine. Original model, version 3.02. <a href="https://3d.nih.gov/entries/3DPX-016951">NIH 3D record</a> · <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></p>
       </details>
-    </> : <><PregnancyUltrasoundExamples/>
+    </> : <>{!embedded && <PregnancyUltrasoundExamples/>}
     <details><summary>About this reference and its source</summary>
       <p>This sculpted full-term specimen is partly informed by MRI from UC San Diego Health. It is shown in its own coordinate space. The reference illustrates placental anatomy and supplies no patient-specific or twin arrangement.</p>
       <p>Kristen Browne and Heidi Schlehlein, Human Reference Atlas / HuBMAP. DICOM3D extracted eight meshes from the united-female v1.5 model and retained their original hierarchy, geometry and materials. Source nodes 428 and 429 distinguish the two umbilical arteries.</p>

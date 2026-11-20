@@ -46,4 +46,21 @@ assert.ok(result.actions.some(a=>a.id==='open-imaging'));
 assert.match(result.title,/Start with a scan/);
 result=lesson({nrx:true});
 assert.match(body(result),/not reconstructed from the scan/);
+for(const [h001,identity,source] of [
+ ['twins','H001 · Figure 1','10.7759/cureus.113224'],
+ ['fibroid','H001 · Figure 2','10.7759/cureus.113224'],
+ ['myoma','UMD_221129_001','10.6084/m9.figshare.23541312.v3'],
+ ['fetal-mri','22-week fetal brain template','10.7910/DVN/QOO75G']
+]){
+ const state={h001,imagingOpen:true};
+ const evidence=buildLearnContext(state);
+ assert.equal(evidence.kind,'h001');
+ assert.ok(evidence.sourceRows.some(row=>row.value.includes(identity)));
+ assert.equal(evidence.links[0].href,'https://doi.org/'+source);
+ const local=lesson(state);
+ assert.equal(local.key,'h001:'+h001);
+ assert.ok(local.check.answers[local.check.correct]);
+ assert.ok(local.terms.length);
+ assert.ok(local.ideas.length);
+}
 console.log('PASS: beginner learning context adaptation, exact-ID education, female scope, loaded/unloaded guidance, presentation state, CT/SEG correspondence, local privacy, source links and self-check boundaries.');

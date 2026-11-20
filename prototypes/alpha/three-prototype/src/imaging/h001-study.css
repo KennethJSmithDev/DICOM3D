@@ -1,5 +1,9 @@
 .h001-study{height:100%;overflow:auto;box-sizing:border-box;padding:clamp(.9rem,2vw,1.75rem);color:#deedf4;scroll-padding:1rem}
 .h001-heading{margin-bottom:.7rem}
+.h001-reference-dialog{width:min(64rem,94vw);max-height:90dvh;box-sizing:border-box;overflow:auto;background:#091a29;color:#deedf4;border:1px solid #367891;border-radius:.65rem;padding:clamp(.65rem,2vw,1.4rem)}
+.h001-reference-dialog::backdrop{background:rgba(1,8,16,.85)}
+.h001-reference-dialog .placenta-study{width:auto;max-width:none;height:auto;overflow:visible}
+.h001-reference-dialog .placenta-stage{min-height:36dvh}
 .h001-study h2{margin:0;font-size:clamp(1.2rem,2vw,1.8rem)}
 .h001-study p{margin:.6rem 0;line-height:1.5}
 .h001-study label{display:grid;gap:.35rem;max-width:28rem}

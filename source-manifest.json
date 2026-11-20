@@ -224,8 +224,8 @@
       "sha256": "1406edeffc44715c8df54bef32845e0fe493fe14a8b746ef4669e8855e9e12e1"
     },
     "docs/INSTALL_070.md": {
-      "bytes": 4496,
-      "sha256": "8ba98a4d175b7d29db082fb73062061b867ade45486f44338373d22b780b2f1e"
+      "bytes": 5217,
+      "sha256": "f982c61e1bfceea6b68a7b9bc87e7ce010d9d2dab4910b1639c82c094e1390cc"
     },
     "docs/INSTALL_070_ALPHA.md": {
       "bytes": 8830,
@@ -413,7 +413,7 @@
     },
     "module.xml": {
       "bytes": 18355,
-      "sha256": "3dc0366e85dbc2e80fe58aa63bed86006372b55001d3840fdac695fa6a372c83"
+      "sha256": "86d57e1dec8cde1989ec7c1373813503c679c9184d6f1a274fe90271f917dcca"
     },
     "prototypes/alpha/.gitattributes": {
       "bytes": 9,
@@ -672,8 +672,8 @@
       "sha256": "00984aa722736da8e8598a244d80d60d7b1b9f322acfc47ce1a1f047db637e22"
     },
     "prototypes/alpha/three-prototype/src/LearnPanel.jsx": {
-      "bytes": 4447,
-      "sha256": "ff9da2b670dc369d001006d64d6d588b9f7c0a8f610c34e02ea43675bc4a4543"
+      "bytes": 4542,
+      "sha256": "63436e12353f8aeb986ce966b542801790b339929a57ac2ea2b3be3e8e1a989a"
     },
     "prototypes/alpha/three-prototype/src/MaterializationEffect.jsx": {
       "bytes": 4541,
@@ -728,8 +728,8 @@
       "sha256": "38b041c00c022c224ecfd77fba60bdbd9762fec2797f38bccac39a12c5afa41e"
     },
     "prototypes/alpha/three-prototype/src/beginner-learning.mjs": {
-      "bytes": 11293,
-      "sha256": "bb2ea9d2d7365c32dd43e774b1267ab995ac9de8fb0ba5bc3003eac0a62ba7ff"
+      "bytes": 11344,
+      "sha256": "e8a865f1bf2c9d0068afb02d1ae289a027a40714c3cfd3b380e8f5eddd32905a"
     },
     "prototypes/alpha/three-prototype/src/compact-workspace.css": {
       "bytes": 4215,
@@ -804,8 +804,8 @@
       "sha256": "2f6ab3f78259758fc9450ae97ba45d3797f27bd93c967247de3a9a24b53ac844"
     },
     "prototypes/alpha/three-prototype/src/imaging/H001Study.jsx": {
-      "bytes": 6818,
-      "sha256": "a06dd78300ca455ac601ed3b5341e258d3d0559bb898ff64b855a5cc14ecd19d"
+      "bytes": 7986,
+      "sha256": "ce2814b5cba72abcbdd60b44efbe9c149f245e2c138f9557475f086e2955abf4"
     },
     "prototypes/alpha/three-prototype/src/imaging/Hl7FhirDraftPanel.jsx": {
       "bytes": 4268,
@@ -848,8 +848,8 @@
       "sha256": "f0d99389311cd139564bb506079e70c836c58b1a21eaea6d1ab69aacd42d2dc4"
     },
     "prototypes/alpha/three-prototype/src/imaging/fetal-mri/FetalTissueSurface.jsx": {
-      "bytes": 7701,
-      "sha256": "d43e38c7a1261a40ea4cc71fc56b9db1203aad8574d7fceebabe08d36123363e"
+      "bytes": 9253,
+      "sha256": "7370d8e194ff1348ca3ad0282a96836f9f7371058a1e67eebb5c3f09912c2e27"
     },
     "prototypes/alpha/three-prototype/src/imaging/fetal-mri/T2WAtlas_labelkey-tissue.txt": {
       "bytes": 2591,
@@ -931,21 +931,25 @@
       "bytes": 3222,
       "sha256": "b1ad4704fef6a951bde7012696177d069b0f0ebc445b03b2d14927300a99451e"
     },
+    "prototypes/alpha/three-prototype/src/imaging/h001-learning.mjs": {
+      "bytes": 4485,
+      "sha256": "8f05fffd1a1e1b4b3cac091fb646986cfc92fced499bfab0dd55b25ed5eefe62"
+    },
     "prototypes/alpha/three-prototype/src/imaging/h001-pelvic-owners.mjs": {
       "bytes": 338,
       "sha256": "71a3a5164c5c7c20851934ad260c60626913948f9b9b15e858d0ce917d25237c"
     },
     "prototypes/alpha/three-prototype/src/imaging/h001-study.css": {
-      "bytes": 2541,
-      "sha256": "d7514e867002e4bc7ff4ef77e9fbeafafe2d8851b3e0e03265189459dbada374"
+      "bytes": 2966,
+      "sha256": "4e65f59618280b8100e80dd9d9c1dfe714ef637f1aa79ade7cc7d417ca85adc2"
     },
     "prototypes/alpha/three-prototype/src/imaging/local-stack-indices.mjs": {
       "bytes": 582,
       "sha256": "7932aedb7de67e020905ffa34ffc970efdf88a993f86ffa72ead18e6c0aef52b"
     },
     "prototypes/alpha/three-prototype/src/imaging/myoma/MyomaExplorer.jsx": {
-      "bytes": 7629,
-      "sha256": "47b080a0a56d944a1d1f08fbaf7db7a9f90fb4d720c952923aea65e7c221e78a"
+      "bytes": 9309,
+      "sha256": "a0e64d1644d49835f31c929da528613a1e267df658dbe2eb0fca80bd86b5abf8"
     },
     "prototypes/alpha/three-prototype/src/imaging/myoma/UMD-NOTICE.txt": {
       "bytes": 843,
@@ -968,8 +972,8 @@
       "sha256": "e9bf94e0fcc922c5d69700c190733dea6dec06e27ab993387dde95c56b48c443"
     },
     "prototypes/alpha/three-prototype/src/imaging/myoma/myoma.css": {
-      "bytes": 779,
-      "sha256": "3e3b328300fc3404bcd22beba87cd991170c21934022843d247547e7b7a269fe"
+      "bytes": 888,
+      "sha256": "7b3d34e12344bd6b5c37a9c5419d34af720287ec63909948e7c40e6047bb8926"
     },
     "prototypes/alpha/three-prototype/src/imaging/myoma/umd-uterus-placement.mjs": {
       "bytes": 2219,
@@ -992,8 +996,8 @@
       "sha256": "cc9331625564dc9aa7266bf4bf3cabfd5191dc9a2620d153e323d36c134d53a8"
     },
     "prototypes/alpha/three-prototype/src/learn-context.mjs": {
-      "bytes": 12393,
-      "sha256": "b4f39873e1b6af0e8b33e9b6009f449c05ab1e0a8b045ccde3e0b77e358aa34b"
+      "bytes": 12529,
+      "sha256": "bed9b89070df70bf8278e2950af23dd3bd272ded9e5918b3c2a097ff8a168651"
     },
     "prototypes/alpha/three-prototype/src/learn.css": {
       "bytes": 2563,
@@ -1016,8 +1020,8 @@
       "sha256": "474581f7661d35ee26a41e5e5fa9827186db8142e2ffbd2b31384368e7d79917"
     },
     "prototypes/alpha/three-prototype/src/main.jsx": {
-      "bytes": 64363,
-      "sha256": "99bee3a7816031f2034921ab4d09ce8bf324b413be7ca597805db56b4d855eb8"
+      "bytes": 64446,
+      "sha256": "396944a70c09bb866f92f50e3868e6b5e6e872646d5ed6a6918ca3a3669acc47"
     },
     "prototypes/alpha/three-prototype/src/materialization-state.mjs": {
       "bytes": 484,
@@ -1112,8 +1116,8 @@
       "sha256": "baa3576292cc37411eb4d9e7f823f9f5f57a6a515b8745c282cb5501ad771c7d"
     },
     "prototypes/alpha/three-prototype/src/placenta/PlacentaReference.jsx": {
-      "bytes": 8575,
-      "sha256": "f9a7f380eefdf7c3c0cc41595e3591f9bf587a1a53d9e3f6d86073cd31ea72d3"
+      "bytes": 8623,
+      "sha256": "da969f2ccdcac58c10f95965a75adf337b186222970761a661e6519840679ee5"
     },
     "prototypes/alpha/three-prototype/src/placenta/PregnancyUltrasoundExamples.jsx": {
       "bytes": 1487,
@@ -1232,8 +1236,8 @@
       "sha256": "852a303b229c5255ffe547ec1f934fe49f6a79c6af66d4171afef354336be44f"
     },
     "prototypes/alpha/three-prototype/test-beginner-learning.mjs": {
-      "bytes": 3410,
-      "sha256": "5fca93a1c0c5732ddce839786f5b821b361491d1906484ae324e03b00d6b8e68"
+      "bytes": 4136,
+      "sha256": "a4584dea1fa1931be088ef79e6bddd5b3128f2eb09390ec88b17843b1dcb0d4b"
     },
     "prototypes/alpha/three-prototype/test-development-reference.mjs": {
       "bytes": 1374,
@@ -1703,45 +1707,45 @@
       "bytes": 2404,
       "sha256": "90a061354400068f23b2c89b36dc86610071d5de83d30ca96fcc65de8231283a"
     },
-    "public/assets/EpicSandboxPanel-DWq0wkXo.js": {
+    "public/assets/EpicSandboxPanel-D6YTqFKy.js": {
       "bytes": 13216,
-      "sha256": "bd86c206200b3c04fef1c0bd92c7ddb59a4b6ce3d4b206ac1a06b07d948120a6"
+      "sha256": "03889ba979222523f8c83da3e6b4d0965f6d65fae30198d45871521903e9024e"
     },
     "public/assets/FetalBrainExplorer-Bu4wnhMR.css": {
       "bytes": 1817,
       "sha256": "7f660f50a03b0501a957be6f449ee083b4f0930610ef1a726a587883f0cf1558"
     },
-    "public/assets/FetalBrainExplorer-DDnDusrm.js": {
+    "public/assets/FetalBrainExplorer-D5TkBaWr.js": {
       "bytes": 8116,
-      "sha256": "c66caf775db03986a9824023fb9c2aee2f3f94e0f01fe4021b2af9bba1be9884"
+      "sha256": "69e967f1c977718c63ab8af2af5a880178ba276a0d8106d3b11ebdce04eafb6e"
+    },
+    "public/assets/FetalTissueSurface-BxDpDgrt.js": {
+      "bytes": 9017,
+      "sha256": "188efee58a4d64a466ad3df62a3f97b63824862e8c507d9905284b7269dd888c"
     },
     "public/assets/FetalTissueSurface-DXRbgbjg.css": {
       "bytes": 476,
       "sha256": "28736c5675b524c046e65936cca49b60aa18aef74c102718da996c75edbbbf01"
     },
-    "public/assets/FetalTissueSurface-lQ9TwuOr.js": {
-      "bytes": 8031,
-      "sha256": "560a6050788375494dbb000a803e8dea295cd06f8dfb3c4a9791ebab6088de67"
+    "public/assets/MyomaExplorer-BN_Vs8pm.js": {
+      "bytes": 12055,
+      "sha256": "bc7f524e68fd737527046600e3a7fb07abd162d6a0a1c2b718e83a859695bb70"
     },
-    "public/assets/MyomaExplorer-Dw6gjTCy.js": {
-      "bytes": 10846,
-      "sha256": "c2d18d4b2c87a8f4fade31af457ab7a78fb4eeb2a8c4351ba2506255e3fbf90b"
+    "public/assets/MyomaExplorer-h1OkIEqo.css": {
+      "bytes": 876,
+      "sha256": "8dabb6f504526e4dee9ba54d6db4dd801e7da1dd2133e3c579bae14ff5146fbf"
     },
-    "public/assets/MyomaExplorer-vVhwjxU3.css": {
-      "bytes": 769,
-      "sha256": "84adb69d7409dad917d7d8fa6b3ba1f855874aa5edaa7ef82ba4552c727b52c7"
+    "public/assets/PlacentaReference-CCICFc4K.js": {
+      "bytes": 7998,
+      "sha256": "c570bfca1a96af692123110c739e1706fe1cacfcb78897aef22ae626369f4ed7"
     },
     "public/assets/PlacentaReference-Ciq5Jvss.css": {
       "bytes": 1117,
       "sha256": "0c15623eb4ac515b7dabca0bc83b51ae4f94bfe36beed53ec878a7d97e93a0c8"
     },
-    "public/assets/PlacentaReference-Dq92n_sA.js": {
-      "bytes": 7976,
-      "sha256": "761789210da489de3ea65975805cc49bd841ba9ba65c44eee71aeb1bd4818cd4"
-    },
-    "public/assets/SmartSyntheticPanel-CFukJkhT.js": {
+    "public/assets/SmartSyntheticPanel-C5kOVe9V.js": {
       "bytes": 22245,
-      "sha256": "6fc45988f8d27e4c78b470fd1951ce0e39e252dc8032276c318b1dd84b544f2f"
+      "sha256": "90bd803f7370fc2e8f92f648eb3d6d209686ffa3984a965d8b45b73c3d542e07"
     },
     "public/assets/T2WAtlas_labelkey-tissue-CRUwLVvO.txt": {
       "bytes": 2591,
@@ -1759,9 +1763,9 @@
       "bytes": 7117826,
       "sha256": "1b120daa7e86e8bffda8017007aa2363005cd9ba5d5462bf63e772b2a0e4bae1"
     },
-    "public/assets/UmdUterusReference-DYk-mriy.js": {
+    "public/assets/UmdUterusReference-D0dU7tQS.js": {
       "bytes": 2238,
-      "sha256": "f4de5149196e63364c56de3b507a4b3ac40a539e7b9db5de0aca349c5e15599f"
+      "sha256": "0ccdfa3ef007d5397a8ef5a4bef715afa64b3ddea26642299035f3c32ecfb39b"
     },
     "public/assets/__vite-browser-external-BtIiOxWW.js": {
       "bytes": 113,
@@ -1779,9 +1783,9 @@
       "bytes": 182835,
       "sha256": "a079aa76aa413be67d189fbbc9a930286742668c50d32f45be51264946c27cf3"
     },
-    "public/assets/fhir-readonly-openapi-DwTNbwX7.js": {
+    "public/assets/fhir-readonly-openapi-BzA8hGjJ.js": {
       "bytes": 3859,
-      "sha256": "1295ea47fbef6109ef6132266ec07404028e0a8ef140f8ef4d59f9c57ec05b40"
+      "sha256": "4d2952dbab9cefaabf76515ebaa8133046ed048774e4e4923ed3a39f23fc5639"
     },
     "public/assets/fibroid-j8W9rm3I.jpg": {
       "bytes": 722530,
@@ -1791,13 +1795,13 @@
       "bytes": 4918168,
       "sha256": "972ced14fda2e34dbba62af285345c72d56ae28885be6b38398db2bff775587f"
     },
-    "public/assets/index-BYLITBvv.css": {
-      "bytes": 26931,
-      "sha256": "7567ed5149303c6f9f57c7be66a7dc0b78ef5327b32d39b8befe213c94530164"
+    "public/assets/index--K4Pb-Qo.css": {
+      "bytes": 27345,
+      "sha256": "594e662ec9c736c289c629edc1064509065b11b6a36bf7ce50fbe2921e41837b"
     },
-    "public/assets/index-D_pzShJf.js": {
-      "bytes": 1996132,
-      "sha256": "e9f45428d0e2ec08376224a59ff4966642ccaefc9375d28af570ce94d650f30a"
+    "public/assets/index-C1y23P3o.js": {
+      "bytes": 2001362,
+      "sha256": "d1cfb8c744b0c89343c3db4db7ab263d206b5521b3664de73174bacf97a05b5d"
     },
     "public/assets/jsx-runtime-MZURdZre.js": {
       "bytes": 8567,
@@ -1848,16 +1852,16 @@
       "sha256": "8b534c82a9b49fb19d642cb873a7fbb6c8d5df7aa67c5b7439e30ba4cc776892"
     },
     "public/demo-build-manifest.json": {
-      "bytes": 51948,
-      "sha256": "6fffade350c4150971672ed283871836dac640e43ec0de7c257fb2e7da2e20b6"
+      "bytes": 52086,
+      "sha256": "fcfb4be0f20cab83e67977f7b77336b03ddfa265ab7815b1e76d282720c8d1b1"
     },
     "public/index.html": {
       "bytes": 1278,
-      "sha256": "5ad75abc62c86450fc660c53601aa825ff1f5a6090c8448d0914a22399ae632a"
+      "sha256": "b5092f6c0fbfcd19ff76dc7e2c67e52bead9de5c6dfa6429a1c6bd05ec6199bb"
     },
     "public/reference.html": {
       "bytes": 1278,
-      "sha256": "5ad75abc62c86450fc660c53601aa825ff1f5a6090c8448d0914a22399ae632a"
+      "sha256": "b5092f6c0fbfcd19ff76dc7e2c67e52bead9de5c6dfa6429a1c6bd05ec6199bb"
     },
     "reference/metadata/anatomy-source-records.json": {
       "bytes": 855652,
@@ -3205,7 +3209,7 @@
     },
     "src/DICOM3D/Entry.cls": {
       "bytes": 2781,
-      "sha256": "944ca1839537d5e26d99fd1902b7fc96d972417301958a0b1f6c83d48cc6e7e7"
+      "sha256": "33c184edeed1379f4c92c8416ba2282265e83c8758800a53e404603715e37e35"
     },
     "src/DICOM3D/Health.cls": {
       "bytes": 555,
@@ -3213,7 +3217,7 @@
     },
     "src/DICOM3D/InstallMigration.cls": {
       "bytes": 42203,
-      "sha256": "14bf643f7f84363be164139d83b704aeb1f81a9843f10d0a25680b5c41845f37"
+      "sha256": "e7d330a4e15b885c1d5db249d3c08577953f6f3e92b7700e6c608aac4071dc57"
     },
     "third-party/alpha-runtime-NOTICE.txt": {
       "bytes": 2728,

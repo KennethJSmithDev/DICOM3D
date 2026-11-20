@@ -28,7 +28,7 @@ export default function LearnPanel({open,onClose,context,availableActions=[],onA
    <dl>{lesson.sourceRows.map(row=><React.Fragment key={row.label}><dt>{row.label}</dt><dd>{row.value}</dd></React.Fragment>)}</dl>
    {!lesson.sourceRows.length&&<p>No acquired source is active. Load a study or select a reference structure to see its evidence.</p>}
    {!!lesson.relationships.length&&<details><summary>Recorded source relationships · {lesson.relationships.length} shown</summary>{lesson.relationships.map((row,i)=><p key={`${row.id}-${i}`}><b>{row.label}</b><br/>{row.id} · {row.scope}{row.relation?` · ${row.relation}`:''}</p>)}</details>}
-   <p>Source relationships describe the supplied anatomy; they do not establish a spatial match to a patient.</p>
+   <p>{lesson.kind==='h001'?'Each source record identifies the image or model used in this view.':'Source relationships describe the supplied anatomy; they do not establish a spatial match to a patient.'}</p>
   </div>}
   {!!lesson.links.length&&<nav className="learn-links" aria-label="Learning source attribution">{lesson.links.map(link=><a key={link.label} href={link.href??`${import.meta.env.BASE_URL}${link.path}`} target="_blank" rel="noopener noreferrer">{link.label}</a>)}</nav>}
  </section>;

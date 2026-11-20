@@ -8,7 +8,9 @@ In **Imaging**, open **H001** to compare the two published ultrasound figures fr
 
 From H001, open the **22-week fetal brain MRI**. Step through the three viewing planes, adjust the tissue overlay, or switch to **3D tissue** to rotate and isolate a structure. The MRI is a population-average teaching atlas. Choose **Compare views** to keep the slice and 3D tissue visible together. The current MRI plane appears at its source position in the 3D view. Returning to H001 restores the ultrasound figure you were viewing. [Fetal brain atlas and source labels](https://doi.org/10.7910/DVN/QOO75G)
 
-Open **Fibroid MRI** from H001 to compare a sagittal scan and segmented fibroid from a separate public case. Slice spacing is 6.6 mm. The side-by-side H001 pelvic atlas is an independently positioned anatomy reference. [Uterine Myoma MRI Dataset, version 3](https://doi.org/10.6084/m9.figshare.23541312.v3)
+Choose **Explore a fibroid in 3D** to open an independent sagittal MRI. The orange fibroid and the surrounding uterine wall come from the same segmentation. Under **Surrounding tissue**, fade the wall and click the orange surface to open the MRI slice containing the picked voxel. Drag the divider or orbit either half to compare the source plane and the selected tissue. The optional female reference uterus has independent opacity and approximate placement. Slice spacing is 6.6 mm. [Uterine Myoma MRI Dataset, version 3](https://doi.org/10.6084/m9.figshare.23541312.v3)
+
+Use **Learn** for explanations of the current figure or MRI. Returning to the MRI during the same session restores the previous comparison. **Reset MRI comparison** returns to the opening view. For an offline demonstration, extract the complete portable archive, launch the bundled local viewer as described below, and open H001 from Imaging. The included figures, volumes and references load locally; the publisher links require an internet connection.
 
 ## Standalone viewer
 

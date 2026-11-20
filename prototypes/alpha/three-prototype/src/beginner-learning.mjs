@@ -10,6 +10,7 @@ const action=(id,label)=>({id,label});
 const question=(prompt,correct,other,explanation)=>({prompt,answers:[correct,other],correct:0,explanation});
 
 export function beginnerLesson(o={},context={kind:'reference'}){
+ if(context.kind==='h001')return context.beginner;
  const female=!!o.femaleActive,index=female?o.femaleData?.index:o.index;
  const selected=female?o.femaleSelected:o.selected;
  const part=index?.structures?.find(p=>p.id===selected);

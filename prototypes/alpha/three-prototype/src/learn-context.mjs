@@ -1,6 +1,7 @@
 import {referenceLesson} from '../../viewer/src/reference-learning.mjs';
 import {imageLesson, segmentationLesson} from '../../viewer/src/evidence-learning.mjs';
 import {referenceSourceLinks, relationshipScope, compositeCoverageText} from './female-catalog.mjs';
+import {h001Learning} from './imaging/h001-learning.mjs';
 
 // Adapt the existing deterministic lessons to current source context. No medical
 // finding, new anatomical classification or registration is generated here.
@@ -74,6 +75,8 @@ function localContext(o){
 }
 
 export function buildLearnContext(options={}){
+ const h001=options.h001 && h001Learning(options.h001);
+ if(h001)return h001;
  if(options.localMode)return localContext(options);
  if(options.studyView||options.imagingOpen)return h000Context(options);
  if(options.nrx)return {kind:'nrx',title:'Understand the NRX research surface',subtitle:'Independent HRA right-ovary source',cards:[card('Independent reference source','This smooth-field example derives from the HRA female right-ovary reference. It is independent of the male atlas and the acquired CT study.'),card('What the surface establishes','The bridge displays an NRX-derived surface. Its appearance does not establish registration, organ segmentation from this CT, or clinical correctness.'),...presentationCards],sourceRows:rows([['Source context','HRA female right ovary'],['Registration to active CT','Not established']]),relationships:[],links:[{label:'HRA source attribution',path:'nrx/HRA-FEMALE-NOTICE.txt'}]};

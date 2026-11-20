@@ -4,14 +4,19 @@ import TissueSurface from '../fetal-mri/FetalTissueSurface.jsx';
 import {loadMyoma, myomaPlaneCorners, myomaSourceNotice, readMyomaPixel, renderMyomaSlice} from './myoma-volume.mjs';
 import './myoma.css';
 
-function MyomaWorkspace({volume, rendererProps, compact}) {
-  const [index,setIndex] = useState(volume.centers[2]);
-  const [tissueId,setTissueId] = useState(3);
-  const [overlay,setOverlay] = useState(true);
-  const [plane,setPlane] = useState(true);
-  const [opacity,setOpacity] = useState(70);
-  const [atlasContext,setAtlasContext] = useState(false);
-  const [atlasOpacity,setAtlasOpacity] = useState(22);
+function MyomaWorkspace({volume, rendererProps, compact, reviewState, onReset}) {
+  const [index,setIndex] = useState(reviewState.index ?? volume.centers[2]);
+  const [tissueId,setTissueId] = useState(reviewState.tissueId ?? 3);
+  const [overlay,setOverlay] = useState(reviewState.overlay ?? true);
+  const [plane,setPlane] = useState(reviewState.plane ?? true);
+  const [opacity,setOpacity] = useState(reviewState.opacity ?? 70);
+  const [atlasContext,setAtlasContext] = useState(reviewState.atlasContext ?? false);
+  const [atlasOpacity,setAtlasOpacity] = useState(reviewState.atlasOpacity ?? 22);
+  const [wallContext,setWallContext] = useState(reviewState.wallContext ?? true);
+  const [wallOpacity,setWallOpacity] = useState(reviewState.wallOpacity ?? 18);
+  useLayoutEffect(()=>{
+    Object.assign(reviewState,{index,tissueId,overlay,plane,opacity,atlasContext,atlasOpacity,wallContext,wallOpacity});
+  },[reviewState,index,tissueId,overlay,plane,opacity,atlasContext,atlasOpacity,wallContext,wallOpacity]);
   const [atlasStatus,setAtlasStatus] = useState('loading');
   const [panes,setPanes] = useState({});
   const canvas = useRef(null);
@@ -60,6 +65,12 @@ function MyomaWorkspace({volume, rendererProps, compact}) {
     <label>MRI tissue<select value={tissueId} onChange={event=>setTissueId(Number(event.target.value))}>
       {volume.tissues.map(t=><option key={t.id} value={t.id}>{t.id===3?'Fibroid (myoma)':t.name}</option>)}
     </select></label>
+    {tissueId!==1 && <fieldset className="myoma-atlas-control"><legend>Surrounding tissue</legend>
+      <label><input type="checkbox" checked={wallContext} onChange={event=>setWallContext(event.target.checked)}/>Show MRI-derived uterine wall</label>
+      <label>MRI-derived wall opacity<input type="range" min="0" max="100" value={wallOpacity} disabled={!wallContext}
+        aria-valuetext={wallOpacity+' percent'} onChange={event=>setWallOpacity(Number(event.target.value))}/></label>
+      <small>Fade the wall, then click the fibroid to open its MRI slice.</small>
+    </fieldset>}
     <button type="button" onClick={()=>setIndex(tissue.peakK)}>Go to clearest slice</button>
     <small>Opens the slice with the most pixels labeled for this tissue.</small>
     <label><input type="checkbox" checked={overlay} onChange={event=>setOverlay(event.target.checked)}/>Show {name.toLowerCase()} overlay</label>
@@ -78,10 +89,11 @@ function MyomaWorkspace({volume, rendererProps, compact}) {
         <small>The atlas illustrates general anatomy. The fibroid comes from the MRI segmentation.</small>
       </>}
     </fieldset>
+    <button type="button" onClick={onReset}>Reset MRI comparison</button>
   </section>;
   return <>
     {panes.source ? createPortal(source,panes.source) : source}
-    <TissueSurface {...rendererProps} comparison volume={volume} tissueId={tissueId}
+    <TissueSurface {...rendererProps} reviewState={reviewState} wallContext={wallContext} wallOpacity={wallOpacity/100} comparison volume={volume} tissueId={tissueId}
       atlasContext={atlasContext} atlasOpacity={atlasOpacity/100} onAtlasStatus={setAtlasStatus}
       onSelect={(id,sourceK)=>{
         if(!volume.byId.has(id) || id===0) return;
@@ -94,7 +106,15 @@ function MyomaWorkspace({volume, rendererProps, compact}) {
   </>;
 }
 
-export default function MyomaExplorer({rendererProps, compact}) {
+export default function MyomaExplorer({rendererProps, compact, reviewState}) {
+  const fallback=useRef({});
+  const session=reviewState ?? fallback.current;
+  const [revision,setRevision]=useState(0);
+  if(!session.myoma) session.myoma={};
+  function resetComparison(){
+    session.myoma={};
+    setRevision(value=>value+1);
+  }
   const [volume,setVolume] = useState(null);
   const [failed,setFailed] = useState(false);
   const [attempt,setAttempt] = useState(0);
@@ -109,7 +129,7 @@ export default function MyomaExplorer({rendererProps, compact}) {
   return <section className="myoma-explorer" aria-labelledby="myoma-title">
     <h2 id="myoma-title">Uterine fibroid MRI</h2>
     <p>UMD_221129_001 · Separate teaching case from the twin ultrasound.</p>
-    {volume ? <MyomaWorkspace compact={compact} volume={volume} rendererProps={rendererProps}/> : failed ? <div>
+    {volume ? <MyomaWorkspace key={revision} reviewState={session.myoma} onReset={resetComparison} compact={compact} volume={volume} rendererProps={rendererProps}/> : failed ? <div>
       <p role="alert">The uterine MRI or its tissue labels could not be loaded.</p>
       <button type="button" onClick={() => {setFailed(false);setAttempt(a=>a+1);}}>Retry uterine MRI</button>
     </div> : <p role="status">Loading uterine MRI and fibroid segmentation…</p>}
