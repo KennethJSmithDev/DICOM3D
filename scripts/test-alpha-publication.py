@@ -15,7 +15,9 @@ def git(*args):
 def indexed(name):
     return git('show', ':' + name)
 manifest = json.loads(indexed('source-manifest.json'))
-assert manifest['version'] == '0.7.0-alpha.1' and manifest['profile'] == 'three-r3f-alpha'
+alpha_version = json.loads(indexed('prototypes/alpha/three-prototype/package.json'))['version']
+assert alpha_version in {'0.7.0-alpha.1', '0.7.0-alpha.2'}
+assert manifest['version'] == alpha_version and manifest['profile'] == 'three-r3f-alpha'
 paths = list(filter(None, git('ls-files', '-z').decode().split('\0')))
 assert 'scripts/staged_git.py' in paths, 'Required staged source missing: scripts/staged_git.py'
 assert set(manifest['files']) == set(paths) - {'source-manifest.json', 'distribution-manifest.json'}
@@ -23,7 +25,7 @@ with StagedBlobReader(root) as staged:
     for name, expected in manifest['files'].items():
         assert staged.digest(name) == expected, name
 descriptor = json.loads(indexed('distribution-manifest.json'))
-assert descriptor['version'] == '0.7.0-alpha.1' and descriptor['containsPrivatePatientImaging'] is False
+assert descriptor['version'] == alpha_version and descriptor['containsPrivatePatientImaging'] is False
 assert descriptor['approvedPublicResearchFixtures'] == ['H000']
 assert b'KennethJSmithDev' in indexed('.github/FUNDING.yml')
 for name in paths:

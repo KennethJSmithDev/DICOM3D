@@ -2,6 +2,19 @@
 param([string]$OutputDirectory = (Join-Path $PSScriptRoot '../.package'), [string]$SourceCommit = 'UNCOMMITTED-PACKAGING-CANDIDATE')
 $ErrorActionPreference = 'Stop'
 $root = Split-Path $PSScriptRoot -Parent
+if ($SourceCommit -ne 'UNCOMMITTED-PACKAGING-CANDIDATE') {
+  if ($SourceCommit -cnotmatch '^[0-9a-f]{40}$') { throw 'SourceCommit must be the exact lowercase commit SHA or the uncommitted marker' }
+  $head = (& git -C $root rev-parse --verify 'HEAD^{commit}')
+  if ($LASTEXITCODE -ne 0 -or $head -cne $SourceCommit) { throw 'SourceCommit does not identify this checkout HEAD' }
+  $changes = @(& git -C $root status --porcelain=v1 --untracked-files=all)
+  if ($LASTEXITCODE -ne 0 -or $changes.Count -ne 0) { throw 'Cannot bind a committed package identity to modified or untracked working sources' }
+  $flags = @(& git -C $root ls-files -v)
+  if ($LASTEXITCODE -ne 0 -or @($flags | Where-Object { $_ -cnotmatch '^H ' }).Count -ne 0) { throw 'Cannot bind a package while tracked files are hidden from normal Git checks' }
+}
+$candidateVersion = (Get-Content -Raw (Join-Path $root 'prototypes/alpha/three-prototype/package.json') | ConvertFrom-Json).version
+if ($candidateVersion -notin @('0.7.0-alpha.1','0.7.0-alpha.2')) { throw 'Unreviewed alpha version' }
+$moduleVersion = ([xml](Get-Content -Raw (Join-Path $root 'module.xml'))).SelectSingleNode('/Export/Document/Module/Version').InnerText
+if ($moduleVersion -ne $candidateVersion) { throw 'Module and frontend versions differ' }
 & python (Join-Path $root 'scripts/generate-retirement-051.py') --check
 if ($LASTEXITCODE) { throw 'Native retirement adapter differs from its exact policy' }
 if (Test-Path -LiteralPath $OutputDirectory) { throw 'Use a new empty output directory' }
@@ -15,7 +28,13 @@ try {
   & node scripts/test-alpha-distribution.mjs $publicRoot
   if ($LASTEXITCODE) { throw 'Frontend admission failed' }
 } finally { Pop-Location }
-Copy-Item (Join-Path $root 'src') $OutputDirectory -Recurse
+$classOutput = Join-Path $OutputDirectory 'src/DICOM3D'
+New-Item -ItemType Directory -Path $classOutput -Force | Out-Null
+foreach ($name in @('Entry.cls','Health.cls','InstallMigration.cls')) {
+  $source = Join-Path $root ('src/DICOM3D/' + $name)
+  if ((Get-Item -LiteralPath $source -Force).Attributes -band [IO.FileAttributes]::ReparsePoint) { throw 'Linked package source refused' }
+  Copy-Item -LiteralPath $source -Destination $classOutput
+}
 Copy-Item (Join-Path $root 'module.xml') $OutputDirectory
 # A versioned native link escapes still-fresh HTML cached by older packages.
 # The shell itself must revalidate; hashed JS assets retain the server's cache policy.
@@ -47,7 +66,7 @@ $manifest = $manifest.Replace('  <WebApplication Name="/dicom3d"',$copies+"`n"+'
 [IO.File]::WriteAllText($manifestPath,$manifest)
 Copy-Item (Join-Path $root 'LICENSE') $OutputDirectory
 Copy-Item (Join-Path $root 'NOTICE') $OutputDirectory
-Copy-Item (Join-Path $root 'third-party') $OutputDirectory -Recurse
+Copy-Item (Join-Path $publicRoot 'third-party') $OutputDirectory -Recurse
 New-Item -ItemType Directory -Path (Join-Path $OutputDirectory 'docs') | Out-Null
 foreach ($name in @('INSTALL_070_ALPHA.md','PACKAGING_070_ALPHA.md','IRIS_FILECOPY_RETIREMENT_051.md')) {
   Copy-Item (Join-Path $root ('docs/'+$name)) (Join-Path $OutputDirectory 'docs')
@@ -57,11 +76,13 @@ Get-ChildItem $OutputDirectory -File -Recurse | Sort-Object FullName | ForEach-O
   $name = [IO.Path]::GetRelativePath($OutputDirectory,$_.FullName).Replace('\','/')
   $fileInventory[$name] = [ordered]@{ bytes=$_.Length; sha256=(Get-FileHash -LiteralPath $_.FullName -Algorithm SHA256).Hash.ToLower() }
 }
+$frontendIdentity = Get-Content -LiteralPath (Join-Path $publicRoot 'demo-build-manifest.json') -Raw | ConvertFrom-Json
+if ($frontendIdentity.sourceBase -cne $SourceCommit -or $frontendIdentity.buildToolchain.installedTree.sha256 -cnotmatch '^[0-9a-f]{64}$') { throw 'Frontend input identity is missing or does not match the package' }
 $packageIdentity = [ordered]@{
-  product='DICOM3D'; version='0.7.0-alpha.1'; profile='three-r3f-alpha'; distribution='IRIS/IPM'; sourceCommit=$SourceCommit
+  product='DICOM3D'; version=$candidateVersion; profile='three-r3f-alpha'; distribution='IRIS/IPM'; sourceCommit=$SourceCommit
   frontendProfile='three-r3f-alpha'
   approvedPublicResearchFixtures=@('H000'); containsPrivatePatientImaging=$false
-  frontendHtmlSha256=$viewerBuild; patientDerivedResearchData=$true
+  frontendHtmlSha256=$viewerBuild; patientDerivedResearchData=$true; installedBuildDependencyTree=$frontendIdentity.buildToolchain.installedTree
   qualification='Requires the separate exact-artifact qualification receipt'; files=$fileInventory
 }
 [IO.File]::WriteAllText((Join-Path $OutputDirectory 'package-manifest.json'),($packageIdentity | ConvertTo-Json -Depth 8)+"`n")

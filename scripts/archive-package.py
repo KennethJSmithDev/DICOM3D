@@ -18,7 +18,8 @@ if args.archive.exists():
     parser.error("archive already exists; choose a new output path")
 identity = json.loads((args.stage / "package-manifest.json").read_text(encoding="utf-8-sig"))
 alpha = identity.get("profile") == "three-r3f-alpha"
-if identity["version"] != ("0.7.0-alpha.1" if alpha else "0.6.5") or not re.fullmatch(r"[0-9a-f]{40}", identity["sourceCommit"]):
+allowed_versions = {"0.7.0-alpha.1", "0.7.0-alpha.2"} if alpha else {"0.6.5"}
+if identity["version"] not in allowed_versions or not re.fullmatch(r"[0-9a-f]{40}", identity["sourceCommit"]):
     parser.error("exact reviewed packaging version and source identity required")
 actual = {
     path.relative_to(args.stage).as_posix(): {
@@ -30,8 +31,10 @@ if actual != identity["files"]:
     parser.error("stage differs from its exact package inventory")
 frontend = json.loads((args.stage / "public/demo-build-manifest.json").read_text())
 if alpha:
-    if frontend.get("schema") != "dicom3d-alpha-distribution-1" or frontend.get("release") != "0.7.0-alpha.1" or frontend.get("containsPrivatePatientImaging") is not False or frontend.get("approvedPublicResearchFixtures") != ["H000"]:
+    if frontend.get("schema") != "dicom3d-alpha-distribution-1" or frontend.get("release") != identity["version"] or frontend.get("containsPrivatePatientImaging") is not False or frontend.get("approvedPublicResearchFixtures") != ["H000"]:
         parser.error("unadmitted alpha distribution")
+    if frontend.get('sourceBase') != identity['sourceCommit'] or not isinstance(identity.get('installedBuildDependencyTree'), dict) or identity['installedBuildDependencyTree'] != frontend.get('buildToolchain', {}).get('installedTree') or not re.fullmatch(r'[0-9a-f]{64}', identity['installedBuildDependencyTree'].get('sha256', '')):
+        parser.error('package and frontend build-input identities differ')
     admission = frontend.get("approvedPublicResearchAssets", {})
     # Five unchanged, operator-admitted public H000 objects; not arbitrary studies.
     if hashlib.sha256(json.dumps(admission, sort_keys=True, separators=(",", ":")).encode()).hexdigest() != "b199c0f8b3d8df40a0f23a03f9bd851aebb3febc86f184b2cf7cbdeb3d8f93e8":
@@ -39,6 +42,8 @@ if alpha:
     for name, expected in admission.items():
         if frontend["files"].get("demo/h000/" + name) != expected:
             parser.error("public H000 asset differs: " + name)
+    if {name for name in frontend['files'] if name.startswith('demo/h000/')} != {'demo/h000/' + name for name in admission}:
+        parser.error('unexpected H000 asset')
 elif frontend["patientDerivedResearchData"] or frontend["approvedPublicResearchFixtures"]:
     parser.error("research data is not admitted in the legacy profile")
 public_files = {path.relative_to(args.stage / "public").as_posix() for path in (args.stage / "public").rglob("*") if path.is_file()}

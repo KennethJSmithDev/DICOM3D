@@ -2,6 +2,14 @@
 // WHY: HRA female has 231 primitives in 22 groups; a primitive is not an organ/budget.
 // INVARIANT: no geometry writes; O(capacity) output plus one copied source primitive.
 // EVIDENCE: B04-05 lab vertex sampler; test-public-reference-visual.mjs adds multi-primitive cases.
+export function groupsWithinSampleBudget(groups, capacity) {
+  if(!Array.isArray(groups)||!Number.isInteger(capacity)||capacity<1||capacity>8192)throw Error('Invalid reference sample budget');
+  // When there are more owners than particles, sample the loaded owners evenly;
+  // this is presentation only and does not alter the full anatomy or its IDs.
+  if(groups.length<=capacity)return groups;
+  return Array.from({length:capacity},(_,i)=>groups[Math.floor(i*groups.length/capacity)]);
+}
+
 export function samplePublicReference(groups, capacity=8192, seed=0x52454631) {
   if(!Number.isInteger(capacity)||capacity<1||capacity>8192||!groups.length||groups.length>capacity)throw Error('Invalid reference sample budget');
   if(new Set(groups.map(g=>g.id)).size!==groups.length)throw Error('Duplicate reference group identity');

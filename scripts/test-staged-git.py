@@ -1,5 +1,6 @@
 """Regression tests for staged-byte hashing and concurrent index replacement."""
 import hashlib
+import json
 import os
 from pathlib import Path
 import shutil
@@ -140,14 +141,78 @@ class StagedGitTests(unittest.TestCase):
                         self.root / 'viewer' / 'src' / 'public-h000-admission.mjs')
         (self.root / 'distribution-manifest.json').write_text(
             '{"version":"0.7.0-alpha.1","frontendProfile":"three-r3f-alpha"}', encoding='utf-8')
+        package = self.root / 'prototypes/alpha/three-prototype/package.json'
+        package.parent.mkdir(parents=True)
+        package.write_text('{"version":"0.7.0-alpha.1"}', encoding='utf-8')
         args = [sys.executable, '-B', 'scripts/update-source-manifest.py', '--profile', 'alpha']
         missing = subprocess.run(args, cwd=self.root, capture_output=True, text=True)
         self.assertNotEqual(missing.returncode, 0)
         self.assertIn('Required staged source missing: scripts/staged_git.py', missing.stderr)
         self.assertFalse((self.root / 'source-manifest.json').exists())
-        self.git('add', '--', 'scripts/staged_git.py')
+        self.git('add', '--', 'scripts/staged_git.py', 'viewer/src/public-h000-admission.mjs',
+                 'distribution-manifest.json', 'prototypes/alpha/three-prototype/package.json')
         present = subprocess.run(args, cwd=self.root, capture_output=True, text=True)
         self.assertEqual(present.returncode, 0, present.stderr)
+        package.write_text('{"version":"0.7.0-alpha.2"}', encoding='utf-8')
+        self.git('add', '--', 'prototypes/alpha/three-prototype/package.json')
+        before = (self.root / 'source-manifest.json').read_bytes()
+        mismatch = subprocess.run(args, cwd=self.root, capture_output=True, text=True)
+        self.assertNotEqual(mismatch.returncode, 0)
+        self.assertEqual((self.root / 'source-manifest.json').read_bytes(), before)
+        (self.root / 'distribution-manifest.json').write_text(
+            '{"version":"0.7.0-alpha.2","frontendProfile":"three-r3f-alpha"}', encoding='utf-8')
+        # Unstaged descriptor must not change the staged source identity.
+        unstaged = subprocess.run(args, cwd=self.root, capture_output=True, text=True)
+        self.assertNotEqual(unstaged.returncode, 0)
+        self.git('add', '--', 'distribution-manifest.json')
+        next_version = subprocess.run(args, cwd=self.root, capture_output=True, text=True)
+        self.assertEqual(next_version.returncode, 0, next_version.stderr)
+        self.assertEqual(json.loads((self.root / 'source-manifest.json').read_text())['version'], '0.7.0-alpha.2')
+
+    def test_unstaged_admission_cannot_authorize_extra_h000(self):
+        source = Path(__file__).resolve().parent
+        (self.root / 'scripts').mkdir()
+        (self.root / 'viewer/src').mkdir(parents=True)
+        for name in ('update-source-manifest.py', 'staged_git.py'):
+            shutil.copyfile(source / name, self.root / 'scripts' / name)
+        admission = self.root / 'viewer/src/public-h000-admission.mjs'
+        shutil.copyfile(source.parent / 'viewer/src/public-h000-admission.mjs', admission)
+        self.git('add', '--', 'scripts/staged_git.py', 'viewer/src/public-h000-admission.mjs')
+        extra = self.root / 'reference/public/demo/h000/private.txt'
+        extra.parent.mkdir(parents=True)
+        extra.write_text('not public', encoding='utf-8')
+        self.git('add', '--', 'reference/public/demo/h000/private.txt')
+        admission.write_text('export const APPROVED_H000_ASSETS = {"private.txt": {"bytes":10,"sha256":"'
+                             + hashlib.sha256(b'not public').hexdigest() + '"}};', encoding='utf-8')
+        result = subprocess.run([sys.executable, '-B', 'scripts/update-source-manifest.py'],
+                                cwd=self.root, capture_output=True, text=True)
+        self.assertNotEqual(result.returncode, 0)
+        self.assertIn('Unadmitted source path', result.stderr)
+        self.assertFalse((self.root / 'source-manifest.json').exists())
+
+    def test_publication_gate_uses_staged_excluded_hash(self):
+        source = Path(__file__).resolve().parent
+        (self.root / 'scripts').mkdir()
+        (self.root / 'viewer/src').mkdir(parents=True)
+        (self.root / 'docs').mkdir()
+        shutil.copyfile(source / 'test-publication.mjs', self.root / 'scripts/test-publication.mjs')
+        secret = b'synthetic excluded screenshot'
+        (self.root / 'docs/renamed.txt').write_bytes(secret)
+        release = self.root / 'viewer/src/public-release.mjs'
+        release.write_text("export const PUBLIC_RELEASE={release:'0.6.5'}; export const publicBuildProfile=()=>({studyEnabled:false});")
+        admission = self.root / 'viewer/src/public-h000-admission.mjs'
+        admission.write_text("export const APPROVED_H000_ASSETS={}; export const EXCLUDED_STUDY_SCREENSHOT_SHA256='" + hashlib.sha256(secret).hexdigest() + "';")
+        (self.root / 'viewer/package.json').write_text('{"version":"0.6.5"}')
+        (self.root / 'distribution-manifest.json').write_text('{}')
+        self.git('add', '--', 'scripts/test-publication.mjs', 'viewer', 'docs', 'distribution-manifest.json')
+        names = self.git('ls-files', '-z').decode().split('\0')
+        files = {name: identity(self.git('show', ':' + name)) for name in names if name and name != 'distribution-manifest.json'}
+        (self.root / 'source-manifest.json').write_text(json.dumps({'files':files}))
+        self.git('add', '--', 'source-manifest.json')
+        admission.write_text("export const APPROVED_H000_ASSETS={}; export const EXCLUDED_STUDY_SCREENSHOT_SHA256='" + '0'*64 + "';")
+        result = subprocess.run(['node', 'scripts/test-publication.mjs'], cwd=self.root, capture_output=True, text=True)
+        self.assertNotEqual(result.returncode, 0)
+        self.assertIn('Excluded screenshot under renamed path', result.stderr)
 
     def test_child_is_closed_on_failure(self):
         child = None

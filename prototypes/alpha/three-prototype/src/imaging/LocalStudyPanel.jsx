@@ -1,11 +1,12 @@
 import React, {useEffect, useRef, useState} from 'react';
 import {verifyVolume, verifiedFrameRgba} from '../../../viewer/src/verified-volume.mjs';
+import ResearchEvidencePanel from './ResearchEvidencePanel.jsx';
 
 // Files remain in the browser; no fetch or upload is used. The adapter validates
 // the supplied producer descriptor and every decoded frame before publication.
 export default function LocalStudyPanel({onStudyChange, onFrameChange}) {
   const [descriptorFile,setDescriptorFile]=useState(null),[pixelFile,setPixelFile]=useState(null);
-  const [study,setStudy]=useState(null),[frame,setFrame]=useState(0),[loading,setLoading]=useState(false);
+  const [study,setStudy]=useState(null),[sourceEncoding,setSourceEncoding]=useState(null),[frame,setFrame]=useState(0),[loading,setLoading]=useState(false);
   const [status,setStatus]=useState('No local study loaded.');
   const canvasRef=useRef(null), generation=useRef(0), controller=useRef(null);
   useEffect(()=>()=>{generation.current++;controller.current?.abort();},[]);
@@ -20,13 +21,13 @@ export default function LocalStudyPanel({onStudyChange, onFrameChange}) {
       const bytes=await pixelFile.arrayBuffer();
       const result=await verifyVolume(descriptor,bytes,{signal:ac.signal,sourceEncoding:metadata?.sourceEncoding});
       if(id!==generation.current||ac.signal.aborted)return;
-      setStudy(result);setFrame(0);onStudyChange?.(result);onFrameChange?.(0);
+      setStudy(result);setSourceEncoding(metadata?.sourceEncoding??null);setFrame(0);onStudyChange?.(result);onFrameChange?.(0);
       setStatus('Local verified CT admitted. No live retrieval, segmentation or atlas registration is supplied.');
     }catch{
       if(id===generation.current&&!ac.signal.aborted)setStatus('Local source could not be verified. Existing study, if any, was retained.');
     }finally{if(id===generation.current)setLoading(false);}
   }
-  function close(){generation.current++;controller.current?.abort();setLoading(false);setStudy(null);setFrame(0);onStudyChange?.(null);onFrameChange?.(0);setStatus('No local study loaded.');}
+  function close(){generation.current++;controller.current?.abort();setLoading(false);setStudy(null);setSourceEncoding(null);setFrame(0);onStudyChange?.(null);onFrameChange?.(0);setStatus('No local study loaded.');}
   function changeFrame(value){setFrame(value);onFrameChange?.(value);}
   useEffect(()=>{
     if(!study||!canvasRef.current)return;
@@ -44,6 +45,7 @@ export default function LocalStudyPanel({onStudyChange, onFrameChange}) {
     <p role="status">{status}</p>
     {study&&<><canvas ref={canvasRef} aria-label="Private acquired CT frame" style={{width:'100%',maxWidth:512,display:'block',background:'#000'}}/>
       <label>Source frame {frame+1} / {study.descriptor.shape[0]} <input aria-label="Local CT frame" type="range" min="0" max={study.descriptor.shape[0]-1} value={frame} onChange={e=>changeFrame(Number(e.target.value))}/></label>
-      <p>Source frames and 3D plane are experimental. No source SEG or atlas registration is available.</p></>}
+      <p>Source frames and 3D plane are experimental. No source SEG or atlas registration is available.</p>
+      <ResearchEvidencePanel study={study} sourceEncoding={sourceEncoding} frame={frame} admissionGeneration={generation} admissionId={generation.current}/></>}
   </section>;
 }

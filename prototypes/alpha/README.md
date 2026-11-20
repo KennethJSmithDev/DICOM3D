@@ -1,6 +1,6 @@
 # DICOM3D v0.7.0-alpha.1 source checkpoint
 
-DICOM3D is an open-source interactive anatomy and medical imaging platform. This is the existing React 19.2.7 / Three.js 0.180.0 / R3F 9.6.1 prototype, with Vite 8.2.4; the current source-native integration preserves its renderer and scientific source contracts.
+DICOM3D is an open-source interactive anatomy and medical imaging platform. This is the existing React 19.2.7 / Three.js 0.180.0 / R3F 9.6.1 prototype. The local development candidate pins Vite 8.3.7; the published alpha.1 remains the separately qualified historical release. The current source-native integration preserves its renderer and scientific source contracts.
 
 Current published alpha.1 qualification and installation: [acceptance snapshot](../../docs/RELEASE_070_ALPHA_ACCEPTANCE.md), [downloads](../../docs/DOWNLOADS_070_ALPHA.md) and [launch guide](../../docs/LAUNCH_070_ALPHA.md). The public Live Demo serves this alpha. Historical checkpoint sections below retain their original scope; they are not the current deployment identity.
 

@@ -34,8 +34,9 @@ https://github.com/pmndrs/react-three-fiber/blob/2a528745e9aa7c9e6cca41e404b59d4
 That commit is both the npm 9.6.1 gitHead and upstream v9.6.1 tag.
 
 Current alpha build-tool notices are also retained byte-for-byte:
-  Vite 8.2.4                     MIT and its included third-party notices
-  Rolldown 1.2.13                MIT and its THIRD-PARTY-LICENSE
+  Vite 8.3.7                     MIT and its included third-party notices
+  Rolldown 1.2.18                MIT and its THIRD-PARTY-LICENSE
+Historical alpha tool notices for Vite 8.2.4 and Rolldown 1.2.13 remain in place.
 These identify the locked assembly tools, not additional browser features. They
 do not replace historical notices for other versions elsewhere in the repository.
 

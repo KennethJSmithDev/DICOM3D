@@ -4,8 +4,9 @@ export const OHIF_TEST='https://d14fa38qiwhyfd.cloudfront.net/dicomweb/';
 export function readFailure(status){return status===401||status===403?'ACCESS_DENIED':status===404?'NOT_FOUND':'HTTP_ERROR';}
 // Optional anonymous public-test reader: no arbitrary endpoint, redirect,
 // credentials, pagination, attachments, patient reads or write operations.
-export function boundedTestReader(base,signal,fetcher=fetch){
+export function boundedTestReader(base,signal,fetcher=fetch,{totalCap=2*1024*1024}={}){
  if(![SMART_TEST,OHIF_TEST].includes(base))throw Error('Unqualified test provider');
+ if(!Number.isSafeInteger(totalCap)||totalCap<1||totalCap>8*1024*1024)throw Error('Unsupported response budget');
  let bytes=0,calls=0;const sources=[];
  async function read(path,cap=1024*1024){
   const valid=base===SMART_TEST?/^(metadata|ImagingStudy\?_count=1|DiagnosticReport\?_count=1|Observation\/[A-Za-z0-9.-]{1,64})$/.test(path):/^studies\?limit=1$/.test(path);
@@ -17,7 +18,7 @@ export function boundedTestReader(base,signal,fetcher=fetch){
   if(Number(response.headers.get('Content-Length'))>cap)throw Error('Response bound exceeded');
   const reader=response.body?.getReader();if(!reader)throw Error('Readable response required');
   const chunks=[];let size=0;
-  try{for(;;){const part=await reader.read();if(part.done)break;size+=part.value.byteLength;bytes+=part.value.byteLength;if(size>cap||bytes>2*1024*1024)throw Error('Response bound exceeded');chunks.push(part.value);}}
+  try{for(;;){const part=await reader.read();if(part.done)break;size+=part.value.byteLength;bytes+=part.value.byteLength;if(size>cap||bytes>totalCap)throw Error('Response bound exceeded');chunks.push(part.value);}}
   catch(e){await reader.cancel();throw e;}
   const body=new Uint8Array(size);let offset=0;for(const chunk of chunks){body.set(chunk,offset);offset+=chunk.byteLength;}
   const wire=new TextDecoder('utf-8',{fatal:true}).decode(body),data=JSON.parse(wire);

@@ -3,11 +3,14 @@ import {execFileSync} from 'node:child_process';
 import {createHash} from 'node:crypto';
 import {fileURLToPath} from 'node:url';
 import {resolve} from 'node:path';
-import {PUBLIC_RELEASE,publicBuildProfile} from '../viewer/src/public-release.mjs';
-import {APPROVED_H000_ASSETS,EXCLUDED_STUDY_SCREENSHOT_SHA256} from '../viewer/src/public-h000-admission.mjs';
 
 const root=fileURLToPath(new URL('../',import.meta.url));
 const git=args=>execFileSync('git',args,{cwd:root,maxBuffer:150*1024*1024});
+// Admission and release decisions must come from the same index as the bytes
+// being screened. An unstaged working-tree edit must not change this gate.
+const stagedModule=async name=>import('data:text/javascript;base64,'+git(['show',':'+name]).toString('base64'));
+const {PUBLIC_RELEASE,publicBuildProfile}=await stagedModule('viewer/src/public-release.mjs');
+const {APPROVED_H000_ASSETS,EXCLUDED_STUDY_SCREENSHOT_SHA256}=await stagedModule('viewer/src/public-h000-admission.mjs');
 const paths=git(['ls-files','-z']).toString('utf8').split('\0').filter(Boolean);
 const sourceInventory=JSON.parse(git(['show',':source-manifest.json'])).files;
 const inventoryExclusions=new Set(['source-manifest.json','distribution-manifest.json']);

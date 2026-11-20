@@ -3,7 +3,7 @@ import {useFrame,useThree} from '@react-three/fiber';
 import {Box3,BoxGeometry,InstancedMesh,MeshBasicMaterial,Matrix4,Vector3,Color,DoubleSide,AdditiveBlending} from 'three';
 import {MeshBasicNodeMaterial} from 'three/webgpu';
 import {uniform,positionWorld,normalWorld,cameraPosition,vec3,float,dot,abs,pow} from 'three/tsl';
-import {samplePublicReference} from './live-reference-samples.mjs';
+import {samplePublicReference,groupsWithinSampleBudget} from './live-reference-samples.mjs';
 import {introFrame} from './materialization-state.mjs';
 import {isVisibleOwner} from './atlas-presentation.js';
 export const materializationLifecycle={created:0,disposed:0,active:0,samples:0};
@@ -27,7 +27,7 @@ export default function MaterializationEffect({bundles,clock,run,settings={count
   }
   if(!groups.size||bounds.isEmpty())return;
   const all=[...groups.values()],skin=all.find(g=>g.skin),count=[512,2048,8192].includes(settings.count)?settings.count:2048;
-  const sampled=samplePublicReference(all,count).data;
+  const sampled=samplePublicReference(groupsWithinSampleBudget(all,count),count).data;
   if(skin){const outline=samplePublicReference([skin],count/2).data;for(let i=0;i<count/2;i++)sampled.set(outline.subarray(i*8,i*8+8),i*16)}
   const size=bounds.getSize(new Vector3()),radius=size.length()/2,cut=uniform(bounds.min.y),gain=uniform(0),records=[];
   const rim=pow(float(1).sub(abs(dot(normalWorld.normalize(),cameraPosition.sub(positionWorld).normalize()))),2.1);

@@ -93,6 +93,18 @@ test('preserves and renders the valid unsigned 12-bit endpoints', async () => {
   assert.deepEqual([...rgba.slice(0, 8)], [0, 0, 0, 255, 255, 255, 255, 255]);
 });
 
+test('admits only source display widths the renderer can use', async () => {
+  const fixture = packet();
+  fixture.descriptor.calibration.width = 65536;
+  const volume = await verify(fixture);
+  assert.equal(volume.descriptor.calibration.width, 65536);
+  assert.equal(verifiedFrameRgba(volume, 0, 0, 65536, new Uint8ClampedArray(rows * columns * 4)).length, rows * columns * 4);
+  fixture.descriptor.calibration.width = 65537;
+  const owner = createPublicationOwner();
+  await assert.rejects(verify(fixture, owner), {code:'CT_UNSUPPORTED', reasons:['VOI']});
+  assert.equal(owner.current, null);
+});
+
 for (const invalid of [4096, 65535]) {
   test('rejects stored value ' + invalid + ' in an unsigned 12-bit volume with matching hashes', async () => {
     const pixels = new Uint16Array(sampleCount);

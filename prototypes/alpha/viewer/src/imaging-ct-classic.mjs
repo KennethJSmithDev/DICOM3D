@@ -23,7 +23,7 @@ export const classicCt=Object.freeze({
   const d=candidate.descriptor,c=d.calibration;
   need(d.shape?.length===3&&d.shape.every(v=>Number.isSafeInteger(v)&&v>=2),'volume eligibility');
   need(Number.isFinite(c?.slope)&&c.slope!==0&&Number.isFinite(c.intercept),'calibration');
-  need(['LINEAR','LINEAR_EXACT'].includes(c.voiFunction)&&Number.isFinite(c.center)&&Number.isFinite(c.width)&&c.width>=1,'VOI');
+  need(['LINEAR','LINEAR_EXACT'].includes(c.voiFunction)&&Number.isFinite(c.center)&&Number.isFinite(c.width)&&c.width>=1&&c.width<=65536,'VOI');
   const ids=new Set();need(Array.isArray(d.frames)&&d.frames.length===d.shape[0],'frames');
   for(const f of d.frames){need(f.sourceFrame===1&&!ids.has(f.sopIdentity),'one acquired image per SOP');ids.add(f.sopIdentity);}
   // The decoded uint16 carrier must contain only meaningful 12-bit values.

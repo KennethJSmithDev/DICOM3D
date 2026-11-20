@@ -39,3 +39,6 @@ viewer/src/reference-ui.ts text eol=lf
 
 # Preserve lossless HRA byte chunks across checkouts.
 reference/public/reference/hra-female.glb.part* -text
+
+# Build input hashes must match across Windows and Linux checkouts.
+scripts/build-alpha-distribution.mjs text eol=lf
