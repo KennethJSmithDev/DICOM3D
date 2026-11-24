@@ -420,8 +420,8 @@
       "sha256": "311fc357b1dc5ed0ffab12a1eff504e605928dc7cfc4837f62f7e98d11d30d98"
     },
     "module.xml": {
-      "bytes": 18841,
-      "sha256": "9d1e2072cc16e22556011fe39de0769d3f58b15df0296fabf2adab56e2c6a2f8"
+      "bytes": 18805,
+      "sha256": "ebfc0024868dfacd0cd62fade1f4561b5f5d1660725d52aeab97f289abf76a89"
     },
     "prototypes/alpha/.gitattributes": {
       "bytes": 9,
@@ -1999,9 +1999,13 @@
       "bytes": 633942,
       "sha256": "8b534c82a9b49fb19d642cb873a7fbb6c8d5df7aa67c5b7439e30ba4cc776892"
     },
+    "public/attribution/BODYParts3D-NOTICE.txt": {
+      "bytes": 1009,
+      "sha256": "bab5d23320d2aaacbd72f9f5d62b082fb6319b3de434f75ad587c7e5dfdff024"
+    },
     "public/demo-build-manifest.json": {
       "bytes": 56942,
-      "sha256": "d995c9e8d4992bb24f9a9dfe5ef2c857b4d6ed2b4161aaeb02c85c8dcc027cac"
+      "sha256": "866f0dd58acfbb34d753ed815920da1d89b5f27e71f7672b482afc3667969e44"
     },
     "public/index.html": {
       "bytes": 1358,
@@ -2010,6 +2014,10 @@
     "public/reference.html": {
       "bytes": 1358,
       "sha256": "9af552d4b09e6729b7580600644208e8b9acdf3db4714d8c102790fec0779d85"
+    },
+    "public/reference/BODYParts3D-NOTICE.txt": {
+      "bytes": 1009,
+      "sha256": "bab5d23320d2aaacbd72f9f5d62b082fb6319b3de434f75ad587c7e5dfdff024"
     },
     "reference/metadata/anatomy-source-records.json": {
       "bytes": 855652,
@@ -3280,8 +3288,8 @@
       "sha256": "c6705c003e0b8ba04b8db244de00b8672166aa94b6494820b86f97f7dda11e04"
     },
     "scripts/refresh-package-frontend.py": {
-      "bytes": 10898,
-      "sha256": "e457fd4ba557ed73b960c520e9d722d5639ebaf3ac7a91df0858c83708e31582"
+      "bytes": 10859,
+      "sha256": "574b6f296dba019897ae66018a8c9fbf8aa14a44252f48b10d41a7465174a80f"
     },
     "scripts/repair-bp3d-export.py": {
       "bytes": 18471,

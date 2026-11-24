@@ -69,7 +69,9 @@ generated_names = set()
 for name in files:
     if args.profile == 'alpha':
         assert name in {'index.html', 'reference.html', 'demo-build-manifest.json', 'LICENSE', 'NOTICE', 'distribution-manifest.json'} or re.fullmatch(r'(assets|atlas|female-delta|attribution|reference|third-party|demo/h000)/[A-Za-z0-9_./-]+', name)
-        external = name.startswith(('atlas/', 'female-delta/', 'demo/h000/', 'third-party/')) or name in {'attribution/BODYParts3D-NOTICE.txt', 'reference/BODYParts3D-NOTICE.txt', 'LICENSE', 'NOTICE', 'distribution-manifest.json'}
+        if name in {'attribution/BODYParts3D-NOTICE.txt', 'reference/BODYParts3D-NOTICE.txt'}:
+            assert checked_read(root / 'prototypes/alpha/three-prototype/expanded-atlas/LICENSE.md') == verified[name]
+        external = name.startswith(('atlas/', 'female-delta/', 'demo/h000/', 'third-party/')) or name in {'LICENSE', 'NOTICE', 'distribution-manifest.json'}
     else:
         external = name.startswith(('reference/', 'brand/', 'third-party/')) or name in {'LICENSE', 'NOTICE'}
         assert external or name in {'index.html', 'reference.html', 'demo-build-manifest.json'} or re.fullmatch(r'assets/[^/]+\.(js|css)', name)
@@ -138,8 +140,6 @@ for name, expected in sorted(files.items()):
             source = 'prototypes/alpha/three-prototype/atlas-delta/' + name.removeprefix('female-delta/')
         elif name.startswith('demo/h000/'):
             source = 'reference/public/' + name
-        elif name in {'attribution/BODYParts3D-NOTICE.txt', 'reference/BODYParts3D-NOTICE.txt'}:
-            source = 'prototypes/alpha/three-prototype/expanded-atlas/LICENSE.md'
         elif name in {'LICENSE', 'NOTICE', 'distribution-manifest.json'} or name.startswith('third-party/'):
             source = name
         else:

@@ -31,7 +31,7 @@
       "sha256": "0dfff975e61696fd4b570e32b38e84ef4515ebb812906196169aab0818081d2a"
     }
   },
-  "sourceBase": "71172e3fc5f33fd2225e90c5f5a09afe3e5377cc",
+  "sourceBase": "0bb97efe6ddfc7425d75b0b1768cb40ae823d88b",
   "sourceIdentity": "Source commit is separate from the recorded actual installed build dependency tree; tree hash is not proof of upstream package integrity.",
   "sourceInputs": {
     "prototypes/alpha/three-prototype/src/assembly-presentation.js": "2a9417b0aee3dd49269c4932be4e14a0054eddab0735c6e8728cbcbe2d82ac5d",

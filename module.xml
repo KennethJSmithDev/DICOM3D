@@ -88,7 +88,7 @@
   <FileCopy Name="prototypes/alpha/three-prototype/expanded-atlas/male-unclassified-height-upper.glb" Target="{$cspdir}dicom3d/atlas/male-unclassified-height-upper.glb" />
   <FileCopy Name="prototypes/alpha/three-prototype/expanded-atlas/male-unclassified-height-upper.manifest.json" Target="{$cspdir}dicom3d/atlas/male-unclassified-height-upper.manifest.json" />
   <FileCopy Name="prototypes/alpha/three-prototype/expanded-atlas/source-native.json" Target="{$cspdir}dicom3d/atlas/source-native.json" />
-  <FileCopy Name="prototypes/alpha/three-prototype/expanded-atlas/LICENSE.md" Target="{$cspdir}dicom3d/attribution/BODYParts3D-NOTICE.txt" />
+  <FileCopy Name="public/attribution/BODYParts3D-NOTICE.txt" Target="{$cspdir}dicom3d/attribution/BODYParts3D-NOTICE.txt" />
   <FileCopy Name="public/demo-build-manifest.json" Target="{$cspdir}dicom3d/demo-build-manifest.json" />
   <FileCopy Name="reference/public/demo/h000/NOTICE.md" Target="{$cspdir}dicom3d/demo/h000/NOTICE.md" />
   <FileCopy Name="reference/public/demo/h000/ct.npy.bin" Target="{$cspdir}dicom3d/demo/h000/ct.npy.bin" />
@@ -105,7 +105,7 @@
   <FileCopy Name="prototypes/alpha/three-prototype/atlas-delta/female-source-native.json" Target="{$cspdir}dicom3d/female-delta/female-source-native.json" />
   <FileCopy Name="public/index.html" Target="{$cspdir}dicom3d/index.html" />
   <FileCopy Name="public/reference.html" Target="{$cspdir}dicom3d/reference.html" />
-  <FileCopy Name="prototypes/alpha/three-prototype/expanded-atlas/LICENSE.md" Target="{$cspdir}dicom3d/reference/BODYParts3D-NOTICE.txt" />
+  <FileCopy Name="public/reference/BODYParts3D-NOTICE.txt" Target="{$cspdir}dicom3d/reference/BODYParts3D-NOTICE.txt" />
   <FileCopy Name="third-party/alpha-runtime-NOTICE.txt" Target="{$cspdir}dicom3d/third-party/alpha-runtime-NOTICE.txt" />
   <FileCopy Name="third-party/alpha/babel-runtime-7.29.7-LICENSE.txt" Target="{$cspdir}dicom3d/third-party/alpha/babel-runtime-7.29.7-LICENSE.txt" />
   <FileCopy Name="third-party/alpha/base64-js-1.5.1-LICENSE.txt" Target="{$cspdir}dicom3d/third-party/alpha/base64-js-1.5.1-LICENSE.txt" />
