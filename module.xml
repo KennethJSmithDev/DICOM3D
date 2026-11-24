@@ -5,133 +5,14 @@
   <Description>DICOM3D interactive anatomy and imaging research viewer; not for diagnostic use</Description>
   <Packaging>module</Packaging><SourcesRoot>src</SourcesRoot>
   <Resource Name="DICOM3D.PKG" />
+  <Invoke Class="DICOM3D.Assets" Method="Verify" Phase="Activate" When="After">
+    <Arg>{$cspdir}dicom3d/</Arg>
+  </Invoke>
   <Invoke Class="DICOM3D.InstallMigration" Method="Retire051" Phase="Activate" When="After">
     <Arg>{$cspdir}dicom3d/</Arg>
   </Invoke>
   <FileCopy Name="LICENSE" Target="{$cspdir}dicom3d/LICENSE" />
   <FileCopy Name="NOTICE" Target="{$cspdir}dicom3d/NOTICE" />
-  <FileCopy Name="public/assets/CRL-SOURCE-NOTICE-CZLTcZw-.txt" Target="{$cspdir}dicom3d/assets/CRL-SOURCE-NOTICE-CZLTcZw-.txt" />
-  <FileCopy Name="public/assets/EpicSandboxPanel-RFQ0k4km.js" Target="{$cspdir}dicom3d/assets/EpicSandboxPanel-RFQ0k4km.js" />
-  <FileCopy Name="public/assets/FetalBrainExplorer-Bu4wnhMR.css" Target="{$cspdir}dicom3d/assets/FetalBrainExplorer-Bu4wnhMR.css" />
-  <FileCopy Name="public/assets/FetalBrainExplorer-DDhVJDeu.js" Target="{$cspdir}dicom3d/assets/FetalBrainExplorer-DDhVJDeu.js" />
-  <FileCopy Name="public/assets/FetalTissueSurface-DXRbgbjg.css" Target="{$cspdir}dicom3d/assets/FetalTissueSurface-DXRbgbjg.css" />
-  <FileCopy Name="public/assets/FetalTissueSurface-QHOkMdhR.js" Target="{$cspdir}dicom3d/assets/FetalTissueSurface-QHOkMdhR.js" />
-  <FileCopy Name="public/assets/MyomaExplorer-7AVCLQl1.css" Target="{$cspdir}dicom3d/assets/MyomaExplorer-7AVCLQl1.css" />
-  <FileCopy Name="public/assets/MyomaExplorer-DpYg3CgN.js" Target="{$cspdir}dicom3d/assets/MyomaExplorer-DpYg3CgN.js" />
-  <FileCopy Name="public/assets/PlacentaReference-B16P0217.js" Target="{$cspdir}dicom3d/assets/PlacentaReference-B16P0217.js" />
-  <FileCopy Name="public/assets/PlacentaReference-Ciq5Jvss.css" Target="{$cspdir}dicom3d/assets/PlacentaReference-Ciq5Jvss.css" />
-  <FileCopy Name="public/assets/SmartSyntheticPanel-CGLPmdpr.js" Target="{$cspdir}dicom3d/assets/SmartSyntheticPanel-CGLPmdpr.js" />
-  <FileCopy Name="public/assets/T2WAtlas_labelkey-tissue-CRUwLVvO.txt" Target="{$cspdir}dicom3d/assets/T2WAtlas_labelkey-tissue-CRUwLVvO.txt" />
-  <FileCopy Name="public/assets/UMD-NOTICE-Cx_-idnK.txt" Target="{$cspdir}dicom3d/assets/UMD-NOTICE-Cx_-idnK.txt" />
-  <FileCopy Name="public/assets/UMD_221129_001_seg.nii-dpi5Qs1q.gz" Target="{$cspdir}dicom3d/assets/UMD_221129_001_seg.nii-dpi5Qs1q.gz" />
-  <FileCopy Name="public/assets/UMD_221129_001_t2.nii-CytkCKDv.gz" Target="{$cspdir}dicom3d/assets/UMD_221129_001_t2.nii-CytkCKDv.gz" />
-  <FileCopy Name="public/assets/UmdUterusReference-CpBDIDpE.js" Target="{$cspdir}dicom3d/assets/UmdUterusReference-CpBDIDpE.js" />
-  <FileCopy Name="public/assets/__vite-browser-external-BtIiOxWW.js" Target="{$cspdir}dicom3d/assets/__vite-browser-external-BtIiOxWW.js" />
-  <FileCopy Name="public/assets/atlas-gpu-_zASOIh0.js" Target="{$cspdir}dicom3d/assets/atlas-gpu-_zASOIh0.js" />
-  <FileCopy Name="public/assets/carnegie-stage20-LH1Cwx0s.glb" Target="{$cspdir}dicom3d/assets/carnegie-stage20-LH1Cwx0s.glb" />
-  <FileCopy Name="public/assets/ct-spatial-DBQBJiet.js" Target="{$cspdir}dicom3d/assets/ct-spatial-DBQBJiet.js" />
-  <FileCopy Name="public/assets/fetal-brain-DKMBGb3-.js" Target="{$cspdir}dicom3d/assets/fetal-brain-DKMBGb3-.js" />
-  <FileCopy Name="public/assets/fetus-in-uterus-BW8kn3SM.png" Target="{$cspdir}dicom3d/assets/fetus-in-uterus-BW8kn3SM.png" />
-  <FileCopy Name="public/assets/fhir-readonly-openapi-BuH2hvaV.js" Target="{$cspdir}dicom3d/assets/fhir-readonly-openapi-BuH2hvaV.js" />
-  <FileCopy Name="public/assets/fibroid-j8W9rm3I.jpg" Target="{$cspdir}dicom3d/assets/fibroid-j8W9rm3I.jpg" />
-  <FileCopy Name="public/assets/hra-full-term-DYO0M0Bj.glb" Target="{$cspdir}dicom3d/assets/hra-full-term-DYO0M0Bj.glb" />
-  <FileCopy Name="public/assets/index-DTFNjcHd.css" Target="{$cspdir}dicom3d/assets/index-DTFNjcHd.css" />
-  <FileCopy Name="public/assets/index-PXLrh3SV.js" Target="{$cspdir}dicom3d/assets/index-PXLrh3SV.js" />
-  <FileCopy Name="public/assets/jsx-runtime-MZURdZre.js" Target="{$cspdir}dicom3d/assets/jsx-runtime-MZURdZre.js" />
-  <FileCopy Name="public/assets/native-study-B5vLP6PN.js" Target="{$cspdir}dicom3d/assets/native-study-B5vLP6PN.js" />
-  <FileCopy Name="public/assets/native-study-runtime-CWngpZp5.wasm" Target="{$cspdir}dicom3d/assets/native-study-runtime-CWngpZp5.wasm" />
-  <FileCopy Name="public/assets/nrx-reference-worker-BVTUSoQr.js" Target="{$cspdir}dicom3d/assets/nrx-reference-worker-BVTUSoQr.js" />
-  <FileCopy Name="public/assets/nrx-runtime-7TkXZuTP.wasm" Target="{$cspdir}dicom3d/assets/nrx-runtime-7TkXZuTP.wasm" />
-  <FileCopy Name="public/assets/nrx-surface-DMKL5EHT.js" Target="{$cspdir}dicom3d/assets/nrx-surface-DMKL5EHT.js" />
-  <FileCopy Name="public/assets/nrx-worker-BO_EnPT5.js" Target="{$cspdir}dicom3d/assets/nrx-worker-BO_EnPT5.js" />
-  <FileCopy Name="public/assets/public-asset-cache-BFw2mW6w.js" Target="{$cspdir}dicom3d/assets/public-asset-cache-BFw2mW6w.js" />
-  <FileCopy Name="public/assets/scene-ownership-tzOAqvYl.js" Target="{$cspdir}dicom3d/assets/scene-ownership-tzOAqvYl.js" />
-  <FileCopy Name="public/assets/smart-pkce-DMglXBAK.js" Target="{$cspdir}dicom3d/assets/smart-pkce-DMglXBAK.js" />
-  <FileCopy Name="public/assets/t2w_GA22_atlas.nii-DaiIkpwY.gz" Target="{$cspdir}dicom3d/assets/t2w_GA22_atlas.nii-DaiIkpwY.gz" />
-  <FileCopy Name="public/assets/t2w_GA22_tissue.nii-xLUyaiAu.gz" Target="{$cspdir}dicom3d/assets/t2w_GA22_tissue.nii-xLUyaiAu.gz" />
-  <FileCopy Name="public/assets/three.core-rb3tnkwe.js" Target="{$cspdir}dicom3d/assets/three.core-rb3tnkwe.js" />
-  <FileCopy Name="public/assets/twins-CeG7HLgi.jpg" Target="{$cspdir}dicom3d/assets/twins-CeG7HLgi.jpg" />
-  <FileCopy Name="prototypes/alpha/three-prototype/expanded-atlas/LICENSE.md" Target="{$cspdir}dicom3d/atlas/LICENSE.md" />
-  <FileCopy Name="prototypes/alpha/three-prototype/expanded-atlas/index.json" Target="{$cspdir}dicom3d/atlas/index.json" />
-  <FileCopy Name="prototypes/alpha/three-prototype/expanded-atlas/male-classified-abdomen.glb" Target="{$cspdir}dicom3d/atlas/male-classified-abdomen.glb" />
-  <FileCopy Name="prototypes/alpha/three-prototype/expanded-atlas/male-classified-abdomen.manifest.json" Target="{$cspdir}dicom3d/atlas/male-classified-abdomen.manifest.json" />
-  <FileCopy Name="prototypes/alpha/three-prototype/expanded-atlas/male-classified-body-envelope.glb" Target="{$cspdir}dicom3d/atlas/male-classified-body-envelope.glb" />
-  <FileCopy Name="prototypes/alpha/three-prototype/expanded-atlas/male-classified-body-envelope.manifest.json" Target="{$cspdir}dicom3d/atlas/male-classified-body-envelope.manifest.json" />
-  <FileCopy Name="prototypes/alpha/three-prototype/expanded-atlas/male-classified-cardiovascular.glb" Target="{$cspdir}dicom3d/atlas/male-classified-cardiovascular.glb" />
-  <FileCopy Name="prototypes/alpha/three-prototype/expanded-atlas/male-classified-cardiovascular.manifest.json" Target="{$cspdir}dicom3d/atlas/male-classified-cardiovascular.manifest.json" />
-  <FileCopy Name="prototypes/alpha/three-prototype/expanded-atlas/male-classified-head-and-nervous-system.glb" Target="{$cspdir}dicom3d/atlas/male-classified-head-and-nervous-system.glb" />
-  <FileCopy Name="prototypes/alpha/three-prototype/expanded-atlas/male-classified-head-and-nervous-system.manifest.json" Target="{$cspdir}dicom3d/atlas/male-classified-head-and-nervous-system.manifest.json" />
-  <FileCopy Name="prototypes/alpha/three-prototype/expanded-atlas/male-classified-lower-limbs.glb" Target="{$cspdir}dicom3d/atlas/male-classified-lower-limbs.glb" />
-  <FileCopy Name="prototypes/alpha/three-prototype/expanded-atlas/male-classified-lower-limbs.manifest.json" Target="{$cspdir}dicom3d/atlas/male-classified-lower-limbs.manifest.json" />
-  <FileCopy Name="prototypes/alpha/three-prototype/expanded-atlas/male-classified-other.glb" Target="{$cspdir}dicom3d/atlas/male-classified-other.glb" />
-  <FileCopy Name="prototypes/alpha/three-prototype/expanded-atlas/male-classified-other.manifest.json" Target="{$cspdir}dicom3d/atlas/male-classified-other.manifest.json" />
-  <FileCopy Name="prototypes/alpha/three-prototype/expanded-atlas/male-classified-pelvis.glb" Target="{$cspdir}dicom3d/atlas/male-classified-pelvis.glb" />
-  <FileCopy Name="prototypes/alpha/three-prototype/expanded-atlas/male-classified-pelvis.manifest.json" Target="{$cspdir}dicom3d/atlas/male-classified-pelvis.manifest.json" />
-  <FileCopy Name="prototypes/alpha/three-prototype/expanded-atlas/male-classified-skeleton.glb" Target="{$cspdir}dicom3d/atlas/male-classified-skeleton.glb" />
-  <FileCopy Name="prototypes/alpha/three-prototype/expanded-atlas/male-classified-skeleton.manifest.json" Target="{$cspdir}dicom3d/atlas/male-classified-skeleton.manifest.json" />
-  <FileCopy Name="prototypes/alpha/three-prototype/expanded-atlas/male-classified-thorax.glb" Target="{$cspdir}dicom3d/atlas/male-classified-thorax.glb" />
-  <FileCopy Name="prototypes/alpha/three-prototype/expanded-atlas/male-classified-thorax.manifest.json" Target="{$cspdir}dicom3d/atlas/male-classified-thorax.manifest.json" />
-  <FileCopy Name="prototypes/alpha/three-prototype/expanded-atlas/male-classified-upper-limbs.glb" Target="{$cspdir}dicom3d/atlas/male-classified-upper-limbs.glb" />
-  <FileCopy Name="prototypes/alpha/three-prototype/expanded-atlas/male-classified-upper-limbs.manifest.json" Target="{$cspdir}dicom3d/atlas/male-classified-upper-limbs.manifest.json" />
-  <FileCopy Name="prototypes/alpha/three-prototype/expanded-atlas/male-classified-vessels.glb" Target="{$cspdir}dicom3d/atlas/male-classified-vessels.glb" />
-  <FileCopy Name="prototypes/alpha/three-prototype/expanded-atlas/male-classified-vessels.manifest.json" Target="{$cspdir}dicom3d/atlas/male-classified-vessels.manifest.json" />
-  <FileCopy Name="prototypes/alpha/three-prototype/expanded-atlas/male-source-table-repairs.glb" Target="{$cspdir}dicom3d/atlas/male-source-table-repairs.glb" />
-  <FileCopy Name="prototypes/alpha/three-prototype/expanded-atlas/male-source-table-repairs.manifest.json" Target="{$cspdir}dicom3d/atlas/male-source-table-repairs.manifest.json" />
-  <FileCopy Name="prototypes/alpha/three-prototype/expanded-atlas/male-source43-recoveries.glb" Target="{$cspdir}dicom3d/atlas/male-source43-recoveries.glb" />
-  <FileCopy Name="prototypes/alpha/three-prototype/expanded-atlas/male-source43-recoveries.manifest.json" Target="{$cspdir}dicom3d/atlas/male-source43-recoveries.manifest.json" />
-  <FileCopy Name="prototypes/alpha/three-prototype/expanded-atlas/male-unclassified-height-lower-middle.glb" Target="{$cspdir}dicom3d/atlas/male-unclassified-height-lower-middle.glb" />
-  <FileCopy Name="prototypes/alpha/three-prototype/expanded-atlas/male-unclassified-height-lower-middle.manifest.json" Target="{$cspdir}dicom3d/atlas/male-unclassified-height-lower-middle.manifest.json" />
-  <FileCopy Name="prototypes/alpha/three-prototype/expanded-atlas/male-unclassified-height-lower.glb" Target="{$cspdir}dicom3d/atlas/male-unclassified-height-lower.glb" />
-  <FileCopy Name="prototypes/alpha/three-prototype/expanded-atlas/male-unclassified-height-lower.manifest.json" Target="{$cspdir}dicom3d/atlas/male-unclassified-height-lower.manifest.json" />
-  <FileCopy Name="prototypes/alpha/three-prototype/expanded-atlas/male-unclassified-height-upper-middle.glb" Target="{$cspdir}dicom3d/atlas/male-unclassified-height-upper-middle.glb" />
-  <FileCopy Name="prototypes/alpha/three-prototype/expanded-atlas/male-unclassified-height-upper-middle.manifest.json" Target="{$cspdir}dicom3d/atlas/male-unclassified-height-upper-middle.manifest.json" />
-  <FileCopy Name="prototypes/alpha/three-prototype/expanded-atlas/male-unclassified-height-upper.glb" Target="{$cspdir}dicom3d/atlas/male-unclassified-height-upper.glb" />
-  <FileCopy Name="prototypes/alpha/three-prototype/expanded-atlas/male-unclassified-height-upper.manifest.json" Target="{$cspdir}dicom3d/atlas/male-unclassified-height-upper.manifest.json" />
-  <FileCopy Name="prototypes/alpha/three-prototype/expanded-atlas/source-native.json" Target="{$cspdir}dicom3d/atlas/source-native.json" />
-  <FileCopy Name="public/attribution/BODYParts3D-NOTICE.txt" Target="{$cspdir}dicom3d/attribution/BODYParts3D-NOTICE.txt" />
-  <FileCopy Name="public/demo-build-manifest.json" Target="{$cspdir}dicom3d/demo-build-manifest.json" />
-  <FileCopy Name="reference/public/demo/h000/NOTICE.md" Target="{$cspdir}dicom3d/demo/h000/NOTICE.md" />
-  <FileCopy Name="reference/public/demo/h000/ct.npy.bin" Target="{$cspdir}dicom3d/demo/h000/ct.npy.bin" />
-  <FileCopy Name="reference/public/demo/h000/lesion.glb" Target="{$cspdir}dicom3d/demo/h000/lesion.glb" />
-  <FileCopy Name="reference/public/demo/h000/mask.npy.bin" Target="{$cspdir}dicom3d/demo/h000/mask.npy.bin" />
-  <FileCopy Name="reference/public/demo/h000/source-binding.json" Target="{$cspdir}dicom3d/demo/h000/source-binding.json" />
-  <FileCopy Name="distribution-manifest.json" Target="{$cspdir}dicom3d/distribution-manifest.json" />
-  <FileCopy Name="prototypes/alpha/three-prototype/atlas-delta/HRA-FEMALE-NOTICE.txt" Target="{$cspdir}dicom3d/female-delta/HRA-FEMALE-NOTICE.txt" />
-  <FileCopy Name="prototypes/alpha/three-prototype/atlas-delta/female-delta.json" Target="{$cspdir}dicom3d/female-delta/female-delta.json" />
-  <FileCopy Name="prototypes/alpha/three-prototype/atlas-delta/female-reproductive-delta.glb" Target="{$cspdir}dicom3d/female-delta/female-reproductive-delta.glb" />
-  <FileCopy Name="prototypes/alpha/three-prototype/atlas-delta/female-reproductive-delta.manifest.json" Target="{$cspdir}dicom3d/female-delta/female-reproductive-delta.manifest.json" />
-  <FileCopy Name="prototypes/alpha/three-prototype/atlas-delta/female-source-complete-delta.glb" Target="{$cspdir}dicom3d/female-delta/female-source-complete-delta.glb" />
-  <FileCopy Name="prototypes/alpha/three-prototype/atlas-delta/female-source-complete-delta.manifest.json" Target="{$cspdir}dicom3d/female-delta/female-source-complete-delta.manifest.json" />
-  <FileCopy Name="prototypes/alpha/three-prototype/atlas-delta/female-source-native.json" Target="{$cspdir}dicom3d/female-delta/female-source-native.json" />
-  <FileCopy Name="public/index.html" Target="{$cspdir}dicom3d/index.html" />
-  <FileCopy Name="public/reference.html" Target="{$cspdir}dicom3d/reference.html" />
-  <FileCopy Name="public/reference/BODYParts3D-NOTICE.txt" Target="{$cspdir}dicom3d/reference/BODYParts3D-NOTICE.txt" />
-  <FileCopy Name="third-party/alpha-runtime-NOTICE.txt" Target="{$cspdir}dicom3d/third-party/alpha-runtime-NOTICE.txt" />
-  <FileCopy Name="third-party/alpha/babel-runtime-7.29.7-LICENSE.txt" Target="{$cspdir}dicom3d/third-party/alpha/babel-runtime-7.29.7-LICENSE.txt" />
-  <FileCopy Name="third-party/alpha/base64-js-1.5.1-LICENSE.txt" Target="{$cspdir}dicom3d/third-party/alpha/base64-js-1.5.1-LICENSE.txt" />
-  <FileCopy Name="third-party/alpha/buffer-6.0.3-LICENSE.txt" Target="{$cspdir}dicom3d/third-party/alpha/buffer-6.0.3-LICENSE.txt" />
-  <FileCopy Name="third-party/alpha/ieee754-1.2.1-LICENSE.txt" Target="{$cspdir}dicom3d/third-party/alpha/ieee754-1.2.1-LICENSE.txt" />
-  <FileCopy Name="third-party/alpha/its-fine-2.0.0-LICENSE.txt" Target="{$cspdir}dicom3d/third-party/alpha/its-fine-2.0.0-LICENSE.txt" />
-  <FileCopy Name="third-party/alpha/react-LICENSE.txt" Target="{$cspdir}dicom3d/third-party/alpha/react-LICENSE.txt" />
-  <FileCopy Name="third-party/alpha/react-dom-LICENSE.txt" Target="{$cspdir}dicom3d/third-party/alpha/react-dom-LICENSE.txt" />
-  <FileCopy Name="third-party/alpha/react-three-fiber-LICENSE.txt" Target="{$cspdir}dicom3d/third-party/alpha/react-three-fiber-LICENSE.txt" />
-  <FileCopy Name="third-party/alpha/react-use-measure-2.1.7-LICENSE.txt" Target="{$cspdir}dicom3d/third-party/alpha/react-use-measure-2.1.7-LICENSE.txt" />
-  <FileCopy Name="third-party/alpha/rolldown-1.2.13-LICENSE.txt" Target="{$cspdir}dicom3d/third-party/alpha/rolldown-1.2.13-LICENSE.txt" />
-  <FileCopy Name="third-party/alpha/rolldown-1.2.13-THIRD-PARTY-LICENSE.txt" Target="{$cspdir}dicom3d/third-party/alpha/rolldown-1.2.13-THIRD-PARTY-LICENSE.txt" />
-  <FileCopy Name="third-party/alpha/rolldown-1.2.18-LICENSE.txt" Target="{$cspdir}dicom3d/third-party/alpha/rolldown-1.2.18-LICENSE.txt" />
-  <FileCopy Name="third-party/alpha/rolldown-1.2.18-THIRD-PARTY-LICENSE.txt" Target="{$cspdir}dicom3d/third-party/alpha/rolldown-1.2.18-THIRD-PARTY-LICENSE.txt" />
-  <FileCopy Name="third-party/alpha/scheduler-0.27.0-LICENSE.txt" Target="{$cspdir}dicom3d/third-party/alpha/scheduler-0.27.0-LICENSE.txt" />
-  <FileCopy Name="third-party/alpha/suspend-react-0.1.3-LICENSE.txt" Target="{$cspdir}dicom3d/third-party/alpha/suspend-react-0.1.3-LICENSE.txt" />
-  <FileCopy Name="third-party/alpha/three-LICENSE.txt" Target="{$cspdir}dicom3d/third-party/alpha/three-LICENSE.txt" />
-  <FileCopy Name="third-party/alpha/use-sync-external-store-1.6.0-LICENSE.txt" Target="{$cspdir}dicom3d/third-party/alpha/use-sync-external-store-1.6.0-LICENSE.txt" />
-  <FileCopy Name="third-party/alpha/vite-8.2.4-LICENSE.txt" Target="{$cspdir}dicom3d/third-party/alpha/vite-8.2.4-LICENSE.txt" />
-  <FileCopy Name="third-party/alpha/vite-8.3.7-LICENSE.txt" Target="{$cspdir}dicom3d/third-party/alpha/vite-8.3.7-LICENSE.txt" />
-  <FileCopy Name="third-party/alpha/zustand-5.0.14-LICENSE.txt" Target="{$cspdir}dicom3d/third-party/alpha/zustand-5.0.14-LICENSE.txt" />
-  <FileCopy Name="third-party/babylon-lite-1.32.0-LICENSE.txt" Target="{$cspdir}dicom3d/third-party/babylon-lite-1.32.0-LICENSE.txt" />
-  <FileCopy Name="third-party/babylon-lite-1.32.0-NOTICE.txt" Target="{$cspdir}dicom3d/third-party/babylon-lite-1.32.0-NOTICE.txt" />
-  <FileCopy Name="third-party/rolldown-1.2.12-LICENSE.txt" Target="{$cspdir}dicom3d/third-party/rolldown-1.2.12-LICENSE.txt" />
-  <FileCopy Name="third-party/rolldown-1.2.12-THIRD-PARTY-LICENSE.txt" Target="{$cspdir}dicom3d/third-party/rolldown-1.2.12-THIRD-PARTY-LICENSE.txt" />
-  <FileCopy Name="third-party/vite-8.3.0-CORE-LICENSE.txt" Target="{$cspdir}dicom3d/third-party/vite-8.3.0-CORE-LICENSE.txt" />
   <WebApplication Name="/dicom3d" NameSpace="USER" Path="{$cspdir}dicom3d/" Recurse="1" ServeFiles="3" ServeFilesTimeout="0" AutheEnabled="32" Resource="%Development" GroupById="DICOM3D" CookiePath="/" />
   <WebApplication Name="/dicom3d/assets" NameSpace="USER" Path="{$cspdir}dicom3d/assets/" Recurse="1" ServeFiles="3" ServeFilesTimeout="3600" AutheEnabled="32" Resource="%Development" GroupById="DICOM3D" CookiePath="/" />
   <WebApplication Name="/dicom3d-api" NameSpace="USER" DispatchClass="DICOM3D.Health" Recurse="0" ServeFiles="0" AutheEnabled="32" Resource="%Development" GroupById="DICOM3D" CookiePath="/" />

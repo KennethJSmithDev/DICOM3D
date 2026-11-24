@@ -34,7 +34,7 @@ New here? Follow the [five-minute beginner guide](docs/BEGINNER_GUIDE.md), then 
 The **v0.8.0** standalone Core ZIP, source-directory IPM load and IPM archive passed fresh-install checks. A Docker Core image was built and tested locally; the previously published Docker Hub image and Open Exchange registry are not automatically updated by a GitHub release. There is no qualified in-place upgrade in this release:
 
 - **[Standalone Core](docs/INSTALL_CORE.md):** Extract the 0.8.0 ZIP and run it with Node.js 24, or build the Docker image from the tagged source. Core runs without IRIS, Orthanc or AI.
-- **[IRIS/IPM installation](docs/INSTALL_070.md#iris-and-ipm):** Load the 0.8.0 archive into an authorized IRIS instance. A fresh isolated installation, authenticated access, restart and uninstall passed; the public IPM registry update is separate.
+- **[IRIS/IPM installation](docs/INSTALL_070.md#iris-and-ipm):** The original 0.8.0 release archive is self-contained. The smaller [source-module installation](docs/INSTALL_SPLIT_IPM.md) provisions its verified public viewer assets separately before loading. A fresh isolated installation, authenticated access, restart and uninstall passed; the public IPM registry update is separate.
 - **[v0.6.0 release downloads](https://github.com/KennethJSmithDev/DICOM3D/releases/tag/v0.6.0)** and **[packaging provenance](docs/PACKAGING_060.md):** Historical distribution identities, source/packaging boundaries and qualification receipts.
 - **[v0.6.5 downloads](https://github.com/KennethJSmithDev/DICOM3D/releases/tag/v0.6.5):** Previous Babylon Lite Safe Demo ZIP and Core source ZIP, not a v0.7.0-alpha installer.
 

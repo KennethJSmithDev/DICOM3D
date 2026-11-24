@@ -56,6 +56,11 @@ if ($binding.Count -ne 1) { throw 'Missing unique retirement frontend binding' }
 # Match current hashed build filenames without changing the frozen release.
 $manifestPath = Join-Path $OutputDirectory 'module.xml'
 $manifest = [IO.File]::ReadAllText($manifestPath)
+# The full package installs all frontend files itself, so it must not run the
+# split installer's separately provisioned asset guard.
+$splitGuard = '(?ms)^\s*<Invoke Class="DICOM3D\.Assets" Method="Verify" Phase="Activate" When="After">\s*<Arg>\{\$cspdir\}dicom3d/</Arg>\s*</Invoke>\s*'
+if ([regex]::Matches($manifest, $splitGuard).Count -ne 1) { throw 'Missing unique split asset guard' }
+$manifest = [regex]::Replace($manifest, $splitGuard, "`n")
 $publicRoot = Join-Path $OutputDirectory 'public'
 $copies = (Get-ChildItem $publicRoot -File -Recurse | Sort-Object FullName | ForEach-Object {
   $relative = [IO.Path]::GetRelativePath($publicRoot,$_.FullName).Replace('\','/')

@@ -72,8 +72,8 @@
       "sha256": "82434fe04e921523bff967f06dc63b26d847d0b1e2c99797ee5b475e12a81623"
     },
     "README.md": {
-      "bytes": 12263,
-      "sha256": "9e022738743ce96f8ea818be13139b63574fbb3ee878b7b1124e4722b8b36318"
+      "bytes": 12400,
+      "sha256": "48353f87312be1b8ce0c47f69ed89542bd17aed881ff7a1d134ee11d60ded3e2"
     },
     "ROADMAP.md": {
       "bytes": 8520,
@@ -238,6 +238,10 @@
     "docs/INSTALL_CORE.md": {
       "bytes": 2427,
       "sha256": "24ee4a53eed6e3fd73a02fb6983130332bf09fa75c28cb7e718e56e337557c59"
+    },
+    "docs/INSTALL_SPLIT_IPM.md": {
+      "bytes": 1633,
+      "sha256": "ea8f4fc4295cfe72c3ed0f01f655c6e2349016a86020b3862bcc5eff38213aef"
     },
     "docs/INTEROPERABILITY_065.md": {
       "bytes": 2115,
@@ -420,8 +424,8 @@
       "sha256": "311fc357b1dc5ed0ffab12a1eff504e605928dc7cfc4837f62f7e98d11d30d98"
     },
     "module.xml": {
-      "bytes": 18805,
-      "sha256": "ebfc0024868dfacd0cd62fade1f4561b5f5d1660725d52aeab97f289abf76a89"
+      "bytes": 1411,
+      "sha256": "3ed41b330dc0614f8c620a7e848d87689e94a1f1ad64db7abdaea663290c84fa"
     },
     "prototypes/alpha/.gitattributes": {
       "bytes": 9,
@@ -3207,6 +3211,10 @@
       "bytes": 9938,
       "sha256": "52908c847b2df62704490c1548716d98c01b83ef4141380f8a5f5ae90ab9b459"
     },
+    "scripts/build-split-ipm.py": {
+      "bytes": 3862,
+      "sha256": "ea9dd6e7c8c6bd1d54bf8011d89cac80c011173c1a4aa58870bed015ab5a26d1"
+    },
     "scripts/expand-reference.py": {
       "bytes": 10330,
       "sha256": "67eefe277c935daea385bce2df525ba66c385aac33920128f19f13dd375c0ae1"
@@ -3236,8 +3244,8 @@
       "sha256": "fe39765994baa6638a57885864edb1a0bb1c3e396be03ac0abb6f30051dcd5bb"
     },
     "scripts/generate-retirement-051.py": {
-      "bytes": 9513,
-      "sha256": "33b8f67271f871a18432b7231ea27a99b8743912bbbdef7a7c9f43496805e569"
+      "bytes": 9696,
+      "sha256": "268f41f4f90ab77bd662879045ab3b78a06cd14ceaa62067ad1a8492aa6f7dae"
     },
     "scripts/live-h000-ct.mjs": {
       "bytes": 8346,
@@ -3279,6 +3287,10 @@
       "bytes": 1980,
       "sha256": "0284848a4a704017f82ffc7f88c213027aa1d3b9c1e4fad88c90385790276737"
     },
+    "scripts/provision-ipm-assets.py": {
+      "bytes": 5575,
+      "sha256": "12aa26fb8c79ee30883da37af51a82275c64116786d14b32070864725d071018"
+    },
     "scripts/recover-bp3d43i-held.py": {
       "bytes": 12939,
       "sha256": "4a1f2eb0ba18385787014291c2930810e0303eb83df37ea14b9ceaba38847930"
@@ -3288,8 +3300,8 @@
       "sha256": "c6705c003e0b8ba04b8db244de00b8672166aa94b6494820b86f97f7dda11e04"
     },
     "scripts/refresh-package-frontend.py": {
-      "bytes": 10859,
-      "sha256": "574b6f296dba019897ae66018a8c9fbf8aa14a44252f48b10d41a7465174a80f"
+      "bytes": 11072,
+      "sha256": "d02fc3d37573b5159b84748a44534866e80dc29551dcaa08283efe14ff38dea8"
     },
     "scripts/repair-bp3d-export.py": {
       "bytes": 18471,
@@ -3300,8 +3312,8 @@
       "sha256": "35207fa1d526cebe3f5e48f5898c94864e4634e45637f7b4df00d63dd85d83de"
     },
     "scripts/stage-package.ps1": {
-      "bytes": 7003,
-      "sha256": "3ee9f26371495c7e01200a55cec94763095b768a987d97a8cc24d819b2a0b250"
+      "bytes": 7452,
+      "sha256": "ae493f4914de99735e031db4b57db3bc8d4edbb6a20b52a8a1c09d03b62ee902"
     },
     "scripts/staged_git.py": {
       "bytes": 4839,
@@ -3359,6 +3371,10 @@
       "bytes": 4319,
       "sha256": "3a62e330eac5699cc534a9b2873505c44e45d3a0a100c7c609c37a253dedb80f"
     },
+    "scripts/test-provision-ipm-assets.py": {
+      "bytes": 3053,
+      "sha256": "ab0d2a356263d83177cfcbe24db0c9bef450c06167e46b4588b08d1df1557f9b"
+    },
     "scripts/test-public-reference-visual.mjs": {
       "bytes": 10248,
       "sha256": "570ab60766a0f4c3e1c2bec014e69d1261e513c8e3671f6ede93a46c0c594860"
@@ -3395,13 +3411,17 @@
       "bytes": 4694,
       "sha256": "664312695dfa7b662ff22f1109392314ddc2ca6d62992becbbaa4268ee8158bc"
     },
+    "src/DICOM3D/Assets.cls": {
+      "bytes": 1959,
+      "sha256": "353bc0ecabd8fc9aa122327f7046dbe3862422c6aad1fa911ddeb723d18f45c5"
+    },
     "src/DICOM3D/Entry.cls": {
       "bytes": 2781,
       "sha256": "bec53bb4c2a5437304880c256ac177b65b60e7badb5f9384120f9700ddfb623f"
     },
     "src/DICOM3D/Health.cls": {
       "bytes": 555,
-      "sha256": "e3327c8cb4899e7b40d8b83a98863d03b790360718a306c884777c8de724e932"
+      "sha256": "82130f66f3c76b7d84229899d799cfb629675b039c7bac23b5e1615ec2aef68d"
     },
     "src/DICOM3D/InstallMigration.cls": {
       "bytes": 42203,

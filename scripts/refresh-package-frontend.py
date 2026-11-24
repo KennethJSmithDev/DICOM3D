@@ -180,6 +180,9 @@ for name in filter(None, old):
         destination.unlink(missing_ok=True)
 module = (root / 'module.xml').read_text(encoding='utf-8')
 module = re.sub(r'(?m)^\s*<FileCopy Name="[^\r\n]+\r?\n', '', module)
+if args.profile == 'alpha':
+    copies = [line for line in copies if line.endswith('dicom3d/LICENSE" />') or line.endswith('dicom3d/NOTICE" />')]
+    assert len(copies) == 2, 'Expected the two root notice copies'
 module = module.replace('  <WebApplication Name="/dicom3d"', '\n'.join(copies) + '\n  <WebApplication Name="/dicom3d"')
 unchanged('module.xml')
 (root / 'module.xml').write_bytes(module.encode('utf-8'))

@@ -23,7 +23,10 @@ assert all(set(r) == {'bytes', 'sha256'} and r['bytes'] > 0 and re.fullmatch(r'[
 current = [e.attrib['Target'].removeprefix('{$cspdir}dicom3d/') for e in ET.parse(root / 'module.xml').findall('.//FileCopy')]
 frontend = json.loads((root / 'public/demo-build-manifest.json').read_text(encoding='utf-8'))
 expected = {*frontend['files'], 'demo-build-manifest.json'}
-assert len(current) == len(expected) and set(current) == expected
+# The root IPM module provisions its pinned viewer separately; the full
+# frontend inventory still defines the paths the retirement must never touch.
+assert set(current) == {'LICENSE', 'NOTICE'} and len(current) == 2
+assert set(current) <= expected
 assert not set(targets) & expected
 entry = (root / 'src/DICOM3D/Entry.cls').read_text()
 viewer_build = re.search(r'Parameter VIEWERBUILD = "([0-9a-f]{64})";', entry)[1]
