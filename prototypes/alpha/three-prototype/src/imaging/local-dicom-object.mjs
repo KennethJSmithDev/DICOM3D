@@ -1,11 +1,14 @@
 const sha256 = /^[0-9a-f]{64}$/;
 const uid = /^(?:[0-9]+\.)+[0-9]+$/;
+export const ionPlanSopClass = '1.2.840.10008.5.1.4.1.1.481.8';
 const sopFamilies = new Map([
   ['1.2.840.10008.5.1.4.1.1.88.11', 'SR'],
   ['1.2.840.10008.5.1.4.1.1.88.22', 'SR'],
   ['1.2.840.10008.5.1.4.1.1.88.33', 'SR'],
   ['1.2.840.10008.5.1.4.1.1.88.34', 'SR'],
   ['1.2.840.10008.5.1.4.1.1.481.5', 'RTPLAN'],
+  [ionPlanSopClass, 'RTPLAN'],
+  ['1.2.840.10008.5.1.4.1.1.481.3', 'RTSTRUCT'],
 ]);
 
 export const localObjectFileLimit = 2 * 1024 * 1024;
@@ -48,6 +51,46 @@ function checkReport(item, depth = 0) {
   array(item.children, child => checkReport(child, depth + 1));
 }
 
+function regionNumber(value) {
+  if (!/^[+-]?\d+$/.test(value ?? '')) return NaN;
+  const number = Number(value);
+  return number >= -2147483648 && number <= 2147483647 ? number : NaN;
+}
+
+function checkStructure(content) {
+  fields(content.fields);
+  if (content.studyIdentity != null) {
+    need(typeof content.studyIdentity === 'string' && content.studyIdentity.length <= 64 && uid.test(content.studyIdentity),
+      'Invalid structure set study identity');
+  }
+  const regions = new Set();
+  array(content.regions, region => {
+    fields(region);
+    const number = regionNumber(region.ROINumber);
+    need(Number.isFinite(number) && !regions.has(number), 'Missing or duplicate ROI number');
+    regions.add(number);
+  });
+  array(content.contours, group => {
+    fields(group.fields);
+    need(regions.has(regionNumber(group.fields.ReferencedROINumber)), 'Contour references an absent ROI');
+    array(group.items, contour => {
+      fields(contour.fields);
+      checkReferences(contour.references);
+      if (contour.coordinatesMm !== undefined) {
+        const count = regionNumber(contour.fields.NumberOfContourPoints);
+        need(count > 0 && count <= 4000 && Array.isArray(contour.coordinatesMm) &&
+          contour.coordinatesMm.length === count * 3 && contour.coordinatesMm.every(Number.isFinite),
+          'Invalid contour coordinates');
+      }
+    });
+  });
+  array(content.observations, observation => {
+    fields(observation);
+    need(regions.has(regionNumber(observation.ReferencedROINumber)), 'Observation references an absent ROI');
+  });
+  checkReferences(content.references);
+}
+
 export async function readLocalDicomObject(envelope) {
   need(envelope?.schema === 'DICOM3D-local-object-1' && typeof envelope.payload === 'string' &&
     sha256.test(envelope.payloadSha256), 'Invalid prepared DICOM object');
@@ -64,6 +107,7 @@ export async function readLocalDicomObject(envelope) {
     ['1.2.840.10008.1.2', '1.2.840.10008.1.2.1'].includes(source.transferSyntaxUID),
   'Invalid source DICOM identity');
   if (source.family === 'SR') checkReport(value.content);
+  else if (source.family === 'RTSTRUCT') checkStructure(value.content);
   else {
     fields(value.content.fields);
     array(value.content.beams, fields);

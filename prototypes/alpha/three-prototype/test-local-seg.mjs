@@ -39,6 +39,13 @@ function seg() {
   };
 }
 
+function fractionalSeg(type, maximum, samples = [0, 1, 2, 3, 4, 0, 0, 0, 0]) {
+  const bundle = seg();
+  const bytes = Buffer.from([...samples, ...new Array(9).fill(0)]);
+  return {...bundle, schema:'DICOM3D-local-fractional-seg-1', fractional:{type, maximum},
+    payload:{bytes:bytes.length, sha256:sha256(bytes), base64:bytes.toString('base64')}};
+}
+
 test('maps shuffled SEG frames by exact source plane, preserving one-bit locations and CT source', async () => {
   const study = await verifiedCt();
   const loaded = await readLocalSeg(seg(), study);
@@ -68,5 +75,32 @@ test('rejects a real source SOP, plane, spacing, transform or mask mismatch with
     await assert.rejects(readLocalSeg(input, study), expected);
   }
   await assert.rejects(readLocalSeg(seg(), {descriptor:study.descriptor}), /verified source CT/);
+  assert.equal(await study.assertSourceUnchanged(), true);
+});
+
+test('preserves fractional probability and occupancy values through proportional display', async () => {
+  const study = await verifiedCt();
+  for (const [type, maximum, samples] of [
+    ['PROBABILITY', 4, [0, 1, 2, 3, 4, 0, 0, 0, 0]],
+    ['OCCUPANCY', 100, [0, 25, 50, 75, 100, 0, 0, 0, 0]],
+  ]) {
+    const overlay = await readLocalSeg(fractionalSeg(type, maximum, samples), study);
+    assert.deepEqual(overlay.fractional, {type, maximum});
+    const rgba = new Uint8ClampedArray(36);
+    assert.equal(overlay.apply(0, rgba), 0);
+    assert.equal(overlay.apply(1, rgba), 4);
+    assert.deepEqual([1, 5, 9, 13, 17].map(channel => rgba[channel]), [0, 26, 52, 78, 104]);
+  }
+  assert.equal(await study.assertSourceUnchanged(), true);
+});
+
+test('rejects invalid fractional metadata and a validly hashed sample beyond the maximum', async () => {
+  const study = await verifiedCt();
+  await assert.rejects(readLocalSeg(fractionalSeg('UNKNOWN', 4), study), /type or maximum/);
+  for (const maximum of [0, 4.5, 256]) {
+    await assert.rejects(readLocalSeg(fractionalSeg('PROBABILITY', maximum), study), /type or maximum/);
+  }
+  await assert.rejects(readLocalSeg(fractionalSeg('PROBABILITY', 3), study), /sample exceeds/);
+  await assert.rejects(readLocalSeg({...seg(), fractional:{type:'PROBABILITY', maximum:1}}, study), /Unexpected fractional/);
   assert.equal(await study.assertSourceUnchanged(), true);
 });

@@ -25,7 +25,7 @@ export default function LocalSegPanel({study, frame}) {
       const seg = await readLocalSeg(JSON.parse(await file.text()), study);
       if (id !== generation.current) return;
       setAdmission({study, seg});
-      setResult({study, status:'SEG source frames and mask verified.'});
+      setResult({study, status:seg.fractional ? 'SEG source frames and fractional samples verified.' : 'SEG source frames and mask verified.'});
     } catch (error) {
       if (id === generation.current) setResult({study, status:error instanceof SyntaxError
         ? 'The prepared SEG is not a valid JSON bundle.' : error.message});
@@ -55,16 +55,18 @@ export default function LocalSegPanel({study, frame}) {
 
   return <details onToggle={event => setOpen(event.currentTarget.open)}>
     <summary>Local source-linked SEG</summary>
-    <p>Open a prepared binary SEG bundle for the verified CT above. The preview uses only matching source planes.</p>
+    <p>Open a prepared binary or fractional SEG bundle for the verified CT above. The preview uses only matching source planes.</p>
     <label>Prepared DICOM SEG <input aria-label="Prepared DICOM SEG" type="file" accept=".d3seg,application/json" onChange={load}/></label>
     {(segment || result?.study === study) && <button type="button" onClick={clear}>Clear local SEG</button>}
     <p role="status">{result?.study === study ? result.status : ''}</p>
     {segment && <>
       <p>{segment.label} · segment {segment.segmentNumber} · {segment.matchedFrames} matched source frames</p>
+      {segment.fractional && <p>Fractional {segment.fractional.type.toLowerCase()} · stored maximum {segment.fractional.maximum}. Overlay intensity follows the stored fraction.</p>}
       {open && <>
         <canvas ref={canvas} role="img" aria-label="Source-linked SEG overlay"
           style={{width:'100%', maxWidth:512, display:'block', background:'#000'}}/>
-        <p>{occupied === null ? 'No SEG frame for this source plane.' : occupied.toLocaleString() + ' masked pixels on this source plane.'}</p>
+        <p>{occupied === null ? 'No SEG frame for this source plane.' : occupied.toLocaleString() +
+          (segment.fractional ? ' nonzero fractional samples on this source plane.' : ' masked pixels on this source plane.')}</p>
       </>}
       <details><summary>SEG source evidence</summary>
         <p>Original SEG SHA-256 <code style={{overflowWrap:'anywhere'}}>{segment.sourceSha256}</code></p>

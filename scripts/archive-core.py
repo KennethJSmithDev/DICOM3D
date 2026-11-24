@@ -18,7 +18,7 @@ CORE_BUILD = {
     'scripts/admitted-public-files.mjs', 'scripts/admitted-notices.json', 'scripts/preview-verified-file.mjs',
 }
 PREVIEW_BUILD_INPUTS = {
-    'scripts/preview-static.mjs', 'scripts/live-h000-ct.mjs', 'scripts/live-native-images.mjs',
+    'scripts/preview-static.mjs', 'scripts/live-h000-ct.mjs', 'scripts/live-native-images.mjs','scripts/live-rle.mjs',
 }
 CORE_DOCS = {'docs/INSTALL_070.md', 'docs/FHIR_INTEROP_ALPHA2.md', 'docs/SMART_SYNTHETIC_FOUNDATION.md'}
 FRONTEND_SOURCE_TREES = ('prototypes/alpha/three-prototype/src/', 'prototypes/alpha/viewer/src/')

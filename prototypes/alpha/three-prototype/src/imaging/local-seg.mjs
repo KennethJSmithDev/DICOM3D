@@ -20,7 +20,18 @@ function validReference(reference) {
 
 export async function readLocalSeg(bundle, study) {
   requireSeg(isVerifiedVolume(study) && study.descriptor.source.modality === 'CT', 'Open the verified source CT first.');
-  requireSeg(bundle?.schema === 'DICOM3D-local-binary-seg-1', 'Expected a prepared binary DICOM SEG.');
+  const isFractional = bundle?.schema === 'DICOM3D-local-fractional-seg-1';
+  requireSeg(isFractional || bundle?.schema === 'DICOM3D-local-binary-seg-1',
+    'Expected a prepared binary or fractional DICOM SEG.');
+  let fractional = null;
+  if (isFractional) {
+    const {type, maximum} = bundle.fractional ?? {};
+    requireSeg(['PROBABILITY','OCCUPANCY'].includes(type) && Number.isInteger(maximum) && maximum >= 1 && maximum <= 255,
+      'The fractional SEG type or maximum is invalid.');
+    fractional = Object.freeze({type, maximum});
+  } else {
+    requireSeg(bundle.fractional === undefined, 'Unexpected fractional metadata for binary SEG.');
+  }
   const {source, segment, frames, dimensions, payload} = bundle;
   const descriptor = study.descriptor;
   const [, rows, columns] = descriptor.shape;
@@ -62,7 +73,7 @@ export async function readLocalSeg(bundle, study) {
     frameMap.set(equalPlanes[0].k, index);
   }
   const pixelCount = rows * columns;
-  const frameBytes = Math.ceil(pixelCount / 8);
+  const frameBytes = fractional ? pixelCount : Math.ceil(pixelCount / 8);
   const bytes = frameBytes * frames.length;
   requireSeg(Number.isSafeInteger(bytes) && bytes <= packedLimit && payload?.bytes === bytes && sha(payload.sha256) &&
     typeof payload.base64 === 'string' && payload.base64.length === 4 * Math.ceil(bytes / 3),
@@ -71,7 +82,9 @@ export async function readLocalSeg(bundle, study) {
   requireSeg(raw.length === bytes, 'The SEG mask is incomplete.');
   const packed = Uint8Array.from(raw, character => character.charCodeAt(0));
   requireSeg(await digest(packed) === payload.sha256, 'The SEG mask digest did not match.');
-  if (pixelCount % 8) {
+  if (fractional) {
+    requireSeg(!packed.some(value => value > fractional.maximum), 'A fractional SEG sample exceeds its declared maximum.');
+  } else if (pixelCount % 8) {
     const paddingMask = 255 ^ ((1 << (pixelCount % 8)) - 1);
     for (const index of frameMap.values()) {
       requireSeg((packed[(index + 1) * frameBytes - 1] & paddingMask) === 0, 'The SEG mask contains unused bits.');
@@ -79,6 +92,7 @@ export async function readLocalSeg(bundle, study) {
   }
   return Object.freeze({
     label:segment.label, segmentNumber:segment.number, sourceSha256:source.sha256,
+    fractional,
     get matchedFrames() { return frameMap.size; },
     apply(frame, rgba) {
       const index = frameMap.get(frame);
@@ -87,12 +101,15 @@ export async function readLocalSeg(bundle, study) {
       const offset = index * frameBytes;
       let occupied = 0;
       for (let pixel = 0; pixel < pixelCount; pixel++) {
-        if (!(packed[offset + (pixel >> 3)] & (1 << (pixel & 7)))) continue;
+        const value = fractional ? packed[offset + pixel] : packed[offset + (pixel >> 3)] & (1 << (pixel & 7));
+        if (!value) continue;
         occupied++;
         const channel = pixel * 4;
-        rgba[channel] = Math.round(rgba[channel] * 0.55);
-        rgba[channel + 1] = Math.round(rgba[channel + 1] * 0.55 + 230 * 0.45);
-        rgba[channel + 2] = Math.round(rgba[channel + 2] * 0.55 + 255 * 0.45);
+        const opacity = fractional ? (value / fractional.maximum) * 0.45 : 0.45;
+        const retain = 1 - opacity;
+        rgba[channel] = Math.round(rgba[channel] * retain);
+        rgba[channel + 1] = Math.round(rgba[channel + 1] * retain + 230 * opacity);
+        rgba[channel + 2] = Math.round(rgba[channel + 2] * retain + 255 * opacity);
       }
       return occupied;
     },

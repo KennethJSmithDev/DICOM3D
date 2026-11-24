@@ -1,4 +1,4 @@
-import React, {useEffect, useRef, useState} from 'react';
+import React, {useEffect, useMemo, useRef, useState} from 'react';
 import {verifyVolume, verifiedFrameRgba} from '../../../viewer/src/verified-volume.mjs';
 import ResearchEvidencePanel from './ResearchEvidencePanel.jsx';
 import LocalFrameFilePanel from './LocalFrameFilePanel.jsx';
@@ -6,6 +6,7 @@ import LocalEcgPanel from './LocalEcgPanel.jsx';
 import LocalDicomObjectPanel from './LocalDicomObjectPanel.jsx';
 import LocalSegPanel from './LocalSegPanel.jsx';
 import LiveNativeImagePanel from './LiveNativeImagePanel.jsx';
+import {bindRtContours} from './local-rt-contours.mjs';
 
 const descriptorLimit=1024*1024;
 const pixelLimit=80*1024*1024;
@@ -59,6 +60,9 @@ export default function LocalStudyPanel({onStudyChange, onFrameChange}) {
   const [descriptorFile,setDescriptorFile]=useState(null),[pixelFile,setPixelFile]=useState(null);
   const [study,setStudy]=useState(null),[sourceEncoding,setSourceEncoding]=useState(null),[frame,setFrame]=useState(0),[loading,setLoading]=useState(false);
   const [status,setStatus]=useState('No local study loaded.');
+  const [rtObject,setRtObject]=useState(null),[showContours,setShowContours]=useState(true);
+  const rt=useMemo(()=>bindRtContours(rtObject,study),[rtObject,study]);
+  const contours=rt?.byFrame.get(frame)??[];
   const canvasRef=useRef(null), generation=useRef(0), controller=useRef(null);
   useEffect(()=>()=>{generation.current++;controller.current?.abort();},[]);
   async function admit(read,progress,success,failure){
@@ -127,7 +131,7 @@ export default function LocalStudyPanel({onStudyChange, onFrameChange}) {
     <h2>Imaging sources</h2>
     <LocalFrameFilePanel/>
     <LocalEcgPanel/>
-    <LocalDicomObjectPanel/>
+    <LocalDicomObjectPanel onObjectChange={setRtObject}/>
     <h3>Verified CT</h3><p>Open the admission request and decoded pixel file from a prepared CT packet. The viewer checks the files on this device before displaying the study.</p>
     <label>Descriptor or admission request <input aria-label="Local CT descriptor" type="file" accept=".json" onChange={e=>setDescriptorFile(e.target.files?.[0]??null)}/></label>
     <label>Decoded values <input aria-label="Local CT stored values" type="file" accept=".bin,.raw16" onChange={e=>setPixelFile(e.target.files?.[0]??null)}/></label>
@@ -143,7 +147,22 @@ export default function LocalStudyPanel({onStudyChange, onFrameChange}) {
     </details>}
     {canRetrieveLiveCt() && <LiveNativeImagePanel/>}
     <p role="status">{status}</p>
-    {study&&<><canvas ref={canvasRef} role="img" aria-label="Private acquired CT frame" style={{width:'100%',maxWidth:512,display:'block',background:'#000'}}/>
+    {study&&<><div style={{position:'relative',maxWidth:512}}>
+      <canvas ref={canvasRef} role="img" aria-label="Private acquired CT frame" style={{width:'100%',display:'block',background:'#000'}}/>
+      {showContours && contours.length>0 && <svg role="img" aria-label="Source-linked RT contour outlines"
+        viewBox={`0 0 ${study.descriptor.shape[2]} ${study.descriptor.shape[1]}`} preserveAspectRatio="none"
+        style={{position:'absolute',inset:0,width:'100%',height:'100%',pointerEvents:'none'}}
+        stroke="#ffd26d" strokeWidth="1.5" fill="none">
+        {contours.map(({points,type,label},index)=>type==='POINT'
+          ? <circle key={index} aria-label={label} cx={points[0][0]} cy={points[0][1]} r="3" vectorEffect="non-scaling-stroke"/>
+          : type==='OPEN_PLANAR'
+            ? <polyline key={index} aria-label={label} points={points.join(' ')} vectorEffect="non-scaling-stroke"/>
+            : <polygon key={index} aria-label={label} points={points.join(' ')} vectorEffect="non-scaling-stroke"/>)}
+      </svg>}
+    </div>
+      {rt && <><label><input type="checkbox" checked={showContours} onChange={event=>setShowContours(event.target.checked)}/> Show RT contour outlines</label>
+        <p role="status">{contours.length} RT contours on this source plane. {rt.count} verified outlines across the study.</p></>}
+      {rtObject && !rt && <p role="status">No RT outlines could be matched to this verified CT.</p>}
       <label>Source frame {frame+1} / {study.descriptor.shape[0]} <input aria-label="Local CT frame" type="range" min="0" max={study.descriptor.shape[0]-1} value={frame} onChange={e=>changeFrame(Number(e.target.value))}/></label>
       <div className="view-controls">
         <button type="button" disabled={frame===0} onClick={()=>changeFrame(frame-1)}>Previous CT frame</button>

@@ -36,6 +36,7 @@
 !scripts/preview-static.mjs
 !scripts/live-h000-ct.mjs
 !scripts/live-native-images.mjs
+!scripts/live-rle.mjs
 !third-party/
 !third-party/**
 !docker/

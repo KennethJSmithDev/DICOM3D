@@ -10,7 +10,7 @@ WORKDIR /build
 COPY prototypes/alpha/three-prototype/ ./prototypes/alpha/three-prototype/
 COPY prototypes/alpha/viewer/src/ ./prototypes/alpha/viewer/src/
 COPY reference/public/demo/h000/ ./reference/public/demo/h000/
-COPY scripts/build-alpha-distribution.mjs scripts/test-alpha-distribution.mjs scripts/admitted-public-files.mjs scripts/admitted-notices.json scripts/preview-verified-file.mjs scripts/preview-static.mjs scripts/live-h000-ct.mjs scripts/live-native-images.mjs ./scripts/
+COPY scripts/build-alpha-distribution.mjs scripts/test-alpha-distribution.mjs scripts/admitted-public-files.mjs scripts/admitted-notices.json scripts/preview-verified-file.mjs scripts/preview-static.mjs scripts/live-h000-ct.mjs scripts/live-native-images.mjs scripts/live-rle.mjs ./scripts/
 COPY LICENSE NOTICE distribution-manifest.json ./
 COPY third-party/ ./third-party/
 # Git metadata stays outside the context. The manifest hashes the actual inputs.

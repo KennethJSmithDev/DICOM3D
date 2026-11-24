@@ -1,5 +1,5 @@
 import React, {useEffect, useRef, useState} from 'react';
-import {localObjectFileLimit, readLocalDicomObject} from './local-dicom-object.mjs';
+import {ionPlanSopClass, localObjectFileLimit, readLocalDicomObject} from './local-dicom-object.mjs';
 
 const labels = {
   RTPlanLabel: 'Plan label',
@@ -14,6 +14,16 @@ const labels = {
   NumberOfBeams: 'Recorded beam count',
   NumericValue: 'Source numeric value',
   ReferencedSOPInstanceUID: 'Referenced SOP instance',
+  ReferencedFrameOfReferenceUID: 'Referenced frame of reference',
+  GraphicType: 'Recorded graphic type',
+  GraphicData: 'Recorded coordinates',
+  StructureSetLabel: 'Structure set label',
+  StructureSetName: 'Structure set name',
+  ROINumber: 'Region number',
+  ROIName: 'Region name',
+  ReferencedROINumber: 'Referenced region number',
+  ContourGeometricType: 'Recorded contour type',
+  NumberOfContourPoints: 'Recorded contour point count',
   CodeMeaning: 'Code meaning',
 };
 
@@ -68,7 +78,38 @@ function Plan({plan}) {
   </>;
 }
 
-export default function LocalDicomObjectPanel() {
+function StructureSet({structure}) {
+  return <>
+    <p>Recorded region and contour metadata. Outlines appear on their matching verified CT planes when source geometry is available.</p>
+    <Fields values={structure.fields}/>
+    <details open><summary>Recorded regions ({structure.regions.length})</summary>
+      {structure.regions.map(region => <Fields key={region.ROINumber} values={region}/>)}
+    </details>
+    <details><summary>Recorded contour groups ({structure.contours.length})</summary>
+      {structure.contours.map((group, groupIndex) => <div key={groupIndex}>
+        <Fields values={group.fields}/>
+        {group.items.map((item, itemIndex) => <div key={itemIndex}>
+          <Fields values={item.fields}/><References items={item.references}/>
+        </div>)}
+      </div>)}
+    </details>
+    <details><summary>Recorded observations ({structure.observations.length})</summary>
+      {structure.observations.map((item, index) => <Fields key={index} values={item}/>)}
+    </details>
+    <References items={structure.references}/>
+  </>;
+}
+
+function ObjectInspection({source, content}) {
+  if (source.family === 'SR') return <><h3>DICOM structured report</h3><StructuredItem item={content} root/></>;
+  if (source.family === 'RTSTRUCT') return <><h3>RT structure set source metadata</h3><StructureSet structure={content}/></>;
+  return <>
+    <h3>{source.sopClassUID === ionPlanSopClass ? 'RT ion plan source metadata' : 'RT plan source metadata'}</h3>
+    <Plan plan={content}/>
+  </>;
+}
+
+export default function LocalDicomObjectPanel({onObjectChange}) {
   const [result, setResult] = useState(null);
   const [status, setStatus] = useState('');
   const generation = useRef(0);
@@ -85,6 +126,7 @@ export default function LocalDicomObjectPanel() {
       const value = await readLocalDicomObject(JSON.parse(await file.text()));
       if (generation.current !== id) return;
       setResult(value);
+      onObjectChange?.(value.source.family === 'RTSTRUCT' ? value : null);
       setStatus('Prepared DICOM object verified.');
     } catch {
       if (generation.current === id) setStatus('The prepared DICOM object could not be verified. The current object, if any, was kept.');
@@ -93,14 +135,13 @@ export default function LocalDicomObjectPanel() {
 
   return <details>
     <summary>Local structured report or RT plan</summary>
-    <p>Open a prepared .d3obj file to inspect recorded content and source references. For research review only.</p>
+    <p>Open a prepared .d3obj file to inspect a structured report, radiation therapy plan or structure set and its source references. For research review only.</p>
     <label>Prepared DICOM object <input aria-label="Prepared DICOM object" type="file"
       accept=".d3obj,application/json" onChange={load}/></label>
     <p role="status">{status}</p>
     {result && <section style={{overflowWrap:'anywhere'}}>
-      <button type="button" onClick={() => { generation.current++; setResult(null); setStatus(''); }}>Clear DICOM object</button>
-      <h3>{result.source.family === 'SR' ? 'DICOM structured report' : 'RT plan source metadata'}</h3>
-      {result.source.family === 'SR' ? <StructuredItem item={result.content} root/> : <Plan plan={result.content}/>}
+      <button type="button" onClick={() => { generation.current++; setResult(null); onObjectChange?.(null); setStatus(''); }}>Clear DICOM object</button>
+      <ObjectInspection source={result.source} content={result.content}/>
       <details><summary>Original object identity</summary>
         <p>Original DICOM SHA-256 <code>{result.source.sha256}</code></p>
         <p>SOP class <code>{result.source.sopClassUID}</code></p>

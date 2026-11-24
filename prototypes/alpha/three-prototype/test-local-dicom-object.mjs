@@ -50,3 +50,27 @@ test('preserves recorded beam, fraction and referenced object metadata', async (
   };
   assert.deepEqual(await readLocalDicomObject(envelope({source: planSource, content: plan})), {source: planSource, content: plan});
 });
+
+test('admits recorded RT structure set links and rejects orphan contour or observation records', async () => {
+  const structureSource = {...source, family: 'RTSTRUCT', sopClassUID: '1.2.840.10008.5.1.4.1.1.481.3'};
+  const structure = {
+    fields: {StructureSetLabel: 'Analytic'},
+    regions: [{ROINumber: '1', ROIName: 'Synthetic region'}],
+    contours: [{fields: {ReferencedROINumber: '+1'}, items: [
+      {fields: {ContourGeometricType: 'CLOSED_PLANAR', NumberOfContourPoints: '3'}, references: []},
+    ]}],
+    observations: [{ReferencedROINumber: '1', RTROIInterpretedType: 'EXTERNAL'}],
+    references: [],
+  };
+  assert.deepEqual(await readLocalDicomObject(envelope({source: structureSource, content: structure})),
+    {source: structureSource, content: structure});
+  for (const [key, value, reason] of [
+    ['regions', [...structure.regions, {...structure.regions[0], ROINumber: '001'}], /duplicate ROI/],
+    ['contours', [{fields: {ReferencedROINumber: '2'}, items: []}], /Contour references an absent ROI/],
+    ['observations', [{ReferencedROINumber: '2'}], /Observation references an absent ROI/],
+  ]) {
+    await assert.rejects(readLocalDicomObject(envelope({
+      source: structureSource, content: {...structure, [key]: value},
+    })), reason);
+  }
+});

@@ -1,5 +1,5 @@
 import React, {useEffect, useMemo, useRef, useState} from 'react';
-import {localImageRgba} from '../../../viewer/src/local-image.mjs';
+import {copyMrReformat,localImageRgba,mrPlaneLayout} from '../../../viewer/src/local-image.mjs';
 import {sourceCineTiming} from './native-cine-timing.mjs';
 
 function stopTimer(playback) {
@@ -10,21 +10,35 @@ function stopTimer(playback) {
 
 export default function NativeImageFrames({
   image, frame, onFrameChange, active = true, label = 'Live source image', frameLabel = 'Live image frame',
-  previousLabel = 'Previous live image frame', nextLabel = 'Next live image frame',
+  previousLabel = 'Previous live image frame', nextLabel = 'Next live image frame', mrPlane = null,
 }) {
   const [playing, setPlaying] = useState(false);
   const canvas = useRef(null);
   const playback = useRef(null);
-  const [frames, rows, columns] = image.bundle.pixels.shape;
-  const timing = useMemo(() => sourceCineTiming(image.bundle), [image]);
+  const mrLayout = mrPlane ? mrPlaneLayout(image,mrPlane) : null;
+  const [frames, rows, columns] = mrLayout
+    ? [mrLayout.frames,mrLayout.rows,mrLayout.columns]
+    : image.bundle.pixels.shape;
+  const reformat = mrPlane === 'row' || mrPlane === 'column';
+  const frameName = image.bundle.frameIdentity?.series?.frames[0].sourceFrame === undefined
+    ? 'Source frame' : 'Volume slice';
+  const timing = useMemo(() => mrPlane ? null : sourceCineTiming(image.bundle), [image,mrPlane]);
   const rgba = useMemo(() => new ImageData(columns, rows), [columns, rows]);
+  const displayImage = useMemo(() => {
+    if (!reformat) return image;
+    return {
+      pixels: new image.pixels.constructor(rows * columns),
+      bundle: {...image.bundle, pixels: {...image.bundle.pixels,shape:[1,rows,columns,1]}},
+    };
+  }, [image,reformat,rows,columns]);
 
   useEffect(() => {
     const surface = canvas.current;
     const {center, width} = image.bundle.display;
-    localImageRgba(image, frame, center, width, rgba.data);
+    if (reformat) copyMrReformat(image,mrPlane,frame,displayImage.pixels);
+    localImageRgba(displayImage, reformat ? 0 : frame, center, width, rgba.data);
     surface.getContext('2d').putImageData(rgba, 0, 0);
-  }, [image, frame, rgba]);
+  }, [image, frame, rgba, displayImage, mrPlane, reformat]);
 
   function stop() {
     stopTimer(playback);
@@ -86,8 +100,9 @@ export default function NativeImageFrames({
 
   return <>
     <canvas ref={canvas} width={columns} height={rows} role="img" aria-label={label}
-      style={{width:'100%',maxWidth:512,display:'block',background:'#000'}}/>
-    <p>Source frame {frame+1} / {frames}</p>
+      style={{width:'100%',maxWidth:512,display:'block',background:'#000',
+        aspectRatio:mrLayout ? mrLayout.widthMm/mrLayout.heightMm : undefined}}/>
+    <p>{reformat ? `Reformatted ${mrPlane}` : frameName} {frame+1} / {frames}</p>
     {frames > 1 && <>
       <input aria-label={frameLabel} type="range" min="0" max={frames-1} value={frame}
         onChange={event => seek(Number(event.target.value))}/>

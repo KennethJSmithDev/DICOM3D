@@ -24,7 +24,7 @@ for(const [name,record]of Object.entries(manifest.files)){
  files.set(base+name,{path,record});
 }
 files.set(base+'demo-build-manifest.json',{path:resolve(root,'demo-build-manifest.json'),bytes:manifestBytes});
-const mime={'.html':'text/html; charset=utf-8','.js':'text/javascript; charset=utf-8','.mjs':'text/javascript; charset=utf-8','.css':'text/css; charset=utf-8','.json':'application/json','.svg':'image/svg+xml','.glb':'model/gltf-binary','.png':'image/png','.jpg':'image/jpeg','.txt':'text/plain; charset=utf-8'};
+const mime={'.html':'text/html; charset=utf-8','.js':'text/javascript; charset=utf-8','.mjs':'text/javascript; charset=utf-8','.css':'text/css; charset=utf-8','.json':'application/json','.svg':'image/svg+xml','.glb':'model/gltf-binary','.png':'image/png','.jpg':'image/jpeg','.txt':'text/plain; charset=utf-8','.wasm':'application/wasm'};
 const admitResponse=createResponseGate();
 const server=createServer();
 async function servePreview(liveFhir,liveCt,liveNativeImages,req,res){

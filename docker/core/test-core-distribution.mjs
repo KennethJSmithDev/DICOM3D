@@ -91,7 +91,7 @@ test('both Core build recipes admit the required build and runtime sources', () 
   const exact = [
     'scripts/build-alpha-distribution.mjs','scripts/test-alpha-distribution.mjs','scripts/admitted-public-files.mjs',
     'scripts/admitted-notices.json','scripts/preview-verified-file.mjs','scripts/preview-static.mjs',
-    'scripts/live-h000-ct.mjs','scripts/live-native-images.mjs','docker/core/server.mjs',
+    'scripts/live-h000-ct.mjs','scripts/live-native-images.mjs','scripts/live-rle.mjs','docker/core/server.mjs',
     'docker/core/fhir-loopback-route.mjs','docker/core/fhir-configured-metadata.mjs'
   ];
   for (const name of ['Dockerfile.core', 'Dockerfile.core.offline']) {
@@ -104,7 +104,7 @@ test('both Core build recipes admit the required build and runtime sources', () 
     assert.ok(recipe.includes('COPY prototypes/alpha/viewer/src/fhir-capability-model.mjs ./prototypes/alpha/viewer/src/'));
     assert.ok(recipe.includes('CMD ["node", "docker/core/server.mjs"]'));
     const runtime = recipe.slice(recipe.lastIndexOf('\nFROM '));
-    for (const file of ['scripts/preview-static.mjs','scripts/live-h000-ct.mjs','scripts/live-native-images.mjs']) {
+    for (const file of ['scripts/preview-static.mjs','scripts/live-h000-ct.mjs','scripts/live-native-images.mjs','scripts/live-rle.mjs']) {
       assert.ok(!runtime.includes(file), name+' includes preview source in the final image');
     }
   }

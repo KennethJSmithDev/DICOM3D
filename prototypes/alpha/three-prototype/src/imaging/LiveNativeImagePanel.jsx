@@ -67,11 +67,16 @@ export default function LiveNativeImagePanel() {
   const [choice, setChoice] = useState('');
   const [result, setResult] = useState(null);
   const [frame, setFrame] = useState(0);
+  const [plane, setPlane] = useState('source');
+  const [reformatFrame, setReformatFrame] = useState(0);
   const [loading, setLoading] = useState(false);
   const [open, setOpen] = useState(false);
   const [status, setStatus] = useState('');
   const activeCatalog = useRef(null);
   const activeImage = useRef(null);
+  const series = result?.image.bundle.frameIdentity.series;
+  const enhanced = series?.frames[0].sourceFrame !== undefined;
+  const slice = plane === 'source' ? series?.frames[frame] : null;
   useEffect(() => () => {
     activeCatalog.current?.abort();
     activeImage.current?.abort();
@@ -116,7 +121,7 @@ export default function LiveNativeImagePanel() {
     const controller = new AbortController();
     activeImage.current = controller;
     setLoading(true);
-    setStatus('Retrieving and verifying the original DICOM image…');
+    setStatus('Retrieving and verifying original DICOM data…');
     try {
       const signal = AbortSignal.any([controller.signal, AbortSignal.timeout(90000)]);
       const packet = await readResponse(endpoint + selected.id, {
@@ -129,7 +134,9 @@ export default function LiveNativeImagePanel() {
       if (signal.aborted) throw new Error(incomplete);
       setResult({image, study:selected});
       setFrame(0);
-      setStatus('Live source image verified.');
+      setPlane('source');
+      setReformatFrame(0);
+      setStatus(image.bundle.frameIdentity.series ? 'Live MR source volume verified.' : 'Live source image verified.');
     } catch (error) {
       if (!controller.signal.aborted) {
         const message = error.message === denied || error.message === unavailable ? error.message : incomplete;
@@ -158,7 +165,7 @@ export default function LiveNativeImagePanel() {
     if (visible) loadCatalog();
   }}>
     <summary>Live native DICOM frames</summary>
-    <p>Retrieve an admitted public DICOM example from IRIS and Orthanc. The frame viewer uses source order and recorded display settings.</p>
+    <p>Retrieve an admitted DICOM example from IRIS and Orthanc. The frame viewer uses verified slice or frame order and recorded display settings.</p>
     {catalog?.length ? <form onSubmit={retrieve} autoComplete="off">
       <label>Live imaging study <select aria-label="Live imaging study" value={choice} disabled={loading} onChange={event => setChoice(event.target.value)}>
         {catalog.map(study => <option key={study.id} value={study.id}>{study.label}</option>)}
@@ -171,12 +178,30 @@ export default function LiveNativeImagePanel() {
     <p role="status">{status}</p>
     {result && <>
       <h3>{result.study.label}</h3>
-      <NativeImageFrames image={result.image} frame={frame} onFrameChange={setFrame}
+      {series && <label>MR view <select aria-label="MR view" value={plane} onChange={event=>{
+        setPlane(event.target.value);
+        setReformatFrame(0);
+      }}>
+        <option value="source">Original source slices</option>
+        <option value="row">Row reformat</option>
+        <option value="column">Column reformat</option>
+      </select></label>}
+      {plane !== 'source' && <p>Derived view through stored voxels without interpolation. Source slices advance from top to bottom.</p>}
+      <NativeImageFrames image={result.image} mrPlane={series ? plane : null}
+        frame={plane === 'source' ? frame : reformatFrame} onFrameChange={plane === 'source' ? setFrame : setReformatFrame}
         active={open && !loading && result.study.id === choice}/>
       <details>
         <summary>Live image source evidence</summary>
-        <p>Original DICOM SHA-256 <code style={{overflowWrap:'anywhere'}}>{result.image.bundle.source.sha256}</code></p>
+        <p>{series && !enhanced ? 'Ordered DICOM source inventory SHA-256' : 'Original DICOM SHA-256'} <code style={{overflowWrap:'anywhere'}}>{result.image.bundle.source.sha256}</code></p>
         <p>Stored pixel SHA-256 <code style={{overflowWrap:'anywhere'}}>{result.image.bundle.pixels.sha256}</code></p>
+        {slice && <>
+          <p>Slice {frame+1} SOP Instance UID <code style={{overflowWrap:'anywhere'}}>{slice.sop}</code></p>
+          {enhanced
+            ? <p>Original DICOM frame {slice.sourceFrame}</p>
+            : <p>Slice original DICOM SHA-256 <code style={{overflowWrap:'anywhere'}}>{slice.sourceSha256}</code></p>}
+          <p>Slice origin (mm, LPS) {slice.position.join(', ')}</p>
+          <p>Pixel spacing (row × column) {series.pixelSpacing.join(' × ')} mm · Slice spacing {series.sliceSpacing} mm</p>
+        </>}
       </details>
     </>}
   </details>;
