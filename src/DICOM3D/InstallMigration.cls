@@ -831,7 +831,7 @@ ClassMethod Retire051(root As %String) As %Status [ Language = python ]
         }
     }
     policy_sha = "282c8029a22bcc6ab808489fd329ba6e37b66018768e2908c66e8cc1dc3cfb43"
-    viewer_sha = "fcad82e400d68af82145d89b720160a8abae0153edb91f9d06b5562206264165"
+    viewer_sha = "9af552d4b09e6729b7580600644208e8b9acdf3db4714d8c102790fec0779d85"
     descriptors = []
     retired = []
     missing = 0

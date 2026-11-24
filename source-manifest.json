@@ -3397,7 +3397,7 @@
     },
     "src/DICOM3D/InstallMigration.cls": {
       "bytes": 42203,
-      "sha256": "958e365765fc91f8c3c305fc4e01f053622b71b29acf52fbe17fb22b5a8db1ad"
+      "sha256": "c42d17a428d17c1bb7f1b58a9085c334020717ec1f7111853c81361490a383a0"
     },
     "third-party/alpha-runtime-NOTICE.txt": {
       "bytes": 2728,
