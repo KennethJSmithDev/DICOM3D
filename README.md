@@ -3,38 +3,38 @@
 <p align="center">
   <a href="https://kennethjsmithdev.github.io/DICOM3D/"><strong>Live Demo</strong></a>
   &nbsp;·&nbsp;
-  <a href="prototypes/alpha/three-prototype/"><strong>v0.7.0-alpha.1 Source</strong></a>
+  <a href="prototypes/alpha/three-prototype/"><strong>v0.8.0 Source</strong></a>
   &nbsp;·&nbsp;
-  <a href="docs/DOWNLOADS_070_ALPHA.md"><strong>v0.7.0-alpha.1 Downloads</strong></a>
+  <a href="https://github.com/KennethJSmithDev/DICOM3D/releases/tag/v0.8.0"><strong>v0.8.0 Downloads</strong></a>
   &nbsp;·&nbsp;
-  <a href="docs/INSTALL_070_ALPHA.md#docker-core"><strong>Docker Quick Start</strong></a>
+  <a href="docs/INSTALL_CORE.md"><strong>Docker &amp; Core</strong></a>
   &nbsp;·&nbsp;
-  <a href="docs/INSTALL_070_ALPHA.md#ipmzpm-in-iris"><strong>Native / IRIS Install</strong></a>
+  <a href="docs/INSTALL_070.md#iris-and-ipm"><strong>IRIS / IPM Install</strong></a>
 </p>
 
 <p align="center"><img src="assets/branding/dicom3d-logo.png" alt="DICOM3D Logo" width="480"></p>
 
-**v0.7.0-alpha.1 — Anatomy & Imaging Foundation.** *From Pixels to Meaning.*
+**v0.8.0 — Anatomy & Imaging Foundation.** *From Pixels to Meaning.*
 
-DICOM3D is an open-source interactive anatomy and medical imaging platform for exploring generalized reference anatomy, public acquired CT and source-linked segmentation. The new web frontend uses **Three.js, React Three Fiber and React**, with **WebGPU preferred and WebGL2 fallback**. This is a research/educational alpha for feedback and further development, **not a clinically validated diagnostic tool**.
+DICOM3D is an open-source interactive anatomy and medical imaging platform for exploring generalized reference anatomy, public imaging and source-linked segmentation. The web frontend uses **React and Three.js/React Three Fiber**, with an **NRX WebGPU atlas renderer** on supported devices and Three.js as a fallback. It is a research and educational platform, **not a clinically validated diagnostic tool**.
 
-**Current alpha:** v0.7.0-alpha.1 source under [`prototypes/alpha/three-prototype/`](prototypes/alpha/three-prototype/), with [versioned downloads and hashes](docs/DOWNLOADS_070_ALPHA.md), [local installation](docs/INSTALL_070_ALPHA.md) and an [acceptance record](docs/RELEASE_070_ALPHA_ACCEPTANCE.md). The published [v0.6.5 release](https://github.com/KennethJSmithDev/DICOM3D/releases/tag/v0.6.5), its Babylon Lite workstation and historical documentation remain available for comparison and rollback.
+**Current release:** [v0.8.0](https://github.com/KennethJSmithDev/DICOM3D/releases/tag/v0.8.0), with a standalone Core ZIP and IRIS/IPM archive. The [v0.7.0-alpha.1 downloads](docs/DOWNLOADS_070_ALPHA.md) and [v0.6.5 release](https://github.com/KennethJSmithDev/DICOM3D/releases/tag/v0.6.5) remain available as historical releases and rollback references.
 
 New here? Follow the [five-minute beginner guide](docs/BEGINNER_GUIDE.md), then explore the [roadmap](ROADMAP.md). Milestones advance through [evidence and release approval](VERSIONING.md), not dates.
 
 ## Try it and download
 
-- **[Live Demo](https://kennethjsmithdev.github.io/DICOM3D/):** Web frontend with the available generalized anatomy and approved public H000 CT/SEG research example. Inspect its displayed version and renderer status when evaluating a deployment.
-- **[v0.7.0-alpha.1 downloads and source](docs/DOWNLOADS_070_ALPHA.md):** Exact Safe Demo ZIP, locally qualified IPM archive and source-build routes, with hashes and publication status. The static demo needs no IRIS or AI service; the IPM host uses your existing authorized IRIS login.
+- **[Live Demo](https://kennethjsmithdev.github.io/DICOM3D/):** The existing deployed demo may serve an earlier release; check its displayed version. The 0.8.0 release did not update GitHub Pages.
+- **[v0.8.0 downloads](https://github.com/KennethJSmithDev/DICOM3D/releases/tag/v0.8.0):** Standalone Core ZIP, IPM archive, source and release notes.
 - **[Published v0.6.5 downloads](https://github.com/KennethJSmithDev/DICOM3D/releases/tag/v0.6.5):** Retained Babylon Lite Safe Demo ZIP and Core **source** ZIP; this is the previous release and rollback reference.
-- **[Local alpha installation](docs/INSTALL_070_ALPHA.md):** Standalone Docker Core and authenticated IRIS/IPM setup, with fresh-install qualification separated from upgrades. Historical [v0.6.0 installations](docs/INSTALL_060.md) remain documented for their original artifacts.
+- **[Core installation](docs/INSTALL_CORE.md)** and **[IRIS/IPM setup](docs/INSTALL_070.md#iris-and-ipm):** Use the v0.8.0 downloads; the IRIS commands in the latter document name the earlier 0.7.0 archive, so substitute `dicom3d-0.8.0.tgz` and confirm version `0.8.0`.
 
 ## Install and integrate
 
-The Three/R3F **v0.7.0-alpha.1** has separately tested static, Docker Core and fresh IRIS/IPM paths. Follow the [alpha launch guide](docs/LAUNCH_070_ALPHA.md) and exact [download identities](docs/DOWNLOADS_070_ALPHA.md); a GitHub archive does not update Docker Hub, the IPM registry or Open Exchange automatically. There is no native MSI/EXE or qualified in-place upgrade in this release:
+The **v0.8.0** standalone Core ZIP, source-directory IPM load and IPM archive passed fresh-install checks. A Docker Core image was built and tested locally; the previously published Docker Hub image and Open Exchange registry are not automatically updated by a GitHub release. There is no qualified in-place upgrade in this release:
 
-- **[Standalone Core Docker Quick Start](docs/INSTALL_070_ALPHA.md#docker-core):** Run the published Linux/amd64 image by its verified digest, or build from source. Core serves the alpha without IRIS, Orthanc or AI. The published payload matches the qualified image; fresh-machine installation and source-build dependency acquisition retain their own evidence boundaries.
-- **[IRIS/IPM installation](docs/INSTALL_070_ALPHA.md#ipmzpm-in-iris):** Fresh archive installation, normal authenticated Entry, restart and uninstall were exercised in an isolated IRIS for Health 2026.2 fixture. This hosts the viewer; it does not establish live PACS retrieval or a registry update. Earlier [native/Core installation artifacts](docs/INSTALL_060.md) retain their own version boundaries.
+- **[Standalone Core](docs/INSTALL_CORE.md):** Extract the 0.8.0 ZIP and run it with Node.js 24, or build the Docker image from the tagged source. Core runs without IRIS, Orthanc or AI.
+- **[IRIS/IPM installation](docs/INSTALL_070.md#iris-and-ipm):** Load the 0.8.0 archive into an authorized IRIS instance. A fresh isolated installation, authenticated access, restart and uninstall passed; the public IPM registry update is separate.
 - **[v0.6.0 release downloads](https://github.com/KennethJSmithDev/DICOM3D/releases/tag/v0.6.0)** and **[packaging provenance](docs/PACKAGING_060.md):** Historical distribution identities, source/packaging boundaries and qualification receipts.
 - **[v0.6.5 downloads](https://github.com/KennethJSmithDev/DICOM3D/releases/tag/v0.6.5):** Previous Babylon Lite Safe Demo ZIP and Core source ZIP, not a v0.7.0-alpha installer.
 
@@ -42,7 +42,7 @@ For the preserved Babylon Lite workstation, see the [Safe Demo build guide](docs
 
 The earlier workstation also documents a **verified local CT** input route using a volume descriptor and stored pixels kept in the browser. This is a legacy capability, not a claim that arbitrary local DICOM import is qualified in the current alpha.
 
-## What the alpha can do
+## What DICOM3D can do
 
 **Explore expanded anatomy.** The BodyParts3D male reference provides **1,205 source-backed geometry groups across 17 independently loadable bundles**. The **1,235-group female composite** shares that base, excludes/replaces nine groups and adds 39 HRA groups containing 60 source components. These are rendered ownership groups, **not counts of distinct organs**. Published hierarchies support exact component and compound selection without copying geometry; the [coverage table](docs/RELEASE_070_ALPHA_ACCEPTANCE.md#atlas-coverage-and-limits) reports overlapping selection categories separately. The female fit is approximate and retains the shared base skeleton and body shape.
 
@@ -50,15 +50,17 @@ The earlier workstation also documents a **verified local CT** input route using
 
 **Connect source CT and 3D.** The approved public **H000 CT/SEG** study demonstrates 103 acquired CT frames, source segmentation overlays and related 3D visualization/accumulation. The optional NRX-derived lesion surface is a **display derivative of the supplied SEG**, not whole-scan organ segmentation. Reference anatomy is not spatially registered to that study.
 
+**Explore H001.** Published ultrasound figures and separate MRI-derived teaching references support a pregnancy and fibroid exploration. The figures and models have different sources and are not a registered reconstruction of one patient.
+
 **Learn as you explore.** The contextual Beginner, Explore and Evidence views explain active anatomy, imaging sources, presentation effects, provenance and limitations without requiring AI. The introductory Materialization effect lasts approximately eight seconds and settles into Scientific; Holographic remains selectable. Skip and reduced-motion controls remain available as explicit choices.
 
 ![Actual alpha.1 Materialization replay settling into Scientific](docs/media/materialization-alpha1.gif)
 
 Actual frozen alpha.1 runtime on hardware WebGPU; approximately 9.5 seconds of real presentation, exported at reduced resolution. [Capture method and media boundaries](docs/DEMONSTRATION_MEDIA.md).
 
-**Know the boundaries.** This alpha is a public research demonstration. It does not claim diagnosis, treatment guidance, anatomical completeness, arbitrary DICOM/SEG interpretation, clinical validation, general PACS interoperability, production FHIR/AI features or a qualified installed-update wizard. Whole CT display is direct volume rendering, not whole-scan organ segmentation; the native NRX research renderer is separate from the alpha's NRX/R002 lesion-surface bridge. Fresh installation does not establish an installed settings/data migration or rollback.
+**Know the boundaries.** This release does not claim diagnosis, treatment guidance, anatomical completeness, arbitrary DICOM/SEG interpretation, clinical validation, universal PACS interoperability, production FHIR/AI features or a qualified installed-update wizard. Whole CT display is direct volume rendering, not whole-scan organ segmentation. Fresh installation does not establish an installed settings/data migration or rollback.
 
-## Build the research alpha from source
+## Build from source
 
 Use Node.js 24 and npm on a supported desktop. From the repository root:
 
